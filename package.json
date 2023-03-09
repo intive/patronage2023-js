@@ -1,22 +1,25 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "patronage2023-js",
+  "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "dependencies": {
-    "@types/node": "18.14.2",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.1",
-    "next": "13.2.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.5"
-  }
+  "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "eslint-config-custom": "*",
+    "prettier": "latest",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "npm@8.5.0"
 }
