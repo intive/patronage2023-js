@@ -7,15 +7,9 @@ export const Button = ({
   children,
   ...props
 }: ButtonProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <ButtonStyled
-      disabled={disabled}
-      secondary={secondary}
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      <>{isOpen && children}</>
+    <ButtonStyled disabled={disabled} secondary={secondary}>
+      <>{children}</>
     </ButtonStyled>
   );
 };
