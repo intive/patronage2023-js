@@ -28,3 +28,10 @@ Secondary.args = {
   children: "Secondary",
   secondary: true,
 };
+
+export const DisabledSecondary = Template.bind({});
+DisabledSecondary.args = {
+  children: "Disabled Secondary",
+  secondary: true,
+  disabled: true,
+};

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Buttons from "./Buttons";
+import Buttons from "../components/Buttons";
 
 export const metadata: Metadata = {
   title: "Home",

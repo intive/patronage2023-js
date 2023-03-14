@@ -1,26 +1,31 @@
-"use client";
-
-import * as React from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 
 export const Button = ({
   disabled = false,
   secondary = false,
   children,
-  onClick,
+  ...props
 }: ButtonProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <ButtonStyled disabled={disabled} secondary={secondary} onClick={onClick}>
-      {children}
+    <ButtonStyled
+      disabled={disabled}
+      secondary={secondary}
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      <>{isOpen && children}</>
     </ButtonStyled>
   );
 };
 
-export type ButtonProps = {
+type ExtraButtonProps = {
   disabled?: boolean;
   secondary?: boolean;
-  onClick?: Function;
 } & React.HTMLProps<HTMLButtonElement>;
+
+type ButtonProps = React.PropsWithChildren<ExtraButtonProps>;
 
 export const ButtonStyled = styled.button<ButtonProps>`
   min-width: 100px;
