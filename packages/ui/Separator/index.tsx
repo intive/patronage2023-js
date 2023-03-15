@@ -3,17 +3,17 @@ import styled, { css } from "styled-components";
 
 export const Separator = ({ label, className }: SeparatorProps) => {
   return (
-    <SeparatorStyled className={className}>
-      <LabelStyled>{label}</LabelStyled>
+    <SeparatorStyled className={className} label={label}>
+      {label && <LabelStyled>{label}</LabelStyled>}
     </SeparatorStyled>
   );
 };
 
 export type SeparatorProps = {
-  label: string;
+  label?: string;
 } & React.HTMLProps<HTMLDivElement>;
 
-export const SeparatorStyled = styled.div`
+export const SeparatorStyled = styled.div<SeparatorProps>`
   text-align: center;
   position: relative;
   margin: 48px 0;
@@ -21,7 +21,7 @@ export const SeparatorStyled = styled.div`
   ::before {
     content: " ";
     height: 1px;
-    background-color: #9e9e9e;
+    background-color: ${({ label }) => (label ? "#9e9e9e" : "#E1E1E1")};
     position: absolute;
     width: 100%;
     left: 0;
@@ -32,7 +32,7 @@ export const SeparatorStyled = styled.div`
 `;
 
 export const LabelStyled = styled.span`
-  color: #9e9e9e;
+  color: #7E7E7E;
   padding: 4px 9px;
   font-weight: 600;
   font-size: 16px;
