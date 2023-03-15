@@ -15,4 +15,11 @@ export default {
   export const Normal = Template.bind({});
   Normal.args = {
     label: "Label",
+    hasError: false,
+  };
+
+  export const Error = Template.bind({});
+  Error.args = {
+    label: "Label",
+    hasError: true,
   };

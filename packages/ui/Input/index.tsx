@@ -3,26 +3,36 @@ import styled, { css } from "styled-components";
 
 export const Input = ({
     label,
+    hasError=false,
 }: InputProps) => {
   return (
     <Wrapper>
-        <StyledInput placeholder=" " />
-        <StyledLabel>{label}</StyledLabel>
+        <StyledInput placeholder=" " hasError={hasError}/>
+        <StyledLabel hasError={hasError}>{label}</StyledLabel>
     </Wrapper>  
   );
 };
 
+type StyledInputProps = {
+    hasError: boolean;
+} & React.HTMLProps<HTMLInputElement>;
+
+type StyledLabelProps = {
+    hasError: boolean;
+} & React.HTMLProps<HTMLLabelElement>;
+
 export type InputProps = {
     label: string;
-} & React.HTMLProps<HTMLInputElement>;
+} & StyledInputProps;
 
 const Wrapper = styled.div`
     position: relative;
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<StyledLabelProps>`
+    font-family: Arial, sans-serif;
     position: absolute;
-    color: #515151;
+    color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
     font-weight: 400;
     font-size: 16px;
     left: 10px;
@@ -30,16 +40,20 @@ const StyledLabel = styled.label`
     transition: all 200ms linear;
 `;
 
-const StyledInput = styled.input`
-    border: solid 2px #E1E1E1; 
+const StyledInput = styled.input<StyledInputProps>`
+    border: solid 2px #E1E1E1;
     border-radius: 8px;
     padding: 10px;
+    caret-color: #515151;
     transition: border-color 200ms ease-out;
-
-    :focus, :not(:placeholder-shown) {
+    
+    :focus {
         outline: none;
         border-color: #64BA95;
-        
+    }
+
+    :focus,
+    :not(:placeholder-shown) {
         + label {
             transform: translateY(-16px);
             font-size: 12px;
@@ -49,8 +63,10 @@ const StyledInput = styled.input`
             padding-right: 4px;
         }
     }
-    
-    :not(:focus) {
-        border-color: #E1E1E1;
-    }
+
+    ${({ hasError }) =>
+    hasError &&
+    css`
+        border-color: #B3261E!important;
+    `}
 `;
