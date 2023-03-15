@@ -67,7 +67,7 @@ PrimaryDisabled.args = {
 export const SecondaryDisabled = Template.bind({});
 SecondaryDisabled.args = {
   children: "Secondary Disabled",
-  ariant: "secondary",
+  variant: "secondary",
   disabled: true,
   fullWidth: false,
 };
