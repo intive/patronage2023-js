@@ -6,7 +6,7 @@ export const Input = ({
 }: InputProps) => {
   return (
     <Wrapper>
-        <StyledInput/>
+        <StyledInput placeholder=" " />
         <StyledLabel>{label}</StyledLabel>
     </Wrapper>  
   );
@@ -36,7 +36,7 @@ const StyledInput = styled.input`
     padding: 10px;
     transition: border-color 200ms ease-out;
 
-    :focus {
+    :focus, :not(:placeholder-shown) {
         outline: none;
         border-color: #64BA95;
         
@@ -48,5 +48,9 @@ const StyledInput = styled.input`
             padding-left: 4px;
             padding-right: 4px;
         }
+    }
+    
+    :not(:focus) {
+        border-color: #E1E1E1;
     }
 `;
