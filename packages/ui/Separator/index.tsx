@@ -13,7 +13,7 @@ export type SeparatorProps = {
   label?: string;
 } & React.HTMLProps<HTMLDivElement>;
 
-export const SeparatorStyled = styled.div<SeparatorProps>`
+const SeparatorStyled = styled.div<SeparatorProps>`
   text-align: center;
   position: relative;
   margin: 48px 0;
@@ -31,7 +31,7 @@ export const SeparatorStyled = styled.div<SeparatorProps>`
   }
 `;
 
-export const LabelStyled = styled.span`
+const LabelStyled = styled.span`
   color: #7E7E7E;
   padding: 4px 9px;
   font-weight: 600;
