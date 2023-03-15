@@ -16,10 +16,12 @@ export default {
   Normal.args = {
     label: "Label",
     hasError: false,
+    id: '',
   };
 
   export const Error = Template.bind({});
   Error.args = {
     label: "Label",
     hasError: true,
+    id: '',
   };

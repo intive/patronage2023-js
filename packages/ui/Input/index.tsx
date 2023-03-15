@@ -1,72 +1,73 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
 
-export const Input = ({
-    label,
-    hasError=false,
-}: InputProps) => {
+export const Input = ({ label, hasError = false, id }: InputProps) => {
+  const randomId = React.useId();
   return (
     <Wrapper>
-        <StyledInput placeholder=" " hasError={hasError}/>
-        <StyledLabel hasError={hasError}>{label}</StyledLabel>
-    </Wrapper>  
+      <StyledInput placeholder=" " hasError={hasError} id={id || randomId} />
+      <StyledLabel hasError={hasError} htmlFor={id || randomId}>
+        {label}
+      </StyledLabel>
+    </Wrapper>
   );
 };
 
 type StyledInputProps = {
-    hasError: boolean;
+  hasError: boolean;
 } & React.HTMLProps<HTMLInputElement>;
 
 type StyledLabelProps = {
-    hasError: boolean;
+  hasError: boolean;
 } & React.HTMLProps<HTMLLabelElement>;
 
 export type InputProps = {
-    label: string;
+  label: string;
 } & StyledInputProps;
 
 const Wrapper = styled.div`
-    position: relative;
+  position: relative;
 `;
 
 const StyledLabel = styled.label<StyledLabelProps>`
-    font-family: Arial, sans-serif;
-    position: absolute;
-    color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
-    font-weight: 400;
-    font-size: 16px;
-    left: 10px;
-    top: 10px;
-    transition: all 200ms linear;
+  font-family: Arial, sans-serif;
+  position: absolute;
+  color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
+  font-weight: 400;
+  font-size: 16px;
+  left: 10px;
+  top: 10px;
+  transition: all 200ms linear;
 `;
 
 const StyledInput = styled.input<StyledInputProps>`
-    border: solid 2px #E1E1E1;
-    border-radius: 8px;
-    padding: 10px;
-    caret-color: #515151;
-    transition: border-color 200ms ease-out;
-    
-    :focus {
-        outline: none;
-        border-color: #64BA95;
-    }
+  border: solid 2px #e1e1e1;
+  border-radius: 8px;
+  padding: 10px;
+  caret-color: #515151;
+  transition: border-color 200ms ease-out;
 
-    :focus,
-    :not(:placeholder-shown) {
-        + label {
-            transform: translateY(-16px);
-            font-size: 12px;
-            font-weight: 600;
-            background-color: white;
-            padding-left: 4px;
-            padding-right: 4px;
-        }
-    }
+  :focus {
+    outline: none;
+    border-color: #64ba95;
+  }
 
-    ${({ hasError }) =>
+  :focus,
+  :not(:placeholder-shown) {
+    + label {
+      transform: translateY(-16px);
+      font-size: 12px;
+      font-weight: 600;
+      background-color: white;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
+
+  ${({ hasError }) =>
     hasError &&
     css`
-        border-color: #B3261E!important;
+      border-color: #b3261e !important;
+      caret-color: #b3261e;
     `}
 `;
