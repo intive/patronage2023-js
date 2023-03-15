@@ -4,8 +4,7 @@ import * as React from "react";
 import styled, { css } from "styled-components";
 
 export const Button = ({
-  secondary = false,
-  simple = false,
+  variant = "primary",
   fullWidth,
   disabled,
   children,
@@ -13,8 +12,7 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <ButtonStyled
-      secondary={secondary}
-      simple={simple}
+      variant={variant}
       onClick={onClick}
       fullWidth={fullWidth}
       disabled={disabled}
@@ -25,8 +23,7 @@ export const Button = ({
 };
 
 export type ButtonProps = {
-  secondary?: boolean;
-  simple?: boolean;
+  variant: string;
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
@@ -34,7 +31,6 @@ export type ButtonProps = {
 
 export const ButtonStyled = styled.button<ButtonProps>`
   display: inline-block;
-  margin: 24px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -59,8 +55,8 @@ export const ButtonStyled = styled.button<ButtonProps>`
     cursor: not-allowed;
   }
 
-  ${({ secondary }) =>
-    secondary &&
+  ${({ variant }) =>
+    variant === "secondary" &&
     css`
       background-color: transparent;
       border: 2px solid #1e4c40;
@@ -77,8 +73,8 @@ export const ButtonStyled = styled.button<ButtonProps>`
       }
     `}
 
-  ${({ simple }) =>
-    simple &&
+  ${({ variant }) =>
+    variant === "simple" &&
     css`
       border: 0;
       background-color: transparent;

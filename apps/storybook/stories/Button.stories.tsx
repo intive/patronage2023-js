@@ -7,8 +7,7 @@ export default {
   title: "Button",
   component: Button,
   argTypes: {
-    secondary: { control: "boolean" },
-    simple: { control: "boolean" },
+    variant: { control: "radio", options: ["primary", "secondary", "simple"] },
     fullWidth: { control: "boolean" },
   },
 } as ComponentMeta<typeof Button>;
@@ -20,51 +19,63 @@ const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
 export const Primary = Template.bind({});
 Primary.args = {
   children: "Primary",
+  variant: "primary",
   disabled: false,
+  fullWidth: false,
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   children: "Secondary",
-  secondary: true,
+  variant: "secondary",
+  disabled: false,
+  fullWidth: false,
 };
 
 export const Simple = Template.bind({});
 Simple.args = {
   children: "Simple",
-  simple: true,
+  variant: "simple",
+  disabled: false,
+  fullWidth: false,
 };
 
-export const NormalFullWidth = Template.bind({});
-NormalFullWidth.args = {
-  children: "Normal FullWidth",
+export const PrimaryFullWidth = Template.bind({});
+PrimaryFullWidth.args = {
+  children: "Primary FullWidth",
+  variant: "primary",
+  disabled: false,
   fullWidth: true,
 };
 
 export const SecondaryFullWidth = Template.bind({});
 SecondaryFullWidth.args = {
   children: "Secondary FullWidth",
-  secondary: true,
+  variant: "secondary",
+  disabled: false,
   fullWidth: true,
 };
 
 export const PrimaryDisabled = Template.bind({});
 PrimaryDisabled.args = {
   children: "Primary Disabled",
-  secondary: false,
+  variant: "primary",
   disabled: true,
+  fullWidth: false,
 };
 
 export const SecondaryDisabled = Template.bind({});
 SecondaryDisabled.args = {
   children: "Secondary Disabled",
-  secondary: true,
+  ariant: "secondary",
   disabled: true,
+  fullWidth: false,
 };
 
 export const SimpleDisabled = Template.bind({});
 SimpleDisabled.args = {
   children: "Simple Disabled",
-  simple: true,
+  variant: "simple",
   disabled: true,
+  fullWidth: false,
 };
