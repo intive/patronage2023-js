@@ -7,6 +7,8 @@ import Link from "next/link";
 
 const Link = () => {
     return (
-        <Link href="."></Link>
+        <Link href="/"></Link>
     );
 };
+
+//testing changing in branch
