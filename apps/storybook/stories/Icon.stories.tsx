@@ -12,5 +12,7 @@ const Template: ComponentStory<typeof Icon> = ({ ...args }) => (
 
 export const Normal = Template.bind({});
 Normal.args = {
-  children: "Normal",
+  icon: "home",
+  variant: "outlined",
+  color: "black",
 };
