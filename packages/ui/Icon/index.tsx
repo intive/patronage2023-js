@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 
 type styledIconProps = {
   color?: string;
-  variant: "filled" | "outlined";
+  filled?: boolean;
 } & React.HTMLProps<HTMLSpanElement>;
 
 type IconProps = {
@@ -69,23 +69,19 @@ export const StyledIcon = styled.span<styledIconProps>`
       color: ${color};
     `}
 
-  ${({ variant }) =>
-    variant === "filled" &&
+  ${({ filled }) =>
+    filled &&
     css`
       font-variation-settings: "FILL" 1;
     `}
 `;
 
-export const Icon = ({
-  icon,
-  variant = "outlined",
-  color = "black",
-}: IconProps) => {
+export const Icon = ({ icon, filled = false, color = "black" }: IconProps) => {
   return (
     <StyledIcon
       color={color}
       className="material-symbols-rounded"
-      variant={variant}
+      filled={filled}
     >
       {icon}
     </StyledIcon>

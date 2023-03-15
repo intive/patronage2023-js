@@ -13,13 +13,12 @@ const Template: ComponentStory<typeof Icon> = ({ ...args }) => (
 export const Outline = Template.bind({});
 Outline.args = {
   icon: "home",
-  variant: "outlined",
   color: "black",
 };
 
 export const Filled = Template.bind({});
 Filled.args = {
   icon: "home",
-  variant: "filled",
+  filled: true,
   color: "black",
 };
