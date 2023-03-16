@@ -20,6 +20,7 @@ Normal.args = {
   hasError: false,
   id: "",
   supportingLabel: "Supporting label",
+  type: "text",
 };
 
 export const Error = Template.bind({});
@@ -40,4 +41,5 @@ LinkInSupportingLabel.args = {
       <a href="#">Forgot password?</a>
     </div>
   ),
+  type: "password",
 };
