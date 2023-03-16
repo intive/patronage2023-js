@@ -10,11 +10,8 @@ export const metadata: Metadata = {
 export default function Web() {
 	return (
 		<div>
-			<h1>Web</h1>
+			<h1>InBudget app</h1>
 			<Buttons />
-			<Card padding="50px" margin="10px">
-				To jest przykładowa karta
-			</Card>
 		</div>
 	);
 }
