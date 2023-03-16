@@ -1,8 +1,12 @@
+'use client'
 import { ReactNode } from 'react'
 import styled, { css } from 'styled-components'
-export const ButtonGroup = ({ options }: GroupProps) => {
+import 'material-symbols'
+import React from 'react'
+
+export const ButtonGroup = ({ options, secondary }: GroupProps) => {
   return (
-    <ButtonGroupStyled options={options}>
+    <ButtonGroupStyled options={options} secondary={secondary}>
       {options.map(({ component, onSelect }, index) => {
         return (
           <>
@@ -30,6 +34,7 @@ interface InputProps {
 
 type GroupProps = {
   options: InputProps[]
+  secondary?: boolean
 } & React.HTMLProps<HTMLDivElement>
 
 const ButtonGroupStyled = styled.div<GroupProps>`
@@ -46,8 +51,19 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     justify-content: center;
     cursor: pointer;
     padding: 8px 24px;
-    border: 2px solid #b1b1b1;
-    color: #1e4c40;
+
+    ${({ secondary }) =>
+      secondary
+        ? css`
+            border: 2px solid #b1b1b1;
+            color: #1e4c40;
+          `
+        : css`
+            background-color: #1e4c40;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+          `}
+
     width: 100%;
     // Add a negative margin to overlap the borders
     margin: -1px;
@@ -68,13 +84,47 @@ const ButtonGroupStyled = styled.div<GroupProps>`
   }
 
   & > input:checked + label {
-    border-color: #1e4c40;
-    z-index: 10;
+    ${({ secondary }) =>
+      secondary
+        ? css`
+            border-color: #1e4c40;
+            z-index: 10;
+          `
+        : css`
+            background-color: #459175;
+          `}
   }
 
-  //svg grey when not checked
+  //label on hover
+  & > label:hover {
+    ${({ secondary }) =>
+      secondary
+        ? css`
+            border-color: #1e4c40;
+            z-index: 10;
+          `
+        : css`
+            background-color: #459175;
+          `}
+  }
 
-  & > input:not(:checked) + label svg {
-    color: #7e7e7e;
+  & > label:hover > span {
+    ${({ secondary }) =>
+      !secondary &&
+      css`
+        color: #ffffff !important;
+      `}
+  }
+
+  //when input is not checked span inside label is grey
+  & > input:not(:checked) + label > span {
+    ${({ secondary }) =>
+      secondary
+        ? css`
+            color: #7e7e7e;
+          `
+        : css`
+            color: #b1b1b1;
+          `}
   }
 `
