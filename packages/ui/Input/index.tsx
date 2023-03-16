@@ -7,6 +7,8 @@ export const Input = ({
   id,
   supportingLabel,
   type,
+  value,
+  onChange,
 }: InputProps) => {
   const randomId = React.useId();
   const [typeOverride, setTypeOverride] = React.useState("");
@@ -22,8 +24,12 @@ export const Input = ({
         <StyledIcon onClick={() => setTypeOverride("text")}>o</StyledIcon>
       );
     }
-    if (type) {
-      return <StyledIcon>x</StyledIcon>;
+    if (value) {
+      return <StyledIcon onClick={() => {
+        if ( onChange ) {
+           onChange('')
+        }
+      }}>x</StyledIcon>;
     }
     return null;
   };
@@ -34,6 +40,12 @@ export const Input = ({
         hasError={hasError}
         id={id || randomId}
         type={typeOverride || type}
+        value={value}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            if (onChange) {
+                onChange(event.target.value)
+            }
+        } }
       />
       <StyledLabel hasError={hasError} htmlFor={id || randomId}>
         {label}
@@ -60,6 +72,7 @@ type StyledSupportingLabelProps = {
 
 export type InputProps = {
   label: string;
+  onChange?: (newValue: string) => void;
   supportingLabel?: React.ReactNode;
 } & StyledInputProps;
 

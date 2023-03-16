@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Input } from "ui";
@@ -8,11 +8,18 @@ export default {
   component: Input,
 } as ComponentMeta<typeof Input>;
 
-const Template: ComponentStory<typeof Input> = ({ ...args }) => (
-  <div style={{maxWidth: '300px'}}>
-    <Input {...args} />
-  </div>
-);
+const Template: ComponentStory<typeof Input> = ({ ...args }) => {
+  const [value, setValue] = useState("");
+  return (
+    <div style={{ maxWidth: "300px" }}>
+      <Input
+        {...args}
+        value={value}
+        onChange={ newValue => setValue(newValue) }
+      />
+    </div>
+  );
+};
 
 export const Normal = Template.bind({});
 Normal.args = {
