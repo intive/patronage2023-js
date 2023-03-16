@@ -19,17 +19,28 @@ export const Input = ({
     }
     if (type === "password") {
       return typeOverride ? (
-        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("")}>Ø</StyledIcon>
+        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("")}>
+          Ø
+        </StyledIcon>
       ) : (
-        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("text")}>o</StyledIcon>
+        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("text")}>
+          o
+        </StyledIcon>
       );
     }
     if (value) {
-      return <StyledIcon hasError={hasError} onClick={() => {
-        if ( onChange ) {
-           onChange('')
-        }
-      }}>x</StyledIcon>;
+      return (
+        <StyledIcon
+          hasError={hasError}
+          onClick={() => {
+            if (onChange) {
+              onChange("");
+            }
+          }}
+        >
+          x
+        </StyledIcon>
+      );
     }
     return null;
   };
@@ -42,10 +53,10 @@ export const Input = ({
         type={typeOverride || type}
         value={value}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            if (onChange) {
-                onChange(event.target.value)
-            }
-        } }
+          if (onChange) {
+            onChange(event.target.value);
+          }
+        }}
       />
       <StyledLabel hasError={hasError} htmlFor={id || randomId}>
         {label}
