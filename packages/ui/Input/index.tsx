@@ -15,17 +15,17 @@ export const Input = ({
 
   const getButton = () => {
     if (hasError) {
-      return <StyledIcon>!</StyledIcon>;
+      return <StyledIcon hasError={hasError}>!</StyledIcon>;
     }
     if (type === "password") {
       return typeOverride ? (
-        <StyledIcon onClick={() => setTypeOverride("")}>Ø</StyledIcon>
+        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("")}>Ø</StyledIcon>
       ) : (
-        <StyledIcon onClick={() => setTypeOverride("text")}>o</StyledIcon>
+        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("text")}>o</StyledIcon>
       );
     }
     if (value) {
-      return <StyledIcon onClick={() => {
+      return <StyledIcon hasError={hasError} onClick={() => {
         if ( onChange ) {
            onChange('')
         }
@@ -63,6 +63,10 @@ type StyledInputProps = {
 } & React.HTMLProps<HTMLInputElement>;
 
 type StyledLabelProps = {
+  hasError: boolean;
+} & React.HTMLProps<HTMLLabelElement>;
+
+type StyledIconProps = {
   hasError: boolean;
 } & React.HTMLProps<HTMLLabelElement>;
 
@@ -128,7 +132,7 @@ const StyledLabel = styled.label<StyledLabelProps>`
   transition: all 200ms linear;
 `;
 
-const StyledIcon = styled.button`
+const StyledIcon = styled.button<StyledIconProps>`
   position: absolute;
   right: -14px;
   top: 10px;
@@ -140,6 +144,13 @@ const StyledIcon = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      color: #b3261e;
+      cursor: text;
+    `}
 `;
 
 const StyledSupportingLabel = styled.div<StyledSupportingLabelProps>`
