@@ -43,6 +43,9 @@ export const CardWrapperStyled = styled.div<{
 `;
 
 export const CardStyled = styled.div<CardProps>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	width: ${({ horizontalFit }) => (horizontalFit ? "100%" : "fit-content")};
 	height: ${({ verticalFit }) => (verticalFit ? "auto" : "fit-content")};
 	padding: ${({ padding }) => (padding ? padding : "auto")};
@@ -56,9 +59,9 @@ export const CardStyled = styled.div<CardProps>`
 
 export const CardContenetStyled = styled.div`
 	overflow: auto;
-	width: 100%;
-	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 `;

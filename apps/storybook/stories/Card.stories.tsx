@@ -35,5 +35,12 @@ CardInParentElement.args = {
 	verticalFit: false,
 	padding: "",
 	margin: "",
-	children: <img src="form_img.png" alt="" height={200} />,
+	children: (
+		<img
+			src="form_img.png"
+			alt=""
+			height={350}
+			style={{ border: "1px solid red" }}
+		/>
+	),
 };
