@@ -15,29 +15,29 @@ const Template: ComponentStory<typeof Chip> = ({ children, ...args }) => (
 export const Completed = Template.bind({});
 Completed.args = {
   children: "Completed",
-  state: "completed",
+  type: "completed",
 };
 
 export const Due = Template.bind({});
 Due.args = {
   children: "Due",
-  state: "due",
+  type: "due",
 };
 
 export const Recurring = Template.bind({});
 Recurring.args = {
   children: "Recurring",
-  state: "due",
+  type: "due",
 };
 
 export const Overdue = Template.bind({});
 Overdue.args = {
   children: "Overdue",
-  state: "failed",
+  type: "failed",
 };
 
 export const Cancelled = Template.bind({});
 Cancelled.args = {
   children: "Cancelled",
-  state: "failed",
+  type: "failed",
 };
