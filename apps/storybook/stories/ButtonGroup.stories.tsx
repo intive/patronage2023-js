@@ -1,37 +1,37 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import React from 'react'
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import React from "react";
 
-import { ButtonGroup } from 'ui'
+import { ButtonGroup } from "ui";
 
 export default {
-  title: 'Example/ButtonGroup',
+  title: "ButtonGroup",
   component: ButtonGroup,
   argTypes: {},
-} as ComponentMeta<typeof ButtonGroup>
+} as ComponentMeta<typeof ButtonGroup>;
 
-const FullWidth: ComponentStory<typeof ButtonGroup> = args => (
+const FullWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   <div>
     <p>
       This component <u>always</u> fills parent. Both height and width.
     </p>
     <ButtonGroup {...args} />
   </div>
-)
+);
 
-const FixedWidth: ComponentStory<typeof ButtonGroup> = args => (
+const FixedWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   <>
     <p>Parent has fixed width (300px) and component is secondary.</p>
     <div
       style={{
-        width: '300px',
+        width: "300px",
       }}
     >
       <ButtonGroup {...args} />
     </div>
   </>
-)
+);
 
-const FullHeight: ComponentStory<typeof ButtonGroup> = args => (
+const FullHeight: ComponentStory<typeof ButtonGroup> = (args) => (
   <>
     <p>
       It also takes icons from material-symbol library. In this example parent
@@ -39,75 +39,75 @@ const FullHeight: ComponentStory<typeof ButtonGroup> = args => (
     </p>
     <div
       style={{
-        height: '100px',
-        width: '200px',
+        height: "100px",
+        width: "200px",
       }}
     >
       <ButtonGroup {...args} />
     </div>
   </>
-)
+);
 
-export const Primary = FullWidth.bind({})
+export const Primary = FullWidth.bind({});
 Primary.args = {
   options: [
     {
-      component: 'View all',
+      component: "View all",
       onSelect: () => {
-        console.log('Option 1 selected')
+        console.log("Option 1 selected");
       },
     },
     {
-      component: 'Income',
+      component: "Income",
       onSelect: () => {
-        console.log('Option 2 selected')
+        console.log("Option 2 selected");
       },
     },
     {
-      component: 'Expenses',
+      component: "Expenses",
       onSelect: () => {
-        console.log('Option 3 selected')
+        console.log("Option 3 selected");
       },
     },
   ],
   secondary: false,
-}
+};
 
-export const Secondary = FixedWidth.bind({})
+export const Secondary = FixedWidth.bind({});
 Secondary.args = {
   options: [
     {
-      component: 'Income',
+      component: "Income",
       onSelect: () => {
-        console.log('Option 1 selected')
+        console.log("Option 1 selected");
       },
     },
     {
-      component: 'Expenses',
+      component: "Expenses",
       onSelect: () => {
-        console.log('Option 2 selected')
+        console.log("Option 2 selected");
       },
     },
   ],
   secondary: true,
-}
+};
 
-export const Icons = FullHeight.bind({})
+export const Icons = FullHeight.bind({});
 
 Icons.args = {
   options: [
     {
       component: <span className="material-symbols-rounded">equalizer</span>,
       onSelect: () => {
-        console.log('Option 1 selected')
+        console.log("Option 1 selected");
       },
     },
     {
       component: <span className="material-symbols-rounded">area_chart</span>,
       onSelect: () => {
-        console.log('Option 2 selected')
+        console.log("Option 2 selected");
       },
     },
   ],
   secondary: true,
-}
+};
