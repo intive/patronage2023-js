@@ -17,24 +17,21 @@ export const Button = ({
       fullWidth={fullWidth}
       disabled={disabled}
     >
-      {children}
+      <SpanStyled>{children}</SpanStyled>
     </ButtonStyled>
   );
 };
 
 export type ButtonProps = {
-  variant:  "primary" | "secondary" | "simple";
+  variant?: "primary" | "secondary" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
 } & React.HTMLProps<HTMLButtonElement>;
 
 export const ButtonStyled = styled.button<ButtonProps>`
-  display: inline-block;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline;
   border: 0;
   border-radius: 8px;
   color: white;
@@ -95,4 +92,12 @@ export const ButtonStyled = styled.button<ButtonProps>`
     css`
       width: 100%;
     `}
+`;
+
+export const SpanStyled = styled.span`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 `;
