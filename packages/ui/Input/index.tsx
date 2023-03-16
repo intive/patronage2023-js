@@ -1,7 +1,12 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
 
-export const Input = ({ label, hasError = false, id }: InputProps) => {
+export const Input = ({
+  label,
+  hasError = false,
+  id,
+  supportingLabel,
+}: InputProps) => {
   const randomId = React.useId();
   return (
     <Wrapper>
@@ -9,6 +14,9 @@ export const Input = ({ label, hasError = false, id }: InputProps) => {
       <StyledLabel hasError={hasError} htmlFor={id || randomId}>
         {label}
       </StyledLabel>
+      <StyledSupportingLabel hasError={hasError}>
+        {supportingLabel}
+      </StyledSupportingLabel>
     </Wrapper>
   );
 };
@@ -21,8 +29,13 @@ type StyledLabelProps = {
   hasError: boolean;
 } & React.HTMLProps<HTMLLabelElement>;
 
+type StyledSupportingLabelProps = {
+  hasError: boolean;
+} & React.HTMLProps<HTMLLabelElement>;
+
 export type InputProps = {
   label: string;
+  supportingLabel?: React.ReactNode;
 } & StyledInputProps;
 
 const Wrapper = styled.div`
@@ -70,4 +83,12 @@ const StyledInput = styled.input<StyledInputProps>`
       border-color: #b3261e !important;
       caret-color: #b3261e;
     `}
+`;
+
+const StyledSupportingLabel = styled.div<StyledSupportingLabelProps>`
+  font-family: Arial, sans-serif;
+  color: ${({ hasError }) => (hasError ? "#B3261E" : "#49454F")};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0px 10px;
 `;
