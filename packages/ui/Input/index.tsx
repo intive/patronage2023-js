@@ -50,6 +50,10 @@ const StyledLabel = styled.label<StyledLabelProps>`
   font-size: 16px;
   left: 10px;
   top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 20px);
   transition: all 200ms linear;
 `;
 
@@ -59,6 +63,7 @@ const StyledInput = styled.input<StyledInputProps>`
   padding: 10px;
   caret-color: #515151;
   transition: border-color 200ms ease-out;
+  width: 100%;
 
   :focus {
     outline: none;

@@ -9,7 +9,9 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = ({ ...args }) => (
-  <Input {...args} />
+  <div style={{maxWidth: '300px'}}>
+    <Input {...args} />
+  </div>
 );
 
 export const Normal = Template.bind({});
