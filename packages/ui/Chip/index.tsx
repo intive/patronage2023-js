@@ -1,4 +1,3 @@
-import * as React from "react";
 import styled, { css } from "styled-components";
 
 /*
@@ -21,10 +20,10 @@ Specification:
 */
 
 export type ChipProps = {
-  state: "completed" | "due" | "failed";
+  type: "completed" | "due" | "failed";
 } & React.HTMLProps<HTMLSpanElement>;
 
-export const ChipsStyled = styled.span<ChipProps>`
+export const ChipStyled = styled.span<ChipProps>`
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
   font-family: "Inter", sans-serif;
   font-style: normal;
@@ -35,24 +34,24 @@ export const ChipsStyled = styled.span<ChipProps>`
   border-radius: 16px;
   padding: 4px 16px;
 
-  ${({ state }) =>
-    (state === "completed" &&
+  ${({ type }) =>
+    (type === "completed" &&
       css`
         color: #2e6858;
         background: #d0f5e3;
       `) ||
-    (state === "due" &&
+    (type === "due" &&
       css`
         color: #b96232;
         background: #fcefe7;
       `) ||
-    (state === "failed" &&
+    (type === "failed" &&
       css`
         color: #ab322c;
         background: #fceeed;
       `)}
 `;
 
-export const Chip = ({ state, children }: ChipProps) => {
-  return <ChipsStyled state={state}>{children}</ChipsStyled>;
+export const Chip = ({ type, children }: ChipProps) => {
+  return <ChipStyled type={type}>{children}</ChipStyled>;
 };
