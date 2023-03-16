@@ -1,2 +1,2 @@
-import * as React from "react";
-export { Button } from "./Button";
+export { Button } from './Button'
+export { ButtonGroup } from './ButtonGroup'
