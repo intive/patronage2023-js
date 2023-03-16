@@ -3,6 +3,23 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Button } from "ui";
 
+//delete when Icon component is done and implemented
+import "material-symbols";
+import styled from "styled-components";
+
+type IconStyled = {
+  type?: string;
+} & React.HTMLProps<HTMLSpanElement>;
+
+const Icon = ({ type }) => {
+  return <IconStyled className="material-symbols-rounded">{type}</IconStyled>;
+};
+
+const IconStyled = styled.span<IconStyled>`
+  margin: -10px;
+`;
+// end of section to delete
+
 export default {
   title: "Button",
   component: Button,
@@ -78,4 +95,14 @@ SimpleDisabled.args = {
   variant: "simple",
   disabled: true,
   fullWidth: false,
+};
+
+export const PrimaryWithIcon = Template.bind({});
+PrimaryWithIcon.args = {
+  children: (
+    <>
+      Primary with Icon
+      <Icon type="arrow_drop_down"></Icon>
+    </>
+  ),
 };

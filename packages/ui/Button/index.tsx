@@ -22,14 +22,14 @@ export const Button = ({
   );
 };
 
-export type ButtonProps = {
+type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
 } & React.HTMLProps<HTMLButtonElement>;
 
-export const ButtonStyled = styled.button<ButtonProps>`
+const ButtonStyled = styled.button<ButtonProps>`
   box-sizing: border-box;
   display: inline;
   border: 0;
@@ -41,7 +41,6 @@ export const ButtonStyled = styled.button<ButtonProps>`
   height: 56px;
   padding: 16px 24px;
   font-size: 1em;
-  line-height: 24px;
   transition: all 0.2s;
   cursor: pointer;
   &:hover {
@@ -94,10 +93,10 @@ export const ButtonStyled = styled.button<ButtonProps>`
     `}
 `;
 
-export const SpanStyled = styled.span`
+const SpanStyled = styled.span`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 `;
