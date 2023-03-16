@@ -23,7 +23,7 @@ export const Button = ({
 };
 
 export type ButtonProps = {
-  variant: string;
+  variant:  "primary" | "secondary" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
