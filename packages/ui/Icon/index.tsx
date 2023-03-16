@@ -5,10 +5,10 @@ import styled, { css } from "styled-components";
 type styledIconProps = {
   color?: string;
   filled?: boolean;
+  iconSize?: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
 type IconProps = {
-  //Map it to more friendly names or keep them as default?
   icon:
     | "home"
     | "add"
@@ -60,14 +60,20 @@ type IconProps = {
 } & styledIconProps;
 
 export const StyledIcon = styled.span<styledIconProps>`
-  cursor: pointer;
   font-variation-settings: "FILL" 0;
+
+  ${({ iconSize }) =>
+    iconSize &&
+    css`
+      font-size: ${iconSize}px;
+    `}
 
   ${({ color }) =>
     color &&
     css`
       color: ${color};
     `}
+  
 
   ${({ filled }) =>
     filled &&
@@ -76,11 +82,17 @@ export const StyledIcon = styled.span<styledIconProps>`
     `}
 `;
 
-export const Icon = ({ icon, filled = false, color = "black" }: IconProps) => {
+export const Icon = ({
+  icon,
+  filled = false,
+  color = "black",
+  iconSize,
+}: IconProps) => {
   return (
     <StyledIcon
       color={color}
       className="material-symbols-rounded"
+      iconSize={iconSize}
       filled={filled}
     >
       {icon}
