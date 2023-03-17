@@ -34,11 +34,9 @@ export const ButtonStyled = styled.button<ButtonProps>`
   margin: 10px 20px;
   cursor: pointer;
   transition: opacity 250ms;
-
   &:hover {
     opacity: ${({ disabled }) => (disabled ? 1 : 0.6)};
   }
-
   ${({ secondary }) =>
     secondary &&
     css`
@@ -46,7 +44,6 @@ export const ButtonStyled = styled.button<ButtonProps>`
       outline: 1px solid #000;
       color: #000;
     `}
-
   ${({ disabled }) =>
     disabled &&
     css`
@@ -54,3 +51,8 @@ export const ButtonStyled = styled.button<ButtonProps>`
       cursor: not-allowed;
     `}
 `;
+
+
+
+
+
