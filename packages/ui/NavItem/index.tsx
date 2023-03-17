@@ -2,11 +2,11 @@
 
 import styled from "styled-components";
 import "material-symbols";
+import { Icon } from "../Icon";
 
 export type NavItemProps = {
     active?: boolean,
 } & React.HTMLProps<HTMLLIElement>;
-
 
 // why I use min-width:0; https://css-tricks.com/flexbox-truncated-text/
 export const ChildrenWrapper = styled.div`
@@ -16,7 +16,7 @@ export const ChildrenWrapper = styled.div`
   flex-basis:80%;
   min-width:0;
 `
-export const ArrowWrapper = styled.div`
+export const ArrowWrapper = styled.div<NavItemProps>`
   display:flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ export const NavItem = ({
       <ChildrenWrapper>
         {children}
       </ChildrenWrapper>
-      <ArrowWrapper>{active && <span className="material-symbols-outlined">chevron_right</span>}</ArrowWrapper>
+      {active && <ArrowWrapper><Icon icon={"chevron_right"} color="#1E4C40"></Icon></ArrowWrapper>}
     </NavItemStyled>
   );
 };
