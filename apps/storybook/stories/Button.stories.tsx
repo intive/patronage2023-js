@@ -85,7 +85,7 @@ PrimaryWithIcon.args = {
   children: (
     <>
       Primary with Icon
-      <Icon icon="arrow_drop_down"></Icon>
+      <Icon icon="arrow_drop_down" color="white" iconSize={30} />
     </>
   ),
 };
