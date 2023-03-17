@@ -1,24 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button } from "ui";
-
-//delete when Icon component is done and implemented
-import "material-symbols";
-import styled from "styled-components";
-
-type IconStyled = {
-  type?: string;
-} & React.HTMLProps<HTMLSpanElement>;
-
-const Icon = ({ type }) => {
-  return <IconStyled className="material-symbols-rounded">{type}</IconStyled>;
-};
-
-const IconStyled = styled.span<IconStyled>`
-  margin: -10px;
-`;
-// end of section to delete
+import { Button, Icon } from "ui";
 
 export default {
   title: "Button",
@@ -102,7 +85,7 @@ PrimaryWithIcon.args = {
   children: (
     <>
       Primary with Icon
-      <Icon type="arrow_drop_down"></Icon>
+      <Icon icon="arrow_drop_down"></Icon>
     </>
   ),
 };
