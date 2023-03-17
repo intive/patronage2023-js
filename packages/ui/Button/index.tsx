@@ -39,7 +39,8 @@ const ButtonStyled = styled.button<ButtonProps>`
   font-family: "Inter", sans-serif;
   font-weight: 600;
   height: 56px;
-  padding: 16px 24px;
+  padding-left: 24px;
+  padding-right: 24px;
   font-size: 1em;
   transition: all 0.2s;
   cursor: pointer;
@@ -95,7 +96,6 @@ const ButtonStyled = styled.button<ButtonProps>`
 
 const SpanStyled = styled.span`
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 15px;
