@@ -94,9 +94,11 @@ const ButtonStyled = styled.button<ButtonProps>`
 `;
 
 const SpanStyled = styled.span`
-  margin-right: -10px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
+  & :last-child {
+    margin-right: -10px;
+  }
 `;
