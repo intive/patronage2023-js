@@ -94,8 +94,9 @@ const ButtonStyled = styled.button<ButtonProps>`
 `;
 
 const SpanStyled = styled.span`
+  margin-right: -10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 5px;
 `;
