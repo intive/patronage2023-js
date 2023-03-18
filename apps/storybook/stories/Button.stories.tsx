@@ -88,4 +88,8 @@ PrimaryWithIcon.args = {
       <Icon icon="arrow_drop_down" color="white" iconSize={30} />
     </>
   ),
+  variant: "primary",
+  disabled: false,
+  fullWidth: false,
+  height: 48,
 };

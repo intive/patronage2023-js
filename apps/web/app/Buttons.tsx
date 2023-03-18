@@ -14,7 +14,7 @@ export default function Buttons() {
         Secondary
       </Button>
 
-      <Button>
+      <Button height={48}>
         Create
         <Icon icon="arrow_drop_down" color="white" />
       </Button>

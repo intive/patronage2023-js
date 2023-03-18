@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 
 export const Button = ({
   variant = "primary",
+  height = 56,
   fullWidth,
   disabled,
   children,
@@ -13,6 +14,7 @@ export const Button = ({
     <ButtonStyled
       variant={variant}
       onClick={onClick}
+      height={height}
       fullWidth={fullWidth}
       disabled={disabled}
     >
@@ -23,6 +25,7 @@ export const Button = ({
 
 type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
+  height?: number;
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
@@ -37,7 +40,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   background-color: #1e4c40;
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  height: 56px;
+  height: ${(props) => props.height}px;
   padding-left: 24px;
   padding-right: 24px;
   font-size: 1em;
