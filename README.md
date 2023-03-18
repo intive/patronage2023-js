@@ -2,6 +2,14 @@
 
 This is the Patronage 2023 JS inbudget app.
 
+## Deployments
+
+`main` deployments are available at:
+
+### App: https://patronage2023-js-web.vercel.app/
+
+### Storybook: https://patronage2023-js-storybook.vercel.app/ (design system)
+
 ## What's inside?
 
 This is a turborepo monorepo
