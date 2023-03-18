@@ -38,8 +38,8 @@ Error.args = {
   supportingLabel: "Supporting label",
 };
 
-export const LinkInSupportingLabel = Template.bind({});
-LinkInSupportingLabel.args = {
+export const Password = Template.bind({});
+Password.args = {
   label: "Label",
   hasError: false,
   id: "",

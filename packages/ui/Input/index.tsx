@@ -1,6 +1,8 @@
 import * as React from "react";
 import styled, { css } from "styled-components";
 
+import { Icon } from "../Icon";
+
 export const Input = ({
   label,
   hasError = false,
@@ -12,41 +14,71 @@ export const Input = ({
 }: InputProps) => {
   const randomId = React.useId();
   const [typeOverride, setTypeOverride] = React.useState("");
+  const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const getButton = () => {
     if (hasError) {
-      return <StyledIcon hasError={hasError}>!</StyledIcon>;
+      return (
+        <StyledIcon>
+          <Icon icon="error" filled color="#b3261e" iconSize={20} />
+        </StyledIcon>
+      );
     }
     if (type === "password") {
       return typeOverride ? (
-        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("")}>
-          Ø
+        <StyledIcon
+          onClick={() => {
+            setTypeOverride("");
+            inputRef.current?.focus();
+          }}
+        >
+          <Icon
+            icon="visibility_off"
+            color="#49454f"
+            iconSize={23}
+          />
         </StyledIcon>
       ) : (
-        <StyledIcon hasError={hasError} onClick={() => setTypeOverride("text")}>
-          o
+        <StyledIcon
+          onClick={() => {
+            setTypeOverride("text");
+            inputRef.current?.focus();
+          }}
+        >
+          <Icon
+            icon="visibility"
+            color="#49454f"
+            iconSize={23}
+          />
         </StyledIcon>
       );
     }
     if (value) {
       return (
         <StyledIcon
-          hasError={hasError}
           onClick={() => {
             if (onChange) {
               onChange("");
             }
+            inputRef.current?.focus();
           }}
+          style={{ transform: "rotate(45deg)" }}
         >
-          x
+          <Icon
+            icon={"add_circle"}
+            color={"#49454f"}
+            iconSize={20}
+          />
         </StyledIcon>
       );
     }
     return null;
   };
+
   return (
     <Wrapper>
       <StyledInput
+        ref={inputRef}
         placeholder=" "
         hasError={hasError}
         id={id || randomId}
@@ -74,10 +106,6 @@ type StyledInputProps = {
 } & React.HTMLProps<HTMLInputElement>;
 
 type StyledLabelProps = {
-  hasError: boolean;
-} & React.HTMLProps<HTMLLabelElement>;
-
-type StyledIconProps = {
   hasError: boolean;
 } & React.HTMLProps<HTMLLabelElement>;
 
@@ -109,6 +137,7 @@ const StyledInput = styled.input<StyledInputProps>`
   }
 
   :focus,
+  // case when input has value
   :not(:placeholder-shown) {
     + label {
       transform: translateY(-16px);
@@ -129,7 +158,6 @@ const StyledInput = styled.input<StyledInputProps>`
 `;
 
 const StyledLabel = styled.label<StyledLabelProps>`
-  font-family: Arial, sans-serif;
   position: absolute;
   color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
   font-weight: 400;
@@ -143,29 +171,18 @@ const StyledLabel = styled.label<StyledLabelProps>`
   transition: all 200ms linear;
 `;
 
-const StyledIcon = styled.button<StyledIconProps>`
+const StyledIcon = styled.button`
   position: absolute;
   right: -14px;
   top: 10px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #49454f;
-  width: 20px;
-  height: 20px;
   border: none;
   background: none;
   cursor: pointer;
-
-  ${({ hasError }) =>
-    hasError &&
-    css`
-      color: #b3261e;
-      cursor: text;
-    `}
+  padding: 0;
+  line-height: 0;
 `;
 
 const StyledSupportingLabel = styled.div<StyledSupportingLabelProps>`
-  font-family: Arial, sans-serif;
   color: ${({ hasError }) => (hasError ? "#B3261E" : "#49454F")};
   font-weight: 400;
   font-size: 12px;
