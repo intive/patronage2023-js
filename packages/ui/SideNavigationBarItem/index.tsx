@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 
 /*
@@ -15,6 +15,7 @@ export type SideNavigationBarItemProps = {
   activeFlag?: boolean;
   onClick?: Function;
   children: React.ReactNode;
+  textValue: string;
 } & React.HTMLProps<HTMLDivElement>;
 
 export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
@@ -32,8 +33,9 @@ export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps
 
 export const SideNavigationBarItem = ({
   children,
+  textValue,
 }: SideNavigationBarItemProps) => {
-  const [active, setActive] = React.useState(false);
+  const [active, setActive] = useState(false);
 
   return (
     <SideNavigationBarItemStyled
@@ -41,8 +43,10 @@ export const SideNavigationBarItem = ({
       onClick={() => {
         setActive(!active);
       }}
+      textValue={textValue}
     >
       {children}
+      <span style={{ fontSize: 10 }}>{textValue}</span>
     </SideNavigationBarItemStyled>
   );
 };
