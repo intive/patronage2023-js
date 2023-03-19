@@ -18,7 +18,7 @@ export const Button = ({
       fullWidth={fullWidth}
       disabled={disabled}
     >
-      <SpanStyled>{children}</SpanStyled>
+      {children}
     </ButtonStyled>
   );
 };
@@ -33,7 +33,10 @@ type ButtonProps = {
 
 const ButtonStyled = styled.button<ButtonProps>`
   box-sizing: border-box;
-  display: inline;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
   border: 0;
   border-radius: 8px;
   color: white;
@@ -52,6 +55,11 @@ const ButtonStyled = styled.button<ButtonProps>`
   &:disabled {
     background-color: lightgray;
     cursor: not-allowed;
+  }
+
+  // temporary fix to create button
+  & :last-child {
+    margin-right: -10px;
   }
 
   ${({ variant }) =>
@@ -94,14 +102,4 @@ const ButtonStyled = styled.button<ButtonProps>`
     css`
       width: 100%;
     `}
-`;
-
-const SpanStyled = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  & :last-child {
-    margin-right: -10px;
-  }
 `;

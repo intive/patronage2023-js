@@ -16,7 +16,7 @@ export default function Buttons() {
 
       <Button height={48}>
         Create
-        <Icon icon="arrow_drop_down" color="white" />
+        <Icon icon="arrow_drop_down" color="white" iconSize={30} />
       </Button>
     </>
   );
