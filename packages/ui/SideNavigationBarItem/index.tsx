@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Icon } from "ui";
 import { IconProps } from "../Icon";
+import Link from "next/link";
 
 /*
 Side navigation item:
@@ -13,17 +14,17 @@ Inactive: gray color.
 Hover: unspecified in design (probably green color similar to active state but without border?)
 */
 
-export type SideNavigationBarItemProps = {
+// SINGLE SIDE NAVIGATION BAR ITEM
+
+type SideNavigationBarItemProps = {
   activeFlag?: boolean;
   onClick?: Function;
-  children: React.ReactNode;
+  href: string;
   textValue: string;
 } & React.HTMLProps<HTMLDivElement> &
   IconProps;
 
-// TODO: take care of padding and try to create a whole side navigation bar with couple of items!
-
-export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
+const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
   /* display: flex; */
   display: inline-flex;
   flex-direction: column;
@@ -41,24 +42,98 @@ export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps
     `}
 `;
 
+type SpanProps = {
+  fontSize: number;
+} & React.HTMLProps<HTMLSpanElement>;
+
+const SpanStyled = styled.span<SpanProps>`
+  ${({ fontSize }) =>
+    fontSize &&
+    css`
+      font-size: ${fontSize}px;
+    `}
+`;
+
+const LinkStyled = styled(Link)`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
 export const SideNavigationBarItem = ({
-  children,
+  href,
   icon,
   textValue,
 }: SideNavigationBarItemProps) => {
   const [active, setActive] = useState(false);
 
   return (
-    <SideNavigationBarItemStyled
-      activeFlag={active}
-      onClick={() => {
-        setActive(!active);
-      }}
-      textValue={textValue}
-      icon={icon}
-    >
-      <Icon icon={icon} iconSize={30} color={active ? "#1e4c40" : "#7e7e7e"} />
-      <span style={{ fontSize: 10 }}>{textValue}</span>
-    </SideNavigationBarItemStyled>
+    <LinkStyled href={href}>
+      <SideNavigationBarItemStyled
+        activeFlag={active}
+        onClick={() => {
+          setActive(!active);
+        }}
+        href={href}
+        textValue={textValue}
+        icon={icon}
+      >
+        <Icon
+          icon={icon}
+          iconSize={30}
+          color={active ? "#1e4c40" : "#7e7e7e"}
+        />
+        <SpanStyled fontSize={10}>{textValue}</SpanStyled>
+      </SideNavigationBarItemStyled>
+    </LinkStyled>
+  );
+};
+
+// SIDE NAVIGATION BAR MENU
+
+type SideNavigationBarProps = {
+  items: SideNavigationBarItemProps[];
+};
+
+const SideNavigationBarStyled = styled.div<SideNavigationBarProps>`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
+  return (
+    <SideNavigationBarStyled items={items}>
+      {items.map(({ href, icon, textValue }) => {
+        const [active, setActive] = useState(false);
+
+        return (
+          <LinkStyled href={href}>
+            <SideNavigationBarItemStyled
+              activeFlag={active}
+              onClick={() => {
+                setActive(!active);
+              }}
+              href={href}
+              textValue={textValue}
+              icon={icon}
+            >
+              <Icon
+                icon={icon}
+                iconSize={30}
+                color={active ? "#1e4c40" : "#7e7e7e"}
+              />
+              <SpanStyled fontSize={10}>{textValue}</SpanStyled>
+            </SideNavigationBarItemStyled>
+          </LinkStyled>
+        );
+      })}
+    </SideNavigationBarStyled>
   );
 };
