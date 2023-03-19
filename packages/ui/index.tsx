@@ -1,3 +1,3 @@
 import * as React from "react";
 export { Button } from "./Button";
-export { LinkComponent } from "./Link"
+export { LinkComponent } from "./Link";
