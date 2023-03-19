@@ -1,5 +1,7 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import { Icon } from "ui";
+import { IconProps } from "../Icon";
 
 /*
 Side navigation item:
@@ -16,12 +18,20 @@ export type SideNavigationBarItemProps = {
   onClick?: Function;
   children: React.ReactNode;
   textValue: string;
-} & React.HTMLProps<HTMLDivElement>;
+} & React.HTMLProps<HTMLDivElement> &
+  IconProps;
+
+// TODO: take care of padding and try to create a whole side navigation bar with couple of items!
 
 export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
-  display: flex;
+  /* display: flex; */
+  display: inline-flex;
   flex-direction: column;
-  padding-left: 6px;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+
+  padding: 7px 14px 7px 14px;
   color: #7e7e7e;
   ${({ activeFlag }) =>
     activeFlag &&
@@ -33,6 +43,7 @@ export const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps
 
 export const SideNavigationBarItem = ({
   children,
+  icon,
   textValue,
 }: SideNavigationBarItemProps) => {
   const [active, setActive] = useState(false);
@@ -44,8 +55,9 @@ export const SideNavigationBarItem = ({
         setActive(!active);
       }}
       textValue={textValue}
+      icon={icon}
     >
-      {children}
+      <Icon icon={icon} iconSize={30} color={active ? "#1e4c40" : "#7e7e7e"} />
       <span style={{ fontSize: 10 }}>{textValue}</span>
     </SideNavigationBarItemStyled>
   );

@@ -8,7 +8,7 @@ type styledIconProps = {
   iconSize?: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
-type IconProps = {
+export type IconProps = {
   icon:
     | "home"
     | "add"
@@ -61,7 +61,6 @@ type IconProps = {
 
 export const StyledIcon = styled.span<styledIconProps>`
   font-variation-settings: "FILL" 0;
-
   ${({ iconSize }) =>
     iconSize &&
     css`

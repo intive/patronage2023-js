@@ -2,7 +2,6 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { SideNavigationBarItem } from "ui";
-import { Icon } from "ui";
 
 export default {
   title: "SideNavigationBarItem",
@@ -14,12 +13,8 @@ const Template: ComponentStory<typeof SideNavigationBarItem> = ({
   ...args
 }) => <SideNavigationBarItem {...args}>{children}</SideNavigationBarItem>;
 
-export const Normal = Template.bind({});
-Normal.args = {
-  children: (
-    <>
-      <Icon icon={"menu"} iconSize={30} />
-    </>
-  ),
-  textValue: "anything",
+export const Menu = Template.bind({});
+Menu.args = {
+  icon: "menu",
+  textValue: "Menu",
 };
