@@ -4,26 +4,26 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Card } from "ui";
 
 export default {
-	title: "Card",
-	component: Card,
+  title: "Card",
+  component: Card,
 } as ComponentMeta<typeof Card>;
 
 const Template: ComponentStory<typeof Card> = ({ children, ...args }) => (
-	<Card {...args}>{children}</Card>
+  <Card {...args}>{children}</Card>
 );
 
 export const BasicCard = Template.bind({});
 BasicCard.args = {
-	padding: "20px",
-	margin: "",
-	minWidth: "",
-	minHeight: "",
-	children: (
-		<img
-			src="form_img.png"
-			alt=""
-			height={250}
-			style={{ border: "1px solid red" }}
-		/>
-	),
+  padding: "20px",
+  margin: "",
+  minWidth: "",
+  minHeight: "",
+  children: (
+    <img
+      src="form_img.png"
+      alt=""
+      height={250}
+      style={{ border: "1px solid red" }}
+    />
+  ),
 };
