@@ -13,10 +13,10 @@ export type CardProps = {
 
 export const Card = ({
 	children,
-	padding,
-	margin,
-	minWidth,
-	minHeight,
+	padding = "auto",
+	margin = "0",
+	minWidth = "fit-content",
+	minHeight = "fit-content",
 }: CardProps) => {
 	return (
 		<CardStyled
@@ -33,10 +33,10 @@ export const CardStyled = styled.div<CardProps>`
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	padding: ${({ padding }) => (padding ? padding : "auto")};
-	margin: ${({ margin }) => (margin ? margin : 0)};
-	min-width: ${({ minWidth }) => (minWidth ? minWidth : "fit-content")};
-	min-height: ${({ minHeight }) => (minHeight ? minHeight : "fit-content")};
+	padding: ${({ padding }) => padding};
+	margin: ${({ margin }) => margin};
+	min-width: ${({ minWidth }) => minWidth};
+	min-height: ${({ minHeight }) => minHeight};
 	background-color: #ffffff;
 	border: 1px solid #e1e1e1;
 	box-shadow: 0px 2px 6px rgba(32, 41, 50, 0.1);
