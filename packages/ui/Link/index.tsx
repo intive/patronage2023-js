@@ -11,20 +11,11 @@ export const LinkComponent = ({
   children,
   onClick,
 }: LinkComponentProps) => {
-  if (onClick) {
-    return (
-      <LinkComponentButtonStyled onClick={onClick}>
-        {children}
-      </LinkComponentButtonStyled>
-    )
-  } else {
-    return (
-      <LinkComponentAnchorStyled href={href}>
-        {children}
-      </LinkComponentAnchorStyled>
-    )
-  }
-
+  return onClick ? (<LinkComponentButtonStyled onClick={onClick}>
+    {children}
+  </LinkComponentButtonStyled>) : (<LinkComponentAnchorStyled href={href}>
+    {children}
+  </LinkComponentAnchorStyled>)
 };
 
 export const LinkComponentAnchorStyled = styled.a<LinkComponentProps>`
