@@ -47,7 +47,9 @@ export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
   width: 54px;
   height: 20px; 
   line-height: 20px;
-  flex: 1;
+  display: flex;
+  flex: none;
+  order: 1;
   flex-grow: 0;
   cursor: pointer;
   border: none;
