@@ -14,12 +14,10 @@ export const Outline = Template.bind({});
 Outline.args = {
   icon: "home",
   filled: false,
-  color: "black",
 };
 
 export const Filled = Template.bind({});
 Filled.args = {
   icon: "home",
   filled: true,
-  color: "black",
 };
