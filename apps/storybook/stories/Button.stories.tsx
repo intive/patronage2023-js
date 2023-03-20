@@ -9,6 +9,7 @@ export default {
   argTypes: {
     variant: { control: "radio", options: ["primary", "secondary", "simple"] },
     fullWidth: { control: "boolean" },
+    small: { control: "boolean" },
   },
 } as ComponentMeta<typeof Button>;
 
@@ -19,32 +20,24 @@ const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
 export const Primary = Template.bind({});
 Primary.args = {
   children: "Primary",
-  variant: "primary",
-  disabled: false,
-  fullWidth: false,
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
   children: "Secondary",
   variant: "secondary",
-  disabled: false,
-  fullWidth: false,
 };
 
 export const Simple = Template.bind({});
 Simple.args = {
   children: "Simple",
   variant: "simple",
-  disabled: false,
-  fullWidth: false,
 };
 
 export const PrimaryFullWidth = Template.bind({});
 PrimaryFullWidth.args = {
   children: "Primary FullWidth",
   variant: "primary",
-  disabled: false,
   fullWidth: true,
 };
 
@@ -52,7 +45,6 @@ export const SecondaryFullWidth = Template.bind({});
 SecondaryFullWidth.args = {
   children: "Secondary FullWidth",
   variant: "secondary",
-  disabled: false,
   fullWidth: true,
 };
 
@@ -61,7 +53,6 @@ PrimaryDisabled.args = {
   children: "Primary Disabled",
   variant: "primary",
   disabled: true,
-  fullWidth: false,
 };
 
 export const SecondaryDisabled = Template.bind({});
@@ -69,7 +60,6 @@ SecondaryDisabled.args = {
   children: "Secondary Disabled",
   variant: "secondary",
   disabled: true,
-  fullWidth: false,
 };
 
 export const SimpleDisabled = Template.bind({});
@@ -77,7 +67,6 @@ SimpleDisabled.args = {
   children: "Simple Disabled",
   variant: "simple",
   disabled: true,
-  fullWidth: false,
 };
 
 export const PrimaryWithIcon = Template.bind({});
@@ -91,5 +80,11 @@ PrimaryWithIcon.args = {
   variant: "primary",
   disabled: false,
   fullWidth: false,
-  height: 48,
+  small: true,
+};
+
+export const PrimaryWithLongText = Template.bind({});
+PrimaryWithLongText.args = {
+  children:
+    "Primary With Long Long Long Long Long Long Long Long Long Long Long Long Long Long Long Text",
 };

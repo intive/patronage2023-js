@@ -4,19 +4,19 @@ import styled, { css } from "styled-components";
 
 export const Button = ({
   variant = "primary",
-  height = 56,
-  fullWidth,
-  disabled,
+  fullWidth = false,
+  disabled = false,
   children,
   onClick,
+  small = false,
 }: ButtonProps) => {
   return (
     <ButtonStyled
       variant={variant}
       onClick={onClick}
-      height={height}
       fullWidth={fullWidth}
       disabled={disabled}
+      small={small}
     >
       {children}
     </ButtonStyled>
@@ -25,10 +25,10 @@ export const Button = ({
 
 type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
-  height?: number;
   fullWidth?: boolean;
   disabled?: boolean;
   onClick?: Function;
+  small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
 const ButtonStyled = styled.button<ButtonProps>`
@@ -37,22 +37,22 @@ const ButtonStyled = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  border: 0;
+  border: 2px solid #1e4c40;
   border-radius: 8px;
   color: white;
   background-color: #1e4c40;
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  height: ${(props) => props.height}px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 16px 24px;
   font-size: 1em;
   transition: all 0.2s;
   cursor: pointer;
   &:hover {
+    border: 2px solid #459175;
     background-color: #459175;
   }
   &:disabled {
+    border: 2px solid lightgray;
     background-color: lightgray;
     cursor: not-allowed;
   }
@@ -60,6 +60,8 @@ const ButtonStyled = styled.button<ButtonProps>`
   // temporary fix to create button
   & :last-child {
     margin-right: -10px;
+    margin-top: -8px;
+    margin-bottom: -8px;
   }
 
   ${({ variant }) =>
@@ -83,19 +85,28 @@ const ButtonStyled = styled.button<ButtonProps>`
   ${({ variant }) =>
     variant === "simple" &&
     css`
-      border: 0;
+      border: 2px solid transparent;
       background-color: transparent;
       color: #52a785;
       &:hover {
+        border: 2px solid transparent;
         background-color: transparent;
         text-decoration: underline;
       }
       &:disabled {
+        border: 2px solid transparent;
         background-color: transparent;
         color: lightgrey;
         text-decoration: none;
       }
     `}
+
+  ${({ small }) =>
+    small &&
+    css`
+      padding: 13px 24px;
+    `}
+  
 
   ${({ fullWidth }) =>
     fullWidth &&
