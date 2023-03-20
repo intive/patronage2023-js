@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Buttons from "./Buttons";
-import { Card } from "ui";
 
 export const metadata: Metadata = {
 	title: "Home",
