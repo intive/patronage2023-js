@@ -1,4 +1,4 @@
-import { useState, useRef, useId } from 'react'
+import { useState, useRef, useId } from "react";
 import styled, { css } from "styled-components";
 
 import { Icon } from "../Icon";
@@ -77,9 +77,11 @@ export const Input = ({
         {label}
       </StyledLabel>
       {getButton()}
-      <StyledSupportingLabel hasError={hasError}>
-        {supportingLabel}
-      </StyledSupportingLabel>
+      {supportingLabel && (
+        <StyledSupportingLabel hasError={hasError}>
+          {supportingLabel}
+        </StyledSupportingLabel>
+      )}
     </Wrapper>
   );
 };

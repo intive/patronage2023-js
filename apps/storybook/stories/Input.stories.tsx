@@ -26,6 +26,14 @@ Normal.args = {
   label: "Label",
   hasError: false,
   id: "",
+  type: "text",
+};
+
+export const SupportingLabel = Template.bind({});
+SupportingLabel.args = {
+  label: "Label",
+  hasError: false,
+  id: "",
   supportingLabel: "Supporting label",
   type: "text",
 };
