@@ -29,19 +29,6 @@ export const Card = ({
 	);
 };
 
-// export const CardWrapperStyled = styled.div<{
-// 	height?: string;
-// 	width?: string;
-// }>`
-// 	display: flex;
-// 	max-width: 100%;
-// 	max-height: 100%;
-// 	width: ${({ width }) => (width ? width : "fit-content")};
-// 	height: ${({ height }) => (height ? height : "fit-content")};
-// 	/* height: ${({ height }) => (height ? height : "fit-content")};
-// 	width: ${({ width }) => width}; */
-// `;
-
 export const CardStyled = styled.div<CardProps>`
 	display: inline-flex;
 	justify-content: center;
