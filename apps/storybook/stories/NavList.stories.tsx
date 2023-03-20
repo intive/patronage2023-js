@@ -7,18 +7,20 @@ import styled from "styled-components";
 type NavItemContent = {
   title: string;
   active: boolean;
+  id:number;
 };
 
-const navItemContents: Array<NavItemContent> = [{ title: "Edit profile", active: true }, { title: "Change password", active: false }, { title: "Language", active: false }];
+const navItemContents: Array<NavItemContent> = [{ title: "Edit profile", active: true, id: 1 }, { title: "Change password", active: false, id: 2 }, { title: "Language", active: false, id: 3 }];
 
 //creating dummy data for proper display on storybook - two children elements inside NavItem
 type NavItemContentIcon = {
   title: string;
   active: boolean;
   icon: "payments" | "subscriptions" | "savings";
+  id:number;
 };
 
-const navItemContentsIcon: Array<NavItemContentIcon> = [{ title: "Bills", active: true, icon: "payments" }, { title: "Subscriptions", active: false, icon: "subscriptions" }, { title: "Savings", active: false, icon: "savings" }];
+const navItemContentsIcon: Array<NavItemContentIcon> = [{ title: "Bills", active: true, icon: "payments", id: 1 }, { title: "Subscriptions", active: false, icon: "subscriptions", id: 2 }, { title: "Savings", active: false, icon: "savings", id: 3 }];
 
 //span that imitates children element - wrapper for text
 const SpanStyled = styled.span`
@@ -30,13 +32,13 @@ const SpanStyled = styled.span`
 `
 
 //div that imitates children element - wrapper for icon 
+//with !important this div will always have bcg on "white", even when `active` prop will change bcg of whole li element on "#F1FBF6" 
 const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: white !important;
-  flex-basis:13%;
-  padding:3px 0;
+  padding:4px 7px;
   border-radius: 8px;
 `
 
@@ -60,10 +62,10 @@ export const ElementsInactive = Template.bind({});
 ElementsInactive.args = {
   children: (
     <>
-      {navItemContents.map((settingData, i) => {
+      {navItemContents.map((content) => {
         return (
-          <NavItem active={false} key={i++}>
-            <SpanStyled>{settingData.title}</SpanStyled>
+          <NavItem active={false} key={content.id}>
+            <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         )
       })}
@@ -76,10 +78,10 @@ export const OneElementActive = Template.bind({});
 OneElementActive.args = {
   children: (
     <>
-      {navItemContents.map((settingData, i) => {
+      {navItemContents.map((content) => {
         return (
-          <NavItem active={settingData.active} key={i++}>
-            <SpanStyled>{settingData.title}</SpanStyled>
+          <NavItem active={content.active} key={content.id}>
+            <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         )
       })}
@@ -100,11 +102,11 @@ export const ListWithIconAndText = Template.bind({});
 ListWithIconAndText.args = {
   children: (
     <>
-      {navItemContentsIcon.map((settingData, i) => {
+      {navItemContentsIcon.map((content) => {
         return (
-          <NavItem active={settingData.active} key={i++}>
-            <IconWrapper><Icon icon={settingData.icon} color="#1E4C40"></Icon></IconWrapper>
-            <SpanStyled>{settingData.title}</SpanStyled>
+          <NavItem active={content.active} key={content.id}>
+            <IconWrapper><Icon icon={content.icon} color="#1E4C40"></Icon></IconWrapper>
+            <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         )
       })}

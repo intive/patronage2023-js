@@ -7,7 +7,7 @@ export type NavListProps = React.HTMLProps<HTMLUListElement>;
 
 const NavListStyled = styled.ul`
     list-style: none;
-    width:350px;
+    width:100%;
     height:auto;
 `
 export const NavList = ({
