@@ -81,12 +81,7 @@ export const StyledIcon = styled.span<styledIconProps>`
     `}
 `;
 
-export const Icon = ({
-  icon,
-  filled = false,
-  color = "black",
-  iconSize,
-}: IconProps) => {
+export const Icon = ({ icon, filled = false, color, iconSize }: IconProps) => {
   return (
     <StyledIcon
       color={color}
