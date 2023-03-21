@@ -27,3 +27,14 @@ BasicCard.args = {
     />
   ),
 };
+
+export const CardWithColor = Template.bind({});
+CardWithColor.args = {
+  children:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus est accusantium eligendi? Totam asperiores nemo modi accusantium libero autem, nihil quisquam, velit numquam minus tempore quidem in dolorem soluta exercitationem.",
+  color: "#515151",
+  padding: "20px",
+  margin: "",
+  minWidth: "",
+  minHeight: "",
+};

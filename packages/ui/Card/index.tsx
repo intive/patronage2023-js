@@ -9,6 +9,7 @@ export type CardProps = {
   margin?: string;
   minWidth?: string;
   minHeight?: string;
+  color?: string;
 };
 
 export const Card = ({
@@ -17,13 +18,15 @@ export const Card = ({
   margin = "0",
   minWidth = "fit-content",
   minHeight = "fit-content",
+  color = "#515151",
 }: CardProps) => {
   return (
     <CardStyled
       padding={padding}
       margin={margin}
       minWidth={minWidth}
-      minHeight={minHeight}>
+      minHeight={minHeight}
+      color={color}>
       {children}
     </CardStyled>
   );
@@ -37,6 +40,7 @@ export const CardStyled = styled.div<CardProps>`
   margin: ${({ margin }) => margin};
   min-width: ${({ minWidth }) => minWidth};
   min-height: ${({ minHeight }) => minHeight};
+  color: ${({ color }) => color};
   background-color: #ffffff;
   border: 1px solid #e1e1e1;
   box-shadow: 0px 2px 6px rgba(32, 41, 50, 0.1);
