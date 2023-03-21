@@ -22,24 +22,26 @@ export const SideNavigationBarItem = ({
   const [active, setActive] = useState(false);
 
   return (
-    <LinkStyled href={href}>
-      <SideNavigationBarItemStyled
-        activeFlag={active}
-        onClick={() => {
-          setActive(!active);
-        }}
-        href={href}
-        textValue={textValue}
-        icon={icon}
-      >
-        <Icon
+    <li>
+      <LinkStyled href={href}>
+        <SideNavigationBarItemStyled
+          activeFlag={active}
+          onClick={() => {
+            setActive(!active);
+          }}
+          href={href}
+          textValue={textValue}
           icon={icon}
-          iconSize={30}
-          color={active ? "#1e4c40" : "#7e7e7e"}
-        />
-        <SpanStyled fontSize={10}>{textValue}</SpanStyled>
-      </SideNavigationBarItemStyled>
-    </LinkStyled>
+        >
+          <Icon
+            icon={icon}
+            iconSize={30}
+            color={active ? "#1e4c40" : "#7e7e7e"}
+          />
+          <SpanStyled fontSize={10}>{textValue}</SpanStyled>
+        </SideNavigationBarItemStyled>
+      </LinkStyled>
+    </li>
   );
 };
 
@@ -76,6 +78,7 @@ type SpanProps = {
 } & React.HTMLProps<HTMLSpanElement>;
 
 const SpanStyled = styled.span<SpanProps>`
+  text-align: center;
   ${({ fontSize }) =>
     fontSize &&
     css`

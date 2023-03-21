@@ -7,15 +7,14 @@ import {
 export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
   return (
     <SideNavigationBarStyled items={items}>
-      {items.map(({ href, icon, textValue }) => {
+      {items.map(({ href, icon, textValue }, index) => {
         return (
-          <li>
-            <SideNavigationBarItem
-              href={href}
-              icon={icon}
-              textValue={textValue}
-            />
-          </li>
+          <SideNavigationBarItem
+            key={index}
+            href={href}
+            icon={icon}
+            textValue={textValue}
+          />
         );
       })}
     </SideNavigationBarStyled>
