@@ -27,7 +27,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
-  onClick?: Function;
+  onClick: Function;
   small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
@@ -57,7 +57,7 @@ const ButtonStyled = styled.button<ButtonProps>`
     cursor: not-allowed;
   }
 
-  // temporary fix to create button
+  // temporary fix to button with arrow_dropdown_down
   & :last-child {
     margin-right: -10px;
     margin-top: -8px;
