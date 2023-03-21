@@ -1,5 +1,5 @@
 "use client";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 type LinkComponentProps = {
   href?: any;
@@ -19,34 +19,32 @@ export const LinkComponent = ({
 };
 
 export const LinkComponentAnchorStyled = styled.a<LinkComponentProps>`
-  /* position: absolute; */
-  width: 57px;
-  height: 24px;
-  left: 0px;
+  position: absolute;
   top: 0px;
+  left: 0px;
+  /* width: 57px; */
+  /* height: 24px; */
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  /* identical to box height, or 150% */
   color: #397B65;
   text-decoration: underline;
 `;
 
 export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
-  /* position: absolute; */
-  left: 0px;
+  position: absolute;
   top: 0px;
+  left: 0px;
+  /* width: 54px; */
+  /* height: 20px;  */
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  /* identical to box height, or 150% */
-  color: #397B65;
-  width: 54px;
-  height: 20px; 
   line-height: 20px;
+  color: #397B65;
   display: flex;
   flex: none;
   order: 1;
@@ -54,5 +52,4 @@ export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
   cursor: pointer;
   border: none;
   background-color: transparent;
-  /* identical to box height, or 143% */
 `;
