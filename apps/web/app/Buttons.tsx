@@ -14,7 +14,7 @@ export default function Buttons() {
         Secondary
       </Button>
 
-      <Button small>
+      <Button small onClick={() => alert("Dropdown")}>
         Create
         <Icon icon="arrow_drop_down" color="white" iconSize={30} />
       </Button>
