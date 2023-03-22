@@ -18,6 +18,7 @@ BasicCard.args = {
   margin: "",
   minWidth: "",
   minHeight: "",
+  noBorder: false,
   children: (
     <img
       src="form_img.png"
@@ -37,4 +38,5 @@ CardWithColor.args = {
   margin: "",
   minWidth: "",
   minHeight: "",
+  noBorder: false,
 };
