@@ -23,9 +23,7 @@ export const LinkComponentAnchorStyled = styled.a<LinkComponentProps>`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 24px;
   color: #397B65;
-  text-decoration: underline;
 `;
 
 export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
@@ -33,7 +31,6 @@ export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 20px;
   color: #397B65;
   cursor: pointer;
   border: none;
