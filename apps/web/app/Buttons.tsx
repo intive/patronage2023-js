@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
-import Buttons from "./Buttons";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Home",
-  description: "Welcome to my page",
-};
+import { Button } from "ui";
 
-export default function Web() {
+export default function Buttons() {
   return (
-    <div>
-      <h1>InBudget app</h1>
-      <Buttons />
-    </div>
+    <>
+      <Button onClick={() => alert("Hello")}>Hello</Button>
+      <Button disabled onClick={() => alert("Sadge")}>
+        Don&apos;t click me
+      </Button>
+      <Button secondary onClick={() => alert("Secondary")}>
+        Secondary
+      </Button>
+    </>
   );
 }

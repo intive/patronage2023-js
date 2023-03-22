@@ -3,8 +3,6 @@ import Buttons from "./Buttons";
 
 import 'material-icons/iconfont/material-icons.css';
 
-
-//tu bedzie cała aplikacja 
 export const metadata: Metadata = {
   title: "Home",
   description: "Welcome to my page",
