@@ -3,6 +3,18 @@ import styled, { css } from "styled-components";
 
 import { Icon } from "../Icon";
 
+type StyledErrorProps = {
+  hasError: boolean;
+};
+
+export type InputProps = {
+  label: string;
+  supportingLabel?: React.ReactNode;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onInputCleared?: () => void;
+} & StyledErrorProps &
+  React.HTMLProps<HTMLInputElement>;
+
 export const Input = ({
   label,
   hasError = false,
@@ -11,6 +23,7 @@ export const Input = ({
   type,
   value,
   onChange,
+  onInputCleared,
 }: InputProps) => {
   const randomId = useId();
   const [typeOverride, setTypeOverride] = useState("");
@@ -40,13 +53,11 @@ export const Input = ({
         </StyledIcon>
       );
     }
-    if (value) {
+    if (value && onInputCleared) {
       return (
         <StyledIcon
           onClick={() => {
-            if (onChange) {
-              onChange("");
-            }
+            onInputCleared();
             inputRef.current?.focus();
           }}
           style={{ transform: "rotate(45deg)" }}
@@ -67,11 +78,7 @@ export const Input = ({
         id={id || randomId}
         type={typeOverride || type}
         value={value}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          if (onChange) {
-            onChange(event.target.value);
-          }
-        }}
+        onChange={onChange}
       />
       <StyledLabel hasError={hasError} htmlFor={id || randomId}>
         {label}
@@ -85,17 +92,6 @@ export const Input = ({
     </Wrapper>
   );
 };
-
-type StyledErrorProps = {
-  hasError: boolean;
-};
-
-export type InputProps = {
-  label: string;
-  onChange?: (newValue: string) => void;
-  supportingLabel?: React.ReactNode;
-} & StyledErrorProps &
-  React.HTMLProps<HTMLInputElement>;
 
 const Wrapper = styled.div`
   position: relative;
@@ -130,8 +126,12 @@ const StyledInput = styled.input<StyledErrorProps>`
   ${({ hasError }) =>
     hasError &&
     css`
-      border-color: #b3261e !important;
+      border-color: #b3261e;
       caret-color: #b3261e;
+
+      :focus {
+        border-color: #b3261e;
+      }
     `}
 `;
 

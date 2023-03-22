@@ -15,7 +15,8 @@ const Template: ComponentStory<typeof Input> = ({ ...args }) => {
       <Input
         {...args}
         value={value}
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(event) => setValue(event.target.value)}
+        onInputCleared={() => setValue('')}
       />
     </div>
   );
