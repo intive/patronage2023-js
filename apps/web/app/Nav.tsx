@@ -38,6 +38,7 @@ export default function Nav() {
       <ActionWrapper>
         <LinkStyled href="/">Home</LinkStyled>{" "}
         <LinkStyled href="/users">Users</LinkStyled>
+        <LinkStyled href="/log-in">LogIn</LinkStyled>
       </ActionWrapper>
     </NavBar>
   );
