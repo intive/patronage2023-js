@@ -46,7 +46,7 @@ export const Input = ({
           }}
         >
           <Icon
-            icon={`${typeOverride ? "visibility_off" : "visibility"}`}
+            icon={typeOverride ? "visibility_off" : "visibility"}
             color="#49454f"
             iconSize={23}
           />
@@ -62,7 +62,7 @@ export const Input = ({
           }}
           style={{ transform: "rotate(45deg)" }}
         >
-          <Icon icon={"add_circle"} color={"#49454f"} iconSize={20} />
+          <Icon icon="add_circle" color="#49454f" iconSize={20} />
         </StyledIcon>
       );
     }
