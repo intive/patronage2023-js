@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "preview": "vite preview",
-    "dev": "start-storybook -p 6006",
-    "build": "build-storybook"
+    "dev": "start-storybook -p 6006 -s ../web/public",
+    "build": "build-storybook -s public"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -14,20 +14,21 @@
     "ui": "*"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-vite": "^0.4.2",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "babel-loader": "^8.3.0",
+    "storybook-addon-next": "^1.7.3",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0",
-    "@storybook/react": "^6.5.16",
-    "@storybook/addon-links": "^6.5.16",
-    "@storybook/addon-essentials": "^6.5.16",
-    "@storybook/addon-actions": "^6.5.16",
-    "@storybook/addon-interactions": "^6.5.16",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/builder-vite": "^0.4.2",
-    "@babel/core": "^7.21.0",
-    "babel-loader": "^8.3.0"
+    "vite": "^4.1.0"
   },
   "engines": {
     "node": "16.x",
