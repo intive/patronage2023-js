@@ -22,21 +22,11 @@ export default function RootLayout({ children }: LayoutProps) {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-<<<<<<< HEAD
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <Nav />
           {children}
         </StyledComponentsRegistry>
-=======
-      <body className={openSans.className}>
-        <Background>
-          <StyledComponentsRegistry>
-            <Nav />
-            {children}
-          </StyledComponentsRegistry>
-        </Background>
->>>>>>> main
       </body>
     </html>
   );
