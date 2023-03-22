@@ -2,11 +2,14 @@
 
 // import styled, { css } from "styled-components";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  
 
   const handleLogIn = (e: React.FormEvent<EventTarget>): void => {
     e.preventDefault();
@@ -18,6 +21,7 @@ export default function LoginPage() {
     console.log(email);
     console.log(password);
     clearForm()
+    router.push("/")
   };
 
   const closeError = () => {
