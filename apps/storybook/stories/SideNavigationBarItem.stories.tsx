@@ -14,7 +14,8 @@ const Template: ComponentStory<typeof SideNavigationBarItem> = ({
 
 export const SideNavBarItem = Template.bind({});
 SideNavBarItem.args = {
-  href: "#",
+  href: "#menu",
   icon: "menu",
   textValue: "Menu",
+  activeFlag: true,
 };

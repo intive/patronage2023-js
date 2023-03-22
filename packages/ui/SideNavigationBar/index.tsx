@@ -1,19 +1,24 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import {
   SideNavigationBarItemProps,
   SideNavigationBarItem,
 } from "../SideNavigationBarItem";
 
-export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
+export const SideNavigationBar = ({
+  items,
+  pathname,
+}: SideNavigationBarProps) => {
   return (
-    <SideNavigationBarStyled items={items}>
+    <SideNavigationBarStyled items={items} pathname={pathname}>
       {items.map(({ href, icon, textValue }, index) => {
+        const active = pathname === href;
         return (
           <SideNavigationBarItem
             key={index}
             href={href}
             icon={icon}
             textValue={textValue}
+            activeFlag={active}
           />
         );
       })}
@@ -23,6 +28,7 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
 
 type SideNavigationBarProps = {
   items: SideNavigationBarItemProps[];
+  pathname: string;
 };
 
 const SideNavigationBarStyled = styled.ul<SideNavigationBarProps>`

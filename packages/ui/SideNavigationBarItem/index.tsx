@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled, { css } from "styled-components";
 import { Icon } from "ui";
 import { IconProps } from "../Icon";
@@ -18,17 +17,13 @@ export const SideNavigationBarItem = ({
   href,
   icon,
   textValue,
+  activeFlag,
 }: SideNavigationBarItemProps) => {
-  const [active, setActive] = useState(false);
-
   return (
-    <li>
+    <ListItemStyled>
       <LinkStyled href={href}>
         <SideNavigationBarItemStyled
-          activeFlag={active}
-          onClick={() => {
-            setActive(!active);
-          }}
+          activeFlag={activeFlag}
           href={href}
           textValue={textValue}
           icon={icon}
@@ -36,18 +31,17 @@ export const SideNavigationBarItem = ({
           <Icon
             icon={icon}
             iconSize={30}
-            color={active ? "#1e4c40" : "#7e7e7e"}
+            color={activeFlag ? "#1e4c40" : "#7e7e7e"}
           />
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
         </SideNavigationBarItemStyled>
       </LinkStyled>
-    </li>
+    </ListItemStyled>
   );
 };
 
 export type SideNavigationBarItemProps = {
   activeFlag?: boolean;
-  onClick?: Function;
   href: string;
   textValue: string;
 } & React.HTMLProps<HTMLDivElement> &
@@ -95,4 +89,9 @@ const LinkStyled = styled(Link)`
   &:active {
     text-decoration: none;
   }
+`;
+
+const ListItemStyled = styled.li`
+  list-style: none;
+  padding: 0;
 `;

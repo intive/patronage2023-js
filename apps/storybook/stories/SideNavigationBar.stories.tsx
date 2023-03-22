@@ -15,9 +15,14 @@ const Template: ComponentStory<typeof SideNavigationBar> = ({ ...args }) => (
 export const SideNavBar = Template.bind({});
 SideNavBar.args = {
   items: [
-    { href: "#", icon: "menu", textValue: "Menu" },
-    { href: "#", icon: "history", textValue: "History" },
-    { href: "#", icon: "settings", textValue: "Settings" },
-    { href: "#", icon: "shopping_cart", textValue: "Shopping cart" },
+    { href: "#menu", icon: "menu", textValue: "Menu" },
+    { href: "#history", icon: "history", textValue: "History" },
+    { href: "#settings", icon: "settings", textValue: "Settings" },
+    {
+      href: "#shopping_cart",
+      icon: "shopping_cart",
+      textValue: "Shopping cart",
+    },
   ],
+  pathname: "#menu",
 };
