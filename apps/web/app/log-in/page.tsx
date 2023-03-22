@@ -3,6 +3,7 @@
 // import styled, { css } from "styled-components";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Icon } from "./../../../../packages/ui"
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,10 +19,8 @@ export default function LoginPage() {
       return;
     }
     alert("Logged in! Have fun!");
-    console.log(email);
-    console.log(password);
-    clearForm()
-    router.push("/")
+    clearForm();
+    router.push("/");
   };
 
   const closeError = () => {
@@ -64,12 +63,12 @@ export default function LoginPage() {
             }}
           >
             <div>
-              <button
-                style={{ position: "absolute", top: "10px", right: "10px" }}
+              <div
+                style={{ position: "absolute", top: "10px", right: "10px", cursor: "pointer" }}
                 onClick={closeError}
               >
-                X
-              </button>
+              <Icon icon="close" color="white"/>
+              </div>
               <span style={{ color: "white" }}>{errMsg}</span>
             </div>
           </div>
