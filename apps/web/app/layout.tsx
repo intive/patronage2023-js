@@ -2,6 +2,7 @@
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Open_Sans } from "next/font/google";
 import Nav from "./Nav";
+import { Background } from "ui";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -15,12 +16,19 @@ const openSans = Open_Sans({
 export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        />
+      </head>
       <body className={openSans.className}>
-        <StyledComponentsRegistry>
-          <Nav />
-          {children}
-        </StyledComponentsRegistry>
+        <Background>
+          <StyledComponentsRegistry>
+            <Nav />
+            {children}
+          </StyledComponentsRegistry>
+        </Background>
       </body>
     </html>
   );
