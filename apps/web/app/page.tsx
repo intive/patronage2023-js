@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Web() {
   return (
     <div>
-      <p>hello from home</p>
+      <p style={{ margin: "50px" }}>test page</p>
     </div>
   );
 }
