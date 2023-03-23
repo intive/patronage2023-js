@@ -9,13 +9,10 @@ export default {
   component: Avatar,
 } as ComponentMeta<typeof Avatar>;
 
-type StoryProps = AvatarProps & {height: number};
+type StoryProps = AvatarProps & { height: number };
 
-const Template = ({
-  height,
-  ...args
-}: StoryProps) => (
-  <div style={{ height: `${height}px`}}>
+const Template = ({ height, ...args }: StoryProps) => (
+  <div style={{ height: `${height}px` }}>
     <Avatar {...args} />
   </div>
 );
@@ -29,9 +26,7 @@ Normal.args = {
 
 // example of avatar with username
 
-const TemplateStyledAvatar = ({
-  ...args
-}: StoryProps) => (
+const TemplateStyledAvatar = ({ ...args }: StoryProps) => (
   <Wrapper>
     <StyledAvatar {...args} />
     <span>{args.username}</span>
@@ -50,8 +45,8 @@ const Wrapper = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: 400;
-`
+`;
 
 const StyledAvatar = styled(Avatar)`
   margin-right: 16px;
-`
+`;
