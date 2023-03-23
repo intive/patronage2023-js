@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 import { Icon } from "../Icon";
 
 type StyledErrorProps = {
-  hasError: boolean;
+  hasError?: boolean;
 };
 
 export type InputProps = {
