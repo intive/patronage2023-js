@@ -50,12 +50,7 @@ const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
   width: 60px;
 
   padding: 7px 14px 7px 14px;
-  color: #7e7e7e;
-  ${({ activeFlag }) =>
-    activeFlag &&
-    css`
-      color: #1e4c40;
-    `}
+  color: ${({ activeFlag }) => (activeFlag ? "#1e4c40" : "#7e7e7e")};
 `;
 
 type SpanProps = {

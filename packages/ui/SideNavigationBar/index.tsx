@@ -12,7 +12,7 @@ export const SideNavigationBar = ({
     <SideNavigationBarStyled items={items} pathname={pathname}>
       {items.map(({ href, icon, textValue }, index) => (
         <SideNavigationBarItem
-          key={index}
+          key={`SideNavigationBarItem-${index}`}
           href={href}
           icon={icon}
           textValue={textValue}
