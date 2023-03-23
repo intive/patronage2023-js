@@ -91,8 +91,8 @@ const DivStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #1e4c40;
+  background-color: #459175;
   height: 100%;
   width: 4px;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 8px 8px 0;
 `;
