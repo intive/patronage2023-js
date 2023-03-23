@@ -1,31 +1,29 @@
 "use client"
 
 import styled from "styled-components"
+import { Card } from "ui";
 
-export type CardImitationProps = React.HTMLProps<HTMLDivElement>;
-
-const CardImitationStyled = styled.div<CardImitationProps>`
+const TypoStyled = styled.h1`
+    display:flex;
+    align-self: flex-start;
+    margin-top:23%;
+    font-family: "Inter", sans-serif;
+    font-size: 3.5em;
+    color: #1E4C40;
+`
+const CardWrapperStyled = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    background-color: white;
-    width:80%;
-    height:50rem;
-    box-shadow: 0px 2px 6px rgba(32, 41, 50, 0.1);
-    border-radius: 16px;
-    font-family: "Inter", sans-serif;
+    background-color:#E5E5E5;
+    height:94vh;
 `
 export default function WelcomePage() {
-    //here, components that build WelcomePage
-    //side nav item
-    //text
-    // instead of home and users, bell icon and avatar
-    return( 
-        <>
-            <CardImitationStyled>
-                <h1>Welcome to Inbudget</h1>
-            </CardImitationStyled>
-        </>
+    return (
+        <CardWrapperStyled>
+            <Card minWidth="70%" minHeight="95%">
+                <TypoStyled>Welcome to Inbudget</TypoStyled>
+            </Card>
+        </CardWrapperStyled>
     )
 }
