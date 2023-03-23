@@ -23,7 +23,6 @@
   },
   "packageManager": "npm@8.5.0",
   "dependencies": {
-    "material-icons": "^1.13.2",
     "material-symbols": "^0.5.0"
   }
 }

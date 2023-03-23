@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Buttons from "./Buttons";
 
-import 'material-icons/iconfont/material-icons.css';
-
 export const metadata: Metadata = {
   title: "Home",
   description: "Welcome to my page",
