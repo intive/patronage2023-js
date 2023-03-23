@@ -10,18 +10,15 @@ export const SideNavigationBar = ({
 }: SideNavigationBarProps) => {
   return (
     <SideNavigationBarStyled items={items} pathname={pathname}>
-      {items.map(({ href, icon, textValue }, index) => {
-        const active = pathname === href;
-        return (
-          <SideNavigationBarItem
-            key={index}
-            href={href}
-            icon={icon}
-            textValue={textValue}
-            activeFlag={active}
-          />
-        );
-      })}
+      {items.map(({ href, icon, textValue }, index) => (
+        <SideNavigationBarItem
+          key={index}
+          href={href}
+          icon={icon}
+          textValue={textValue}
+          activeFlag={pathname === href}
+        />
+      ))}
     </SideNavigationBarStyled>
   );
 };

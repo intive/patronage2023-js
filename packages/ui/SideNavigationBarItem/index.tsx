@@ -3,16 +3,6 @@ import { Icon } from "ui";
 import { IconProps } from "../Icon";
 import Link from "next/link";
 
-/*
-Side navigation item:
-HTML div element containing children: Icon component and HTML span text
-dedicated icon 
-text below icon
-Active state: green color, left green border.
-Inactive: gray color.
-Hover: unspecified in design (probably green color similar to active state but without border?)
-*/
-
 export const SideNavigationBarItem = ({
   href,
   icon,
@@ -34,6 +24,7 @@ export const SideNavigationBarItem = ({
             color={activeFlag ? "#1e4c40" : "#7e7e7e"}
           />
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
+          {activeFlag && <DivStyled />}
         </SideNavigationBarItemStyled>
       </LinkStyled>
     </ListItemStyled>
@@ -54,6 +45,7 @@ const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
   align-items: center;
   gap: 2px;
 
+  position: relative;
   height: auto;
   width: 60px;
 
@@ -62,7 +54,6 @@ const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
   ${({ activeFlag }) =>
     activeFlag &&
     css`
-      border-left: 3px solid #459175;
       color: #1e4c40;
     `}
 `;
@@ -94,4 +85,14 @@ const LinkStyled = styled(Link)`
 const ListItemStyled = styled.li`
   list-style: none;
   padding: 0;
+`;
+
+const DivStyled = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #1e4c40;
+  height: 100%;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
 `;
