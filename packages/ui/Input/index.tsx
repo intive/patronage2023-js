@@ -49,7 +49,7 @@ export const Input = ({
         >
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
-            color="#49454f"
+            color="#397B65"
             iconSize={23}
           />
         </StyledIcon>
@@ -63,7 +63,7 @@ export const Input = ({
             inputRef.current?.focus();
           }}
         >
-          <Icon icon="cancel" color="#49454f" iconSize={20} />
+          <Icon icon="cancel" color="#397B65" iconSize={20} />
         </StyledIcon>
       );
     }
@@ -101,7 +101,9 @@ const Wrapper = styled.div`
 const StyledInput = styled.input<StyledErrorProps>`
   border: solid 2px #e1e1e1;
   border-radius: 8px;
-  padding: 10px;
+  padding: 14px 0 14px 14px;
+  font-size: 16px;
+  line-height: 150%;
   caret-color: #515151;
   transition: border-color 200ms ease-out;
   width: 100%;
@@ -115,7 +117,7 @@ const StyledInput = styled.input<StyledErrorProps>`
   // case when input has value
   :not(:placeholder-shown) {
     + label {
-      transform: translateY(-16px);
+      transform: translateY(-24px);
       font-size: 12px;
       font-weight: 600;
       background-color: white;
@@ -141,19 +143,20 @@ const StyledLabel = styled.label<StyledErrorProps>`
   color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
   font-weight: 400;
   font-size: 16px;
-  left: 10px;
-  top: 10px;
+  line-height: 150%;
+  left: 14px;
+  top: 16px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: calc(100% - 20px);
+  max-width: calc(100% - 32px);
   transition: all 200ms linear;
 `;
 
 const StyledIcon = styled.button`
   position: absolute;
-  right: -14px;
-  top: 10px;
+  right: -4px;
+  top: 18px;
   border: none;
   background: none;
   cursor: pointer;
