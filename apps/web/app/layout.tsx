@@ -3,6 +3,7 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Open_Sans } from "next/font/google";
 import SideNavBar from "./SideNavBar";
 import Nav from "./Nav";
+import { Background } from "ui";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -23,11 +24,12 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={openSans.className}>
-        <StyledComponentsRegistry>
-          <Nav />
-          <SideNavBar />
-          {children}
-        </StyledComponentsRegistry>
+        <Background>
+          <StyledComponentsRegistry>
+            <Nav />
+            {children}
+          </StyledComponentsRegistry>
+        </Background>
       </body>
     </html>
   );
