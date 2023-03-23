@@ -25,6 +25,7 @@ export const Input = ({
   type,
   value,
   onChange,
+  onFocus,
   onInputCleared,
 }: InputProps) => {
   const randomId = useId();
@@ -80,6 +81,7 @@ export const Input = ({
         type={typeOverride || type}
         value={value}
         onChange={onChange}
+        onFocus={onFocus}
       />
       <StyledLabel hasError={hasError} htmlFor={id || randomId}>
         {label}
