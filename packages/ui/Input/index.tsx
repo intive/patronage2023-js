@@ -60,9 +60,8 @@ export const Input = ({
             onInputCleared();
             inputRef.current?.focus();
           }}
-          style={{ transform: "rotate(45deg)" }}
         >
-          <Icon icon="add_circle" color="#49454f" iconSize={20} />
+          <Icon icon="cancel" color="#49454f" iconSize={20} />
         </StyledIcon>
       );
     }
