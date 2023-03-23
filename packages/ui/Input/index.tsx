@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useId } from "react";
 import styled, { css } from "styled-components";
 
