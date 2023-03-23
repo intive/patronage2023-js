@@ -9,10 +9,10 @@ type ErrorMessageProps = {
 export const ErrorMessage = ({ message, onClose }: ErrorMessageProps) => {
   return (
     <ErrorMessageStyled>
-      <ErrorWrapperStyled>
+      <IconAndMessageWrapperStyled>
         <Icon icon="error" iconSize={20} />
         <MessageStyled>{message}</MessageStyled>
-      </ErrorWrapperStyled>
+      </IconAndMessageWrapperStyled>
       <CloseButtonStyled onClick={onClose}>
         <Icon icon="close" iconSize={20} />
       </CloseButtonStyled>
@@ -35,7 +35,7 @@ const ErrorMessageStyled = styled.div`
   }
 `;
 
-const ErrorWrapperStyled = styled.div`
+const IconAndMessageWrapperStyled = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
