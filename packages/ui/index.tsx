@@ -1,6 +1,9 @@
 export { Button } from "./Button";
-export { ButtonGroup } from './ButtonGroup'
+export { Card } from "./Card";
+export { ButtonGroup } from "./ButtonGroup";
 export { Separator } from "./Separator";
-export { Icon } from "./Icon"
+export { Icon } from "./Icon";
 export { Chip } from "./Chip";
 export { Logo } from "./Logo";
+export { ErrorMessage } from "./ErrorMessage";
+export { Background } from "./Background";
