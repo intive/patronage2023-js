@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import styled from "styled-components";
-import { Logo } from "ui";
+import { Icon, Logo } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -36,7 +36,7 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <LinkStyled href="/">Home</LinkStyled>{" "}
+        <Icon icon={"notifications"} color={"white"}/>
         <LinkStyled href="/users">Users</LinkStyled>
       </ActionWrapper>
     </NavBar>
