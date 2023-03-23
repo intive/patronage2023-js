@@ -8,6 +8,7 @@ export type LayoutProps = {
 };
 
 const inter = Inter({
+const inter = Inter({
   weight: ["400", "600", "700"],
   subsets: ["latin"],
 });
