@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "preview": "vite preview",
-    "dev": "start-storybook -p 6006 -s ../web/public",
-    "build": "build-storybook -s public"
+    "dev": "start-storybook -p 6006",
+    "build": "build-storybook"
   },
   "dependencies": {
     "react": "^18.2.0",
