@@ -3,7 +3,7 @@
 // import styled, { css } from "styled-components";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Icon } from "./../../../../packages/ui"
+import { ErrorMessage } from "./../../../../packages/ui";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,7 +19,6 @@ export default function LoginPage() {
       return;
     }
     alert("Logged in! Have fun!");
-    clearForm();
     router.push("/");
   };
 
@@ -27,18 +26,14 @@ export default function LoginPage() {
     setErrMsg("");
   };
 
-  const clearForm = () => {
-    setEmail("");
-    setPassword("");
-  };
-
   return (
     <div
       style={{
         margin: "0 auto",
-        width: "50vw",
+        width: "40vw",
         position: "relative",
         border: "1px solid red",
+        padding: "50px"
       }}
     >
       <h3>Log In Form</h3>
@@ -50,27 +45,12 @@ export default function LoginPage() {
           <div
             style={{
               position: "absolute",
-              backgroundColor: "red",
-              borderRadius: "15px",
-              padding: "10px 20px",
               top: "1rem",
               left: "50%",
               transform: "translate(-50%, 0)",
-              height: "5rem",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
             }}
           >
-            <div>
-              <div
-                style={{ position: "absolute", top: "10px", right: "10px", cursor: "pointer" }}
-                onClick={closeError}
-              >
-              <Icon icon="close" color="white"/>
-              </div>
-              <span style={{ color: "white" }}>{errMsg}</span>
-            </div>
+            <ErrorMessage message="Invalid credentials. Please try again." onClose={closeError}/>
           </div>
         )}
         <label htmlFor="email">Email</label>
