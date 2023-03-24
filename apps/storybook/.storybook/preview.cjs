@@ -1,3 +1,4 @@
+//deptimize NextImage in storybook
 import NextImage from "next/image";
 
 NextImage.defaultProps = {
