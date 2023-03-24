@@ -1,8 +1,8 @@
-"use client";
-
-import "./global.css";
+/* eslint-disable @next/next/no-head-element */
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
+import Nav from "./Nav";
+import "./global.css";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -10,21 +10,23 @@ export type LayoutProps = {
 
 const inter = Inter({
   weight: ["400", "600", "700"],
-  subsets: ["latin"],
+  subsets: ["latin"]
 });
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
-    <html>
+    <html lang="en">
       <head>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-
       <body className={inter.className}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          {/* <Nav /> */}
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

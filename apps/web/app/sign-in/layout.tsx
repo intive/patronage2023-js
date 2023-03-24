@@ -9,7 +9,7 @@ export type LayoutProps = {
 
 export const device = {
   mobile: `(max-width: 767px)`,
-  desktop: `(min-width: 768px)`,
+  desktop: `(min-width: 768px)`
 };
 
 export default function SignInLayout({ children }: LayoutProps) {
@@ -38,14 +38,13 @@ export default function SignInLayout({ children }: LayoutProps) {
 const StyledAllPageContainer = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: blue;
+  background-color: #1e4c40;
 `;
 
 const StyledMaxVisiblePageContainer = styled.div`
   width: 100%;
 
   @media ${device.desktop} {
-    color: red;
     margin: 0 auto;
     max-width: 1200px;
   }
