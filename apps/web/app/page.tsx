@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Buttons from "./Buttons";
+import ErrorDemo from "./ErrorDemo";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -11,6 +12,7 @@ export default function Web() {
     <div>
       <h1>InBudget app</h1>
       <Buttons />
+      <ErrorDemo />
     </div>
   );
 }
