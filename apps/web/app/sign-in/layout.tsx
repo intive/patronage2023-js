@@ -14,34 +14,34 @@ export const device = {
 
 export default function SignInLayout({ children }: LayoutProps) {
   return (
-    <StyledAllPageContainer>
-      <StyledMaxVisiblePageContainer>
+    <ViewStyled>
+      <PageContainerStyled>
         <Background>
-          <StyledInsideBackgroundContainer>
-            <StyledLeftWrapper>
+          <ContentStyled>
+            <TextWrapperStyled>
               <StyledInnerLeftContentWrapper>
                 <Logo logoWidth={90} white />
                 <StyledH1>Get started with your free account today</StyledH1>
                 <p>No credit card</p>
               </StyledInnerLeftContentWrapper>
-            </StyledLeftWrapper>
-            <StyledRightWrapper>
+            </TextWrapperStyled>
+            <FormWrapperStyled>
               <Card minHeight="100%">{children}</Card>
-            </StyledRightWrapper>
-          </StyledInsideBackgroundContainer>
+            </FormWrapperStyled>
+          </ContentStyled>
         </Background>
-      </StyledMaxVisiblePageContainer>
-    </StyledAllPageContainer>
+      </PageContainerStyled>
+    </ViewStyled>
   );
 }
 
-const StyledAllPageContainer = styled.div`
+const ViewStyled = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #1e4c40;
 `;
 
-const StyledMaxVisiblePageContainer = styled.div`
+const PageContainerStyled = styled.div`
   width: 100%;
 
   @media ${device.desktop} {
@@ -50,7 +50,7 @@ const StyledMaxVisiblePageContainer = styled.div`
   }
 `;
 
-const StyledInsideBackgroundContainer = styled.div`
+const ContentStyled = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -61,7 +61,7 @@ const StyledInsideBackgroundContainer = styled.div`
   }
 `;
 
-const StyledLeftWrapper = styled.div`
+const TextWrapperStyled = styled.div`
   color: "white";
   width: 100%;
   height: 30vh;
@@ -73,7 +73,7 @@ const StyledLeftWrapper = styled.div`
   }
 `;
 
-const StyledRightWrapper = styled.div`
+const FormWrapperStyled = styled.div`
   height: 70vh;
   width: 100%;
   padding: 8px;
