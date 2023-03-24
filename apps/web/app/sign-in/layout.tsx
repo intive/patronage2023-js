@@ -18,13 +18,11 @@ export default function SignInLayout({ children }: LayoutProps) {
       <PageContainerStyled>
         <Background>
           <ContentStyled>
-            <TextWrapperStyled>
-              <StyledInnerLeftContentWrapper>
-                <Logo logoWidth={90} white />
-                <StyledH1>Get started with your free account today</StyledH1>
-                <p>No credit card</p>
-              </StyledInnerLeftContentWrapper>
-            </TextWrapperStyled>
+            <SectionStyled>
+              <Logo logoWidth={90} white />
+              <StyledH1>Get started with your free account today</StyledH1>
+              <StyledP>No credit card required</StyledP>
+            </SectionStyled>
             <FormWrapperStyled>
               <Card minHeight="100%">{children}</Card>
             </FormWrapperStyled>
@@ -53,46 +51,60 @@ const PageContainerStyled = styled.div`
 const ContentStyled = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
   @media ${device.desktop} {
     flex-direction: row;
     width: 100%;
-    height: 100vh;
   }
 `;
 
-const TextWrapperStyled = styled.div`
-  color: "white";
+const SectionStyled = styled.div`
+  color: white;
   width: 100%;
-  height: 30vh;
-  padding: 52px 16px 16px 16px;
-  display: flex;
+  padding: 52px 16px 0px 16px;
 
   @media ${device.desktop} {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100vh;
+    padding: 64px;
   }
 `;
 
 const FormWrapperStyled = styled.div`
-  height: 70vh;
   width: 100%;
+  height: 100%;
   padding: 8px;
-  justify-content: center;
-  align-items: stretch;
 
   @media ${device.desktop} {
     height: 100vh;
     padding: 12vh 64px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 `;
 
-const StyledInnerLeftContentWrapper = styled.div`
-  color: white;
+const StyledH1 = styled.h1`
+  display: block;
+  font-family: "Signika", sans-serif;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-top: 16px;
+
+  @media ${device.desktop} {
+    margin-top: 32px;
+    font-size: 40px;
+    line-height: 40px;
+  }
 `;
 
-const StyledH1 = styled.span`
-  font-size: 1.5em;
+const StyledP = styled.p`
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 24px;
+
+  @media ${device.desktop} {
+    margin-top: 16px;
+  }
 `;
