@@ -1,13 +1,12 @@
 "use client";
 
 import styled from "styled-components";
-import { NavItem } from "../NavItem";
-import { Icon } from "../Icon";
+import { useState } from "react";
+import { NavItem, Icon } from "ui";
 
 //creating dummy data 
-type NavItemContents = {
+export type NavItemContents = {
   title: string;
-  active: boolean;
   icon?: "payments" | "subscriptions" | "savings";
   id: number;
 };
@@ -45,14 +44,22 @@ const IconWrapper = styled.div`
 export const NavList = ({
   contents
 }: NavListProps) => {
+  
+  const [isActive,setIsActive] = useState(false)
+
+  const activeElementHandler = () => {
+    setIsActive(prevState => !prevState)
+  }
+
   return (
     <NavListStyled>
       {contents.map((content) => {
         return (
-          <NavItem active={content.active} key={content.id}>
+          <NavItem active={isActive} onClick={activeElementHandler} key={content.id}>
+            {content.icon && 
             <IconWrapper>
-              <Icon icon={content.icon} color="#1E4C40"/>
-            </IconWrapper>
+              <Icon icon={content.icon} color="#1E4C40" />
+            </IconWrapper>}
             <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         )
