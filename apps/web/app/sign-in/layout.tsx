@@ -15,20 +15,20 @@ const device = {
 export default function SignInLayout({ children }: LayoutProps) {
   return (
     <ViewStyled>
-      <PageContainerStyled>
-        <Background>
+      <Background>
+        <PageContainerStyled>
           <ContentStyled>
             <SectionStyled>
-              <Logo logoWidth={90} white />
-              <StyledH1>Get started with your free account today</StyledH1>
-              <StyledP>No credit card required</StyledP>
+              <Logo logoWidth={138} white />
+              <StyledH1>Log in with your email</StyledH1>
+              <StyledP>Use your email to log in to your team workspace</StyledP>
             </SectionStyled>
             <FormWrapperStyled>
               <Card minHeight="100%">{children}</Card>
             </FormWrapperStyled>
           </ContentStyled>
-        </Background>
-      </PageContainerStyled>
+        </PageContainerStyled>
+      </Background>
     </ViewStyled>
   );
 }
@@ -69,7 +69,8 @@ const SectionStyled = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100vh;
-    padding: 64px;
+    padding-left: 128px;
+    padding-right: 64px;
   }
 `;
 
@@ -105,6 +106,7 @@ const StyledP = styled.p`
   margin-bottom: 24px;
 
   @media ${device.desktop} {
-    margin-top: 16px;
+    line-height: 24px;
+    margin-top: 1em;
   }
 `;
