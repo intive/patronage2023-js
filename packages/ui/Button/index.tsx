@@ -1,56 +1,116 @@
 "use client";
 
-import * as React from "react";
 import styled, { css } from "styled-components";
 
 export const Button = ({
+  variant = "primary",
+  fullWidth = false,
   disabled = false,
-  secondary = false,
   children,
   onClick,
+  small = false,
 }: ButtonProps) => {
   return (
-    <ButtonStyled disabled={disabled} secondary={secondary} onClick={onClick}>
+    <ButtonStyled
+      variant={variant}
+      onClick={onClick}
+      fullWidth={fullWidth}
+      disabled={disabled}
+      small={small}
+    >
       {children}
     </ButtonStyled>
   );
 };
 
-export type ButtonProps = {
+type ButtonProps = {
+  variant?: "primary" | "secondary" | "simple";
+  fullWidth?: boolean;
   disabled?: boolean;
-  secondary?: boolean;
-  onClick?: Function;
+  onClick: Function;
+  small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
-export const ButtonStyled = styled.button<ButtonProps>`
-  min-width: 100px;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #fff;
-  background-color: #000;
-  border-radius: 4px;
-  border: none;
-  padding: 5px 10px;
-  margin: 10px 20px;
+const ButtonStyled = styled.button<ButtonProps>`
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid #1e4c40;
+  border-radius: 8px;
+  color: white;
+  background-color: #1e4c40;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  padding: 16px 24px;
+  font-size: 1em;
+  transition: all 0.2s;
   cursor: pointer;
-  transition: opacity 250ms;
-
   &:hover {
-    opacity: ${({ disabled }) => (disabled ? 1 : 0.6)};
+    border: 2px solid #459175;
+    background-color: #459175;
+  }
+  &:disabled {
+    border: 2px solid lightgray;
+    background-color: lightgray;
+    cursor: not-allowed;
   }
 
-  ${({ secondary }) =>
-    secondary &&
+  // temporary fix to button with arrow_dropdown_down
+  & :last-child {
+    margin-right: -10px;
+    margin-top: -8px;
+    margin-bottom: -8px;
+  }
+
+  ${({ variant }) =>
+    variant === "secondary" &&
     css`
       background-color: transparent;
-      outline: 1px solid #000;
-      color: #000;
+      border: 2px solid #1e4c40;
+      color: #1e4c40;
+      &:hover {
+        background-color: transparent;
+        border: 2px solid #459175;
+        color: #459175;
+      }
+      &:disabled {
+        color: lightgray;
+        background-color: transparent;
+        border: 2px solid lightgray;
+      }
     `}
 
-  ${({ disabled }) =>
-    disabled &&
+  ${({ variant }) =>
+    variant === "simple" &&
     css`
-      opacity: 0.75;
-      cursor: not-allowed;
+      border: 2px solid transparent;
+      background-color: transparent;
+      color: #52a785;
+      &:hover {
+        border: 2px solid transparent;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      &:disabled {
+        border: 2px solid transparent;
+        background-color: transparent;
+        color: lightgrey;
+        text-decoration: none;
+      }
+    `}
+
+  ${({ small }) =>
+    small &&
+    css`
+      padding: 13px 24px;
+    `}
+  
+
+  ${({ fullWidth }) =>
+    fullWidth &&
+    css`
+      width: 100%;
     `}
 `;
