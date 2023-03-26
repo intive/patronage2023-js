@@ -4,13 +4,12 @@ import sidenav from  "../../../packages/ui/helper-imgs/sidenav.png"
 import Image from "next/image";
 
 const SideNavStyled = styled.div`
-    height:94vh;
     width:7%;
     background-color: white;
     border: 1px solid #e1e1e1;
 `
 const ImageWrapper = styled.div`
-    padding:30px 0;
+    padding: 30px 0;
 `
 
 export default function SideNav() {
