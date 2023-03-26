@@ -21,7 +21,7 @@ const CardWrapperStyled = styled.div`
 export default function WelcomePage() {
     return (
         <CardWrapperStyled>
-            <Card minWidth="70%" minHeight="95%">
+            <Card minWidth="95%" minHeight="95%">
                 <TypoStyled>Welcome to Inbudget</TypoStyled>
             </Card>
         </CardWrapperStyled>

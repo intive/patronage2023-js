@@ -1,15 +1,23 @@
 "use client"
 import styled from "styled-components";
+import sidenav from  "../../../packages/ui/helper-imgs/sidenav.png"
+import Image from "next/image";
 
 const SideNavStyled = styled.div`
-    height:90vh;
-    width:15%;
+    height:94vh;
+    width:7%;
     background-color: white;
     border: 1px solid #e1e1e1;
 `
+const ImageWrapper = styled.div`
+    padding:30px 0;
+`
+
 export default function SideNav() {
     return (
-        <SideNavStyled></SideNavStyled>
+        <SideNavStyled>
+            <ImageWrapper><Image src={sidenav} width={120} height={400} alt="sidenav"></Image></ImageWrapper>
+        </SideNavStyled>
     );
   }
   
