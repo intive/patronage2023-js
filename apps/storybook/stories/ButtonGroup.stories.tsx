@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { ButtonGroup } from "ui";
+import { ButtonGroup, Icon } from "ui";
 
 export default {
   title: "ButtonGroup",
@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof ButtonGroup>;
 
-const FullWidth: ComponentStory<typeof ButtonGroup> = (args) => (
+const FullWidth: ComponentStory<typeof ButtonGroup> = args => (
   <div>
     <p>
       This component <u>always</u> fills parent. Both height and width.
@@ -18,7 +18,7 @@ const FullWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   </div>
 );
 
-const FixedWidth: ComponentStory<typeof ButtonGroup> = (args) => (
+const FixedWidth: ComponentStory<typeof ButtonGroup> = args => (
   <>
     <p>Parent has fixed width (300px) and component is secondary.</p>
     <div
@@ -31,7 +31,7 @@ const FixedWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   </>
 );
 
-const FullHeight: ComponentStory<typeof ButtonGroup> = (args) => (
+const FullHeight: ComponentStory<typeof ButtonGroup> = args => (
   <>
     <p>
       It also takes icons from material-symbol library. In this example parent
@@ -97,13 +97,13 @@ export const Icons = FullHeight.bind({});
 Icons.args = {
   options: [
     {
-      component: <span className="material-symbols-rounded">equalizer</span>,
+      component: <Icon icon="bar_chart" />,
       onSelect: () => {
         console.log("Option 1 selected");
       },
     },
     {
-      component: <span className="material-symbols-rounded">area_chart</span>,
+      component: <Icon icon="area_chart" />,
       onSelect: () => {
         console.log("Option 2 selected");
       },
