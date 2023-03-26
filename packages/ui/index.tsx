@@ -6,4 +6,3 @@ export { Icon } from "./Icon";
 export { Chip } from "./Chip";
 export { Logo } from "./Logo";
 export { Background } from "./Background";
-export { Prove } from "./poc";
