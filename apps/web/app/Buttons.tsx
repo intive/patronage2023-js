@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "ui";
+import { Button, Icon } from "ui";
+import "material-symbols";
 
 export default function Buttons() {
   return (
@@ -9,8 +10,13 @@ export default function Buttons() {
       <Button disabled onClick={() => alert("Sadge")}>
         Don&apos;t click me
       </Button>
-      <Button secondary onClick={() => alert("Secondary")}>
+      <Button variant="secondary" onClick={() => alert("Secondary")}>
         Secondary
+      </Button>
+
+      <Button small onClick={() => alert("Dropdown")}>
+        Create
+        <Icon icon="arrow_drop_down" color="white" iconSize={30} />
       </Button>
     </>
   );
