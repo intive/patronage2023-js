@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Buttons from "./Buttons";
 import ErrorDemo from "./ErrorDemo";
 import { NavListDemo } from "./NavListDemo";
+import "./css/body.css"
 
 export const metadata: Metadata = {
   title: "Home",

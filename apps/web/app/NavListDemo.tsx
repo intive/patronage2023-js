@@ -3,23 +3,27 @@
 import { NavList } from "ui"
 import { NavItemContents } from "ui/NavList";
 import styled from "styled-components";
+import { useState } from "react";
 
 //creating array of objects for NavList props
-const navItemContents: Array<NavItemContents> = [
+const dummyNavItemContents: Array<NavItemContents> = [
     {
         title: "Bills",
         icon: "payments",
-        id: 1
+        id: 1,
+        active: false,
     },
     {
         title: "Subscriptions",
         icon: "subscriptions",
-        id: 2
+        id: 2,
+        active: false,
     },
     {
         title: "Savings",
         icon: "savings",
-        id: 3
+        id: 3,
+        active: false,
     }
 ];
 
@@ -29,9 +33,11 @@ const NavListWrapperStyled = styled.div`
 `
 
 export const NavListDemo = () => {
+
+    const [navItemContents, setNavItemContents] = useState(dummyNavItemContents)
     return (
         <NavListWrapperStyled>
-            <NavList contents={navItemContents}></NavList>
+            <NavList contents={navItemContents} setNavItemContents={setNavItemContents}></NavList>
         </NavListWrapperStyled>
     )
 }

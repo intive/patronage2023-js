@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { NavItem, Icon } from "ui";
 
 //creating dummy data 
@@ -9,10 +9,12 @@ export type NavItemContents = {
   title: string;
   icon?: "payments" | "subscriptions" | "savings";
   id: number;
+  active: boolean;
 };
 
 export type NavListProps = {
-  contents: Array<NavItemContents>
+  contents: Array<NavItemContents>,
+  setNavItemContents: React.Dispatch<React.SetStateAction<NavItemContents[]>>
 } & React.HTMLProps<HTMLUListElement>;
 
 const NavListStyled = styled.ul`
@@ -42,20 +44,30 @@ const IconWrapper = styled.div`
 `
 
 export const NavList = ({
-  contents
+  contents,
+  setNavItemContents,
 }: NavListProps) => {
-  
-  const [isActive,setIsActive] = useState(false)
 
-  const activeElementHandler = () => {
-    setIsActive(prevState => !prevState)
+  const activeHandler = (id: number) => {
+    console.log(id)
+    const contentsCopy = contents.slice();
+    const currentItem = contentsCopy.find(content=>content.id === id);
+    if(currentItem) {
+      currentItem.active = !currentItem.active;
+      contentsCopy.forEach(content=>{
+        if(content.id !== currentItem.id){
+          content.active = false;
+        }
+      })
+    }
+    setNavItemContents(contentsCopy);
   }
-
+  
   return (
     <NavListStyled>
       {contents.map((content) => {
         return (
-          <NavItem active={isActive} onClick={activeElementHandler} key={content.id}>
+          <NavItem active={content.active} onClick={()=> activeHandler(content.id)} key={content.id}>
             {content.icon && 
             <IconWrapper>
               <Icon icon={content.icon} color="#1E4C40" />

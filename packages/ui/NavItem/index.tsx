@@ -5,7 +5,7 @@ import "material-symbols";
 import { Icon } from "ui";
 
 export type NavItemProps = {
-    active?: boolean,
+    active: boolean,
     onClick: Function,
 } & React.HTMLProps<HTMLLIElement>;
 
@@ -43,7 +43,7 @@ export const NavItemStyled = styled.li<NavItemProps>`
 `;
 
 export const NavItem = ({
-  active = false,
+  active,
   onClick,
   children,
 }: NavItemProps) => {
