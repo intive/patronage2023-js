@@ -53,7 +53,7 @@ export const NavItem = ({
       <ChildrenWrapper>
         {children}
       </ChildrenWrapper>
-      {active && <ArrowWrapper><Icon icon="chevron_right" color="#1E4C40"></Icon></ArrowWrapper>}
+      {active && <Icon icon="chevron_right" color="#1E4C40"></Icon>}
     </NavItemStyled>
   );
 };
