@@ -67,12 +67,12 @@ export const NavList = ({
     <NavListStyled>
       {contents.map((content) => {
         return (
-          <NavItem active={content.active} onClick={()=> activeHandler(content.id)} key={content.id}>
+          <NavItem title={content.title} active={content.active} onClick={()=> activeHandler(content.id)} key={content.id}>
             {content.icon && 
             <IconWrapper>
               <Icon icon={content.icon} color="#1E4C40" />
             </IconWrapper>}
-            <SpanStyled>{content.title}</SpanStyled>
+            {/* <SpanStyled>{content.title}</SpanStyled> */}
           </NavItem>
         )
       })}
