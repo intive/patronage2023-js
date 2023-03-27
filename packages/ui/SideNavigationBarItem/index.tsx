@@ -3,6 +3,21 @@ import { Icon } from "ui";
 import { IconProps } from "../Icon";
 import Link from "next/link";
 
+export type SideNavigationBarItemProps = {
+  activeFlag?: boolean;
+  href: string;
+  textValue: string;
+} & React.HTMLProps<HTMLDivElement> &
+  IconProps;
+
+type SpanProps = {
+  fontSize: number;
+} & React.HTMLProps<HTMLSpanElement>;
+
+interface SideNavigationBarItemState {
+  activeFlag?: boolean;
+}
+
 export const SideNavigationBarItem = ({
   href,
   icon,
@@ -12,12 +27,7 @@ export const SideNavigationBarItem = ({
   return (
     <ListItemStyled>
       <LinkStyled href={href}>
-        <SideNavigationBarItemStyled
-          activeFlag={activeFlag}
-          href={href}
-          textValue={textValue}
-          icon={icon}
-        >
+        <SideNavigationBarItemStyled activeFlag={activeFlag}>
           <Icon
             icon={icon}
             iconSize={30}
@@ -31,14 +41,23 @@ export const SideNavigationBarItem = ({
   );
 };
 
-export type SideNavigationBarItemProps = {
-  activeFlag?: boolean;
-  href: string;
-  textValue: string;
-} & React.HTMLProps<HTMLDivElement> &
-  IconProps;
+const ListItemStyled = styled.li`
+  list-style: none;
+  padding: 0;
+`;
 
-const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
+const LinkStyled = styled(Link)`
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
+
+const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemState>`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -53,10 +72,6 @@ const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemProps>`
   color: ${({ activeFlag }) => (activeFlag ? "#1e4c40" : "#7e7e7e")};
 `;
 
-type SpanProps = {
-  fontSize: number;
-} & React.HTMLProps<HTMLSpanElement>;
-
 const SpanStyled = styled.span<SpanProps>`
   text-align: center;
   ${({ fontSize }) =>
@@ -64,22 +79,6 @@ const SpanStyled = styled.span<SpanProps>`
     css`
       font-size: ${fontSize}px;
     `};
-`;
-
-const LinkStyled = styled(Link)`
-  text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
-
-const ListItemStyled = styled.li`
-  list-style: none;
-  padding: 0;
 `;
 
 const DivStyled = styled.div`

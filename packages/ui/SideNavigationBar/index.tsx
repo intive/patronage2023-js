@@ -4,6 +4,11 @@ import {
   SideNavigationBarItem,
 } from "../SideNavigationBarItem";
 
+type SideNavigationBarProps = {
+  items: SideNavigationBarItemProps[];
+  pathname: string;
+};
+
 export const SideNavigationBar = ({
   items,
   pathname,
@@ -21,11 +26,6 @@ export const SideNavigationBar = ({
       ))}
     </SideNavigationBarStyled>
   );
-};
-
-type SideNavigationBarProps = {
-  items: SideNavigationBarItemProps[];
-  pathname: string;
 };
 
 const SideNavigationBarStyled = styled.ul<SideNavigationBarProps>`
