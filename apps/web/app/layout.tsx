@@ -23,7 +23,6 @@ const Main = styled.div`
 
 const Content = styled.div`
   flex-grow: 1;
-  flex-basis:100%;
 `
 
 export default function RootLayout({ children }: LayoutProps) {
