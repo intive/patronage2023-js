@@ -18,10 +18,12 @@ const inter = Inter({
 const Main = styled.div`
   display: flex;
   justify-content: space-between;
+  height:100%;
 `
 
 const Content = styled.div`
   flex-grow: 1;
+  flex-basis:100%;
 `
 
 export default function RootLayout({ children }: LayoutProps) {

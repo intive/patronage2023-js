@@ -2,6 +2,7 @@
 
 import styled from "styled-components"
 import { Card } from "ui";
+import "../css/body.css"
 
 const TypoStyled = styled.h1`
     display:flex;
@@ -16,7 +17,7 @@ const CardWrapperStyled = styled.div`
     justify-content: center;
     align-items: center;
     background-color:#E5E5E5;
-    height:94vh;
+    height:100%;
 `
 export default function WelcomePage() {
     return (
