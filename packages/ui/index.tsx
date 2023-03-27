@@ -8,3 +8,4 @@ export { Logo } from "./Logo";
 export { ErrorMessage } from "./ErrorMessage";
 export { Background } from "./Background";
 export { LinkComponent } from "./Link";
+export { Input } from "./Input";
