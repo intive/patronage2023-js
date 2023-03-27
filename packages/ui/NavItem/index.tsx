@@ -3,12 +3,13 @@
 import styled from "styled-components";
 import "material-symbols";
 import { Icon,LinkComponent } from "ui";
+import Link from 'next/link'
 
 export type NavItemProps = {
-    title: string,
     active: boolean,
     onClick: Function,
-} & React.HTMLProps<HTMLLIElement>;
+    href:string,
+} & React.HTMLProps<HTMLAnchorElement>;
 
 // why I use min-width:0; https://css-tricks.com/flexbox-truncated-text/
 export const ChildrenWrapper = styled.div`
@@ -24,7 +25,7 @@ export const ArrowWrapper = styled.div<NavItemProps>`
   justify-content: center;
   align-items: center;
 `
-export const NavItemStyled = styled.li<NavItemProps>` 
+export const NavItemStyled = styled(Link)<NavItemProps>` 
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -35,9 +36,10 @@ export const NavItemStyled = styled.li<NavItemProps>`
   padding: 15px 10px;
   border-radius: 8px;
   font-family: "Inter", sans-serif;
-  font-weight:500;
+  font-weight:600;
   overflow: hidden;
   cursor:pointer;
+  text-decoration:none;
 
   &:hover{
     background-color:#F1FBF6;
@@ -45,24 +47,19 @@ export const NavItemStyled = styled.li<NavItemProps>`
 `;
 
 export const NavItem = ({
-  title,
   active,
   onClick,
   children,
+  href,
 }: NavItemProps) => {
 
   return (
-    <NavItemStyled active={active} onClick={onClick} title={title}>
+    <NavItemStyled active={active} onClick={onClick} href={href}>
       <ChildrenWrapper>
         {children}
-        <LinkComponent href={""}>{title}</LinkComponent>
       </ChildrenWrapper>
       {active && <Icon icon="chevron_right" color="#1E4C40"></Icon>}
     </NavItemStyled>
   );
 };
 
-
-//change navitems into links - make link filling its parent, so its clickable on it's whole width/height.
-//but i don't have possibility to style LinkComponent. I cant use only  LinkComponent because i need props on each item that are not available on LinkComponent.
-//i need wrapper fro each Link. Problems width appearance and with props.  

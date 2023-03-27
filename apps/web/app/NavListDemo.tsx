@@ -10,18 +10,21 @@ const dummyNavItemContents: Array<NavItemContents> = [
     {
         title: "Bills",
         icon: "payments",
+        href:"#",
         id: 1,
         active: false,
     },
     {
         title: "Subscriptions",
         icon: "subscriptions",
+        href:"#",
         id: 2,
         active: false,
     },
     {
         title: "Savings",
         icon: "savings",
+        href:"#",
         id: 3,
         active: false,
     }
@@ -32,12 +35,14 @@ const NavListWrapperStyled = styled.div`
     width:20%;
 `
 
-export const NavListDemo = () => {
+export default function NavListDemo() {
 
     const [navItemContents, setNavItemContents] = useState(dummyNavItemContents)
     return (
-        <NavListWrapperStyled>
-            <NavList contents={navItemContents} setNavItemContents={setNavItemContents}></NavList>
-        </NavListWrapperStyled>
+        <>
+            <NavListWrapperStyled>
+                <NavList contents={navItemContents} setNavItemContents={setNavItemContents}></NavList>
+            </NavListWrapperStyled>
+        </>
     )
 }

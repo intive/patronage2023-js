@@ -14,12 +14,14 @@ const Template: ComponentStory<typeof NavItem> = ({ children, ...args }) => (
 
 export const Inactive = Template.bind({});
 Inactive.args = {
-  children: "Language"
+  children: "Language",
+  href: "#",
 };
 
 export const Active = Template.bind({});
 Active.args = {
   active:true,
   children: "Language",
+  href: "#",
 };
 
