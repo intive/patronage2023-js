@@ -66,6 +66,7 @@ export default function LogInPage() {
                   value={value}
                   onChange={(e) => setValue(e.currentTarget.value)}
                   onFocus={() => setErrMsg("")}
+                  onInputCleared={() => setValue("")}
                 />
               )}
             </Field>
