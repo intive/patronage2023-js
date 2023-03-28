@@ -3,6 +3,7 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
 import Nav from "./Nav";
 import { Background } from "ui";
+import SideNav from "./SideNavigationBar";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps) {
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <Nav />
+          <SideNav />
           {children}
         </StyledComponentsRegistry>
       </body>
