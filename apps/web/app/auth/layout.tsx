@@ -7,7 +7,7 @@ export type LayoutProps = {
   children: React.ReactNode;
 };
 
-export const device = {
+const device = {
   mobile: `(max-width: 767px)`,
   desktop: `(min-width: 768px)`,
 };
