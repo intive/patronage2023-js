@@ -1,6 +1,6 @@
 "use client"
 import styled from "styled-components";
-import sidenav from  "../../../packages/ui/helper-imgs/sidenav.png"
+import sidenav from  "../public/sidenav.png"
 import Image from "next/image";
 
 const SideNavStyled = styled.div`

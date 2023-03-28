@@ -1,4 +1,11 @@
+html{
+    height:100vh;
+}
+
 body{
+    height:94.1%;
+}
+
+html,body{
     margin:0;
-    height:94.1vh;
 }

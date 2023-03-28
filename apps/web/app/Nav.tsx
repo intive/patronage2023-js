@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Icon, Logo } from "ui";
-import avatar from "../../../packages/ui/helper-imgs/3d_avatar_21.png"
+import avatar from "../public/avatar.png"
 import Image from "next/image";
 
 const NavBar = styled.nav`
