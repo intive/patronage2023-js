@@ -3,20 +3,39 @@
 import styled from "styled-components";
 import { Card, Logo } from "ui";
 import { LayoutProps } from "../layout";
-import {device} from "lib/css-variables"
+import { device } from "lib/css-variables";
+import { useState, useEffect } from "react";
 
 export default function SignInLayout({ children }: LayoutProps) {
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" && window.innerWidth
+  );
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const handleWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleWindowWidth);
+  }, [windowWidth]);
+
+  useEffect(() => {
+    setIsDesktop(windowWidth >= 768 ? true : false);
+  }, [windowWidth]);
+
   return (
     <ContentStyled>
       <SectionStyled>
         <Logo logoWidth={138} white />
-        <StyledH1>Log in with your email</StyledH1>
+        <H1Styled>Log in with your email</H1Styled>
         <ParagraphStyled>
           Use your email to log in to your team workspace
         </ParagraphStyled>
       </SectionStyled>
       <FormWrapperStyled>
-        <Card minHeight="100%">{children}</Card>
+        <Card minHeight="100%" padding={isDesktop ? "48px 10vh" : "24px"}>
+          {children}
+        </Card>
       </FormWrapperStyled>
     </ContentStyled>
   );
@@ -49,6 +68,7 @@ const SectionStyled = styled.div`
 `;
 
 const FormWrapperStyled = styled.div`
+  overflow-x: auto;
   width: 100%;
   height: 100%;
   padding: 8px;
@@ -59,7 +79,7 @@ const FormWrapperStyled = styled.div`
   }
 `;
 
-const StyledH1 = styled.h1`
+const H1Styled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 1.5em;
   line-height: 1.5em;
