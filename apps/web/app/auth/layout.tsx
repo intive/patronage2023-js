@@ -1,15 +1,11 @@
 "use client";
 
+import { device } from "lib/css-variables";
 import styled from "styled-components";
 import { Background } from "ui";
 
 export type LayoutProps = {
   children: React.ReactNode;
-};
-
-const device = {
-  mobile: `(max-width: 767px)`,
-  desktop: `(min-width: 768px)`,
 };
 
 export default function AuthLayout({ children }: LayoutProps) {

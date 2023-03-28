@@ -3,11 +3,7 @@
 import styled from "styled-components";
 import { Card, Logo } from "ui";
 import { LayoutProps } from "../layout";
-
-const device = {
-  mobile: `(max-width: 767px)`,
-  desktop: `(min-width: 768px)`,
-};
+import {device} from "lib/css-variables"
 
 export default function SignInLayout({ children }: LayoutProps) {
   return (
