@@ -1,52 +1,25 @@
 "use client";
 
 import styled from "styled-components";
-import { Background, Card, Logo } from "ui";
-
-export type LayoutProps = {
-  children: React.ReactNode;
-};
-
-const device = {
-  mobile: `(max-width: 767px)`,
-  desktop: `(min-width: 768px)`,
-};
+import { Card, Logo } from "ui";
+import { device, LayoutProps } from "../layout";
 
 export default function SignInLayout({ children }: LayoutProps) {
   return (
-    <ViewStyled>
-      <Background>
-        <PageContainerStyled>
-          <ContentStyled>
-            <SectionStyled>
-              <Logo logoWidth={138} white />
-              <StyledH1>Log in with your email</StyledH1>
-              <ParagraphStyled>Use your email to log in to your team workspace</ParagraphStyled>
-            </SectionStyled>
-            <FormWrapperStyled>
-              <Card minHeight="100%">{children}</Card>
-            </FormWrapperStyled>
-          </ContentStyled>
-        </PageContainerStyled>
-      </Background>
-    </ViewStyled>
+    <ContentStyled>
+      <SectionStyled>
+        <Logo logoWidth={138} white />
+        <StyledH1>Log in with your email</StyledH1>
+        <ParagraphStyled>
+          Use your email to log in to your team workspace
+        </ParagraphStyled>
+      </SectionStyled>
+      <FormWrapperStyled>
+        <Card minHeight="100%">{children}</Card>
+      </FormWrapperStyled>
+    </ContentStyled>
   );
 }
-
-const ViewStyled = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #1e4c40;
-`;
-
-const PageContainerStyled = styled.div`
-  width: 100%;
-
-  @media ${device.desktop} {
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-`;
 
 const ContentStyled = styled.div`
   display: flex;
