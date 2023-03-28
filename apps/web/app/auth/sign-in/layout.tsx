@@ -3,14 +3,14 @@
 import styled from "styled-components";
 import { Card, Logo } from "ui";
 import { LayoutProps } from "../layout";
-import {device} from "lib/css-variables"
+import { device } from "lib/css-variables";
 
 export default function SignInLayout({ children }: LayoutProps) {
   return (
     <ContentStyled>
       <SectionStyled>
         <Logo logoWidth={138} white />
-        <StyledH1>Log in with your email</StyledH1>
+        <H1Styled>Log in with your email</H1Styled>
         <ParagraphStyled>
           Use your email to log in to your team workspace
         </ParagraphStyled>
@@ -49,6 +49,7 @@ const SectionStyled = styled.div`
 `;
 
 const FormWrapperStyled = styled.div`
+  overflow-x: auto;
   width: 100%;
   height: 100%;
   padding: 8px;
@@ -59,7 +60,7 @@ const FormWrapperStyled = styled.div`
   }
 `;
 
-const StyledH1 = styled.h1`
+const H1Styled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 1.5em;
   line-height: 1.5em;
