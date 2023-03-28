@@ -1,19 +1,30 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { NavList} from "ui";
-import { NavItemContents } from "ui/NavList";
 import styled from "styled-components";
-import NavListDemo from "../../web/app/NavListDemo"
+import { NavList } from "ui";
+import {dummyNavItemContents} from "../../web/app/NavListDemo"
+import { NavItemContents } from "ui/NavList";
 
-// //creating dummy data for proper display on storybook - one children element inside NavItem
-// const navItemContents: Array<NavItemContents> = [{ title: "Edit profile",active:false,href:"", id: 1 }, { title: "Change password",active:false,href:"", id: 2 }, { title: "Language",active:false,href:"", id: 3 }];
+//imported dummyNavItemContents to already have contents with icon.
+//creating second set of dummy NavItem contents here, but only with text.
+const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
+  {
+      title: "Bills",
+      href: "#",
+      id: 1,
+  },
+  {
+      title: "Subscriptions",
+      href: "#",
+      id: 2,
+  },
+  {
+      title: "Savings",
+      href: "#",
+      id: 3,
+  }
+];
 
-// //creating dummy data for proper display on storybook - two children elements inside NavItem
-// const navItemContentsIcon: Array<NavItemContents> = [{ title: "Bills",active:false,href:"", icon: "payments", id: 1 }, { title: "Subscriptions",active:false,href:"", icon: "subscriptions", id: 2 }, { title: "Savings",active:false,href:"", icon: "savings", id: 3 }];
-
-// const NavListWrapper = styled.div`
-//   width:30%;
-// `
 export default {
   title: "Nav List",
   component: NavList,
@@ -26,21 +37,22 @@ export default {
   },
 } as ComponentMeta<typeof NavList>;
 
+//wrapper imitating parent element of NavList - for proper display on storybook
+const NavListWrapper = styled.div`
+  width:20%;
+`
 const Template: ComponentStory<typeof NavList> = ({ ...args }) => (
-  <NavListDemo/>
+  <NavListWrapper><NavList {...args}/></NavListWrapper>
 );
 
+//list with list items that include icon and text
+export const ListWithTextAndIcons = Template.bind({});
+ListWithTextAndIcons.args = {
+  contents:dummyNavItemContents,
+};
 
-//list with two children elements and one active listItem to show it's behavior in storybook
-export const ListWithItems = Template.bind({});
-ListWithItems.args = {
-
+//list with list items that include text only
+export const ListWithText = Template.bind({});
+ListWithText.args = {
+  contents:dummyNavItemContentsTextOnly,
 }
-
-// ListWithIconAndText.parameters = {
-//   docs: {
-//     description: {
-//       story: 'Imitation of component\'s behavior - when item has been clicked, it changes its color, background color and adds an icon on the right. `Children` props contains two elements.',
-//     },
-//   },
-// };

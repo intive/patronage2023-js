@@ -2,9 +2,10 @@
 
 import styled from "styled-components";
 import "material-symbols";
-import { Icon,LinkComponent } from "ui";
+import { Icon } from "ui";
 import Link from 'next/link'
 
+//types of NavItem props
 export type NavItemProps = {
     active: boolean,
     onClick: Function,
@@ -49,8 +50,8 @@ export const NavItemStyled = styled(Link)<NavItemProps>`
 export const NavItem = ({
   active,
   onClick,
-  children,
   href,
+  children,
 }: NavItemProps) => {
 
   return (
@@ -62,4 +63,3 @@ export const NavItem = ({
     </NavItemStyled>
   );
 };
-

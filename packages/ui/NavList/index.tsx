@@ -2,19 +2,20 @@
 
 import styled from "styled-components";
 import { NavItem, Icon } from "ui";
+import { usePathname } from "next/navigation";
 
-//creating dummy data 
+//types of NavItemContents to mark that NavList will receive array full of objects of type below. 
 export type NavItemContents = {
   title: string;
   icon?: "payments" | "subscriptions" | "savings";
+  avatar?: string;
   href: string;
   id: number;
-  active: boolean;
 };
 
+//types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type.
 export type NavListProps = {
   contents: Array<NavItemContents>,
-  setNavItemContents: React.Dispatch<React.SetStateAction<NavItemContents[]>>
 } & React.HTMLProps<HTMLUListElement>;
 
 const NavListStyled = styled.ul`
@@ -43,35 +44,26 @@ const IconWrapper = styled.div`
   border-radius: 8px;
 `
 
+//imitation of Avatar component - just to show below how real component will be used here. (typescript error, cannot pass props type for now)
+//if in passed props is icon - display icon, if in passed props is avatar - display avatar.
+const Avatar = styled.div`
+`
+
 export const NavList = ({
   contents,
-  setNavItemContents,
 }: NavListProps) => {
 
-  const activeHandler = (id: number) => {
-    console.log(id)
-    const contentsCopy = contents.slice();
-    const currentItem = contentsCopy.find(content=>content.id === id);
-    if(currentItem) {
-      currentItem.active = !currentItem.active;
-      contentsCopy.forEach(content=>{
-        if(content.id !== currentItem.id){
-          content.active = false;
-        }
-      })
-    }
-    setNavItemContents(contentsCopy);
-  }
-  
+  const currentPage = usePathname();
   return (
     <NavListStyled>
       {contents.map((content) => {
         return (
-          <NavItem active={content.active} onClick={()=> activeHandler(content.id)} key={content.id} href={content.href}>
-            {content.icon && 
-            <IconWrapper>
-              <Icon icon={content.icon} color="#1E4C40" />
-            </IconWrapper>}
+          <NavItem active={content.href === currentPage} onClick={() => { }} key={content.id} href={content.href}>
+            {content.icon ?
+              <IconWrapper>
+                <Icon icon={content.icon} color="#1E4C40" />
+              </IconWrapper> : <Avatar avatar={content.avatar} />
+            }
             <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         )
