@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
-// import { z } from "zod";
 
 export default function LogInPage() {
   const router = useRouter();
@@ -32,37 +31,6 @@ export default function LogInPage() {
                 <ErrorMessage message={errMsg} onClose={closeErrorMessage} />
               </ErrorWrapper>
             )}
-            {/* <FieldsWrapper>
-            <Field name="email" onSubmitValidate={z.string().min(3)}>
-              {({ value, setValue, errors }) => (
-                <div>
-                  <input
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder={"onsubmit"}
-                  />
-                  {errors.map((error) => (
-                    <p key={error}>{error}</p>
-                  ))}
-                </div>
-              )}
-            </Field>
-            <Field name="password" onSubmitValidate={z.string().min(3)}>
-              {({ value, setValue, errors }) => (
-                <div>
-                  <input
-                    type="password"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder={"onsubmitpassword"}
-                  />
-                  {errors.map((error) => (
-                    <p key={error}>{error}</p>
-                  ))}
-                </div>
-              )}
-            </Field>
-          </FieldsWrapper> */}
             <FieldsWrapper>
               <Field name="email">
                 {({ value, setValue }) => (
@@ -97,17 +65,17 @@ export default function LogInPage() {
 const FormWrapper = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: 40vw;
-  height: 100%;
+  padding-top: 10rem;
+  width: 416px;
   position: relative;
   border: 1px solid red;
-  padding: 10rem 1rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
   @media (max-width: 767px) {
-    max-width: 90vw;
+    width: 312px;
+    padding-top: 8rem;
   }
 `;
 
