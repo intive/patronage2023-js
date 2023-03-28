@@ -20,6 +20,7 @@ export type InputProps = {
 export const Input = ({
   label,
   hasError = false,
+  name,
   id,
   supportingLabel,
   type,
@@ -28,18 +29,10 @@ export const Input = ({
   onFocus,
   onInputCleared,
 }: InputProps) => {
-  const randomId = useId();
   const [typeOverride, setTypeOverride] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const getButton = () => {
-    if (hasError) {
-      return (
-        <StyledIcon>
-          <Icon icon="error" filled color="#b3261e" iconSize={20} />
-        </StyledIcon>
-      );
-    }
     if (type === "password") {
       return (
         <StyledIcon
@@ -50,9 +43,16 @@ export const Input = ({
         >
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
-            color="#397B65"
+            color={hasError ? "#b3261e" : "#397B65"}
             iconSize={23}
           />
+        </StyledIcon>
+      );
+    }
+    if (hasError) {
+      return (
+        <StyledIcon disabled>
+          <Icon icon="error" filled color="#b3261e" iconSize={20} />
         </StyledIcon>
       );
     }
@@ -64,7 +64,7 @@ export const Input = ({
             inputRef.current?.focus();
           }}
         >
-          <Icon icon="close" color="#397B65" iconSize={20} />
+          <Icon icon="cancel" color="#397B65" iconSize={20} />
         </StyledIcon>
       );
     }
@@ -77,13 +77,14 @@ export const Input = ({
         ref={inputRef}
         placeholder=" "
         hasError={hasError}
-        id={id || randomId}
+        name={name}
+        id={id || name}
         type={typeOverride || type}
         value={value}
         onChange={onChange}
         onFocus={onFocus}
       />
-      <StyledLabel hasError={hasError} htmlFor={id || randomId}>
+      <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
       </StyledLabel>
       {getButton()}
@@ -101,7 +102,6 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input<StyledErrorProps>`
-  box-sizing: border-box;
   border: solid 2px #e1e1e1;
   border-radius: 8px;
   padding: 14px 0 14px 14px;
@@ -154,15 +154,16 @@ const StyledLabel = styled.label<StyledErrorProps>`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
+  cursor: text;
 `;
 
 const StyledIcon = styled.button`
   position: absolute;
-  right: 15px;
+  right: -4px;
   top: 18px;
   border: none;
   background: none;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};;
   padding: 0;
   line-height: 0;
 `;
