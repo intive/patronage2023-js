@@ -12,6 +12,7 @@ type IconProps = {
   icon:
     | "home"
     | "add"
+    | "cancel"
     | "bar_chart"
     | "settings"
     | "account_circle"
