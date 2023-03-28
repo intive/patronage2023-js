@@ -1,3 +1,8 @@
+import NextImage from "next/image";
+
+NextImage.defaultProps = {
+  unoptimized: true,
+};
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -8,16 +13,16 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: 'white',
+    default: "white",
     values: [
       {
-        name: 'white',
-        value: '#fff',
+        name: "white",
+        value: "#fff",
       },
       {
-        name: 'darkgreen',
-        value: '#1E4C40',
+        name: "darkgreen",
+        value: "#1E4C40",
       },
     ],
-  }
+  },
 };
