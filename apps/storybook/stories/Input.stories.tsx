@@ -26,7 +26,7 @@ export const Normal = Template.bind({});
 Normal.args = {
   label: "Label",
   hasError: false,
-  id: "",
+  name: "normal",
   type: "text",
 };
 
@@ -34,7 +34,7 @@ export const SupportingLabel = Template.bind({});
 SupportingLabel.args = {
   label: "Label",
   hasError: false,
-  id: "",
+  name: "supportingLabel",
   supportingLabel: "Supporting label",
   type: "text",
 };
@@ -43,7 +43,7 @@ export const Error = Template.bind({});
 Error.args = {
   label: "Label",
   hasError: true,
-  id: "",
+  name: "error",
   supportingLabel: "Supporting label",
 };
 
@@ -51,7 +51,20 @@ export const Password = Template.bind({});
 Password.args = {
   label: "Label",
   hasError: false,
-  id: "",
+  name: "password",
+  supportingLabel: (
+    <div>
+      <a href="#">Forgot password?</a>
+    </div>
+  ),
+  type: "password",
+};
+
+export const PasswordWithError = Template.bind({});
+PasswordWithError.args = {
+  label: "Label",
+  hasError: true,
+  name: "passwordWithError",
   supportingLabel: (
     <div>
       <a href="#">Forgot password?</a>
