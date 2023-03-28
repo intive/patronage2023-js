@@ -12,22 +12,23 @@ export default function LogInPage() {
   const [errMsg, setErrMsg] = useState("");
 
   return (
-    <Form
-      onSubmit={(values) => {
-        console.log(values);
-        values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
-          ? router.push("/")
-          : setErrMsg("Invalid credentials. Please try again.");
-      }}
-    >
-      {({ submit }) => (
-        <FormWrapper>
-          {errMsg && (
-            <ErrorWrapper>
-              <ErrorMessage message={errMsg} onClose={() => setErrMsg("")} />
-            </ErrorWrapper>
-          )}
-          {/* <FieldsWrapper>
+      <Form
+        onSubmit={(values) => {
+          console.log(values);
+          values.email === "smutnarzaba@png.pl" &&
+          values.password === "frytki123"
+            ? router.push("/")
+            : setErrMsg("Invalid credentials. Please try again.");
+        }}
+      >
+        {({ submit }) => (
+          <FormWrapper>
+            {errMsg && (
+              <ErrorWrapper>
+                <ErrorMessage message={errMsg} onClose={() => setErrMsg("")} />
+              </ErrorWrapper>
+            )}
+            {/* <FieldsWrapper>
             <Field name="email" onSubmitValidate={z.string().min(3)}>
               {({ value, setValue, errors }) => (
                 <div>
@@ -58,58 +59,60 @@ export default function LogInPage() {
               )}
             </Field>
           </FieldsWrapper> */}
-          <FieldsWrapper>
-            <Field name="email">
-              {({ value, setValue }) => (
-                <Input
-                  label="Email"
-                  value={value}
-                  onChange={(e) => setValue(e.currentTarget.value)}
-                  onFocus={() => setErrMsg("")}
-                  onInputCleared={() => setValue("")}
-                />
-              )}
-            </Field>
-            <Field name="password">
-              {({ value, setValue }) => (
-                <Input
-                  type="password"
-                  label="Password"
-                  value={value}
-                  onChange={(e) => setValue(e.currentTarget.value)}
-                  onFocus={() => setErrMsg("")}
-                />
-              )}
-            </Field>
-          </FieldsWrapper>
-          <Button onClick={submit}>Log In</Button>
-        </FormWrapper>
-      )}
-    </Form>
+            <FieldsWrapper>
+              <Field name="email">
+                {({ value, setValue }) => (
+                  <Input
+                    label="Email"
+                    value={value}
+                    onChange={(e) => setValue(e.currentTarget.value)}
+                    onFocus={() => setErrMsg("")}
+                    onInputCleared={() => setValue("")}
+                  />
+                )}
+              </Field>
+              <Field name="password">
+                {({ value, setValue }) => (
+                  <Input
+                    type="password"
+                    label="Password"
+                    value={value}
+                    onChange={(e) => setValue(e.currentTarget.value)}
+                    onFocus={() => setErrMsg("")}
+                  />
+                )}
+              </Field>
+            </FieldsWrapper>
+            <Button onClick={submit}>Log In</Button>
+          </FormWrapper>
+        )}
+      </Form>
   );
 }
 
 const FormWrapper = styled.div`
-  position: 0 auto;
-  width: 50vw;
-  height: 40vh;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 40vw;
+  height: 100%;
   position: relative;
   border: 1px solid red;
-  padding: 50px;
-  padding-top: 300px;
-  padding-bottom: 100px;
+  padding: 10rem 1rem 3rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 auto;
+  @media (max-width: 1024px) {
+    max-width: 90vw;
+  }
 `;
 
 const FieldsWrapper = styled.div`
-  border: 1px solid red;
-  height: 40%;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 5rem;
 `;
 
 const ErrorWrapper = styled.div`
