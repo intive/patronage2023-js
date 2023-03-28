@@ -18,7 +18,7 @@ const inter = Inter({
 const Main = styled.div`
   display: flex;
   justify-content: space-between;
-  height:100%;
+  min-height:100%;
 `
 
 const Content = styled.div`
