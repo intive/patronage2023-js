@@ -11,6 +11,10 @@ export default function LogInPage() {
   const router = useRouter();
   const [errMsg, setErrMsg] = useState("");
 
+  const closeErrorMessage = (): void => {
+    setErrMsg("")
+  }
+
   return (
       <Form
         onSubmit={(values) => {
@@ -25,7 +29,7 @@ export default function LogInPage() {
           <FormWrapper>
             {errMsg && (
               <ErrorWrapper>
-                <ErrorMessage message={errMsg} onClose={() => setErrMsg("")} />
+                <ErrorMessage message={errMsg} onClose={closeErrorMessage} />
               </ErrorWrapper>
             )}
             {/* <FieldsWrapper>
@@ -66,7 +70,7 @@ export default function LogInPage() {
                     label="Email"
                     value={value}
                     onChange={(e) => setValue(e.currentTarget.value)}
-                    onFocus={() => setErrMsg("")}
+                    onFocus={closeErrorMessage}
                     onInputCleared={() => setValue("")}
                   />
                 )}
@@ -78,7 +82,7 @@ export default function LogInPage() {
                     label="Password"
                     value={value}
                     onChange={(e) => setValue(e.currentTarget.value)}
-                    onFocus={() => setErrMsg("")}
+                    onFocus={closeErrorMessage}
                   />
                 )}
               </Field>
