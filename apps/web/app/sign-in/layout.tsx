@@ -21,7 +21,7 @@ export default function SignInLayout({ children }: LayoutProps) {
             <SectionStyled>
               <Logo logoWidth={138} white />
               <StyledH1>Log in with your email</StyledH1>
-              <StyledP>Use your email to log in to your team workspace</StyledP>
+              <ParagraphStyled>Use your email to log in to your team workspace</ParagraphStyled>
             </SectionStyled>
             <FormWrapperStyled>
               <Card minHeight="100%">{children}</Card>
@@ -86,7 +86,6 @@ const FormWrapperStyled = styled.div`
 `;
 
 const StyledH1 = styled.h1`
-  display: block;
   font-family: "Signika", sans-serif;
   font-size: 1.5em;
   line-height: 1.5em;
@@ -99,7 +98,7 @@ const StyledH1 = styled.h1`
   }
 `;
 
-const StyledP = styled.p`
+const ParagraphStyled = styled.p`
   margin-top: 8px;
   font-size: 14px;
   line-height: 20px;
