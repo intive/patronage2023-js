@@ -102,6 +102,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input<StyledErrorProps>`
+  box-sizing: border-box;
   border: solid 2px #e1e1e1;
   border-radius: 8px;
   padding: 14px 0 14px 14px;
@@ -159,7 +160,7 @@ const StyledLabel = styled.label<StyledErrorProps>`
 
 const StyledIcon = styled.button`
   position: absolute;
-  right: -4px;
+  right: 15px;
   top: 18px;
   border: none;
   background: none;
