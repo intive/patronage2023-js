@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Buttons from "./Buttons";
 import ErrorDemo from "./ErrorDemo";
-import "./css/body.css";
+import "./css/global.css";
 
 export const metadata: Metadata = {
   title: "Home",
