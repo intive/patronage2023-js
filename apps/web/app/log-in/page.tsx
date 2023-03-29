@@ -14,7 +14,6 @@ const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
   @media (max-width: 767px) {
     width: 90%;
     padding-top: 8rem;
