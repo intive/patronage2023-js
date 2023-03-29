@@ -86,5 +86,6 @@ const ParagraphStyled = styled.p`
 `;
 
 const CustomCard = styled(Card)`
+  padding: 1em;
   min-height: 100%;
 `;
