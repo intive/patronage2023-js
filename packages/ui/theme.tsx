@@ -7,7 +7,7 @@ const colors = {
   Teal10: "#1E4C40",
 };
 
-const theme = {
+export const theme = {
   button: {
     primary: colors.Teal10,
   },

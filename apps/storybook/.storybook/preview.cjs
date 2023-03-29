@@ -1,8 +1,12 @@
 import NextImage from "next/image";
+import { withThemeFromJSXProvider } from '@storybook/addon-styling';
+import { ThemeProvider } from 'styled-components';
+import {theme} from "ui/theme.tsx"
 
 NextImage.defaultProps = {
   unoptimized: true,
 };
+
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -26,3 +30,10 @@ export const parameters = {
     ],
   },
 };
+ export const decorators = [withThemeFromJSXProvider({
+   themes: {
+     default: theme,
+   },
+   defaultTheme: 'default',
+   Provider: ThemeProvider
+ })]
