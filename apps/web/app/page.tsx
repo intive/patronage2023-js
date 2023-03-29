@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AvatarSelectorDemo from "./AvatarSelectorDemo";
 import Buttons from "./Buttons";
 import ErrorDemo from "./ErrorDemo";
 
@@ -13,6 +14,7 @@ export default function Web() {
       <h1>InBudget app</h1>
       <Buttons />
       <ErrorDemo />
+      <AvatarSelectorDemo />
     </div>
   );
 }
