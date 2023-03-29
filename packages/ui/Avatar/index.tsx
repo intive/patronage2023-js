@@ -4,7 +4,7 @@ export type AvatarProps = {
   username?: string;
   src: string;
   alt?: string;
-  hasOutline?: boolean;
+  outlined?: boolean;
   className?: string;
 };
 
@@ -13,14 +13,14 @@ export const Avatar = ({
   src,
   alt,
   className,
-  hasOutline,
+  outlined,
 }: AvatarProps) => {
   return (
     <Image
       src={src}
       alt={alt ? alt : `${username}'s avatar`}
       className={className}
-      hasOutline={hasOutline}
+      outlined={outlined}
     />
   );
 };
@@ -31,8 +31,8 @@ const Image = styled.img<AvatarProps>`
   border-radius: 50%;
   object-fit: cover;
 
-  ${({ hasOutline }) =>
-    hasOutline &&
+  ${({ outlined }) =>
+    outlined &&
     css`
       border: 2px solid white;
     `}

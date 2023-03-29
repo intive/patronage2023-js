@@ -9,7 +9,7 @@ export default {
   component: Avatar,
 } as ComponentMeta<typeof Avatar>;
 
-const Template = ({...args }: AvatarProps) => (
+const Template = ({ ...args }: AvatarProps) => (
   <Wrapper>
     <Avatar {...args} />
   </Wrapper>
@@ -35,7 +35,7 @@ export const StackedWithOutline = TemplateStyledAvatar.bind({});
 StackedWithOutline.args = {
   username: "Howard Wolowitz",
   src: "https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcT6y09yzjZgTgDakotcP0I1a1lw1bwLenGGCQYe54D4x66GzlWTW5x-hMklvlfTDXLF",
-  hasOutline: true,
+  outlined: true,
 };
 
 const Wrapper = styled.div`
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
   align-items: center;
   font-size: 48px;
   line-height: 1em;
-  
+
   > * + * {
     margin-left: -0.4em;
   }
