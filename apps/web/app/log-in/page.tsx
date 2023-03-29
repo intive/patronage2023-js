@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const FormWrapper = styled.div`
   margin: 0 auto;
-  padding-top: 10rem;
+  padding-top: 8rem;
   width: 416px;
   position: relative;
   display: flex;
@@ -16,7 +16,7 @@ const FormWrapper = styled.div`
   justify-content: center;
   @media (max-width: 767px) {
     width: 90%;
-    padding-top: 8rem;
+    padding-top: 7rem;
   }
 `;
 
@@ -30,6 +30,7 @@ const FieldsWrapper = styled.div`
 
 const ErrorWrapper = styled.div`
   position: absolute;
+  width: 100%;
   top: 1rem;
   left: 50%;
   transform: translate(-50%, 0);
