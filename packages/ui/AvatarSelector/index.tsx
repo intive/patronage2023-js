@@ -27,28 +27,28 @@ export const AvatarSelector = () => {
         //implicitly set isDragging so IDE dont scream at me
         isDragging={isDragging}
       >
-        <button>
+        <button onClick={() => console.log(`Avatar 1 selected`)}>
           <Image src="/avatars/1.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 2 selected`)}>
           <Image src="/avatars/2.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 3 selected`)}>
           <Image src="/avatars/3.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 4 selected`)}>
           <Image src="/avatars/4.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 5 selected`)}>
           <Image src="/avatars/5.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 6 selected`)}>
           <Image src="/avatars/6.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 7 selected`)}>
           <Image src="/avatars/7.svg" alt="avatar" fill sizes="100%" />
         </button>
-        <button>
+        <button onClick={() => console.log(`Avatar 8 selected`)}>
           <Image src="/avatars/8.svg" alt="avatar" fill sizes="100%" />
         </button>
       </Grid>
