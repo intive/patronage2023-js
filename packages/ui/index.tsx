@@ -11,3 +11,4 @@ export { ErrorMessage } from "./ErrorMessage";
 export { Background } from "./Background";
 export { Input } from "./Input";
 export { LinkComponent } from "./Link";
+export { AvatarSelector } from "./AvatarSelector";
