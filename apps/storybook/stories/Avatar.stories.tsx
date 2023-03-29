@@ -9,44 +9,42 @@ export default {
   component: Avatar,
 } as ComponentMeta<typeof Avatar>;
 
-type StoryProps = AvatarProps & { height: number };
-
-const Template = ({ height, ...args }: StoryProps) => (
-  <div style={{ height: `${height}px` }}>
+const Template = ({...args }: AvatarProps) => (
+  <Wrapper>
     <Avatar {...args} />
-  </div>
+  </Wrapper>
 );
 
 export const Normal = Template.bind({});
 Normal.args = {
-  height: 120,
   username: "Ricardo",
   src: "https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcT6y09yzjZgTgDakotcP0I1a1lw1bwLenGGCQYe54D4x66GzlWTW5x-hMklvlfTDXLF",
 };
 
-// example of avatar with username
+// example for stacked avatars
 
-const TemplateStyledAvatar = ({ ...args }: StoryProps) => (
+const TemplateStyledAvatar = ({ ...args }: AvatarProps) => (
   <Wrapper>
-    <StyledAvatar {...args} />
-    <span>{args.username}</span>
+    <Avatar {...args} />
+    <Avatar {...args} />
+    <Avatar {...args} />
   </Wrapper>
 );
 
-export const StyledWithUsername = TemplateStyledAvatar.bind({});
-StyledWithUsername.args = {
+export const StackedWithOutline = TemplateStyledAvatar.bind({});
+StackedWithOutline.args = {
   username: "Howard Wolowitz",
   src: "https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcT6y09yzjZgTgDakotcP0I1a1lw1bwLenGGCQYe54D4x66GzlWTW5x-hMklvlfTDXLF",
+  hasOutline: true,
 };
 
 const Wrapper = styled.div`
-  height: 48px;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  font-weight: 400;
-`;
-
-const StyledAvatar = styled(Avatar)`
-  margin-right: 16px;
+  font-size: 48px;
+  line-height: 1em;
+  
+  > * + * {
+    margin-left: -0.4em;
+  }
 `;

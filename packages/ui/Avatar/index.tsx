@@ -1,18 +1,39 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export type AvatarProps = {
-  className?: string;
-  username: string;
+  username?: string;
   src: string;
+  alt?: string;
+  hasOutline?: boolean;
+  className?: string;
 };
 
-export const Avatar = ({ username, src, className }: AvatarProps) => {
-  return <Image src={src} alt={`${username}'s avatar`} className={className} />;
+export const Avatar = ({
+  username = "user",
+  src,
+  alt,
+  className,
+  hasOutline,
+}: AvatarProps) => {
+  return (
+    <Image
+      src={src}
+      alt={alt ? alt : `${username}'s avatar`}
+      className={className}
+      hasOutline={hasOutline}
+    />
+  );
 };
 
-const Image = styled.img`
-  height: 100%;
-  aspect-ratio: 1/1;
+const Image = styled.img<AvatarProps>`
+  height: 1em;
+  width: 1em;
   border-radius: 50%;
   object-fit: cover;
+
+  ${({ hasOutline }) =>
+    hasOutline &&
+    css`
+      border: 2px solid white;
+    `}
 `;
