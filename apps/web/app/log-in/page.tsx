@@ -6,6 +6,37 @@ import { useRouter } from "next/navigation";
 import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
 
+const FormWrapper = styled.div`
+  margin: 0 auto;
+  padding-top: 10rem;
+  width: 416px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  @media (max-width: 767px) {
+    width: 90%;
+    padding-top: 8rem;
+  }
+`;
+
+const FieldsWrapper = styled.div`
+  height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+`;
+
+const ErrorWrapper = styled.div`
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 5;
+`;
+
 export default function LogInPage() {
   const router = useRouter();
   const [errMsg, setErrMsg] = useState("");
@@ -62,35 +93,3 @@ export default function LogInPage() {
   );
 }
 
-const FormWrapper = styled.div`
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding-top: 10rem;
-  width: 416px;
-  position: relative;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  @media (max-width: 767px) {
-    width: 312px;
-    padding-top: 8rem;
-  }
-`;
-
-const FieldsWrapper = styled.div`
-  height: 8rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 5rem;
-`;
-
-const ErrorWrapper = styled.div`
-  position: absolute;
-  top: 1rem;
-  left: 50%;
-  transform: translate(-50%, 0);
-  z-index: 5;
-`;
