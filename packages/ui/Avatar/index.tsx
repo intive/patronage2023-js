@@ -8,6 +8,19 @@ export type AvatarProps = {
   className?: string;
 };
 
+const Image = styled.img<AvatarProps>`
+  height: 1em;
+  width: 1em;
+  border-radius: 50%;
+  object-fit: cover;
+
+  ${({ outlined }) =>
+    outlined &&
+    css`
+      border: 2px solid white;
+    `}
+`;
+
 export const Avatar = ({
   username = "user",
   src,
@@ -24,16 +37,3 @@ export const Avatar = ({
     />
   );
 };
-
-const Image = styled.img<AvatarProps>`
-  height: 1em;
-  width: 1em;
-  border-radius: 50%;
-  object-fit: cover;
-
-  ${({ outlined }) =>
-    outlined &&
-    css`
-      border: 2px solid white;
-    `}
-`;
