@@ -23,40 +23,40 @@ export default function SignInLayout({ children }: LayoutProps) {
 }
 
 const ContentStyled = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 
   @media ${device.desktop} {
     flex-direction: row;
-    width: 100%;
+    margin: 0 auto;
   }
 `;
 
 const SectionStyled = styled.div`
   color: white;
-  width: 100%;
+
   padding: 52px 16px 0px 16px;
 
   @media ${device.desktop} {
     display: flex;
+    width: 50%;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
-    padding-left: 128px;
-    padding-right: 64px;
+    padding-left: 6%;
+    padding-right: 3%;
   }
 `;
 
 const FormWrapperStyled = styled.div`
   overflow-x: auto;
-  width: 100%;
   height: 100%;
   padding: 8px;
 
   @media ${device.desktop} {
-    height: 100vh;
-    padding: 12vh 64px;
+    width: 50%;
+    min-height: 100%;
+    padding: 12% 2%;
   }
 `;
 
@@ -68,8 +68,8 @@ const H1Styled = styled.h1`
 
   @media ${device.desktop} {
     margin-top: 32px;
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 2.5em;
+    line-height: 1em;
   }
 `;
 

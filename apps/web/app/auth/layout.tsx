@@ -10,25 +10,16 @@ export type LayoutProps = {
 
 export default function AuthLayout({ children }: LayoutProps) {
   return (
-    <ViewStyled>
-      <Background>
-        <PageContainerStyled>{children}</PageContainerStyled>
-      </Background>
-    </ViewStyled>
+    <Background>
+      <PageContainerStyled>{children}</PageContainerStyled>
+    </Background>
   );
 }
 
-const ViewStyled = styled.div`
-  width: 100%;
-  height: 100vh;
-  background-color: #1e4c40;
-`;
-
 const PageContainerStyled = styled.div`
-  width: 100%;
-
+  height: 100%;
   @media ${device.desktop} {
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1080px;
   }
 `;
