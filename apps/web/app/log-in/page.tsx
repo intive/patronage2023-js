@@ -48,7 +48,6 @@ export default function LogInPage() {
   return (
       <Form
         onSubmit={(values) => {
-          console.log(values);
           values.email === "smutnarzaba@png.pl" &&
           values.password === "frytki123"
             ? router.push("/")
