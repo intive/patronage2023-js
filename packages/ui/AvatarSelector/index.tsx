@@ -50,7 +50,7 @@ export const AvatarSelector = () => {
           <Avatar src="/avatars/7.svg" />
         </button>
         <button onClick={() => console.log(`Avatar 8 selected`)}>
-          <Image src="/avatars/8.svg" alt="" fill sizes="100%" />
+          <Avatar src="/avatars/8.svg" />
         </button>
       </Grid>
     </div>
@@ -72,21 +72,14 @@ const Grid = styled.div<GridProps>`
 
   button {
     user-select: none;
-    position: relative;
     flex-shrink: 0;
     cursor: pointer;
-    border-radius: 50%;
     border: none;
-    height: 88px;
-    width: 88px;
-    //override default Avatar styles
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    font-size: 88px;
+    outline: 2px solid transparent;
   }
   button:hover {
-    outline: 2px solid black;
+    outline-color: black;
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
