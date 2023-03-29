@@ -15,7 +15,7 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   @media (max-width: 767px) {
-    width: 90%;
+    width: 100%;
     padding-top: 7rem;
   }
 `;
@@ -65,6 +65,7 @@ export default function LogInPage() {
               <Field name="email">
                 {({ value, setValue }) => (
                   <Input
+                    name="email"
                     label="Email"
                     value={value}
                     onChange={(e) => setValue(e.currentTarget.value)}
@@ -76,6 +77,7 @@ export default function LogInPage() {
               <Field name="password">
                 {({ value, setValue }) => (
                   <Input
+                    name="password"
                     type="password"
                     label="Password"
                     value={value}
