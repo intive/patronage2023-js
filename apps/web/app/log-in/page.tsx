@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
+import { z } from "zod";
 
 const FormWrapper = styled.div`
   margin: 0 auto;
@@ -21,10 +22,10 @@ const FormWrapper = styled.div`
 `;
 
 const FieldsWrapper = styled.div`
-  height: 8rem;
+  height: 11rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 5rem;
 `;
 
@@ -35,62 +36,85 @@ const ErrorWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-`;
+`; 
 
 export default function LogInPage() {
   const router = useRouter();
   const [errMsg, setErrMsg] = useState("");
 
   const closeErrorMessage = () => {
-    setErrMsg("")
-  }
+    setErrMsg("");
+  };
 
   return (
-      <Form
-        onSubmit={(values) => {
-          values.email === "smutnarzaba@png.pl" &&
-          values.password === "frytki123"
-            ? router.push("/")
-            : setErrMsg("Invalid credentials. Please try again.");
-        }}
-      >
-        {({ submit }) => (
-          <FormWrapper>
+    <Form
+      onSubmit={(values) => {
+        values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
+          ? router.push("/")
+          : setErrMsg("Invalid credentials. Please try again.");
+      }}
+    >
+      {({ submit, errors }) => (
+        <FormWrapper>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              submit();
+            }}
+          >
             {errMsg && (
               <ErrorWrapper>
                 <ErrorMessage message={errMsg} onClose={closeErrorMessage} />
               </ErrorWrapper>
             )}
             <FieldsWrapper>
-              <Field name="email">
-                {({ value, setValue }) => (
-                  <Input
-                    name="email"
-                    label="Email"
-                    value={value}
-                    onChange={(e) => setValue(e.currentTarget.value)}
-                    onFocus={closeErrorMessage}
-                    onInputCleared={() => setValue("")}
-                  />
+              <Field
+                name="email"
+                initialValue={""}
+                onBlurValidate={z.string().email("This is not a valid email")}
+              >
+                {({ value, setValue, onBlur, errors }) => (
+                    <Input
+                      name="email"
+                      label="Email"
+                      value={value}
+                      onChange={(e) => setValue(e.currentTarget.value)}
+                      onFocus={closeErrorMessage}
+                      onInputCleared={() => setValue("")}
+                      onBlur={onBlur}
+                      hasError={errors.length > 0}
+                      supportingLabel={errors}
+                    />
                 )}
               </Field>
-              <Field name="password">
-                {({ value, setValue }) => (
-                  <Input
-                    name="password"
-                    type="password"
-                    label="Password"
-                    value={value}
-                    onChange={(e) => setValue(e.currentTarget.value)}
-                    onFocus={closeErrorMessage}
-                  />
+              <Field
+                name="password"
+                initialValue={""}
+                onBlurValidate={z
+                  .string()
+                  .min(3, "Password must have at least 3 characters")}
+              >
+                {({ value, setValue, onBlur, errors }) => (
+                    <Input
+                      name="password"
+                      type="password"
+                      label="Password"
+                      value={value}
+                      onChange={(e) => setValue(e.currentTarget.value)}
+                      onFocus={closeErrorMessage}
+                      onBlur={onBlur}
+                      hasError={errors.length > 0}
+                      supportingLabel={errors}
+                    />
                 )}
               </Field>
             </FieldsWrapper>
-            <Button onClick={submit}>Log In</Button>
-          </FormWrapper>
-        )}
-      </Form>
+            <Button onClick={submit} type="submit" fullWidth>
+              Log In
+            </Button>
+          </form>
+        </FormWrapper>
+      )}
+    </Form>
   );
 }
-

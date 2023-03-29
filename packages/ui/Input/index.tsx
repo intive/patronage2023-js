@@ -27,6 +27,7 @@ export const Input = ({
   value,
   onChange,
   onFocus,
+  onBlur,
   onInputCleared,
 }: InputProps) => {
   const [typeOverride, setTypeOverride] = useState("");
@@ -36,7 +37,8 @@ export const Input = ({
     if (type === "password") {
       return (
         <StyledIcon
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault()
             setTypeOverride(typeOverride ? "" : "text");
             inputRef.current?.focus();
           }}
@@ -83,6 +85,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         onFocus={onFocus}
+        onBlur={onBlur}
       />
       <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
