@@ -16,7 +16,7 @@ export default function SignInLayout({ children }: LayoutProps) {
         </ParagraphStyled>
       </SectionStyled>
       <FormWrapperStyled>
-        <Card minHeight="100%">{children}</Card>
+        <CustomCard>{children}</CustomCard>
       </FormWrapperStyled>
     </ContentStyled>
   );
@@ -83,4 +83,8 @@ const ParagraphStyled = styled.p`
     line-height: 24px;
     margin-top: 1em;
   }
+`;
+
+const CustomCard = styled(Card)`
+  min-height: 100%;
 `;
