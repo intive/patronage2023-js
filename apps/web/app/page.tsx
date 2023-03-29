@@ -1,6 +1,6 @@
-"use client";
 import type { Metadata } from "next";
-import { AvatarSelector } from "ui";
+import Buttons from "./Buttons";
+import ErrorDemo from "./ErrorDemo";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -8,5 +8,11 @@ export const metadata: Metadata = {
 };
 
 export default function Web() {
-  return <AvatarSelector />;
+  return (
+    <div>
+      <h1>InBudget app</h1>
+      <Buttons />
+      <ErrorDemo />
+    </div>
+  );
 }
