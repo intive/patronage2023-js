@@ -24,13 +24,13 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsThemeWrapper>
-          <StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <StyledComponentsThemeWrapper>
             <Nav />
             <SideNav />
             {children}
-          </StyledComponentsRegistry>
-        </StyledComponentsThemeWrapper>
+          </StyledComponentsThemeWrapper>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
+import { styled } from "../theme";
 
 export const Button = ({
   variant = "primary",
@@ -53,7 +54,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
   &:disabled {
     border: 2px solid lightgray;
-    background-color: ${(props) => props.theme.button.primary};
+    background-color: ${(p) => p.theme.button.primary};
     cursor: not-allowed;
   }
 
