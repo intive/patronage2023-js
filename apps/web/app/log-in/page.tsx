@@ -33,7 +33,7 @@ const ErrorWrapper = styled.div`
   width: 100%;
   top: 1rem;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translateX(-50%);
   z-index: 5;
 `;
 
