@@ -53,7 +53,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
   &:disabled {
     border: 2px solid lightgray;
-    background-color: lightgray;
+    background-color: ${(props) => props.theme.button.primary};
     cursor: not-allowed;
   }
 

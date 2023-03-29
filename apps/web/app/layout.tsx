@@ -2,8 +2,8 @@
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
 import Nav from "./Nav";
-import { Background } from "ui";
 import SideNav from "./SideNavigationBar";
+import StyledComponentsThemeWrapper from "ui/theme";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -24,11 +24,13 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <Nav />
-          <SideNav />
-          {children}
-        </StyledComponentsRegistry>
+        <StyledComponentsThemeWrapper>
+          <StyledComponentsRegistry>
+            <Nav />
+            <SideNav />
+            {children}
+          </StyledComponentsRegistry>
+        </StyledComponentsThemeWrapper>
       </body>
     </html>
   );
