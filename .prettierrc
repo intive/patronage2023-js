@@ -4,5 +4,12 @@
   "singleQuote": true,
   "trailingComma": "es5",
   "bracketSpacing": true,
-  "bracketSameLine": true
+  "bracketSameLine": true,
+  "quoteProps": "as-needed",
+  "proseWrap": "preserve",
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "htmlWhitespaceSensitivity": "css",
+  "singleAttributePerLine": false,
+  "printWidth": 80
 }
