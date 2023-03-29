@@ -41,7 +41,7 @@ export default function LogInPage() {
   const router = useRouter();
   const [errMsg, setErrMsg] = useState("");
 
-  const closeErrorMessage = (): void => {
+  const closeErrorMessage = () => {
     setErrMsg("")
   }
 
