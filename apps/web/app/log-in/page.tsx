@@ -45,6 +45,7 @@ const InputWrapper = styled.div`
 const ErrorSuportingMsg = styled.div`
   position: absolute;
   top: 60px;
+  left: 10px;
   color: #b3261e;
   font-size: small;
 `;
