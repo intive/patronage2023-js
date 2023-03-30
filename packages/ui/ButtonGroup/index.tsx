@@ -6,6 +6,7 @@ interface InputProps {
   component: ReactNode;
   onSelect: () => void;
   defaultChecked?: boolean;
+  id: string;
 }
 
 type GroupProps = {
@@ -16,9 +17,9 @@ type GroupProps = {
 export const ButtonGroup = ({ options, secondary }: GroupProps) => {
   return (
     <ButtonGroupStyled options={options} secondary={secondary}>
-      {options.map(({ component, onSelect, defaultChecked }, index) => {
+      {options.map(({ component, onSelect, defaultChecked, id }, index) => {
         return (
-          <Fragment key={`group-${index}`}>
+          <Fragment key={id}>
             <input
               type={"radio"}
               id={`button-${index}`}
@@ -26,9 +27,7 @@ export const ButtonGroup = ({ options, secondary }: GroupProps) => {
               name={"button-group"}
               defaultChecked={defaultChecked}
             />
-            <label key={`index-${index}`} htmlFor={`button-${index}`}>
-              {component}
-            </label>
+            <label htmlFor={`button-${index}`}>{component}</label>
           </Fragment>
         );
       })}
@@ -50,6 +49,7 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     justify-content: center;
     cursor: pointer;
     padding: 8px 24px;
+    position: relative;
 
     ${({ secondary }) =>
       secondary
@@ -78,11 +78,8 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     border-bottom-right-radius: 8px;
   }
 
-  & > input {
-    display: none;
-  }
-
-  & > input:checked + label {
+  & > input:checked + label,
+  & > input:focus + label {
     ${({ secondary }) =>
       secondary
         ? css`
@@ -92,6 +89,14 @@ const ButtonGroupStyled = styled.div<GroupProps>`
         : css`
             background-color: #459175;
           `}
+  }
+
+  //hide input without losing accessibility
+  & > input {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
   }
 
   //label on hover
@@ -107,11 +112,11 @@ const ButtonGroupStyled = styled.div<GroupProps>`
           `}
   }
 
-  & > label:hover > span {
+  & > label:hover > span:not(.selected) {
     ${({ secondary }) =>
       !secondary &&
       css`
-        color: #ffffff !important;
+        color: #ffffff;
       `}
   }
 
