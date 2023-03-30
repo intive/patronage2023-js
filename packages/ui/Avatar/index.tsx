@@ -1,5 +1,4 @@
-import { css } from "styled-components";
-import { styled } from "ui/theme";
+import styled, { css } from "styled-components";
 
 export type AvatarProps = {
   username?: string;

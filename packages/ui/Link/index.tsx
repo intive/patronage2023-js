@@ -1,5 +1,5 @@
 "use client";
-import { styled } from "ui/theme";
+import styled from "styled-components";
 
 type LinkComponentProps = {
   href?: any;

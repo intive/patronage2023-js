@@ -1,7 +1,6 @@
 "use client";
 
-import { css } from "styled-components";
-import { styled } from "ui/theme";
+import styled, { css } from "styled-components";
 
 export const Button = ({
   variant = "primary",
@@ -17,8 +16,7 @@ export const Button = ({
       onClick={onClick}
       fullWidth={fullWidth}
       disabled={disabled}
-      small={small}
-    >
+      small={small}>
       {children}
     </ButtonStyled>
   );

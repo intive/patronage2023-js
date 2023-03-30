@@ -1,7 +1,6 @@
 import React from "react";
 import "material-symbols";
-import { css } from "styled-components";
-import { styled } from "ui/theme";
+import styled, { css } from "styled-components";
 
 type styledIconProps = {
   color?: string;

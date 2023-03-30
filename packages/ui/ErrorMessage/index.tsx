@@ -1,4 +1,4 @@
-import { styled } from "ui/theme";
+import styled from "styled-components";
 import { Icon } from "../Icon";
 
 type ErrorMessageProps = {

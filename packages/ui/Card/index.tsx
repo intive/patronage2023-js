@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { styled } from "ui/theme";
+import styled from "styled-components";
 
 export type CardProps = {
   children: ReactNode;

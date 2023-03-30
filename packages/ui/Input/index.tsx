@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { css, useTheme } from "styled-components";
-import { styled } from "ui/theme";
+import styled, { css, useTheme } from "styled-components";
 
 import { Icon } from "../Icon";
 

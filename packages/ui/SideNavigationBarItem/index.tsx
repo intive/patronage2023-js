@@ -1,5 +1,4 @@
-import { css, useTheme } from "styled-components";
-import { styled } from "ui/theme";
+import styled, { css, useTheme } from "styled-components";
 import { Icon } from "ui";
 import { IconProps } from "../Icon";
 import Link from "next/link";

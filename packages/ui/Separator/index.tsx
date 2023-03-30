@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "ui/theme";
+import styled from "styled-components";
 
 export const Separator = ({ label, className }: SeparatorProps) => {
   return (

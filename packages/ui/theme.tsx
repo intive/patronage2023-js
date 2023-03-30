@@ -1,6 +1,5 @@
 "use client";
 import { ThemeProvider } from "styled-components";
-import baseStyled, { ThemedStyledInterface } from "styled-components";
 import { ReactNode } from "react";
 
 const colors = {
@@ -58,6 +57,19 @@ export const theme = {
       disabled: colors.Teal4,
     },
   },
+  buttonGroup: {
+    primary: {
+      main: colors.BasicWhite,
+      background: colors.Teal10,
+      backgroundAction: colors.Teal7,
+      uncheckedColor: colors.Neutral4,
+    },
+    secondary: {
+      main: colors.Teal10,
+      border: colors.Neutral4,
+      uncheckedColor: colors.Neutral7,
+    },
+  },
   card: {
     background: colors.BasicWhite,
     border: colors.Neutral2,
@@ -105,7 +117,7 @@ export const theme = {
   },
 };
 
-type ThemeType = typeof theme;
+export type ThemeType = typeof theme;
 
 type WrapperProps = {
   children: ReactNode;
@@ -114,5 +126,4 @@ const StyledComponentsThemeWrapper = ({ children }: WrapperProps) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
-export const styled = baseStyled as ThemedStyledInterface<ThemeType>;
 export default StyledComponentsThemeWrapper;
