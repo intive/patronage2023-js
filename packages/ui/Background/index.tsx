@@ -6,9 +6,12 @@ import { styled } from "ui/theme";
 export const Background = ({
   children,
   withoutPattern = false,
+  className,
 }: BackgroundProps) => {
   return (
-    <BackgroundStyled withoutPattern={withoutPattern}>
+    <BackgroundStyled>
+      withoutPattern={withoutPattern}
+      className={className}>
       {children}
     </BackgroundStyled>
   );
@@ -19,7 +22,7 @@ export type BackgroundProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 export const BackgroundStyled = styled.div<BackgroundProps>`
-  height: 100vh;
+  min-height: 100%;
   background-position: top 168px center;
   background-repeat: no-repeat;
   background-color: ${({ theme }) => theme.background.background};
