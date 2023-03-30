@@ -1,28 +1,37 @@
 "use client"
 
+import type { Metadata } from "next";
+import Link from "next/link";
 import styled from "styled-components";
 import { Card } from "ui";
 import "../css/global.css";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Welcome to my page",
+};
 
 const CardWrapperStyled = styled.div`
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color:#E5E5E5;
     height:100%;
+    background-color:#E5E5E5;
 `
-const TypoStyled = styled.h1`
+const LinkStyled = styled(Link)`
     align-self: flex-start;
     margin-top:23%;
     font-family: "Inter", sans-serif;
     font-size: 3.5em;
+    font-weight: 600;
     color: #1E4C40;
+    text-decoration: none;
 `
-export default function WelcomePage() {
+export default function CreateAccountPage() {
     return (
         <CardWrapperStyled>
             <Card className="card-styled">
-                <TypoStyled>Welcome to Inbudget</TypoStyled>
+                <LinkStyled href="/home">Create my free account!</LinkStyled>
             </Card>
         </CardWrapperStyled>
     )

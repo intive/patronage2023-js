@@ -13,6 +13,7 @@ const NavBar = styled.nav`
   margin:0;
   padding: 15px 20px 15px 40px;
   justify-content: space-between;
+  z-index:1;
 `;
 
 const ActionWrapper = styled.div`

@@ -1,7 +1,7 @@
 "use client"
 
 import styled from "styled-components";
-import Nav from "../Nav";
+import Nav from "../Nav"
 import SideNav from "../SideNavigationBar";
 import { LayoutProps } from "../layout";
 
@@ -20,13 +20,12 @@ const Content = styled.div`
 `
 export default function NavigationLayout({ children }: LayoutProps) {
   return (
-    <><Wrapper>
+    <Wrapper>
         <Nav/>
         <Main>
             <SideNav/>
             <Content>{children}</Content>
         </Main>
-        </Wrapper>
-    </>
+    </Wrapper>
   )
 }
