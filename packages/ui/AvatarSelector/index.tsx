@@ -68,18 +68,20 @@ const Grid = styled.div<GridProps>`
   flex-wrap: wrap;
   padding: 1rem;
   gap: 1rem;
-  width: 460px;
-
+  width: 400px;
   button {
     user-select: none;
-    flex-shrink: 0;
     cursor: pointer;
     border: none;
     font-size: 88px;
-    outline: 2px solid transparent;
+    height: 1em;
+    padding: 0;
+    background: none;
+    border-radius: 50%;
   }
   button:hover {
-    outline-color: black;
+    outline: 2px solid #000;
+    outline-offset: 2px;
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
