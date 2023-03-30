@@ -21,8 +21,7 @@ export const CardStyled = styled(Card)`
 `
 export const LinkStyled = styled(Link)`
     font-family: "Signika", sans-serif;
-    font-size: 2.7em;
+    font-size: 2.3em;
     font-weight: 600;
     color: #1E4C40;
-    text-decoration: none;
 `
