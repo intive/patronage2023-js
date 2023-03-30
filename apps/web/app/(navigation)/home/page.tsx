@@ -14,7 +14,7 @@ const CardWrapperStyled = styled.div`
 const TypoStyled = styled.h1`
     align-self: flex-start;
     margin-top:23%;
-    font-family: "Inter", sans-serif;
+    font-family: "Signika", sans-serif;
     font-size: 3.5em;
     color: #1E4C40;
 `

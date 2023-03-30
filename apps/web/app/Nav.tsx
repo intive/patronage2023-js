@@ -1,9 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo } from "ui";
-import avatar from "../public/avatar.png"
-import Image from "next/image";
+import { Icon, Logo, Avatar } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -23,19 +21,13 @@ const ActionWrapper = styled.div`
   align-items: center;
 `;
 
-const IconWrapper = styled.div`
-  display:flex;
-  justify-content: center;
-  align-items: center;
-`
-//Image will be replaced by Avatar
 export default function Nav() {
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <IconWrapper><Icon icon={"notifications"} color={"white"}/></IconWrapper>
-        <Image src={avatar} width={30} height={30} alt="avatar"></Image>
+        <Icon icon={"notifications"} color={"white"}/>
+        <Avatar src="../public/avatar.png" outlined={true} />
       </ActionWrapper>
     </NavBar>
   );

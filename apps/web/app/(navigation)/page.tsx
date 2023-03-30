@@ -21,7 +21,7 @@ const CardWrapperStyled = styled.div`
 const LinkStyled = styled(Link)`
     align-self: flex-start;
     margin-top:23%;
-    font-family: "Inter", sans-serif;
+    font-family: "Signika", sans-serif;
     font-size: 3.5em;
     font-weight: 600;
     color: #1E4C40;
