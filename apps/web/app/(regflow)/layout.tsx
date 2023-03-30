@@ -3,7 +3,6 @@
 import { device } from "lib/css-variables";
 import styled from "styled-components";
 import { Background, Card, Logo } from "ui";
-import "../global.css"
 
 import { usePathname } from "next/navigation";
 
