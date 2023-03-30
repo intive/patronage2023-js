@@ -181,5 +181,5 @@ const StyledSupportingLabel = styled.div<StyledErrorProps>`
       : ({ theme }) => theme.input.neutral};
   font-weight: 400;
   font-size: 12px;
-  margin: 4px 10px 0px 10px;
+  margin: 4px 10px 0 10px;
 `;
