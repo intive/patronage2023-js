@@ -1,23 +1,5 @@
-import styled, { css } from "styled-components";
-
-/*
-
-WHAT: Transaction status element (chip/badge/pill)
-
-Possible states:
-
-- Completed
-- Due
-- Recurring
-- Overdue
-- Cancelled
-
-Specification:
-
-- HTML span element with text value as children
-- Span background color and text color depend on the possible state
-
-*/
+import { css } from "styled-components";
+import { styled } from "ui/theme";
 
 export type ChipProps = {
   type: "completed" | "due" | "failed";
@@ -37,18 +19,18 @@ export const ChipStyled = styled.span<ChipProps>`
   ${({ type }) =>
     (type === "completed" &&
       css`
-        color: #2e6858;
-        background: #d0f5e3;
+        color: ${({ theme }) => theme.chip.completed.main};
+        background: ${({ theme }) => theme.chip.completed.background};
       `) ||
     (type === "due" &&
       css`
-        color: #b96232;
-        background: #fcefe7;
+        color: ${({ theme }) => theme.chip.due.main};
+        background: ${({ theme }) => theme.chip.due.background};
       `) ||
     (type === "failed" &&
       css`
-        color: #ab322c;
-        background: #fceeed;
+        color: ${({ theme }) => theme.chip.failed.main};
+        background: ${({ theme }) => theme.chip.failed.background};
       `)}
 `;
 

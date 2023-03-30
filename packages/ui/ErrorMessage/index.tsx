@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "ui/theme";
 import { Icon } from "../Icon";
 
 type ErrorMessageProps = {
@@ -25,9 +25,9 @@ const ErrorMessageStyled = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding: 10px;
-  background-color: #fceeed;
-  color: #922b26;
-  border: 2px solid #922b26;
+  background-color: ${({ theme }) => theme.errorMessage.background};
+  color: ${({ theme }) => theme.errorMessage.main};
+  border: 2px solid ${({ theme }) => theme.errorMessage.main};
   border-radius: 8px;
 
   @media (min-width: 768px) {

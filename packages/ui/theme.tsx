@@ -58,6 +58,51 @@ export const theme = {
       disabled: colors.Teal4,
     },
   },
+  card: {
+    background: colors.BasicWhite,
+    border: colors.Neutral2,
+  },
+  chip: {
+    completed: {
+      main: colors.Teal9,
+      background: colors.Teal2,
+    },
+    due: {
+      main: colors.Supporting5,
+      background: colors.Supporting2,
+    },
+    failed: {
+      main: colors.Supporting4,
+      background: colors.Supporting1,
+    },
+  },
+  errorMessage: {
+    main: colors.Supporting4,
+    background: colors.Supporting1,
+  },
+  input: {
+    main: colors.Teal8,
+    error: colors.Supporting4,
+    borderError: colors.Neutral2,
+    neutral: colors.Neutral8,
+    focus: colors.Teal5,
+    labelBackground: colors.BasicWhite,
+  },
+  link: {
+    main: colors.Teal8,
+  },
+  logo: {
+    main: colors.Teal10,
+  },
+  separator: {
+    withText: colors.Neutral5,
+    withoutText: colors.Neutral2,
+  },
+  sideNavigationBarItem: {
+    main: colors.Teal10,
+    inactive: colors.Neutral6,
+    background: colors.Teal7,
+  },
 };
 
 type ThemeType = typeof theme;

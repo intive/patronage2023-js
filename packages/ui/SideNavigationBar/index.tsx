@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "ui/theme";
 import {
   SideNavigationBarItemProps,
   SideNavigationBarItem,

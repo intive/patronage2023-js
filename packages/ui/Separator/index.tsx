@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, { css } from "styled-components";
+import { styled } from "ui/theme";
 
 export const Separator = ({ label, className }: SeparatorProps) => {
   return (
@@ -21,7 +21,10 @@ const SeparatorStyled = styled.div<SeparatorProps>`
   ::before {
     content: " ";
     height: 1px;
-    background-color: ${({ label }) => (label ? "#9e9e9e" : "#E1E1E1")};
+    background-color: ${({ label }) =>
+      label
+        ? ({ theme }) => theme.separator.withText
+        : ({ theme }) => theme.separator.withoutText};
     position: absolute;
     width: 100%;
     left: 0;
@@ -32,7 +35,7 @@ const SeparatorStyled = styled.div<SeparatorProps>`
 `;
 
 const LabelStyled = styled.span`
-  color: #7E7E7E;
+  color: #7e7e7e;
   padding: 4px 9px;
   font-weight: 600;
   font-size: 16px;

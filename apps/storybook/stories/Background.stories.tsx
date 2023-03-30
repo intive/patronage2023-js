@@ -14,11 +14,11 @@ const Template: ComponentStory<typeof Background> = ({ children, ...args }) => (
 
 export const BackgroundPattern = Template.bind({});
 BackgroundPattern.args = {
-  children: <Button>Normal</Button>,
+  children: <Button onClick={() => {}}>Normal</Button>,
 };
 
 export const BackgroundWithoutPattern = Template.bind({});
 BackgroundWithoutPattern.args = {
-  children: <Button>Normal</Button>,
+  children: <Button onClick={() => {}}>Normal</Button>,
   withoutPattern: true,
 };

@@ -1,37 +1,41 @@
 "use client";
-import styled from "styled-components";
+import { styled } from "ui/theme";
 
 type LinkComponentProps = {
   href?: any;
   children?: string;
 } & React.HTMLProps<HTMLElement>;
 
-export const LinkComponent = ({ 
-  href, 
+export const LinkComponent = ({
+  href,
   children,
   onClick,
 }: LinkComponentProps) => {
-  return onClick ? (<LinkComponentButtonStyled onClick={onClick}>
-    {children}
-  </LinkComponentButtonStyled>) : (<LinkComponentAnchorStyled href={href}>
-    {children}
-  </LinkComponentAnchorStyled>)
+  return onClick ? (
+    <LinkComponentButtonStyled onClick={onClick}>
+      {children}
+    </LinkComponentButtonStyled>
+  ) : (
+    <LinkComponentAnchorStyled href={href}>
+      {children}
+    </LinkComponentAnchorStyled>
+  );
 };
 
 export const LinkComponentAnchorStyled = styled.a<LinkComponentProps>`
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: #397B65;
+  color: ${({ theme }) => theme.link.main};
 `;
 
 export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  color: #397B65;
+  color: ${({ theme }) => theme.link.main};
   cursor: pointer;
   border: none;
   background-color: transparent;

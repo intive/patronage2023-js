@@ -9,9 +9,7 @@ export const Background = ({
   className,
 }: BackgroundProps) => {
   return (
-    <BackgroundStyled>
-      withoutPattern={withoutPattern}
-      className={className}>
+    <BackgroundStyled withoutPattern={withoutPattern} className={className}>
       {children}
     </BackgroundStyled>
   );
