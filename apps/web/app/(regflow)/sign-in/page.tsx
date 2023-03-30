@@ -9,15 +9,14 @@ import { z } from "zod";
 
 const FormWrapper = styled.div`
   margin: 0 auto;
-  padding-top: 8rem;
+  padding-top: 6rem;
   width: 416px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   @media (max-width: 767px) {
-    width: 100%;
-    padding-top: 7rem;
+    width: 312px;
   }
 `;
 
@@ -64,16 +63,14 @@ export default function SignInPage() {
         values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
           ? router.push("/home")
           : setErrMsg("Invalid credentials. Please try again.");
-      }}
-    >
+      }}>
       {({ submit, errors }) => (
         <FormWrapper>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               submit();
-            }}
-          >
+            }}>
             {errMsg && (
               <ErrorWrapper>
                 <ErrorMessage message={errMsg} onClose={closeErrorMessage} />
@@ -83,8 +80,7 @@ export default function SignInPage() {
               <Field
                 name="email"
                 initialValue={""}
-                onBlurValidate={z.string().email("This is not a valid email")}
-              >
+                onBlurValidate={z.string().email("This is not a valid email")}>
                 {({ value, setValue, onBlur, errors }) => (
                   <InputWrapper>
                     <Input
@@ -97,8 +93,10 @@ export default function SignInPage() {
                       onBlur={onBlur}
                       hasError={errors.length > 0}
                     />
-                    {errors.map(error => <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>)}
-                    </InputWrapper>
+                    {errors.map((error) => (
+                      <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>
+                    ))}
+                  </InputWrapper>
                 )}
               </Field>
               <Field
@@ -106,8 +104,7 @@ export default function SignInPage() {
                 initialValue={""}
                 onBlurValidate={z
                   .string()
-                  .min(3, "Password must have at least 3 characters")}
-              >
+                  .min(3, "Password must have at least 3 characters")}>
                 {({ value, setValue, onBlur, errors }) => (
                   <InputWrapper>
                     <Input
@@ -120,8 +117,10 @@ export default function SignInPage() {
                       onBlur={onBlur}
                       hasError={errors.length > 0}
                     />
-                    {errors.map(error => <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>)}
-                    </InputWrapper>
+                    {errors.map((error) => (
+                      <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>
+                    ))}
+                  </InputWrapper>
                 )}
               </Field>
             </FieldsWrapper>

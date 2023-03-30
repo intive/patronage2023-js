@@ -47,7 +47,7 @@ export default function RegFlowLayout({ children }: LayoutProps) {
   };
 
   return (
-    <Background>
+    <BackgroundFlex>
       <PageContainerStyled>
         <ContentStyled>
           <SectionStyled>
@@ -60,26 +60,31 @@ export default function RegFlowLayout({ children }: LayoutProps) {
           </FormWrapperStyled>
         </ContentStyled>
       </PageContainerStyled>
-    </Background>
+    </BackgroundFlex>
   );
 }
 
+const BackgroundFlex = styled(Background)`
+  display: flex;
+`;
+
 const PageContainerStyled = styled.div`
-  height: 100%;
+  min-height: 100%;
+  display: flex;
+  width: 100%;
   @media ${device.desktop} {
-    margin: 0 auto;
     max-width: 1080px;
   }
 `;
 
 const ContentStyled = styled.div`
-  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   @media ${device.desktop} {
     flex-direction: row;
-    margin: 0 auto;
   }
 `;
 
@@ -100,16 +105,10 @@ const SectionStyled = styled.div`
 
 const FormWrapperStyled = styled.div`
   overflow-x: auto;
-  height: 100%;
   padding: 8px;
 
   @media ${device.desktop} {
     width: 50%;
-    min-height: 100%;
-    padding: 12% 2%;
-  }
-  @media ${device.desktopLowHeight} {
-    padding: 2% 2%;
   }
 `;
 
@@ -140,5 +139,4 @@ const ParagraphStyled = styled.p`
 
 const CustomCard = styled(Card)`
   padding: 1em;
-  min-height: 100%;
 `;
