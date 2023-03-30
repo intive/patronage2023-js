@@ -2,7 +2,6 @@
 
 import styled from "styled-components";
 import { Card } from "ui";
-import "../../css/global.css"
 
 const CardWrapperStyled = styled.div`
     display:flex;

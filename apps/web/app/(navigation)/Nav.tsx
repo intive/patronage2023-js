@@ -30,8 +30,8 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <Icon icon={"notifications"} color={"white"}/>
-        <Avatar src="..avatar.png" outlined />
+        <Icon icon="notifications" color="white" />
+        <AvatarStyled src="/avatar.svg" outlined />
       </ActionWrapper>
     </NavBar>
   );

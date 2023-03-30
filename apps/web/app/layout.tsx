@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-head-element */
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
+import "../app/css/global.css"
 
 export type LayoutProps = {
   children: React.ReactNode;
