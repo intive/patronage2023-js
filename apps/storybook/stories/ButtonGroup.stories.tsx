@@ -70,7 +70,7 @@ Primary.args = {
       onSelect: () => {
         console.log("Option 3 selected");
       },
-      id: "expanses",
+      id: "expenses",
     },
   ],
   secondary: false,
@@ -92,7 +92,7 @@ Secondary.args = {
         console.log("Option 2 selected");
       },
       defaultChecked: true,
-      id: "expanses",
+      id: "expenses",
     },
   ],
   secondary: true,
