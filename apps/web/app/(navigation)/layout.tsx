@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   min-height:100%;
 `
-const Main = styled.div`
+const Main = styled.main`
   display: flex;
   justify-content: space-between;
   flex-grow:1;

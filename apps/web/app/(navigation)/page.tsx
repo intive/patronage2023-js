@@ -18,6 +18,10 @@ const CardWrapperStyled = styled.div`
     height:100%;
     background-color:#E5E5E5;
 `
+const CardStyled = styled(Card)`
+    min-width: 95%;
+    min-height: 95%;
+`
 const LinkStyled = styled(Link)`
     align-self: flex-start;
     margin-top:23%;
@@ -30,9 +34,9 @@ const LinkStyled = styled(Link)`
 export default function CreateAccountPage() {
     return (
         <CardWrapperStyled>
-            <Card className="card-styled">
+            <CardStyled>
                 <LinkStyled href="/home">Create my free account!</LinkStyled>
-            </Card>
+            </CardStyled>
         </CardWrapperStyled>
     )
 }

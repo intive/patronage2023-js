@@ -11,6 +11,10 @@ const CardWrapperStyled = styled.div`
     background-color:#E5E5E5;
     height:100%;
 `
+const CardStyled = styled(Card)`
+    min-width: 95%;
+    min-height: 95%;
+`
 const TypoStyled = styled.h1`
     align-self: flex-start;
     margin-top:23%;
@@ -21,9 +25,9 @@ const TypoStyled = styled.h1`
 export default function WelcomePage() {
     return (
         <CardWrapperStyled>
-            <Card className="card-styled">
+            <CardStyled>
                 <TypoStyled>Welcome to Inbudget</TypoStyled>
-            </Card>
+            </CardStyled>
         </CardWrapperStyled>
     )
 }
