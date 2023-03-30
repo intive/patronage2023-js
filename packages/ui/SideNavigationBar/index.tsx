@@ -31,7 +31,7 @@ export const SideNavigationBar = ({
 const SideNavigationBarStyled = styled.ul<SideNavigationBarProps>`
   display: inline-flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
   padding: 0;
