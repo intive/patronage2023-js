@@ -30,14 +30,8 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-<<<<<<< HEAD:apps/web/app/Nav.tsx
-        <LinkStyled href="/">Home</LinkStyled>{" "}
-        <LinkStyled href="/users">Users</LinkStyled>
-        <LinkStyled href="/log-in">LogIn</LinkStyled>
-=======
         <Icon icon="notifications" color="white" />
         <AvatarStyled src="/avatar.svg" outlined />
->>>>>>> e23198fbd32e98d7ddc53a38d1f11060d96f7e5d:apps/web/app/(navigation)/Nav.tsx
       </ActionWrapper>
     </NavBar>
   );

@@ -62,7 +62,7 @@ export default function SignInPage() {
     <Form
       onSubmit={(values) => {
         values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
-          ? router.push("/")
+          ? router.push("/home")
           : setErrMsg("Invalid credentials. Please try again.");
       }}
     >
