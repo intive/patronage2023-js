@@ -1,21 +1,30 @@
 "use client";
 import { Fragment, ReactNode } from "react";
 import styled, { css } from "styled-components";
-import "material-symbols";
-import React from "react";
+
+interface InputProps {
+  component: ReactNode;
+  onSelect: () => void;
+  defaultChecked?: boolean;
+}
+
+type GroupProps = {
+  options: InputProps[];
+  secondary?: boolean;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const ButtonGroup = ({ options, secondary }: GroupProps) => {
   return (
     <ButtonGroupStyled options={options} secondary={secondary}>
-      {options.map(({ component, onSelect }, index) => {
+      {options.map(({ component, onSelect, defaultChecked }, index) => {
         return (
           <Fragment key={`group-${index}`}>
             <input
               type={"radio"}
               id={`button-${index}`}
-              key={`input-${index}`}
               onClick={onSelect}
               name={"button-group"}
+              defaultChecked={defaultChecked}
             />
             <label key={`index-${index}`} htmlFor={`button-${index}`}>
               {component}
@@ -26,16 +35,6 @@ export const ButtonGroup = ({ options, secondary }: GroupProps) => {
     </ButtonGroupStyled>
   );
 };
-
-interface InputProps {
-  component: ReactNode;
-  onSelect: () => void;
-}
-
-type GroupProps = {
-  options: InputProps[];
-  secondary?: boolean;
-} & React.HTMLProps<HTMLDivElement>;
 
 const ButtonGroupStyled = styled.div<GroupProps>`
   display: flex;
