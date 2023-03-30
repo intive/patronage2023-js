@@ -9,7 +9,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof ButtonGroup>;
 
-const FullWidth: ComponentStory<typeof ButtonGroup> = args => (
+const FullWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   <div>
     <p>
       This component <u>always</u> fills parent. Both height and width.
@@ -18,7 +18,7 @@ const FullWidth: ComponentStory<typeof ButtonGroup> = args => (
   </div>
 );
 
-const FixedWidth: ComponentStory<typeof ButtonGroup> = args => (
+const FixedWidth: ComponentStory<typeof ButtonGroup> = (args) => (
   <>
     <p>Parent has fixed width (300px) and component is secondary.</p>
     <div
@@ -31,7 +31,7 @@ const FixedWidth: ComponentStory<typeof ButtonGroup> = args => (
   </>
 );
 
-const FullHeight: ComponentStory<typeof ButtonGroup> = args => (
+const FullHeight: ComponentStory<typeof ButtonGroup> = (args) => (
   <>
     <p>
       It also takes icons from material-symbol library. In this example parent
@@ -56,18 +56,21 @@ Primary.args = {
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "all",
     },
     {
       component: "Income",
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      id: "income",
     },
     {
       component: "Expenses",
       onSelect: () => {
         console.log("Option 3 selected");
       },
+      id: "expanses",
     },
   ],
   secondary: false,
@@ -81,6 +84,7 @@ Secondary.args = {
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "income",
     },
     {
       component: "Expenses",
@@ -88,6 +92,7 @@ Secondary.args = {
         console.log("Option 2 selected");
       },
       defaultChecked: true,
+      id: "expanses",
     },
   ],
   secondary: true,
@@ -102,12 +107,14 @@ Icons.args = {
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "bar_chart",
     },
     {
       component: <Icon icon="area_chart" />,
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      id: "area_chart",
     },
   ],
   secondary: true,
