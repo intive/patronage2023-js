@@ -54,8 +54,7 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
   &:disabled {
     border: 2px solid lightgray;
-    //TODO: fix color - was testing functionality
-    background-color: ${({ theme }) => theme.button.primary};
+    background-color: lightgray;
     cursor: not-allowed;
   }
 
