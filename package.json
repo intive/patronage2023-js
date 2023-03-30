@@ -24,6 +24,8 @@
   },
   "packageManager": "npm@8.5.0",
   "dependencies": {
-    "material-symbols": "^0.5.0"
+    "houseform": "^1.9.0",
+    "material-symbols": "^0.5.0",
+    "zod": "^3.21.4"
   }
 }

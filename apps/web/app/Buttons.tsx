@@ -1,9 +1,12 @@
 "use client";
 
 import { Button, Icon } from "ui";
+import { useRouter } from "next/navigation";
+
 import "material-symbols";
 
 export default function Buttons() {
+  const router = useRouter();
   return (
     <>
       <Button onClick={() => alert("Hello")}>Hello</Button>
@@ -18,6 +21,7 @@ export default function Buttons() {
         Create
         <Icon icon="arrow_drop_down" color="white" iconSize={30} />
       </Button>
+      <Button onClick={() => router.push("/sign-in")}>Sign In</Button>
     </>
   );
 }

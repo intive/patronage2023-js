@@ -8,6 +8,6 @@ export { Chip } from "./Chip";
 export { Logo } from "./Logo";
 export { ErrorMessage } from "./ErrorMessage";
 export { Background } from "./Background";
-export { Input } from "./Input";
 export { LinkComponent } from "./Link";
+export { Input } from "./Input";
 export { Avatar } from "./Avatar"
