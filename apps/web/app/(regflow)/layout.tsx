@@ -108,6 +108,9 @@ const FormWrapperStyled = styled.div`
     min-height: 100%;
     padding: 12% 2%;
   }
+  @media ${device.desktopLowHeight} {
+    padding: 2% 2%;
+  }
 `;
 
 const H1Styled = styled.h1`
