@@ -1,4 +1,5 @@
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
+import { styled } from "ui/theme";
 
 export type AvatarProps = {
   username?: string;
@@ -17,7 +18,7 @@ const Image = styled.img<AvatarProps>`
   ${({ outlined }) =>
     outlined &&
     css`
-      border: 2px solid white;
+      border: 2px solid ${({ theme }) => theme.avatar.outline};
     `}
 `;
 

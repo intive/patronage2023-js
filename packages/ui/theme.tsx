@@ -34,8 +34,29 @@ const colors = {
 };
 
 export const theme = {
+  avatar: {
+    outline: colors.BasicWhite,
+  },
+  background: {
+    background: colors.Teal10,
+  },
   button: {
-    primary: `lightgray`,
+    primary: {
+      main: colors.Teal10,
+      hover: colors.Teal7,
+      disabled: colors.Teal4,
+    },
+    secondary: {
+      main: colors.Teal10,
+      background: colors.BasicWhite,
+      hover: colors.Teal7,
+      disabled: colors.Teal4,
+    },
+    simple: {
+      main: colors.Teal6,
+      background: colors.BasicWhite,
+      disabled: colors.Teal4,
+    },
   },
 };
 

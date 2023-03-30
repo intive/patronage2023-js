@@ -22,16 +22,3 @@ BackgroundWithoutPattern.args = {
   children: <Button>Normal</Button>,
   withoutPattern: true,
 };
-
-export const BackgroundPatternBgColor = Template.bind({});
-BackgroundPatternBgColor.args = {
-  children: <Button>Normal</Button>,
-  bgColor: "#ffb52d",
-};
-
-export const BackgroundWithoutPatternWithBgColor = Template.bind({});
-BackgroundWithoutPatternWithBgColor.args = {
-  children: <Button>Normal</Button>,
-  bgColor: "#ffb52d",
-  withoutPattern: true,
-};

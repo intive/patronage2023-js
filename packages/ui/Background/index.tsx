@@ -1,21 +1,20 @@
 "use client";
 
-import styled, { css } from "styled-components";
+import { css } from "styled-components";
+import { styled } from "ui/theme";
 
 export const Background = ({
   children,
   withoutPattern = false,
-  bgColor = "#1e4c40",
 }: BackgroundProps) => {
   return (
-    <BackgroundStyled bgColor={bgColor} withoutPattern={withoutPattern}>
+    <BackgroundStyled withoutPattern={withoutPattern}>
       {children}
     </BackgroundStyled>
   );
 };
 
 export type BackgroundProps = {
-  bgColor?: string;
   withoutPattern?: boolean;
 } & React.HTMLProps<HTMLDivElement>;
 
@@ -23,7 +22,7 @@ export const BackgroundStyled = styled.div<BackgroundProps>`
   height: 100vh;
   background-position: top 168px center;
   background-repeat: no-repeat;
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ theme }) => theme.background.background};
 
   @media only screen and (min-width: 765px) {
     background-position: right;
