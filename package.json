@@ -15,7 +15,8 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
     "eslint-config-custom": "*",
-    "prettier": "latest",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "2.8.7",
     "turbo": "latest"
   },
   "engines": {
