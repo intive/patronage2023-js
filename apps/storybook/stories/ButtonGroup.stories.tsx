@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { ButtonGroup } from "ui";
+import { ButtonGroup, Icon } from "ui";
 
 export default {
   title: "ButtonGroup",
@@ -56,18 +56,21 @@ Primary.args = {
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "all",
     },
     {
       component: "Income",
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      id: "income",
     },
     {
       component: "Expenses",
       onSelect: () => {
         console.log("Option 3 selected");
       },
+      id: "expenses",
     },
   ],
   secondary: false,
@@ -81,12 +84,15 @@ Secondary.args = {
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "income",
     },
     {
       component: "Expenses",
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      defaultChecked: true,
+      id: "expenses",
     },
   ],
   secondary: true,
@@ -97,16 +103,18 @@ export const Icons = FullHeight.bind({});
 Icons.args = {
   options: [
     {
-      component: <span className="material-symbols-rounded">equalizer</span>,
+      component: <Icon icon="bar_chart" />,
       onSelect: () => {
         console.log("Option 1 selected");
       },
+      id: "bar_chart",
     },
     {
-      component: <span className="material-symbols-rounded">area_chart</span>,
+      component: <Icon icon="area_chart" />,
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      id: "area_chart",
     },
   ],
   secondary: true,
