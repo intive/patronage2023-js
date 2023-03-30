@@ -1,7 +1,7 @@
 "use client"
 
 import styled from "styled-components";
-import Nav from "../Nav"
+import Nav from "../(navigation)/Nav"
 import SideNav from "../SideNavigationBar";
 import { LayoutProps } from "../layout";
 

@@ -21,13 +21,17 @@ const ActionWrapper = styled.div`
   align-items: center;
 `;
 
+const AvatarStyled = styled(Avatar)`
+  height:2.1em;
+  width:2.1em;
+`
 export default function Nav() {
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <Icon icon={"notifications"} color={"white"}/>
-        <Avatar src="../public/avatar.png" outlined={true} />
+        <Icon icon={"notifications"} color={"white"} iconSize={23}/>
+        <AvatarStyled src="/avatar.svg" outlined={true} />
       </ActionWrapper>
     </NavBar>
   );
