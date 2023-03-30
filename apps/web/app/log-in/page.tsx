@@ -36,7 +36,18 @@ const ErrorWrapper = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
-`; 
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const ErrorSuportingMsg = styled.div`
+  position: absolute;
+  top: 60px;
+  color: #b3261e;
+  font-size: small;
+`;
 
 export default function LogInPage() {
   const router = useRouter();
@@ -74,6 +85,7 @@ export default function LogInPage() {
                 onBlurValidate={z.string().email("This is not a valid email")}
               >
                 {({ value, setValue, onBlur, errors }) => (
+                  <InputWrapper>
                     <Input
                       name="email"
                       label="Email"
@@ -83,8 +95,9 @@ export default function LogInPage() {
                       onInputCleared={() => setValue("")}
                       onBlur={onBlur}
                       hasError={errors.length > 0}
-                      supportingLabel={errors}
                     />
+                    {errors.map(error => <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>)}
+                    </InputWrapper>
                 )}
               </Field>
               <Field
@@ -95,6 +108,7 @@ export default function LogInPage() {
                   .min(3, "Password must have at least 3 characters")}
               >
                 {({ value, setValue, onBlur, errors }) => (
+                  <InputWrapper>
                     <Input
                       name="password"
                       type="password"
@@ -104,8 +118,9 @@ export default function LogInPage() {
                       onFocus={closeErrorMessage}
                       onBlur={onBlur}
                       hasError={errors.length > 0}
-                      supportingLabel={errors}
                     />
+                    {errors.map(error => <ErrorSuportingMsg key={error}>{error}</ErrorSuportingMsg>)}
+                    </InputWrapper>
                 )}
               </Field>
             </FieldsWrapper>
