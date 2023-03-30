@@ -27,7 +27,7 @@ export default function Nav() {
       <Logo white />
       <ActionWrapper>
         <Icon icon={"notifications"} color={"white"}/>
-        <Avatar src="../public/avatar.png" outlined={true} />
+        <Avatar src="..avatar.png" outlined />
       </ActionWrapper>
     </NavBar>
   );
