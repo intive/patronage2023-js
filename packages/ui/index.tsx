@@ -1,4 +1,6 @@
 export { Button } from "./Button";
+export { SideNavigationBarItem } from "./SideNavigationBarItem";
+export { SideNavigationBar } from "./SideNavigationBar";
 export { Card } from "./Card";
 export { ButtonGroup } from "./ButtonGroup";
 export { Separator } from "./Separator";
