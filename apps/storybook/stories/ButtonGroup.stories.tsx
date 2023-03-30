@@ -87,6 +87,7 @@ Secondary.args = {
       onSelect: () => {
         console.log("Option 2 selected");
       },
+      defaultChecked: true,
     },
   ],
   secondary: true,
