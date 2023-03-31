@@ -8,10 +8,10 @@ const NavBar = styled.nav`
   display: flex;
   width: 100%;
   background-color: #1e4c40;
-  margin:0;
+  margin: 0;
   padding: 15px 20px 15px 40px;
   justify-content: space-between;
-  z-index:1;
+  z-index: 1;
 `;
 
 const ActionWrapper = styled.div`
@@ -22,9 +22,9 @@ const ActionWrapper = styled.div`
 `;
 
 const AvatarStyled = styled(Avatar)`
-  height:2.1em;
-  width:2.1em;
-`
+  height: 2.1em;
+  width: 2.1em;
+`;
 export default function Nav() {
   return (
     <NavBar>

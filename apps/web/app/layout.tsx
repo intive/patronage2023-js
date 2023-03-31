@@ -1,8 +1,8 @@
-"use client"
+"use client";
 /* eslint-disable @next/next/no-head-element */
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
-import "./css/global.css"
+import "./css/global.css";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -27,9 +27,7 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-        {children}
-        </StyledComponentsRegistry>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
       </body>
     </html>
   );

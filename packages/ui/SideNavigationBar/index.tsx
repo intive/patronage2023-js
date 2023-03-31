@@ -33,7 +33,7 @@ const SideNavigationBarStyled = styled.ul<SideNavigationBarProps>`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
+  margin-top: 0.5%;
   padding: 0;
   list-style: none;
 `;
