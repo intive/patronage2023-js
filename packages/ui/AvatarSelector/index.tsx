@@ -43,6 +43,7 @@ const AvatarGridStyled = styled.div`
   flex-wrap: wrap;
   padding: 1rem;
   gap: 1rem;
+
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
@@ -55,6 +56,13 @@ const AvatarGridStyled = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: nowrap;
+    background: linear-gradient(
+      270deg,
+      #867c7c34 0%,
+      #ffffff 10%,
+      #ffffff 90%,
+      #867c7c34 100%
+    );
   }
 `;
 
