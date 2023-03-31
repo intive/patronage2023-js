@@ -7,7 +7,7 @@ export default function AvatarSelectorDemo() {
   return (
     <div
       style={{
-        width: "440px",
+        width: "480px",
       }}
     >
       <h3>Wybrany awatar: {selectedAvatar || "brak"}</h3>
