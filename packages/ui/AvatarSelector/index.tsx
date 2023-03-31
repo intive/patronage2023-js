@@ -1,89 +1,48 @@
 import styled from "styled-components";
-import Image from "next/image";
-import { useState } from "react";
 import { Avatar } from "../Avatar";
-export const AvatarSelector = () => {
-  const [isDragging, setIsDragging] = useState(false);
 
-  const handleTouchStart = () => {
-    setIsDragging(true);
-  };
+interface AvatarProps {
+  src: string;
+  id: string;
+}
 
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
+interface SelectorProps {
+  avatars: AvatarProps[];
+  selectedAvatar?: string;
+  onSelect: (id: string) => void;
+}
 
+interface ButtonProps {
+  selected: boolean;
+}
+
+export const AvatarSelector = ({
+  avatars,
+  onSelect,
+  selectedAvatar,
+}: SelectorProps) => {
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: "fit-content",
-        border: "2px solid black",
-        borderRadius: "1rem",
-      }}
-    >
-      <Grid
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        //implicitly set isDragging so IDE dont scream at me
-        isDragging={isDragging}
-      >
-        <button onClick={() => console.log(`Avatar 1 selected`)}>
-          <Avatar src="/avatars/1.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 2 selected`)}>
-          <Avatar src="/avatars/2.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 3 selected`)}>
-          <Avatar src="/avatars/3.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 4 selected`)}>
-          <Avatar src="/avatars/4.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 5 selected`)}>
-          <Avatar src="/avatars/5.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 6 selected`)}>
-          <Avatar src="/avatars/6.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 7 selected`)}>
-          <Avatar src="/avatars/7.svg" />
-        </button>
-        <button onClick={() => console.log(`Avatar 8 selected`)}>
-          <Avatar src="/avatars/8.svg" />
-        </button>
-      </Grid>
-    </div>
+    <AvatarGridStyled>
+      {avatars.map(({ src, id }) => (
+        <ButtonStyled
+          key={id}
+          onClick={() => onSelect(id)}
+          selected={selectedAvatar === id}
+        >
+          <Avatar src={src} />
+        </ButtonStyled>
+      ))}
+    </AvatarGridStyled>
   );
 };
 
-interface GridProps {
-  isDragging: boolean;
-  onTouchStart: () => void;
-  onTouchEnd: () => void;
-}
-const Grid = styled.div<GridProps>`
+const AvatarGridStyled = styled.div`
   overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
   gap: 1rem;
-  width: 400px;
-  button {
-    user-select: none;
-    cursor: pointer;
-    border: none;
-    font-size: 88px;
-    height: 1em;
-    padding: 0;
-    background: none;
-    border-radius: 50%;
-  }
-  button:hover {
-    outline: 2px solid #000;
-    outline-offset: 2px;
-  }
-
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
@@ -96,5 +55,21 @@ const Grid = styled.div<GridProps>`
 
   @media (max-width: 768px) {
     flex-wrap: nowrap;
+  }
+`;
+
+const ButtonStyled = styled.button<ButtonProps>`
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  font-size: 88px;
+  height: 1em;
+  padding: 0;
+  background: none;
+  border-radius: 50%;
+  outline-offset: 2px;
+  outline: ${({ selected }) => (selected ? "2px solid #000" : "none")};
+  &:hover {
+    outline: 2px solid #000;
   }
 `;
