@@ -130,10 +130,10 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            color: ${({ theme }) => theme.buttonGroup.secondary.uncheckedColor};
+            color: ${({ theme }) => theme.buttonGroup.secondary.notSelected};
           `
         : css`
-            color: ${({ theme }) => theme.buttonGroup.primary.uncheckedColor};
+            color: ${({ theme }) => theme.buttonGroup.primary.notSelected};
           `}
   }
 `;

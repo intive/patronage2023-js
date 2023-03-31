@@ -30,6 +30,7 @@ const colors = {
   Supporting2: "#FCEFE7",
   Supporting1: "#FCEEED",
   BasicWhite: "#FFFFFF",
+  BasicTransparent: "transparent",
 };
 
 export const theme = {
@@ -47,13 +48,13 @@ export const theme = {
     },
     secondary: {
       main: colors.Teal10,
-      background: colors.BasicWhite,
+      background: colors.BasicTransparent,
       hover: colors.Teal7,
       disabled: colors.Teal4,
     },
     simple: {
       main: colors.Teal6,
-      background: colors.BasicWhite,
+      background: colors.BasicTransparent,
       disabled: colors.Teal4,
     },
   },
@@ -62,12 +63,12 @@ export const theme = {
       main: colors.BasicWhite,
       background: colors.Teal10,
       backgroundAction: colors.Teal7,
-      uncheckedColor: colors.Neutral4,
+      notSelected: colors.Neutral4,
     },
     secondary: {
       main: colors.Teal10,
       border: colors.Neutral4,
-      uncheckedColor: colors.Neutral7,
+      notSelected: colors.Neutral7,
     },
   },
   card: {
