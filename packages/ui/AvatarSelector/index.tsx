@@ -21,11 +21,7 @@ export const AvatarSelector = ({
   selectedAvatar,
 }: SelectorProps) => {
   return (
-    <div
-      style={{
-        position: "relative",
-      }}
-    >
+    <RelativeDiv>
       <AvatarGridStyled>
         {avatars.map(({ src, id }) => (
           <ButtonStyled
@@ -37,7 +33,7 @@ export const AvatarSelector = ({
           </ButtonStyled>
         ))}
       </AvatarGridStyled>
-    </div>
+    </RelativeDiv>
   );
 };
 
@@ -91,6 +87,10 @@ const AvatarGridStyled = styled.div`
       );
     }
   }
+`;
+
+const RelativeDiv = styled.div`
+  position: relative;
 `;
 
 const ButtonStyled = styled.button<ButtonProps>`
