@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Avatar } from "../Avatar";
-
 interface AvatarProps {
   src: string;
   id: string;
@@ -22,26 +21,32 @@ export const AvatarSelector = ({
   selectedAvatar,
 }: SelectorProps) => {
   return (
-    <AvatarGridStyled>
-      {avatars.map(({ src, id }) => (
-        <ButtonStyled
-          key={id}
-          onClick={() => onSelect(id)}
-          selected={selectedAvatar === id}
-        >
-          <Avatar src={src} />
-        </ButtonStyled>
-      ))}
-    </AvatarGridStyled>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
+      <AvatarGridStyled>
+        {avatars.map(({ src, id }) => (
+          <ButtonStyled
+            key={id}
+            onClick={() => onSelect(id)}
+            selected={selectedAvatar === id}
+          >
+            <Avatar src={src} />
+          </ButtonStyled>
+        ))}
+      </AvatarGridStyled>
+    </div>
   );
 };
 
 const AvatarGridStyled = styled.div`
   overflow-x: auto;
-  overflow-y: hidden;
   display: flex;
   flex-wrap: wrap;
-  padding: 1rem;
+  overflow-y: hidden;
+  padding: 2rem;
   gap: 1rem;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -56,18 +61,39 @@ const AvatarGridStyled = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: nowrap;
-    background: linear-gradient(
-      270deg,
-      #867c7c34 0%,
-      #ffffff 10%,
-      #ffffff 90%,
-      #867c7c34 100%
-    );
+
+    &:after,
+    &:before {
+      content: "";
+      width: 36px;
+      height: 100%;
+      top: 0;
+      position: absolute;
+    }
+    &::after {
+      left: 0;
+      background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffffff 33.85%,
+        rgba(255, 255, 255, 0.51) 80.21%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+    &::before {
+      right: 0;
+      background: linear-gradient(
+        270deg,
+        #ffffff 0%,
+        #ffffff 33.85%,
+        rgba(255, 255, 255, 0.51) 80.21%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
   }
 `;
 
 const ButtonStyled = styled.button<ButtonProps>`
-  user-select: none;
   cursor: pointer;
   border: none;
   font-size: 88px;
@@ -77,7 +103,13 @@ const ButtonStyled = styled.button<ButtonProps>`
   border-radius: 50%;
   outline-offset: 2px;
   outline: ${({ selected }) => (selected ? "2px solid #000" : "none")};
-  &:hover {
+
+  &:hover,
+  &:focus {
     outline: 2px solid #000;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 120px;
   }
 `;
