@@ -1,7 +1,8 @@
-import styled, { css, useTheme } from "styled-components";
+import styled, { css, ThemeContext } from "styled-components";
 import { Icon } from "ui";
 import { IconProps } from "../Icon";
 import Link from "next/link";
+import { useContext } from "react";
 
 export type SideNavigationBarItemProps = {
   activeFlag?: boolean;
@@ -24,7 +25,7 @@ export const SideNavigationBarItem = ({
   textValue,
   activeFlag,
 }: SideNavigationBarItemProps) => {
-  const theme = useTheme();
+  const theme = useContext(ThemeContext);
   return (
     <ListItemStyled>
       <LinkStyled href={href}>

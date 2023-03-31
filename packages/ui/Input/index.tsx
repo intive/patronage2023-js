@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import styled, { css, useTheme } from "styled-components";
+import { useState, useRef, useContext } from "react";
+import styled, { css, ThemeContext } from "styled-components";
 
 import { Icon } from "../Icon";
 
@@ -30,7 +30,7 @@ export const Input = ({
   onBlur,
   onInputCleared,
 }: InputProps) => {
-  const theme = useTheme();
+  const theme = useContext(ThemeContext);
   const [typeOverride, setTypeOverride] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
