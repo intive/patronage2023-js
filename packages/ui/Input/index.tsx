@@ -2,11 +2,16 @@
 
 import { useState, useRef, useId } from "react";
 import styled, { css } from "styled-components";
+import { boolean } from "zod";
 
 import { Icon } from "../Icon";
 
 type StyledErrorProps = {
   hasError?: boolean;
+};
+
+type StyledInputProps = {
+  hasSupportingLabel?: boolean;
 };
 
 export type InputProps = {
@@ -86,6 +91,7 @@ export const Input = ({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        hasSupportingLabel={Boolean(supportingLabel)}
       />
       <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
@@ -104,7 +110,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled.input<StyledErrorProps>`
+const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   box-sizing: border-box;
   border: solid 2px #e1e1e1;
   border-radius: 8px;
@@ -114,6 +120,7 @@ const StyledInput = styled.input<StyledErrorProps>`
   caret-color: #515151;
   transition: border-color 200ms ease-out;
   width: 100%;
+  margin-bottom: ${({ hasSupportingLabel }) => (hasSupportingLabel ? "0" : "18px")};
 
   :focus {
     outline: none;
