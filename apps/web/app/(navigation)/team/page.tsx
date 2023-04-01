@@ -1,3 +1,5 @@
+import dictionary from "lib/dictionary";
+
 export default function TeamPage() {
-  return "Team page";
+  return dictionary.TeamPage.title.en;
 }

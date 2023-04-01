@@ -1,3 +1,5 @@
+import dictionary from "lib/dictionary";
+
 export default function ReportsPage() {
-  return "Reports page";
+  return dictionary.ReportsPage.title.en;
 }

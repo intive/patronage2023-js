@@ -1,6 +1,11 @@
-import {CardWrapperStyled,CardStyled,LinkStyled} from "../(navigation)/main-page-components"
+import {
+  CardWrapperStyled,
+  CardStyled,
+  LinkStyled,
+} from "../(navigation)/main-page-components";
 import { TypoStyled } from "./home/page";
 import type { Metadata } from "next";
+import dictionary from "lib/dictionary";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -8,12 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default function CreateAccountPage() {
-    return (
-        <CardWrapperStyled>
-            <CardStyled>
-                    <TypoStyled>Welcome to Inbudget</TypoStyled>
-                    <LinkStyled href="/sign-in">Create my free account!</LinkStyled>
-            </CardStyled>
-        </CardWrapperStyled>
-    )
+  const t = dictionary.CreateAccountPage;
+  return (
+    <CardWrapperStyled>
+      <CardStyled>
+        <TypoStyled>{t.welcomeText.en}</TypoStyled>
+        <LinkStyled href="/sign-in">{t.createAccountLink.en}</LinkStyled>
+      </CardStyled>
+    </CardWrapperStyled>
+  );
 }

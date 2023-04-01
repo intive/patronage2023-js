@@ -3,12 +3,15 @@
 import { device } from "lib/css-variables";
 import styled from "styled-components";
 import { Background, Card, Logo } from "ui";
+import dictionary from "lib/dictionary";
 
 import { usePathname } from "next/navigation";
 
 export type LayoutProps = {
   children: React.ReactNode;
 };
+
+const t = dictionary.RegFlowLayout;
 
 type leftColumnText = {
   signIn: {
@@ -23,12 +26,12 @@ type leftColumnText = {
 
 const leftColumnText = {
   signIn: {
-    h1: "Log in with your email",
-    p: "Use your email to log in to your team workspace",
+    h1: t.signIn.h1.en,
+    p: t.signIn.paragraph.en,
   },
   signUp: {
-    h1: "Get started with your free account today",
-    p: "No credit card required",
+    h1: t.signUp.h1.en,
+    p: t.signUp.paragraph.en,
   },
 };
 

@@ -1,3 +1,5 @@
+import dictionary from "lib/dictionary";
+
 export default function SettingsPage() {
-  return "Settings page";
+  return dictionary.SettingsPage.title.en;
 }

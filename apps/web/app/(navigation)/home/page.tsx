@@ -1,30 +1,31 @@
-"use client"
+"use client";
 
 import styled from "styled-components";
 import { Card } from "ui";
+import dictionary from "lib/dictionary";
 
 const CardWrapperStyled = styled.div`
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background-color:#E5E5E5;
-    height:100%;
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+  height: 100%;
+`;
 const CardStyled = styled(Card)`
-    min-width: 95%;
-    min-height: 95%;
-`
+  min-width: 95%;
+  min-height: 95%;
+`;
 export const TypoStyled = styled.h1`
-    font-family: "Signika", sans-serif;
-    font-size: 3.5em;
-    color: #1E4C40;
-`
+  font-family: "Signika", sans-serif;
+  font-size: 3.5em;
+  color: #1e4c40;
+`;
 export default function WelcomePage() {
-    return (
-        <CardWrapperStyled>
-            <CardStyled>
-                <TypoStyled>Welcome to Inbudget</TypoStyled>
-            </CardStyled>
-        </CardWrapperStyled>
-    )
+  return (
+    <CardWrapperStyled>
+      <CardStyled>
+        <TypoStyled>{dictionary.HomePage.welcomeText.en}</TypoStyled>
+      </CardStyled>
+    </CardWrapperStyled>
+  );
 }

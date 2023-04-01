@@ -1,3 +1,5 @@
+import dictionary from "lib/dictionary";
+
 export default function BudgetsPage() {
-  return "Budgets page";
+  return dictionary.BudgetsPage.title.en;
 }

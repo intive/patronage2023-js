@@ -1,7 +1,9 @@
+import dictionary from "lib/dictionary";
+
 export default function SignInPage() {
   return (
     <div>
-      <p>Hello from Sign-Up page</p>
+      <p>{dictionary.SignUpPage.paragraph.en}</p>
     </div>
   );
 }
