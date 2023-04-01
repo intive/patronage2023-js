@@ -37,3 +37,4 @@ export const parameters = {
    defaultTheme: 'default',
    Provider: ThemeProvider
  })]
+ 
