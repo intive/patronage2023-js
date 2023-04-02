@@ -74,8 +74,4 @@ export const CustomCard = styled(Card)`
   @media ${device.desktop} {
     padding: 3rem;
   }
-
-  @media ${device.large} {
-    padding: 3rem 112px;
-  }
 `;
