@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useRef, useId } from "react";
+import { useState, useRef } from "react";
 import styled, { css } from "styled-components";
-import { boolean } from "zod";
 
 import { Icon } from "../Icon";
 
@@ -43,11 +42,10 @@ export const Input = ({
       return (
         <StyledIcon
           onClick={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             setTypeOverride(typeOverride ? "" : "text");
             inputRef.current?.focus();
-          }}
-        >
+          }}>
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
             color={hasError ? "#b3261e" : "#397B65"}
@@ -69,14 +67,16 @@ export const Input = ({
           onClick={() => {
             onInputCleared();
             inputRef.current?.focus();
-          }}
-        >
+          }}>
           <Icon icon="cancel" color="#397B65" iconSize={20} />
         </StyledIcon>
       );
     }
     return null;
   };
+
+  const errorId =
+    hasError && supportingLabel ? `${id || name}-error-message` : undefined;
 
   return (
     <Wrapper>
@@ -92,13 +92,15 @@ export const Input = ({
         onFocus={onFocus}
         onBlur={onBlur}
         hasSupportingLabel={Boolean(supportingLabel)}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-errormessage={errorId}
       />
       <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
       </StyledLabel>
       {getButton()}
       {supportingLabel && (
-        <StyledSupportingLabel hasError={hasError}>
+        <StyledSupportingLabel hasError={hasError} id={errorId}>
           {supportingLabel}
         </StyledSupportingLabel>
       )}
@@ -120,7 +122,8 @@ const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   caret-color: #515151;
   transition: border-color 200ms ease-out;
   width: 100%;
-  margin-bottom: ${({ hasSupportingLabel }) => (hasSupportingLabel ? "0" : "18px")};
+  margin-bottom: ${({ hasSupportingLabel }) =>
+    hasSupportingLabel ? "0" : "18px"};
 
   :focus {
     outline: none;
@@ -174,7 +177,7 @@ const StyledIcon = styled.button`
   top: 18px;
   border: none;
   background: none;
-  cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};;
+  cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};
   padding: 0;
   line-height: 0;
 `;
