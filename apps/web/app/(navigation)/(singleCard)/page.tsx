@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TypoStyled, LinkStyled } from "./HomePage";
+import { TypoStyled, LinkStyled } from "../HomePage";
 
 export const metadata: Metadata = {
   title: "Home",

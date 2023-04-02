@@ -9,7 +9,7 @@ const NavBar = styled.nav`
   width: 100%;
   background-color: #1e4c40;
   margin: 0;
-  padding: 15px 20px 15px 40px;
+  padding: 15px 15px;
   justify-content: space-between;
   z-index: 1;
 `;
