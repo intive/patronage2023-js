@@ -9,7 +9,6 @@ import {
   CustomCard,
   FormWrapperStyled,
   H1Styled,
-  PageContainerStyled,
   ParagraphStyled,
   SectionStyled,
 } from "./layout.styles";
@@ -56,18 +55,16 @@ export default function RegFlowLayout({ children }: LayoutProps) {
 
   return (
     <BackgroundFlex>
-      <PageContainerStyled>
-        <ContentStyled>
-          <SectionStyled>
-            <Logo logoWidth={138} white />
-            <H1Styled>{getLeftColumnText("h1")}</H1Styled>
-            <ParagraphStyled>{getLeftColumnText("p")}</ParagraphStyled>
-          </SectionStyled>
-          <FormWrapperStyled>
-            <CustomCard>{children}</CustomCard>
-          </FormWrapperStyled>
-        </ContentStyled>
-      </PageContainerStyled>
+      <ContentStyled>
+        <SectionStyled>
+          <Logo logoWidth={138} white />
+          <H1Styled>{getLeftColumnText("h1")}</H1Styled>
+          <ParagraphStyled>{getLeftColumnText("p")}</ParagraphStyled>
+        </SectionStyled>
+        <FormWrapperStyled>
+          <CustomCard>{children}</CustomCard>
+        </FormWrapperStyled>
+      </ContentStyled>
     </BackgroundFlex>
   );
 }
