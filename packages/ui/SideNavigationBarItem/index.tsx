@@ -1,7 +1,8 @@
-import styled, { css } from "styled-components";
+import styled, { css, ThemeContext } from "styled-components";
 import { Icon } from "ui";
 import { IconProps } from "../Icon";
 import Link from "next/link";
+import { useContext } from "react";
 
 export type SideNavigationBarItemProps = {
   activeFlag?: boolean;
@@ -24,6 +25,7 @@ export const SideNavigationBarItem = ({
   textValue,
   activeFlag,
 }: SideNavigationBarItemProps) => {
+  const theme = useContext(ThemeContext);
   return (
     <ListItemStyled>
       <LinkStyled href={href}>
@@ -31,7 +33,11 @@ export const SideNavigationBarItem = ({
           <Icon
             icon={icon}
             iconSize={30}
-            color={activeFlag ? "#1e4c40" : "#7e7e7e"}
+            color={
+              activeFlag
+                ? theme.sideNavigationBarItem.main
+                : theme.sideNavigationBarItem.inactive
+            }
           />
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
           {activeFlag && <DivStyled />}
@@ -69,7 +75,10 @@ const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemState>`
   width: 60px;
 
   padding: 7px 14px 7px 14px;
-  color: ${({ activeFlag }) => (activeFlag ? "#1e4c40" : "#7e7e7e")};
+  color: ${({ activeFlag }) =>
+    activeFlag
+      ? ({ theme }) => theme.sideNavigationBarItem.main
+      : ({ theme }) => theme.sideNavigationBarItem.inactive};
 `;
 
 const SpanStyled = styled.span<SpanProps>`
@@ -85,7 +94,7 @@ const DivStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #459175;
+  background-color: ${({ theme }) => theme.sideNavigationBarItem.background};
   height: 100%;
   width: 4px;
   border-radius: 0 8px 8px 0;

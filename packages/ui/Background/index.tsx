@@ -5,21 +5,16 @@ import styled, { css } from "styled-components";
 export const Background = ({
   children,
   withoutPattern = false,
-  bgColor = "#1e4c40",
   className,
 }: BackgroundProps) => {
   return (
-    <BackgroundStyled
-      bgColor={bgColor}
-      withoutPattern={withoutPattern}
-      className={className}>
+    <BackgroundStyled withoutPattern={withoutPattern} className={className}>
       {children}
     </BackgroundStyled>
   );
 };
 
 export type BackgroundProps = {
-  bgColor?: string;
   withoutPattern?: boolean;
 } & React.HTMLProps<HTMLDivElement>;
 
@@ -27,7 +22,7 @@ export const BackgroundStyled = styled.div<BackgroundProps>`
   min-height: 100%;
   background-position: top 168px center;
   background-repeat: no-repeat;
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ theme }) => theme.background.background};
 
   @media only screen and (min-width: 765px) {
     background-position: right;
