@@ -36,6 +36,8 @@ const getSubMenusStateAfterClick = (temporaryStateObj: any, index: number) => {
     if (key !== `${index}`) temporaryStateObj[key] = false;
   });
   temporaryStateObj[`${index}`] = !temporaryStateObj[`${index}`];
+
+  return temporaryStateObj;
 };
 
 export const SideNavigationBar = ({
