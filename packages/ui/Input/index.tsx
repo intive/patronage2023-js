@@ -41,8 +41,8 @@ export const Input = ({
     if (type === "password") {
       return (
         <StyledIcon
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={(event) => {
+            event.preventDefault();
             setTypeOverride(typeOverride ? "" : "text");
             inputRef.current?.focus();
           }}>
@@ -64,7 +64,8 @@ export const Input = ({
     if (value && onInputCleared) {
       return (
         <StyledIcon
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             onInputCleared();
             inputRef.current?.focus();
           }}>
