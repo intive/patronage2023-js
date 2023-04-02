@@ -1,35 +1,20 @@
 import styled, { css, ThemeContext } from "styled-components";
-import { Icon } from "ui";
-import { IconProps } from "../Icon";
 import Link from "next/link";
+import { IconProps } from "../../Icon";
+import { Icon } from "../../Icon";
 import { useContext } from "react";
 
-export type SideNavigationBarItemProps = {
-  activeFlag?: boolean;
-  href: string;
-  textValue: string;
-} & React.HTMLProps<HTMLDivElement> &
-  IconProps;
-
-type SpanProps = {
-  fontSize: number;
-} & React.HTMLProps<HTMLSpanElement>;
-
-interface SideNavigationBarItemState {
-  activeFlag?: boolean;
-}
-
-export const SideNavigationBarItem = ({
+export const SideNavigationBarLink = ({
   href,
   icon,
   textValue,
   activeFlag,
-}: SideNavigationBarItemProps) => {
+}: SideNavigationBarLinkProps) => {
   const theme = useContext(ThemeContext);
   return (
     <ListItemStyled>
       <LinkStyled href={href}>
-        <SideNavigationBarItemStyled activeFlag={activeFlag}>
+        <Wrapper>
           <Icon
             icon={icon}
             iconSize={30}
@@ -41,10 +26,25 @@ export const SideNavigationBarItem = ({
           />
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
           {activeFlag && <DivStyled />}
-        </SideNavigationBarItemStyled>
+        </Wrapper>
       </LinkStyled>
     </ListItemStyled>
   );
+};
+
+type SideNavigationBarLinkProps = {
+  href: string;
+  textValue: string;
+  activeFlag: boolean;
+} & React.HTMLProps<HTMLAnchorElement> &
+  IconProps;
+
+type SpanProps = {
+  fontSize: number;
+} & React.HTMLProps<HTMLSpanElement>;
+
+type SideNavigationBarLinkState = {
+  activeFlag?: boolean;
 };
 
 const ListItemStyled = styled.li`
@@ -63,7 +63,7 @@ const LinkStyled = styled(Link)`
   }
 `;
 
-const SideNavigationBarItemStyled = styled.div<SideNavigationBarItemState>`
+const Wrapper = styled.div<SideNavigationBarLinkState>`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
