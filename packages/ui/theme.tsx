@@ -116,6 +116,9 @@ export const theme = {
     inactive: colors.Neutral6,
     background: colors.Teal7,
   },
+  avatarSelector: {
+    active: colors.Teal6,
+  },
 };
 
 export type ThemeType = typeof theme;
