@@ -27,8 +27,7 @@ export const AvatarSelector = ({
           <ButtonStyled
             key={id}
             onClick={() => onSelect(id)}
-            selected={selectedAvatar === id}
-          >
+            selected={selectedAvatar === id}>
             <Avatar src={src} />
           </ButtonStyled>
         ))}
@@ -46,13 +45,15 @@ const AvatarGridStyled = styled.div`
   gap: 1rem;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  /* Hide scrollbar for IE, Edge and Firefox */
-  & {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  @media (hover: none) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    & {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
   }
 
   @media (max-width: 768px) {
@@ -102,11 +103,12 @@ const ButtonStyled = styled.button<ButtonProps>`
   background: none;
   border-radius: 50%;
   outline-offset: 2px;
-  outline: ${({ selected }) => (selected ? "2px solid #000" : "none")};
+  outline: ${({ selected, theme }) =>
+    selected ? `2px solid ${theme.avatarSelector.active}` : "none"};
 
   &:hover,
   &:focus {
-    outline: 2px solid #000;
+    outline: ${({ theme }) => `2px solid ${theme.avatarSelector.active}`};
   }
 
   @media (max-width: 768px) {
