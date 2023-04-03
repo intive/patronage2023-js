@@ -68,7 +68,6 @@ export const H1Styled = styled.h1`
 `;
 
 export const ParagraphStyled = styled.p`
-  font-family: "Inter", sans-serif;
   margin-top: 8px;
   font-size: 14px;
   line-height: 20px;
@@ -82,7 +81,6 @@ export const ParagraphStyled = styled.p`
 `;
 
 export const CustomCard = styled(Card)`
-  font-family: "Inter", sans-serif;
   padding: 1.5rem;
 
   ${device.desktop} {

@@ -29,7 +29,7 @@ export const BackgroundStyled = styled.div<BackgroundProps>`
   background-repeat: no-repeat;
   background-color: ${({ bgColor }) => bgColor};
 
-  @media only screen and (min-width: 765px) {
+  @media only screen and (min-width: 768px) {
     background-position: right;
   }
 
