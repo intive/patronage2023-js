@@ -64,7 +64,8 @@ export const ParagraphStyled = styled.p`
   line-height: 20px;
   margin-bottom: 24px;
 
- ${device.desktop} {
+  ${device.desktop} {
+    font-size: 1rem;
     line-height: 1.5rem;
     margin-top: 1rem;
   }
