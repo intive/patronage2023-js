@@ -69,9 +69,7 @@ export const SideNavigationBar = ({
       })
     ) {
       hideSubMenu();
-      return setIsSpecSubMenuShown(
-        getSubMenusStateAfterClick(temporaryStateObj, index)
-      );
+      return;
     }
 
     // Deactivate all side nav bar items apart from the one that has just been clicked
@@ -83,6 +81,7 @@ export const SideNavigationBar = ({
   const hideSubMenu = () => {
     setSubMenuData({});
     setIsSubMenuShown(false);
+    setIsSpecSubMenuShown(initiateSubMenusState(items));
   };
 
   return (
@@ -104,6 +103,7 @@ export const SideNavigationBar = ({
               icon={icon}
               textValue={textValue}
               activeFlag={href === pathname}
+              onClick={() => hideSubMenu()}
             />
           );
         })}
@@ -129,5 +129,5 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   background-color: ${({ isSubMenuShown }) =>
     isSubMenuShown ? "white" : "#e5e5e5"};
   /* Is it a correct way to make a gap between Nav and SideNav? */
-  padding-top: 20px;
+  padding-top: 40px;
 `;

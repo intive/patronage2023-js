@@ -9,11 +9,12 @@ export const SideNavigationBarLink = ({
   icon,
   textValue,
   activeFlag,
+  onClick,
 }: SideNavigationBarLinkProps) => {
   const theme = useContext(ThemeContext);
   return (
     <ListItemStyled>
-      <LinkStyled href={href}>
+      <LinkStyled href={href} onClick={onClick}>
         <Wrapper>
           <Icon
             icon={icon}
@@ -36,6 +37,7 @@ type SideNavigationBarLinkProps = {
   href: string;
   textValue: string;
   activeFlag: boolean;
+  onClick: Function;
 } & React.HTMLProps<HTMLAnchorElement> &
   IconProps;
 
@@ -74,7 +76,7 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   height: auto;
   width: 60px;
 
-  padding: 7px 14px 7px 14px;
+  padding: 17px 34px 17px 34px;
   color: ${({ activeFlag }) =>
     activeFlag
       ? ({ theme }) => theme.sideNavigationBarItem.main

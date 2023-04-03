@@ -15,7 +15,7 @@ const SubMenuStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  padding: 10px 20px;
+  padding: 40px 16px 24px 16px;
   box-shadow: 10px 10px;
 `;
 

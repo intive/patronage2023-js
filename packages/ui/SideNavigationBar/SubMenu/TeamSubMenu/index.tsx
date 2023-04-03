@@ -14,7 +14,7 @@ export const TeamSubMenu = ({
     <>
       <MainDiv>
         <HeaderStyled>
-          <h3>{title}</h3>
+          <Title>{title}</Title>
           <Icon icon="filter_list" />
         </HeaderStyled>
         <SearchInput searchInput={searchInput} />
@@ -50,6 +50,14 @@ const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const Title = styled.span`
+  font-family: "Signika";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
 `;
 
 const MainDiv = styled.div`

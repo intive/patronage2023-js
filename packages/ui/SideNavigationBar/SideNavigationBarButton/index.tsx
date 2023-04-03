@@ -58,7 +58,7 @@ const Wrapper = styled.div<WrapperProps>`
   height: auto;
   width: 60px;
 
-  padding: 7px 14px 7px 14px;
+  padding: 17px 34px 17px 34px;
   color: ${({ activeFlag, theme }) =>
     activeFlag
       ? theme.sideNavigationBarItem.main
