@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useId } from "react";
-import styled, { css } from "styled-components";
+import { useState, useRef, useContext } from "react";
+import styled, { css, ThemeContext } from "styled-components";
 
 import { Icon } from "../Icon";
 
@@ -27,8 +27,10 @@ export const Input = ({
   value,
   onChange,
   onFocus,
+  onBlur,
   onInputCleared,
 }: InputProps) => {
+  const theme = useContext(ThemeContext);
   const [typeOverride, setTypeOverride] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -36,14 +38,14 @@ export const Input = ({
     if (type === "password") {
       return (
         <StyledIcon
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             setTypeOverride(typeOverride ? "" : "text");
             inputRef.current?.focus();
-          }}
-        >
+          }}>
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
-            color={hasError ? "#b3261e" : "#397B65"}
+            color={hasError ? theme.input.error : theme.input.main}
             iconSize={23}
           />
         </StyledIcon>
@@ -52,7 +54,7 @@ export const Input = ({
     if (hasError) {
       return (
         <StyledIcon disabled>
-          <Icon icon="error" filled color="#b3261e" iconSize={20} />
+          <Icon icon="error" filled color={theme.input.error} iconSize={20} />
         </StyledIcon>
       );
     }
@@ -62,9 +64,8 @@ export const Input = ({
           onClick={() => {
             onInputCleared();
             inputRef.current?.focus();
-          }}
-        >
-          <Icon icon="cancel" color="#397B65" iconSize={20} />
+          }}>
+          <Icon icon="cancel" color={theme.input.main} iconSize={20} />
         </StyledIcon>
       );
     }
@@ -83,6 +84,7 @@ export const Input = ({
         value={value}
         onChange={onChange}
         onFocus={onFocus}
+        onBlur={onBlur}
       />
       <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
@@ -102,18 +104,19 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input<StyledErrorProps>`
-  border: solid 2px #e1e1e1;
+  box-sizing: border-box;
+  border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
   padding: 14px 0 14px 14px;
   font-size: 16px;
   line-height: 150%;
-  caret-color: #515151;
+  caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
   width: 100%;
 
   :focus {
     outline: none;
-    border-color: #64ba95;
+    border-color: ${({ theme }) => theme.input.focus};
   }
 
   :focus,
@@ -123,7 +126,7 @@ const StyledInput = styled.input<StyledErrorProps>`
       transform: translateY(-24px);
       font-size: 12px;
       font-weight: 600;
-      background-color: white;
+      background-color: ${({ theme }) => theme.input.labelBackground};
       padding-left: 4px;
       padding-right: 4px;
     }
@@ -132,18 +135,21 @@ const StyledInput = styled.input<StyledErrorProps>`
   ${({ hasError }) =>
     hasError &&
     css`
-      border-color: #b3261e;
-      caret-color: #b3261e;
+      border-color: ${({ theme }) => theme.input.error};
+      caret-color: ${({ theme }) => theme.input.error};
 
       :focus {
-        border-color: #b3261e;
+        border-color: ${({ theme }) => theme.input.error};
       }
     `}
 `;
 
 const StyledLabel = styled.label<StyledErrorProps>`
   position: absolute;
-  color: ${({ hasError }) => (hasError ? "#B3261E" : "#515151")};
+  color: ${({ hasError }) =>
+    hasError
+      ? ({ theme }) => theme.input.error
+      : ({ theme }) => theme.input.neutral};
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -159,18 +165,21 @@ const StyledLabel = styled.label<StyledErrorProps>`
 
 const StyledIcon = styled.button`
   position: absolute;
-  right: -4px;
+  right: 15px;
   top: 18px;
   border: none;
   background: none;
-  cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};;
+  cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};
   padding: 0;
   line-height: 0;
 `;
 
 const StyledSupportingLabel = styled.div<StyledErrorProps>`
-  color: ${({ hasError }) => (hasError ? "#B3261E" : "#49454F")};
+  color: ${({ hasError }) =>
+    hasError
+      ? ({ theme }) => theme.input.error
+      : ({ theme }) => theme.input.neutral};
   font-weight: 400;
   font-size: 12px;
-  margin: 4px 10px 0px 10px;
+  margin: 4px 10px 0 10px;
 `;
