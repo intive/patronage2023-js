@@ -7,7 +7,7 @@ import { TeamSubMenu } from "./TeamSubMenu";
 import { SettingsSubMenu } from "./SettingsSubMenu";
 
 type SubMenuProps = {
-  dataObject: object;
+  dataObject: any;
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`

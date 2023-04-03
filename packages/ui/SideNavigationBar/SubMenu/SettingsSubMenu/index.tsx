@@ -5,8 +5,10 @@ export const SettingsSubMenu = ({ title, items }: SettingsSubMenuProps) => {
     <SettingsSubMenuStyled>
       <h3>{title}</h3>
       <ul>
-        {items.map(({ label }) => (
-          <ListItemStyled>{label}</ListItemStyled>
+        {items.map(({ label }, index) => (
+          <ListItemStyled key={`SettingsListItem-${index}`}>
+            {label}
+          </ListItemStyled>
         ))}
       </ul>
     </SettingsSubMenuStyled>

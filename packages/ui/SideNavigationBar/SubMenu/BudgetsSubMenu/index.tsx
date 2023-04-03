@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "../../../Icon";
-import { Input } from "../../../Input";
 import { Button } from "../../../Button";
+import { SearchInput } from "../../../Input/SearchInput";
 
 export const BudgetsSubMenu = ({
   title,
@@ -9,12 +9,6 @@ export const BudgetsSubMenu = ({
   searchInput,
   items,
 }: BudgetsSubMenuProps) => {
-  const labelContent = (
-    <div>
-      <Icon icon={searchInput.icon} />
-      <span>{searchInput.placeholder}</span>
-    </div>
-  );
   return (
     <>
       <MainDiv>
@@ -22,11 +16,11 @@ export const BudgetsSubMenu = ({
           <h3>{title}</h3>
           <Icon icon="filter_list" />
         </HeaderStyled>
-        <Input label={labelContent} />
+        <SearchInput searchInput={searchInput} />
         <ul>
-          {items.map(({ icon, label, href }) => {
+          {items.map(({ icon, label, href }, index) => {
             return (
-              <ListElementStyled>
+              <ListElementStyled key={`BudgetsListElement-${index}`}>
                 <Icon icon={icon} />
                 <span>{label}</span>
               </ListElementStyled>

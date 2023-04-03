@@ -40,6 +40,13 @@ const getSubMenusStateAfterClick = (temporaryStateObj: any, index: number) => {
   return temporaryStateObj;
 };
 
+const Divider = styled.div`
+  width: 1px;
+  height: inherit;
+  background-color: lightgray;
+  content: " ";
+`;
+
 export const SideNavigationBar = ({
   items,
   pathname,
@@ -77,13 +84,6 @@ export const SideNavigationBar = ({
     setSubMenuData({});
     setIsSubMenuShown(false);
   };
-
-  const Divider = styled.div`
-    width: 1px;
-    height: inherit;
-    background-color: lightgray;
-    content: " ";
-  `;
 
   return (
     <>

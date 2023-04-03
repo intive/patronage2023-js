@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { Icon } from "../../../Icon";
 import { Avatar } from "../../../Avatar";
-import { Input } from "../../../Input";
 import { Button } from "../../../Button";
+import { SearchInput } from "../../../Input/SearchInput";
 
 export const TeamSubMenu = ({
   title,
@@ -10,12 +10,6 @@ export const TeamSubMenu = ({
   searchInput,
   items,
 }: BudgetsSubMenuProps) => {
-  const labelContent = (
-    <div>
-      <Icon icon={searchInput.icon} />
-      <span>{searchInput.placeholder}</span>
-    </div>
-  );
   return (
     <>
       <MainDiv>
@@ -23,11 +17,11 @@ export const TeamSubMenu = ({
           <h3>{title}</h3>
           <Icon icon="filter_list" />
         </HeaderStyled>
-        <Input label={labelContent} />
+        <SearchInput searchInput={searchInput} />
         <ul>
-          {items.map(({ avatarSrc, username }) => {
+          {items.map(({ avatarSrc, username }, index) => {
             return (
-              <ListElementStyled>
+              <ListElementStyled key={`TeamsListItem-${index}`}>
                 <Avatar username={username} src={avatarSrc} />
                 <span>{username}</span>
               </ListElementStyled>
