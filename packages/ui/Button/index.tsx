@@ -16,8 +16,7 @@ export const Button = ({
       onClick={onClick}
       fullWidth={fullWidth}
       disabled={disabled}
-      small={small}
-    >
+      small={small}>
       {children}
     </ButtonStyled>
   );
@@ -37,10 +36,10 @@ const ButtonStyled = styled.button<ButtonProps>`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  border: 2px solid #1e4c40;
+  border: 2px solid ${({ theme }) => theme.button.primary.main};
   border-radius: 8px;
   color: white;
-  background-color: #1e4c40;
+  background-color: ${({ theme }) => theme.button.primary.main};
   font-family: "Inter", sans-serif;
   font-weight: 600;
   padding: 16px 24px;
@@ -48,12 +47,12 @@ const ButtonStyled = styled.button<ButtonProps>`
   transition: all 0.2s;
   cursor: pointer;
   &:hover {
-    border: 2px solid #459175;
-    background-color: #459175;
+    border: 2px solid ${({ theme }) => theme.button.primary.hover};
+    background-color: ${({ theme }) => theme.button.primary.hover};
   }
   &:disabled {
-    border: 2px solid lightgray;
-    background-color: lightgray;
+    border: 2px solid ${({ theme }) => theme.button.primary.disabled};
+    background-color: ${({ theme }) => theme.button.primary.disabled};
     cursor: not-allowed;
   }
 
@@ -67,36 +66,36 @@ const ButtonStyled = styled.button<ButtonProps>`
   ${({ variant }) =>
     variant === "secondary" &&
     css`
-      background-color: transparent;
-      border: 2px solid #1e4c40;
-      color: #1e4c40;
+      background-color: ${({ theme }) => theme.button.secondary.background};
+      border: 2px solid ${({ theme }) => theme.button.secondary.main};
+      color: ${({ theme }) => theme.button.secondary.main};
       &:hover {
-        background-color: transparent;
-        border: 2px solid #459175;
-        color: #459175;
+        background-color: ${({ theme }) => theme.button.secondary.background};
+        border: 2px solid ${({ theme }) => theme.button.secondary.hover};
+        color: ${({ theme }) => theme.button.secondary.hover};
       }
       &:disabled {
         color: lightgray;
-        background-color: transparent;
-        border: 2px solid lightgray;
+        background-color: ${({ theme }) => theme.button.secondary.background};
+        border: 2px solid ${({ theme }) => theme.button.secondary.disabled};
       }
     `}
 
   ${({ variant }) =>
     variant === "simple" &&
     css`
-      border: 2px solid transparent;
-      background-color: transparent;
-      color: #52a785;
+      border: 2px solid ${({ theme }) => theme.button.simple.background};
+      background-color: ${({ theme }) => theme.button.simple.background};
+      color: ${({ theme }) => theme.button.simple.main};
       &:hover {
-        border: 2px solid transparent;
-        background-color: transparent;
+        border: 2px solid ${({ theme }) => theme.button.simple.background};
+        background-color: ${({ theme }) => theme.button.simple.background};
         text-decoration: underline;
       }
       &:disabled {
-        border: 2px solid transparent;
-        background-color: transparent;
-        color: lightgrey;
+        border: 2px solid ${({ theme }) => theme.button.simple.background};
+        background-color: ${({ theme }) => theme.button.simple.background};
+        color: ${({ theme }) => theme.button.simple.disabled};
         text-decoration: none;
       }
     `}

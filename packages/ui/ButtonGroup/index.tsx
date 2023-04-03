@@ -1,4 +1,5 @@
 "use client";
+
 import { Fragment, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
@@ -54,13 +55,15 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            border: 2px solid #b1b1b1;
-            color: #1e4c40;
+            border: 2px solid
+              ${({ theme }) => theme.buttonGroup.secondary.border};
+            color: ${({ theme }) => theme.buttonGroup.secondary.main};
           `
         : css`
-            background-color: #1e4c40;
-            color: #ffffff;
-            border: 2px solid #ffffff;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.background};
+            color: ${({ theme }) => theme.buttonGroup.primary.main};
+            border: 2px solid ${({ theme }) => theme.buttonGroup.primary.main};
           `}
 
     width: 100%;
@@ -83,11 +86,12 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            border-color: #1e4c40;
+            border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
             z-index: 10;
           `
         : css`
-            background-color: #459175;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.backgroundAction};
           `}
   }
 
@@ -104,11 +108,12 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            border-color: #1e4c40;
+            border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
             z-index: 10;
           `
         : css`
-            background-color: #459175;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.backgroundAction};
           `}
   }
 
@@ -116,7 +121,7 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       !secondary &&
       css`
-        color: #ffffff;
+        color: ${({ theme }) => theme.buttonGroup.primary.main};
       `}
   }
 
@@ -125,10 +130,10 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            color: #7e7e7e;
+            color: ${({ theme }) => theme.buttonGroup.secondary.notSelected};
           `
         : css`
-            color: #b1b1b1;
+            color: ${({ theme }) => theme.buttonGroup.primary.notSelected};
           `}
   }
 `;
