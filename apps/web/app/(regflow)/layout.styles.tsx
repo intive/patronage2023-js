@@ -1,6 +1,6 @@
 "use client";
 
-import { device } from "lib/css-variables";
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { Background, Card } from "ui";
 
@@ -14,12 +14,12 @@ export const ContentStyled = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media ${device.desktop} {
+  ${device.desktop} {
     flex-direction: row;
     justify-content: center;
   }
 
-  @media ${device.large} {
+  ${device.large} {
     gap: 6rem;
   }
 `;
@@ -28,7 +28,7 @@ export const SectionStyled = styled.div`
   color: white;
   padding: 52px 16px 0px 16px;
 
-  @media ${device.desktop} {
+  ${device.desktop} {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,7 +38,10 @@ export const SectionStyled = styled.div`
 
 export const FormWrapperStyled = styled.div`
   overflow-x: auto;
-  padding: 0 8px 8px 8px;
+
+  ${device.desktop} {
+    padding: 16px;
+  }
 `;
 
 export const H1Styled = styled.h1`
@@ -47,7 +50,7 @@ export const H1Styled = styled.h1`
   line-height: 1.5rem;
   margin-top: 16px;
 
-  @media ${device.desktop} {
+  ${device.desktop} {
     margin-top: 32px;
     font-size: 2.5rem;
     line-height: 2.5rem;
@@ -61,7 +64,7 @@ export const ParagraphStyled = styled.p`
   line-height: 20px;
   margin-bottom: 24px;
 
-  @media ${device.desktop} {
+ ${device.desktop} {
     line-height: 1.5rem;
     margin-top: 1rem;
   }
@@ -71,7 +74,7 @@ export const CustomCard = styled(Card)`
   font-family: "Inter", sans-serif;
   padding: 1.5rem;
 
-  @media ${device.desktop} {
+  ${device.desktop} {
     padding: 3rem;
   }
 `;

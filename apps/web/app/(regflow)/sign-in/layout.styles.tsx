@@ -1,6 +1,6 @@
 "use client";
 
-import { device } from "lib/css-variables";
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { Background, Card } from "ui";
 
