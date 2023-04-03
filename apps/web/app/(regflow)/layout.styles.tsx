@@ -32,7 +32,8 @@ export const SectionStyled = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 32px;
+    padding: 0 16px;
+    max-width: 415px;
   }
 `;
 
