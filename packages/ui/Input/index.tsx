@@ -43,8 +43,8 @@ export const Input = ({
         <StyledIcon
           onClick={(event) => {
             event.preventDefault();
-            setTypeOverride(typeOverride ? "" : "text");
             inputRef.current?.focus();
+            setTypeOverride(typeOverride ? "" : "text");
           }}>
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
@@ -66,8 +66,8 @@ export const Input = ({
         <StyledIcon
           onClick={(event) => {
             event.preventDefault();
-            onInputCleared();
             inputRef.current?.focus();
+            onInputCleared();
           }}>
           <Icon icon="cancel" color="#397B65" iconSize={20} />
         </StyledIcon>
@@ -169,6 +169,7 @@ const StyledLabel = styled.label<StyledErrorProps>`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
+  transition-delay: 0.25s;
   cursor: text;
 `;
 
