@@ -3,7 +3,7 @@
 import { device } from "lib/css-variables";
 import styled from "styled-components";
 import { Background, Card, Logo } from "ui";
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 import { usePathname } from "next/navigation";
 
@@ -11,32 +11,32 @@ export type LayoutProps = {
   children: React.ReactNode;
 };
 
-const t = dictionary.RegFlowLayout;
-
-type leftColumnText = {
-  signIn: {
-    h1: string;
-    p: string;
-  };
-  signUp: {
-    h1: string;
-    p: string;
-  };
-};
-
-const leftColumnText = {
-  signIn: {
-    h1: t.signIn.h1.en,
-    p: t.signIn.paragraph.en,
-  },
-  signUp: {
-    h1: t.signUp.h1.en,
-    p: t.signUp.paragraph.en,
-  },
-};
-
 export default function RegFlowLayout({ children }: LayoutProps) {
   const pathName = usePathname();
+  const { t, dict } = useTranslate("RegFlowLayout");
+  const { signIn, signUp } = dict;
+
+  type leftColumnText = {
+    signIn: {
+      h1: string;
+      p: string;
+    };
+    signUp: {
+      h1: string;
+      p: string;
+    };
+  };
+
+  const leftColumnText = {
+    signIn: {
+      h1: t(signIn.h1),
+      p: t(signIn.paragraph),
+    },
+    signUp: {
+      h1: t(signUp.h1),
+      p: t(signUp.paragraph),
+    },
+  };
 
   const getLeftColumnText = (element: string) => {
     if (pathName === "/sign-in")

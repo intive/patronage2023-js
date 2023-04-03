@@ -1,9 +1,11 @@
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
-export default function SignInPage() {
+export default function SignUpPage() {
+  const { t, dict } = useTranslate("SignUpPage");
+
   return (
     <div>
-      <p>{dictionary.SignUpPage.paragraph.en}</p>
+      <p>{t(dict.paragraph)}</p>
     </div>
   );
 }

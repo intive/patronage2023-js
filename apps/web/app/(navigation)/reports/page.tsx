@@ -1,5 +1,7 @@
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 export default function ReportsPage() {
-  return dictionary.ReportsPage.title.en;
+  const { dict, t } = useTranslate("ReportsPage");
+
+  return t(dict.title);
 }

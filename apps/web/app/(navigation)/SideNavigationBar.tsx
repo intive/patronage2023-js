@@ -2,11 +2,12 @@
 
 import { usePathname } from "next/navigation";
 import { SideNavigationBar } from "ui";
-import dictionary from "../../lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 export default function SideNav() {
   const pathname = usePathname() || "";
-  const t = dictionary.NavigationLayout.SideNav;
+  const { dict, t } = useTranslate("NavigationLayout");
+  const { SideNav } = dict;
 
   return (
     <SideNavigationBar
@@ -14,18 +15,22 @@ export default function SideNav() {
         {
           href: "/budgets",
           icon: "wallet",
-          textValue: t.budgetsItem.en,
+          textValue: t(SideNav.budgetsItem),
         },
         {
           href: "/reports",
           icon: "query_stats",
-          textValue: t.reportsItem.en,
+          textValue: t(SideNav.reportsItem),
         },
-        { href: "/team", icon: "account_circle", textValue: t.teamsItem.en },
+        {
+          href: "/team",
+          icon: "account_circle",
+          textValue: t(SideNav.teamsItem),
+        },
         {
           href: "/settings",
           icon: "settings",
-          textValue: t.settingsItem.en,
+          textValue: t(SideNav.settingsItem),
         },
       ]}
       pathname={pathname}

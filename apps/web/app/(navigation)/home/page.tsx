@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Card } from "ui";
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 const CardWrapperStyled = styled.div`
   display: flex;
@@ -21,10 +21,11 @@ export const TypoStyled = styled.h1`
   color: #1e4c40;
 `;
 export default function WelcomePage() {
+  const { t, dict } = useTranslate("HomePage");
   return (
     <CardWrapperStyled>
       <CardStyled>
-        <TypoStyled>{dictionary.HomePage.welcomeText.en}</TypoStyled>
+        <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
       </CardStyled>
     </CardWrapperStyled>
   );

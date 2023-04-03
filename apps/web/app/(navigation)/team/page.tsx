@@ -1,5 +1,7 @@
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 export default function TeamPage() {
-  return dictionary.TeamPage.title.en;
+  const { t, dict } = useTranslate("TeamPage");
+
+  return dict.title;
 }

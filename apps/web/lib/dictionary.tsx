@@ -76,6 +76,4 @@ const dictionary = {
 
 export default dictionary;
 
-// export const getTranslations = (screenName: string | number) => {
-//   return dictionary[screenName];
-// };
+export type dictionaryType = typeof dictionary;

@@ -1,5 +1,6 @@
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 export default function SettingsPage() {
-  return dictionary.SettingsPage.title.en;
+  const { t, dict } = useTranslate("SettingsPage");
+  return t(dict.title);
 }

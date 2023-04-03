@@ -5,7 +5,7 @@ import {
 } from "../(navigation)/main-page-components";
 import { TypoStyled } from "./home/page";
 import type { Metadata } from "next";
-import dictionary from "lib/dictionary";
+import { useTranslate } from "lib/hooks";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -13,12 +13,13 @@ export const metadata: Metadata = {
 };
 
 export default function CreateAccountPage() {
-  const t = dictionary.CreateAccountPage;
+  const { t, dict } = useTranslate("CreateAccountPage");
+
   return (
     <CardWrapperStyled>
       <CardStyled>
-        <TypoStyled>{t.welcomeText.en}</TypoStyled>
-        <LinkStyled href="/sign-in">{t.createAccountLink.en}</LinkStyled>
+        <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
+        <LinkStyled href="/sign-in">{t(dict.createAccountLink)}</LinkStyled>
       </CardStyled>
     </CardWrapperStyled>
   );
