@@ -70,7 +70,7 @@ export const Input = ({
             inputRef.current?.focus();
             onInputCleared();
           }}>
-          <Icon icon="cancel" color="#397B65" iconSize={20} />
+          <Icon icon="cancel" color={theme.input.main} iconSize={20} />
         </StyledIcon>
       );
     }
