@@ -6,6 +6,15 @@ import { Background, Card } from "ui";
 
 export const BackgroundFlex = styled(Background)`
   display: flex;
+
+  ${device.desktop} {
+    backgrount-attachment: fixed;
+    background-position: right -250px center;
+  }
+
+  ${device.large} {
+    background-position: right -50px center;
+  }
 `;
 
 export const ContentStyled = styled.div`
