@@ -8,7 +8,7 @@ export const BackgroundFlex = styled(Background)`
   display: flex;
 
   ${device.desktop} {
-    backgrount-attachment: fixed;
+    background-attachment: fixed;
     background-position: right -250px center;
   }
 
