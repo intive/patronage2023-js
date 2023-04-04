@@ -12,3 +12,4 @@ export { LinkComponent } from "./Link";
 export { AvatarSelector } from "./AvatarSelector";
 export { Input } from "./Input";
 export { Avatar } from "./Avatar";
+export { Checkbox } from "./Checkbox";

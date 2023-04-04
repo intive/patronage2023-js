@@ -9,6 +9,10 @@ type StyledErrorProps = {
   hasError?: boolean;
 };
 
+type StyledInputProps = {
+  hasSupportingLabel?: boolean;
+};
+
 export type InputProps = {
   label: string;
   supportingLabel?: React.ReactNode;
@@ -38,10 +42,10 @@ export const Input = ({
     if (type === "password") {
       return (
         <StyledIcon
-          onClick={(e) => {
-            e.preventDefault();
-            setTypeOverride(typeOverride ? "" : "text");
+          onClick={(event) => {
+            event.preventDefault();
             inputRef.current?.focus();
+            setTypeOverride(typeOverride ? "" : "text");
           }}>
           <Icon
             icon={typeOverride ? "visibility_off" : "visibility"}
@@ -61,9 +65,10 @@ export const Input = ({
     if (value && onInputCleared) {
       return (
         <StyledIcon
-          onClick={() => {
-            onInputCleared();
+          onClick={(event) => {
+            event.preventDefault();
             inputRef.current?.focus();
+            onInputCleared();
           }}>
           <Icon icon="cancel" color={theme.input.main} iconSize={20} />
         </StyledIcon>
@@ -71,6 +76,9 @@ export const Input = ({
     }
     return null;
   };
+
+  const errorId =
+    hasError && supportingLabel ? `${id || name}-error-message` : undefined;
 
   return (
     <Wrapper>
@@ -85,13 +93,16 @@ export const Input = ({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        hasSupportingLabel={Boolean(supportingLabel)}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-errormessage={errorId}
       />
       <StyledLabel hasError={hasError} htmlFor={id || name}>
         {label}
       </StyledLabel>
       {getButton()}
       {supportingLabel && (
-        <StyledSupportingLabel hasError={hasError}>
+        <StyledSupportingLabel hasError={hasError} id={errorId}>
           {supportingLabel}
         </StyledSupportingLabel>
       )}
@@ -103,7 +114,7 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled.input<StyledErrorProps>`
+const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   box-sizing: border-box;
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
@@ -113,6 +124,8 @@ const StyledInput = styled.input<StyledErrorProps>`
   caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
   width: 100%;
+  margin-bottom: ${({ hasSupportingLabel }) =>
+    hasSupportingLabel ? "0" : "18px"};
 
   :focus {
     outline: none;
@@ -160,6 +173,7 @@ const StyledLabel = styled.label<StyledErrorProps>`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
+  transition-delay: 0.25s;
   cursor: text;
 `;
 
