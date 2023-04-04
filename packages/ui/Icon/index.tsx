@@ -88,8 +88,7 @@ export const Icon = ({ icon, filled = false, color, iconSize }: IconProps) => {
       color={color}
       className="material-symbols-rounded"
       iconSize={iconSize}
-      filled={filled}
-    >
+      filled={filled}>
       {icon}
     </StyledIcon>
   );
