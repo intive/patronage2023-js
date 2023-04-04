@@ -1,6 +1,5 @@
-import { useTranslate } from "lib/hooks";
+import { BudgetsTitle } from "./BudgetsTitle";
 
 export default function BudgetsPage() {
-  const { t, dict } = useTranslate("BudgetsPage");
-  return t(dict.title);
+  return <BudgetsTitle />;
 }

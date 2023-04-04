@@ -1,11 +1,6 @@
-import {
-  CardWrapperStyled,
-  CardStyled,
-  LinkStyled,
-} from "../(navigation)/main-page-components";
-import { TypoStyled } from "./home/page";
 import type { Metadata } from "next";
-import { useTranslate } from "lib/hooks";
+import { CardWrapperStyled } from "./main-page-components";
+import { CreateAccountPageCard } from "./CreateAccountPageCard";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -13,14 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function CreateAccountPage() {
-  const { t, dict } = useTranslate("CreateAccountPage");
-
   return (
     <CardWrapperStyled>
-      <CardStyled>
-        <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
-        <LinkStyled href="/sign-in">{t(dict.createAccountLink)}</LinkStyled>
-      </CardStyled>
+      <CreateAccountPageCard />
     </CardWrapperStyled>
   );
 }

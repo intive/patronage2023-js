@@ -1,8 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
+
+enum languages {
+  en = "en",
+  pl = "pl",
+}
 
 interface LanguageContextInterface {
-  currentLang: string;
-  setLang: (newLanguage: string) => void;
+  currentLang: languages;
+  setLang: Dispatch<SetStateAction<languages>>;
 }
 
 export const LanguageContext = createContext<LanguageContextInterface>(
@@ -10,12 +15,12 @@ export const LanguageContext = createContext<LanguageContextInterface>(
 );
 
 export const LanguageProvider = ({ children }: any) => {
-  const [lang, setLang] = useState("en");
-
-  useEffect(() => {
-    const localLang = localStorage.getItem("lang");
-    localLang && setLang(localLang);
-  }, []);
+  const localLang = localStorage.getItem("lang");
+  const [lang, setLang] = useState(
+    localLang && Object.values<string>(languages).includes(localLang)
+      ? (localLang as languages)
+      : languages.en
+  );
 
   return (
     <LanguageContext.Provider value={{ currentLang: lang, setLang }}>

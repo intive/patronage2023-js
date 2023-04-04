@@ -1,11 +1,5 @@
-import { useTranslate } from "lib/hooks";
+import { SignUpTitle } from "./SignUpTitle";
 
 export default function SignUpPage() {
-  const { t, dict } = useTranslate("SignUpPage");
-
-  return (
-    <div>
-      <p>{t(dict.paragraph)}</p>
-    </div>
-  );
+  return <SignUpTitle />;
 }
