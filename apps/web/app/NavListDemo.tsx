@@ -8,20 +8,19 @@ import styled from "styled-components";
 export const dummyNavItemContents: Array<NavItemContents> = [
     {
         title: "Bills",
-        // icon: "payments",
+        componentToRender:"/avatar.svg",
         href: "/",
         id: 1,
-        avatar: "/avatar.svg"
     },
     {
         title: "Subscriptions",
-        icon: "subscriptions",
+        componentToRender:"subscriptions",
         href: "",
         id: 2,
     },
     {
         title: "Savings",
-        icon: "savings",
+        componentToRender:"savings",
         href: "",
         id: 3,
     }

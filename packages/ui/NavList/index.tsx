@@ -5,10 +5,10 @@ import { NavItem, Icon, Avatar } from "ui";
 import { usePathname } from "next/navigation";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below.
+
 export type NavItemContents = {
   title: string;
-  icon?: "payments" | "subscriptions" | "savings";
-  avatar?: string;
+  componentToRender?: "payments" | "subscriptions" | "savings" | string;
   href: string;
   id: number;
 };
@@ -46,26 +46,28 @@ const IconWrapper = styled.div`
 
 const AvatarStyled = styled(Avatar)`
   width: 2em;
-  height: 2em;
+  height: 1em;
 `;
 
 export const NavList = ({ contents }: NavListProps) => {
   const currentPage = usePathname();
   return (
     <NavListStyled>
-      {contents.map(({ href, id, icon, avatar, title }) => {
+      {contents.map(({ href, id, componentToRender, title }) => {
         return (
           <NavItem
             active={href === currentPage}
             onClick={() => {}}
             key={id}
             href={href}>
-            {icon ? (
+            {componentToRender && componentToRender === "payments" || "subscriptions" || "savings"  &&(
               <IconWrapper>
-                <Icon icon={icon} color="#1E4C40" />
+                <Icon icon={componentToRender} color="#1E4C40" />
               </IconWrapper>
-            ) : (
-              <AvatarStyled src={avatar} />
+            ) } 
+            
+            {componentToRender && componentToRender === typeof String && (
+              <AvatarStyled src={componentToRender} />
             )}
             <SpanStyled>{title}</SpanStyled>
           </NavItem>

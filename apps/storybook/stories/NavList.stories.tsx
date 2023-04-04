@@ -29,19 +29,19 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
   {
     title: "Bills",
     href: "",
-    avatar: "/avatar.svg",
+    componentToRender: "/avatar.svg",
     id: 1,
   },
   {
     title: "Subscriptions",
     href: "",
-    avatar: "/avatar.svg",
+    componentToRender: "/avatar.svg",
     id: 2,
   },
   {
     title: "Savings",
     href: "",
-    avatar: "/avatar.svg",
+    componentToRender: "/avatar.svg",
     id: 3,
   },
 ];
