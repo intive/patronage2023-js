@@ -8,10 +8,11 @@ type styledIconProps = {
   iconSize?: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
-type IconProps = {
+export type IconProps = {
   icon:
     | "home"
     | "add"
+    | "cancel"
     | "bar_chart"
     | "settings"
     | "account_circle"
@@ -61,7 +62,6 @@ type IconProps = {
 
 export const StyledIcon = styled.span<styledIconProps>`
   font-variation-settings: "FILL" 0;
-
   ${({ iconSize }) =>
     iconSize &&
     css`
@@ -88,8 +88,7 @@ export const Icon = ({ icon, filled = false, color, iconSize }: IconProps) => {
       color={color}
       className="material-symbols-rounded"
       iconSize={iconSize}
-      filled={filled}
-    >
+      filled={filled}>
       {icon}
     </StyledIcon>
   );

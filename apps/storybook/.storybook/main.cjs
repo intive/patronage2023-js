@@ -8,6 +8,7 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
+    '@storybook/addon-styling'
   ],
   // -s is Deprecated as of Storybook 6.5
   staticDirs: ["../../web/public"],

@@ -1,41 +1,40 @@
-'use client'
-import { ReactNode } from 'react'
-import styled, { css } from 'styled-components'
-import 'material-symbols'
-import React from 'react'
+"use client";
+
+import { Fragment, ReactNode } from "react";
+import styled, { css } from "styled-components";
+
+interface InputProps {
+  component: ReactNode;
+  onSelect: () => void;
+  defaultChecked?: boolean;
+  id: string;
+}
+
+type GroupProps = {
+  options: InputProps[];
+  secondary?: boolean;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const ButtonGroup = ({ options, secondary }: GroupProps) => {
   return (
     <ButtonGroupStyled options={options} secondary={secondary}>
-      {options.map(({ component, onSelect }, index) => {
+      {options.map(({ component, onSelect, defaultChecked, id }, index) => {
         return (
-          <>
+          <Fragment key={id}>
             <input
-              type={'radio'}
+              type={"radio"}
               id={`button-${index}`}
-              key={`input-${index}`}
               onClick={onSelect}
-              name={'button-group'}
+              name={"button-group"}
+              defaultChecked={defaultChecked}
             />
-            <label key={`index-${index}`} htmlFor={`button-${index}`}>
-              {component}
-            </label>
-          </>
-        )
+            <label htmlFor={`button-${index}`}>{component}</label>
+          </Fragment>
+        );
       })}
     </ButtonGroupStyled>
-  )
-}
-
-interface InputProps {
-  component: ReactNode
-  onSelect: () => void
-}
-
-type GroupProps = {
-  options: InputProps[]
-  secondary?: boolean
-} & React.HTMLProps<HTMLDivElement>
+  );
+};
 
 const ButtonGroupStyled = styled.div<GroupProps>`
   display: flex;
@@ -51,17 +50,20 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     justify-content: center;
     cursor: pointer;
     padding: 8px 24px;
+    position: relative;
 
     ${({ secondary }) =>
       secondary
         ? css`
-            border: 2px solid #b1b1b1;
-            color: #1e4c40;
+            border: 2px solid
+              ${({ theme }) => theme.buttonGroup.secondary.border};
+            color: ${({ theme }) => theme.buttonGroup.secondary.main};
           `
         : css`
-            background-color: #1e4c40;
-            color: #ffffff;
-            border: 2px solid #ffffff;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.background};
+            color: ${({ theme }) => theme.buttonGroup.primary.main};
+            border: 2px solid ${({ theme }) => theme.buttonGroup.primary.main};
           `}
 
     width: 100%;
@@ -79,20 +81,26 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     border-bottom-right-radius: 8px;
   }
 
-  & > input {
-    display: none;
-  }
-
-  & > input:checked + label {
+  & > input:checked + label,
+  & > input:focus + label {
     ${({ secondary }) =>
       secondary
         ? css`
-            border-color: #1e4c40;
+            border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
             z-index: 10;
           `
         : css`
-            background-color: #459175;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.backgroundAction};
           `}
+  }
+
+  //hide input without losing accessibility
+  & > input {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    position: absolute;
   }
 
   //label on hover
@@ -100,19 +108,20 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            border-color: #1e4c40;
+            border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
             z-index: 10;
           `
         : css`
-            background-color: #459175;
+            background-color: ${({ theme }) =>
+              theme.buttonGroup.primary.backgroundAction};
           `}
   }
 
-  & > label:hover > span {
+  & > label:hover > span:not(.selected) {
     ${({ secondary }) =>
       !secondary &&
       css`
-        color: #ffffff !important;
+        color: ${({ theme }) => theme.buttonGroup.primary.main};
       `}
   }
 
@@ -121,10 +130,10 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     ${({ secondary }) =>
       secondary
         ? css`
-            color: #7e7e7e;
+            color: ${({ theme }) => theme.buttonGroup.secondary.notSelected};
           `
         : css`
-            color: #b1b1b1;
+            color: ${({ theme }) => theme.buttonGroup.primary.notSelected};
           `}
   }
-`
+`;
