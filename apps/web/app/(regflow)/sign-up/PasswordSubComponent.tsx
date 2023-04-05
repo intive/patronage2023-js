@@ -1,3 +1,8 @@
+import { useTranslate } from "../../../lib/hooks";
+
 export const PasswordSubComponent = () => {
-  return <>Lez do it</>;
+  const { t, dict } = useTranslate("SignUpPage");
+  const { passwordComponent } = dict;
+
+  return <>{t(passwordComponent.inputErrors.matchError)}</>;
 };
