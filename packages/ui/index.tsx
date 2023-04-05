@@ -12,3 +12,4 @@ export { LinkComponent } from "./Link";
 export { Input } from "./Input";
 export { Avatar } from "./Avatar";
 export { Textarea } from "./Textarea";
+export { Checkbox } from "./Checkbox";
