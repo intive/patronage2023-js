@@ -8,11 +8,14 @@ const TextAreaStyled = styled.textarea`
   min-height: 70px;
   font-family: "Inter", sans-serif;
   font-size: 1em;
-  color: black;
   border-radius: 10px;
   border: 2px solid #ccc;
   padding: 12px;
-  resize:none;
+  resize: none;
+
+  &:focus {
+    outline: 2px solid #52a785;
+  }
 `;
 
 export const Textarea = () => {
