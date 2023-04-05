@@ -12,10 +12,10 @@ const RightCardStyled = styled(CardStyled)`
     flex-direction: column;
     justify-content: space-between;
     align-self: flex-start;
-    flex-basis: 15%;
-    min-width: 300px;
-    min-height: 250px;
-    margin-left: 1%;
+    flex-basis: 12%;
+    min-width: 250px;
+    min-height: 220px;
+    margin-left: 20px;
   }
 `;
 
@@ -26,7 +26,7 @@ const DescriptionsWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px 0 20px;
-  margin-top: 5%;
+  margin-top: 15px;
 `;
 
 const CheckboxesWrapper = styled.div`
@@ -39,7 +39,7 @@ const CheckboxesWrapper = styled.div`
 `;
 
 export const H3Styled = styled.h3`
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
   font-family: "Inter", sans-serif;
 `;

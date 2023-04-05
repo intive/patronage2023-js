@@ -11,7 +11,7 @@ export const CardWrapperStyled = styled.div`
   align-items: center;
   height: 100%;
   background-color: #e5e5e5;
-  padding: 2%;
+  padding: 25px;
 `;
 export const CardStyled = styled(Card)`
   display: flex;
@@ -26,7 +26,7 @@ export const LinkStyled = styled(Link)`
   font-size: 1.6em;
   font-weight: 600;
   color: #1e4c40;
-  margin-top: 2%;
+  margin-top: 35px;
   @media ${device.desktop} {
     font-size: 2.3em;
   }

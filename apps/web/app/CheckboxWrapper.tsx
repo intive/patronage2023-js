@@ -15,7 +15,7 @@ const CheckboxInputTitleWrapper = styled.div`
   gap: 15px;
 `;
 const TitleStyled = styled.h3`
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 500;
   font-family: "Inter", sans-serif;
 `;
