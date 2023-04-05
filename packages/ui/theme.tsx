@@ -120,6 +120,10 @@ export const theme = {
     main: colors.Teal6,
     inactive: colors.Neutral4,
   },
+  textarea: {
+    disabled: colors.Neutral3,
+    focus: colors.Teal6,
+  },
 };
 
 export type ThemeType = typeof theme;
