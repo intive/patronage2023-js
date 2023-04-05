@@ -120,6 +120,10 @@ export const theme = {
     main: colors.Teal6,
     inactive: colors.Neutral4,
   },
+  text: {
+    header: colors.Teal10,
+    paragraph: colors.Neutral8,
+  },
 };
 
 export type ThemeType = typeof theme;

@@ -73,21 +73,22 @@ const dictionary = {
         en: "Your password must contain at least:",
         pl: "Twoje hasło musi zawierać przynajmniej:",
       },
-      requirementsList: {
-        en: [
-          "One upper case character",
-          "One lower case character",
-          "One special character",
-          "No spaces",
-          "12 characters or more",
-        ],
-        pl: [
-          "Jedną wielką literę",
-          "Jedną małą literę",
-          "Jeden znak specjalny",
-          "Nie może zawierać spacji",
-          "Musi składać się z 12 lub więcej znaków",
-        ],
+      requirementUpperCase: {
+        en: "One upper case character",
+        pl: "Jedną wielką literę",
+      },
+      requirementLowerCase: {
+        en: "One lower case character",
+        pl: "Jedną małą literę",
+      },
+      requirementSpecialCharacter: {
+        en: "One special character",
+        pl: "Jeden znak specjalny",
+      },
+      requirementNoSpace: { en: "No spaces", pl: "Nie może zawierać spacji" },
+      requirementLength: {
+        en: "12 characters or more",
+        pl: "Musi składać się z 12 lub więcej znaków",
       },
       inputPlaceholderPassword: {
         en: "Password",
