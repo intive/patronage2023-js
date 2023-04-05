@@ -1,9 +1,11 @@
 const size = {
-  desktop: '768px',
-  large: '1200px'
+  tablet: "768px",
+  desktop: "1025px",
+  tv: "1441px",
 };
 
 export const device = {
+  tablet: `@media (min-width: ${size.tablet})`,
   desktop: `@media (min-width: ${size.desktop})`,
-  large: `@media (min-width: ${size.large})`,
+  tv: `@media (min-width: ${size.tv})`,
 };

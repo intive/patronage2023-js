@@ -11,6 +11,7 @@ import {
   H1Styled,
   ParagraphStyled,
   SectionStyled,
+  TypoStyled,
 } from "./layout.styles";
 
 export type LayoutProps = {
@@ -57,9 +58,11 @@ export default function RegFlowLayout({ children }: LayoutProps) {
     <BackgroundFlex>
       <ContentStyled>
         <SectionStyled>
-          <Logo logoWidth={138} white />
-          <H1Styled>{getLeftColumnText("h1")}</H1Styled>
-          <ParagraphStyled>{getLeftColumnText("p")}</ParagraphStyled>
+          <TypoStyled>
+            <Logo logoWidth={138} white />
+            <H1Styled>{getLeftColumnText("h1")}</H1Styled>
+            <ParagraphStyled>{getLeftColumnText("p")}</ParagraphStyled>
+          </TypoStyled>
         </SectionStyled>
         <FormWrapperStyled>
           <CustomCard>{children}</CustomCard>
