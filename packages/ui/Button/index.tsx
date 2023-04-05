@@ -2,26 +2,6 @@
 
 import styled, { css } from "styled-components";
 
-export const Button = ({
-  variant = "primary",
-  fullWidth = false,
-  disabled = false,
-  children,
-  onClick,
-  small = false,
-}: ButtonProps) => {
-  return (
-    <ButtonStyled
-      variant={variant}
-      onClick={onClick}
-      fullWidth={fullWidth}
-      disabled={disabled}
-      small={small}>
-      {children}
-    </ButtonStyled>
-  );
-};
-
 type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
   fullWidth?: boolean;
@@ -30,7 +10,7 @@ type ButtonProps = {
   small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
-const ButtonStyled = styled.button<ButtonProps>`
+export const ButtonStyled = styled.button<ButtonProps>`
   box-sizing: border-box;
   display: inline-flex;
   justify-content: center;
@@ -113,3 +93,25 @@ const ButtonStyled = styled.button<ButtonProps>`
       width: 100%;
     `}
 `;
+
+export const Button = ({
+  variant = "primary",
+  fullWidth = false,
+  disabled = false,
+  children,
+  onClick,
+  small = false,
+  className,
+}: ButtonProps) => {
+  return (
+    <ButtonStyled
+      className={className}
+      variant={variant}
+      onClick={onClick}
+      fullWidth={fullWidth}
+      disabled={disabled}
+      small={small}>
+      {children}
+    </ButtonStyled>
+  );
+};

@@ -159,6 +159,13 @@ export const theme = {
     hover: colors.Teal1,
     outline: colors.Teal5,
   },
+  signUp: {
+    main: colors.Teal10,
+    text: colors.Neutral8,
+    error: colors.Supporting4,
+    icon: colors.BasicWhite,
+    link: colors.BasicWhite,
+  },
 };
 
 export type ThemeType = typeof theme;
