@@ -72,10 +72,8 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                     /.*[!"#$%&'()+,-./:;<=>?@[\]^_`{|}~].*/,
                     t(passwordComponent.inputErrors.missingSpecialCharacter)
                   )
-                  .regex(
-                    /^\S+$/,
-                    t(passwordComponent.inputErrors.spacesCheck)
-                  )}>
+                  .regex(/^\S+$/, t(passwordComponent.inputErrors.spacesCheck))}
+                onChangeValidate={z.string()}>
                 {({ value, setValue, onBlur, errors }) => {
                   return (
                     <>
@@ -100,7 +98,7 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                   );
                 }}
               </Field>
-              <button type="submit">Submit</button>
+              <button onClick={submit}>Submit</button>
             </form>
           )}
         </Form>
