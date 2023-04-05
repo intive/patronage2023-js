@@ -6,7 +6,7 @@ import { Icon, Logo, Avatar } from "ui";
 const NavBar = styled.nav`
   box-sizing: border-box;
   display: flex;
-  background-color: #1e4c40;
+  background-color: ${({ theme }) => theme.nav.main};
   margin: 0;
   padding: 15px 15px;
   justify-content: space-between;

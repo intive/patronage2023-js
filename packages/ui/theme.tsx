@@ -116,6 +116,9 @@ export const theme = {
     inactive: colors.Neutral6,
     background: colors.Teal7,
   },
+  nav: {
+    main: colors.Teal10,
+  },
 };
 
 export type ThemeType = typeof theme;

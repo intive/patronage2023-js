@@ -79,3 +79,5 @@ export default function MultiCardLayout({ children }: LayoutProps) {
     </CardWrapperStyled>
   );
 }
+
+
