@@ -63,7 +63,7 @@ const AvatarGridStyled = styled.div`
     &:before {
       content: "";
       width: 36px;
-      height: 100%;
+      height: 90%;
       top: 0;
       position: absolute;
     }
