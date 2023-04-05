@@ -46,7 +46,7 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
           <li>{t(passwordComponent.requirementLength)}</li>
         </ul>
         <Form
-          onSubmit={(values) => {
+          onSubmit={(values, form) => {
             console.log(JSON.stringify(values));
           }}>
           {({ isValid, submit }) => (
@@ -55,11 +55,35 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                 e.preventDefault();
                 submit();
               }}>
-              <Field name="password">
-                {({ value, setValue, onBlur }) => {
+              <Field
+                name="password"
+                onSubmitValidate={z
+                  .string()
+                  .min(12, t(passwordComponent.inputErrors.longCheck))
+                  .regex(
+                    /.*[A-Z].*/,
+                    t(passwordComponent.inputErrors.missingUpperCase)
+                  )
+                  .regex(
+                    /.*[a-z].*/,
+                    t(passwordComponent.inputErrors.missingLowerCase)
+                  )
+                  .regex(
+                    /.*[!"#$%&'()+,-./:;<=>?@[\]^_`{|}~].*/,
+                    t(passwordComponent.inputErrors.missingSpecialCharacter)
+                  )
+                  .regex(
+                    /^\S+$/,
+                    t(passwordComponent.inputErrors.spacesCheck)
+                  )}>
+                {({ value, setValue, onBlur, errors }) => {
                   return (
                     <>
-                      <input value={value} />
+                      <input
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                      />
+                      <p>{errors[0]}</p>
                     </>
                   );
                 }}
@@ -68,11 +92,15 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                 {({ value, setValue, onBlur }) => {
                   return (
                     <>
-                      <input value={value} />
+                      <input
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                      />
                     </>
                   );
                 }}
               </Field>
+              <button type="submit">Submit</button>
             </form>
           )}
         </Form>
