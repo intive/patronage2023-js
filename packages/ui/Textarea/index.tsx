@@ -1,5 +1,4 @@
 "use client";
-
 import styled from "styled-components";
 
 const TextAreaStyled = styled.textarea`
@@ -9,12 +8,12 @@ const TextAreaStyled = styled.textarea`
   font-family: "Inter", sans-serif;
   font-size: 1em;
   border-radius: 10px;
-  border: 2px solid #ccc;
+  border: 2px solid ${({ theme }) => theme.textarea.disabled};
   padding: 12px;
   resize: none;
 
   &:focus {
-    outline: 2px solid #52a785;
+    outline: 2px solid ${({ theme }) => theme.textarea.focus};
   }
 `;
 
