@@ -10,7 +10,7 @@ import {
 import { Icon, IconType } from "../Icon";
 
 type IconPickerProps = {
-  selectedIcon?: IconType;
+  defaultIcon?: IconType;
   icons: IconType[];
   onSelect: (icon: IconType) => void;
 };
@@ -26,19 +26,17 @@ export const IconSelectorButton = ({
 }: IconSelectorButtonProps) => {
   return (
     <SelectIconButtonStyled key={icon} onClick={onClick}>
-      <Icon icon={icon} iconSize={30} color="#1E4C40" />
+      <Icon icon={icon} iconSize={30} />
     </SelectIconButtonStyled>
   );
 };
 
 export const IconPicker = ({
-  selectedIcon,
+  defaultIcon,
   icons,
   onSelect,
 }: IconPickerProps) => {
-  const [currentIcon, setCurrentIcon] = useState(
-    selectedIcon ? selectedIcon : icons[0]
-  );
+  const [currentIcon, setCurrentIcon] = useState(defaultIcon);
   const [iconSelectorVisible, setIconSelectorVisible] = useState(false);
 
   const handleEditButtonClick = () => {
@@ -54,7 +52,7 @@ export const IconPicker = ({
   return (
     <IconPickerStyled>
       <IconAndButtonWrapperStyled>
-        <Icon icon={currentIcon} iconSize={40} color="#1E4C40" />
+        {currentIcon && <Icon icon={currentIcon} iconSize={40} />}
         <EditButtonStyled onClick={handleEditButtonClick}>
           <Icon icon="edit" iconSize={12} />
         </EditButtonStyled>

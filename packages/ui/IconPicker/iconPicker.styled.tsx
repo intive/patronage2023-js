@@ -17,7 +17,8 @@ export const IconAndButtonWrapperStyled = styled.div`
   height: 112px;
   width: 112px;
   border-radius: 50%;
-  background-color: #f7f7f7;
+  background-color: ${({ theme }) => theme.iconPicker.background};
+  color: ${({ theme }) => theme.iconPicker.main};
 `;
 
 export const EditButtonStyled = styled.button`
@@ -31,8 +32,8 @@ export const EditButtonStyled = styled.button`
   height: 24px;
   border-radius: 50%;
   border: none;
-  background-color: #1e4c40;
-  color: white;
+  background-color: ${({ theme }) => theme.iconPicker.main};
+  color: ${({ theme }) => theme.iconPicker.edit};
   cursor: pointer;
 `;
 
@@ -51,10 +52,11 @@ export const SelectIconButtonStyled = styled.button`
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  color: ${({ theme }) => theme.iconPicker.main};
   border: none;
 
   &:hover {
     border-radius: 12px;
-    background-color: #f1f8f6;
+    background-color: ${({ theme }) => theme.iconPicker.hover};
   }
 `;

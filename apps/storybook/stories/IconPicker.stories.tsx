@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof IconPicker> = ({ ...args }) => (
 
 export const BasicIconPicker = Template.bind({});
 BasicIconPicker.args = {
-  selectedIcon: "payments",
+  defaultIcon: "savings",
   onSelect: () => {},
   icons: [
     "savings",
