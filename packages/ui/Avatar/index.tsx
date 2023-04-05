@@ -17,7 +17,7 @@ const Image = styled.img<AvatarProps>`
   ${({ outlined }) =>
     outlined &&
     css`
-      border: 2px solid white;
+      border: 2px solid ${({ theme }) => theme.avatar.outline};
     `}
 `;
 
