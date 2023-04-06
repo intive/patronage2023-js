@@ -126,9 +126,8 @@ const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
   width: 100%;
-  /* margin-bottom: ${({ hasSupportingLabel }) =>
-    hasSupportingLabel ? "0" : "18px"}; */
-  margin-bottom: 2em;
+  margin-bottom: ${({ hasSupportingLabel }) =>
+    hasSupportingLabel ? "0" : "18px"};
 
   :focus {
     outline: none;

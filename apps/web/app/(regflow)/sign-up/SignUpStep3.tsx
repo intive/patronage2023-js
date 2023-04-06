@@ -4,7 +4,8 @@ import { Form, Field } from "houseform";
 import { device } from "lib/css-variables";
 import styled from "styled-components";
 import { z } from "zod";
-import { Separator, Input, Button } from "ui";
+import { Separator, Input, Button, AvatarSelector } from "ui";
+import { useState } from "react";
 
 const H3Styled = styled.h3`
   color: ${({ theme }) => theme.signUp.main};
@@ -32,6 +33,15 @@ const StepWrapper = styled.div`
 
 const FormWrapper = styled.div`
   width: 100%;
+`;
+
+const FieldsWrapper = styled.div`
+  width: 100%;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 3em;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -66,6 +76,7 @@ function checkValue(string: string): any {
 export const SignUpStep3 = () => {
   const { dict, t } = useTranslate("SignUpPage");
   const { step3 } = dict;
+  const [selected, setSelected] = useState("1");
 
   return (
     <>
@@ -73,11 +84,48 @@ export const SignUpStep3 = () => {
         <H3Styled>{t(step3.title)}</H3Styled>
         <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
         <SeparatorLine />
-        <AvatarStyled>Avatar Picker</AvatarStyled>
+        <AvatarSelector
+          avatars={[
+            {
+              id: "1",
+              src: "/avatars/1.svg",
+            },
+            {
+              id: "2",
+              src: "/avatars/2.svg",
+            },
+            {
+              id: "3",
+              src: "/avatars/3.svg",
+            },
+            {
+              id: "4",
+              src: "/avatars/4.svg",
+            },
+            {
+              id: "5",
+              src: "/avatars/5.svg",
+            },
+            {
+              id: "6",
+              src: "/avatars/6.svg",
+            },
+            {
+              id: "7",
+              src: "/avatars/7.svg",
+            },
+            {
+              id: "8",
+              src: "/avatars/8.svg",
+            },
+          ]}
+          selectedAvatar={selected}
+          onSelect={setSelected}
+        />
         <FormWrapper>
           <Form
             onSubmit={(values) => {
-              console.log(values)
+              console.log(values, selected);
             }}>
             {({ submit, errors }) => (
               <form
@@ -85,44 +133,47 @@ export const SignUpStep3 = () => {
                   e.preventDefault();
                   submit();
                 }}>
-                <Field
-                  onChangeValidate={z
-                    .string()
-                    .min(1, t(step3.lastNameInput.error))}
-                  name="firstName"
-                  initialValue={""}>
-                  {({ value, setValue, onBlur, errors }) => (
-                    <Input
-                      name="firstName"
-                      label={t(step3.firstNameInput.label)}
-                      value={value}
-                      onChange={(e) => setValue(e.currentTarget.value)}
-                      onInputCleared={() => setValue("")}
-                      onBlur={onBlur}
-                      hasError={errors.length > 0}
-                      supportingLabel={errors}
-                    />
-                  )}
-                </Field>
-                <Field
-                  onChangeValidate={z
-                    .string()
-                    .min(1, t(step3.lastNameInput.error))}
-                  name="lastName"
-                  initialValue={""}>
-                  {({ value, setValue, onBlur, errors }) => (
-                    <Input
-                      name="lastName"
-                      label={t(step3.lastNameInput.label)}
-                      value={value}
-                      onChange={(e) => setValue(e.currentTarget.value)}
-                      onBlur={onBlur}
-                      onInputCleared={() => setValue("")}
-                      hasError={errors.length > 0}
-                      supportingLabel={errors}
-                    />
-                  )}
-                </Field>
+                <FieldsWrapper>
+                  <Field
+                    onChangeValidate={z
+                      .string()
+                      .min(1, t(step3.lastNameInput.error))}
+                    name="firstName"
+                    initialValue={""}>
+                    {({ value, setValue, onBlur, errors }) => (
+                      <Input
+                        name="firstName"
+                        label={t(step3.firstNameInput.label)}
+                        value={value}
+                        onChange={(e) => setValue(e.currentTarget.value)}
+                        onInputCleared={() => setValue("")}
+                        onBlur={onBlur}
+                        hasError={errors.length > 0}
+                        supportingLabel={errors}
+                      />
+                    )}
+                  </Field>
+                  <Field
+                    onChangeValidate={z
+                      .string()
+                      .min(1, t(step3.lastNameInput.error))}
+                    name="lastName"
+                    initialValue={""}>
+                    {({ value, setValue, onBlur, errors }) => (
+                      <Input
+                        name="lastName"
+                        label={t(step3.lastNameInput.label)}
+                        value={value}
+                        onChange={(e) => setValue(e.currentTarget.value)}
+                        onBlur={onBlur}
+                        onInputCleared={() => setValue("")}
+                        hasError={errors.length > 0}
+                        supportingLabel={errors}
+                      />
+                    )}
+                  </Field>
+                </FieldsWrapper>
+
                 <ButtonsWrapper>
                   <Button
                     variant="secondary"
@@ -133,7 +184,9 @@ export const SignUpStep3 = () => {
                     {t(step3.backButton)}
                   </Button>
                   <CreateBtnWrapper>
-                  <Button fullWidth onClick={submit}>{t(step3.submitButton)}</Button>
+                    <Button fullWidth onClick={submit}>
+                      {t(step3.submitButton)}
+                    </Button>
                   </CreateBtnWrapper>
                 </ButtonsWrapper>
               </form>
