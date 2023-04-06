@@ -118,6 +118,13 @@ export const theme = {
   },
   nav: {
     main: colors.Teal10,
+    avatarSelector: {
+      active: colors.Teal6,
+    },
+    checkbox: {
+      main: colors.Teal6,
+      inactive: colors.Neutral4,
+    },
   },
 };
 

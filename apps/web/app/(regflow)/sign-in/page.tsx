@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
+import { useTranslate } from "lib/hooks";
 
 const FormWrapper = styled.div`
   margin: 0 auto;
@@ -51,6 +52,8 @@ const ErrorSuportingMsg = styled.div`
 
 export default function SignInPage() {
   const router = useRouter();
+  const { t, dict } = useTranslate("SignInPage");
+  const { form } = dict;
   const [errMsg, setErrMsg] = useState("");
 
   const closeErrorMessage = () => {
@@ -62,7 +65,7 @@ export default function SignInPage() {
       onSubmit={(values) => {
         values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
           ? router.push("/home")
-          : setErrMsg("Invalid credentials. Please try again.");
+          : setErrMsg(t(form.errorMessage));
       }}>
       {({ submit, errors }) => (
         <FormWrapper>
@@ -80,12 +83,14 @@ export default function SignInPage() {
               <Field
                 name="email"
                 initialValue={""}
-                onBlurValidate={z.string().email("This is not a valid email")}>
+                onBlurValidate={z
+                  .string()
+                  .email(t(form.emailInput.wrongFormatError))}>
                 {({ value, setValue, onBlur, errors }) => (
                   <InputWrapper>
                     <Input
                       name="email"
-                      label="Email"
+                      label={t(form.emailInput.label)}
                       value={value}
                       onChange={(e) => setValue(e.currentTarget.value)}
                       onFocus={closeErrorMessage}
@@ -104,13 +109,13 @@ export default function SignInPage() {
                 initialValue={""}
                 onBlurValidate={z
                   .string()
-                  .min(3, "Password must have at least 3 characters")}>
+                  .min(3, t(form.passwordInput.min3CharactersError))}>
                 {({ value, setValue, onBlur, errors }) => (
                   <InputWrapper>
                     <Input
                       name="password"
                       type="password"
-                      label="Password"
+                      label={t(form.passwordInput.label)}
                       value={value}
                       onChange={(e) => setValue(e.currentTarget.value)}
                       onFocus={closeErrorMessage}
@@ -125,7 +130,7 @@ export default function SignInPage() {
               </Field>
             </FieldsWrapper>
             <Button onClick={submit} type="submit" fullWidth>
-              Log In
+              {t(form.submitButton)}
             </Button>
           </form>
         </FormWrapper>
