@@ -1,7 +1,7 @@
 "use client";
 
-import { Icon } from "ui";
-import { useContext, useState } from "react";
+import { Button, Icon } from "ui";
+import { useContext, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled, { ThemeContext } from "styled-components";
@@ -61,27 +61,28 @@ const DatePickerStyled = styled.div`
   .react-datepicker__navigation--next {
     top: 10px;
     right: 10px;
+    :hover {
+      & span::before {
+        border-color: #1e4c40;
+      }
+    }
   }
 
   .react-datepicker__navigation--previous {
     top: 10px;
     left: 10px;
+    :hover {
+      & span::before {
+        border-color: #1e4c40;
+      }
+    }
   }
 
   .react-datepicker__navigation-icon::before,
   .react-datepicker__navigation-icon::after,
   .react-datepicker__year-read-view--down-arrow {
-    border-color: #515151;
+    border-color: #52a785;
   }
-
-  .react-datepicker__navigation--next:hover,
-  .react-datepicker__navigation--previous:hover {
-    & span::before {
-      border-color: red;
-    }
-  }
-
-  
 
   .react-datepicker__year-dropdown-container {
     line-height: 2.5rem;
@@ -92,8 +93,15 @@ const DatePickerStyled = styled.div`
     top: 12px;
   }
 
+  .react-datepicker__year-read-view:hover {
+    & span {
+      border-color: #1e4c40;
+    }
+  }
+
   .react-datepicker__current-month {
     line-height: 2.5rem;
+    color: #222222;
   }
 
   .react-datepicker__day,
@@ -102,7 +110,8 @@ const DatePickerStyled = styled.div`
     width: 2.35rem;
     line-height: 2.35rem;
 
-    ${device.desktop} {
+    @media ${device.desktop} {
+      font-size: 1rem;
       width: 2.5rem;
       line-height: 2.5rem;
     }
@@ -112,6 +121,23 @@ const DatePickerStyled = styled.div`
     color: white;
     border-radius: 50%;
     background-color: #1e4c40;
+    :hover {
+      color: #222222;
+    }
+  }
+
+  .react-datepicker__day:hover {
+    border-radius: 50%;
+    background-color: #d0f5e3;
+  }
+
+  .react-datepicker__day--disabled:hover {
+    bacground-color: unset;
+  }
+
+  .react-datepicker__day--disabled {
+    color: #9e9e9e;
+    cursor: not-allowed;
   }
 
   .react-datepicker__day--keyboard-selected {
@@ -120,12 +146,8 @@ const DatePickerStyled = styled.div`
   }
 
   .react-datepicker__day--outside-month {
+    font-size: 0.7rem;
     color: #9e9e9e;
-  }
-
-  .react-datepicker__day:hover {
-    border-radius: 50%;
-    background-color: #a3eac9;
   }
 `;
 
@@ -149,27 +171,33 @@ const Line = styled.div`
 `;
 
 export default function TestPage() {
-  const theme = useContext(ThemeContext);
   const [date, setDate] = useState<Date | null>(null);
-
-  console.log(date);
 
   return (
     <FormWrapper style={{ minWidth: "314px" }}>
       <h2 style={{ marginBottom: "25px", textAlign: "center" }}>datepicker</h2>
       <form style={{ minHeight: "640px" }}>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Line>
           <DatePickerStyled>
             <DatePicker
+              withPortal
               name="date"
               selected={date}
               onChange={(date: Date) => {
                 setDate(date);
               }}
               placeholderText="Start Date"
+              maxDate={new Date()}
               yearDropdownItemNumber={3}
-              showYearDropdown
-            />
+              showYearDropdown></DatePicker>
             <StyledIcon>
               <Icon icon={"event"} color={theme.input.neutral} />
             </StyledIcon>
