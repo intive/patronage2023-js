@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { IconPicker } from "ui";
@@ -8,14 +8,24 @@ export default {
   component: IconPicker,
 } as ComponentMeta<typeof IconPicker>;
 
-const Template: ComponentStory<typeof IconPicker> = ({ ...args }) => (
-  <IconPicker {...args}></IconPicker>
-);
+const Template: ComponentStory<typeof IconPicker> = ({ ...args }) => {
+  const preSelectedIcon = "savings";
+  const [selectedIcon, setSelectedIcon] = useState(preSelectedIcon);
+
+  return (
+    <>
+      <IconPicker
+        {...args}
+        defaultIcon={preSelectedIcon}
+        onSelect={(icon) => setSelectedIcon(icon)}
+      />
+      <p>{`Wybrano ikonę: ${selectedIcon}`}</p>
+    </>
+  );
+};
 
 export const BasicIconPicker = Template.bind({});
 BasicIconPicker.args = {
-  defaultIcon: "savings",
-  onSelect: () => {},
   icons: [
     "savings",
     "directions_car",

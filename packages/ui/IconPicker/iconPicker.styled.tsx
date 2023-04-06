@@ -2,15 +2,18 @@ import styled from "styled-components";
 import { Card } from "../Card";
 
 export const IconPickerStyled = styled.div`
-  display: flex;
-  width: 314px;
+  position: relative;
+  justify-content: flex-start;
+  width: 112px;
   height: 112px;
   gap: 2px;
   z-index: 10;
 `;
 
 export const IconAndButtonWrapperStyled = styled.div`
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,9 +38,16 @@ export const EditButtonStyled = styled.button`
   background-color: ${({ theme }) => theme.iconPicker.main};
   color: ${({ theme }) => theme.iconPicker.edit};
   cursor: pointer;
+
+  &:focus {
+    outline-color: ${({ theme }) => theme.iconPicker.outline};
+  }
 `;
 
 export const IconsSelectorStyled = styled(Card)`
+  position: absolute;
+  top: 0;
+  left: 114px;
   display: grid;
   place-items: stretch;
   grid-template-columns: repeat(3, 64px);
@@ -55,8 +65,13 @@ export const SelectIconButtonStyled = styled.button`
   color: ${({ theme }) => theme.iconPicker.main};
   border: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     border-radius: 12px;
     background-color: ${({ theme }) => theme.iconPicker.hover};
+  }
+
+  &:focus {
+    outline-color: ${({ theme }) => theme.iconPicker.outline};
   }
 `;

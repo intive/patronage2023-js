@@ -125,6 +125,7 @@ export const theme = {
     background: colors.Neutral1,
     edit: colors.BasicWhite,
     hover: colors.Teal1,
+    outline: colors.Teal5,
   },
 };
 
