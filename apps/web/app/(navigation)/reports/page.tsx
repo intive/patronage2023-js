@@ -1,3 +1,5 @@
+import { ReportsTitle } from "./ReportsTitle";
+
 export default function ReportsPage() {
-  return "Reports page";
+  return <ReportsTitle />;
 }
