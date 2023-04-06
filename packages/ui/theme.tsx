@@ -119,7 +119,7 @@ export const theme = {
   navList: {
     navItem: {
       activeColor: colors.Teal10,
-      inactiveColor: colors.Teal8,
+      inactiveColor: colors.Neutral8,
       activeBackground: colors.Teal1,
       inactiveBackground: "transparent",
       hoverBackground: colors.Teal1,
