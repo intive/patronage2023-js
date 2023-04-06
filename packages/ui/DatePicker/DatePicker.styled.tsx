@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styled from "styled-components";
 import { device } from "../../../apps/web/lib/media-queries";
@@ -30,10 +30,18 @@ export const DatePickerStyled = styled.div`
 
   .react-datepicker {
     font-family: unset;
-    border: 0;
+    font-weight: 400;
     background-color: #f1fbf6;
     border-radius: 1rem;
     border: 1px solid #e1e1e1;
+    box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
+      0px 2px 4px rgba(32, 37, 50, 0.03);
+  }
+
+  .react-datepicker__year-dropdown {
+    border-radius: 1rem;
+    border: 1px solid #e1e1e1;
+    background-color: #a3eac9;
     box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
       0px 2px 4px rgba(32, 37, 50, 0.03);
   }
@@ -121,7 +129,7 @@ export const DatePickerStyled = styled.div`
   }
 
   .react-datepicker__day--disabled:hover {
-    bacground-color: unset;
+    background-color: unset;
   }
 
   .react-datepicker__day--disabled {
@@ -138,15 +146,53 @@ export const DatePickerStyled = styled.div`
     font-size: 0.7rem;
     color: #9e9e9e;
   }
-`;
 
-export const StyledIcon = styled.div`
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  border: none;
-  background: none;
-  cursor: pointer;
-  padding: 0;
-  line-height: 0;
+  .react-datepicker__close-icon {
+    padding-right: 15px;
+  }
+
+  .react-datepicker__close-icon:after {
+    background-color: #397b65;
+    right: 15px;
+  }
+
+  .react-datepicker__year-option {
+    font-size: 1rem;
+    line-height: 2.5rem;
+    border: 2px solid #a3eac9;
+    border-radius: 1rem;
+  }
+
+  .react-datepicker__year-option:hover {
+    background-color: #82d3af;
+    border-radius: 1rem;
+  }
+
+  .react-datepicker__year-option--selected_year {
+    border-radius: 1rem;
+    background-color: #1e4c40;
+    color: white;
+  }
+
+  .react-datepicker__year-option--selected_year:hover {
+    border-radius: 1rem;
+    background-color: #2e6858;
+  }
+
+  .react-datepicker__year-option:first-of-type,
+  .react-datepicker__year-option:last-of-type {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    line-height: 2.5rem;
+  }
+
+  .react-datepicker__year-dropdown,
+  .react-datepicker__year-option:hover {
+    border-radius: 1rem;
+    border: 2px solid #a3eac9;
+  }
 `;

@@ -24,9 +24,9 @@ export default function TestPage() {
   return (
     <FormWrapper style={{ minWidth: "314px" }}>
       <h2 style={{ marginBottom: "25px", textAlign: "center" }}>datepicker</h2>
-      <form style={{ minHeight: "640px" }}>
+      <form style={{ minHeight: "500px" }}>
         <Line>
-          <CustomDatePicker />
+          <CustomDatePicker placeholder="Start date" />
         </Line>
       </form>
     </FormWrapper>
