@@ -2,7 +2,7 @@
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/css-variables";
-import { Input, Separator } from "ui";
+import { Button, Input, Separator } from "ui";
 import { z } from "zod";
 import { Field, Form } from "houseform";
 
@@ -47,13 +47,12 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
         </ul>
         <Form
           onSubmit={(values, form) => {
-            console.log(JSON.stringify(values));
+            console.log("Yay");
           }}>
           {({ isValid, submit }) => (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                submit();
               }}>
               <Field
                 name="password"
@@ -61,44 +60,70 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                   .string()
                   .min(12, t(passwordComponent.inputErrors.longCheck))
                   .regex(
-                    /.*[A-Z].*/,
+                    /[A-Z]/,
                     t(passwordComponent.inputErrors.missingUpperCase)
                   )
                   .regex(
-                    /.*[a-z].*/,
+                    /[a-z]/,
                     t(passwordComponent.inputErrors.missingLowerCase)
                   )
                   .regex(
-                    /.*[!"#$%&'()+,-./:;<=>?@[\]^_`{|}~].*/,
+                    /[!"#$%&'()+,-./:;<=>?@[\]^_`{|}~]/,
                     t(passwordComponent.inputErrors.missingSpecialCharacter)
                   )
                   .regex(/^\S+$/, t(passwordComponent.inputErrors.spacesCheck))}
                 onChangeValidate={z.string()}>
-                {({ value, setValue, onBlur, errors }) => {
+                {({ value, setValue, errors, isValid }) => {
                   return (
                     <>
-                      <input
+                      <Input
                         value={value}
                         onChange={(e) => setValue(e.target.value)}
-                      />
-                      <p>{errors[0]}</p>
-                    </>
-                  );
-                }}
-              </Field>
-              <Field name="passwordConfirmation">
-                {({ value, setValue, onBlur }) => {
-                  return (
-                    <>
-                      <input
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
+                        label={t(passwordComponent.inputPlaceholderPassword)}
+                        hasError={!isValid}
+                        supportingLabel={!isValid ? errors[0] : ""}
+                        type="password"
                       />
                     </>
                   );
                 }}
               </Field>
-              <button onClick={submit}>Submit</button>
+              <Field
+                name="passwordConfirmation"
+                listenTo={["password"]}
+                onSubmitValidate={(val, form) => {
+                  if (val === form.getFieldValue("password")!.value) {
+                    return Promise.resolve(true);
+                  } else {
+                    return Promise.reject(
+                      t(passwordComponent.inputErrors.matchError)
+                    );
+                  }
+                }}
+                onChangeValidate={z.string()}>
+                {({ value, setValue, errors }) => {
+                  return (
+                    <>
+                      <Input
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        label={t(
+                          passwordComponent.inputPlaceholderRepeatPassword
+                        )}
+                        hasError={!isValid}
+                        supportingLabel={!isValid ? errors[0] : ""}
+                        type="password"
+                      />
+                    </>
+                  );
+                }}
+              </Field>
+              <Button
+                onClick={() => console.log("Wracamy")}
+                variant="secondary">
+                Back
+              </Button>
+              <Button onClick={submit}>Submit</Button>
             </form>
           )}
         </Form>
