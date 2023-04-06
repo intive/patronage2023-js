@@ -61,17 +61,14 @@ const SeparatorLine = styled.div`
   margin: 2em 0;
 `;
 
-const AvatarStyled = styled.div`
-  height: 150px;
-  width: 100%;
-  border: 1px solid red;
+const AvatarsWrapper = styled.div`
+  width: 300px;
   margin-bottom: 2em;
-`;
 
-function checkValue(string: string): any {
-  console.log(string.length > 0);
-  return string.length > 0;
-}
+  @media ${device.desktop} {
+    width: 100%;
+  }
+`;
 
 export const SignUpStep3 = () => {
   const { dict, t } = useTranslate("SignUpPage");
@@ -84,6 +81,7 @@ export const SignUpStep3 = () => {
         <H3Styled>{t(step3.title)}</H3Styled>
         <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
         <SeparatorLine />
+        <AvatarsWrapper>
         <AvatarSelector
           avatars={[
             {
@@ -122,10 +120,13 @@ export const SignUpStep3 = () => {
           selectedAvatar={selected}
           onSelect={setSelected}
         />
+        </AvatarsWrapper>
+          
         <FormWrapper>
           <Form
             onSubmit={(values) => {
               console.log(values, selected);
+              alert(`Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selected}`)
             }}>
             {({ submit, errors }) => (
               <form
@@ -179,7 +180,7 @@ export const SignUpStep3 = () => {
                     variant="secondary"
                     onClick={(e) => {
                       e.preventDefault();
-                      console.log("Going Back");
+                      alert("Going Back");
                     }}>
                     {t(step3.backButton)}
                   </Button>

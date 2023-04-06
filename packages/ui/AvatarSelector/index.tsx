@@ -39,9 +39,10 @@ export const AvatarSelector = ({
 const AvatarGridStyled = styled.div`
   overflow-x: auto;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   overflow-y: hidden;
-  padding: 2rem;
+  padding: 0.5rem;
   gap: 1rem;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -58,6 +59,7 @@ const AvatarGridStyled = styled.div`
 
   @media (max-width: 768px) {
     flex-wrap: nowrap;
+    justify-content: flex-start;
 
     &:after,
     &:before {
@@ -67,7 +69,7 @@ const AvatarGridStyled = styled.div`
       top: 0;
       position: absolute;
     }
-    &::after {
+    /* &::after {
       left: 0;
       background: linear-gradient(
         90deg,
@@ -76,7 +78,7 @@ const AvatarGridStyled = styled.div`
         rgba(255, 255, 255, 0.51) 80.21%,
         rgba(255, 255, 255, 0) 100%
       );
-    }
+    } */
     &::before {
       right: 0;
       background: linear-gradient(
@@ -97,7 +99,7 @@ const RelativeDiv = styled.div`
 const ButtonStyled = styled.button<ButtonProps>`
   cursor: pointer;
   border: none;
-  font-size: 88px;
+  font-size: 92px;
   height: 1em;
   padding: 0;
   background: none;
@@ -112,6 +114,6 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
 
   @media (max-width: 768px) {
-    font-size: 120px;
+    font-size: 110px;
   }
 `;
