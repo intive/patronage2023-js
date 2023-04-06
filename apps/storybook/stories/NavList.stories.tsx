@@ -1,8 +1,7 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
-import { NavList } from "ui";
-import { dummyNavItemContents } from "../../web/app/NavListDemo";
+import { NavList, Avatar } from "ui";
+import { dummyNavItemContents as dummyNavItemContentsWithIcon } from "../../web/app/NavListDemo";
 import { NavItemContents } from "ui/NavList";
 
 //imported dummyNavItemContents to already have contents with icon.
@@ -25,23 +24,29 @@ const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
   },
 ];
 
+//creating AvatarStyled in the aim of adjusting size of Avatar component
+const AvatarStyled = styled(Avatar)`
+  width: 28px;
+  height: 28px;
+`;
+
 const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
   {
-    title: "Bills",
+    title: "Leonard Hofstadter",
     href: "",
-    componentToRender: "/avatar.svg",
+    componentToRender: <AvatarStyled src="/avatar.svg" />,
     id: 1,
   },
   {
-    title: "Subscriptions",
+    title: "Howard Wolowitz",
     href: "",
-    componentToRender: "/avatar.svg",
+    componentToRender: <AvatarStyled src="/avatar.svg" />,
     id: 2,
   },
   {
-    title: "Savings",
+    title: "Rajesh Kotthrappall",
     href: "",
-    componentToRender: "/avatar.svg",
+    componentToRender: <AvatarStyled src="/avatar.svg" />,
     id: 3,
   },
 ];
@@ -69,20 +74,20 @@ const Template: ComponentStory<typeof NavList> = ({ ...args }) => (
   </NavListWrapper>
 );
 
-//list with list items that include icon and text
-export const ListWithTextAndIcons = Template.bind({});
-ListWithTextAndIcons.args = {
-  contents: dummyNavItemContents,
-};
-
 //list with list items that include text only
 export const ListWithText = Template.bind({});
 ListWithText.args = {
   contents: dummyNavItemContentsTextOnly,
 };
 
+//list with list items that include icon and text
+export const ListWithTextAndIcons = Template.bind({});
+ListWithTextAndIcons.args = {
+  contents: dummyNavItemContentsWithIcon,
+};
+
 //list with list items that include text only
 export const ListWithTextAndAvatars = Template.bind({});
-ListWithText.args = {
+ListWithTextAndAvatars.args = {
   contents: dummyNavItemContentsWithAvatar,
 };

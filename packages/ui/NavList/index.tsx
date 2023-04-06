@@ -1,19 +1,19 @@
 "use client";
 
 import styled from "styled-components";
-import { NavItem, Icon, Avatar } from "ui";
+import { NavItem } from "ui";
 import { usePathname } from "next/navigation";
+import React, { ReactElement } from "react";
 
-//types of NavItemContents to mark that NavList will receive array full of objects of type below.
-
+//types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
   title: string;
-  componentToRender?: "payments" | "subscriptions" | "savings" | string;
+  componentToRender?: ReactElement;
   href: string;
   id: number;
 };
 
-//types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type.
+//types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
 export type NavListProps = {
   contents: Array<NavItemContents>;
 } & React.HTMLProps<HTMLUListElement>;
@@ -24,18 +24,18 @@ const NavListStyled = styled.ul`
   height: auto;
 `;
 
-//span that imitates children element - wrapper for text
+//wrapper for text (incoming `content.title`)
 const SpanStyled = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
-  margin-left: 3%;
+  margin-left: 10px;
 `;
 
-//div that imitates children element - wrapper for icon
+//div that imitates wrapper for icon, currently imported in places where NavList is being used
 //with !important this div will always have bcg on "white", even when `active` prop will change bcg of whole li element on "#F1FBF6"
-const IconWrapper = styled.div`
+export const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,32 +44,19 @@ const IconWrapper = styled.div`
   border-radius: 8px;
 `;
 
-const AvatarStyled = styled(Avatar)`
-  width: 2em;
-  height: 1em;
-`;
-
 export const NavList = ({ contents }: NavListProps) => {
   const currentPage = usePathname();
   return (
     <NavListStyled>
-      {contents.map(({ href, id, componentToRender, title }) => {
+      {contents.map((content) => {
         return (
           <NavItem
-            active={href === currentPage}
-            onClick={() => {}}
-            key={id}
-            href={href}>
-            {componentToRender && componentToRender === "payments" || "subscriptions" || "savings"  &&(
-              <IconWrapper>
-                <Icon icon={componentToRender} color="#1E4C40" />
-              </IconWrapper>
-            ) } 
-            
-            {componentToRender && componentToRender === typeof String && (
-              <AvatarStyled src={componentToRender} />
-            )}
-            <SpanStyled>{title}</SpanStyled>
+            active={content.href === currentPage}
+
+            key={content.id}
+            href={content.href}>
+            {content.componentToRender}
+            <SpanStyled>{content.title}</SpanStyled>
           </NavItem>
         );
       })}
