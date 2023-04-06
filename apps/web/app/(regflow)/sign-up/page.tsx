@@ -1,5 +1,5 @@
-import { SignUpStep3 } from "./SignUpStep3";
+import { ProfileScreen } from "./ProfileScreen";
 
 export default function SignUpPage() {
-  return <SignUpStep3 />;
+  return <ProfileScreen />;
 }

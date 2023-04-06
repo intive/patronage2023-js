@@ -70,10 +70,20 @@ const AvatarsWrapper = styled.div`
   }
 `;
 
-export const SignUpStep3 = () => {
+type ProfileScreenProps = {
+  avatarSelected: string;
+  goBack: () => void;
+  submitProfile: () => void;
+} & React.HTMLProps<HTMLDivElement>;
+
+export const ProfileScreen = ({
+  avatarSelected,
+  goBack,
+  submitProfile,
+}: ProfileScreenProps ) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { step3 } = dict;
-  const [selectedAvatar, setSelectedAvatar] = useState("1");
+  const [ selectedAvatar, setSelectedAvatar ] = useState("1");
 
   return (
     <>
@@ -121,7 +131,6 @@ export const SignUpStep3 = () => {
           onSelect={setSelectedAvatar}
         />
         </AvatarsWrapper>
-          
         <FormWrapper>
           <Form
             onSubmit={(values) => {
