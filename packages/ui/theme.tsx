@@ -2,7 +2,7 @@
 import { ThemeProvider } from "styled-components";
 import { ReactNode } from "react";
 
-const colors = {
+export const colors = {
   Teal10: "#1E4C40",
   Teal9: "#2E6858",
   Teal8: "#397B65",
@@ -120,6 +120,11 @@ export const theme = {
     main: colors.Teal6,
     inactive: colors.Neutral4,
   },
+  signUp: {
+      main: colors.Teal10,
+      secondary: colors.Neutral8,
+      accent: colors.Neutral2,
+  }
 };
 
 export type ThemeType = typeof theme;

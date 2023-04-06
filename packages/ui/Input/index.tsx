@@ -32,6 +32,7 @@ export const Input = ({
   onChange,
   onFocus,
   onBlur,
+  onSubmit,
   onInputCleared,
 }: InputProps) => {
   const theme = useContext(ThemeContext);
@@ -93,6 +94,7 @@ export const Input = ({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
+        onSubmit={onSubmit}
         hasSupportingLabel={Boolean(supportingLabel)}
         aria-invalid={hasError ? "true" : undefined}
         aria-errormessage={errorId}
@@ -124,8 +126,9 @@ const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
   width: 100%;
-  margin-bottom: ${({ hasSupportingLabel }) =>
-    hasSupportingLabel ? "0" : "18px"};
+  /* margin-bottom: ${({ hasSupportingLabel }) =>
+    hasSupportingLabel ? "0" : "18px"}; */
+  margin-bottom: 2em;
 
   :focus {
     outline: none;
@@ -196,4 +199,7 @@ const StyledSupportingLabel = styled.div<StyledErrorProps>`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
+  position: absolute;
+  top: 4.5em;
+  left: 0;
 `;

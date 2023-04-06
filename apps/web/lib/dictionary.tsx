@@ -67,6 +67,44 @@ const dictionary = {
       en: "Hello from Sign-Up page",
       pl: "Witaj ze strony rejestracji",
     },
+    step3: {
+      title: {
+        en:"Customise the account",
+        pl:"Spersonalizuj swoje konto",
+      },
+      subtitle: {
+        en: "Select your avatar and tell us your name",
+        pl: "Wybierz avatar i powiedz jak się nazywasz",
+      },
+      firstNameInput:{
+        label: {
+          en: "First name",
+          pl: "Imię",
+        },
+        error : {
+          en: "The field cannot be empty",
+          pl: "Pole nie może być puste",
+        }
+      },
+      lastNameInput:{
+        label: {
+          en: "Last name",
+          pl: "Nazwisko",
+        },
+        error : {
+          en: "The field cannot be empty",
+          pl: "Pole nie może być puste",
+        }
+      },
+      backButton: { 
+        en: "Back", 
+        pl: "Powrót" 
+      },
+      submitButton: { 
+        en: "Create my account", 
+        pl: "Utwórz konto" 
+      },
+    }
   },
   BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
