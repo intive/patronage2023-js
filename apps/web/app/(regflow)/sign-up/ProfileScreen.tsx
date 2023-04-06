@@ -37,7 +37,7 @@ const FormWrapper = styled.div`
 
 const FieldsWrapper = styled.div`
   width: 100%;
-  height: 140px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -159,7 +159,7 @@ export const ProfileScreen = ({
                         onInputCleared={() => setValue("")}
                         onBlur={onBlur}
                         hasError={errors.length > 0}
-                        supportingLabel={errors}
+                        supportingLabel={errors.length ? errors : null}
                       />
                     )}
                   </Field>
@@ -178,7 +178,7 @@ export const ProfileScreen = ({
                         onBlur={onBlur}
                         onInputCleared={() => setValue("")}
                         hasError={errors.length > 0}
-                        supportingLabel={errors}
+                        supportingLabel={errors.length ? errors : null}
                       />
                     )}
                   </Field>

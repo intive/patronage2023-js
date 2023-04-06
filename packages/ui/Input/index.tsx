@@ -198,7 +198,4 @@ const StyledSupportingLabel = styled.div<StyledErrorProps>`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
-  position: absolute;
-  top: 4.5em;
-  left: 0;
 `;
