@@ -124,12 +124,13 @@ export const theme = {
       inactiveBackground: "transparent",
       hoverBackground: colors.Teal1,
     },
-  avatarSelector: {
-    active: colors.Teal6,
-  },
-  checkbox: {
-    main: colors.Teal6,
-    inactive: colors.Neutral4,
+    avatarSelector: {
+      active: colors.Teal6,
+    },
+    checkbox: {
+      main: colors.Teal6,
+      inactive: colors.Neutral4,
+    },
   },
 };
 
