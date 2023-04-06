@@ -65,11 +65,16 @@ const AvatarGridStyled = styled.div`
     &:before {
       content: "";
       width: 36px;
-      height: 100%;
+      height: 88%;
       top: 0;
       position: absolute;
+
+      @media (hover: none) {
+      height: 100%;
+      }
     }
-    /* &::after {
+
+        /* &::after {
       left: 0;
       background: linear-gradient(
         90deg,
