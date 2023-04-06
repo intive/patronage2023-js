@@ -51,5 +51,5 @@ export const FlowController = () => {
   ];
   const Screen = steps[currentStep].screen;
 
-  return <div>{Screen}</div>;
+  return <>{Screen}</>;
 };
