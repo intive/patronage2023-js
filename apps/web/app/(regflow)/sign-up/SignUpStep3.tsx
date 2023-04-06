@@ -73,7 +73,7 @@ const AvatarsWrapper = styled.div`
 export const SignUpStep3 = () => {
   const { dict, t } = useTranslate("SignUpPage");
   const { step3 } = dict;
-  const [selected, setSelected] = useState("1");
+  const [selectedAvatar, setSelectedAvatar] = useState("1");
 
   return (
     <>
@@ -117,16 +117,16 @@ export const SignUpStep3 = () => {
               src: "/avatars/8.svg",
             },
           ]}
-          selectedAvatar={selected}
-          onSelect={setSelected}
+          selectedAvatar={selectedAvatar}
+          onSelect={setSelectedAvatar}
         />
         </AvatarsWrapper>
           
         <FormWrapper>
           <Form
             onSubmit={(values) => {
-              console.log(values, selected);
-              alert(`Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selected}`)
+              console.log(values, selectedAvatar);
+              alert(`Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`)
             }}>
             {({ submit, errors }) => (
               <form
