@@ -44,6 +44,7 @@ export const H3Styled = styled.h3`
   font-family: "Inter", sans-serif;
 `;
 
+//did not yet applied dictionary, Checkbox component here is dummy
 export default function MultiCardLayout({ children }: LayoutProps) {
   return (
     <CardWrapperStyled>
@@ -79,5 +80,3 @@ export default function MultiCardLayout({ children }: LayoutProps) {
     </CardWrapperStyled>
   );
 }
-
-

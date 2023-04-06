@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TypoStyled, LinkStyled } from "../HomePage";
+import { MainPageTranslated } from "./MainPageTranslated";
 
 export const metadata: Metadata = {
   title: "Home",
@@ -7,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function MainPage() {
-  return (
-    <>
-      <TypoStyled>Welcome to Inbudget</TypoStyled>
-      <LinkStyled href="/sign-in">Create my free account!</LinkStyled>
-    </>
-  );
+  return <MainPageTranslated />;
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import { CardStyled, TypoStyled, LinkStyled } from "./main-page-components";
+import { CardStyled, TypoStyled, LinkStyled } from "app/(navigation)/HomePage";
 import { useTranslate } from "lib/hooks";
 
-export const CreateAccountPageCard = () => {
-  const { dict, t } = useTranslate("CreateAccountPage");
+export const MainPageTranslated = () => {
+  const { dict, t } = useTranslate("MainPage");
 
   return (
     <CardStyled>

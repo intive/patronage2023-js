@@ -1,4 +1,4 @@
-import { TypoStyled } from "../../HomePage";
+import WelcomePageTranslated from "./WelcomePageTranslated";
 export default function WelcomePage() {
-  return <TypoStyled>Welcome to Inbudget</TypoStyled>;
+  return <WelcomePageTranslated />;
 }

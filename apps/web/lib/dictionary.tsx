@@ -29,10 +29,10 @@ const dictionary = {
       },
     },
   },
-  HomePage: {
+  WelcomePage: {
     welcomeText: { en: "Welcome to Inbudget", pl: "Witaj w Inbudget" },
   },
-  CreateAccountPage: {
+  MainPage: {
     welcomeText: { en: "Welcome to Inbudget", pl: "Witaj w Inbudget" },
     createAccountLink: {
       en: "Create my free account!",
