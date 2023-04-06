@@ -8,15 +8,18 @@ export default {
 } as ComponentMeta<typeof Textarea>;
 
 //creating imitation of parent component for proper display on Storybook
-const TextAreaWrapper = styled.div`
+const TextareaWrapper = styled.div`
   height: 300px;
   width: 400px;
 `;
 
-const Template: ComponentStory<typeof Textarea> = () => (
-  <TextAreaWrapper>
-    <Textarea />
-  </TextAreaWrapper>
+const Template: ComponentStory<typeof Textarea> = ({ ...args }) => (
+  <TextareaWrapper>
+    <Textarea {...args} />
+  </TextareaWrapper>
 );
 
 export const Simple = Template.bind({});
+Simple.args = {
+  placeholder: "Description",
+};

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 type TextareaProps = {
   placeholder?: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
 } & React.HTMLProps<HTMLTextAreaElement>;
 
