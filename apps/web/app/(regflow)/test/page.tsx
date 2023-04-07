@@ -27,11 +27,11 @@ export default function TestPage() {
   const [endDate, setEndDate] = useState<number | null>(null);
 
   const onSelectStartDate = (date: Date) => {
-    setStartDate(date.getTime());
+    date ? setStartDate(date.getTime()) : setStartDate(null)
   };
 
   const onSelectEndDate = (date: Date) => {
-    setEndDate(date.getTime());
+    date ? setEndDate(date.getTime()): setEndDate(null)
   };
 
   return (
@@ -41,18 +41,20 @@ export default function TestPage() {
       </h2>
       <form style={{ minHeight: "500px" }}>
         <Line>
+          {/* usage */}
           <CustomDatePicker
             placeholder="Start date"
-            onSelect={onSelectStartDate}
+            onSelect={(date) => onSelectStartDate(date)}
           />
+          {/* usage */}
           <p> to </p>
-          <CustomDatePicker placeholder="End date" onSelect={onSelectEndDate} />
+          <CustomDatePicker placeholder="End date" onSelect={(date)=> onSelectEndDate(date)} />
         </Line>
         <Line style={{ marginTop: "50px" }}>
-          <div>StartDate: {startDate}</div>
+          <div>StartDate: {startDate ? startDate :  "unset"}</div>
         </Line>
         <Line>
-          <div>EndDate: {endDate}</div>
+          <div>EndDate: {endDate ? endDate: "unset"}</div>
         </Line>
       </form>
     </FormWrapper>
