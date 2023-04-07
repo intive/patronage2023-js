@@ -8,6 +8,7 @@ export const Button = ({
   disabled = false,
   children,
   onClick,
+  className,
   small = false,
 }: ButtonProps) => {
   return (
@@ -16,7 +17,8 @@ export const Button = ({
       onClick={onClick}
       fullWidth={fullWidth}
       disabled={disabled}
-      small={small}>
+      small={small}
+      className={className}>
       {children}
     </ButtonStyled>
   );
