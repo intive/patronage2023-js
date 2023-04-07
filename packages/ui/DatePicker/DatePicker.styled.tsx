@@ -40,10 +40,10 @@ export const DatePickerStyled = styled.div`
 
   .react-datepicker__year-dropdown {
     border-radius: 1rem;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #82d3af;
     background-color: #a3eac9;
-    box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
-      0px 2px 4px rgba(32, 37, 50, 0.03);
+    box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.12),
+      0px 2px 4px rgba(32, 37, 50, 0.12);
   }
 
   .react-datepicker__month-container {
@@ -114,18 +114,22 @@ export const DatePickerStyled = styled.div`
     }
   }
 
+  .react-datepicker__day:hover {
+    border-radius: 50%;
+    background-color: #a3eac9;
+  }
+
   .react-datepicker__day--selected {
     color: white;
     border-radius: 50%;
     background-color: #1e4c40;
     :hover {
-      color: #222222;
+      background-color: #1e4c40;
     }
   }
 
-  .react-datepicker__day:hover {
-    border-radius: 50%;
-    background-color: #d0f5e3;
+  .react-datepicker__year-option {
+    position: relative;
   }
 
   .react-datepicker__day--disabled:hover {
@@ -176,7 +180,7 @@ export const DatePickerStyled = styled.div`
 
   .react-datepicker__year-option--selected_year:hover {
     border-radius: 1rem;
-    background-color: #2e6858;
+    background-color: #1e4c40;
   }
 
   .react-datepicker__year-option:first-of-type,
@@ -190,9 +194,25 @@ export const DatePickerStyled = styled.div`
     line-height: 2.5rem;
   }
 
-  .react-datepicker__year-dropdown,
-  .react-datepicker__year-option:hover {
-    border-radius: 1rem;
-    border: 2px solid #a3eac9;
+  .react-datepicker__year-option:first-of-type::before {
+    position: absolute;
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-left: 3px solid #1e4c40;
+    border-bottom: 3px solid #1e4c40;
+    top: 13px;
+    transform: rotate(135deg);
+  }
+
+  .react-datepicker__year-option:last-of-type::after {
+    position: absolute;
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-left: 3px solid #1e4c40;
+    border-bottom: 3px solid #1e4c40;
+    top: 8px;
+    transform: rotate(-45deg);
   }
 `;
