@@ -39,7 +39,6 @@ export const IconPicker = ({
   children,
 }: IconPickerProps) => {
   const [currentIcon, setCurrentIcon] = useState(defaultIcon);
-  console.log("ustawino current z usestate");
   const [iconSelectorVisible, setIconSelectorVisible] = useState(false);
 
   const handleEditButtonClick = () => {
@@ -49,9 +48,7 @@ export const IconPicker = ({
   const handleIconSelectorButtonClick = (icon: IconType) => {
     setIconSelectorVisible(false);
     setCurrentIcon(icon);
-    console.log("ustawiono current z buttona");
     onSelect(icon);
-    console.log("ustawiono select z buttona");
   };
 
   return (
