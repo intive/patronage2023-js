@@ -116,6 +116,13 @@ export const theme = {
     inactive: colors.Neutral6,
     background: colors.Teal7,
   },
+  avatarSelector: {
+    active: colors.Teal6,
+  },
+  checkbox: {
+    main: colors.Teal6,
+    inactive: colors.Neutral4,
+  },
 };
 
 export type ThemeType = typeof theme;
