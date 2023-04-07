@@ -8,7 +8,7 @@ import { DatePickerStyled } from "./DatePicker.styled";
 type CustomDatePickerProps = {
   placeholder: string;
   onSelect: (date: Date) => void;
-} & React.HTMLProps<HTMLDivElement>;
+};
 
 export const CustomDatePicker = ({
   placeholder = "",
@@ -19,10 +19,23 @@ export const CustomDatePicker = ({
   return (
     <DatePickerStyled>
       <DatePicker
+        popperPlacement="top-end"
+        popperModifiers={[
+          {
+            name: "preventOverflow",
+            options: {
+              rootBoundary: "viewport",
+              tether: false,
+              altAxis: true,
+            },
+          },
+        ]}
+        popperProps={{
+          strategy: "fixed",
+        }}
         onSelect={onSelect}
-        withPortal
-        name="date"
         selected={date}
+        name={placeholder}
         onChange={(date: Date) => {
           setDate(date);
           onSelect(date);
