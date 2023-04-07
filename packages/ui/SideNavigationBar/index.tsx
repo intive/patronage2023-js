@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
 import { SubMenu } from "./SubMenu";
+import { SubMenuDataProps } from "./SubMenu";
 
 import { IconProps } from "../Icon";
 
@@ -22,16 +23,23 @@ type SubMenuBoolean = {
   isSubMenuShown: boolean;
 };
 
-const initiateSubMenusState = (items: SideNavigationBarItemProps[]) => {
-  const stateObject: any = {};
+type StateObject = {
+  [key: string]: boolean;
+};
+
+const initiateSideNavBarItemsState = (items: SideNavigationBarItemProps[]) => {
+  const stateObject: StateObject = {};
   items.forEach((item, index) => {
-    if (item.subMenu) return (stateObject[`${index}`] = false);
+    return (stateObject[`${index}`] = false);
   });
 
   return stateObject;
 };
 
-const getSubMenusStateAfterClick = (temporaryStateObj: any, index: number) => {
+const getSideNavBarItemsStateAfterClick = (
+  temporaryStateObj: StateObject,
+  index: number
+) => {
   Object.keys(temporaryStateObj).forEach((key) => {
     if (key !== `${index}`) temporaryStateObj[key] = false;
   });
@@ -40,27 +48,24 @@ const getSubMenusStateAfterClick = (temporaryStateObj: any, index: number) => {
   return temporaryStateObj;
 };
 
-const Divider = styled.div`
-  width: 1px;
-  height: inherit;
-  background-color: lightgray;
-  content: " ";
-`;
-
 export const SideNavigationBar = ({
   items,
   pathname,
 }: SideNavigationBarProps) => {
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
-  const [subMenuData, setSubMenuData] = useState({});
-
-  const [isSpecSubMenuShown, setIsSpecSubMenuShown] = useState(
-    initiateSubMenusState(items)
+  const [subMenuData, setSubMenuData] = useState<{} | SubMenuDataProps>({});
+  const [isSideNavBarItemClicked, setIsSideNavBarItemClicked] = useState(
+    initiateSideNavBarItemsState(items)
   );
 
-  const showSubMenu = (subMenuData: object, index: any): void => {
+  const hideSubMenu = () => {
+    setSubMenuData({});
+    setIsSubMenuShown(false);
+  };
+
+  const showSubMenu = (subMenuData: object, index: number): void => {
     // Creating a shallow copy of state object
-    const temporaryStateObj: any = Object.assign({}, isSpecSubMenuShown);
+    const temporaryStateObj: any = Object.assign({}, isSideNavBarItemClicked);
 
     // Checking whether already active side nav bar item was clicked again, if so, it should be closed
     if (
@@ -69,19 +74,25 @@ export const SideNavigationBar = ({
       })
     ) {
       hideSubMenu();
+      setIsSideNavBarItemClicked(initiateSideNavBarItemsState(items));
       return;
     }
 
     // Deactivate all side nav bar items apart from the one that has just been clicked
-    setIsSpecSubMenuShown(getSubMenusStateAfterClick(temporaryStateObj, index));
     setSubMenuData({ ...subMenuData });
     setIsSubMenuShown(true);
+    setIsSideNavBarItemClicked(
+      getSideNavBarItemsStateAfterClick(temporaryStateObj, index)
+    );
   };
 
-  const hideSubMenu = () => {
-    setSubMenuData({});
-    setIsSubMenuShown(false);
-    setIsSpecSubMenuShown(initiateSubMenusState(items));
+  const linkClickHandler = (index: any) => {
+    hideSubMenu();
+
+    const temporaryStateObj: any = Object.assign({}, isSideNavBarItemClicked);
+    setIsSideNavBarItemClicked(
+      getSideNavBarItemsStateAfterClick(temporaryStateObj, index)
+    );
   };
 
   return (
@@ -94,7 +105,7 @@ export const SideNavigationBar = ({
               onClick={() => showSubMenu(subMenu, index)}
               icon={icon}
               textValue={textValue}
-              activeFlag={isSpecSubMenuShown[`${index}`]}
+              activeFlag={isSideNavBarItemClicked[`${index}`]}
             />
           ) : (
             <SideNavigationBarLink
@@ -102,17 +113,14 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={href === pathname}
-              onClick={() => hideSubMenu()}
+              activeFlag={isSideNavBarItemClicked[`${index}`]}
+              onClick={() => linkClickHandler(index)}
             />
           );
         })}
       </SideNavigationBarStyled>
       {isSubMenuShown && subMenuData && (
-        <>
-          <Divider></Divider>
-          <SubMenu dataObject={subMenuData} />
-        </>
+        <SubMenu subMenuDataObject={subMenuData} />
       )}
     </>
   );

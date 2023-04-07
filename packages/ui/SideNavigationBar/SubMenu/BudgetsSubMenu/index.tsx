@@ -1,7 +1,22 @@
 import styled from "styled-components";
 import { Icon } from "../../../Icon";
+import { IconProps } from "../../../Icon";
 import { Button } from "../../../Button";
 import { SearchInput } from "../../../Input/SearchInput";
+import { SubMenuDataItemsProps } from "..";
+
+type BudgetsSubMenuProps = {
+  title: string;
+  sort: {
+    method: Function;
+    icon: IconProps;
+  };
+  searchInput: {
+    icon: IconProps;
+    placeholder: string;
+  };
+  items: SubMenuDataItemsProps[];
+};
 
 export const BudgetsSubMenu = ({
   title,
@@ -38,13 +53,6 @@ export const BudgetsSubMenu = ({
       </Button>
     </>
   );
-};
-
-type BudgetsSubMenuProps = {
-  title: string;
-  sort: object;
-  searchInput: any;
-  items: [];
 };
 
 const HeaderStyled = styled.div`

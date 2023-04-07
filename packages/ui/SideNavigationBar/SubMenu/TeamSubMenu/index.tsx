@@ -1,15 +1,34 @@
 import styled from "styled-components";
 import { Icon } from "../../../Icon";
+import { IconProps } from "../../../Icon";
 import { Avatar } from "../../../Avatar";
 import { Button } from "../../../Button";
 import { SearchInput } from "../../../Input/SearchInput";
+
+type TeamSubMenuDataItemsProps = {
+  avatarSrc: string;
+  username: string;
+};
+
+type TeamSubMenuProps = {
+  title: string;
+  sort: {
+    method: Function;
+    icon: IconProps;
+  };
+  searchInput: {
+    icon: IconProps;
+    placeholder: string;
+  };
+  items: TeamSubMenuDataItemsProps[];
+};
 
 export const TeamSubMenu = ({
   title,
   sort,
   searchInput,
   items,
-}: BudgetsSubMenuProps) => {
+}: TeamSubMenuProps) => {
   return (
     <>
       <MainDiv>
@@ -37,13 +56,6 @@ export const TeamSubMenu = ({
       </Button>
     </>
   );
-};
-
-type BudgetsSubMenuProps = {
-  title: string;
-  sort: object;
-  searchInput: any;
-  items: [];
 };
 
 const HeaderStyled = styled.div`

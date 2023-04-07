@@ -1,13 +1,30 @@
 import styled from "styled-components";
-import { Icon } from "../../Icon";
-import { Input } from "../../Input";
-import { Button } from "../../Button";
+import { IconProps } from "../../Icon";
 import { BudgetsSubMenu } from "./BudgetsSubMenu";
 import { TeamSubMenu } from "./TeamSubMenu";
 import { SettingsSubMenu } from "./SettingsSubMenu";
 
+export type SubMenuDataItemsProps = {
+  icon: IconProps;
+  label: string;
+  href: string;
+};
+
+export type SubMenuDataProps = {
+  title: string;
+  sort: {
+    method: Function;
+    icon: IconProps;
+  };
+  searchInput: {
+    icon: IconProps;
+    placeholder: string;
+  };
+  items: SubMenuDataItemsProps[];
+};
+
 type SubMenuProps = {
-  dataObject: any;
+  subMenuDataObject: SubMenuDataProps;
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
@@ -17,27 +34,29 @@ const SubMenuStyled = styled.div`
 
   padding: 40px 16px 24px 16px;
   box-shadow: 10px 10px;
+
+  border-left: 1px solid lightgray;
 `;
 
-export const SubMenu = ({ dataObject }: SubMenuProps) => {
+export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   return (
     <SubMenuStyled>
-      {dataObject.title === "Budgets" ? (
+      {subMenuData.title === "Budgets" ? (
         <BudgetsSubMenu
-          title={dataObject.title}
-          sort={dataObject.sort}
-          searchInput={dataObject.searchInput}
-          items={dataObject.items}
+          title={subMenuData.title}
+          sort={subMenuData.sort}
+          searchInput={subMenuData.searchInput}
+          items={subMenuData.items}
         />
-      ) : dataObject.title === "Team" ? (
+      ) : subMenuData.title === "Team" ? (
         <TeamSubMenu
-          title={dataObject.title}
-          sort={dataObject.sort}
-          searchInput={dataObject.searchInput}
-          items={dataObject.items}
+          title={subMenuData.title}
+          sort={subMenuData.sort}
+          searchInput={subMenuData.searchInput}
+          items={subMenuData.items}
         />
-      ) : dataObject.title === "Settings" ? (
-        <SettingsSubMenu title={dataObject.title} items={dataObject.items} />
+      ) : subMenuData.title === "Settings" ? (
+        <SettingsSubMenu title={subMenuData.title} items={subMenuData.items} />
       ) : (
         ""
       )}
