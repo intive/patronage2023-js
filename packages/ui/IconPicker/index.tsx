@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   IconPickerStyled,
   IconAndButtonWrapperStyled,
@@ -13,6 +13,7 @@ type IconPickerProps = {
   defaultIcon?: IconType;
   icons: IconType[];
   onSelect: (icon: IconType) => void;
+  children?: ReactNode;
 };
 
 type IconSelectorButtonProps = {
@@ -35,8 +36,10 @@ export const IconPicker = ({
   defaultIcon,
   icons,
   onSelect,
+  children,
 }: IconPickerProps) => {
   const [currentIcon, setCurrentIcon] = useState(defaultIcon);
+  console.log("ustawino current z usestate");
   const [iconSelectorVisible, setIconSelectorVisible] = useState(false);
 
   const handleEditButtonClick = () => {
@@ -46,22 +49,28 @@ export const IconPicker = ({
   const handleIconSelectorButtonClick = (icon: IconType) => {
     setIconSelectorVisible(false);
     setCurrentIcon(icon);
+    console.log("ustawiono current z buttona");
     onSelect(icon);
+    console.log("ustawiono select z buttona");
   };
 
   return (
     <IconPickerStyled>
       <IconAndButtonWrapperStyled>
-        {currentIcon && <Icon icon={currentIcon} iconSize={40} />}
+        {currentIcon ? (
+          <Icon icon={currentIcon} iconSize={40} />
+        ) : (
+          <>{children}</>
+        )}
         <EditButtonStyled onClick={handleEditButtonClick}>
           <Icon icon="edit" iconSize={12} />
         </EditButtonStyled>
       </IconAndButtonWrapperStyled>
       {iconSelectorVisible && (
         <IconsSelectorStyled>
-          {icons.map((icon, index) => (
+          {icons.map((icon) => (
             <IconSelectorButton
-              key={`${index}-icon-selector-button`}
+              key={icon}
               icon={icon}
               onClick={() => handleIconSelectorButtonClick(icon)}
             />

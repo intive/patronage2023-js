@@ -64,6 +64,7 @@ export const SelectIconButtonStyled = styled.button`
   background-color: transparent;
   color: ${({ theme }) => theme.iconPicker.main};
   border: none;
+  cursor: pointer;
 
   &:hover,
   &:focus {
