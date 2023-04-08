@@ -57,7 +57,11 @@ export const IconSelector = ({
   return (
     <IconsSelectorStyled>
       {icons.map((icon) => (
-        <IconSelectorButton key={icon} icon={icon} onClick={() => onSelect} />
+        <IconSelectorButton
+          key={icon}
+          icon={icon}
+          onClick={() => onSelect(icon)}
+        />
       ))}
     </IconsSelectorStyled>
   );
