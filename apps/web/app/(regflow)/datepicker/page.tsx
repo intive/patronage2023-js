@@ -4,7 +4,9 @@ import { Button, CustomDatePicker } from "ui";
 
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import pl from "date-fns/locale/pl";
+import en from "date-fns/locale/en-US";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -30,6 +32,8 @@ export default function TestPage() {
   const [startDate, setStartDate] = useState<number | null>(null);
   const [endDate, setEndDate] = useState<number | null>(null);
   const [anotherDate, setAnotherDate] = useState<number | null>(null);
+  const [lang, setLang] = useState<string | null | undefined>();
+  const [locale, setLocale] = useState<Locale>(en);
 
   const onSelectStartDate = (date: Date) => {
     date ? setStartDate(date.getTime()) : setStartDate(null);
@@ -45,8 +49,25 @@ export default function TestPage() {
 
   const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log((e.target as HTMLElement).innerHTML);
+    const lang = (e.target as HTMLElement).innerHTML.toLowerCase();
+    setLang(lang);
   };
+
+  useEffect(() => {
+    switch (lang) {
+      case "pl":
+        setLocale(pl);
+        break;
+
+      case "en":
+        setLocale(en);
+        break;
+
+      default:
+        setLocale(en);
+        break;
+    }
+  }, [lang]);
 
   return (
     <FormWrapper style={{ minWidth: "314px" }}>
@@ -57,12 +78,14 @@ export default function TestPage() {
         <Line>
           {/* usage */}
           <CustomDatePicker
+            locale={locale}
             placeholder="Start date"
             onSelect={(date) => onSelectStartDate(date)}
           />
           <p> to </p>
           {/* usage */}
           <CustomDatePicker
+            locale={locale}
             placeholder="End date"
             onSelect={(date) => onSelectEndDate(date)}
           />
@@ -75,10 +98,10 @@ export default function TestPage() {
             End Date: {endDate ? endDate : "unset"}
           </div>
         </Line>
-
         <Line style={{ height: "100px" }}></Line>
+
         <Line style={{ justifyContent: "center" }}>
-          <p>Lang:</p>
+          <p>Select language:</p>
           <Button variant="simple" onClick={(e) => handleLangClick(e)}>
             EN
           </Button>
@@ -87,14 +110,16 @@ export default function TestPage() {
             PL
           </Button>
         </Line>
+        <Line>Selected language: {lang ? lang : "en"}</Line>
         <Line style={{ height: "100px" }}></Line>
-        <Line style={{ marginBottom: "15px" }}>
-          Another Date: {anotherDate ? anotherDate : "unset"}
-        </Line>
         <CustomDatePicker
+          locale={locale}
           placeholder="Third date"
           onSelect={(date) => onSelectAnotherDate(date)}
         />
+        <Line style={{ marginTop: "15px" }}>
+          Another Date: {anotherDate ? anotherDate : "unset"}
+        </Line>
       </form>
     </FormWrapper>
   );

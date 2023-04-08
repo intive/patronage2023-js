@@ -30,7 +30,7 @@ export const LanguageProvider = ({ children }: any) => {
     setLang(
       localLang && Object.values<string>(languages).includes(localLang)
         ? (localLang as languages)
-        : languages.en
+        : languages.pl
     );
   }, []);
 
