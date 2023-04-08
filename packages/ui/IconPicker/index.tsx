@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   IconPickerStyled,
   IconAndButtonWrapperStyled,
@@ -21,6 +21,12 @@ type IconSelectorButtonProps = {
   onClick: () => void;
 };
 
+type IconSelectorProps = {
+  icons: IconType[];
+  onClose: () => void;
+  onSelect: (icon: IconType) => void;
+};
+
 export const IconSelectorButton = ({
   icon,
   onClick,
@@ -29,6 +35,31 @@ export const IconSelectorButton = ({
     <SelectIconButtonStyled key={icon} onClick={onClick}>
       <Icon icon={icon} iconSize={30} />
     </SelectIconButtonStyled>
+  );
+};
+
+export const IconSelector = ({
+  icons,
+  onClose,
+  onSelect,
+}: IconSelectorProps) => {
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.code === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
+  }, []);
+
+  return (
+    <IconsSelectorStyled>
+      {icons.map((icon) => (
+        <IconSelectorButton key={icon} icon={icon} onClick={() => onSelect} />
+      ))}
+    </IconsSelectorStyled>
   );
 };
 
@@ -51,6 +82,8 @@ export const IconPicker = ({
     onSelect(icon);
   };
 
+  const handleCloseIconSelector = () => setIconSelectorVisible(false);
+
   return (
     <IconPickerStyled>
       <IconAndButtonWrapperStyled>
@@ -64,15 +97,11 @@ export const IconPicker = ({
         </EditButtonStyled>
       </IconAndButtonWrapperStyled>
       {iconSelectorVisible && (
-        <IconsSelectorStyled>
-          {icons.map((icon) => (
-            <IconSelectorButton
-              key={icon}
-              icon={icon}
-              onClick={() => handleIconSelectorButtonClick(icon)}
-            />
-          ))}
-        </IconsSelectorStyled>
+        <IconSelector
+          icons={icons}
+          onClose={handleCloseIconSelector}
+          onSelect={(icon) => handleIconSelectorButtonClick(icon)}
+        />
       )}
     </IconPickerStyled>
   );
