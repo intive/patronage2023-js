@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CurrencySelector } from "ui";
+import { CurrencySelect } from "ui";
 
 export default {
-    title: "Currency Selector",
-    component: CurrencySelector,
-} as ComponentMeta<typeof CurrencySelector>;
+    title: "Currency Select",
+    component: CurrencySelect,
+} as ComponentMeta<typeof CurrencySelect>;
 
-const CurrencySelectorTemplate: ComponentStory<typeof CurrencySelector> = ({...args }) => (
-    <CurrencySelector />
+const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({...args }) => (
+    <CurrencySelect />
 );
 
-export const Selector = CurrencySelectorTemplate.bind({});
-Selector.args = {
+export const Select = CurrencySelectTemplate.bind({});
+Select.args = {
 };
