@@ -7,12 +7,17 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import pl from "date-fns/locale/pl";
 import en from "date-fns/locale/en-US";
+import { device } from "lib/media-queries";
 
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
+  max-width: 311px;
+  ${device.tablet} {
+    max-width: 416px;
+  }
 `;
 
 const Line = styled.div`
@@ -70,11 +75,11 @@ export default function TestPage() {
   }, [lang]);
 
   return (
-    <FormWrapper style={{ minWidth: "314px" }}>
+    <FormWrapper>
       <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
-        Intorducing DatePicker
+        DatePicker Demo
       </h2>
-      <form style={{ minHeight: "500px" }}>
+      <form>
         <Line>
           {/* usage */}
           <CustomDatePicker

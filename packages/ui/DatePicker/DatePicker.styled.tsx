@@ -152,12 +152,14 @@ export const DatePickerStyled = styled.div`
   }
 
   .react-datepicker__close-icon {
-    padding-right: 15px;
+    padding-right: 5px;
+    ${device.tablet} {
+      padding-right: 15px;
+    }
   }
 
   .react-datepicker__close-icon:after {
     background-color: #397b65;
-    right: 15px;
   }
 
   .react-datepicker__year-option {
