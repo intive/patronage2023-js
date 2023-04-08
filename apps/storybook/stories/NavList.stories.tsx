@@ -2,23 +2,23 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
 import { NavList, Avatar } from "ui";
 import { dummyNavItemContents as dummyNavItemContentsWithIcon } from "../../web/app/NavListDemo";
-import { NavItemContents } from "ui/NavList";
+import { NavItemContents, SpanStyled } from "ui/NavList";
 
 //imported dummyNavItemContents to already have contents with icon.
 //creating second set of dummy NavItem contents here, but only with text.
 const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
   {
-    title: "Bills",
+    ComponentToRender: <SpanStyled>Bills</SpanStyled>,
     href: "",
     id: 1,
   },
   {
-    title: "Subscriptions",
+    ComponentToRender: <SpanStyled>Subscriptions</SpanStyled>,
     href: "",
     id: 2,
   },
   {
-    title: "Savings",
+    ComponentToRender: <SpanStyled>Savings</SpanStyled>,
     href: "",
     id: 3,
   },
@@ -32,21 +32,33 @@ const AvatarStyled = styled(Avatar)`
 
 const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
   {
-    title: "Leonard Hofstadter",
     href: "",
-    componentToRender: <AvatarStyled src="/avatar.svg" />,
+    ComponentToRender: (
+      <>
+        <SpanStyled>Leonard Hofstadter</SpanStyled>
+        <AvatarStyled src="/avatar.svg" />
+      </>
+    ),
     id: 1,
   },
   {
-    title: "Howard Wolowitz",
     href: "",
-    componentToRender: <AvatarStyled src="/avatar.svg" />,
+    ComponentToRender: (
+      <>
+        <SpanStyled>Howard Wolowitz</SpanStyled>
+        <AvatarStyled src="/avatar.svg" />
+      </>
+    ),
     id: 2,
   },
   {
-    title: "Rajesh Kotthrappall",
     href: "",
-    componentToRender: <AvatarStyled src="/avatar.svg" />,
+    ComponentToRender: (
+      <>
+        <SpanStyled>Rajesh Kotthrappall</SpanStyled>
+        <AvatarStyled src="/avatar.svg" />
+      </>
+    ),
     id: 3,
   },
 ];

@@ -1,5 +1,4 @@
 "use client";
-
 import styled from "styled-components";
 import { NavItem } from "ui";
 import { usePathname } from "next/navigation";
@@ -7,8 +6,7 @@ import React, { ReactElement } from "react";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
-  title: string;
-  componentToRender?: ReactElement;
+  ComponentToRender?: ReactElement;
   href: string;
   id: number;
 };
@@ -24,8 +22,8 @@ const NavListStyled = styled.ul`
   height: auto;
 `;
 
-//wrapper for text (incoming `content.title`)
-const SpanStyled = styled.span`
+//wrapper for text coming from ComponentToRender; currently imported in places where NavList is being used
+export const SpanStyled = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -52,11 +50,9 @@ export const NavList = ({ contents }: NavListProps) => {
         return (
           <NavItem
             active={content.href === currentPage}
-
             key={content.id}
             href={content.href}>
-            {content.componentToRender}
-            <SpanStyled>{content.title}</SpanStyled>
+            {content.ComponentToRender}
           </NavItem>
         );
       })}
