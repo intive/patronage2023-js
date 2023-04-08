@@ -19,7 +19,7 @@ export const CustomDatePicker = ({
   return (
     <DatePickerStyled>
       <DatePicker
-        popperPlacement="top-start"
+        popperPlacement="top-end"
         popperModifiers={[
           {
             name: "preventOverflow",
