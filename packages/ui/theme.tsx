@@ -98,6 +98,7 @@ export const theme = {
     error: colors.Supporting4,
     borderError: colors.Neutral2,
     neutral: colors.Neutral8,
+    neutralLabel: colors.Neutral10,
     focus: colors.Teal5,
     labelBackground: colors.BasicWhite,
   },
