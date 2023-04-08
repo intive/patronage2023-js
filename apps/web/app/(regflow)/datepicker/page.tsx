@@ -91,7 +91,6 @@ export default function TestPage() {
         <Line style={{ marginBottom: "15px" }}>
           Another Date: {anotherDate ? anotherDate : "unset"}
         </Line>
-        {/* usage */}
         <CustomDatePicker
           placeholder="Third date"
           onSelect={(date) => onSelectAnotherDate(date)}
