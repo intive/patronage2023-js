@@ -3,21 +3,18 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
-// import pl from "date-fns/locale/pl";
-// import enUS from "date-fns/locale/en-US";
+import en from "date-fns/locale/en-US";
 
 type CustomDatePickerProps = {
   placeholder: string;
   onSelect: (date: Date) => void;
-  locale?: Locale;
+  locale: Locale;
 };
-
-// const globalLocale = enUS;
 
 export const CustomDatePicker = ({
   placeholder = "",
   onSelect,
-  locale,
+  locale = en,
 }: CustomDatePickerProps) => {
   const [date, setDate] = useState<Date | null>(null);
 
