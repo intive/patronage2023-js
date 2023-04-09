@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
+import "react-datepicker/dist/react-datepicker.css";
+
 import en from "date-fns/locale/en-US";
 
 type CustomDatePickerProps = {

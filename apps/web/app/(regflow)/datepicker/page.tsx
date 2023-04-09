@@ -1,13 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { device } from "lib/media-queries";
 import { Button, CustomDatePicker } from "ui";
 
 import "react-datepicker/dist/react-datepicker.css";
-import styled from "styled-components";
-import { useEffect, useState } from "react";
 import pl from "date-fns/locale/pl";
 import en from "date-fns/locale/en-US";
-import { device } from "lib/media-queries";
 
 const FormWrapper = styled.div`
   display: flex;
