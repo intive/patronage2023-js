@@ -78,15 +78,13 @@ const AvatarsWrapper = styled.div`
 `;
 
 type ProfileScreenProps = {
-  avatarSelected: string;
-  goBack: () => void;
-  submitProfile: () => void;
+  back: () => void;
+  done: () => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 export const ProfileScreen = ({
-  avatarSelected,
-  goBack,
-  submitProfile,
+  back,
+  done,
 }: ProfileScreenProps ) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { step3 } = dict;
