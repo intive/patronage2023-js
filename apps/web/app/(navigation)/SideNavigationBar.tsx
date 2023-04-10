@@ -2,56 +2,66 @@
 
 import { usePathname } from "next/navigation";
 import { SideNavigationBar } from "ui";
+import { Icon } from "ui";
 
 export default function SideNav() {
-  const pathname = usePathname() || "";
-
   // Missing: sort icon (+functionality), search input (+functionality) - separate features
   // Once navigation item is clicked, it should be active? or is it a hover state with green background and arrow right?
   const BudgetsSubMenuData = {
     title: "Budgets",
     sort: {
       method: () => {},
-      icon: "filter_list",
+      icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      icon: "search",
       placeholder: "Search budgets",
+      icon: <Icon icon="search" />,
     },
     items: [
       {
-        icon: "payments",
+        icon: <Icon icon="payments" />,
         label: "Bills",
         href: "/budgets/bills",
+        id: "1",
       },
       {
-        icon: "subscriptions",
+        icon: <Icon icon="subscriptions" />,
         label: "Subscriptions",
         href: "/budgets/subscriptions",
+        id: "2",
       },
       {
-        icon: "savings",
+        icon: <Icon icon="savings" />,
         label: "Savings",
         href: "/budgets/savings",
+        id: "3",
       },
     ],
+    button: {
+      method: () => {},
+      label: "Add new budget",
+    },
   };
 
   const TeamSubMenuData = {
     title: "Team",
     sort: {
       method: () => {},
-      icon: "filter_list",
+      icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      icon: "search",
+      icon: <Icon icon="search" />,
       placeholder: "Search team",
     },
     items: [
-      { avatarSrc: "./avatar.svg", username: "Leonard" },
-      { avatarSrc: "./avatar.svg", username: "Howard" },
-      { avatarSrc: "./avatar.svg", username: "Rajesh" },
+      { avatarSrc: "./avatar.svg", username: "Leonard", id: "1" },
+      { avatarSrc: "./avatar.svg", username: "Howard", id: "2" },
+      { avatarSrc: "./avatar.svg", username: "Rajesh", id: "3" },
     ],
+    button: {
+      method: () => {},
+      label: "Add new member",
+    },
   };
 
   const SettingsSubMenuData = {
@@ -59,12 +69,15 @@ export default function SideNav() {
     items: [
       {
         label: "Edit profile",
+        id: "1",
       },
       {
         label: "Change password",
+        id: "2",
       },
       {
         label: "Language",
+        id: "3",
       },
     ],
   };
@@ -92,7 +105,6 @@ export default function SideNav() {
           subMenu: SettingsSubMenuData,
         },
       ]}
-      pathname={pathname}
     />
   );
 }

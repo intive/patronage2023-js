@@ -11,88 +11,41 @@ import { IconProps } from "../Icon";
 type SideNavigationBarItemProps = {
   href: string;
   textValue: string;
-  subMenu?: object;
+  subMenu?: SubMenuDataProps;
 } & IconProps;
 
 type SideNavigationBarProps = {
   items: SideNavigationBarItemProps[];
-  pathname: string;
 };
 
 type SubMenuBoolean = {
   isSubMenuShown: boolean;
 };
 
-type StateObject = {
-  [key: string]: boolean;
-};
-
-const initiateSideNavBarItemsState = (items: SideNavigationBarItemProps[]) => {
-  const stateObject: StateObject = {};
-  items.forEach((item, index) => {
-    return (stateObject[`${index}`] = false);
-  });
-
-  return stateObject;
-};
-
-const getSideNavBarItemsStateAfterClick = (
-  temporaryStateObj: StateObject,
-  index: number
-) => {
-  Object.keys(temporaryStateObj).forEach((key) => {
-    if (key !== `${index}`) temporaryStateObj[key] = false;
-  });
-  temporaryStateObj[`${index}`] = !temporaryStateObj[`${index}`];
-
-  return temporaryStateObj;
-};
-
-export const SideNavigationBar = ({
-  items,
-  pathname,
-}: SideNavigationBarProps) => {
+export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
-  const [subMenuData, setSubMenuData] = useState<{} | SubMenuDataProps>({});
-  const [isSideNavBarItemClicked, setIsSideNavBarItemClicked] = useState(
-    initiateSideNavBarItemsState(items)
-  );
+  const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
+  const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
+    useState<number>();
 
   const hideSubMenu = () => {
-    setSubMenuData({});
+    setActiveSideNavBarItemIndex(undefined);
+    setSubMenuData(undefined);
     setIsSubMenuShown(false);
   };
 
-  const showSubMenu = (subMenuData: object, index: number): void => {
-    // Creating a shallow copy of state object
-    const temporaryStateObj: any = Object.assign({}, isSideNavBarItemClicked);
-
-    // Checking whether already active side nav bar item was clicked again, if so, it should be closed
-    if (
-      Object.entries(temporaryStateObj).find(([key, value]) => {
-        return key === `${index}` && value === true;
-      })
-    ) {
-      hideSubMenu();
-      setIsSideNavBarItemClicked(initiateSideNavBarItemsState(items));
-      return;
+  const showSubMenu = (subMenu: SubMenuDataProps, index: number) => {
+    if (activeSideNavBarItemIndex === index) {
+      return hideSubMenu();
     }
-
-    // Deactivate all side nav bar items apart from the one that has just been clicked
-    setSubMenuData({ ...subMenuData });
+    setActiveSideNavBarItemIndex(index);
+    setSubMenuData(subMenu);
     setIsSubMenuShown(true);
-    setIsSideNavBarItemClicked(
-      getSideNavBarItemsStateAfterClick(temporaryStateObj, index)
-    );
   };
 
-  const linkClickHandler = (index: any) => {
+  const handleLinkClick = (index: number) => {
     hideSubMenu();
-
-    const temporaryStateObj: any = Object.assign({}, isSideNavBarItemClicked);
-    setIsSideNavBarItemClicked(
-      getSideNavBarItemsStateAfterClick(temporaryStateObj, index)
-    );
+    setActiveSideNavBarItemIndex(index);
   };
 
   return (
@@ -105,7 +58,7 @@ export const SideNavigationBar = ({
               onClick={() => showSubMenu(subMenu, index)}
               icon={icon}
               textValue={textValue}
-              activeFlag={isSideNavBarItemClicked[`${index}`]}
+              activeFlag={activeSideNavBarItemIndex === index}
             />
           ) : (
             <SideNavigationBarLink
@@ -113,8 +66,8 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={isSideNavBarItemClicked[`${index}`]}
-              onClick={() => linkClickHandler(index)}
+              activeFlag={activeSideNavBarItemIndex === index}
+              onClick={() => handleLinkClick(index)}
             />
           );
         })}
