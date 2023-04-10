@@ -1,7 +1,7 @@
 "use client";
 import { useTranslate } from "lib/hooks";
 import { Form, Field } from "houseform";
-import { device } from "lib/css-variables";
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { z } from "zod";
 import { Separator, Input, Button, AvatarSelector } from "ui";

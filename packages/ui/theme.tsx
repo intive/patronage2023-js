@@ -127,7 +127,14 @@ export const theme = {
       main: colors.Teal10,
       secondary: colors.Neutral8,
       accent: colors.Neutral2,
-  }
+  },
+  iconPicker: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+    edit: colors.BasicWhite,
+    hover: colors.Teal1,
+    outline: colors.Teal5,
+  },
 };
 
 export type ThemeType = typeof theme;
