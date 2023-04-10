@@ -4,9 +4,6 @@ import styled from "styled-components";
 
 import { CustomDatePicker } from "ui";
 
-import en from "date-fns/locale/en-US"; //neded for localization
-import pl from "date-fns/locale/pl";
-
 export default {
   title: "CustomDatePicker",
   component: CustomDatePicker,
@@ -29,7 +26,6 @@ Default.args = {
   onSelect: (date: Date) => {
     console.log(date);
   },
-  locale: en,
 };
 
 export const TranslatedToPolish = Template.bind({});
@@ -38,5 +34,5 @@ TranslatedToPolish.args = {
   onSelect: (date: Date) => {
     console.log(date);
   },
-  locale: pl,
+  lang: "pl",
 };

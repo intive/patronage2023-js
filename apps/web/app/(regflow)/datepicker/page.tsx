@@ -37,8 +37,7 @@ export default function TestPage() {
   const [startDate, setStartDate] = useState<number | null>(null);
   const [endDate, setEndDate] = useState<number | null>(null);
   const [anotherDate, setAnotherDate] = useState<number | null>(null);
-  const [lang, setLang] = useState<string | null | undefined>();
-  const [locale, setLocale] = useState<Locale>(en);
+  const [lang, setLang] = useState<string>();
 
   const onSelectStartDate = (date: Date) => {
     date ? setStartDate(date.getTime()) : setStartDate(null);
@@ -58,22 +57,6 @@ export default function TestPage() {
     setLang(lang);
   };
 
-  useEffect(() => {
-    switch (lang) {
-      case "pl":
-        setLocale(pl);
-        break;
-
-      case "en":
-        setLocale(en);
-        break;
-
-      default:
-        setLocale(en);
-        break;
-    }
-  }, [lang]);
-
   return (
     <FormWrapper>
       <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
@@ -83,14 +66,14 @@ export default function TestPage() {
         <Line>
           {/* usage */}
           <CustomDatePicker
-            locale={locale}
+            lang={lang}
             placeholder="Start date"
             onSelect={(date) => onSelectStartDate(date)}
           />
           <p> to </p>
           {/* usage */}
           <CustomDatePicker
-            locale={locale}
+            lang={lang}
             placeholder="End date"
             onSelect={(date) => onSelectEndDate(date)}
           />
@@ -118,7 +101,7 @@ export default function TestPage() {
         <Line>Selected language: {lang ? lang : "en"}</Line>
         <Line style={{ height: "100px" }}></Line>
         <CustomDatePicker
-          locale={locale}
+          lang={lang}
           placeholder="Third date"
           onSelect={(date) => onSelectAnotherDate(date)}
         />
