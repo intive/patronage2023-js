@@ -18,7 +18,7 @@ const SubtitleStyled = styled.p`
   color: ${({ theme }) => theme.signUp.secondary};
   font-size: 14px;
 
-  @media ${device.desktop} {
+  ${device.tablet} {
     font-size: 16px;
   }
 `;
@@ -65,8 +65,10 @@ const AvatarsWrapper = styled.div`
   width: 300px;
   margin-bottom: 2em;
 
-  @media ${device.desktop} {
+  ${device.tablet} {
     width: 100%;
+    max-width: 480px;
+    min-width: 350px;
   }
 `;
 

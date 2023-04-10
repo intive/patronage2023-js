@@ -74,7 +74,7 @@ const AvatarGridStyled = styled.div`
       }
     }
 
-        /* &::after {
+        &::after {
       left: 0;
       background: linear-gradient(
         90deg,
@@ -83,7 +83,7 @@ const AvatarGridStyled = styled.div`
         rgba(255, 255, 255, 0.51) 80.21%,
         rgba(255, 255, 255, 0) 100%
       );
-    } */
+    }
     &::before {
       right: 0;
       background: linear-gradient(
