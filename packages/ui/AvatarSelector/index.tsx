@@ -70,11 +70,11 @@ const AvatarGridStyled = styled.div`
       position: absolute;
 
       @media (hover: none) {
-      height: 100%;
+        height: 100%;
       }
     }
 
-        &::after {
+    &::after {
       left: -5px;
       background: linear-gradient(
         90deg,
@@ -122,12 +122,11 @@ const ButtonStyled = styled.button<ButtonProps>`
     font-size: 110px;
 
     &:first-child {
-    margin-left: 18px;
-  }
+      margin-left: 18px;
+    }
 
-  &:last-child {
-    margin-right: 18px;
+    &:last-child {
+      margin-right: 18px;
+    }
   }
-  }
-  
 `;

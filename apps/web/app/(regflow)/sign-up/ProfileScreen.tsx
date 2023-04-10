@@ -29,6 +29,7 @@ const StepWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  text-align: center;
 `;
 
 const FormWrapper = styled.div`
@@ -66,7 +67,6 @@ const AvatarsWrapper = styled.div`
   margin-left: -2em;
   margin-right: -2em;
   margin-bottom: 2em;
-  /* border:1px solid red; */
 
   ${device.tablet} {
     width: 100%;
@@ -82,13 +82,10 @@ type ProfileScreenProps = {
   done: () => void;
 } & React.HTMLProps<HTMLDivElement>;
 
-export const ProfileScreen = ({
-  back,
-  done,
-}: ProfileScreenProps ) => {
+export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { step3 } = dict;
-  const [ selectedAvatar, setSelectedAvatar ] = useState("1");
+  const [selectedAvatar, setSelectedAvatar] = useState("1");
 
   return (
     <>
@@ -97,50 +94,52 @@ export const ProfileScreen = ({
         <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
         <SeparatorLine />
         <AvatarsWrapper>
-        <AvatarSelector
-          avatars={[
-            {
-              id: "1",
-              src: "/avatars/1.svg",
-            },
-            {
-              id: "2",
-              src: "/avatars/2.svg",
-            },
-            {
-              id: "3",
-              src: "/avatars/3.svg",
-            },
-            {
-              id: "4",
-              src: "/avatars/4.svg",
-            },
-            {
-              id: "5",
-              src: "/avatars/5.svg",
-            },
-            {
-              id: "6",
-              src: "/avatars/6.svg",
-            },
-            {
-              id: "7",
-              src: "/avatars/7.svg",
-            },
-            {
-              id: "8",
-              src: "/avatars/8.svg",
-            },
-          ]}
-          selectedAvatar={selectedAvatar}
-          onSelect={setSelectedAvatar}
-        />
+          <AvatarSelector
+            avatars={[
+              {
+                id: "1",
+                src: "/avatars/1.svg",
+              },
+              {
+                id: "2",
+                src: "/avatars/2.svg",
+              },
+              {
+                id: "3",
+                src: "/avatars/3.svg",
+              },
+              {
+                id: "4",
+                src: "/avatars/4.svg",
+              },
+              {
+                id: "5",
+                src: "/avatars/5.svg",
+              },
+              {
+                id: "6",
+                src: "/avatars/6.svg",
+              },
+              {
+                id: "7",
+                src: "/avatars/7.svg",
+              },
+              {
+                id: "8",
+                src: "/avatars/8.svg",
+              },
+            ]}
+            selectedAvatar={selectedAvatar}
+            onSelect={setSelectedAvatar}
+          />
         </AvatarsWrapper>
         <FormWrapper>
           <Form
             onSubmit={(values) => {
               console.log(values, selectedAvatar);
-              alert(`Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`)
+              alert(
+                `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
+              );
             }}>
             {({ submit, errors }) => (
               <form
