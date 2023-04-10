@@ -64,6 +64,7 @@ export const CustomDatePicker = ({
           setDate(date);
           onSelect(date);
         }}
+        onFocus={(e) => (e.target.readOnly = true)}
         autoComplete="off"
         placeholderText={placeholder}
         yearDropdownItemNumber={3}
