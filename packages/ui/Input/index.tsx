@@ -144,6 +144,29 @@ const StyledInput = styled.input<StyledErrorProps>`
     `}
 `;
 
+const StyledInputBase = styled.input`
+  box-sizing: border-box;
+  border: solid 2px ${({ theme }) => theme.input.borderError};
+  border-radius: 8px;
+  width: 100%;
+
+  // padding: 0 0 0 0;
+  // font-size: 14px;
+  // line-height: 20px; maybe in %?
+  // caret-color: ?
+
+  :focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.input.focus};
+  }
+`;
+
+const StyledInputSearch = styled(StyledInputBase)``;
+
+export const InputSearch = () => {
+  return <></>;
+};
+
 const StyledLabel = styled.label<StyledErrorProps>`
   position: absolute;
   color: ${({ hasError }) =>
