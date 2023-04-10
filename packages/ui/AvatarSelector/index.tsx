@@ -118,15 +118,16 @@ const ButtonStyled = styled.button<ButtonProps>`
     outline: ${({ theme }) => `2px solid ${theme.avatarSelector.active}`};
   }
 
-  &:first-child {
+  @media (max-width: 768px) {
+    font-size: 110px;
+
+    &:first-child {
     margin-left: 18px;
   }
 
   &:last-child {
     margin-right: 18px;
   }
-
-  @media (max-width: 768px) {
-    font-size: 110px;
   }
+  
 `;

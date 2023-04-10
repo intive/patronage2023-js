@@ -66,11 +66,14 @@ const AvatarsWrapper = styled.div`
   margin-left: -2em;
   margin-right: -2em;
   margin-bottom: 2em;
+  /* border:1px solid red; */
 
   ${device.tablet} {
     width: 100%;
     max-width: 480px;
     min-width: 350px;
+    margin: 0;
+    margin-bottom: 2em;
   }
 `;
 
