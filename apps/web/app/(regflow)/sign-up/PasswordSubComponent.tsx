@@ -2,11 +2,19 @@
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/css-variables";
-import { Button, Input, Separator } from "ui";
+import { Button, Input } from "ui";
 import { z } from "zod";
 import { Field, Form } from "houseform";
 
-export const PasswordSubComponent = ({ next, back, onSubmit }) => {
+type PasswordSubComponentProps = {
+  onNext: (password: string) => void;
+  onBack: () => void;
+};
+
+export const PasswordSubComponent = ({
+  onNext,
+  onBack,
+}: PasswordSubComponentProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const { passwordComponent } = dict;
 
@@ -18,8 +26,31 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
     width: 23%;
   `;
 
-  const StyledList = styled.ul`
-    list-style-position: inside;
+  const StyledHeader = styled.h2`
+    color: ${({ theme }) => theme.text.header};
+    font-family: "Signika", sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+  `;
+
+  const StyledSubHeader = styled.h3`
+    margin-top: 4px;
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    text-align: center;
+    color: ${({ theme }) => theme.text.paragraph};
+  `;
+
+  const ListHeader = styled.p`
+    font-family: "Inter", sans-serif;
+    margin-bottom: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: ${({ theme }) => theme.text.header};
   `;
 
   const InputWrapper = styled.div`
@@ -42,6 +73,22 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
     min-height: 150px;
     flex-direction: column;
     justify-content: space-around;
+    padding: 0 16px;
+  `;
+
+  const UnorderedListWrapper = styled.ul`
+    list-style: none;
+
+    & > li {
+      font-family: "Inter", sans-serif;
+      background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMiIgdmlld0JveD0iMCAwIDEwIDIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjQ1ODY2IDEuOTc5MDhDMS4xODA4OCAxLjk3OTA4IDAuOTQ4MjQyIDEuODg1MzMgMC43NjA3NDIgMS42OTc4M0MwLjU3MzI0MiAxLjUxMDMzIDAuNDc5NDkyIDEuMjc3NyAwLjQ3OTQ5MiAwLjk5OTkxOEMwLjQ3OTQ5MiAwLjcyMjE0MSAwLjU3MzI0MiAwLjQ4OTUwMiAwLjc2MDc0MiAwLjMwMjAwMkMwLjk0ODI0MiAwLjExNDUwMiAxLjE4MDg4IDAuMDIwNzUyIDEuNDU4NjYgMC4wMjA3NTJIOC41NDE5OUM4LjgxOTc3IDAuMDIwNzUyIDkuMDUyNDEgMC4xMTQ1MDIgOS4yMzk5MSAwLjMwMjAwMkM5LjQyNzQxIDAuNDg5NTAyIDkuNTIxMTYgMC43MjIxNDEgOS41MjExNiAwLjk5OTkxOEM5LjUyMTE2IDEuMjc3NyA5LjQyNzQxIDEuNTEwMzMgOS4yMzk5MSAxLjY5NzgzQzkuMDUyNDEgMS44ODUzMyA4LjgxOTc3IDEuOTc5MDggOC41NDE5OSAxLjk3OTA4SDEuNDU4NjZaIiBmaWxsPSIjNjRCQTk1Ii8+Cjwvc3ZnPgo=")
+        no-repeat left center;
+      padding: 5px 10px 5px 25px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      color: ${({ theme }) => theme.text.paragraph};
+    }
   `;
 
   const FormWrapper = styled.div`
@@ -57,32 +104,26 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
     }
   `;
 
-  const StyledHeader = styled.h2`
-    color: ${({ theme }) => theme.text.header};
-    font-family: "Signika", sans-serif;
-    font-size: 24px;
-    text-align: center;
-  `;
-  //TODO: Poprawić wyświetlanie separatora
   return (
     <>
       <FormWrapper>
-        <StyledHeader>{t(passwordComponent.mainHeader)}</StyledHeader>
-        <h3>{t(passwordComponent.subHeader)}</h3>
-        {/*<Separator label="test" />*/}
-        <p>{t(passwordComponent.requirementsHeader)}</p>
-        <StyledList>
-          <ListWrapper>
+        <div>
+          <StyledHeader>{t(passwordComponent.mainHeader)}</StyledHeader>
+          <StyledSubHeader>{t(passwordComponent.subHeader)}</StyledSubHeader>
+        </div>
+        <ListWrapper>
+          <ListHeader>{t(passwordComponent.requirementsHeader)}</ListHeader>
+          <UnorderedListWrapper>
             <li>{t(passwordComponent.requirementUpperCase)}</li>
             <li>{t(passwordComponent.requirementLowerCase)}</li>
             <li>{t(passwordComponent.requirementSpecialCharacter)}</li>
             <li>{t(passwordComponent.requirementNoSpace)}</li>
             <li>{t(passwordComponent.requirementLength)}</li>
-          </ListWrapper>
-        </StyledList>
+          </UnorderedListWrapper>
+        </ListWrapper>
         <Form
-          onSubmit={(values, form) => {
-            console.log("Yay");
+          onSubmit={(values) => {
+            onNext(values.password);
           }}>
           {({ isValid, submit }) => (
             <form
@@ -159,9 +200,7 @@ export const PasswordSubComponent = ({ next, back, onSubmit }) => {
                 </Field>
               </InputWrapper>
               <ButtonWrapper>
-                <StyledBackButton
-                  onClick={() => console.log("Wracamy")}
-                  variant="secondary">
+                <StyledBackButton onClick={onBack} variant="secondary">
                   {t(passwordComponent.buttonBack)}
                 </StyledBackButton>
                 <StyledSubmitButton onClick={submit}>
