@@ -75,22 +75,22 @@ const AvatarGridStyled = styled.div`
     }
 
         &::after {
-      left: 0;
+      left: -5px;
       background: linear-gradient(
         90deg,
         #ffffff 0%,
-        #ffffff 33.85%,
-        rgba(255, 255, 255, 0.51) 80.21%,
+        #ffffff 35%,
+        rgba(255, 255, 255, 0.41) 75%,
         rgba(255, 255, 255, 0) 100%
       );
     }
     &::before {
-      right: 0;
+      right: -5px;
       background: linear-gradient(
         270deg,
         #ffffff 0%,
-        #ffffff 33.85%,
-        rgba(255, 255, 255, 0.51) 80.21%,
+        #ffffff 35%,
+        rgba(255, 255, 255, 0.41) 75%,
         rgba(255, 255, 255, 0) 100%
       );
     }
@@ -116,6 +116,14 @@ const ButtonStyled = styled.button<ButtonProps>`
   &:hover,
   &:focus {
     outline: ${({ theme }) => `2px solid ${theme.avatarSelector.active}`};
+  }
+
+  &:first-child {
+    margin-left: 18px;
+  }
+
+  &:last-child {
+    margin-right: 18px;
   }
 
   @media (max-width: 768px) {

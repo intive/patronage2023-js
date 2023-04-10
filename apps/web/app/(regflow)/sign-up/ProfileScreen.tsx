@@ -62,7 +62,9 @@ const SeparatorLine = styled.div`
 `;
 
 const AvatarsWrapper = styled.div`
-  width: 300px;
+  width: 350px;
+  margin-left: -2em;
+  margin-right: -2em;
   margin-bottom: 2em;
 
   ${device.tablet} {
