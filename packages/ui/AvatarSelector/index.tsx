@@ -48,7 +48,6 @@ const AvatarsWrapper = styled.div`
   margin-left: -1em;
   margin-right: -1em;
   margin-bottom: 2em;
-  border: 1px solid red;
 
   ${device.tablet} {
     width: 100%;
