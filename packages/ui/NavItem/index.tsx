@@ -47,8 +47,11 @@ export const NavItemStyled = styled(Link)<NavItemProps>`
   cursor: pointer;
   text-decoration: none;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.navList.navItem.hoverBackground};
+  &:hover,&:focus {
+    background-color: ${({ theme }) => theme.navList.navItem.hoverAndFocusBackground};
+  }
+  &:focus{
+    outline: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline}
   }
 `;
 
