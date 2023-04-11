@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Avatar } from "../Avatar";
+import { device } from "../../../apps/web/lib/media-queries";
+
 interface AvatarProps {
   src: string;
   id: string;
@@ -20,6 +22,8 @@ export const AvatarSelector = ({
   onSelect,
   selectedAvatar,
 }: SelectorProps) => {
+  console.log(device)
+
   return (
     <RelativeDiv>
       <AvatarGridStyled>
@@ -104,7 +108,7 @@ const RelativeDiv = styled.div`
 const ButtonStyled = styled.button<ButtonProps>`
   cursor: pointer;
   border: none;
-  font-size: 92px;
+  font-size: 110px;
   height: 1em;
   padding: 0;
   background: none;
@@ -118,15 +122,20 @@ const ButtonStyled = styled.button<ButtonProps>`
     outline: ${({ theme }) => `2px solid ${theme.avatarSelector.active}`};
   }
 
-  @media (max-width: 768px) {
-    font-size: 110px;
-
-    &:first-child {
+  &:first-child {
       margin-left: 18px;
     }
 
     &:last-child {
       margin-right: 18px;
+    }
+
+  ${device.tablet} {
+    font-size: 92px;
+
+    &:first-child,
+    &:last-child {
+      margin: 0;
     }
   }
 `;
