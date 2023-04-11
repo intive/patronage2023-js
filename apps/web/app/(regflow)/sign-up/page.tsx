@@ -1,3 +1,5 @@
+"use client"
+
 import { ProfileScreen } from "./ProfileScreen";
 
 export default function SignUpPage() {
