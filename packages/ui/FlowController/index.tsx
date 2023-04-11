@@ -5,47 +5,82 @@ interface userObject {
   profile: {
     name: string;
     surname: string;
+    avatar: string;
   };
-  avatar: string;
 }
 
 export const FlowController = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [result, setResult] = useState<number | null>(null); // 200, 400
   const [user, setUser] = useState<userObject>({
     email: "",
     password: "",
     profile: {
       name: "",
       surname: "",
+      avatar: "",
     },
-    avatar: "",
   });
 
   const goBack = () => setCurrentStep(currentStep - 1);
-  const goNext = () => setCurrentStep(currentStep + 1);
 
-  const submitEmail = () => {};
-  const submitPassword = () => {};
-  const submitProfile = () => {};
-  const result = "test";
+  const goToBeginning = () => {
+    setCurrentStep(0);
+  };
+
+  const validateEmail = (email: string) => {
+    // get validated email and set it to user
+    setUser({ ...user, email });
+
+    //go next
+    setCurrentStep(currentStep + 1);
+  };
+  const validatePassword = (password: string) => {
+    //get validated password and set it to user
+    setUser({ ...user, password });
+
+    //go next
+    setCurrentStep(currentStep + 1);
+  };
+
+  const validateProfile = (profileInfo: userObject["profile"]) => {
+    //set profile info to user
+    setUser({ ...user, profile: profileInfo });
+    //useState might not be updated here, so use fetch with passed profileInfo directly
+
+    fetch("http://strzelam_w_backend:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: user.email,
+        password: user.password,
+        profile: profileInfo,
+      }),
+    }).then((res) => {
+      setResult(res.status);
+    });
+  };
+
   const steps = [
     {
       screen: <div>Email</div>,
-      props: { user, onNext: goNext, validate: submitEmail },
+      props: { user, onNext: validateEmail },
     },
     {
       screen: <div>Password</div>,
-      props: { user, onNext: goNext, onBack: goBack, validate: submitPassword },
+      props: { user, onNext: validatePassword, onBack: goBack },
     },
     {
       screen: <div>Profile</div>,
-      props: { user, onNext: goNext, onBack: goBack, validate: submitProfile },
+      props: { user, onNext: validateProfile, onBack: goBack },
     },
     {
       screen: <div>Result</div>,
       props: {
         result,
-        onBack: goBack,
+        onBack: goToBeginning,
       },
     },
   ];
