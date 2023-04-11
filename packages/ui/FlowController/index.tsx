@@ -36,7 +36,7 @@ export const FlowController = () => {
     setCurrentStep(currentStep + 1);
   };
   const validatePassword = (password: string) => {
-    //get password and set it to user
+    //get validated not hashed password and set it to user
     setUser({ ...user, password });
 
     //go next
@@ -46,10 +46,11 @@ export const FlowController = () => {
   const validateProfile = async (profileInfo: userObject["profile"]) => {
     //set profile info to user
     setUser({ ...user, profile: profileInfo });
-    //useState might not be updated here, so use fetch with passed profileInfo directly
 
+    //hash password here so when user goes back to password screen, he can't see it properly
     const hashedPassword = await user.password; //encrypt password with bcrypt or something similar
 
+    //useState might not be updated here, so we use fetch with passed profileInfo directly
     fetch("http://strzelam_w_backend:5000", {
       method: "POST",
       headers: {
