@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import "material-symbols";
 import { Icon } from "ui";
 import Link from "next/link";
 
@@ -59,7 +58,7 @@ export const NavItem = ({ active, href, children }: NavItemProps) => {
   return (
     <NavItemStyled active={active} href={href}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
-      {active && <Icon icon="chevron_right" color="#1E4C40"></Icon>}
+      {active && <Icon icon="chevron_right" color="#1E4C40"/>}
     </NavItemStyled>
   );
 };
