@@ -32,21 +32,17 @@ const StepWrapper = styled.div`
   text-align: center;
 `;
 
-const FormWrapper = styled.div`
+const StyledForm = styled.form`
   width: 100%;
-`;
-
-const FieldsWrapper = styled.div`
-  width: 100%;
-  height: 160px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 3em;
+  gap: 10px;
+  text-align: left;
 `;
 
 const ButtonsWrapper = styled.div`
   width: 100%;
+  margin-top: 1em;
   display: flex;
 `;
 
@@ -133,80 +129,75 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
             onSelect={setSelectedAvatar}
           />
         </AvatarsWrapper>
-        <FormWrapper>
-          <Form
-            onSubmit={(values) => {
-              console.log(values, selectedAvatar);
-              alert(
-                `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
-              );
-            }}>
-            {({ submit, errors }) => (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  submit();
-                }}>
-                <FieldsWrapper>
-                  <Field
-                    onChangeValidate={z
-                      .string()
-                      .min(1, t(step3.lastNameInput.error))}
+        <Form
+          onSubmit={(values) => {
+            console.log(values, selectedAvatar);
+            alert(
+              `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
+            );
+          }}>
+          {({ submit }) => (
+            <StyledForm
+              onSubmit={(e) => {
+                e.preventDefault();
+                submit();
+              }}>
+              <Field
+                onChangeValidate={z
+                  .string()
+                  .min(1, t(step3.lastNameInput.error))}
+                name="firstName"
+                initialValue={""}>
+                {({ value, setValue, onBlur, errors }) => (
+                  <Input
                     name="firstName"
-                    initialValue={""}>
-                    {({ value, setValue, onBlur, errors }) => (
-                      <Input
-                        name="firstName"
-                        label={t(step3.firstNameInput.label)}
-                        value={value}
-                        onChange={(e) => setValue(e.currentTarget.value)}
-                        onInputCleared={() => setValue("")}
-                        onBlur={onBlur}
-                        hasError={errors.length > 0}
-                        supportingLabel={errors.length ? errors : null}
-                      />
-                    )}
-                  </Field>
-                  <Field
-                    onChangeValidate={z
-                      .string()
-                      .min(1, t(step3.lastNameInput.error))}
+                    label={t(step3.firstNameInput.label)}
+                    value={value}
+                    onChange={(e) => setValue(e.currentTarget.value)}
+                    onInputCleared={() => setValue("")}
+                    onBlur={onBlur}
+                    hasError={errors.length > 0}
+                    supportingLabel={errors.length ? errors : null}
+                  />
+                )}
+              </Field>
+              <Field
+                onChangeValidate={z
+                  .string()
+                  .min(1, t(step3.lastNameInput.error))}
+                name="lastName"
+                initialValue={""}>
+                {({ value, setValue, onBlur, errors }) => (
+                  <Input
                     name="lastName"
-                    initialValue={""}>
-                    {({ value, setValue, onBlur, errors }) => (
-                      <Input
-                        name="lastName"
-                        label={t(step3.lastNameInput.label)}
-                        value={value}
-                        onChange={(e) => setValue(e.currentTarget.value)}
-                        onBlur={onBlur}
-                        onInputCleared={() => setValue("")}
-                        hasError={errors.length > 0}
-                        supportingLabel={errors.length ? errors : null}
-                      />
-                    )}
-                  </Field>
-                </FieldsWrapper>
-
-                <ButtonsWrapper>
-                  <Button
-                    variant="secondary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      alert("Going Back");
-                    }}>
-                    {t(step3.backButton)}
+                    label={t(step3.lastNameInput.label)}
+                    value={value}
+                    onChange={(e) => setValue(e.currentTarget.value)}
+                    onBlur={onBlur}
+                    onInputCleared={() => setValue("")}
+                    hasError={errors.length > 0}
+                    supportingLabel={errors.length ? errors : null}
+                  />
+                )}
+              </Field>
+              <ButtonsWrapper>
+                <Button
+                  variant="secondary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("Going Back");
+                  }}>
+                  {t(step3.backButton)}
+                </Button>
+                <CreateBtnWrapper>
+                  <Button fullWidth onClick={submit}>
+                    {t(step3.submitButton)}
                   </Button>
-                  <CreateBtnWrapper>
-                    <Button fullWidth onClick={submit}>
-                      {t(step3.submitButton)}
-                    </Button>
-                  </CreateBtnWrapper>
-                </ButtonsWrapper>
-              </form>
-            )}
-          </Form>
-        </FormWrapper>
+                </CreateBtnWrapper>
+              </ButtonsWrapper>
+            </StyledForm>
+          )}
+        </Form>
       </StepWrapper>
     </>
   );
