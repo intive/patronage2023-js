@@ -40,9 +40,13 @@ export const DatePickerStyled = styled.div`
   }
 
   .react-datepicker__year-dropdown {
+    width: 90px;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
     border-radius: 1rem;
-    border: 1px solid ${({ theme }) => theme.datePicker.teal4};
-    background-color: ${({ theme }) => theme.datePicker.teal3};
+    border: 1px solid ${({ theme }) => theme.datePicker.teal3};
+    background-color: ${({ theme }) => theme.datePicker.teal2};
     box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.12),
       0px 2px 4px rgba(32, 37, 50, 0.12);
   }
@@ -129,10 +133,6 @@ export const DatePickerStyled = styled.div`
     }
   }
 
-  .react-datepicker__year-option {
-    position: relative;
-  }
-
   .react-datepicker__day--keyboard-selected {
     background-color: ${({ theme }) => theme.datePicker.teal3};
     border-radius: 50%;
@@ -155,14 +155,15 @@ export const DatePickerStyled = styled.div`
   }
 
   .react-datepicker__year-option {
+    position: relative;
     font-size: 1rem;
-    line-height: 2.5rem;
-    border: 2px solid ${({ theme }) => theme.datePicker.teal3};
+    line-height: 1.5rem;
+    border: 2px solid ${({ theme }) => theme.datePicker.teal2};
     border-radius: 1rem;
   }
 
   .react-datepicker__year-option:hover {
-    background-color: ${({ theme }) => theme.datePicker.teal4};
+    background-color: ${({ theme }) => theme.datePicker.teal3};
     border-radius: 1rem;
   }
 
@@ -170,6 +171,9 @@ export const DatePickerStyled = styled.div`
     border-radius: 1rem;
     background-color: ${({ theme }) => theme.datePicker.teal10};
     color: white;
+    & span {
+      left: 7px;
+    }
   }
 
   .react-datepicker__year-option--selected_year:hover {
@@ -185,7 +189,7 @@ export const DatePickerStyled = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
-    line-height: 2.5rem;
+    line-height: 1rem;
   }
 
   .react-datepicker__year-option:first-of-type::before {

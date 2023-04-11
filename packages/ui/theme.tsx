@@ -130,6 +130,7 @@ export const theme = {
     neutral8: colors.Neutral8,
     neutral10: colors.Neutral10,
     teal1: colors.Teal1,
+    teal2: colors.Teal2,
     teal3: colors.Teal3,
     teal4: colors.Teal4,
     teal6: colors.Teal6,
