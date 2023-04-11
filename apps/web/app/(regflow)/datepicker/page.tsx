@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { Button, CustomDatePicker } from "ui";
 
 import "react-datepicker/dist/react-datepicker.css";
-import pl from "date-fns/locale/pl";
-import en from "date-fns/locale/en-US";
 
 const FormWrapper = styled.div`
   display: flex;
@@ -37,7 +35,7 @@ export default function TestPage() {
   const [startDate, setStartDate] = useState<number | null>(null);
   const [endDate, setEndDate] = useState<number | null>(null);
   const [anotherDate, setAnotherDate] = useState<number | null>(null);
-  const [lang, setLang] = useState<string>();
+  const [lang, setLang] = useState<string | undefined>();
 
   const onSelectStartDate = (date: Date) => {
     date ? setStartDate(date.getTime()) : setStartDate(null);
@@ -54,7 +52,7 @@ export default function TestPage() {
   const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const lang = (e.target as HTMLElement).innerHTML.toLowerCase();
-    setLang(lang);
+    lang && setLang(lang);
   };
 
   return (

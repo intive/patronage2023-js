@@ -11,7 +11,7 @@ import pl from "date-fns/locale/pl";
 
 type CustomDatePickerProps = {
   placeholder: string;
-  lang: string,
+  lang: string | undefined,
   onSelect: (date: Date) => void;
 };
 
