@@ -116,6 +116,9 @@ export const theme = {
     inactive: colors.Neutral6,
     background: colors.Teal7,
   },
+  avatarSelector: {
+    active: colors.Teal6,
+  },
   checkbox: {
     main: colors.Teal6,
     inactive: colors.Neutral4,
@@ -123,6 +126,13 @@ export const theme = {
   textarea: {
     disabled: colors.Neutral3,
     focus: colors.Teal6,
+  },
+  iconPicker: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+    edit: colors.BasicWhite,
+    hover: colors.Teal1,
+    outline: colors.Teal5,
   },
 };
 
