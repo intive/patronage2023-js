@@ -69,6 +69,7 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
           alert(
             `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
           );
+          //done(values, selectedAvatar)
         }}>
         {({ submit }) => (
           <StyledForm
@@ -157,6 +158,7 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
                 onClick={(e) => {
                   e.preventDefault();
                   alert("Going Back");
+                  //back()
                 }}>
                 {t(step3.backButton)}
               </Button>
