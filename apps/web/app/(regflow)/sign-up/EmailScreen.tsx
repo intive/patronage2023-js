@@ -7,7 +7,8 @@ import { z } from "zod";
 import { useTranslate } from "lib/hooks";
 
 type EmailScreenProps = {
-  onNext: (password: string) => void;
+  onNext: (email: string) => void;
+  email?: string;
 };
 
 const StyledForm = styled.form`
@@ -32,7 +33,7 @@ const FooterStyled = styled.div`
   margin-top: 42px;
 `;
 
-export const EmailScreen = ({ onNext }: EmailScreenProps) => {
+export const EmailScreen = ({ onNext, email = "" }: EmailScreenProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const { emailScreen } = dict;
 
@@ -48,7 +49,7 @@ export const EmailScreen = ({ onNext }: EmailScreenProps) => {
           }}>
           <Field
             name="email"
-            initialValue={""}
+            initialValue={email}
             onChangeValidate={z
               .string()
               .email(t(emailScreen.invalidEmailError))}>
