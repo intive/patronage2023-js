@@ -22,7 +22,6 @@ export const AvatarSelector = ({
   onSelect,
   selectedAvatar,
 }: SelectorProps) => {
-  console.log(device)
 
   return (
     <RelativeDiv>
