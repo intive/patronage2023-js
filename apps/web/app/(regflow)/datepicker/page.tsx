@@ -75,7 +75,6 @@ export default function TestPage() {
             lang={lang}
             placeholder="Start date"
             onSelect={(date) => onSelectStartDate(date)}
-            onFocus={(e) => (e.target.readOnly = true)}
           />
           <p> to </p>
 
@@ -120,15 +119,12 @@ export default function TestPage() {
             lang={lang}
             placeholder="Another date"
             onSelect={(date) => onSelectAnotherDate(date)}
-            onFocus={(e) => (e.target.readOnly = true)}
-            dropdownMode="select"
           />
           <p>to</p>
           <CustomDatePicker
             lang={lang}
             placeholder="And another date"
             onSelect={(date) => onSelectAndAnother(date)}
-            dropdownMode="select"
           />
         </Line>
         <Line style={{ marginTop: "15px" }}>

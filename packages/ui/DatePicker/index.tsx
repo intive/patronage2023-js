@@ -13,8 +13,6 @@ type CustomDatePickerProps = {
   placeholder: string;
   lang: string | undefined;
   onSelect: (date: Date) => void;
-  //temporary props
-  onFocus?: (e: any) => void;
   dropdownMode?: "scroll" | "select";
 };
 
@@ -32,9 +30,6 @@ export const CustomDatePicker = ({
   placeholder = "",
   lang = "en",
   onSelect,
-  // temporary props
-  onFocus,
-  dropdownMode = "scroll",
 }: CustomDatePickerProps) => {
   const [date, setDate] = useState<Date | null>(null);
 
@@ -68,9 +63,8 @@ export const CustomDatePicker = ({
         yearDropdownItemNumber={3}
         showYearDropdown
         isClearable
-        //temporary props
-        onFocus={onFocus}
-        dropdownMode={dropdownMode}
+        onFocus={(e) => (e.target.readOnly = true)}
+        dropdownMode="select"
       />
     </DatePickerStyled>
   );
