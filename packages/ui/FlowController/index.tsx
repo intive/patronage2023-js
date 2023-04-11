@@ -36,17 +36,19 @@ export const FlowController = () => {
     setCurrentStep(currentStep + 1);
   };
   const validatePassword = (password: string) => {
-    //get validated password and set it to user
+    //get password and set it to user
     setUser({ ...user, password });
 
     //go next
     setCurrentStep(currentStep + 1);
   };
 
-  const validateProfile = (profileInfo: userObject["profile"]) => {
+  const validateProfile = async (profileInfo: userObject["profile"]) => {
     //set profile info to user
     setUser({ ...user, profile: profileInfo });
     //useState might not be updated here, so use fetch with passed profileInfo directly
+
+    const hashedPassword = await user.password; //encrypt password with bcrypt or something similar
 
     fetch("http://strzelam_w_backend:5000", {
       method: "POST",
@@ -55,7 +57,7 @@ export const FlowController = () => {
       },
       body: JSON.stringify({
         email: user.email,
-        password: user.password,
+        password: hashedPassword,
         profile: profileInfo,
       }),
     }).then((res) => {
