@@ -160,7 +160,7 @@ export const PasswordSubComponent = ({
                       <>
                         <Input
                           value={value}
-                          onChange={(e) => setValue(e.target.value)}
+                          onChange={(e) => setValue(e.currentTarget.value)}
                           label={t(passwordComponent.inputPlaceholderPassword)}
                           hasError={!isValid}
                           supportingLabel={!isValid ? errors[0] : ""}
@@ -188,7 +188,7 @@ export const PasswordSubComponent = ({
                       <>
                         <Input
                           value={value}
-                          onChange={(e) => setValue(e.target.value)}
+                          onChange={(e) => setValue(e.currentTarget.value)}
                           label={t(
                             passwordComponent.inputPlaceholderRepeatPassword
                           )}
