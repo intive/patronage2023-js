@@ -12,24 +12,17 @@ const H3Styled = styled.h3`
   font-family: "Signika", sans-serif;
   font-size: 24px;
   line-height: 1.5em;
+  text-align: center;
 `;
 
 const SubtitleStyled = styled.p`
   color: ${({ theme }) => theme.signUp.secondary};
   font-size: 14px;
+  text-align: center;
 
   ${device.tablet} {
     font-size: 16px;
   }
-`;
-
-const StepWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  text-align: center;
 `;
 
 const StyledForm = styled.form`
@@ -85,120 +78,114 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
 
   return (
     <>
-      <StepWrapper>
-        <H3Styled>{t(step3.title)}</H3Styled>
-        <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
-        <SeparatorLine />
-        <AvatarsWrapper>
-          <AvatarSelector
-            avatars={[
-              {
-                id: "1",
-                src: "/avatars/1.svg",
-              },
-              {
-                id: "2",
-                src: "/avatars/2.svg",
-              },
-              {
-                id: "3",
-                src: "/avatars/3.svg",
-              },
-              {
-                id: "4",
-                src: "/avatars/4.svg",
-              },
-              {
-                id: "5",
-                src: "/avatars/5.svg",
-              },
-              {
-                id: "6",
-                src: "/avatars/6.svg",
-              },
-              {
-                id: "7",
-                src: "/avatars/7.svg",
-              },
-              {
-                id: "8",
-                src: "/avatars/8.svg",
-              },
-            ]}
-            selectedAvatar={selectedAvatar}
-            onSelect={setSelectedAvatar}
-          />
-        </AvatarsWrapper>
-        <Form
-          onSubmit={(values) => {
-            console.log(values, selectedAvatar);
-            alert(
-              `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
-            );
-          }}>
-          {({ submit }) => (
-            <StyledForm
-              onSubmit={(e) => {
-                e.preventDefault();
-                submit();
-              }}>
-              <Field
-                onChangeValidate={z
-                  .string()
-                  .min(1, t(step3.lastNameInput.error))}
-                name="firstName"
-                initialValue={""}>
-                {({ value, setValue, onBlur, errors }) => (
-                  <Input
-                    name="firstName"
-                    label={t(step3.firstNameInput.label)}
-                    value={value}
-                    onChange={(e) => setValue(e.currentTarget.value)}
-                    onInputCleared={() => setValue("")}
-                    onBlur={onBlur}
-                    hasError={errors.length > 0}
-                    supportingLabel={errors.length ? errors : null}
-                  />
-                )}
-              </Field>
-              <Field
-                onChangeValidate={z
-                  .string()
-                  .min(1, t(step3.lastNameInput.error))}
-                name="lastName"
-                initialValue={""}>
-                {({ value, setValue, onBlur, errors }) => (
-                  <Input
-                    name="lastName"
-                    label={t(step3.lastNameInput.label)}
-                    value={value}
-                    onChange={(e) => setValue(e.currentTarget.value)}
-                    onBlur={onBlur}
-                    onInputCleared={() => setValue("")}
-                    hasError={errors.length > 0}
-                    supportingLabel={errors.length ? errors : null}
-                  />
-                )}
-              </Field>
-              <ButtonsWrapper>
-                <Button
-                  variant="secondary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("Going Back");
-                  }}>
-                  {t(step3.backButton)}
+      <Form
+        onSubmit={(values) => {
+          console.log(values, selectedAvatar);
+          alert(
+            `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
+          );
+        }}>
+        {({ submit }) => (
+          <StyledForm
+            onSubmit={(e) => {
+              e.preventDefault();
+              submit();
+            }}>
+            <H3Styled>{t(step3.title)}</H3Styled>
+            <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
+            <SeparatorLine />
+            <AvatarsWrapper>
+              <AvatarSelector
+                avatars={[
+                  {
+                    id: "1",
+                    src: "/avatars/1.svg",
+                  },
+                  {
+                    id: "2",
+                    src: "/avatars/2.svg",
+                  },
+                  {
+                    id: "3",
+                    src: "/avatars/3.svg",
+                  },
+                  {
+                    id: "4",
+                    src: "/avatars/4.svg",
+                  },
+                  {
+                    id: "5",
+                    src: "/avatars/5.svg",
+                  },
+                  {
+                    id: "6",
+                    src: "/avatars/6.svg",
+                  },
+                  {
+                    id: "7",
+                    src: "/avatars/7.svg",
+                  },
+                  {
+                    id: "8",
+                    src: "/avatars/8.svg",
+                  },
+                ]}
+                selectedAvatar={selectedAvatar}
+                onSelect={setSelectedAvatar}
+              />
+            </AvatarsWrapper>
+            <Field
+              onChangeValidate={z.string().min(1, t(step3.lastNameInput.error))}
+              name="firstName"
+              initialValue={""}>
+              {({ value, setValue, onBlur, errors }) => (
+                <Input
+                  name="firstName"
+                  label={t(step3.firstNameInput.label)}
+                  value={value}
+                  onChange={(e) => setValue(e.currentTarget.value)}
+                  onInputCleared={() => setValue("")}
+                  onBlur={onBlur}
+                  hasError={errors.length > 0}
+                  supportingLabel={errors.length ? errors : null}
+                />
+              )}
+            </Field>
+            <Field
+              onChangeValidate={z.string().min(1, t(step3.lastNameInput.error))}
+              name="lastName"
+              initialValue={""}>
+              {({ value, setValue, onBlur, errors }) => (
+                <Input
+                  name="lastName"
+                  label={t(step3.lastNameInput.label)}
+                  value={value}
+                  onChange={(e) => setValue(e.currentTarget.value)}
+                  onBlur={onBlur}
+                  onInputCleared={() => setValue("")}
+                  hasError={errors.length > 0}
+                  supportingLabel={errors.length ? errors : null}
+                />
+              )}
+            </Field>
+            <ButtonsWrapper>
+              <Button
+                variant="secondary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  alert("Going Back");
+                }}>
+                {t(step3.backButton)}
+              </Button>
+              <CreateBtnWrapper>
+                <Button fullWidth onClick={submit}>
+                  {t(step3.submitButton)}
                 </Button>
-                <CreateBtnWrapper>
-                  <Button fullWidth onClick={submit}>
-                    {t(step3.submitButton)}
-                  </Button>
-                </CreateBtnWrapper>
-              </ButtonsWrapper>
-            </StyledForm>
-          )}
-        </Form>
-      </StepWrapper>
+              </CreateBtnWrapper>
+            </ButtonsWrapper>
+          </StyledForm>
+        )}
+      </Form>
     </>
   );
 };
