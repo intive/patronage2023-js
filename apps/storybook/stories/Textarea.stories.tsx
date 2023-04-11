@@ -21,5 +21,5 @@ const Template: ComponentStory<typeof Textarea> = ({ ...args }) => (
 
 export const Simple = Template.bind({});
 Simple.args = {
-  placeholder: "Description",
+  label: "Description",
 };
