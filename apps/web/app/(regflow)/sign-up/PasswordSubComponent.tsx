@@ -2,7 +2,7 @@
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/css-variables";
-import { Button, Input } from "ui";
+import { Button, Input, Separator } from "ui";
 import { z } from "zod";
 import { Field, Form } from "houseform";
 
@@ -98,6 +98,7 @@ export const PasswordSubComponent = ({
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: space-between;
+    padding: 30px 0;
 
     @media ${device.mobile} {
       width: 311px;
@@ -111,6 +112,7 @@ export const PasswordSubComponent = ({
           <StyledHeader>{t(passwordComponent.mainHeader)}</StyledHeader>
           <StyledSubHeader>{t(passwordComponent.subHeader)}</StyledSubHeader>
         </div>
+        <Separator />
         <ListWrapper>
           <ListHeader>{t(passwordComponent.requirementsHeader)}</ListHeader>
           <UnorderedListWrapper>
