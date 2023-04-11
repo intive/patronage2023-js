@@ -1,5 +1,5 @@
 import { ProfileScreen } from "./ProfileScreen";
 
 export default function SignUpPage() {
-  return <ProfileScreen />;
+  return <ProfileScreen back={() => alert("Back")} done={() => alert("Done")} />;
 }
