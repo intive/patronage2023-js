@@ -101,7 +101,7 @@ const dictionary = {
         pl: "Powrót" 
       },
       submitButton: { 
-        en: "Create my account", 
+        en: "Create account", 
         pl: "Utwórz konto" 
       },
     }
