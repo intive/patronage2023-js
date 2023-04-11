@@ -13,7 +13,6 @@ type CustomDatePickerProps = {
   placeholder: string;
   lang: string | undefined;
   onSelect: (date: Date) => void;
-  dropdownMode?: "scroll" | "select";
 };
 
 type DatePickerLanguageConfigType = {
