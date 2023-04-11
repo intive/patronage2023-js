@@ -51,21 +51,6 @@ const SeparatorLine = styled.div`
   margin: 2em 0;
 `;
 
-const AvatarsWrapper = styled.div`
-  width: 350px;
-  margin-left: -2em;
-  margin-right: -2em;
-  margin-bottom: 2em;
-
-  ${device.tablet} {
-    width: 100%;
-    max-width: 480px;
-    min-width: 350px;
-    margin: 0;
-    margin-bottom: 2em;
-  }
-`;
-
 type ProfileScreenProps = {
   back: () => void;
   done: () => void;
@@ -94,46 +79,44 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
             <H3Styled>{t(step3.title)}</H3Styled>
             <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
             <SeparatorLine />
-            <AvatarsWrapper>
-              <AvatarSelector
-                avatars={[
-                  {
-                    id: "1",
-                    src: "/avatars/1.svg",
-                  },
-                  {
-                    id: "2",
-                    src: "/avatars/2.svg",
-                  },
-                  {
-                    id: "3",
-                    src: "/avatars/3.svg",
-                  },
-                  {
-                    id: "4",
-                    src: "/avatars/4.svg",
-                  },
-                  {
-                    id: "5",
-                    src: "/avatars/5.svg",
-                  },
-                  {
-                    id: "6",
-                    src: "/avatars/6.svg",
-                  },
-                  {
-                    id: "7",
-                    src: "/avatars/7.svg",
-                  },
-                  {
-                    id: "8",
-                    src: "/avatars/8.svg",
-                  },
-                ]}
-                selectedAvatar={selectedAvatar}
-                onSelect={setSelectedAvatar}
-              />
-            </AvatarsWrapper>
+            <AvatarSelector
+              avatars={[
+                {
+                  id: "1",
+                  src: "/avatars/1.svg",
+                },
+                {
+                  id: "2",
+                  src: "/avatars/2.svg",
+                },
+                {
+                  id: "3",
+                  src: "/avatars/3.svg",
+                },
+                {
+                  id: "4",
+                  src: "/avatars/4.svg",
+                },
+                {
+                  id: "5",
+                  src: "/avatars/5.svg",
+                },
+                {
+                  id: "6",
+                  src: "/avatars/6.svg",
+                },
+                {
+                  id: "7",
+                  src: "/avatars/7.svg",
+                },
+                {
+                  id: "8",
+                  src: "/avatars/8.svg",
+                },
+              ]}
+              selectedAvatar={selectedAvatar}
+              onSelect={setSelectedAvatar}
+            />
             <Field
               onChangeValidate={z.string().min(1, t(step3.lastNameInput.error))}
               name="firstName"

@@ -24,7 +24,7 @@ export const AvatarSelector = ({
 }: SelectorProps) => {
 
   return (
-    <RelativeDiv>
+    <AvatarsWrapper>
       <AvatarGridStyled>
         {avatars.map(({ src, id }) => (
           <ButtonStyled
@@ -38,9 +38,26 @@ export const AvatarSelector = ({
           </ButtonStyled>
         ))}
       </AvatarGridStyled>
-    </RelativeDiv>
+    </AvatarsWrapper>
   );
 };
+
+const AvatarsWrapper = styled.div`
+  position: relative;
+  width: 360px;
+  margin-left: -1em;
+  margin-right: -1em;
+  margin-bottom: 2em;
+  border: 1px solid red;
+
+  ${device.tablet} {
+    width: 100%;
+    max-width: 480px;
+    min-width: 350px;
+    margin: 0;
+    margin-bottom: 2em;
+  }
+`;
 
 const AvatarGridStyled = styled.div`
   overflow-x: auto;
@@ -125,11 +142,11 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
 
   &:first-child {
-      margin-left: 18px;
+      margin-left: 14px;
     }
 
     &:last-child {
-      margin-right: 18px;
+      margin-right: 14px;
     }
 
   ${device.tablet} {
@@ -141,3 +158,5 @@ const ButtonStyled = styled.button<ButtonProps>`
     }
   }
 `;
+
+
