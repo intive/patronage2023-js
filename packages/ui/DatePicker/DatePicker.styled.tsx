@@ -213,4 +213,19 @@ export const DatePickerStyled = styled.div`
     top: 8px;
     transform: rotate(-45deg);
   }
+
+  .react-datepicker__year-select {
+    font-family: unset;
+    color: ${({ theme }) => theme.datePicker.neutral10};
+    border: 2px solid ${({ theme }) => theme.datePicker.teal6};
+    padding: 8px 8px 8px 8px;
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.datePicker.teal2};
+  }
+
+  .react-datepicker__year-select option:hover,
+  .react-datepicker__year-select option:checked {
+    color: ${({ theme }) => theme.datePicker.basicWhite};
+    background-color: ${({ theme }) => theme.datePicker.teal10};
+  }
 `;

@@ -26,8 +26,7 @@ const Line = styled.div`
   gap: 10px;
   align-items: center;
   & .part {
-    padding-left: 15px;
-    width: 50%;
+    font-size: 12px;
   }
 `;
 
@@ -35,6 +34,7 @@ export default function TestPage() {
   const [startDate, setStartDate] = useState<number | null>(null);
   const [endDate, setEndDate] = useState<number | null>(null);
   const [anotherDate, setAnotherDate] = useState<number | null>(null);
+  const [andAnother, setAndAnother] = useState<number | null>(null);
   const [lang, setLang] = useState<string | undefined>();
 
   const onSelectStartDate = (date: Date) => {
@@ -49,6 +49,10 @@ export default function TestPage() {
     date ? setAnotherDate(date.getTime()) : setAnotherDate(null);
   };
 
+  const onSelectAndAnother = (date: Date) => {
+    date ? setAndAnother(date.getTime()) : setAndAnother(null);
+  };
+
   const handleLangClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const lang = (e.target as HTMLElement).innerHTML.toLowerCase();
@@ -61,14 +65,20 @@ export default function TestPage() {
         DatePicker Demo
       </h2>
       <form>
+        <Line style={{ color: "red", fontSize: "12px" }}>
+          <p>scroll, keyboard on input: OFF</p>
+          <p>scroll, keyboard on input: ON</p>
+        </Line>
         <Line>
           {/* usage */}
           <CustomDatePicker
             lang={lang}
             placeholder="Start date"
             onSelect={(date) => onSelectStartDate(date)}
+            onFocus={(e) => (e.target.readOnly = true)}
           />
           <p> to </p>
+
           {/* usage */}
           <CustomDatePicker
             lang={lang}
@@ -84,8 +94,8 @@ export default function TestPage() {
             End Date: {endDate ? endDate : "unset"}
           </div>
         </Line>
-        <Line style={{ height: "100px" }}></Line>
-
+        <Line style={{ height: "50px" }}></Line>
+        <hr />
         <Line style={{ justifyContent: "center" }}>
           <p>Select language:</p>
           <Button variant="simple" onClick={(e) => handleLangClick(e)}>
@@ -96,15 +106,38 @@ export default function TestPage() {
             PL
           </Button>
         </Line>
-        <Line>Selected language: {lang ? lang : "en"}</Line>
-        <Line style={{ height: "100px" }}></Line>
-        <CustomDatePicker
-          lang={lang}
-          placeholder="Third date"
-          onSelect={(date) => onSelectAnotherDate(date)}
-        />
+        <Line style={{ marginBottom: "15px" }}>
+          Selected language: {lang ? lang : "en"}
+        </Line>{" "}
+        <hr />
+        <Line style={{ height: "50px" }}></Line>
+        <Line style={{ color: "red", fontSize: "12px" }}>
+          <p>select, keyboard on input: OFF</p>
+          <p>select, keyboard on input: ON</p>
+        </Line>
+        <Line>
+          <CustomDatePicker
+            lang={lang}
+            placeholder="Another date"
+            onSelect={(date) => onSelectAnotherDate(date)}
+            onFocus={(e) => (e.target.readOnly = true)}
+            dropdownMode="select"
+          />
+          <p>to</p>
+          <CustomDatePicker
+            lang={lang}
+            placeholder="And another date"
+            onSelect={(date) => onSelectAndAnother(date)}
+            dropdownMode="select"
+          />
+        </Line>
         <Line style={{ marginTop: "15px" }}>
-          Another Date: {anotherDate ? anotherDate : "unset"}
+          <div className="part">
+            Another Date: {anotherDate ? anotherDate : "unset"}
+          </div>
+          <div className="part" style={{ marginLeft: "15px" }}>
+            End Date: {andAnother ? andAnother : "unset"}
+          </div>
         </Line>
       </form>
     </FormWrapper>
