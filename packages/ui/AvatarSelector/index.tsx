@@ -29,7 +29,10 @@ export const AvatarSelector = ({
         {avatars.map(({ src, id }) => (
           <ButtonStyled
             key={id}
-            onClick={() => onSelect(id)}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(id);
+            }}
             selected={selectedAvatar === id}>
             <Avatar src={src} />
           </ButtonStyled>
