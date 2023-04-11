@@ -35,8 +35,8 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "",
     ComponentToRender: (
       <>
-        <SpanStyled>Leonard Hofstadter</SpanStyled>
         <AvatarStyled src="/avatar.svg" />
+        <SpanStyled>Leonard Hofstadter</SpanStyled>
       </>
     ),
     id: 1,
@@ -45,8 +45,8 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "",
     ComponentToRender: (
       <>
-        <SpanStyled>Howard Wolowitz</SpanStyled>
         <AvatarStyled src="/avatar.svg" />
+        <SpanStyled>Howard Wolowitz</SpanStyled>
       </>
     ),
     id: 2,
@@ -55,8 +55,8 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "",
     ComponentToRender: (
       <>
-        <SpanStyled>Rajesh Kotthrappall</SpanStyled>
         <AvatarStyled src="/avatar.svg" />
+        <SpanStyled>Rajesh Kotthrappall</SpanStyled>
       </>
     ),
     id: 3,
