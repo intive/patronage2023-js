@@ -32,7 +32,6 @@ export const Input = ({
   onChange,
   onFocus,
   onBlur,
-  onSubmit,
   onInputCleared,
 }: InputProps) => {
   const theme = useContext(ThemeContext);
@@ -94,7 +93,6 @@ export const Input = ({
         onChange={onChange}
         onFocus={onFocus}
         onBlur={onBlur}
-        onSubmit={onSubmit}
         hasSupportingLabel={Boolean(supportingLabel)}
         aria-invalid={hasError ? "true" : undefined}
         aria-errormessage={errorId}
