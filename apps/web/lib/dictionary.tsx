@@ -67,6 +67,28 @@ const dictionary = {
       en: "Hello from Sign-Up page",
       pl: "Witaj ze strony rejestracji",
     },
+    emailScreen: {
+      inputLabel: {
+        en: "Email",
+        pl: "Email",
+      },
+      invalidEmailError: {
+        en: "This is not a valid email",
+        pl: "To nie jest prawidłowy adres email",
+      },
+      buttonNext: {
+        en: "Continue",
+        pl: "Dalej",
+      },
+      footer: {
+        en: "Already have an account?",
+        pl: "Posiadasz już konto?",
+      },
+      footerLink: {
+        en: "Log in",
+        pl: "Zaloguj się",
+      },
+    },
   },
   BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
