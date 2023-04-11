@@ -124,6 +124,7 @@ export const theme = {
     header: colors.Teal10,
     paragraph: colors.Neutral8,
   },
+  primary: colors.Teal10,
 };
 
 export type ThemeType = typeof theme;
