@@ -4,7 +4,7 @@ import { Form, Field } from "houseform";
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { z } from "zod";
-import { Separator, Input, Button, AvatarSelector } from "ui";
+import { Input, Button, AvatarSelector } from "ui";
 import { useState } from "react";
 
 const H3Styled = styled.h3`
