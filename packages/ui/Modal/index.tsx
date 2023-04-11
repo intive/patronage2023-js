@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import styled from "styled-components";
 import { Card, Icon } from "ui";
 
@@ -86,6 +86,17 @@ const CloseButtonStyled = styled.button`
 `;
 
 export const Modal = ({ onClose, children, header }: ModalProps) => {
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.code === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
+  }, []);
+
   return (
     <ModalStyled onClick={onClose}>
       <BackgroundStyled />
