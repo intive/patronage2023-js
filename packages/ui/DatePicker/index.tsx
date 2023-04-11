@@ -59,7 +59,6 @@ export const CustomDatePicker = ({
         }}
         autoComplete="off"
         placeholderText={placeholder}
-        yearDropdownItemNumber={3}
         showYearDropdown
         isClearable
         onFocus={(e) => (e.target.readOnly = true)}
