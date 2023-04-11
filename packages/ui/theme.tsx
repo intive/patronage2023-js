@@ -130,6 +130,11 @@ export const theme = {
     hover: colors.Teal1,
     outline: colors.Teal5,
   },
+  modal: {
+    background: colors.Neutral8,
+    header: colors.Teal10,
+    closeButton: colors.Neutral6,
+  },
 };
 
 export type ThemeType = typeof theme;

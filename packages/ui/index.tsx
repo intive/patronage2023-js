@@ -14,3 +14,4 @@ export { Input } from "./Input";
 export { Avatar } from "./Avatar";
 export { Checkbox } from "./Checkbox";
 export { IconPicker } from "./IconPicker";
+export { Modal } from "./Modal";
