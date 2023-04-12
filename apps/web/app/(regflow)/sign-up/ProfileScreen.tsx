@@ -54,7 +54,7 @@ type ProfileScreenProps = {
   profileData: {firstName:string,lastName:string,avatar:string};
 } & React.HTMLProps<HTMLDivElement>;
 
-export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
+export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("1");
