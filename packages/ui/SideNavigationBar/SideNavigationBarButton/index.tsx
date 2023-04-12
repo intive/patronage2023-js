@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import { IconProps } from "../../Icon";
-import { Icon } from "../../Icon";
+import { ReactNode } from "react";
 
 export const SideNavigationBarButton = ({
   onClick,
@@ -12,7 +11,7 @@ export const SideNavigationBarButton = ({
     <ListItemStyled>
       <ButtonStyled onClick={onClick}>
         <Wrapper activeFlag={activeFlag}>
-          <Icon icon={icon} iconSize={30} />
+          {icon}
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
           {activeFlag && <DivStyled />}
         </Wrapper>
@@ -22,11 +21,11 @@ export const SideNavigationBarButton = ({
 };
 
 type SideNavigationBarButtonProps = {
-  onClick: Function;
+  onClick: () => void;
+  icon: ReactNode;
   textValue: string;
   activeFlag: boolean;
-} & React.HTMLProps<HTMLButtonElement> &
-  IconProps;
+} & React.HTMLProps<HTMLButtonElement>;
 
 type SpanProps = {
   fontSize: number;

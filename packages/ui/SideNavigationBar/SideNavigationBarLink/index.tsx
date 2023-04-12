@@ -1,7 +1,6 @@
 import styled, { css, ThemeContext } from "styled-components";
+import { ReactNode } from "react";
 import Link from "next/link";
-import { IconProps } from "../../Icon";
-import { Icon } from "../../Icon";
 import { useContext } from "react";
 
 export const SideNavigationBarLink = ({
@@ -15,16 +14,8 @@ export const SideNavigationBarLink = ({
   return (
     <ListItemStyled>
       <LinkStyled href={href} onClick={onClick}>
-        <Wrapper>
-          <Icon
-            icon={icon}
-            iconSize={30}
-            color={
-              activeFlag
-                ? theme.sideNavigationBarItem.main
-                : theme.sideNavigationBarItem.inactive
-            }
-          />
+        <Wrapper activeFlag={activeFlag}>
+          {icon}
           <SpanStyled fontSize={10}>{textValue}</SpanStyled>
           {activeFlag && <DivStyled />}
         </Wrapper>
@@ -35,11 +26,11 @@ export const SideNavigationBarLink = ({
 
 type SideNavigationBarLinkProps = {
   href: string;
+  icon: ReactNode;
   textValue: string;
   activeFlag: boolean;
-  onClick: Function;
-} & React.HTMLProps<HTMLAnchorElement> &
-  IconProps;
+  onClick: () => void;
+} & React.HTMLProps<HTMLAnchorElement>;
 
 type SpanProps = {
   fontSize: number;

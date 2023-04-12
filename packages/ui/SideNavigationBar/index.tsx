@@ -1,18 +1,18 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
 import { SubMenu } from "./SubMenu";
 import { SubMenuDataProps } from "./SubMenu";
 
-import { IconProps } from "../Icon";
-
 type SideNavigationBarItemProps = {
   href: string;
+  icon: ReactNode;
   textValue: string;
   subMenu?: SubMenuDataProps;
-} & IconProps;
+  id: number;
+};
 
 type SideNavigationBarProps = {
   items: SideNavigationBarItemProps[];
@@ -51,10 +51,10 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
   return (
     <>
       <SideNavigationBarStyled isSubMenuShown={isSubMenuShown}>
-        {items.map(({ href, icon, textValue, subMenu }, index) => {
+        {items.map(({ href, icon, textValue, subMenu, id }, index) => {
           return subMenu ? (
             <SideNavigationBarButton
-              key={`SideNavigationBarButton-${index}`}
+              key={id}
               onClick={() => showSubMenu(subMenu, index)}
               icon={icon}
               textValue={textValue}
@@ -62,7 +62,7 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
             />
           ) : (
             <SideNavigationBarLink
-              key={`SideNavigationBarLink-${index}`}
+              key={id}
               href={href}
               icon={icon}
               textValue={textValue}

@@ -2,16 +2,6 @@ import styled from "styled-components";
 import { ReactNode } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
-import { Avatar } from "../../Avatar";
-
-export type SubMenuDataItemsProps = {
-  icon?: ReactNode;
-  label?: string;
-  href?: string;
-  avatarSrc?: string;
-  username?: string;
-  id: string;
-};
 
 export type SubMenuDataProps = {
   title: string;
@@ -23,7 +13,7 @@ export type SubMenuDataProps = {
     placeholder: string;
     icon: ReactNode;
   };
-  items: SubMenuDataItemsProps[];
+  navigationList?: ReactNode;
   button?: {
     method: () => void;
     label: string;
@@ -46,44 +36,23 @@ const SubMenuStyled = styled.div`
 `;
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
+  const { title, sort, searchInput, navigationList, button } = subMenuData;
   return (
     <SubMenuStyled>
       <MainDiv>
         <HeaderStyled>
-          <Title>{subMenuData.title}</Title>
-          {subMenuData.sort?.icon}
+          <Title>{title}</Title>
+          {sort?.icon}
         </HeaderStyled>
-        {subMenuData.searchInput && (
-          <SearchInput searchInput={subMenuData.searchInput} />
-        )}
-        <ul>
-          {subMenuData.items.map(
-            ({ icon, label, href, avatarSrc, username, id }, index) => {
-              return (
-                <ListElementStyled key={id}>
-                  {avatarSrc ? (
-                    <>
-                      <Avatar username={username} src={avatarSrc} />
-                      <span>{username}</span>
-                    </>
-                  ) : (
-                    <>
-                      {icon}
-                      <span>{label}</span>
-                    </>
-                  )}
-                </ListElementStyled>
-              );
-            }
-          )}
-        </ul>
+        {searchInput && <SearchInput searchInput={searchInput} />}
+        {navigationList}
       </MainDiv>
 
-      {subMenuData.button && (
+      {button && (
         <Button
           variant="secondary"
           onClick={() => console.log("Modal has been opened! ")}>
-          {subMenuData.button.label}
+          {button.label}
         </Button>
       )}
     </SubMenuStyled>

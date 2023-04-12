@@ -41,16 +41,18 @@ export const NavItemStyled = styled(Link)<NavItemProps>`
   padding: 15px 10px;
   border-radius: 8px;
   font-family: "Inter", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   overflow: hidden;
   cursor: pointer;
   text-decoration: none;
 
-  &:hover,&:focus {
-    background-color: ${({ theme }) => theme.navList.navItem.hoverAndFocusBackground};
+  &:hover,
+  &:focus {
+    background-color: ${({ theme }) =>
+      theme.navList.navItem.hoverAndFocusBackground};
   }
-  &:focus{
-    outline: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline}
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline};
   }
 `;
 
@@ -58,7 +60,7 @@ export const NavItem = ({ active, href, children }: NavItemProps) => {
   return (
     <NavItemStyled active={active} href={href}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
-      {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18}/>}
+      {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
     </NavItemStyled>
   );
 };
