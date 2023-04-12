@@ -51,6 +51,7 @@ const SeparatorLine = styled.div`
 type ProfileScreenProps = {
   back: () => void;
   done: ( profileInfo: {firstName: string; lastName: string; avatar: string} ) => void;
+  profileData: {firstName:string,lastName:string,avatar:string};
 } & React.HTMLProps<HTMLDivElement>;
 
 export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
