@@ -79,7 +79,7 @@ const AvatarGridStyled = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 820px) {
     flex-wrap: nowrap;
     justify-content: flex-start;
 
