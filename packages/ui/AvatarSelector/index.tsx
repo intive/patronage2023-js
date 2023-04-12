@@ -79,7 +79,7 @@ const AvatarGridStyled = styled.div`
     }
   }
 
-  @media (max-width: 820px) {
+  @media (max-width: 767px) {
     flex-wrap: nowrap;
     justify-content: flex-start;
 
@@ -145,12 +145,24 @@ const ButtonStyled = styled.button<ButtonProps>`
     }
 
   ${device.tablet} {
-    font-size: 92px;
+    font-size: 61px;
 
     &:first-child,
     &:last-child {
       margin: 0;
     }
+  }
+
+  @media (min-width: 900px) {
+    font-size: 73px;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 70px;
+  }
+
+  @media (min-width: 1150px) {
+    font-size: 90px;
   }
 `;
 
