@@ -15,10 +15,12 @@ export type CurrencySelectComponentProps = {
 export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
   return (
     <SelectRoot>
+      
       <SelectTrigger>
-        <SelectValue placeholder="Currency" />
+        <SelectValue placeholder="Currency"/>
         <SelectIcon><Icon icon="arrow_drop_down" iconSize={23} /></SelectIcon>
       </SelectTrigger>
+      
       <SelectPortal>
         <SelectContent position="popper">
           <SelectViewport className="SelectViewport">
@@ -37,7 +39,9 @@ export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
 
 
 const SelectRoot = styled(Select.Root)`
+
 `;
+
 
 const SelectTrigger = styled(Select.Trigger)`
   background-color: ${({theme}) => theme.card.background};
@@ -49,6 +53,8 @@ const SelectTrigger = styled(Select.Trigger)`
   height: 56px;
   cursor: pointer;
   padding-bottom: 10px;
+  /* display: grid;
+  justify-content: space-between; */
 
   :focus {
     outline: none;
@@ -57,11 +63,11 @@ const SelectTrigger = styled(Select.Trigger)`
 `;
 
 const SelectValue = styled(Select.Value)`
-
 `;
 
 const SelectIcon = styled(Select.Icon)`
   color: #626262;
+  margin-right: -30px;
 `;
 
 const SelectPortal = styled(Select.Portal)`
@@ -85,13 +91,20 @@ const SelectViewport = styled(Select.Viewport)`
 
 const SelectItem = styled(Select.Item)`
   height: 56px;
-  outline: none;
+  outline-color: ${({ theme }) => theme.input.focus};
   padding: 16px;
   gap: 8px;
   
-  :hover {
+  :focus {
     color: #397B65;
     background-color: #F1FBF6;
+    :first-child {
+      border-radius: 1em 1em 0 0;
+    }
+    :last-child {
+      border-radius: 0 0 1em 1em;
+    }
+    
   }
 `;
 
@@ -101,9 +114,9 @@ const SelectItemIndicator = styled(Select.ItemIndicator)`
 
 const StyledTag = styled.span`
   color: #515151;
-  :hover {
+  /* :hover {
     color: #397B65;
-  }
+  } */
 `;
 
 const SelectItemText = styled(Select.ItemText)`
@@ -112,6 +125,9 @@ const SelectItemText = styled(Select.ItemText)`
     color: #397B65;
   }
 `;
+
+
+
 
 
 // export type CurrencySelectComponentProps = {
