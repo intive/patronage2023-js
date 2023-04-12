@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Card, Icon } from "ui";
 
@@ -86,6 +86,7 @@ const CloseButtonStyled = styled.button`
 `;
 
 export const Modal = ({ onClose, children, header }: ModalProps) => {
+  const closeButtonReference = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.code === "Escape") {
@@ -97,13 +98,17 @@ export const Modal = ({ onClose, children, header }: ModalProps) => {
     return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [onClose]);
 
+  useEffect(() => {
+    closeButtonReference.current?.focus();
+  }, []);
+
   return (
     <ModalStyled>
       <BackgroundStyled onClick={onClose} />
       <CardStyled>
         <HeaderWrapperStyled>
           <HeaderStyled>{header}</HeaderStyled>
-          <CloseButtonStyled onClick={onClose}>
+          <CloseButtonStyled onClick={onClose} ref={closeButtonReference}>
             <Icon icon="close" />
           </CloseButtonStyled>
         </HeaderWrapperStyled>
