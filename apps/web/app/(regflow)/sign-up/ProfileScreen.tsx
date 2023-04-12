@@ -50,11 +50,19 @@ const SeparatorLine = styled.div`
 
 type ProfileScreenProps = {
   back: () => void;
-  done: ( profileInfo: {firstName: string; lastName: string; avatar: string} ) => void;
-  profileData: {firstName:string,lastName:string,avatar:string};
+  done: (profileInfo: {
+    firstName: string;
+    lastName: string;
+    avatar: string;
+  }) => void;
+  profileData: { firstName: string; lastName: string; avatar: string };
 } & React.HTMLProps<HTMLDivElement>;
 
-export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) => {
+export const ProfileScreen = ({
+  back,
+  done,
+  profileData,
+}: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("1");
@@ -63,8 +71,12 @@ export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) =
     <>
       <Form
         onSubmit={(values) => {
-          const profileInfo = { firstName: values.firstName, lastName: values.lastName, avatar: selectedAvatar}
-          console.log(profileInfo)
+          const profileInfo = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            avatar: selectedAvatar,
+          };
+          console.log(profileInfo);
           //done(profileInfo)
         }}>
         {({ submit }) => (
@@ -115,7 +127,9 @@ export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) =
               onSelect={setSelectedAvatar}
             />
             <Field
-              onChangeValidate={z.string().min(1, t(profileScreen.inputErrorMsg))}
+              onChangeValidate={z
+                .string()
+                .min(1, t(profileScreen.inputErrorMsg))}
               name="firstName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (
@@ -132,7 +146,9 @@ export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) =
               )}
             </Field>
             <Field
-              onChangeValidate={z.string().min(1, t(profileScreen.inputErrorMsg))}
+              onChangeValidate={z
+                .string()
+                .min(1, t(profileScreen.inputErrorMsg))}
               name="lastName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (
@@ -158,9 +174,9 @@ export const ProfileScreen = ({ back, done, profileData }: ProfileScreenProps) =
                 }}>
                 {t(profileScreen.backButton)}
               </Button>
-                <Button fullWidth onClick={submit}>
-                  {t(profileScreen.submitButton)}
-                </Button>
+              <Button fullWidth onClick={submit}>
+                {t(profileScreen.submitButton)}
+              </Button>
             </ButtonsWrapper>
           </StyledForm>
         )}
