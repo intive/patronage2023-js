@@ -133,11 +133,6 @@ export const theme = {
     main: colors.Teal6,
     inactive: colors.Neutral4,
   },
-  signUp: {
-      main: colors.Teal10,
-      secondary: colors.Neutral8,
-      accent: colors.Neutral2,
-  },
   datePicker: {
     basicWhite: colors.BasicWhite,
     neutral2: colors.Neutral2,
@@ -174,6 +169,7 @@ export const theme = {
     error: colors.Supporting4,
     icon: colors.BasicWhite,
     link: colors.BasicWhite,
+    accent: colors.Neutral2,
   },
 };
 

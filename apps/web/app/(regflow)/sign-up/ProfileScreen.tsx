@@ -17,7 +17,7 @@ const H3Styled = styled.h3`
 `;
 
 const SubtitleStyled = styled.p`
-  color: ${({ theme }) => theme.signUp.secondary};
+  color: ${({ theme }) => theme.signUp.text};
   font-size: 14px;
   text-align: center;
 
