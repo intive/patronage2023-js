@@ -14,7 +14,7 @@ const ModalStyled = styled.div`
   justify-content: center;
   align-items: center;
   inset: 0px;
-  z-index: 1;
+  z-index: 100;
 `;
 
 const BackgroundStyled = styled.div`
@@ -95,15 +95,15 @@ export const Modal = ({ onClose, children, header }: ModalProps) => {
 
     document.addEventListener("keydown", handleEscapeKey);
     return () => document.removeEventListener("keydown", handleEscapeKey);
-  }, []);
+  }, [onClose]);
 
   return (
-    <ModalStyled onClick={onClose}>
-      <BackgroundStyled />
+    <ModalStyled>
+      <BackgroundStyled onClick={onClose} />
       <CardStyled>
         <HeaderWrapperStyled>
           <HeaderStyled>{header}</HeaderStyled>
-          <CloseButtonStyled>
+          <CloseButtonStyled onClick={onClose}>
             <Icon icon="close" />
           </CloseButtonStyled>
         </HeaderWrapperStyled>
