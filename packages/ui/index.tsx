@@ -1,6 +1,6 @@
-export {NavItem} from "./NavItem";
-export {NavList} from "./NavList"
-export { Button } from "./Button";
+export { NavItem } from "./NavItem";
+export { NavList } from "./NavList";
+export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";
 export { Card } from "./Card";
 export { ButtonGroup } from "./ButtonGroup";

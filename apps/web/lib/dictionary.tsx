@@ -89,6 +89,38 @@ const dictionary = {
         pl: "Zaloguj się",
       },
     },
+    successErrorScreen: {
+      status: {
+        error: {
+          subheader: {
+            en: "The account with this email already exists",
+            pl: "Konto z tym adresem e-mail już istnieje",
+          },
+          header: {
+            en: "Something went wrong",
+            pl: "Coś poszło nie tak",
+          },
+          button: {
+            en: "Back to the registration process",
+            pl: "Powrót do rejestracji",
+          },
+        },
+        success: {
+          subheader: {
+            en: "You've successfully created your account",
+            pl: "Pomyślnie utworzyłeś swoje konto",
+          },
+          header: {
+            en: "Congratulations",
+            pl: "Gratulacje",
+          },
+          button: {
+            en: "Log in to your account",
+            pl: "Zaloguj się",
+          },
+        },
+      },
+    },
   },
   BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
