@@ -114,7 +114,7 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
               onSelect={setSelectedAvatar}
             />
             <Field
-              onChangeValidate={z.string().min(1, t(profileScreen.errorMessage))}
+              onChangeValidate={z.string().min(1, t(profileScreen.inputErrorMsg))}
               name="firstName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (
@@ -131,7 +131,7 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
               )}
             </Field>
             <Field
-              onChangeValidate={z.string().min(1, t(profileScreen.errorMessage))}
+              onChangeValidate={z.string().min(1, t(profileScreen.inputErrorMsg))}
               name="lastName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (

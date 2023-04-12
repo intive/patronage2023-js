@@ -84,7 +84,7 @@ const dictionary = {
           en: "Last name",
           pl: "Nazwisko",
       },
-      errorMessage : {
+      inputErrorMsg : {
         en: "The field cannot be empty",
         pl: "Pole nie może być puste",
       },
