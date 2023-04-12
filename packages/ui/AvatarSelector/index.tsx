@@ -44,7 +44,7 @@ export const AvatarSelector = ({
 
 const AvatarsWrapper = styled.div`
   position: relative;
-  width: 360px;
+  width: 348px;
   margin-left: -1em;
   margin-right: -1em;
   margin-bottom: 2em;
