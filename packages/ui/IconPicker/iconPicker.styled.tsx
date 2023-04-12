@@ -7,7 +7,7 @@ export const IconPickerStyled = styled.div`
   width: 112px;
   height: 112px;
   gap: 2px;
-  z-index: 10;
+  z-index: 1;
 `;
 
 export const IconAndButtonWrapperStyled = styled.div`
