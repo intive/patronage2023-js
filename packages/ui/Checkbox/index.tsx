@@ -76,7 +76,7 @@ const InputStyled = styled.input<CheckboxProps>`
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  z-index: 2;
+  z-index: 1;
 
   ${({ sizeBig }) =>
     sizeBig
