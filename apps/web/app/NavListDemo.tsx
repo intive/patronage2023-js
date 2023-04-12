@@ -2,6 +2,7 @@
 import { NavList, Icon } from "ui";
 import { NavItemContents, IconWrapper, SpanStyled } from "ui/NavList";
 import styled from "styled-components";
+import { usePathname } from "next/navigation";
 
 //creating array of objects for NavList props
 //ComponentToRender stands for any `children` element for NavItem
@@ -17,7 +18,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
         <SpanStyled>Bills</SpanStyled>
       </>
     ),
-    href: "/",
+    href: "/bills",
     id: 1,
   },
   {
@@ -29,7 +30,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
         <SpanStyled>Subscriptions</SpanStyled>
       </>
     ),
-    href: "",
+    href: "/subscriptions",
     id: 2,
   },
   {
@@ -41,7 +42,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
         <SpanStyled>Savings</SpanStyled>
       </>
     ),
-    href: "",
+    href: "/savings",
     id: 3,
   },
 ];
@@ -52,10 +53,11 @@ const NavListWrapperStyled = styled.div`
 `;
 
 export default function NavListDemo() {
+  const currentPage = usePathname();
   return (
     <>
       <NavListWrapperStyled>
-        <NavList contents={dummyNavItemContents}></NavList>
+        <NavList contents={dummyNavItemContents} currentPage={currentPage as string}></NavList>
       </NavListWrapperStyled>
     </>
   );

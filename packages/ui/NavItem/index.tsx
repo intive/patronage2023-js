@@ -58,7 +58,7 @@ export const NavItem = ({ active, href, children }: NavItemProps) => {
   return (
     <NavItemStyled active={active} href={href}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
-      {active && <Icon icon="chevron_right" color="#1E4C40"/>}
+      {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18}/>}
     </NavItemStyled>
   );
 };

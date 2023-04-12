@@ -9,17 +9,17 @@ import { NavItemContents, SpanStyled } from "ui/NavList";
 const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
   {
     ComponentToRender: <SpanStyled>Bills</SpanStyled>,
-    href: "",
+    href: "/bills",
     id: 1,
   },
   {
     ComponentToRender: <SpanStyled>Subscriptions</SpanStyled>,
-    href: "",
+    href: "/subscriptions",
     id: 2,
   },
   {
     ComponentToRender: <SpanStyled>Savings</SpanStyled>,
-    href: "",
+    href: "/savings",
     id: 3,
   },
 ];
@@ -32,7 +32,7 @@ const AvatarStyled = styled(Avatar)`
 
 const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
   {
-    href: "",
+    href: "/user1",
     ComponentToRender: (
       <>
         <AvatarStyled src="/avatar.svg" />
@@ -42,7 +42,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     id: 1,
   },
   {
-    href: "",
+    href: "/user2",
     ComponentToRender: (
       <>
         <AvatarStyled src="/avatar.svg" />
@@ -52,7 +52,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     id: 2,
   },
   {
-    href: "",
+    href: "/user3",
     ComponentToRender: (
       <>
         <AvatarStyled src="/avatar.svg" />
@@ -90,16 +90,19 @@ const Template: ComponentStory<typeof NavList> = ({ ...args }) => (
 export const ListWithText = Template.bind({});
 ListWithText.args = {
   contents: dummyNavItemContentsTextOnly,
+  currentPage: "",
 };
 
 //list with list items that include icon and text
 export const ListWithTextAndIcons = Template.bind({});
 ListWithTextAndIcons.args = {
   contents: dummyNavItemContentsWithIcon,
+  currentPage: "",
 };
 
 //list with list items that include text only
 export const ListWithTextAndAvatars = Template.bind({});
 ListWithTextAndAvatars.args = {
   contents: dummyNavItemContentsWithAvatar,
+  currentPage: "",
 };
