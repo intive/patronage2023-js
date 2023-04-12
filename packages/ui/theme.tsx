@@ -169,6 +169,7 @@ export const theme = {
     error: colors.Supporting4,
     icon: colors.BasicWhite,
     link: colors.BasicWhite,
+    accent: colors.Neutral2,
   },
 };
 
