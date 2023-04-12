@@ -121,10 +121,11 @@ export const theme = {
     avatarSelector: {
       active: colors.Teal6,
     },
-    checkbox: {
-      main: colors.Teal6,
-      inactive: colors.Neutral4,
-    },
+  },
+  checkbox: {
+    main: colors.Teal6,
+    inactive: colors.Neutral4,
+  },
   navList: {
     navItem: {
       activeColor: colors.Teal10,
@@ -137,10 +138,6 @@ export const theme = {
   },
   avatarSelector: {
     active: colors.Teal6,
-  },
-  checkbox: {
-    main: colors.Teal6,
-    inactive: colors.Neutral4,
   },
   datePicker: {
     basicWhite: colors.BasicWhite,
