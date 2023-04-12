@@ -67,7 +67,7 @@ const dictionary = {
       en: "Hello from Sign-Up page",
       pl: "Witaj ze strony rejestracji",
     },
-    step3: {
+    profileScreen: {
       title: {
         en:"Customise the account",
         pl:"Spersonalizuj swoje konto",
@@ -76,25 +76,17 @@ const dictionary = {
         en: "Select your avatar and tell us your name",
         pl: "Wybierz avatar i powiedz jak się nazywasz",
       },
-      firstNameInput:{
-        label: {
+      firstNameInputLabel:{
           en: "First name",
           pl: "Imię",
-        },
-        error : {
-          en: "The field cannot be empty",
-          pl: "Pole nie może być puste",
-        }
       },
-      lastNameInput:{
-        label: {
+      lastNameInputLabel:{
           en: "Last name",
           pl: "Nazwisko",
-        },
-        error : {
-          en: "The field cannot be empty",
-          pl: "Pole nie może być puste",
-        }
+      },
+      errorMessage : {
+        en: "The field cannot be empty",
+        pl: "Pole nie może być puste",
       },
       backButton: { 
         en: "Back", 

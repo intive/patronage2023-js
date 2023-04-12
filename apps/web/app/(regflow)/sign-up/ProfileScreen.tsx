@@ -55,7 +55,7 @@ type ProfileScreenProps = {
 
 export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
-  const { step3 } = dict;
+  const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("1");
 
   return (
@@ -72,8 +72,8 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
               e.preventDefault();
               submit();
             }}>
-            <H3Styled>{t(step3.title)}</H3Styled>
-            <SubtitleStyled>{t(step3.subtitle)}</SubtitleStyled>
+            <H3Styled>{t(profileScreen.title)}</H3Styled>
+            <SubtitleStyled>{t(profileScreen.subtitle)}</SubtitleStyled>
             <SeparatorLine />
             <AvatarSelector
               avatars={[
@@ -114,13 +114,13 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
               onSelect={setSelectedAvatar}
             />
             <Field
-              onChangeValidate={z.string().min(1, t(step3.lastNameInput.error))}
+              onChangeValidate={z.string().min(1, t(profileScreen.errorMessage))}
               name="firstName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (
                 <Input
                   name="firstName"
-                  label={t(step3.firstNameInput.label)}
+                  label={t(profileScreen.firstNameInputLabel)}
                   value={value}
                   onChange={(e) => setValue(e.currentTarget.value)}
                   onInputCleared={() => setValue("")}
@@ -131,13 +131,13 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
               )}
             </Field>
             <Field
-              onChangeValidate={z.string().min(1, t(step3.lastNameInput.error))}
+              onChangeValidate={z.string().min(1, t(profileScreen.errorMessage))}
               name="lastName"
               initialValue={""}>
               {({ value, setValue, onBlur, errors }) => (
                 <Input
                   name="lastName"
-                  label={t(step3.lastNameInput.label)}
+                  label={t(profileScreen.lastNameInputLabel)}
                   value={value}
                   onChange={(e) => setValue(e.currentTarget.value)}
                   onBlur={onBlur}
@@ -155,10 +155,10 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
                   alert("Going Back");
                   //back()
                 }}>
-                {t(step3.backButton)}
+                {t(profileScreen.backButton)}
               </Button>
                 <Button fullWidth onClick={submit}>
-                  {t(step3.submitButton)}
+                  {t(profileScreen.submitButton)}
                 </Button>
             </ButtonsWrapper>
           </StyledForm>
