@@ -32,7 +32,7 @@ type ButtonProps = {
   small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
-const ButtonStyled = styled.button<ButtonProps>`
+export const ButtonStyled = styled.button<ButtonProps>`
   box-sizing: border-box;
   display: inline-flex;
   justify-content: center;
