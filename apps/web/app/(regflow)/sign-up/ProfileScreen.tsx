@@ -76,8 +76,8 @@ export const ProfileScreen = ({
             lastName: values.lastName,
             avatar: selectedAvatar,
           };
-          console.log(profileInfo);
-          //done(profileInfo)
+
+          done(profileInfo);
         }}>
         {({ submit }) => (
           <StyledForm
@@ -169,8 +169,7 @@ export const ProfileScreen = ({
                 variant="secondary"
                 onClick={(e) => {
                   e.preventDefault();
-                  alert("Going Back");
-                  //back()
+                  back();
                 }}>
                 {t(profileScreen.backButton)}
               </Button>
