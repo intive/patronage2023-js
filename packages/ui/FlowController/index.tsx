@@ -47,23 +47,36 @@ export const FlowController = () => {
     //set profile info to user
     setUser({ ...user, profile: profileInfo });
 
-    //hash password here so when user goes back to password screen, he can't see it properly
-    const hashedPassword = await user.password; //encrypt password with bcrypt or something similar
-
     //useState might not be updated here, so we use fetch with passed profileInfo directly
-    fetch("http://strzelam_w_backend:5000", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: user.email,
-        password: hashedPassword,
-        profile: profileInfo,
-      }),
-    }).then((res) => {
-      setResult(res.status);
-    });
+    //   fetch("http://strzelam_w_backend:5000", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       email: user.email,
+    //       password: hashedPassword,
+    //       profile: profileInfo,
+    //     }),
+    //   }).then((res) => {
+    //     setResult(res.status);
+    //   });
+    // };
+
+    //alert for showcase
+    alert(
+      JSON.stringify(
+        {
+          email: user.email,
+          password: user.password,
+          firstName: profileInfo.name,
+          lastName: profileInfo.surname,
+          avatar: profileInfo.avatar,
+        },
+        null,
+        2
+      )
+    );
   };
 
   const steps = [
