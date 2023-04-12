@@ -51,7 +51,6 @@ const StyledLabel = styled.label`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
-  transition-delay: 0.25s;
   cursor: text;
 `;
 
