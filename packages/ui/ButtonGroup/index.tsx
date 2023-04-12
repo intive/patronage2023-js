@@ -87,7 +87,7 @@ const ButtonGroupStyled = styled.div<GroupProps>`
       secondary
         ? css`
             border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
-            z-index: 10;
+            z-index: 1;
           `
         : css`
             background-color: ${({ theme }) =>
@@ -109,7 +109,7 @@ const ButtonGroupStyled = styled.div<GroupProps>`
       secondary
         ? css`
             border-color: ${({ theme }) => theme.buttonGroup.secondary.main};
-            z-index: 10;
+            z-index: 1;
           `
         : css`
             background-color: ${({ theme }) =>

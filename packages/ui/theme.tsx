@@ -124,7 +124,6 @@ export const theme = {
       inactiveBackground: "transparent",
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
-
     },
   },
   avatarSelector: {
@@ -160,6 +159,11 @@ export const theme = {
     edit: colors.BasicWhite,
     hover: colors.Teal1,
     outline: colors.Teal5,
+  },
+  modal: {
+    background: colors.Neutral8,
+    header: colors.Teal10,
+    closeButton: colors.Neutral6,
   },
   signUp: {
     main: colors.Teal10,
