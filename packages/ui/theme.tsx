@@ -136,6 +136,9 @@ export const theme = {
     teal6: colors.Teal6,
     teal8: colors.Teal8,
     teal10: colors.Teal10,
+  textarea: {
+    disabled: colors.Neutral3,
+    focus: colors.Teal6,
   },
   iconPicker: {
     main: colors.Teal10,
