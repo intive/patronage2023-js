@@ -1,9 +1,5 @@
-import { CardWrapperStyled, CardStyled } from "../main-page-components";
+import { ReportsTitle } from "./ReportsTitle";
 
 export default function ReportsPage() {
-  return (
-    <CardWrapperStyled>
-      <CardStyled>Reports page</CardStyled>
-    </CardWrapperStyled>
-  );
+  return <ReportsTitle />;
 }

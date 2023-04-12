@@ -1,7 +1,5 @@
-export default function SignInPage() {
-  return (
-    <div>
-      <p>Hello from Sign-Up page</p>
-    </div>
-  );
+import { SignUpForm } from "./SignUpForm";
+
+export default function SignUpPage() {
+  return <SignUpForm />;
 }

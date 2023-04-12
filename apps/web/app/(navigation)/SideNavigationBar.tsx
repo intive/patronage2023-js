@@ -1,10 +1,12 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useTranslate } from "lib/hooks";
 import { SideNavigationBar } from "ui";
 import { Icon } from "ui";
 
 export default function SideNav() {
+  const { dict, t } = useTranslate("NavigationLayout");
+  const { SideNav } = dict;
   // Missing: sort icon (+functionality), search input (+functionality) - separate features
   // Once navigation item is clicked, it should be active? or is it a hover state with green background and arrow right?
   const BudgetsSubMenuData = {
@@ -88,20 +90,24 @@ export default function SideNav() {
         {
           href: "/budgets",
           icon: "wallet",
-          textValue: "Budgets",
+          textValue: t(SideNav.budgetsItem),
           subMenu: BudgetsSubMenuData,
         },
-        { href: "/reports", icon: "query_stats", textValue: "Reports" },
+        {
+          href: "/reports",
+          icon: "query_stats",
+          textValue: t(SideNav.reportsItem),
+        },
         {
           href: "/team",
           icon: "account_circle",
-          textValue: "Team",
+          textValue: t(SideNav.teamsItem),
           subMenu: TeamSubMenuData,
         },
         {
           href: "/settings",
           icon: "settings",
-          textValue: "Settings",
+          textValue: t(SideNav.settingsItem),
           subMenu: SettingsSubMenuData,
         },
       ]}

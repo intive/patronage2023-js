@@ -116,6 +116,56 @@ export const theme = {
     inactive: colors.Neutral6,
     background: colors.Teal7,
   },
+  navList: {
+    navItem: {
+      activeColor: colors.Teal10,
+      inactiveColor: colors.Neutral8,
+      activeBackground: colors.Teal1,
+      inactiveBackground: "transparent",
+      hoverAndFocusBackground: colors.Teal1,
+      focusOutline: colors.Teal10,
+      
+    },
+  },
+  avatarSelector: {
+    active: colors.Teal6,
+  },
+  checkbox: {
+    main: colors.Teal6,
+    inactive: colors.Neutral4,
+  },
+  datePicker: {
+    basicWhite: colors.BasicWhite,
+    neutral2: colors.Neutral2,
+    neutral5: colors.Neutral5,
+    neutral8: colors.Neutral8,
+    neutral10: colors.Neutral10,
+    teal1: colors.Teal1,
+    teal2: colors.Teal2,
+    teal3: colors.Teal3,
+    teal4: colors.Teal4,
+    teal6: colors.Teal6,
+    teal8: colors.Teal8,
+    teal10: colors.Teal10,
+  },
+  textarea: {
+    disabled: colors.Neutral3,
+    focus: colors.Teal6,
+  },
+  iconPicker: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+    edit: colors.BasicWhite,
+    hover: colors.Teal1,
+    outline: colors.Teal5,
+  },
+  signUp: {
+    main: colors.Teal10,
+    text: colors.Neutral8,
+    error: colors.Supporting4,
+    icon: colors.BasicWhite,
+    link: colors.BasicWhite,
+  },
 };
 
 export type ThemeType = typeof theme;
