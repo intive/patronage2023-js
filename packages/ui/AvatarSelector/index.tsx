@@ -52,7 +52,7 @@ const AvatarsWrapper = styled.div`
   ${device.tablet} {
     width: 100%;
     max-width: 480px;
-    min-width: 350px;
+    min-width: 310px;
     margin: 0;
     margin-bottom: 2em;
   }
@@ -117,10 +117,6 @@ const AvatarGridStyled = styled.div`
       );
     }
   }
-`;
-
-const RelativeDiv = styled.div`
-  position: relative;
 `;
 
 const ButtonStyled = styled.button<ButtonProps>`

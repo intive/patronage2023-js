@@ -38,11 +38,7 @@ const ButtonsWrapper = styled.div`
   width: 100%;
   margin-top: 1em;
   display: flex;
-`;
-
-const CreateBtnWrapper = styled.div`
-  flex-grow: 1;
-  margin-left: 1em;
+  gap: 16px;
 `;
 
 const SeparatorLine = styled.div`
@@ -54,7 +50,7 @@ const SeparatorLine = styled.div`
 
 type ProfileScreenProps = {
   back: () => void;
-  done: () => void;
+  done: ( profileInfo: {firstName: string; lastName: string; avatar: string} ) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
@@ -66,11 +62,9 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
     <>
       <Form
         onSubmit={(values) => {
-          console.log(values, selectedAvatar);
-          alert(
-            `Imię: ${values.firstName} Nazwisko: ${values.lastName} Avatar: ${selectedAvatar}`
-          );
-          //done(values, selectedAvatar)
+          const profileInfo = { firstName: values.firstName, lastName: values.lastName, avatar: selectedAvatar}
+          console.log(profileInfo)
+          //done(profileInfo)
         }}>
         {({ submit }) => (
           <StyledForm
@@ -163,11 +157,9 @@ export const ProfileScreen = ({ back, done }: ProfileScreenProps) => {
                 }}>
                 {t(step3.backButton)}
               </Button>
-              <CreateBtnWrapper>
                 <Button fullWidth onClick={submit}>
                   {t(step3.submitButton)}
                 </Button>
-              </CreateBtnWrapper>
             </ButtonsWrapper>
           </StyledForm>
         )}
