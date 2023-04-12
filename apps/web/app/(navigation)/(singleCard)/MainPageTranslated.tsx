@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  CardStyled,
-  TypoStyled,
-  LinkStyled,
-} from "app/(navigation)/HomePageComponents";
+import { TypoStyled, LinkStyled } from "app/(navigation)/HomePageComponents";
 import { useTranslate } from "lib/hooks";
 
 export const MainPageTranslated = () => {
