@@ -13,4 +13,5 @@ export { AvatarSelector } from "./AvatarSelector";
 export { Input } from "./Input";
 export { Avatar } from "./Avatar";
 export { Checkbox } from "./Checkbox";
+export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
