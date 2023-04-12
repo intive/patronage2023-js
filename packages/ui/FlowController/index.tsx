@@ -1,106 +1,27 @@
-import { useState } from "react";
-interface userObject {
-  email: string;
-  password: string;
-  profile: {
-    name: string;
-    surname: string;
-    avatar: string;
-  };
+interface UserInfo {
+  firstName: string;
+  lastName: string;
+  avatar: string;
 }
 
-export const FlowController = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [result, setResult] = useState<number | null>(null); // 200, 400
-  const [user, setUser] = useState<userObject>({
-    email: "",
-    password: "",
-    profile: {
-      name: "",
-      surname: "",
-      avatar: "",
-    },
-  });
-
-  const goBack = () => setCurrentStep(currentStep - 1);
-
-  const goToBeginning = () => {
-    setCurrentStep(0);
+// TODO change to be generic
+interface Step {
+  screen: JSX.Element;
+  props: {
+    user: string | UserInfo;
+    onNext?: (value: string | UserInfo) => void;
+    onBack?: () => void;
+    onGoToBeginning?: () => void;
+    done?: () => void;
   };
+}
+interface FlowControllerProps {
+  steps: Array<Step>;
+  counter: number;
+}
 
-  const validateEmail = (email: string) => {
-    // get validated email and set it to user
-    setUser({ ...user, email });
+export const FlowController = ({ steps, counter }: FlowControllerProps) => {
+  const { screen: Screen, props } = steps[counter];
 
-    //go next
-    setCurrentStep(currentStep + 1);
-  };
-  const validatePassword = (password: string) => {
-    //get validated not hashed password and set it to user
-    setUser({ ...user, password });
-
-    //go next
-    setCurrentStep(currentStep + 1);
-  };
-
-  const validateProfile = async (profileInfo: userObject["profile"]) => {
-    //set profile info to user
-    setUser({ ...user, profile: profileInfo });
-
-    //useState might not be updated here, so we use fetch with passed profileInfo directly
-    //   fetch("http://strzelam_w_backend:5000", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: user.email,
-    //       password: hashedPassword,
-    //       profile: profileInfo,
-    //     }),
-    //   }).then((res) => {
-    //     setResult(res.status);
-    //   });
-    // };
-
-    //alert for showcase
-    alert(
-      JSON.stringify(
-        {
-          email: user.email,
-          password: user.password,
-          firstName: profileInfo.name,
-          lastName: profileInfo.surname,
-          avatar: profileInfo.avatar,
-        },
-        null,
-        2
-      )
-    );
-  };
-
-  const steps = [
-    {
-      screen: <div>Email</div>,
-      props: { user, onNext: validateEmail },
-    },
-    {
-      screen: <div>Password</div>,
-      props: { user, onNext: validatePassword, onBack: goBack },
-    },
-    {
-      screen: <div>Profile</div>,
-      props: { user, onNext: validateProfile, onBack: goBack },
-    },
-    {
-      screen: <div>Result</div>,
-      props: {
-        result,
-        onBack: goToBeginning,
-      },
-    },
-  ];
-  const Screen = steps[currentStep].screen;
-
-  return <>{Screen}</>;
+  return <Screen {...props} />;
 };
