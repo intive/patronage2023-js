@@ -124,7 +124,6 @@ export const theme = {
       inactiveBackground: "transparent",
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
-      
     },
   },
   avatarSelector: {
@@ -149,8 +148,9 @@ export const theme = {
     teal10: colors.Teal10,
   },
   textarea: {
-    disabled: colors.Neutral3,
-    focus: colors.Teal6,
+    font: colors.Neutral8,
+    disabled: colors.Neutral2,
+    focus: colors.Teal5,
   },
   iconPicker: {
     main: colors.Teal10,

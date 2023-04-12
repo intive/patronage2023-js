@@ -47,7 +47,6 @@ export const SectionStyled = styled.div`
     flex-grow: 1;
     padding: 0;
     margin-left: 32px;
-
   }
 
   ${device.desktop} {
@@ -61,7 +60,7 @@ export const SectionStyled = styled.div`
 
 export const TypoStyled = styled.div`
   max-width: 415px;
-`
+`;
 
 export const FormWrapperStyled = styled.div`
   overflow-x: auto;

@@ -22,6 +22,10 @@ export const DatePickerStyled = styled.div`
     }
   }
 
+  .react-datepicker-popper {
+    z-index: 20;
+  }
+
   .react-datepicker__triangle {
     display: none;
   }

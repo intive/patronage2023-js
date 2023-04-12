@@ -25,6 +25,7 @@
   },
   "packageManager": "npm@8.5.0",
   "dependencies": {
+    "@radix-ui/react-tabs": "^1.0.3",
     "houseform": "^1.9.0",
     "material-symbols": "^0.5.0",
     "react-datepicker": "^4.11.0",

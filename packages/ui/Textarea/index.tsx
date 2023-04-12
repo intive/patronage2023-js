@@ -16,20 +16,21 @@ const TextareaStyled = styled.textarea<TextareaProps>`
   min-height: 70px;
   font-family: "Inter", sans-serif;
   font-size: 1em;
-  border-radius: 10px;
-  border: 0;
-  outline: 2px solid ${({ theme }) => theme.textarea.disabled};
-  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid ${({ theme }) => theme.textarea.disabled};
+  color: ${({ theme }) => theme.textarea.font};
+  padding: 14px;
   resize: none;
 
   &:focus {
-    outline: 2px solid ${({ theme }) => theme.textarea.focus};
+    outline: none;
+    border-color: ${({ theme }) => theme.textarea.focus};
   }
 
   &:focus,
   &:not(:placeholder-shown) {
     + label {
-      transform: translateY(-22px);
+      transform: translateY(-18px);
       background-color: ${({ theme }) => theme.input.labelBackground};
       font-size: 12px;
       font-weight: 600;
@@ -44,13 +45,13 @@ const StyledLabel = styled.label`
   left: 14px;
   top: 11px;
   font-weight: 400;
-  font-size: 13px;
   line-height: 150%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
+  color: ${({ theme }) => theme.textarea.font};
   cursor: text;
 `;
 
