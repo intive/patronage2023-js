@@ -82,7 +82,7 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
+  padding-top: 40px;
   padding: 0;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme }) =>

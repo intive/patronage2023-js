@@ -126,6 +126,12 @@ export const theme = {
       title: colors.Teal10,
     },
   },
+  nav: {
+    main: colors.Teal10,
+    avatarSelector: {
+      active: colors.Teal6,
+    },
+  },
   navList: {
     navItem: {
       activeColor: colors.Teal10,

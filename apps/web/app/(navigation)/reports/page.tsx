@@ -1,12 +1,5 @@
-import { ReportsTitle } from "./ReportsTitle";
-import { CardWrapperStyled, CardStyled } from "../main-page-components";
+import { ReportsTitle } from "./ReportsTranslated";
 
 export default function ReportsPage() {
-  return (
-    <CardWrapperStyled>
-      <CardStyled>
-        <ReportsTitle />
-      </CardStyled>
-    </CardWrapperStyled>
-  );
+  return <ReportsTitle />;
 }

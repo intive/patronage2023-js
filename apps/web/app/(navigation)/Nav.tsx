@@ -6,12 +6,11 @@ import { Icon, Logo, Avatar } from "ui";
 const NavBar = styled.nav`
   box-sizing: border-box;
   display: flex;
-  width: 100%;
-  background-color: #1e4c40;
-  margin:0;
-  padding: 15px 20px 15px 40px;
+  background-color: ${({ theme }) => theme.nav.main};
+  margin: 0;
+  padding: 15px 15px;
   justify-content: space-between;
-  z-index:1;
+  z-index: 1;
 `;
 
 const ActionWrapper = styled.div`
@@ -22,9 +21,9 @@ const ActionWrapper = styled.div`
 `;
 
 const AvatarStyled = styled(Avatar)`
-  height:2.1em;
-  width:2.1em;
-`
+  height: 2.1em;
+  width: 2.1em;
+`;
 export default function Nav() {
   return (
     <NavBar>
