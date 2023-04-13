@@ -9,20 +9,19 @@ type ModalProps = {
 };
 
 const ModalStyled = styled.div`
-  position: fixed;
+  position: absolute;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  inset: 0px;
+  min-height: 100%;
   z-index: 100;
+  overflow: auto;
 `;
 
 const BackgroundStyled = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0px;
   background-color: ${({ theme }) => theme.modal.background};
   opacity: 0.4;
 `;

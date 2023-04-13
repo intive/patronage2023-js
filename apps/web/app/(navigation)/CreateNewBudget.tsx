@@ -39,7 +39,7 @@ export const CreateNewBudget = ({ onClose }) => {
     "help",
   ];
 
-  const budgetNames = ["Savings", "Payments"];
+  const budgetNames = ["smutnarzaba", "frytki123"];
 
   return (
     <Modal header="New budget" onClose={() => onClose()}>
@@ -73,10 +73,12 @@ export const CreateNewBudget = ({ onClose }) => {
                     name="budget-name"
                     onSubmitValidate={z
                       .string()
-                      .min(5, "Minimum 5 letters")
-                      .refine((val) => !budgetNames.includes(val), "Zajęte")}
-                    // onChangeValidate={z.string()}
-                  >
+                      .min(5, "Budget name must have at least 5 letters")
+                      .refine(
+                        (val) => !budgetNames.includes(val),
+                        "That name is already taken, please choose another."
+                      )}
+                    onChangeValidate={z.string()}>
                     {({ value, setValue, errors }) => {
                       return (
                         <Input

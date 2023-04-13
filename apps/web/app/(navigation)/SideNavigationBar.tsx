@@ -117,9 +117,11 @@ export default function SideNav() {
           },
         ]}
       />
-      {isCreateNewBudgetModalVisible && (
-        <CreateNewBudget onClose={closeModal} />
-      )}
+      <>
+        {isCreateNewBudgetModalVisible && (
+          <CreateNewBudget onClose={closeModal} />
+        )}
+      </>
     </>
   );
 }
