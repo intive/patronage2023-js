@@ -42,7 +42,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
   border-radius: 8px;
   color: white;
   background-color: ${({ theme }) => theme.button.primary.main};
-
+  font-family: "Inter", sans-serif;
   font-weight: 600;
   padding: 16px 24px;
   font-size: 1em;
