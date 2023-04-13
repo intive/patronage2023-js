@@ -8,7 +8,7 @@ import { Field, Form } from "houseform";
 type PasswordSubComponentProps = {
   onNext: (password: string) => void;
   onBack: () => void;
-  password?: string;
+  userInfo?: string;
 };
 
 const StyledHeader = styled.h2`
@@ -87,7 +87,7 @@ const FormWrapper = styled.div`
 export const PasswordSubComponent = ({
   onNext,
   onBack,
-  password = "",
+  userInfo = "",
 }: PasswordSubComponentProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const { passwordComponent } = dict;
@@ -122,7 +122,7 @@ export const PasswordSubComponent = ({
               <InputWrapper>
                 <Field
                   name="password"
-                  initialValue={password}
+                  initialValue={userInfo}
                   onSubmitValidate={z
                     .string()
                     .min(12, t(passwordComponent.inputErrors.longCheck))
@@ -162,7 +162,7 @@ export const PasswordSubComponent = ({
                 <Field
                   name="passwordConfirmation"
                   listenTo={["password"]}
-                  initialValue={password}
+                  initialValue={userInfo}
                   onSubmitValidate={(val, form) => {
                     if (val === form.getFieldValue("password")!.value) {
                       return Promise.resolve(true);

@@ -55,14 +55,10 @@ type ProfileScreenProps = {
     lastName: string;
     avatar: string;
   }) => void;
-  profileData: { firstName: string; lastName: string; avatar: string };
+  userInfo: { firstName: string; lastName: string; avatar: string };
 } & React.HTMLProps<HTMLDivElement>;
 
-export const ProfileScreen = ({
-  back,
-  done,
-  profileData,
-}: ProfileScreenProps) => {
+export const ProfileScreen = ({ back, done, userInfo }: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("1");
@@ -123,7 +119,7 @@ export const ProfileScreen = ({
                   src: "/avatars/8.svg",
                 },
               ]}
-              selectedAvatar={selectedAvatar}
+              selectedAvatar={userInfo.avatar || selectedAvatar}
               onSelect={setSelectedAvatar}
             />
             <Field
@@ -131,7 +127,7 @@ export const ProfileScreen = ({
                 .string()
                 .min(1, t(profileScreen.inputErrorMsg))}
               name="firstName"
-              initialValue={""}>
+              initialValue={userInfo.firstName || ""}>
               {({ value, setValue, onBlur, errors }) => (
                 <Input
                   name="firstName"
@@ -150,7 +146,7 @@ export const ProfileScreen = ({
                 .string()
                 .min(1, t(profileScreen.inputErrorMsg))}
               name="lastName"
-              initialValue={""}>
+              initialValue={userInfo.lastName || ""}>
               {({ value, setValue, onBlur, errors }) => (
                 <Input
                   name="lastName"

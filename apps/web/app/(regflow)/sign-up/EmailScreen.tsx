@@ -8,7 +8,7 @@ import { useTranslate } from "lib/hooks";
 
 type EmailScreenProps = {
   onNext: (email: string) => void;
-  email?: string;
+  userInfo?: string;
 };
 
 const StyledForm = styled.form`
@@ -33,7 +33,7 @@ const FooterStyled = styled.div`
   margin-top: 42px;
 `;
 
-export const EmailScreen = ({ onNext, email = "" }: EmailScreenProps) => {
+export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const { emailScreen } = dict;
 
@@ -49,7 +49,7 @@ export const EmailScreen = ({ onNext, email = "" }: EmailScreenProps) => {
           }}>
           <Field
             name="email"
-            initialValue={email}
+            initialValue={userInfo}
             onChangeValidate={z
               .string()
               .email(t(emailScreen.invalidEmailError))}>
