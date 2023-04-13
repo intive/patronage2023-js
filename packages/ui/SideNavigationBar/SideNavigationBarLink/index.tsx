@@ -10,7 +10,6 @@ export const SideNavigationBarLink = ({
   activeFlag,
   onClick,
 }: SideNavigationBarLinkProps) => {
-  const theme = useContext(ThemeContext);
   return (
     <ListItemStyled>
       <LinkStyled href={href} onClick={onClick}>
@@ -68,8 +67,8 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   padding: 17px 34px 17px 34px;
   color: ${({ activeFlag }) =>
     activeFlag
-      ? ({ theme }) => theme.sideNavigationBarItem.main
-      : ({ theme }) => theme.sideNavigationBarItem.inactive};
+      ? ({ theme }) => theme.sideNavigationBar.sideNavigationBarItem.main
+      : ({ theme }) => theme.sideNavigationBar.sideNavigationBarItem.inactive};
 `;
 
 const SpanStyled = styled.span<SpanProps>`
@@ -87,7 +86,8 @@ const DivStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${({ theme }) => theme.sideNavigationBarItem.background};
+  background-color: ${({ theme }) =>
+    theme.sideNavigationBar.sideNavigationBarItem.background};
   height: 100%;
   width: 4px;
   border-radius: 0 8px 8px 0;

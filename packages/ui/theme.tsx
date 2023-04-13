@@ -111,10 +111,19 @@ export const theme = {
     withText: colors.Neutral5,
     withoutText: colors.Neutral2,
   },
-  sideNavigationBarItem: {
-    main: colors.Teal10,
-    inactive: colors.Neutral6,
-    background: colors.Teal7,
+  sideNavigationBar: {
+    background: {
+      activeColor: colors.BasicWhite,
+      inactiveColor: "#e5e5e5",
+    },
+    sideNavigationBarItem: {
+      main: colors.Teal10,
+      inactive: colors.Neutral6,
+      background: colors.Teal7,
+    },
+    subMenu: {
+      separator: colors.Neutral2,
+    },
   },
   navList: {
     navItem: {

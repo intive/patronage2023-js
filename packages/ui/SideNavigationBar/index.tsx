@@ -85,8 +85,9 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
 
   padding: 0;
   list-style: none;
-  background-color: ${({ isSubMenuShown }) =>
-    isSubMenuShown ? "white" : "#e5e5e5"};
-  /* Is it a correct way to make a gap between Nav and SideNav? */
+  background-color: ${({ isSubMenuShown, theme }) =>
+    isSubMenuShown
+      ? theme.sideNavigationBar.background.activeColor
+      : theme.sideNavigationBar.background.inactiveColor};
   padding-top: 40px;
 `;

@@ -43,7 +43,7 @@ const ListItemStyled = styled.li`
 const ButtonStyled = styled.button`
   cursor: pointer;
   border: none;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.button.simple.background};
 `;
 
 const Wrapper = styled.div<WrapperProps>`
@@ -60,8 +60,8 @@ const Wrapper = styled.div<WrapperProps>`
   padding: 17px 34px 17px 34px;
   color: ${({ activeFlag, theme }) =>
     activeFlag
-      ? theme.sideNavigationBarItem.main
-      : theme.sideNavigationBarItem.inactive};
+      ? theme.sideNavigationBar.sideNavigationBarItem.main
+      : theme.sideNavigationBar.sideNavigationBarItem.inactive};
 `;
 
 const SpanStyled = styled.span<SpanProps>`
@@ -79,7 +79,8 @@ const DivStyled = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: ${({ theme }) => theme.sideNavigationBarItem.background};
+  background-color: ${({ theme }) =>
+    theme.sideNavigationBar.sideNavigationBarItem.background};
   height: 100%;
   width: 4px;
   border-radius: 0 8px 8px 0;

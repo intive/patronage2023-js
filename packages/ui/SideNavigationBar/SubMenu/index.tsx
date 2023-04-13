@@ -32,7 +32,8 @@ const SubMenuStyled = styled.div`
   padding: 40px 16px 24px 16px;
   box-shadow: 10px 10px;
 
-  border-left: 1px solid lightgray;
+  border-left: 1px solid
+    ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
 `;
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
