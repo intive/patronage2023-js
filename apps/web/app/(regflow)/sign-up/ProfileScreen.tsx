@@ -88,7 +88,7 @@ export const ProfileScreen = ({
                 src: "/avatars/8.svg",
               },
             ]}
-            selectedAvatar={userInfo.avatar || selectedAvatar}
+            selectedAvatar={selectedAvatar}
             onSelect={setSelectedAvatar}
           />
           <Field
