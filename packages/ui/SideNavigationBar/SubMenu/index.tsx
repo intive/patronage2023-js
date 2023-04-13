@@ -78,8 +78,3 @@ const MainDiv = styled.div`
   flex-direction: column;
   gap: 15px;
 `;
-
-const ListElementStyled = styled.li`
-  list-style: none;
-  padding: 0;
-`;

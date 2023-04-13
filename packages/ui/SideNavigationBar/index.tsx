@@ -72,9 +72,7 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
           );
         })}
       </SideNavigationBarStyled>
-      {isSubMenuShown && subMenuData && (
-        <SubMenu subMenuDataObject={subMenuData} />
-      )}
+      {subMenuData && <SubMenu subMenuDataObject={subMenuData} />}
     </>
   );
 };

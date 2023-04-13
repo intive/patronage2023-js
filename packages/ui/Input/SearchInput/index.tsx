@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import { Icon } from "../../Icon";
+import { ReactNode } from "react";
 
 type SearchInputProps = {
-  searchInput: any;
+  searchInput: {
+    placeholder: string;
+    icon: ReactNode;
+  };
 };
 
 export const SearchInput = ({ searchInput }: SearchInputProps) => {
   return (
     <Wrapper>
       <StyledInput placeholder={searchInput.placeholder} />
-      <StyledIcon>
-        <Icon icon={searchInput.icon} color="#515151" />
-      </StyledIcon>
+      <StyledIcon>{searchInput.icon}</StyledIcon>
     </Wrapper>
   );
 };

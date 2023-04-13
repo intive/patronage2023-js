@@ -14,6 +14,12 @@ const AvatarStyled = styled(Avatar)`
   height: 28px;
 `;
 
+const IconStyled = styled(Icon)`
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+`;
+
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
@@ -23,7 +29,7 @@ export default function SideNav() {
     {
       ComponentToRender: (
         <>
-          <Icon icon="payments" iconSize={30} />
+          <IconStyled icon="payments" iconSize={24} />
           <SpanStyled>Bills</SpanStyled>
         </>
       ),
@@ -33,7 +39,7 @@ export default function SideNav() {
     {
       ComponentToRender: (
         <>
-          <Icon icon="subscriptions" iconSize={30} />
+          <IconStyled icon="subscriptions" iconSize={24} />
           <SpanStyled>Subscriptions</SpanStyled>
         </>
       ),
@@ -43,7 +49,7 @@ export default function SideNav() {
     {
       ComponentToRender: (
         <>
-          <Icon icon="savings" iconSize={30} />
+          <IconStyled icon="savings" iconSize={24} />
           <SpanStyled>Savings</SpanStyled>
         </>
       ),
@@ -93,7 +99,7 @@ export default function SideNav() {
     },
     searchInput: {
       placeholder: "Search budgets",
-      icon: <Icon icon="search" />,
+      icon: <Icon icon="search" color="#515151" />,
     },
     navigationList: (
       <NavList
@@ -114,7 +120,7 @@ export default function SideNav() {
       icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      icon: <Icon icon="search" />,
+      icon: <Icon icon="search" color="#515151" />,
       placeholder: "Search team",
     },
     navigationList: (
@@ -131,29 +137,17 @@ export default function SideNav() {
 
   const SettingsSubMenuNavListContents = [
     {
-      ComponentToRender: (
-        <>
-          <span>Edit profile</span>
-        </>
-      ),
+      ComponentToRender: <span>Edit profile</span>,
       href: "/settings/edit-profile",
       id: 1,
     },
     {
-      ComponentToRender: (
-        <>
-          <span>Change password</span>
-        </>
-      ),
+      ComponentToRender: <span>Change password</span>,
       href: "/settings/change-password",
       id: 2,
     },
     {
-      ComponentToRender: (
-        <>
-          <span>Language</span>
-        </>
-      ),
+      ComponentToRender: <span>Language</span>,
       href: "/settings/change-language",
       id: 3,
     },
@@ -174,27 +168,27 @@ export default function SideNav() {
       items={[
         {
           href: "/budgets",
-          icon: <Icon icon="wallet" iconSize={30} />,
+          icon: <Icon icon="wallet" iconSize={32} />,
           textValue: t(SideNav.budgetsItem),
           subMenu: BudgetsSubMenuData,
           id: 1,
         },
         {
           href: "/reports",
-          icon: <Icon icon="query_stats" iconSize={30} />,
+          icon: <Icon icon="query_stats" iconSize={32} />,
           textValue: t(SideNav.reportsItem),
           id: 2,
         },
         {
           href: "/team",
-          icon: <Icon icon="account_circle" iconSize={30} />,
+          icon: <Icon icon="account_circle" iconSize={32} />,
           textValue: t(SideNav.teamsItem),
           subMenu: TeamSubMenuData,
           id: 3,
         },
         {
           href: "/settings",
-          icon: <Icon icon="settings" iconSize={30} />,
+          icon: <Icon icon="settings" iconSize={32} />,
           textValue: t(SideNav.settingsItem),
           subMenu: SettingsSubMenuData,
           id: 4,

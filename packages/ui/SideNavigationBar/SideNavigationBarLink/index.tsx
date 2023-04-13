@@ -42,15 +42,13 @@ type SideNavigationBarLinkState = {
 
 const ListItemStyled = styled.li`
   list-style: none;
-  padding: 0;
 `;
 
 const LinkStyled = styled(Link)`
-  text-decoration: none;
-  &:focus,
-  &:hover,
-  &:visited,
   &:link,
+  &:visited,
+  &:hover,
+  &:focus,
   &:active {
     text-decoration: none;
   }
@@ -61,7 +59,7 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2px;
+  gap: 10px;
 
   position: relative;
   height: auto;
@@ -75,6 +73,8 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
 `;
 
 const SpanStyled = styled.span<SpanProps>`
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
   text-align: center;
   ${({ fontSize }) =>
     fontSize &&
