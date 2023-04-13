@@ -1,6 +1,5 @@
 "use client";
 import { device } from "lib/media";
-
 import styled from "styled-components";
 import Link from "next/link";
 import { Card } from "ui";
@@ -13,6 +12,7 @@ export const CardWrapperStyled = styled.div`
   background-color: #e5e5e5;
   padding: 25px;
 `;
+
 export const CardStyled = styled(Card)`
   display: flex;
   flex-direction: column;
@@ -21,6 +21,7 @@ export const CardStyled = styled(Card)`
   min-height: 100%;
   width: 100%;
 `;
+
 export const LinkStyled = styled(Link)`
   font-family: "Signika", sans-serif;
   font-size: 1.3em;
@@ -32,6 +33,7 @@ export const LinkStyled = styled(Link)`
     font-size: 2.3em;
   }
 `;
+
 export const TypoStyled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 2.8em;

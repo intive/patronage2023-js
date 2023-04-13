@@ -53,11 +53,10 @@ const NavListWrapperStyled = styled.div`
 `;
 
 export default function NavListDemo() {
-  const currentPage = usePathname();
   return (
     <>
       <NavListWrapperStyled>
-        <NavList contents={dummyNavItemContents} currentPage={currentPage as string}></NavList>
+        <NavList contents={dummyNavItemContents}></NavList>
       </NavListWrapperStyled>
     </>
   );

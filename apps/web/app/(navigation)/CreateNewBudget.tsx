@@ -21,7 +21,11 @@ import {
 import { Form, Field } from "houseform";
 import { z } from "zod";
 
-export const CreateNewBudget = ({ onClose }) => {
+type NewBudget = {
+  onClose?: Function;
+};
+
+export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<Icon | undefined>(
     "settings"
@@ -42,7 +46,7 @@ export const CreateNewBudget = ({ onClose }) => {
   const budgetNames = ["smutnarzaba", "frytki123"];
 
   return (
-    <Modal header="New budget" onClose={() => onClose()}>
+    <Modal header="New budget" onClose={() => onClose && onClose()}>
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValue}>
         <TabsListStyled>
