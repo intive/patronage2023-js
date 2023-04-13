@@ -81,8 +81,9 @@ export const SignUp = () => {
         2
       )
     );
+    setResult(Math.random() >= 0.5 ? 200 : 400); // randoming result for showcase since backend is dead
+    setCurrentStep(currentStep + 1);
   };
-  console.log(user);
 
   return (
     <FlowController
@@ -93,7 +94,7 @@ export const SignUp = () => {
           props: {
             onNext: validateEmail,
             onBack: goBack,
-            user: user.email,
+            userInfo: user.email,
           },
         },
         {
@@ -101,7 +102,7 @@ export const SignUp = () => {
           props: {
             onNext: validatePassword,
             onBack: goBack,
-            user: user.password,
+            userInfo: user.password,
           },
         },
         {
@@ -109,12 +110,16 @@ export const SignUp = () => {
           props: {
             done: validateProfile,
             back: goBack,
-            user: user.profile,
+            userInfo: user.profile,
           },
         },
         {
           screen: SuccessErrorScreen,
-          props: {},
+          props: {
+            loginHref: "/sign-in",
+            onBackToStart: goToBeginning,
+            success: result === 200,
+          },
         },
       ]}
     />
