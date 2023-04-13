@@ -1,33 +1,7 @@
 import styled from "styled-components";
-import { Card, Textarea } from "ui";
+import { Separator, Textarea } from "ui";
 import * as Tabs from "@radix-ui/react-tabs";
 import { device } from "lib/media-queries";
-
-export const ModalStyled = styled.div`
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  background-color: rgba(0, 0, 0, 0.3);
-`;
-
-export const CardStyled = styled(Card)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  padding: 32px 48px;
-  ${device.tablet} {
-    width: auto;
-    height: auto;
-    border-radius: 1rem;
-  }
-`;
 
 export const TabsStyled = styled(Tabs.Root)`
   width: 311px;
@@ -58,7 +32,7 @@ export const TabsTriggerStyled = styled(Tabs.Trigger)`
   }
   &[disabled],
   &[disabled]:hover {
-    color: #82d3af;
+    color: ${({ theme }) => theme.button.secondary.disabled};
     cursor: not-allowed;
   }
   &:hover {
@@ -95,3 +69,18 @@ export const InputWrapperFullFlex = styled.div`
   align-items: center;
   gap: 16px;
 `;
+
+export const SeparatorStyled = styled(Separator)`
+  z-index: 15;
+  position: relative;
+  width: 150%;
+  margin-top: 48px;
+`;
+
+export const ButtonWrapperStyled = styled.div`
+  margin-top: 24px;
+  display: flex;
+  flex-start: start;
+`;
+
+export const FormWrapperStyled =  styled.div``

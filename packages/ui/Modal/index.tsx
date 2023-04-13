@@ -41,7 +41,7 @@ const CardStyled = styled(Card)`
   }
 
   @media (min-width: 1024px) {
-    padding: 48px;
+    padding: 32px 48px;
   }
 `;
 
