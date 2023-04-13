@@ -1,39 +1,90 @@
 import styled from "styled-components";
-import {
-  SideNavigationBarItemProps,
-  SideNavigationBarItem,
-} from "../SideNavigationBarItem";
+import { useState, ReactNode } from "react";
+
+import { SideNavigationBarButton } from "./SideNavigationBarButton";
+import { SideNavigationBarLink } from "./SideNavigationBarLink";
+import { SubMenu, SubMenuDataProps } from "./SubMenu";
+
+type SideNavigationBarItemProps = {
+  href: string;
+  icon: ReactNode;
+  textValue: string;
+  subMenu?: SubMenuDataProps;
+  id: number;
+};
 
 type SideNavigationBarProps = {
   items: SideNavigationBarItemProps[];
-  pathname: string;
 };
 
-export const SideNavigationBar = ({
-  items,
-  pathname,
-}: SideNavigationBarProps) => {
+type SubMenuBoolean = {
+  isSubMenuShown: boolean;
+};
+
+export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
+  const [isSubMenuShown, setIsSubMenuShown] = useState(false);
+  const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
+  const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
+    useState<number>();
+
+  const hideSubMenu = () => {
+    setActiveSideNavBarItemIndex(undefined);
+    setSubMenuData(undefined);
+    setIsSubMenuShown(false);
+  };
+
+  const showSubMenu = (subMenu: SubMenuDataProps, index: number) => {
+    if (activeSideNavBarItemIndex === index) {
+      return hideSubMenu();
+    }
+    setActiveSideNavBarItemIndex(index);
+    setSubMenuData(subMenu);
+    setIsSubMenuShown(true);
+  };
+
+  const handleLinkClick = (index: number) => {
+    hideSubMenu();
+    setActiveSideNavBarItemIndex(index);
+  };
+
   return (
-    <SideNavigationBarStyled items={items} pathname={pathname}>
-      {items.map(({ href, icon, textValue }, index) => (
-        <SideNavigationBarItem
-          key={`SideNavigationBarItem-${index}`}
-          href={href}
-          icon={icon}
-          textValue={textValue}
-          activeFlag={pathname === href}
-        />
-      ))}
-    </SideNavigationBarStyled>
+    <>
+      <SideNavigationBarStyled isSubMenuShown={isSubMenuShown}>
+        {items.map(({ href, icon, textValue, subMenu, id }, index) => {
+          return subMenu ? (
+            <SideNavigationBarButton
+              key={id}
+              onClick={() => showSubMenu(subMenu, index)}
+              icon={icon}
+              textValue={textValue}
+              activeFlag={activeSideNavBarItemIndex === index}
+            />
+          ) : (
+            <SideNavigationBarLink
+              key={id}
+              href={href}
+              icon={icon}
+              textValue={textValue}
+              activeFlag={activeSideNavBarItemIndex === index}
+              onClick={() => handleLinkClick(index)}
+            />
+          );
+        })}
+      </SideNavigationBarStyled>
+      {subMenuData && <SubMenu subMenuDataObject={subMenuData} />}
+    </>
   );
 };
 
-const SideNavigationBarStyled = styled.ul<SideNavigationBarProps>`
+const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding-top: 40px;
-  padding: 0;
   list-style: none;
+  background-color: ${({ isSubMenuShown, theme }) =>
+    isSubMenuShown
+      ? theme.sideNavigationBar.background.activeColor
+      : theme.sideNavigationBar.background.inactiveColor};
 `;
