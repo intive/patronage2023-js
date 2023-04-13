@@ -49,7 +49,7 @@ const SeparatorLine = styled.div`
 `;
 
 type ProfileScreenProps = {
-  back: () => void;
+  onBack: () => void;
   done: (profileInfo: {
     firstName: string;
     lastName: string;
@@ -58,7 +58,11 @@ type ProfileScreenProps = {
   userInfo: { firstName: string; lastName: string; avatar: string };
 } & React.HTMLProps<HTMLDivElement>;
 
-export const ProfileScreen = ({ back, done, userInfo }: ProfileScreenProps) => {
+export const ProfileScreen = ({
+  onBack,
+  done,
+  userInfo,
+}: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("1");
@@ -165,7 +169,7 @@ export const ProfileScreen = ({ back, done, userInfo }: ProfileScreenProps) => {
                 variant="secondary"
                 onClick={(e) => {
                   e.preventDefault();
-                  back();
+                  onBack();
                 }}>
                 {t(profileScreen.backButton)}
               </Button>
