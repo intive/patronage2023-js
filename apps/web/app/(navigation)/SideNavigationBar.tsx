@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslate } from "lib/hooks";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
@@ -15,7 +14,6 @@ import {
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
-  const currentPage = usePathname() || "";
 
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
