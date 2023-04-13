@@ -25,6 +25,7 @@ type SubMenuProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
+  width: 288px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -71,6 +72,7 @@ const Title = styled.span`
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
+  color: ${({ theme }) => theme.sideNavigationBar.subMenu.title};
   line-height: 36px;
 `;
 

@@ -123,6 +123,7 @@ export const theme = {
     },
     subMenu: {
       separator: colors.Neutral2,
+      title: colors.Teal10,
     },
   },
   navList: {

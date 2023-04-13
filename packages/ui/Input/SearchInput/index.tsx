@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const StyledInput = styled.input`
+  width: 100%;
   box-sizing: border-box;
   border: solid 2px #e1e1e1;
   border-radius: 8px;
