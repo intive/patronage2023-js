@@ -3,6 +3,7 @@
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { Icon, LinkComponent, ButtonStyled } from "ui";
+import { FormWrapper, StyledHeader, StyledSubHeader } from "./SignUpFormStyled";
 
 type SuccessType = {
   success: boolean;
@@ -12,19 +13,6 @@ type SuccessErrorScreenProps = {
   loginHref: string;
 } & SuccessType &
   React.HTMLProps<HTMLDivElement>;
-
-const ScreenContent = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-direction: column;
-  min-height: 518px;
-
-  @media only screen and (min-width: 1024px) {
-    justify-content: center;
-  }
-`;
 
 const ScreenStatusWrapper = styled.div`
   display: flex;
@@ -39,6 +27,7 @@ const ScreenCircle = styled.div<SuccessType>`
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  margin-bottom: 32px;
   background: ${({ success, theme }) =>
     success ? theme.signUp.main : theme.signUp.error};
 `;
@@ -46,21 +35,6 @@ const ScreenCircle = styled.div<SuccessType>`
 const IconStyled = styled(Icon)`
   color: ${({ theme }) => theme.signUp.icon};
   font-weight: 700;
-`;
-
-const ScreenHeader = styled.h2`
-  font-size: 1.5em;
-  line-height: 1.5em;
-  font-family: "Signika", sans-serif;
-  margin-top: 32px;
-  color: ${({ theme }) => theme.signUp.main};
-`;
-
-const ScreenSubheader = styled.p`
-  line-height: 1.5em;
-  font-family: "Inter", sans-serif;
-  margin-top: 4px;
-  color: ${({ theme }) => theme.signUp.text};
 `;
 
 const LinkStyled = styled(LinkComponent)`
@@ -96,13 +70,13 @@ export const SuccessErrorScreen = ({
     : t(status.error.button);
 
   return (
-    <ScreenContent>
+    <FormWrapper center>
       <ScreenStatusWrapper>
         <ScreenCircle success={success}>
           <IconStyled icon={success ? "done" : "priority_high"} iconSize={56} />
         </ScreenCircle>
-        <ScreenHeader>{statusHeaderText}</ScreenHeader>
-        <ScreenSubheader>{statusSubheaderText}</ScreenSubheader>
+        <StyledHeader>{statusHeaderText}</StyledHeader>
+        <StyledSubHeader>{statusSubheaderText}</StyledSubHeader>
       </ScreenStatusWrapper>
       {success ? (
         <ButtonStyled as={LinkStyled} fullWidth href={loginHref}>
@@ -113,6 +87,6 @@ export const SuccessErrorScreen = ({
           {statusButtonText}
         </ButtonStyled>
       )}
-    </ScreenContent>
+    </FormWrapper>
   );
 };

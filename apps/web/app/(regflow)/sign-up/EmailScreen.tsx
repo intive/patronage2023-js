@@ -5,31 +5,16 @@ import { Button, Input, LinkComponent } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
+import { FormWrapper } from "./SignUpFormStyled";
 
 type EmailScreenProps = {
   onNext: (email: string) => void;
   userInfo?: string;
 };
 
-const StyledForm = styled.form`
-  display: flex;
-  margin: 0 auto;
-  gap: 24px;
-  width: 312px;
-  height: 542px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  @media (min-width: 767px) {
-    width: 416px;
-  }
-`;
-
 const FooterStyled = styled.div`
   font-size: 16px;
   line-height: 150%;
-  font-weight: 400;
   margin-top: 42px;
 `;
 
@@ -43,7 +28,7 @@ export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
         onNext(values.email);
       }}>
       {({ submit }) => (
-        <StyledForm
+        <FormWrapper
           onSubmit={(event) => {
             event.preventDefault();
           }}>
@@ -75,7 +60,7 @@ export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
               {t(emailScreen.footerLink)}
             </LinkComponent>
           </FooterStyled>
-        </StyledForm>
+        </FormWrapper>
       )}
     </Form>
   );
