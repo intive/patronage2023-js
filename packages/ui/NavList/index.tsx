@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { NavItem } from "ui";
 import React, { ReactElement } from "react";
+import { usePathname } from "next/navigation";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
@@ -13,7 +14,6 @@ export type NavItemContents = {
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
 export type NavListProps = {
   contents: Array<NavItemContents>;
-  currentPage: string;
 } & React.HTMLProps<HTMLUListElement>;
 
 const NavListStyled = styled.ul`
@@ -42,7 +42,9 @@ export const IconWrapper = styled.div`
   border-radius: 8px;
 `;
 
-export const NavList = ({ contents, currentPage }: NavListProps) => {
+export const NavList = ({ contents }: NavListProps) => {
+  const currentPage = usePathname() || "";
+
   return (
     <NavListStyled>
       {contents.map((content) => {

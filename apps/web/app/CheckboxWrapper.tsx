@@ -12,12 +12,16 @@ const CheckboxInputTitleWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 15px;
+  gap: 0.5em;
 `;
-const TitleStyled = styled.h3`
+
+const TitleStyled = styled.label`
+  display: flex;
+  align-items: center;
   font-size: 0.9em;
   font-weight: 500;
-  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  gap: 0.5em;
 `;
 
 export const CheckboxWrapper = ({
@@ -25,11 +29,13 @@ export const CheckboxWrapper = ({
   iconName,
   title,
 }: CheckboxWrapperProps) => {
+  const id = title.replaceAll(" ", "_") + "_" + iconName;
   return (
     <CheckboxInputTitleWrapper>
-      <input type="checkbox"></input>
-      <Icon icon={iconName} iconSize={25} color={color} />
-      <TitleStyled>{title}</TitleStyled>
+      <input type="checkbox" id={id}></input>
+      <TitleStyled htmlFor={id}>
+        <Icon icon={iconName} iconSize={25} color={color} /> {title}
+      </TitleStyled>
     </CheckboxInputTitleWrapper>
   );
 };
