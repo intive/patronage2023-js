@@ -2,14 +2,7 @@
 
 import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useState } from "react";
-import {
-  Button,
-  CustomDatePicker,
-  IconPicker,
-  Input,
-  Modal,
-  Separator,
-} from "ui";
+import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
 import { IconType } from "ui/Icon";
 import {
   TabsContentStyled,
@@ -27,6 +20,7 @@ import {
 } from "./CreateNewBudget.styled";
 
 import { Form, Field } from "houseform";
+import { z } from "zod";
 
 export const CreateNewBudget = () => {
   const [defaultValue, setDefaultValue] = useState("settings");
@@ -46,6 +40,8 @@ export const CreateNewBudget = () => {
     "help",
   ];
 
+  const budgetNames = ["Savings", "Payments"];
+
   return (
     <Modal header="New budget" onClose={() => {}}>
       <SeparatorStyledTop />
@@ -60,7 +56,7 @@ export const CreateNewBudget = () => {
         <TabsContentStyled value="settings">
           {/* form */}
           <Form onSubmit={(values) => alert(JSON.stringify(values))}>
-            {({ submit }) => (
+            {({ isValid, submit }) => (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -74,16 +70,25 @@ export const CreateNewBudget = () => {
                     setSelectedIcon(icon);
                   }}></IconPicker>
                 <InputWrapperFullStyled>
-                  <Field name="username">
-                    {({ value, setValue, onBlur }) => (
-                      <Input
-                        value={value}
-                        onChange={(e) => setValue(e.currentTarget.value)}
-                        label="Budget name"
-                        name="budget-name"
-                        onBlur={() => console.log("blurred")}
-                      />
-                    )}
+                  <Field
+                    name="budget-name"
+                    onSubmitValidate={z
+                      .string()
+                      .min(5, "Minimum 5 letters")
+                      .refine((val) => !budgetNames.includes(val), "Zajęte")}
+                    // onChangeValidate={z.string()}
+                  >
+                    {({ value, setValue, errors, onBlur }) => {
+                      return (
+                        <Input
+                          value={value}
+                          hasError={!isValid}
+                          supportingLabel={!isValid ? errors[0] : ""}
+                          onChange={(e) => setValue(e.currentTarget.value)}
+                          label="Budget name"
+                        />
+                      );
+                    }}
                   </Field>
                 </InputWrapperFullStyled>
                 <InputWrapperHalfStyled>

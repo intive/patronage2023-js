@@ -53,10 +53,12 @@ export const ParagraphStyled = styled.p`
 export const InputWrapperFullStyled = styled.div`
   margin-top: 24px;
   width: 100%;
+  margin-bottom: 10px;
 `;
 
 export const InputWrapperHalfStyled = styled.div`
   width: 210px;
+  margin-bottom: 10px;
 `;
 
 export const TextareaStyled = styled(Textarea)`
@@ -78,10 +80,10 @@ export const SeparatorStyled = styled(Separator)`
 `;
 
 export const SeparatorStyledTop = styled(Separator)`
-   display: block;
-   width: 100%;
-   margin-bottom: 16px;
-`
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+`;
 
 export const ButtonWrapperStyled = styled.div`
   display: block;
