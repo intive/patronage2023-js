@@ -1,3 +1,6 @@
+import styled from "styled-components";
+import { FormWrapper } from "./SignUpFormStyled";
+
 interface UserInfo {
   firstName: string;
   lastName: string;
@@ -25,5 +28,9 @@ interface FlowControllerProps {
 export const FlowController = ({ steps, counter }: FlowControllerProps) => {
   const { screen: Screen, props } = steps[counter];
 
-  return <Screen {...props} />;
+  return (
+    <FormWrapper>
+      <Screen {...props} />
+    </FormWrapper>
+  );
 };
