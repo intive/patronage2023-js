@@ -18,7 +18,7 @@ This is a turborepo monorepo
 
 - `web`: [Next.js](https://nextjs.org/) app for web
 - `storybook`: design system Storybook
-- `ui`: a stub React component library shared by both `web` and `storybook` applications
+- `ui`: ui React component library shared by both `web` and `storybook` applications
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
