@@ -66,6 +66,7 @@ export type IconProps = {
 
 export const StyledIcon = styled.span<styledIconProps>`
   font-variation-settings: "FILL" 0;
+  font-weight: 600;
   ${({ iconSize }) =>
     iconSize &&
     css`

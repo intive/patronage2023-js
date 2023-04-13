@@ -63,9 +63,109 @@ const dictionary = {
     },
   },
   SignUpPage: {
+    passwordComponent: {
+      mainHeader: { en: "Let's secure the account", pl: "Zabezpieczmy konto" },
+      subHeader: {
+        en: "Use password to protect your account",
+        pl: "Użyj hasła, aby zabezpieczyć konto",
+      },
+      requirementsHeader: {
+        en: "Your password must contain at least:",
+        pl: "Twoje hasło musi zawierać przynajmniej:",
+      },
+      requirementUpperCase: {
+        en: "One upper case character",
+        pl: "Jedną wielką literę",
+      },
+      requirementLowerCase: {
+        en: "One lower case character",
+        pl: "Jedną małą literę",
+      },
+      requirementSpecialCharacter: {
+        en: "One special character",
+        pl: "Jeden znak specjalny",
+      },
+      requirementNoSpace: { en: "No spaces", pl: "Nie może zawierać spacji" },
+      requirementLength: {
+        en: "12 characters or more",
+        pl: "Musi składać się z 12 lub więcej znaków",
+      },
+      inputPlaceholderPassword: {
+        en: "Password",
+        pl: "Hasło",
+      },
+      inputPlaceholderRepeatPassword: {
+        en: "Repeat password",
+        pl: "Powtórz hasło",
+      },
+      buttonBack: {
+        en: "Back",
+        pl: "Powrót",
+      },
+      buttonNext: {
+        en: "Continue",
+        pl: "Dalej",
+      },
+      inputErrors: {
+        missingUpperCase: {
+          en: "The password should contain at least one upper case character",
+          pl: "Hasło powinno zawierać przynajmniej jedną wielką literę",
+        },
+        missingLowerCase: {
+          en: "The password should contain at least one lower case character",
+          pl: "Hasło powinno zawierać przynajmniej jedną małą literę",
+        },
+        missingSpecialCharacter: {
+          en: "The password should contain at least one special character",
+          pl: "Hasło powinno zawierac przynajmniej jeden znak specjalny",
+        },
+        spacesCheck: {
+          en: "The password should not contain spaces",
+          pl: "Hasło nie powinno zawierać spacji",
+        },
+        longCheck: {
+          en: "The password should be at least 12 characters long",
+          pl: "Hasło powinno zawierać przynajmniej 12 znaków",
+        },
+        matchError: {
+          en: "Passwords do not match",
+          pl: "Podane hasła różnią się od siebie",
+        },
+      },
+    },
     paragraph: {
       en: "Hello from Sign-Up page",
       pl: "Witaj ze strony rejestracji",
+    },
+    profileScreen: {
+      title: {
+        en:"Customise the account",
+        pl:"Spersonalizuj swoje konto",
+      },
+      subtitle: {
+        en: "Select your avatar and tell us your name",
+        pl: "Wybierz avatar i powiedz jak się nazywasz",
+      },
+      firstNameInputLabel:{
+          en: "First name",
+          pl: "Imię",
+      },
+      lastNameInputLabel:{
+          en: "Last name",
+          pl: "Nazwisko",
+      },
+      inputErrorMsg : {
+        en: "The field cannot be empty",
+        pl: "Pole nie może być puste",
+      },
+      backButton: { 
+        en: "Back", 
+        pl: "Powrót" 
+      },
+      submitButton: { 
+        en: "Create account", 
+        pl: "Utwórz konto" 
+      },
     },
     emailScreen: {
       inputLabel: {

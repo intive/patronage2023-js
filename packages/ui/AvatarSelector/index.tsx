@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Avatar } from "../Avatar";
+import { device } from "../../../apps/web/lib/media-queries";
+
 interface AvatarProps {
   src: string;
   id: string;
@@ -20,28 +22,49 @@ export const AvatarSelector = ({
   onSelect,
   selectedAvatar,
 }: SelectorProps) => {
+
   return (
-    <RelativeDiv>
+    <AvatarsWrapper>
       <AvatarGridStyled>
         {avatars.map(({ src, id }) => (
           <ButtonStyled
             key={id}
-            onClick={() => onSelect(id)}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(id);
+            }}
             selected={selectedAvatar === id}>
             <Avatar src={src} />
           </ButtonStyled>
         ))}
       </AvatarGridStyled>
-    </RelativeDiv>
+    </AvatarsWrapper>
   );
 };
+
+const AvatarsWrapper = styled.div`
+  position: relative;
+  width: 348px;
+  margin-left: -1em;
+  margin-right: -1em;
+  margin-bottom: 2em;
+
+  ${device.tablet} {
+    width: 100%;
+    max-width: 480px;
+    min-width: 310px;
+    margin: 0;
+    margin-bottom: 2em;
+  }
+`;
 
 const AvatarGridStyled = styled.div`
   overflow-x: auto;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   overflow-y: hidden;
-  padding: 2rem;
+  padding: 0.5rem;
   gap: 1rem;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -56,48 +79,50 @@ const AvatarGridStyled = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-wrap: nowrap;
+    justify-content: flex-start;
 
     &:after,
     &:before {
       content: "";
       width: 36px;
-      height: 90%;
+      height: 88%;
       top: 0;
       position: absolute;
+
+      @media (hover: none) {
+        height: 100%;
+      }
     }
+
     &::after {
-      left: 0;
+      left: -5px;
       background: linear-gradient(
         90deg,
         #ffffff 0%,
-        #ffffff 33.85%,
-        rgba(255, 255, 255, 0.51) 80.21%,
+        #ffffff 35%,
+        rgba(255, 255, 255, 0.41) 75%,
         rgba(255, 255, 255, 0) 100%
       );
     }
     &::before {
-      right: 0;
+      right: -5px;
       background: linear-gradient(
         270deg,
         #ffffff 0%,
-        #ffffff 33.85%,
-        rgba(255, 255, 255, 0.51) 80.21%,
+        #ffffff 35%,
+        rgba(255, 255, 255, 0.41) 75%,
         rgba(255, 255, 255, 0) 100%
       );
     }
   }
 `;
 
-const RelativeDiv = styled.div`
-  position: relative;
-`;
-
 const ButtonStyled = styled.button<ButtonProps>`
   cursor: pointer;
   border: none;
-  font-size: 88px;
+  font-size: 110px;
   height: 1em;
   padding: 0;
   background: none;
@@ -111,7 +136,34 @@ const ButtonStyled = styled.button<ButtonProps>`
     outline: ${({ theme }) => `2px solid ${theme.avatarSelector.active}`};
   }
 
-  @media (max-width: 768px) {
-    font-size: 120px;
+  &:first-child {
+      margin-left: 14px;
+    }
+
+    &:last-child {
+      margin-right: 14px;
+    }
+
+  ${device.tablet} {
+    font-size: 61px;
+
+    &:first-child,
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  @media (min-width: 900px) {
+    font-size: 73px;
+  }
+
+  @media (min-width: 1025px) {
+    font-size: 70px;
+  }
+
+  @media (min-width: 1150px) {
+    font-size: 90px;
   }
 `;
+
+

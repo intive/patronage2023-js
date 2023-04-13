@@ -16,7 +16,6 @@ export type SeparatorProps = {
 const SeparatorStyled = styled.div<SeparatorProps>`
   text-align: center;
   position: relative;
-  margin: 48px 0;
 
   ::before {
     content: " ";
@@ -30,7 +29,6 @@ const SeparatorStyled = styled.div<SeparatorProps>`
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    z-index: -1;
   }
 `;
 
