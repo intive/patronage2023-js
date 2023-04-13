@@ -19,4 +19,3 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
-export { FlowController } from "./FlowController";
