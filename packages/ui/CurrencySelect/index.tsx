@@ -11,7 +11,7 @@ export type CurrencySelectComponentProps = {
   tag: string;
   label: string;
   id: string | number;
-  value: string | number;
+  value: string;
 } & React.HTMLProps<HTMLElement>;
 
 
@@ -129,21 +129,21 @@ const currency = [
   {
     tag: "PLN",
     label: "Polish Zloty",
-    id: 1,
+    id: "1",
   },
   {
     tag: "GBP",
     label: "British Pound",
-    id: 2,
+    id: "2",
   },
   {
     tag: "EUR",
     label: "Euro",
-    id: 3,
+    id: "3",
   },
   {
     tag: "USD",
     label: "United States Dollar",
-    id: 4,
+    id: "4",
   },
 ];
