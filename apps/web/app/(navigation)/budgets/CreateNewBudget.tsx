@@ -2,7 +2,14 @@
 
 import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useState } from "react";
-import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
+import {
+  Button,
+  CustomDatePicker,
+  IconPicker,
+  Input,
+  Modal,
+  Separator,
+} from "ui";
 import { IconType } from "ui/Icon";
 import {
   TabsContentStyled,
@@ -16,6 +23,7 @@ import {
   TextareaStyled,
   SeparatorStyled,
   ButtonWrapperStyled,
+  SeparatorStyledTop,
 } from "./CreateNewBudget.styled";
 
 import { Form, Field } from "houseform";
@@ -40,6 +48,7 @@ export const CreateNewBudget = () => {
 
   return (
     <Modal header="New budget" onClose={() => {}}>
+      <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValue}>
         <TabsListStyled>
           <TabsTriggerStyled value="settings">Settings</TabsTriggerStyled>
@@ -55,6 +64,7 @@ export const CreateNewBudget = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  submit();
                 }}>
                 <ParagraphStyled>Details</ParagraphStyled>
                 <IconPicker
@@ -64,7 +74,17 @@ export const CreateNewBudget = () => {
                     setSelectedIcon(icon);
                   }}></IconPicker>
                 <InputWrapperFullStyled>
-                  <Input label="Budget name" name="budget-name"></Input>
+                  <Field name="username">
+                    {({ value, setValue, onBlur }) => (
+                      <Input
+                        value={value}
+                        onChange={(e) => setValue(e.currentTarget.value)}
+                        label="Budget name"
+                        name="budget-name"
+                        onBlur={() => console.log("blurred")}
+                      />
+                    )}
+                  </Field>
                 </InputWrapperFullStyled>
                 <InputWrapperHalfStyled>
                   <Input label="Budget limit" name="budget-limit"></Input>
@@ -90,9 +110,7 @@ export const CreateNewBudget = () => {
 
                 <SeparatorStyled />
                 <ButtonWrapperStyled>
-                  <Button type="submit" onClick={() => {}}>
-                    Save
-                  </Button>
+                  <Button onClick={submit}>Save</Button>
                 </ButtonWrapperStyled>
               </form>
             )}

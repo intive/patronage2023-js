@@ -71,6 +71,7 @@ const HeaderStyled = styled.h3`
 
   @media (min-width: 1024px) {
     margin-right: 72px;
+    font-size: 24px;
   }
 `;
 

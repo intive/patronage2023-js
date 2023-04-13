@@ -77,6 +77,12 @@ export const SeparatorStyled = styled(Separator)`
   margin-left: -48px;
 `;
 
+export const SeparatorStyledTop = styled(Separator)`
+   display: block;
+   width: 100%;
+   margin-bottom: 16px;
+`
+
 export const ButtonWrapperStyled = styled.div`
   display: block;
   padding-top: 24px;
