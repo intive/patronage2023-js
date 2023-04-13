@@ -6,13 +6,16 @@ interface UserInfo {
 
 // TODO change to be generic
 interface Step {
-  screen: JSX.Element;
+  screen: React.Component;
   props: {
-    user: string | UserInfo;
+    user?: string | UserInfo;
     onNext?: (value: string | UserInfo) => void;
     onBack?: () => void;
     onGoToBeginning?: () => void;
     done?: () => void;
+    success?: boolean;
+    onBackToStart?: () => void;
+    loginHref?: string;
   };
 }
 interface FlowControllerProps {
