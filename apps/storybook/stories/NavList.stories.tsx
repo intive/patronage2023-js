@@ -76,7 +76,7 @@ export default {
   },
 } as ComponentMeta<typeof NavList>;
 
-//wrapper imitating parent element of NavList - for proper display on storybook
+// wrapper imitating parent element of NavList - for proper display on storybook
 const NavListWrapper = styled.div`
   width: 20%;
 `;
@@ -90,19 +90,16 @@ const Template: ComponentStory<typeof NavList> = ({ ...args }) => (
 export const ListWithText = Template.bind({});
 ListWithText.args = {
   contents: dummyNavItemContentsTextOnly,
-  currentPage: "",
 };
 
 //list with list items that include icon and text
 export const ListWithTextAndIcons = Template.bind({});
 ListWithTextAndIcons.args = {
   contents: dummyNavItemContentsWithIcon,
-  currentPage: "",
 };
 
 //list with list items that include text only
 export const ListWithTextAndAvatars = Template.bind({});
 ListWithTextAndAvatars.args = {
   contents: dummyNavItemContentsWithAvatar,
-  currentPage: "",
 };

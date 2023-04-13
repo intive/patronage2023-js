@@ -9,7 +9,7 @@ export const MainPageTranslated = () => {
   return (
     <>
       <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
-      <LinkStyled href="/sign-in">{t(dict.createAccountLink)}</LinkStyled>
+      <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
     </>
   );
 };

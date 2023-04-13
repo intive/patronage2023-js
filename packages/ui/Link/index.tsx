@@ -9,14 +9,14 @@ type LinkComponentProps = {
 } & React.HTMLProps<HTMLElement>;
 
 export const LinkComponentAnchorStyled = styled(Link)<LinkComponentProps>`
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   color: ${({ theme }) => theme.link.main};
 `;
 
 export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 400;
   color: ${({ theme }) => theme.link.main};

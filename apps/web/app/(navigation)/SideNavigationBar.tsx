@@ -38,12 +38,7 @@ export default function SideNav() {
       placeholder: "Search budgets",
       icon: <Icon icon="search" color="#515151" />,
     },
-    navigationList: (
-      <NavList
-        contents={BudgetsSubMenuNavListContents}
-        currentPage={currentPage}
-      />
-    ),
+    navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
     button: {
       method: () => {
         openModal();
@@ -62,12 +57,7 @@ export default function SideNav() {
       icon: <Icon icon="search" color="#515151" />,
       placeholder: "Search team",
     },
-    navigationList: (
-      <NavList
-        contents={TeamSubMenuNavListContents}
-        currentPage={currentPage}
-      />
-    ),
+    navigationList: <NavList contents={TeamSubMenuNavListContents} />,
     button: {
       method: () => {},
       label: "Add new member",
@@ -76,12 +66,7 @@ export default function SideNav() {
 
   const SettingsSubMenuData = {
     title: "Settings",
-    navigationList: (
-      <NavList
-        contents={SettingsSubMenuNavListContents}
-        currentPage={currentPage}
-      />
-    ),
+    navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
   };
 
   return (

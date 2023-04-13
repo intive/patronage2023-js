@@ -24,7 +24,7 @@ export const BudgetsSubMenuNavListContents = [
         <SpanStyled>Bills</SpanStyled>
       </>
     ),
-    href: "/reports",
+    href: "/budgets/bills",
     id: 1,
   },
   {

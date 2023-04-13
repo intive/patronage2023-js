@@ -10,6 +10,10 @@ export type NavItemProps = {
   href: string;
 } & React.HTMLProps<HTMLAnchorElement>;
 
+type NavItemPropsTransient = Omit<NavItemProps, "active"> & {
+  $active: boolean;
+};
+
 // why I use min-width:0; https://css-tricks.com/flexbox-truncated-text/
 export const ChildrenWrapper = styled.div`
   display: flex;
@@ -19,22 +23,22 @@ export const ChildrenWrapper = styled.div`
   flex-basis: 80%;
   min-width: 0;
 `;
-export const ArrowWrapper = styled.div<NavItemProps>`
+export const ArrowWrapper = styled.div<NavItemPropsTransient>`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
-export const NavItemStyled = styled(Link)<NavItemProps>`
+export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-basis: 100%;
-  color: ${({ active, theme }) =>
-    active
+  color: ${({ $active, theme }) =>
+    $active
       ? theme.navList.navItem.activeColor
       : theme.navList.navItem.inactiveColor};
-  background-color: ${({ active, theme }) =>
-    active
+  background-color: ${({ $active, theme }) =>
+    $active
       ? theme.navList.navItem.activeBackground
       : theme.navList.navItem.inactiveBackground};
   font-size: 15px;
@@ -58,7 +62,7 @@ export const NavItemStyled = styled(Link)<NavItemProps>`
 
 export const NavItem = ({ active, href, children }: NavItemProps) => {
   return (
-    <NavItemStyled active={active} href={href}>
+    <NavItemStyled $active={active} href={href}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
       {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
     </NavItemStyled>
