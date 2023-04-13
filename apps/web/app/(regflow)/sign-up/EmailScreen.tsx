@@ -16,6 +16,7 @@ const FooterStyled = styled.div`
   font-size: 16px;
   line-height: 150%;
   margin-top: 42px;
+  font-family: "Inter", sans-serif;
 `;
 
 export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
