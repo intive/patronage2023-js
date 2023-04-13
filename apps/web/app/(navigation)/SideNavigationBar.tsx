@@ -2,7 +2,9 @@
 
 import { useTranslate } from "lib/hooks";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
+import { CreateNewBudget } from "./CreateNewBudget";
 
 import {
   BudgetsSubMenuNavListContents,
@@ -14,6 +16,17 @@ export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
   const currentPage = usePathname() || "";
+
+  const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
+    useState(false);
+
+  const closeModal = () => {
+    setIsCreateNewBudgetModalVisible(false);
+  };
+
+  const openModal = () => {
+    setIsCreateNewBudgetModalVisible(true);
+  };
 
   const BudgetsSubMenuData = {
     title: "Budgets",
@@ -32,7 +45,9 @@ export default function SideNav() {
       />
     ),
     button: {
-      method: () => {},
+      method: () => {
+        openModal();
+      },
       label: "Add new budget",
     },
   };
@@ -70,36 +85,41 @@ export default function SideNav() {
   };
 
   return (
-    <SideNavigationBar
-      items={[
-        {
-          href: "/budgets",
-          icon: <Icon icon="wallet" iconSize={32} />,
-          textValue: t(SideNav.budgetsItem),
-          subMenu: BudgetsSubMenuData,
-          id: 1,
-        },
-        {
-          href: "/reports",
-          icon: <Icon icon="query_stats" iconSize={32} />,
-          textValue: t(SideNav.reportsItem),
-          id: 2,
-        },
-        {
-          href: "/team",
-          icon: <Icon icon="account_circle" iconSize={32} />,
-          textValue: t(SideNav.teamsItem),
-          subMenu: TeamSubMenuData,
-          id: 3,
-        },
-        {
-          href: "/settings",
-          icon: <Icon icon="settings" iconSize={32} />,
-          textValue: t(SideNav.settingsItem),
-          subMenu: SettingsSubMenuData,
-          id: 4,
-        },
-      ]}
-    />
+    <>
+      <SideNavigationBar
+        items={[
+          {
+            href: "/budgets",
+            icon: <Icon icon="wallet" iconSize={32} />,
+            textValue: t(SideNav.budgetsItem),
+            subMenu: BudgetsSubMenuData,
+            id: 1,
+          },
+          {
+            href: "/reports",
+            icon: <Icon icon="query_stats" iconSize={32} />,
+            textValue: t(SideNav.reportsItem),
+            id: 2,
+          },
+          {
+            href: "/team",
+            icon: <Icon icon="account_circle" iconSize={32} />,
+            textValue: t(SideNav.teamsItem),
+            subMenu: TeamSubMenuData,
+            id: 3,
+          },
+          {
+            href: "/settings",
+            icon: <Icon icon="settings" iconSize={32} />,
+            textValue: t(SideNav.settingsItem),
+            subMenu: SettingsSubMenuData,
+            id: 4,
+          },
+        ]}
+      />
+      {isCreateNewBudgetModalVisible && (
+        <CreateNewBudget onClose={closeModal} />
+      )}
+    </>
   );
 }

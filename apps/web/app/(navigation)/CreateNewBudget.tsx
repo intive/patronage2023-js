@@ -18,11 +18,10 @@ import {
   ButtonWrapperStyled,
   SeparatorStyledTop,
 } from "./CreateNewBudget.styled";
-
 import { Form, Field } from "houseform";
 import { z } from "zod";
 
-export const CreateNewBudget = () => {
+export const CreateNewBudget = ({ onClose }) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<Icon | undefined>(
     "settings"
@@ -43,7 +42,7 @@ export const CreateNewBudget = () => {
   const budgetNames = ["Savings", "Payments"];
 
   return (
-    <Modal header="New budget" onClose={() => {}}>
+    <Modal header="New budget" onClose={() => onClose()}>
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValue}>
         <TabsListStyled>
@@ -78,7 +77,7 @@ export const CreateNewBudget = () => {
                       .refine((val) => !budgetNames.includes(val), "Zajęte")}
                     // onChangeValidate={z.string()}
                   >
-                    {({ value, setValue, errors, onBlur }) => {
+                    {({ value, setValue, errors }) => {
                       return (
                         <Input
                           value={value}

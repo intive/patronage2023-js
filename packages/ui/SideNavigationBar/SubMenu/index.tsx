@@ -50,9 +50,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
       </MainDiv>
 
       {button && (
-        <Button
-          variant="secondary"
-          onClick={() => console.log("Modal has been opened! ")}>
+        <Button variant="secondary" onClick={() => button.method()}>
           {button.label}
         </Button>
       )}
