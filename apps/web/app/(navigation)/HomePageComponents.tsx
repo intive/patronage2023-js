@@ -23,19 +23,21 @@ export const CardStyled = styled(Card)`
 `;
 export const LinkStyled = styled(Link)`
   font-family: "Signika", sans-serif;
-  font-size: 1.6em;
+  font-size: 1.3em;
   font-weight: 600;
   color: #1e4c40;
   margin-top: 35px;
+  padding: 10px;
   @media ${device.desktop} {
     font-size: 2.3em;
   }
 `;
 export const TypoStyled = styled.h1`
   font-family: "Signika", sans-serif;
-  font-size: 3em;
+  font-size: 2.8em;
   color: #1e4c40;
   text-align: center;
+  padding: 0 10px;
   @media ${device.desktop} {
     font-size: 3.5em;
   }
