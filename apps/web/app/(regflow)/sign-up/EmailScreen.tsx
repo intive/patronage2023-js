@@ -30,6 +30,7 @@ export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
       }}>
       {({ submit }) => (
         <FormWrapper
+          center
           onSubmit={(event) => {
             event.preventDefault();
           }}>
