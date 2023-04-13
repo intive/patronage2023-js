@@ -44,18 +44,18 @@ export const theme = {
     primary: {
       main: colors.Teal10,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     secondary: {
       main: colors.Teal10,
       background: colors.BasicTransparent,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     simple: {
       main: colors.Teal6,
       background: colors.BasicTransparent,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
   },
   buttonGroup: {
