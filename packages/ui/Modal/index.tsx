@@ -17,6 +17,7 @@ const ModalStyled = styled.div`
   min-height: 100%;
   z-index: 100;
   overflow: auto;
+  width: 100%;
 `;
 
 const BackgroundStyled = styled.div`
