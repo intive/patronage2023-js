@@ -3,8 +3,7 @@ import { useState, ReactNode } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
-import { SubMenu } from "./SubMenu";
-import { SubMenuDataProps } from "./SubMenu";
+import { SubMenu, SubMenuDataProps } from "./SubMenu";
 
 type SideNavigationBarItemProps = {
   href: string;
@@ -83,11 +82,9 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   justify-content: flex-start;
   align-items: center;
   padding-top: 40px;
-  padding: 0;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme }) =>
     isSubMenuShown
       ? theme.sideNavigationBar.background.activeColor
       : theme.sideNavigationBar.background.inactiveColor};
-  padding-top: 40px;
 `;

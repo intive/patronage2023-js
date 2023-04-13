@@ -2,9 +2,7 @@
 
 import { useTranslate } from "lib/hooks";
 import { usePathname } from "next/navigation";
-import { SideNavigationBar } from "ui";
-import { Icon } from "ui";
-import { NavList } from "ui";
+import { SideNavigationBar, Icon, NavList } from "ui";
 
 import {
   BudgetsSubMenuNavListContents,

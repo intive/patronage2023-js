@@ -31,7 +31,6 @@ const SubMenuStyled = styled.div`
   justify-content: space-between;
 
   padding: 40px 16px 24px 16px;
-  box-shadow: 10px 10px;
 
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};

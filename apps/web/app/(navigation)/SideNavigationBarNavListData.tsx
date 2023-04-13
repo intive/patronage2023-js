@@ -2,9 +2,8 @@
 
 import styled from "styled-components";
 
-import { Icon } from "ui";
+import { Icon, Avatar } from "ui";
 import { SpanStyled } from "ui/NavList";
-import { Avatar } from "ui";
 
 const AvatarStyled = styled(Avatar)`
   width: 28px;
