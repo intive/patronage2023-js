@@ -16,7 +16,6 @@ import {
   TextareaStyled,
   SeparatorStyled,
   ButtonWrapperStyled,
-  FormWrapperStyled,
 } from "./CreateNewBudget.styled";
 
 import { Form, Field } from "houseform";
@@ -53,7 +52,10 @@ export const CreateNewBudget = () => {
           {/* form */}
           <Form onSubmit={(values) => alert(JSON.stringify(values))}>
             {({ submit }) => (
-              <FormWrapperStyled>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}>
                 <ParagraphStyled>Details</ParagraphStyled>
                 <IconPicker
                   defaultIcon="savings"
@@ -85,17 +87,21 @@ export const CreateNewBudget = () => {
                     onSelect={() => {}}
                   />
                 </InputWrapperFullFlex>
-              </FormWrapperStyled>
+
+                <SeparatorStyled />
+                <ButtonWrapperStyled>
+                  <Button type="submit" onClick={() => {}}>
+                    Save
+                  </Button>
+                </ButtonWrapperStyled>
+              </form>
             )}
+            {/* buttom must be out of tabs if we want to use them */}
           </Form>
           {/* end of form */}
         </TabsContentStyled>
         <TabsContentStyled value="share">Welcome to share</TabsContentStyled>
       </TabsStyled>
-      <SeparatorStyled />
-      <ButtonWrapperStyled>
-        <Button onClick={() => {}}>Save</Button>
-      </ButtonWrapperStyled>
     </Modal>
   );
 };

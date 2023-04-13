@@ -71,16 +71,13 @@ export const InputWrapperFullFlex = styled.div`
 `;
 
 export const SeparatorStyled = styled(Separator)`
-  z-index: 15;
-  position: relative;
-  width: 150%;
+  display: block;
+  width: calc(100% + calc(48px * 2));
   margin-top: 48px;
+  margin-left: -48px;
 `;
 
 export const ButtonWrapperStyled = styled.div`
-  margin-top: 24px;
-  display: flex;
-  flex-start: start;
+  display: block;
+  padding-top: 24px;
 `;
-
-export const FormWrapperStyled =  styled.div``
