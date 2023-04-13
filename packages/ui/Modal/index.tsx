@@ -9,20 +9,20 @@ type ModalProps = {
 };
 
 const ModalStyled = styled.div`
-  position: fixed;
+  position: absolute;
+  top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  inset: 0px;
+  min-height: 100%;
   z-index: 100;
+  overflow: auto;
+  width: 100%;
 `;
 
 const BackgroundStyled = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0px;
   background-color: ${({ theme }) => theme.modal.background};
   opacity: 0.4;
 `;
@@ -41,7 +41,7 @@ const CardStyled = styled(Card)`
   }
 
   @media (min-width: 1024px) {
-    padding: 48px;
+    padding: 32px 48px;
   }
 `;
 
@@ -71,6 +71,7 @@ const HeaderStyled = styled.h3`
 
   @media (min-width: 1024px) {
     margin-right: 72px;
+    font-size: 24px;
   }
 `;
 

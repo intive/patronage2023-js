@@ -44,18 +44,18 @@ export const theme = {
     primary: {
       main: colors.Teal10,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     secondary: {
       main: colors.Teal10,
       background: colors.BasicTransparent,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     simple: {
       main: colors.Teal6,
       background: colors.BasicTransparent,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
   },
   buttonGroup: {
@@ -166,8 +166,9 @@ export const theme = {
     teal10: colors.Teal10,
   },
   textarea: {
-    disabled: colors.Neutral3,
-    focus: colors.Teal6,
+    font: colors.Neutral8,
+    disabled: colors.Neutral2,
+    focus: colors.Teal5,
   },
   iconPicker: {
     main: colors.Teal10,

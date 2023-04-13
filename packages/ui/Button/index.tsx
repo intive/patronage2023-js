@@ -77,7 +77,7 @@ export const ButtonStyled = styled.button<ButtonProps>`
         color: ${({ theme }) => theme.button.secondary.hover};
       }
       &:disabled {
-        color: lightgray;
+        color:  ${({ theme }) => theme.button.secondary.disabled};
         background-color: ${({ theme }) => theme.button.secondary.background};
         border: 2px solid ${({ theme }) => theme.button.secondary.disabled};
       }
