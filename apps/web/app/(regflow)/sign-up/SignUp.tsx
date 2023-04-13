@@ -1,6 +1,6 @@
 "use client";
-import { FlowController } from "ui";
 import { EmailScreen } from "./EmailScreen";
+import { FlowController } from "./FlowController";
 import { PasswordSubComponent } from "./PasswordSubComponent";
 import { ProfileScreen } from "./ProfileScreen";
 import { SuccessErrorScreen } from "./SuccessErrorScreen";
@@ -69,19 +69,7 @@ export const SignUp = () => {
     //   });
     // };
 
-    //alert for showcase
-    alert(
-      JSON.stringify(
-        {
-          email: user.email,
-          password: user.password,
-          ...profileInfo,
-        },
-        null,
-        2
-      )
-    );
-    setResult(Math.random() >= 0.5 ? 200 : 400); // randoming result for showcase since backend is dead
+    setResult(user.email === "smutnarzaba@png.pl" ? 400 : 200); //mocked result
     setCurrentStep(currentStep + 1);
   };
 
@@ -109,7 +97,7 @@ export const SignUp = () => {
           screen: ProfileScreen,
           props: {
             done: validateProfile,
-            back: goBack,
+            onBack: goBack,
             userInfo: user.profile,
           },
         },
