@@ -22,7 +22,6 @@ export const AvatarSelector = ({
   onSelect,
   selectedAvatar,
 }: SelectorProps) => {
-
   return (
     <AvatarsWrapper>
       <AvatarGridStyled>
@@ -137,33 +136,19 @@ const ButtonStyled = styled.button<ButtonProps>`
   }
 
   &:first-child {
-      margin-left: 14px;
-    }
+    margin-left: 14px;
+  }
 
-    &:last-child {
-      margin-right: 14px;
-    }
+  &:last-child {
+    margin-right: 14px;
+  }
 
   ${device.tablet} {
-    font-size: 61px;
+    font-size: 88px;
 
     &:first-child,
     &:last-child {
       margin: 0;
     }
   }
-
-  @media (min-width: 900px) {
-    font-size: 73px;
-  }
-
-  @media (min-width: 1025px) {
-    font-size: 70px;
-  }
-
-  @media (min-width: 1150px) {
-    font-size: 90px;
-  }
 `;
-
-

@@ -4,29 +4,18 @@ import styled from "styled-components";
 import { Button, Input, Separator } from "ui";
 import { z } from "zod";
 import { Field, Form } from "houseform";
+import {
+  ButtonWrapper,
+  FormWrapper,
+  StyledHeader,
+  StyledSubHeader,
+} from "./SignUpFormStyled";
 
 type PasswordSubComponentProps = {
   onNext: (password: string) => void;
   onBack: () => void;
-  password?: string;
+  userInfo?: string;
 };
-
-const StyledHeader = styled.h2`
-  color: ${({ theme }) => theme.primary};
-  font-family: "Signika", sans-serif;
-  font-size: 1.5em;
-  text-align: center;
-`;
-
-const StyledSubHeader = styled.h3`
-  margin-top: 4px;
-  font-family: "Inter", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1em;
-  text-align: center;
-  color: ${({ theme }) => theme.secondary};
-`;
 
 const ListHeader = styled.p`
   font-family: "Inter", sans-serif;
@@ -44,11 +33,6 @@ const InputWrapper = styled.div`
   & > * {
     flex-basis: 85px;
   }
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  gap: 8px;
 `;
 
 const ListWrapper = styled.div`
@@ -72,138 +56,121 @@ const UnorderedListWrapper = styled.ul`
   }
 `;
 
-const FormWrapper = styled.div`
-  display: flex;
-  height: 542px;
-  width: 416px;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 30px 0;
-  @media (max-width: 767px) {
-    width: 312px;
-  }
-`;
-
 export const PasswordSubComponent = ({
   onNext,
   onBack,
-  password = "",
+  userInfo = "",
 }: PasswordSubComponentProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const { passwordComponent } = dict;
 
   return (
-    <>
-      <FormWrapper>
-        <div>
-          <StyledHeader>{t(passwordComponent.mainHeader)}</StyledHeader>
-          <StyledSubHeader>{t(passwordComponent.subHeader)}</StyledSubHeader>
-        </div>
-        <Separator />
-        <ListWrapper>
-          <ListHeader>{t(passwordComponent.requirementsHeader)}</ListHeader>
-          <UnorderedListWrapper>
-            <li>{t(passwordComponent.requirementUpperCase)}</li>
-            <li>{t(passwordComponent.requirementLowerCase)}</li>
-            <li>{t(passwordComponent.requirementSpecialCharacter)}</li>
-            <li>{t(passwordComponent.requirementNoSpace)}</li>
-            <li>{t(passwordComponent.requirementLength)}</li>
-          </UnorderedListWrapper>
-        </ListWrapper>
-        <Form
-          onSubmit={(values) => {
-            onNext(values.password);
-          }}>
-          {({ isValid, submit }) => (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}>
-              <InputWrapper>
-                <Field
-                  name="password"
-                  initialValue={password}
-                  onSubmitValidate={z
-                    .string()
-                    .min(12, t(passwordComponent.inputErrors.longCheck))
-                    .regex(
-                      /[A-Z]/,
-                      t(passwordComponent.inputErrors.missingUpperCase)
-                    )
-                    .regex(
-                      /[a-z]/,
-                      t(passwordComponent.inputErrors.missingLowerCase)
-                    )
-                    .regex(
-                      /[!"#$%&'()+,-./:;<=>?@[\]*^_`{|}~]/,
-                      t(passwordComponent.inputErrors.missingSpecialCharacter)
-                    )
-                    .regex(
-                      /^\S+$/,
-                      t(passwordComponent.inputErrors.spacesCheck)
-                    )}
-                  onChangeValidate={z.string()}>
-                  {({ value, setValue, errors, isValid }) => {
-                    return (
-                      <>
-                        <Input
-                          name="password"
-                          value={value}
-                          onChange={(e) => setValue(e.currentTarget.value)}
-                          label={t(passwordComponent.inputPlaceholderPassword)}
-                          hasError={!isValid}
-                          supportingLabel={!isValid ? errors[0] : ""}
-                          type="password"
-                        />
-                      </>
+    <FormWrapper>
+      <div>
+        <StyledHeader>{t(passwordComponent.mainHeader)}</StyledHeader>
+        <StyledSubHeader>{t(passwordComponent.subHeader)}</StyledSubHeader>
+      </div>
+      <Separator />
+      <ListWrapper>
+        <ListHeader>{t(passwordComponent.requirementsHeader)}</ListHeader>
+        <UnorderedListWrapper>
+          <li>{t(passwordComponent.requirementUpperCase)}</li>
+          <li>{t(passwordComponent.requirementLowerCase)}</li>
+          <li>{t(passwordComponent.requirementSpecialCharacter)}</li>
+          <li>{t(passwordComponent.requirementNoSpace)}</li>
+          <li>{t(passwordComponent.requirementLength)}</li>
+        </UnorderedListWrapper>
+      </ListWrapper>
+      <Form
+        onSubmit={(values) => {
+          onNext(values.password);
+        }}>
+        {({ isValid, submit }) => (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}>
+            <InputWrapper>
+              <Field
+                name="password"
+                initialValue={userInfo}
+                onSubmitValidate={z
+                  .string()
+                  .min(12, t(passwordComponent.inputErrors.longCheck))
+                  .regex(
+                    /[A-Z]/,
+                    t(passwordComponent.inputErrors.missingUpperCase)
+                  )
+                  .regex(
+                    /[a-z]/,
+                    t(passwordComponent.inputErrors.missingLowerCase)
+                  )
+                  .regex(
+                    /[!"#$%&'()+,-./:;<=>?@[\]*^_`{|}~]/,
+                    t(passwordComponent.inputErrors.missingSpecialCharacter)
+                  )
+                  .regex(/^\S+$/, t(passwordComponent.inputErrors.spacesCheck))}
+                onChangeValidate={z.string()}>
+                {({ value, setValue, errors, isValid }) => {
+                  return (
+                    <>
+                      <Input
+                        name="password"
+                        value={value}
+                        onChange={(e) => setValue(e.currentTarget.value)}
+                        label={t(passwordComponent.inputPlaceholderPassword)}
+                        hasError={!isValid}
+                        supportingLabel={!isValid ? errors[0] : ""}
+                        type="password"
+                      />
+                    </>
+                  );
+                }}
+              </Field>
+              <Field
+                name="passwordConfirmation"
+                listenTo={["password"]}
+                initialValue={userInfo}
+                onSubmitValidate={(val, form) => {
+                  if (val === form.getFieldValue("password")!.value) {
+                    return Promise.resolve(true);
+                  } else {
+                    return Promise.reject(
+                      t(passwordComponent.inputErrors.matchError)
                     );
-                  }}
-                </Field>
-                <Field
-                  name="passwordConfirmation"
-                  listenTo={["password"]}
-                  initialValue={password}
-                  onSubmitValidate={(val, form) => {
-                    if (val === form.getFieldValue("password")!.value) {
-                      return Promise.resolve(true);
-                    } else {
-                      return Promise.reject(
-                        t(passwordComponent.inputErrors.matchError)
-                      );
-                    }
-                  }}
-                  onChangeValidate={z.string()}>
-                  {({ value, setValue, errors }) => {
-                    return (
-                      <>
-                        <Input
-                          name="passwordConfirmation"
-                          value={value}
-                          onChange={(e) => setValue(e.currentTarget.value)}
-                          label={t(
-                            passwordComponent.inputPlaceholderRepeatPassword
-                          )}
-                          hasError={!isValid}
-                          supportingLabel={!isValid ? errors[0] : ""}
-                          type="password"
-                        />
-                      </>
-                    );
-                  }}
-                </Field>
-              </InputWrapper>
-              <ButtonWrapper>
-                <Button onClick={onBack} variant="secondary">
-                  {t(passwordComponent.buttonBack)}
-                </Button>
-                <Button fullWidth onClick={submit}>
-                  {t(passwordComponent.buttonNext)}
-                </Button>
-              </ButtonWrapper>
-            </form>
-          )}
-        </Form>
-      </FormWrapper>
-    </>
+                  }
+                }}
+                onChangeValidate={z.string()}>
+                {({ value, setValue, errors }) => {
+                  return (
+                    <>
+                      <Input
+                        name="passwordConfirmation"
+                        value={value}
+                        onChange={(e) => setValue(e.currentTarget.value)}
+                        label={t(
+                          passwordComponent.inputPlaceholderRepeatPassword
+                        )}
+                        hasError={!isValid}
+                        supportingLabel={!isValid ? errors[0] : ""}
+                        type="password"
+                      />
+                    </>
+                  );
+                }}
+              </Field>
+            </InputWrapper>
+            <ButtonWrapper>
+              <Button onClick={onBack} variant="secondary">
+                {t(passwordComponent.buttonBack)}
+              </Button>
+              <Button fullWidth onClick={submit}>
+                {t(passwordComponent.buttonNext)}
+              </Button>
+            </ButtonWrapper>
+          </form>
+        )}
+      </Form>
+    </FormWrapper>
   );
 };
