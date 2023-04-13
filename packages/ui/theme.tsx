@@ -133,6 +133,8 @@ export const theme = {
     main: colors.Teal6,
     inactive: colors.Neutral4,
   },
+  primary: colors.Teal10,
+  secondary: colors.Neutral8,
   datePicker: {
     basicWhite: colors.BasicWhite,
     neutral2: colors.Neutral2,
@@ -158,6 +160,19 @@ export const theme = {
     edit: colors.BasicWhite,
     hover: colors.Teal1,
     outline: colors.Teal5,
+  },
+  modal: {
+    background: colors.Neutral8,
+    header: colors.Teal10,
+    closeButton: colors.Neutral6,
+  },
+  signUp: {
+    main: colors.Teal10,
+    text: colors.Neutral8,
+    error: colors.Supporting4,
+    icon: colors.BasicWhite,
+    link: colors.BasicWhite,
+    accent: colors.Neutral2,
   },
 };
 

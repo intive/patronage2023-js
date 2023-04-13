@@ -50,7 +50,9 @@ export type IconType =
   | "savings"
   | "directions_car"
   | "payments"
-  | "subscriptions";
+  | "subscriptions"
+  | "done"
+  | "priority_high";
 
 type styledIconProps = {
   color?: string;
@@ -64,6 +66,7 @@ export type IconProps = {
 
 export const StyledIcon = styled.span<styledIconProps>`
   font-variation-settings: "FILL" 0;
+  font-weight: 600;
   ${({ iconSize }) =>
     iconSize &&
     css`
@@ -84,11 +87,17 @@ export const StyledIcon = styled.span<styledIconProps>`
     `}
 `;
 
-export const Icon = ({ icon, filled = false, color, iconSize }: IconProps) => {
+export const Icon = ({
+  icon,
+  filled = false,
+  color,
+  iconSize,
+  className,
+}: IconProps) => {
   return (
     <StyledIcon
       color={color}
-      className="material-symbols-rounded"
+      className={`material-symbols-rounded ${className || ""}`}
       iconSize={iconSize}
       filled={filled}>
       {icon}
