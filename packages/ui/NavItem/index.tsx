@@ -44,7 +44,6 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   font-size: 15px;
   padding: 15px 10px;
   border-radius: 8px;
-  font-family: "Inter", sans-serif;
   font-weight: 500;
   overflow: hidden;
   cursor: pointer;

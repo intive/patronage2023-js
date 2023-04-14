@@ -23,8 +23,7 @@ const CheckboxesWrapper = styled.div`
 
 export const H3Styled = styled.h3`
   font-size: 0.9em;
-  font-weight: 500;
-  font-family: "Inter", sans-serif;
+  font-weight: 600;
 `;
 
 //it stands for component that will be passed into MultiCardLayout in AsideCard

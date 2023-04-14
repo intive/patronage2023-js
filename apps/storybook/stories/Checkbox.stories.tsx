@@ -86,7 +86,6 @@ const Wrapper = styled.div`
 
 const Text = styled.span`
   font-size: 14px;
-  font-family: Inter;
 `;
 
 const IconWrapper = styled.div`

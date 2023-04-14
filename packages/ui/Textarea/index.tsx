@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const TextareaStyled = styled.textarea<TextareaProps>`
   width: 100%;
   min-height: 70px;
-  font-family: "Inter", sans-serif;
+  font-family: inherit;
   font-size: 1em;
   border-radius: 8px;
   border: 2px solid ${({ theme }) => theme.textarea.disabled};

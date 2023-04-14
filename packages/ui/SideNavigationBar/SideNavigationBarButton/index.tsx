@@ -44,6 +44,7 @@ const ButtonStyled = styled.button`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.button.simple.background};
+  font-family: inherit;
 `;
 
 const Wrapper = styled.div<WrapperProps>`
@@ -65,7 +66,6 @@ const Wrapper = styled.div<WrapperProps>`
 `;
 
 const SpanStyled = styled.span<SpanProps>`
-  font-family: "Inter", sans-serif;
   font-weight: 600;
   text-align: center;
   ${({ fontSize }) =>

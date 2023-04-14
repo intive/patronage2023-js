@@ -11,7 +11,6 @@ export default {
 
 const Wrapper = styled.div`
   width: 311px;
-  font-family: "Inter";
 `;
 
 const Template: ComponentStory<typeof CustomDatePicker> = ({ ...args }) => (

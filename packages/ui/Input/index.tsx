@@ -120,6 +120,7 @@ const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
   border-radius: 8px;
   padding: 14px 0 14px 14px;
   font-size: 16px;
+  font-family: inherit;
   line-height: 150%;
   caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
