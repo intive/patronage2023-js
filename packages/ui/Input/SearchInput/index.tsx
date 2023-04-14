@@ -28,7 +28,6 @@ const StyledInput = styled.input`
   border-radius: 8px;
   padding: 8px 0px 8px 48px;
   background-color: #ffffff;
-  font-family: inherit;
 
   &::placeholder {
     color: #b1b1b1;

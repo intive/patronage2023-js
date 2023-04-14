@@ -44,7 +44,6 @@ const ButtonStyled = styled.button`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.button.simple.background};
-  font-family: inherit;
 `;
 
 const Wrapper = styled.div<WrapperProps>`

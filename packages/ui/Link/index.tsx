@@ -17,7 +17,6 @@ export const LinkComponentAnchorStyled = styled(Link)<LinkComponentProps>`
 export const LinkComponentButtonStyled = styled.button<LinkComponentProps>`
   font-style: normal;
   font-weight: 400;
-  font-family: inherit;
   color: ${({ theme }) => theme.link.main};
   cursor: pointer;
   border: none;

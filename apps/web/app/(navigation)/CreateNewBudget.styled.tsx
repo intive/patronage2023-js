@@ -18,7 +18,6 @@ export const TabsListStyled = styled(Tabs.List)`
 export const TabsTriggerStyled = styled(Tabs.Trigger)`
   font-size: 14px;
   font-weight: 600;
-  font-family: inherit;
   background-color: white;
   color: #7e7e7e;
   width: 50%;
