@@ -14,15 +14,14 @@ export type CurrencySelectComponentProps = {
   value: string;
 } & React.HTMLProps<HTMLElement>;
 
-
-export const CurrencySelect = ({
+export const CurrencySelect = ({ 
 }: CurrencySelectComponentProps) => {
   return (
     <Select.Root>
       <SelectTrigger>
-      <StyledLabel>Currency</StyledLabel>
-        <Select.Value placeholder="Currency"/>
-        <SelectIcon></SelectIcon>
+      {/* <StyledLabel>Currency</StyledLabel> */}
+        <SelectValue placeholder="Currency"/>
+        <SelectIcon><Icon icon="arrow_drop_down" iconSize={23} /></SelectIcon>
       </SelectTrigger>
       
       <SelectPortal>
@@ -30,7 +29,6 @@ export const CurrencySelect = ({
           <SelectViewport className="SelectViewport">
             {currency.map((currency) => (
               <SelectItem value={currency.id}>
-                {/* <SelectItemIndicator>{currency.tag}</SelectItemIndicator> */}
                 <SelectItemText><StyledTag>{currency.tag}</StyledTag> {currency.label}</SelectItemText>
               </SelectItem>
             ))}
@@ -46,10 +44,14 @@ const SelectTrigger = styled(Select.Trigger)`
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
   font-size: 1em;
-  width: 13em;
+  min-width: 13em;
   height: 56px;
   cursor: pointer;
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1em;
+  padding-left: 16px;
+  padding-right: 10px;
 
   :focus {
     outline: none;
@@ -57,22 +59,27 @@ const SelectTrigger = styled(Select.Trigger)`
   }
 `;
 
-const StyledLabel = styled.label`
-  position: absolute;
-  display: flex;
-  font-size: 12px;
-  font-weight: 600;
-  background-color: ${({ theme }) => theme.input.labelBackground};
-  color: ${({ theme }) => theme.input.neutral};
-  padding-left: 4px;
-  padding-right: 4px;
-  margin-left: 12px;
-  top: -7px;
+const SelectValue = styled(Select.Value)`
+
 `;
+
+
+// const StyledLabel = styled.label`
+//   position: absolute;
+//   display: flex;
+//   font-size: 12px;
+//   font-weight: 600;
+//   background-color: ${({ theme }) => theme.input.labelBackground};
+//   color: ${({ theme }) => theme.input.neutral};
+//   padding-left: 4px;
+//   padding-right: 4px;
+//   margin-left: 12px;
+//   top: -7px;
+// `;
 
 const SelectIcon = styled(Select.Icon)`
   color: #626262;
-  float: right;
+  margin-top: -2px;
   /* margin-right: 15px; */
 `;
 
@@ -99,7 +106,7 @@ const SelectItem = styled(Select.Item)`
   padding: 16px;
   gap: 8px;
   
-  :focus {
+  &:focus {
     color: #397B65;
     background-color: #F1FBF6;
     :first-child {
@@ -109,10 +116,10 @@ const SelectItem = styled(Select.Item)`
       border-radius: 0 0 1em 1em;
     }
   }
-`;
 
-const SelectItemIndicator = styled(Select.ItemIndicator)`
-  color: #515151;
+  /* &:hover {
+    color: #397B65;
+  } */
 `;
 
 const StyledTag = styled.span`
@@ -120,30 +127,32 @@ const StyledTag = styled.span`
 `;
 
 const SelectItemText = styled(Select.ItemText)`
-  :hover {
-    color: #397B65;
-  }
+  color: #222222;
 `;
 
 const currency = [
   {
     tag: "PLN",
     label: "Polish Zloty",
+    name: "PLN Polish Zloty",
     id: "1",
   },
   {
     tag: "GBP",
     label: "British Pound",
+    name: "GBP British Pound",
     id: "2",
   },
   {
     tag: "EUR",
     label: "Euro",
+    name: "EUR Euro",
     id: "3",
   },
   {
     tag: "USD",
     label: "United States Dollar",
+    name: "USD United States Dollar",
     id: "4",
   },
 ];
