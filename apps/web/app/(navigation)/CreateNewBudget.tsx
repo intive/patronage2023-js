@@ -17,9 +17,11 @@ import {
   SeparatorStyled,
   ButtonWrapperStyled,
   SeparatorStyledTop,
+  IconPickerStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { z } from "zod";
+
 
 type NewBudget = {
   onClose?: Function;
@@ -66,12 +68,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   submit();
                 }}>
                 <ParagraphStyled>Details</ParagraphStyled>
-                <IconPicker
-                  defaultIcon="savings"
-                  icons={icons}
-                  onSelect={(icon) => {
-                    setSelectedIcon(icon);
-                  }}></IconPicker>
+                <IconPickerStyled>
+                  <IconPicker
+                    defaultIcon="savings"
+                    icons={icons}
+                    onSelect={(icon) => {
+                      setSelectedIcon(icon);
+                    }}></IconPicker>
+                </IconPickerStyled>
                 <InputWrapperFullStyled>
                   <Field
                     name="budget-name"

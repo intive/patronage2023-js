@@ -50,15 +50,30 @@ export const ParagraphStyled = styled.p`
   padding-left: 3px;
 `;
 
+export const IconPickerStyled = styled.div`
+  margin-bottom: 24px;
+`
+
 export const InputWrapperFullStyled = styled.div`
-  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
-  margin-bottom: 10px;
+
+  & > * {
+    flex-basis: 85px;
+  }
 `;
 
 export const InputWrapperHalfStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 210px;
-  margin-bottom: 10px;
+
+  & > * {
+    flex-basis: 85px;
+  }
 `;
 
 export const TextareaStyled = styled(Textarea)`
