@@ -22,7 +22,6 @@ import {
 import { Form, Field } from "houseform";
 import { z } from "zod";
 
-
 type NewBudget = {
   onClose?: Function;
 };
@@ -45,7 +44,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     "help",
   ];
 
-  const budgetNames = ["smutnarzaba", "frytki123"];
+  //mocked existing user budgets
+  const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 
   return (
     <Modal header="New budget" onClose={() => onClose && onClose()}>
@@ -65,7 +65,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  submit();
                 }}>
                 <ParagraphStyled>Details</ParagraphStyled>
                 <IconPickerStyled>
@@ -81,19 +80,22 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     name="budget-name"
                     onSubmitValidate={z
                       .string()
-                      .min(5, "Budget name must have at least 5 letters")
+                      .min(3, "Budget name must have at least 3 characters.")
+                      .max(30, "Budget must not have more than 30 characters.")
                       .refine(
-                        (val) => !budgetNames.includes(val),
-                        "That name is already taken, please choose another."
+                        (val) => !loggedUserExistingBudgets.includes(val),
+                        "Name is taken, please choose another."
                       )}
                     onChangeValidate={z.string()}>
                     {({ value, setValue, errors }) => {
                       return (
                         <Input
+                          name="budget-name"
                           value={value}
-                          hasError={!isValid}
-                          supportingLabel={!isValid ? errors[0] : ""}
+                          hasError={errors.length > 0}
+                          supportingLabel={errors.length ? errors : null}
                           onChange={(e) => setValue(e.currentTarget.value)}
+                          onInputCleared={() => setValue("")}
                           label="Budget name"
                         />
                       );
@@ -101,10 +103,49 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   </Field>
                 </InputWrapperFullStyled>
                 <InputWrapperHalfStyled>
-                  <Input label="Budget limit" name="budget-limit"></Input>
+                  <Field
+                    name="budget-limit"
+                    onChangeValidate={z.union([
+                      z
+                        .string()
+                        .nonempty({ message: "Please specify budget limit." }),
+                      z
+                        .number()
+                        .positive({ message: "Must be grater than 0." }),
+                    ])}
+                    onSubmitValidate={z.union([
+                      z
+                        .string()
+                        .nonempty({ message: "Please specify budget limit." }),
+                      z.number().positive({
+                        message: "Must be grater than 0.",
+                      }),
+                    ])}>
+                    {({ value, setValue, errors }) => (
+                      <Input
+                        value={value}
+                        hasError={errors.length > 0}
+                        onChange={(e) => {
+                          if (e.currentTarget.value) {
+                            setValue(
+                              Math.round(
+                                parseFloat(e.currentTarget.value) * 100
+                              ) / 100
+                            );
+                            console.log(e.currentTarget.value);
+                          } else setValue("");
+                        }}
+                        supportingLabel={errors.length ? errors : null}
+                        label="Budget limit"
+                        name="budget-limit"
+                        type="number"
+                        onInputCleared={() => setValue("")}
+                      />
+                    )}
+                  </Field>
                 </InputWrapperHalfStyled>
                 <InputWrapperHalfStyled>
-                  <Input label="Currency" name="currency"></Input>
+                  <Input label="Currency" name="currency" />
                 </InputWrapperHalfStyled>
                 <TextareaStyled label="Description"></TextareaStyled>
                 <ParagraphStyled>Budget period</ParagraphStyled>
