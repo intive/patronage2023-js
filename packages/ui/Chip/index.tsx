@@ -6,7 +6,6 @@ export type ChipProps = {
 
 export const ChipStyled = styled.span<ChipProps>`
   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
-  font-family: "Inter", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 12px;

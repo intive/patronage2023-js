@@ -44,7 +44,6 @@ const IconAndMessageWrapperStyled = styled.div`
 const MessageStyled = styled.span`
   padding: 0 10px;
   font-size: 16px;
-  font-family: "__Inter_7a7115", "Inter", sans-serif;
 
   @media (min-width: 768px) {
     padding: 0 24px;
