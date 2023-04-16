@@ -18,7 +18,6 @@ type PasswordSubComponentProps = {
 };
 
 const ListHeader = styled.p`
-  font-family: "Inter", sans-serif;
   margin-bottom: 5px;
   font-size: 14px;
   line-height: 20px;
@@ -47,7 +46,6 @@ const UnorderedListWrapper = styled.ul`
   list-style: none;
 
   & > li {
-    font-family: "Inter", sans-serif;
     background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMiIgdmlld0JveD0iMCAwIDEwIDIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjQ1ODY2IDEuOTc5MDhDMS4xODA4OCAxLjk3OTA4IDAuOTQ4MjQyIDEuODg1MzMgMC43NjA3NDIgMS42OTc4M0MwLjU3MzI0MiAxLjUxMDMzIDAuNDc5NDkyIDEuMjc3NyAwLjQ3OTQ5MiAwLjk5OTkxOEMwLjQ3OTQ5MiAwLjcyMjE0MSAwLjU3MzI0MiAwLjQ4OTUwMiAwLjc2MDc0MiAwLjMwMjAwMkMwLjk0ODI0MiAwLjExNDUwMiAxLjE4MDg4IDAuMDIwNzUyIDEuNDU4NjYgMC4wMjA3NTJIOC41NDE5OUM4LjgxOTc3IDAuMDIwNzUyIDkuMDUyNDEgMC4xMTQ1MDIgOS4yMzk5MSAwLjMwMjAwMkM5LjQyNzQxIDAuNDg5NTAyIDkuNTIxMTYgMC43MjIxNDEgOS41MjExNiAwLjk5OTkxOEM5LjUyMTE2IDEuMjc3NyA5LjQyNzQxIDEuNTEwMzMgOS4yMzk5MSAxLjY5NzgzQzkuMDUyNDEgMS44ODUzMyA4LjgxOTc3IDEuOTc5MDggOC41NDE5OSAxLjk3OTA4SDEuNDU4NjZaIiBmaWxsPSIjNjRCQTk1Ii8+Cjwvc3ZnPgo=")
       no-repeat left center;
     padding: 5px 10px 5px 25px;

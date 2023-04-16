@@ -20,7 +20,6 @@ export const TabsListStyled = styled(Tabs.List)`
 `;
 
 export const TabsTriggerStyled = styled(Tabs.Trigger)`
-  font-family: unset;
   font-size: 14px;
   font-weight: 600;
   background-color: ${({ theme }) => theme.createNewBudget.background};

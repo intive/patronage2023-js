@@ -65,7 +65,6 @@ const Wrapper = styled.div<WrapperProps>`
 `;
 
 const SpanStyled = styled.span<SpanProps>`
-  font-family: "Inter", sans-serif;
   font-weight: 600;
   text-align: center;
   ${({ fontSize }) =>

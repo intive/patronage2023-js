@@ -24,7 +24,6 @@ export const StyledHeader = styled.h2`
 
 export const StyledSubHeader = styled.h3`
   margin-top: 4px;
-  font-family: "Inter", sans-serif;
   font-size: 1em;
   text-align: center;
   color: ${({ theme }) => theme.secondary};
