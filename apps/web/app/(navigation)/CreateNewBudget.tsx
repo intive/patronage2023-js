@@ -19,6 +19,8 @@ import {
   IconPickerStyled,
   TextareaErrorStyled,
   TextAreaWrapperStyled,
+  DatePickerWrapperStyled,
+  DatePickerErrorStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { isValid, z } from "zod";
@@ -251,7 +253,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         .nonempty({ message: "Please specify starting date" }),
                     ])}>
                     {({ setValue, errors }) => (
-                      <>
+                      <DatePickerWrapperStyled>
                         <CustomDatePicker
                           selected={
                             budgetObject.budgetDateStart
@@ -264,8 +266,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             onSelectStartDate(date);
                           }}
                         />
-                        <div>{errors[0]}</div>
-                      </>
+                        <DatePickerErrorStyled>
+                          {errors[0]}
+                        </DatePickerErrorStyled>
+                      </DatePickerWrapperStyled>
                     )}
                   </Field>
                   to
@@ -281,13 +285,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       z.date(),
                       z
                         .string()
-                        .datetime({
-                          message: "Invalid datetime string! Must be UTC.",
-                        })
                         .nonempty({ message: "Please specify ending date" }),
                     ])}>
                     {({ setValue, errors }) => (
-                      <>
+                      <DatePickerWrapperStyled>
                         <CustomDatePicker
                           selected={
                             budgetObject.budgetDateEnd
@@ -300,8 +301,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             onSelectEndDate(date);
                           }}
                         />
-                        <div>{errors[0]}</div>
-                      </>
+                        <DatePickerErrorStyled>
+                          {errors[0]}
+                        </DatePickerErrorStyled>
+                      </DatePickerWrapperStyled>
                     )}
                   </Field>
                 </InputWrapperFullFlex>

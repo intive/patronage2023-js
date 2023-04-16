@@ -120,3 +120,15 @@ export const TextareaErrorStyled = styled.div<TextareaErrorType>`
   font-size: 12px;
   margin: 4px 10px 0 10px;
 `;
+
+export const DatePickerWrapperStyled = styled.div`
+  position: relative;
+`;
+
+export const DatePickerErrorStyled = styled.div`
+  position: absolute;
+  color: ${({ theme }) => theme.textarea.error};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0 10px;
+`;
