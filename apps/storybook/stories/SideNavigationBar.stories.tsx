@@ -13,11 +13,17 @@ export default {
   component: SideNavigationBar,
 } as ComponentMeta<typeof SideNavigationBar>;
 
+const Wrapper = styled.div`
+  display: flex;
+`;
+
 const SideNavigationBarTemplate: ComponentStory<typeof SideNavigationBar> = ({
   ...args
-}) => <SideNavigationBar {...args}></SideNavigationBar>;
-
-const currentPage = "";
+}) => (
+  <Wrapper>
+    <SideNavigationBar {...args}></SideNavigationBar>
+  </Wrapper>
+);
 
 const AvatarStyled = styled(Avatar)`
   width: 28px;
@@ -61,7 +67,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="avatars/1.svg/" username="Leonard Hofstadter" />
+        <AvatarStyled src="/avatars/1.svg/" username="Leonard Hofstadter" />
         <SpanStyled>Leonard Hofstadter</SpanStyled>
       </>
     ),
@@ -71,7 +77,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="avatars/2.svg/" username="Howard Wolowitz" />
+        <AvatarStyled src="/avatars/2.svg/" username="Howard Wolowitz" />
         <SpanStyled>Howard Wolowitz</SpanStyled>
       </>
     ),
@@ -81,7 +87,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="avatars/3.svg/" username="Rajesh Koothrappali" />
+        <AvatarStyled src="/avatars/3.svg/" username="Rajesh Koothrappali" />
         <SpanStyled>Rajesh Koothrappali</SpanStyled>
       </>
     ),
@@ -100,12 +106,7 @@ const BudgetsSubMenuData = {
     placeholder: "Search budgets",
     icon: <Icon icon="search" />,
   },
-  navigationList: (
-    <NavList
-      contents={BudgetsSubMenuNavListContents}
-      currentPage={currentPage}
-    />
-  ),
+  navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
   button: {
     method: () => {},
     label: "Add new budget",
@@ -122,9 +123,7 @@ const TeamSubMenuData = {
     icon: <Icon icon="search" />,
     placeholder: "Search team",
   },
-  navigationList: (
-    <NavList contents={TeamSubMenuNavListContents} currentPage={currentPage} />
-  ),
+  navigationList: <NavList contents={TeamSubMenuNavListContents} />,
   button: {
     method: () => {},
     label: "Add new member",
@@ -163,12 +162,7 @@ const SettingsSubMenuNavListContents = [
 
 const SettingsSubMenuData = {
   title: "Settings",
-  navigationList: (
-    <NavList
-      contents={SettingsSubMenuNavListContents}
-      currentPage={currentPage}
-    />
-  ),
+  navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
 };
 
 export const SideNavBar = SideNavigationBarTemplate.bind({});

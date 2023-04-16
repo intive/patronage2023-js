@@ -100,6 +100,7 @@ export const theme = {
     neutral: colors.Neutral8,
     focus: colors.Teal5,
     labelBackground: colors.BasicWhite,
+    placeholder: colors.Neutral4,
   },
   link: {
     main: colors.Teal8,

@@ -114,23 +114,28 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled.input<StyledErrorProps & StyledInputProps>`
+export const StyledInputBase = styled.input`
+  width: 100%;
   box-sizing: border-box;
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
-  padding: 14px 0 14px 14px;
-  font-size: 16px;
-  line-height: 150%;
   caret-color: ${({ theme }) => theme.input.neutral};
   transition: border-color 200ms ease-out;
-  width: 100%;
-  margin-bottom: ${({ hasSupportingLabel }) =>
-    hasSupportingLabel ? "0" : "18px"};
 
   :focus {
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
   }
+`;
+
+const StyledInput = styled(StyledInputBase)<
+  StyledErrorProps & StyledInputProps
+>`
+  padding: 14px 0 14px 14px;
+  font-size: 16px;
+  line-height: 150%;
+  margin-bottom: ${({ hasSupportingLabel }) =>
+    hasSupportingLabel ? "0" : "18px"};
 
   :focus,
   // case when input has value
@@ -176,7 +181,7 @@ const StyledLabel = styled.label<StyledErrorProps>`
   cursor: text;
 `;
 
-const StyledIcon = styled.button`
+export const StyledIcon = styled.button`
   position: absolute;
   right: 15px;
   top: 18px;

@@ -27,43 +27,41 @@ export default function SideNav() {
   };
 
   const BudgetsSubMenuData = {
-    title: "Budgets",
+    title: t(SideNav.budgetsItem.title),
     sort: {
-      method: () => {},
+      clickHandler: () => {},
       icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      placeholder: "Search budgets",
-      icon: <Icon icon="search" color="#515151" />,
+      placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
     },
     navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
     button: {
-      method: () => {
+      clickHandler: () => {
         openModal();
       },
-      label: "Add new budget",
+      label: t(SideNav.budgetsItem.buttonLabel),
     },
   };
 
   const TeamSubMenuData = {
-    title: "Team",
+    title: t(SideNav.teamsItem.title),
     sort: {
-      method: () => {},
+      clickHandler: () => {},
       icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      icon: <Icon icon="search" color="#515151" />,
-      placeholder: "Search team",
+      placeholder: t(SideNav.teamsItem.searchInputPlaceholder),
     },
     navigationList: <NavList contents={TeamSubMenuNavListContents} />,
     button: {
-      method: () => {},
-      label: "Add new member",
+      clickHandler: () => {},
+      label: t(SideNav.teamsItem.buttonLabel),
     },
   };
 
   const SettingsSubMenuData = {
-    title: "Settings",
+    title: t(SideNav.settingsItem.title),
     navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
   };
 
@@ -74,27 +72,27 @@ export default function SideNav() {
           {
             href: "/budgets",
             icon: <Icon icon="wallet" iconSize={32} />,
-            textValue: t(SideNav.budgetsItem),
+            textValue: t(SideNav.budgetsItem.title),
             subMenu: BudgetsSubMenuData,
             id: 1,
           },
           {
             href: "/reports",
             icon: <Icon icon="query_stats" iconSize={32} />,
-            textValue: t(SideNav.reportsItem),
+            textValue: t(SideNav.reportsItem.title),
             id: 2,
           },
           {
             href: "/team",
             icon: <Icon icon="account_circle" iconSize={32} />,
-            textValue: t(SideNav.teamsItem),
+            textValue: t(SideNav.teamsItem.title),
             subMenu: TeamSubMenuData,
             id: 3,
           },
           {
             href: "/settings",
             icon: <Icon icon="settings" iconSize={32} />,
-            textValue: t(SideNav.settingsItem),
+            textValue: t(SideNav.settingsItem.title),
             subMenu: SettingsSubMenuData,
             id: 4,
           },

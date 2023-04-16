@@ -1,21 +1,21 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
+import { useState } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
 
 export type SubMenuDataProps = {
   title: string;
   sort?: {
-    method: () => void;
+    clickHandler: () => void;
     icon: ReactNode;
   };
   searchInput?: {
     placeholder: string;
-    icon: ReactNode;
   };
   navigationList?: ReactNode;
   button?: {
-    method: () => void;
+    clickHandler: () => void;
     label: string;
   };
 };
@@ -38,6 +38,8 @@ const SubMenuStyled = styled.div`
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
+
+  const [value, setValue] = useState("");
   return (
     <SubMenuStyled>
       <MainDiv>
@@ -45,12 +47,21 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
           <Title>{title}</Title>
           {sort?.icon}
         </HeaderStyled>
-        {searchInput && <SearchInput searchInput={searchInput} />}
+        {searchInput && (
+          <SearchInput
+            name="searchInput"
+            type="text"
+            placeholder={searchInput.placeholder}
+            value={value}
+            onChange={(event) => setValue(event.currentTarget.value)}
+            onInputCleared={() => setValue("")}
+          />
+        )}
         {navigationList}
       </MainDiv>
 
       {button && (
-        <Button variant="secondary" onClick={() => button.method()}>
+        <Button variant="secondary" onClick={() => button.clickHandler()}>
           {button.label}
         </Button>
       )}
