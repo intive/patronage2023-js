@@ -139,32 +139,32 @@ const dictionary = {
     },
     profileScreen: {
       title: {
-        en:"Customise the account",
-        pl:"Spersonalizuj swoje konto",
+        en: "Customise the account",
+        pl: "Spersonalizuj swoje konto",
       },
       subtitle: {
         en: "Select your avatar and tell us your name",
         pl: "Wybierz avatar i powiedz jak się nazywasz",
       },
-      firstNameInputLabel:{
-          en: "First name",
-          pl: "Imię",
+      firstNameInputLabel: {
+        en: "First name",
+        pl: "Imię",
       },
-      lastNameInputLabel:{
-          en: "Last name",
-          pl: "Nazwisko",
+      lastNameInputLabel: {
+        en: "Last name",
+        pl: "Nazwisko",
       },
-      inputErrorMsg : {
+      inputErrorMsg: {
         en: "The field cannot be empty",
         pl: "Pole nie może być puste",
       },
-      backButton: { 
-        en: "Back", 
-        pl: "Powrót" 
+      backButton: {
+        en: "Back",
+        pl: "Powrót",
       },
-      submitButton: { 
-        en: "Create account", 
-        pl: "Utwórz konto" 
+      submitButton: {
+        en: "Create account",
+        pl: "Utwórz konto",
       },
     },
     emailScreen: {
@@ -222,6 +222,64 @@ const dictionary = {
       },
     },
   },
+
+  AddNewBudgetModal: {
+    title: {
+      en: "New budget",
+      pl: "Nowy budżet",
+    },
+    tabs: {
+      settings: {
+        en: "Settings",
+        pl: "Ustawiena",
+      },
+      share: {
+        en: "Share",
+        pl: "Udostępnij",
+      },
+    },
+    paragraphs: {
+      details: {
+        en: "Details",
+        pl: "Szczegóły",
+      },
+      budgetPeriod: {
+        en: "Budget period",
+        pl: "Data ważności budżetu",
+      },
+    },
+    button: {
+      en: "Save",
+      pl: "Zapisz",
+    },
+    inputNames: {
+      budgetName: {
+        en: "Budget name",
+        pl: "Nazwa budżetu",
+      },
+      budgetLimit: {
+        en: "Budget limit",
+        pl: "Limit budżetu",
+      },
+      currency: {
+        en: "Currency",
+        pl: "Waluta",
+      },
+      description: {
+        en: "Description",
+        pl: "Opis",
+      },
+      dateStart: {
+        en: "Start date",
+        pl: "Data początkowa",
+      },
+      dateEnd: {
+        en: "End date",
+        pl: "Data końcowa",
+      },
+    },
+  },
+
   BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
   SettingsPage: { title: { en: "Settings page", pl: "Ustawienia" } },

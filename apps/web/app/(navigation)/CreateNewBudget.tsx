@@ -23,6 +23,7 @@ import {
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { z } from "zod";
+import { useTranslate } from "lib/hooks";
 
 type NewBudget = {
   onClose?: Function;
@@ -50,6 +51,7 @@ const icons: IconType[] = [
 const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
+  const { t, dict } = useTranslate("AddNewBudgetModal");
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<Icon | undefined>(
     "settings"
@@ -62,7 +64,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   });
 
   return (
-    <Modal header="New budget" onClose={() => onClose && onClose()}>
+    <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
       <SeparatorStyledTop />
       <Form
         onSubmit={(values) => {
@@ -76,11 +78,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             }}>
             <TabsStyled defaultValue={defaultValue}>
               <TabsListStyled>
-                <TabsTriggerStyled value="settings">Settings</TabsTriggerStyled>
-                <TabsTriggerStyled value="share">Share</TabsTriggerStyled>
+                <TabsTriggerStyled value="settings">
+                  {t(dict.tabs.settings)}
+                </TabsTriggerStyled>
+                <TabsTriggerStyled value="share">
+                  {t(dict.tabs.share)}
+                </TabsTriggerStyled>
               </TabsListStyled>
               <TabsContentStyled value="settings">
-                <ParagraphStyled>Details</ParagraphStyled>
+                <ParagraphStyled>{t(dict.paragraphs.details)}</ParagraphStyled>
                 <IconPickerStyled>
                   <IconPicker
                     defaultIcon="savings"
@@ -124,7 +130,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             setValue(e.currentTarget.value);
                           }}
                           onInputCleared={() => setValue("")}
-                          label="Budget name">
+                          label={t(dict.inputNames.budgetName)}>
                           {budgetObject.budgetName}
                         </Input>
                       );
@@ -169,7 +175,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           } else setValue("");
                         }}
                         supportingLabel={errors.length ? errors : null}
-                        label="Budget limit"
+                        label={t(dict.inputNames.budgetLimit)}
                         name="budget-limit"
                         type="number"
                         onInputCleared={() => setValue("")}
@@ -178,7 +184,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   </Field>
                 </InputWrapperHalfStyled>
                 <InputWrapperHalfStyled>
-                  <Input label="Currency" name="currency" />
+                  <Input label={t(dict.inputNames.currency)} name="currency" />
                 </InputWrapperHalfStyled>
                 <Field
                   name="description"
@@ -194,7 +200,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       <TextAreaWrapperStyled>
                         <TextareaStyled
                           placeholder={budgetObject.budgetDescription}
-                          label="Description"
+                          label={t(dict.inputNames.description)}
                           value={value}
                           hasError={errors.length > 0}
                           onChange={(e) => {
@@ -203,7 +209,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               budgetDescription: e.currentTarget.value,
                             });
                             setValue(e.currentTarget.value);
-                            console.log(budgetObject.budgetDescription);
                           }}
                         />
                         <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
@@ -211,17 +216,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     );
                   }}
                 </Field>
-                <ParagraphStyled>Budget period</ParagraphStyled>
+                <ParagraphStyled>
+                  {t(dict.paragraphs.budgetPeriod)}
+                </ParagraphStyled>
                 <InputWrapperFullFlex>
                   <CustomDatePicker
-                    lang="en"
-                    placeholder="Start Date"
+                    placeholder={t(dict.inputNames.dateStart)}
                     onSelect={() => {}}
                   />
                   to
                   <CustomDatePicker
-                    lang="en"
-                    placeholder="End Date"
+                    placeholder={t(dict.inputNames.dateEnd)}
                     onSelect={() => {}}
                   />
                 </InputWrapperFullFlex>
@@ -231,7 +236,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               </TabsContentStyled>
               <SeparatorStyled />
               <ButtonWrapperStyled>
-                <Button onClick={submit}>Save</Button>
+                <Button onClick={submit}>{t(dict.button)}</Button>
               </ButtonWrapperStyled>
             </TabsStyled>
           </form>

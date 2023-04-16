@@ -1,17 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
 import "react-datepicker/dist/react-datepicker.css";
+import { LanguageContext } from "../../../apps/web/lib/contexts/LanguageContext";
 
 import en from "date-fns/locale/en-US";
 import pl from "date-fns/locale/pl";
 
 type CustomDatePickerProps = {
   placeholder: string;
-  lang: string | undefined;
   onSelect: (date: Date) => void;
 };
 
@@ -27,15 +27,15 @@ const datePickerLanguageConfig: DatePickerLanguageConfigType = {
 
 export const CustomDatePicker = ({
   placeholder = "",
-  lang = "en",
   onSelect,
 }: CustomDatePickerProps) => {
   const [date, setDate] = useState<Date | null>(null);
+  const { currentLang } = useContext(LanguageContext);
 
   return (
     <DatePickerStyled>
       <DatePicker
-        locale={datePickerLanguageConfig[lang]}
+        locale={datePickerLanguageConfig[currentLang]}
         popperPlacement="top-start"
         popperModifiers={[
           {
