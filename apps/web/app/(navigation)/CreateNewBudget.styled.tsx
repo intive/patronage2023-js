@@ -3,6 +3,10 @@ import { Separator, Textarea } from "ui";
 import * as Tabs from "@radix-ui/react-tabs";
 import { device } from "lib/media-queries";
 
+type TextareaErrorType = {
+  hasError?: boolean;
+};
+
 export const TabsStyled = styled(Tabs.Root)`
   width: 311px;
   ${device.tablet} {
@@ -52,7 +56,7 @@ export const ParagraphStyled = styled.p`
 
 export const IconPickerStyled = styled.div`
   margin-bottom: 24px;
-`
+`;
 
 export const InputWrapperFullStyled = styled.div`
   display: flex;
@@ -74,10 +78,6 @@ export const InputWrapperHalfStyled = styled.div`
   & > * {
     flex-basis: 85px;
   }
-`;
-
-export const TextareaStyled = styled(Textarea)`
-  margin-bottom: 36px;
 `;
 
 export const InputWrapperFullFlex = styled.div`
@@ -103,4 +103,21 @@ export const SeparatorStyledTop = styled(Separator)`
 export const ButtonWrapperStyled = styled.div`
   display: block;
   padding-top: 24px;
+`;
+
+export const TextAreaWrapperStyled = styled.div`
+  position: relative;
+`;
+
+export const TextareaStyled = styled(Textarea)`
+  margin-bottom: 36px;
+`;
+
+export const TextareaErrorStyled = styled.div<TextareaErrorType>`
+  position: absolute;
+  top: 70px;
+  color: ${({ theme }) => theme.textarea.error};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0 10px;
 `;

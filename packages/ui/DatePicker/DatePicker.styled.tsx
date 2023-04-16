@@ -14,7 +14,6 @@ export const DatePickerStyled = styled.div`
     line-height: 1.5rem;
     caret-color: ${({ theme }) => theme.datePicker.neutral2};
     transition: border-color 200ms ease-out;
-    color: ${({ theme }) => theme.datePicker.neutral8};
     width: 100%;
     :focus {
       outline: none;

@@ -169,6 +169,7 @@ export const theme = {
     font: colors.Neutral8,
     disabled: colors.Neutral2,
     focus: colors.Teal5,
+    error: colors.Supporting4,
   },
   iconPicker: {
     main: colors.Teal10,

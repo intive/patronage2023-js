@@ -1,11 +1,17 @@
 "use client";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type TextareaProps = {
   label?: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
+  hasError?: boolean;
+  value?: string;
 } & React.HTMLProps<HTMLTextAreaElement>;
+
+type LabelProps = {
+  hasError?: boolean;
+} & React.HTMLProps<HTMLLabelElement>;
 
 const Wrapper = styled.div`
   position: relative;
@@ -18,7 +24,6 @@ const TextareaStyled = styled.textarea<TextareaProps>`
   font-size: 1em;
   border-radius: 8px;
   border: 2px solid ${({ theme }) => theme.textarea.disabled};
-  color: ${({ theme }) => theme.textarea.font};
   padding: 14px;
   resize: none;
 
@@ -38,9 +43,20 @@ const TextareaStyled = styled.textarea<TextareaProps>`
       padding-right: 4px;
     }
   }
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: ${({ theme }) => theme.input.error};
+      caret-color: ${({ theme }) => theme.input.error};
+
+      :focus {
+        border-color: ${({ theme }) => theme.input.error};
+      }
+    `}
 `;
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<LabelProps>`
   position: absolute;
   left: 14px;
   top: 11px;
@@ -51,19 +67,30 @@ const StyledLabel = styled.label`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
-  color: ${({ theme }) => theme.textarea.font};
+  color: ${({ hasError }) =>
+    hasError
+      ? ({ theme }) => theme.input.error
+      : ({ theme }) => theme.input.neutral};
   cursor: text;
 `;
 
-export const Textarea = ({ label, onChange, className }: TextareaProps) => {
+export const Textarea = ({
+  label,
+  onChange,
+  className,
+  hasError,
+  value,
+}: TextareaProps) => {
   return (
     <Wrapper>
       <TextareaStyled
         placeholder=" "
         onChange={onChange}
         className={className}
+        hasError={hasError}
+        value={value}
       />
-      <StyledLabel>{label}</StyledLabel>
+      <StyledLabel hasError={hasError}>{label}</StyledLabel>
     </Wrapper>
   );
 };

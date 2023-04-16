@@ -18,6 +18,8 @@ import {
   ButtonWrapperStyled,
   SeparatorStyledTop,
   IconPickerStyled,
+  TextareaErrorStyled,
+  TextAreaWrapperStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { z } from "zod";
@@ -26,46 +28,58 @@ type NewBudget = {
   onClose?: Function;
 };
 
+type budgetObjectType = {
+  budgetName: string;
+  budgetLimit: number | string;
+  budgetDescription: string;
+};
+
+const icons: IconType[] = [
+  "savings",
+  "directions_car",
+  "payments",
+  "subscriptions",
+  "shopping_cart",
+  "home",
+  "wallet",
+  "error",
+  "help",
+];
+
+//mocked existing user budgets
+const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
+
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<Icon | undefined>(
     "settings"
   );
 
-  const icons: IconType[] = [
-    "savings",
-    "directions_car",
-    "payments",
-    "subscriptions",
-    "shopping_cart",
-    "home",
-    "wallet",
-    "error",
-    "help",
-  ];
-
-  //mocked existing user budgets
-  const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
+  const [budgetObject, setBudgetObject] = useState<budgetObjectType>({
+    budgetName: "",
+    budgetLimit: "",
+    budgetDescription: "",
+  });
 
   return (
     <Modal header="New budget" onClose={() => onClose && onClose()}>
       <SeparatorStyledTop />
-      <TabsStyled defaultValue={defaultValue}>
-        <TabsListStyled>
-          <TabsTriggerStyled value="settings">Settings</TabsTriggerStyled>
-          {/* remove disabled when you want to add second tab content */}
-          <TabsTriggerStyled value="share" disabled>
-            Share
-          </TabsTriggerStyled>
-        </TabsListStyled>
-        <TabsContentStyled value="settings">
-          {/* form */}
-          <Form onSubmit={(values) => alert(JSON.stringify(values))}>
-            {({ isValid, submit }) => (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                }}>
+      <Form
+        onSubmit={(values) => {
+          console.log(values);
+          console.log(budgetObject);
+        }}>
+        {({ submit }) => (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}>
+            <TabsStyled defaultValue={defaultValue}>
+              <TabsListStyled>
+                <TabsTriggerStyled value="settings">Settings</TabsTriggerStyled>
+                <TabsTriggerStyled value="share">Share</TabsTriggerStyled>
+              </TabsListStyled>
+              <TabsContentStyled value="settings">
                 <ParagraphStyled>Details</ParagraphStyled>
                 <IconPickerStyled>
                   <IconPicker
@@ -73,11 +87,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     icons={icons}
                     onSelect={(icon) => {
                       setSelectedIcon(icon);
-                    }}></IconPicker>
+                    }}
+                  />
                 </IconPickerStyled>
                 <InputWrapperFullStyled>
                   <Field
                     name="budget-name"
+                    initialValue={budgetObject.budgetName}
                     onSubmitValidate={z
                       .string()
                       .min(3, "Budget name must have at least 3 characters.")
@@ -86,7 +102,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         (val) => !loggedUserExistingBudgets.includes(val),
                         "Name is taken, please choose another."
                       )}
-                    onChangeValidate={z.string()}>
+                    onChangeValidate={z
+                      .string()
+                      .max(30, "Budget must not have more than 30 characters.")
+                      .refine(
+                        (val) => !loggedUserExistingBudgets.includes(val),
+                        "Name is taken, please choose another."
+                      )}>
                     {({ value, setValue, errors }) => {
                       return (
                         <Input
@@ -94,10 +116,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           value={value}
                           hasError={errors.length > 0}
                           supportingLabel={errors.length ? errors : null}
-                          onChange={(e) => setValue(e.currentTarget.value)}
+                          onChange={(e) => {
+                            setBudgetObject({
+                              ...budgetObject,
+                              budgetName: e.currentTarget.value,
+                            });
+                            setValue(e.currentTarget.value);
+                          }}
                           onInputCleared={() => setValue("")}
-                          label="Budget name"
-                        />
+                          label="Budget name">
+                          {budgetObject.budgetName}
+                        </Input>
                       );
                     }}
                   </Field>
@@ -105,6 +134,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperHalfStyled>
                   <Field
                     name="budget-limit"
+                    initialValue={budgetObject.budgetLimit}
                     onChangeValidate={z.union([
                       z
                         .string()
@@ -126,13 +156,16 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         value={value}
                         hasError={errors.length > 0}
                         onChange={(e) => {
+                          const roundedValue =
+                            Math.round(
+                              parseFloat(e.currentTarget.value) * 100
+                            ) / 100;
                           if (e.currentTarget.value) {
-                            setValue(
-                              Math.round(
-                                parseFloat(e.currentTarget.value) * 100
-                              ) / 100
-                            );
-                            console.log(e.currentTarget.value);
+                            setBudgetObject({
+                              ...budgetObject,
+                              budgetLimit: roundedValue,
+                            });
+                            setValue(roundedValue);
                           } else setValue("");
                         }}
                         supportingLabel={errors.length ? errors : null}
@@ -147,7 +180,37 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperHalfStyled>
                   <Input label="Currency" name="currency" />
                 </InputWrapperHalfStyled>
-                <TextareaStyled label="Description"></TextareaStyled>
+                <Field
+                  name="description"
+                  initialValue={budgetObject.budgetDescription}
+                  onSubmitValidate={z
+                    .string()
+                    .max(50, "Character limit reached.")}
+                  onChangeValidate={z
+                    .string()
+                    .max(50, "Character limit reached.")}>
+                  {({ value, setValue, errors }) => {
+                    return (
+                      <TextAreaWrapperStyled>
+                        <TextareaStyled
+                          placeholder={budgetObject.budgetDescription}
+                          label="Description"
+                          value={value}
+                          hasError={errors.length > 0}
+                          onChange={(e) => {
+                            setBudgetObject({
+                              ...budgetObject,
+                              budgetDescription: e.currentTarget.value,
+                            });
+                            setValue(e.currentTarget.value);
+                            console.log(budgetObject.budgetDescription);
+                          }}
+                        />
+                        <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
+                      </TextAreaWrapperStyled>
+                    );
+                  }}
+                </Field>
                 <ParagraphStyled>Budget period</ParagraphStyled>
                 <InputWrapperFullFlex>
                   <CustomDatePicker
@@ -162,19 +225,18 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     onSelect={() => {}}
                   />
                 </InputWrapperFullFlex>
-
-                <SeparatorStyled />
-                <ButtonWrapperStyled>
-                  <Button onClick={submit}>Save</Button>
-                </ButtonWrapperStyled>
-              </form>
-            )}
-            {/* buttom must be out of tabs if we want to use them */}
-          </Form>
-          {/* end of form */}
-        </TabsContentStyled>
-        <TabsContentStyled value="share">Welcome to share</TabsContentStyled>
-      </TabsStyled>
+              </TabsContentStyled>
+              <TabsContentStyled value="share">
+                Welcome to share
+              </TabsContentStyled>
+              <SeparatorStyled />
+              <ButtonWrapperStyled>
+                <Button onClick={submit}>Save</Button>
+              </ButtonWrapperStyled>
+            </TabsStyled>
+          </form>
+        )}
+      </Form>
     </Modal>
   );
 };
