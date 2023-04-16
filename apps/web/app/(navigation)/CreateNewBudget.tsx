@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useState } from "react";
 import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
 import { IconType } from "ui/Icon";
@@ -22,7 +21,7 @@ import {
   TextAreaWrapperStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
-import { z } from "zod";
+import { isValid, z } from "zod";
 import { useTranslate } from "lib/hooks";
 
 type NewBudget = {
@@ -33,6 +32,9 @@ type budgetObjectType = {
   budgetName: string;
   budgetLimit: number | string;
   budgetDescription: string;
+  budgetIcon: string;
+  budgetDateStart: number | null;
+  budgetDateEnd: number | null;
 };
 
 const icons: IconType[] = [
@@ -53,15 +55,28 @@ const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const [defaultValue, setDefaultValue] = useState("settings");
-  const [selectedIcon, setSelectedIcon] = useState<Icon | undefined>(
-    "settings"
-  );
+  const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
 
   const [budgetObject, setBudgetObject] = useState<budgetObjectType>({
     budgetName: "",
     budgetLimit: "",
     budgetDescription: "",
+    budgetIcon: "",
+    budgetDateStart: null,
+    budgetDateEnd: null,
   });
+
+  const onSelectStartDate = (date: Date) => {
+    date
+      ? setBudgetObject({ ...budgetObject, budgetDateStart: date.getTime() })
+      : setBudgetObject({ ...budgetObject, budgetDateStart: null });
+  };
+
+  const onSelectEndDate = (date: Date) => {
+    date
+      ? setBudgetObject({ ...budgetObject, budgetDateEnd: date.getTime() })
+      : setBudgetObject({ ...budgetObject, budgetDateEnd: null });
+  };
 
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
@@ -89,9 +104,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <ParagraphStyled>{t(dict.paragraphs.details)}</ParagraphStyled>
                 <IconPickerStyled>
                   <IconPicker
-                    defaultIcon="savings"
+                    defaultIcon={selectedIcon}
                     icons={icons}
                     onSelect={(icon) => {
+                      setBudgetObject({ ...budgetObject, budgetIcon: icon });
                       setSelectedIcon(icon);
                     }}
                   />
@@ -220,15 +236,74 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   {t(dict.paragraphs.budgetPeriod)}
                 </ParagraphStyled>
                 <InputWrapperFullFlex>
-                  <CustomDatePicker
-                    placeholder={t(dict.inputNames.dateStart)}
-                    onSelect={() => {}}
-                  />
+                  <Field
+                    name="date-start"
+                    onSubmitValidate={z.union([
+                      z.date(),
+                      z
+                        .string()
+                        .nonempty({ message: "Please specify starting date" }),
+                    ])}
+                    onChangeValidate={z.union([
+                      z.date(),
+                      z
+                        .string()
+                        .nonempty({ message: "Please specify starting date" }),
+                    ])}>
+                    {({ setValue, errors }) => (
+                      <>
+                        <CustomDatePicker
+                          selected={
+                            budgetObject.budgetDateStart
+                              ? new Date(budgetObject.budgetDateStart)
+                              : null
+                          }
+                          placeholder={t(dict.inputNames.dateStart)}
+                          onSelect={(date) => {
+                            setValue(date);
+                            onSelectStartDate(date);
+                          }}
+                        />
+                        <div>{errors[0]}</div>
+                      </>
+                    )}
+                  </Field>
                   to
-                  <CustomDatePicker
-                    placeholder={t(dict.inputNames.dateEnd)}
-                    onSelect={() => {}}
-                  />
+                  <Field
+                    name="date-end"
+                    onSubmitValidate={z.union([
+                      z.date(),
+                      z
+                        .string()
+                        .nonempty({ message: "Please specify ending date" }),
+                    ])}
+                    onChangeValidate={z.union([
+                      z.date(),
+                      z
+                        .string()
+                        .datetime({
+                          message: "Invalid datetime string! Must be UTC.",
+                        })
+                        .nonempty({ message: "Please specify ending date" }),
+                    ])}>
+                    {({ setValue, errors }) => (
+                      <>
+                        <CustomDatePicker
+                          selected={
+                            budgetObject.budgetDateEnd
+                              ? new Date(budgetObject.budgetDateEnd)
+                              : null
+                          }
+                          placeholder={t(dict.inputNames.dateEnd)}
+                          onSelect={(date) => {
+                            setValue(date);
+                            onSelectEndDate(date);
+                          }}
+                        />
+                        <div>{errors[0]}</div>
+                      </>
+                    )}
+                  </Field>
                 </InputWrapperFullFlex>
               </TabsContentStyled>
               <TabsContentStyled value="share">

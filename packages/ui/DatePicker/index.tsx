@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
@@ -13,6 +13,7 @@ import pl from "date-fns/locale/pl";
 type CustomDatePickerProps = {
   placeholder: string;
   onSelect: (date: Date) => void;
+  selected?: Date | null;
 };
 
 type DatePickerLanguageConfigType = {
@@ -28,8 +29,8 @@ const datePickerLanguageConfig: DatePickerLanguageConfigType = {
 export const CustomDatePicker = ({
   placeholder = "",
   onSelect,
+  selected,
 }: CustomDatePickerProps) => {
-  const [date, setDate] = useState<Date | null>(null);
   const { currentLang } = useContext(LanguageContext);
 
   return (
@@ -51,10 +52,9 @@ export const CustomDatePicker = ({
           strategy: "fixed",
         }}
         onSelect={onSelect}
-        selected={date}
+        selected={selected}
         name={placeholder}
         onChange={(date: Date) => {
-          setDate(date);
           onSelect(date);
         }}
         autoComplete="off"
