@@ -191,6 +191,13 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+
+  createNewBudget: {
+    background: colors.BasicWhite,
+    inactive: colors.Neutral6,
+    active: colors.Teal8,
+    hover: colors.Teal10,
+  },
 };
 
 export type ThemeType = typeof theme;

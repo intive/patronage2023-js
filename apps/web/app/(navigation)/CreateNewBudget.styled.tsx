@@ -23,16 +23,16 @@ export const TabsTriggerStyled = styled(Tabs.Trigger)`
   font-family: unset;
   font-size: 14px;
   font-weight: 600;
-  background-color: white;
-  color: #7e7e7e;
+  background-color: ${({ theme }) => theme.createNewBudget.background};
+  color: ${({ theme }) => theme.createNewBudget.inactive};
   width: 50%;
   border: 0;
   cursor: pointer;
   padding: 8px 8px 12px 8px;
   border-bottom: 2px solid white;
   &[data-state="active"] {
-    color: #397b65;
-    border-bottom: 2px solid #397b65;
+    color: ${({ theme }) => theme.createNewBudget.active};
+    border-bottom: 2px solid ${({ theme }) => theme.createNewBudget.active};
   }
   &[disabled],
   &[disabled]:hover {
@@ -40,7 +40,7 @@ export const TabsTriggerStyled = styled(Tabs.Trigger)`
     cursor: not-allowed;
   }
   &:hover {
-    color: #1e4c40;
+    color: ${({ theme }) => theme.button.secondary.hover};
   }
 `;
 
