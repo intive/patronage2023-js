@@ -282,6 +282,36 @@ const dictionary = {
         pl: "Data końcowa",
       },
     },
+    errors: {
+      min3characters: {
+        en: "Budget name must have at least 3 characters.",
+        pl: "Nazwa musi mieć conajmniej 3 znaki.",
+      },
+      max30characters: {
+        en: "Budget must not have more than 30 characters.",
+        pl: "Nazwa nie może mieć więcej niż 30 znaków.",
+      },
+      max50characters: {
+        en: "Character limit of 50 reached.",
+        pl: "Limit znaków osiągnięty (50)",
+      },
+      nameTaken: {
+        en: "Name is taken, please choose another.",
+        pl: "Nazwa zajęta. Proszę wybierz inną.",
+      },
+      specifyBudgetLimit: {
+        en: "Please specify budget limit.",
+        pl: "Podaj limit budżetu.",
+      },
+      startingDate: {
+        en: "Please specify starting date",
+        pl: "Podaj datę startu.",
+      },
+      endingDate: {
+        en: "Please specify ending date",
+        pl: "Podaj datę końca.",
+      },
+    },
   },
 
   BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },

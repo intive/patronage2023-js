@@ -125,7 +125,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="budget-name"
                     initialValue={budgetObject.budgetName}
-                    onSubmitValidate={sibmitVaildateBudgetName}
+                    onSubmitValidate={sibmitVaildateBudgetName()}
                     onChangeValidate={changeValidateBudgetName}>
                     {({ value, setValue, errors }) => {
                       return (
