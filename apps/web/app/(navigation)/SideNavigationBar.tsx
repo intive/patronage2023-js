@@ -7,7 +7,6 @@ import { CreateNewBudget } from "./CreateNewBudget";
 
 import {
   BudgetsSubMenuNavListContents,
-  TeamSubMenuNavListContents,
   SettingsSubMenuNavListContents,
 } from "./SideNavigationBarNavListData";
 
@@ -44,22 +43,6 @@ export default function SideNav() {
     },
   };
 
-  const TeamSubMenuData = {
-    title: t(SideNav.teamsItem.title),
-    sort: {
-      clickHandler: () => {},
-      icon: <Icon icon="filter_list" />,
-    },
-    searchInput: {
-      placeholder: t(SideNav.teamsItem.searchInputPlaceholder),
-    },
-    navigationList: <NavList contents={TeamSubMenuNavListContents} />,
-    button: {
-      clickHandler: () => {},
-      label: t(SideNav.teamsItem.buttonLabel),
-    },
-  };
-
   const SettingsSubMenuData = {
     title: t(SideNav.settingsItem.title),
     navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
@@ -83,18 +66,11 @@ export default function SideNav() {
             id: 2,
           },
           {
-            href: "/team",
-            icon: <Icon icon="account_circle" iconSize={32} />,
-            textValue: t(SideNav.teamsItem.title),
-            subMenu: TeamSubMenuData,
-            id: 3,
-          },
-          {
             href: "/settings",
             icon: <Icon icon="settings" iconSize={32} />,
             textValue: t(SideNav.settingsItem.title),
             subMenu: SettingsSubMenuData,
-            id: 4,
+            id: 3,
           },
         ]}
       />
