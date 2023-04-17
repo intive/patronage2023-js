@@ -1,7 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { device } from "../../../apps/web/lib/media-queries";
 
-export const DatePickerStyled = styled.div`
+type DatePickerStyledProps = {
+  hasError?: boolean;
+};
+
+export const DatePickerStyled = styled.div<DatePickerStyledProps>`
   position: relative;
 
   .react-datepicker__input-container input {
@@ -19,6 +23,17 @@ export const DatePickerStyled = styled.div`
       outline: none;
       border-color: ${({ theme }) => theme.datePicker.teal6};
     }
+
+    ${({ hasError }) =>
+      hasError &&
+      css`
+        border-color: ${({ theme }) => theme.input.error};
+        caret-color: ${({ theme }) => theme.input.error};
+
+        :focus {
+          border-color: ${({ theme }) => theme.input.error};
+        }
+      `}
   }
 
   .react-datepicker-popper {

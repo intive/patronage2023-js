@@ -23,7 +23,6 @@ import {
   DatePickerErrorStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
-import { z } from "zod";
 import { useTranslate } from "lib/hooks";
 import {
   changeValidateBudgetName,
@@ -227,6 +226,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
+                          hasError={errors.length > 0}
                           selected={
                             budgetObject.budgetDateStart
                               ? new Date(budgetObject.budgetDateStart)
@@ -257,6 +257,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
+                          hasError={errors.length > 0}
                           selected={
                             budgetObject.budgetDateEnd
                               ? new Date(budgetObject.budgetDateEnd)

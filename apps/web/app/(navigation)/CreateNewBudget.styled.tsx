@@ -7,6 +7,10 @@ type TextareaErrorType = {
   hasError?: boolean;
 };
 
+type DatePickerStyledProps = {
+  hasError?: boolean;
+};
+
 export const TabsStyled = styled(Tabs.Root)`
   width: 311px;
   ${device.tablet} {

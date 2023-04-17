@@ -14,6 +14,7 @@ type CustomDatePickerProps = {
   placeholder: string;
   onSelect: (date: Date) => void;
   selected?: Date | null;
+  hasError?: boolean;
 };
 
 type DatePickerLanguageConfigType = {
@@ -30,11 +31,12 @@ export const CustomDatePicker = ({
   placeholder = "",
   onSelect,
   selected,
+  hasError,
 }: CustomDatePickerProps) => {
   const { currentLang } = useContext(LanguageContext);
 
   return (
-    <DatePickerStyled>
+    <DatePickerStyled hasError={hasError}>
       <DatePicker
         locale={datePickerLanguageConfig[currentLang]}
         popperPlacement="top-start"

@@ -179,7 +179,7 @@ const StyledLabel = styled.label<StyledErrorProps>`
 const StyledIcon = styled.button`
   position: absolute;
   right: 15px;
-  top: 18px;
+  top: 15px;
   border: none;
   background: none;
   cursor: ${({ disabled }) => (disabled ? "text" : "pointer")};
