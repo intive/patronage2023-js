@@ -244,7 +244,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       </DatePickerWrapperStyled>
                     )}
                   </Field>
-                  to
+                  <div style={{ alignSelf: "flex-start", marginTop: "18px" }}>
+                    {t(dict.paragraphs.wordIt)}
+                  </div>
                   <Field
                     name="date-end"
                     initialValue={

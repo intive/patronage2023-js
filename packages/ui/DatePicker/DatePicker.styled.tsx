@@ -9,75 +9,9 @@ type DatePickerStyledProps = {
 export const DatePickerStyled = styled.div<DatePickerStyledProps>`
   position: relative;
 
-  label {
-    position: absolute;
-    z-index: 21;
-    font-weight: 400;
-    line-height: 150%;
-    left: 14px;
-    top: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: calc(100%-32px);
-    transition: all 200ms linear;
-    cursor: pointer;
-    color: ${({ hasError, theme }) =>
-      hasError ? theme.input.error : theme.input.neutral};
-  }
-
-  :focus-within label {
-    transform: translateY(-24px);
-    font-size: 12px;
-    font-weight: 600;
-    background-color: ${({ theme }) => theme.input.labelBackground};
-    padding-left: 4px;
-    padding-right: 4px;
-
-    :focus-within :not(:placeholder-shown) {
-      + label {
-        transform: translateY(-24px);
-        font-size: 12px;
-        font-weight: 600;
-        background-color: ${({ theme }) => theme.input.labelBackground};
-        padding-left: 4px;
-        padding-right: 4px;
-      }
-    }
-  }
-
-  .react-datepicker__input-container input {
-    font-family: unset;
-    position: relative;
-    border: solid 2px ${({ theme }) => theme.datePicker.neutral2};
-    border-radius: 8px;
-    padding: 14px 0 14px 14px;
-    font-size: 16px;
-    line-height: 1.5rem;
-    caret-color: ${({ theme }) => theme.datePicker.neutral2};
-    transition: border-color 200ms ease-out;
-    width: 100%;
-    :focus {
-      outline: none;
-      border-color: ${({ theme }) => theme.datePicker.teal6};
-    }
-
-    ${({ hasError }) =>
-      hasError &&
-      css`
-        border-color: ${({ theme }) => theme.input.error};
-        caret-color: ${({ theme }) => theme.input.error};
-
-        :focus {
-          border-color: ${({ theme }) => theme.input.error};
-        }
-      `}
-  }
-
   .react-datepicker-popper {
     z-index: 20;
   }
-
   .react-datepicker__triangle {
     display: none;
   }
@@ -199,12 +133,15 @@ export const DatePickerStyled = styled.div<DatePickerStyledProps>`
 
   .react-datepicker__close-icon {
     padding-right: 5px;
+    top: -9px;
     ${device.tablet} {
       padding-right: 15px;
     }
   }
 
   .react-datepicker__close-icon:after {
+    width: 14px;
+    height: 14px;
     background-color: ${({ theme }) => theme.datePicker.teal8};
   }
 

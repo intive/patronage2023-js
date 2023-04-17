@@ -247,6 +247,10 @@ const dictionary = {
         en: "Budget period",
         pl: "Data ważności budżetu",
       },
+      wordIt: {
+        en: "to",
+        pl: "do",
+      },
     },
     button: {
       en: "Save",

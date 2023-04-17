@@ -131,4 +131,5 @@ export const DatePickerErrorStyled = styled.div`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
+  bottom: 0px;
 `;

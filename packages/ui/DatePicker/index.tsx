@@ -7,6 +7,8 @@ import { DatePickerStyled } from "./DatePicker.styled";
 import "react-datepicker/dist/react-datepicker.css";
 import { LanguageContext } from "../../../apps/web/lib/contexts/LanguageContext";
 
+import { Input } from "../Input";
+
 import en from "date-fns/locale/en-US";
 import pl from "date-fns/locale/pl";
 
@@ -37,7 +39,6 @@ export const CustomDatePicker = ({
 
   return (
     <DatePickerStyled hasError={hasError} label={label}>
-      <label htmlFor={label}>{label}</label>
       <DatePicker
         id={label}
         locale={datePickerLanguageConfig[currentLang]}
@@ -66,6 +67,7 @@ export const CustomDatePicker = ({
         isClearable
         onFocus={(e) => (e.target.readOnly = true)}
         dropdownMode="select"
+        customInput={<Input label={label} hasError={hasError} />}
       />
     </DatePickerStyled>
   );
