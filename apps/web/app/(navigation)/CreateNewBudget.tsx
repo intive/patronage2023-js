@@ -240,6 +240,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperFullFlex>
                   <Field
                     name="date-start"
+                    initialValue={
+                      budgetObject.budgetDateStart
+                        ? new Date(budgetObject.budgetDateStart)
+                        : null
+                    }
                     onSubmitValidate={z.union([
                       z.date(),
                       z
@@ -275,6 +280,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   to
                   <Field
                     name="date-end"
+                    initialValue={
+                      budgetObject.budgetDateEnd
+                        ? new Date(budgetObject.budgetDateEnd)
+                        : null
+                    }
                     onSubmitValidate={z.union([
                       z.date(),
                       z
