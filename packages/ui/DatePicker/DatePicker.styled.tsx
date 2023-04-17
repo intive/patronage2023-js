@@ -3,10 +3,48 @@ import { device } from "../../../apps/web/lib/media-queries";
 
 type DatePickerStyledProps = {
   hasError?: boolean;
+  label?: string;
 };
 
 export const DatePickerStyled = styled.div<DatePickerStyledProps>`
   position: relative;
+
+  label {
+    position: absolute;
+    z-index: 21;
+    font-weight: 400;
+    line-height: 150%;
+    left: 14px;
+    top: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100%-32px);
+    transition: all 200ms linear;
+    cursor: pointer;
+    color: ${({ hasError, theme }) =>
+      hasError ? theme.input.error : theme.input.neutral};
+  }
+
+  :focus-within label {
+    transform: translateY(-24px);
+    font-size: 12px;
+    font-weight: 600;
+    background-color: ${({ theme }) => theme.input.labelBackground};
+    padding-left: 4px;
+    padding-right: 4px;
+
+    :focus-within :not(:placeholder-shown) {
+      + label {
+        transform: translateY(-24px);
+        font-size: 12px;
+        font-weight: 600;
+        background-color: ${({ theme }) => theme.input.labelBackground};
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+    }
+  }
 
   .react-datepicker__input-container input {
     font-family: unset;

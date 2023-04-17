@@ -227,12 +227,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
                           hasError={errors.length > 0}
+                          label={t(dict.inputNames.dateStart)}
                           selected={
                             budgetObject.budgetDateStart
                               ? new Date(budgetObject.budgetDateStart)
                               : null
                           }
-                          placeholder={t(dict.inputNames.dateStart)}
                           onSelect={(date) => {
                             setValue(date);
                             onSelectStartDate(date);
@@ -258,12 +258,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
                           hasError={errors.length > 0}
+                          label={t(dict.inputNames.dateEnd)}
                           selected={
                             budgetObject.budgetDateEnd
                               ? new Date(budgetObject.budgetDateEnd)
                               : null
                           }
-                          placeholder={t(dict.inputNames.dateEnd)}
                           onSelect={(date) => {
                             setValue(date);
                             onSelectEndDate(date);
