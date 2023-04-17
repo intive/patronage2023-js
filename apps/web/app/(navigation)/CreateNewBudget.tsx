@@ -23,8 +23,16 @@ import {
   DatePickerErrorStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
-import { isValid, z } from "zod";
+import { z } from "zod";
 import { useTranslate } from "lib/hooks";
+import {
+  changeValidateBudgetName,
+  sibmitVaildateBudgetName,
+  validateBudgetLimit,
+  validateDescription,
+  validateEndDate,
+  validateStartDate,
+} from "./CreareNewBudget.zod";
 
 type NewBudget = {
   onClose?: Function;
@@ -52,7 +60,7 @@ const icons: IconType[] = [
 ];
 
 //mocked existing user budgets
-const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
+export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
@@ -118,21 +126,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="budget-name"
                     initialValue={budgetObject.budgetName}
-                    onSubmitValidate={z
-                      .string()
-                      .min(3, "Budget name must have at least 3 characters.")
-                      .max(30, "Budget must not have more than 30 characters.")
-                      .refine(
-                        (val) => !loggedUserExistingBudgets.includes(val),
-                        "Name is taken, please choose another."
-                      )}
-                    onChangeValidate={z
-                      .string()
-                      .max(30, "Budget must not have more than 30 characters.")
-                      .refine(
-                        (val) => !loggedUserExistingBudgets.includes(val),
-                        "Name is taken, please choose another."
-                      )}>
+                    onSubmitValidate={sibmitVaildateBudgetName}
+                    onChangeValidate={changeValidateBudgetName}>
                     {({ value, setValue, errors }) => {
                       return (
                         <Input
@@ -159,22 +154,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="budget-limit"
                     initialValue={budgetObject.budgetLimit}
-                    onChangeValidate={z.union([
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify budget limit." }),
-                      z
-                        .number()
-                        .positive({ message: "Must be grater than 0." }),
-                    ])}
-                    onSubmitValidate={z.union([
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify budget limit." }),
-                      z.number().positive({
-                        message: "Must be grater than 0.",
-                      }),
-                    ])}>
+                    onChangeValidate={validateBudgetLimit}
+                    onSubmitValidate={validateBudgetLimit}>
                     {({ value, setValue, errors }) => (
                       <Input
                         value={value}
@@ -207,12 +188,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <Field
                   name="description"
                   initialValue={budgetObject.budgetDescription}
-                  onSubmitValidate={z
-                    .string()
-                    .max(50, "Character limit reached.")}
-                  onChangeValidate={z
-                    .string()
-                    .max(50, "Character limit reached.")}>
+                  onSubmitValidate={validateDescription}
+                  onChangeValidate={validateDescription}>
                   {({ value, setValue, errors }) => {
                     return (
                       <TextAreaWrapperStyled>
@@ -245,18 +222,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         ? new Date(budgetObject.budgetDateStart)
                         : null
                     }
-                    onSubmitValidate={z.union([
-                      z.date(),
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify starting date" }),
-                    ])}
-                    onChangeValidate={z.union([
-                      z.date(),
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify starting date" }),
-                    ])}>
+                    onSubmitValidate={validateStartDate}
+                    onChangeValidate={validateStartDate}>
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
@@ -285,18 +252,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         ? new Date(budgetObject.budgetDateEnd)
                         : null
                     }
-                    onSubmitValidate={z.union([
-                      z.date(),
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify ending date" }),
-                    ])}
-                    onChangeValidate={z.union([
-                      z.date(),
-                      z
-                        .string()
-                        .nonempty({ message: "Please specify ending date" }),
-                    ])}>
+                    onSubmitValidate={validateEndDate}
+                    onChangeValidate={validateEndDate}>
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
