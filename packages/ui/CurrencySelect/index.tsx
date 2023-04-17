@@ -26,7 +26,7 @@ export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
             {currency.map((currency) => (
               <SelectItem value={currency.id}>
                 <SelectItemText>
-                  <StyledTag>{currency.tag}</StyledTag> {currency.label}
+                  <StyledTag>{currency.tag}</StyledTag> <StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
                 </SelectItemText>
               </SelectItem>
             ))}
@@ -36,6 +36,8 @@ export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
     </Select.Root>
   );
 };
+
+
 
 const SelectTrigger = styled(Select.Trigger)`
   background-color: ${({ theme }) => theme.card.background};
@@ -57,6 +59,8 @@ const SelectTrigger = styled(Select.Trigger)`
   }
 `;
 
+
+
 const SelectIcon = styled(Select.Icon)`
   color: #626262;
   margin-top: -2px;
@@ -64,6 +68,7 @@ const SelectIcon = styled(Select.Icon)`
 
 const SelectPortal = styled(Select.Portal)`
   margin-top: 2px;
+  
 `;
 
 const SelectContent = styled(Select.Content)`
@@ -79,6 +84,7 @@ const SelectContent = styled(Select.Content)`
 
 const SelectViewport = styled(Select.Viewport)`
   box-shadow: 0px 2px 4px 0px #20253208;
+
 `;
 
 const SelectItem = styled(Select.Item)`
@@ -97,16 +103,25 @@ const SelectItem = styled(Select.Item)`
       border-radius: 0 0 1em 1em;
     }
   }
+
+
 `;
 
-
+const StyledTag = styled.span`
+  color: #515151; 
+  ${SelectItem}:focus & {
+    color: #397b65;
+  }
+`;
 
 const SelectItemText = styled(Select.ItemText)`
   color: #222222;
 `;
 
-const StyledTag = styled.span`
-  color: #515151; 
+const StyledCurrencyLabel = styled.span`
+  ${SelectTrigger} & {
+    display: none;
+  }
 `;
 
 const currency = [
