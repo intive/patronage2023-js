@@ -29,11 +29,13 @@ const SubMenuStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right: 25px;
 
   padding: 40px 16px 24px 16px;
-
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
+  background-color: ${({ theme }) =>
+    theme.sideNavigationBar.subMenu.background};
 `;
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {

@@ -67,7 +67,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatars/1.svg/" username="Leonard Hofstadter" />
+        <AvatarStyled src="/avatars/1.svg" username="Leonard Hofstadter" />
         <SpanStyled>Leonard Hofstadter</SpanStyled>
       </>
     ),
@@ -77,7 +77,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatars/2.svg/" username="Howard Wolowitz" />
+        <AvatarStyled src="/avatars/2.svg" username="Howard Wolowitz" />
         <SpanStyled>Howard Wolowitz</SpanStyled>
       </>
     ),
@@ -87,7 +87,7 @@ const TeamSubMenuNavListContents = [
   {
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatars/3.svg/" username="Rajesh Koothrappali" />
+        <AvatarStyled src="/avatars/3.svg" username="Rajesh Koothrappali" />
         <SpanStyled>Rajesh Koothrappali</SpanStyled>
       </>
     ),
