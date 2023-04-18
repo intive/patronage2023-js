@@ -293,12 +293,17 @@ const dictionary = {
       },
       max50characters: {
         en: "Character limit of 50 reached.",
-        pl: "Limit znaków osiągnięty (50)",
+        pl: "Limit znaków osiągnięty (50).",
       },
       nameTaken: {
         en: "Name is taken, please choose another.",
         pl: "Nazwa zajęta. Proszę wybierz inną.",
       },
+      moreThanZero: {
+        en: "Must be grater than 0.",
+        pl: "Powinien być większy niż 0.",
+      },
+
       specifyBudgetLimit: {
         en: "Please specify budget limit.",
         pl: "Podaj limit budżetu.",

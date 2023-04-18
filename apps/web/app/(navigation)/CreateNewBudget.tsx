@@ -24,14 +24,7 @@ import {
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
-import {
-  changeValidateBudgetName,
-  sibmitVaildateBudgetName,
-  validateBudgetLimit,
-  validateDescription,
-  validateEndDate,
-  validateStartDate,
-} from "./CreareNewBudget.zod";
+import { useValidateBudgetModal } from "./useValidateBudgetModal";
 
 type NewBudget = {
   onClose?: Function;
@@ -66,11 +59,20 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
 
+  const {
+    checkBudgetNameOnChange,
+    checkBudgetNameOnSubmit,
+    checkBudgetLimit,
+    checkDescription,
+    checkStartDate,
+    checkEndDate,
+  } = useValidateBudgetModal("AddNewBudgetModal");
+
   const [budgetObject, setBudgetObject] = useState<budgetObjectType>({
     budgetName: "",
     budgetLimit: "",
     budgetDescription: "",
-    budgetIcon: "",
+    budgetIcon: selectedIcon,
     budgetDateStart: null,
     budgetDateEnd: null,
   });
@@ -125,8 +127,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="budget-name"
                     initialValue={budgetObject.budgetName}
-                    onSubmitValidate={sibmitVaildateBudgetName}
-                    onChangeValidate={changeValidateBudgetName}>
+                    onSubmitValidate={checkBudgetNameOnSubmit}
+                    onChangeValidate={checkBudgetNameOnChange}>
                     {({ value, setValue, errors }) => {
                       return (
                         <Input
@@ -153,8 +155,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="budget-limit"
                     initialValue={budgetObject.budgetLimit}
-                    onChangeValidate={validateBudgetLimit}
-                    onSubmitValidate={validateBudgetLimit}>
+                    onChangeValidate={checkBudgetLimit}
+                    onSubmitValidate={checkBudgetLimit}>
                     {({ value, setValue, errors }) => (
                       <Input
                         value={value}
@@ -187,8 +189,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <Field
                   name="description"
                   initialValue={budgetObject.budgetDescription}
-                  onSubmitValidate={validateDescription}
-                  onChangeValidate={validateDescription}>
+                  onSubmitValidate={checkDescription}
+                  onChangeValidate={checkDescription}>
                   {({ value, setValue, errors }) => {
                     return (
                       <TextAreaWrapperStyled>
@@ -221,8 +223,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         ? new Date(budgetObject.budgetDateStart)
                         : null
                     }
-                    onSubmitValidate={validateStartDate}
-                    onChangeValidate={validateStartDate}>
+                    onSubmitValidate={checkStartDate}
+                    onChangeValidate={checkStartDate}>
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
@@ -254,8 +256,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         ? new Date(budgetObject.budgetDateEnd)
                         : null
                     }
-                    onSubmitValidate={validateEndDate}
-                    onChangeValidate={validateEndDate}>
+                    onSubmitValidate={checkEndDate}
+                    onChangeValidate={checkEndDate}>
                     {({ setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
