@@ -1,18 +1,14 @@
-import { useTranslate } from "lib/hooks";
 import { z } from "zod";
 import { loggedUserExistingBudgets } from "./CreateNewBudget";
 
-export const sibmitVaildateBudgetName = () => {
-  const { t, dict } = useTranslate("AddNewBudgetModal");
-  return z
-    .string()
-    .min(3, t(dict.errors.min3characters))
-    .max(30, "Budget must not have more than 30 characters.")
-    .refine(
-      (val) => !loggedUserExistingBudgets.includes(val),
-      "Name is taken, please choose another."
-    );
-};
+export const sibmitVaildateBudgetName = z
+  .string()
+  .min(3, "Budget name must have at least 3 characters.")
+  .max(30, "Budget must not have more than 30 characters.")
+  .refine(
+    (val) => !loggedUserExistingBudgets.includes(val),
+    "Name is taken, please choose another."
+  );
 
 export const changeValidateBudgetName = z
   .string()
