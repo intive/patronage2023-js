@@ -58,7 +58,7 @@ const LogoSignet = styled.span<LogoSignetProps>`
 
 export const Logo = ({ white, logoWidth = 144 }: LogoProps) => {
   return (
-    <LogoStyledContainer logoWidth={logoWidth} white={white} href={"/"}>
+    <LogoStyledContainer logoWidth={logoWidth} white={white} href="/">
       <LogoSignet logoWidth={logoWidth} white={white} />
       <span>Inbudget</span>
     </LogoStyledContainer>
