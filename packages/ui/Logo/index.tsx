@@ -20,10 +20,11 @@ type ContainerProps = {
   children?: React.ReactNode;
 } & Pick<LogoProps, "logoWidth" | "white">;
 
-const LogoStyledContainer = styled.div<ContainerProps>`
+const LogoStyledContainer = styled.a<ContainerProps>`
   @import url("https://fonts.googleapis.com/css2?family=Signika:wght@600&display=swap");
   font-family: "Signika", sans-serif;
   font-weight: 600;
+  text-decoration: none;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -56,7 +57,7 @@ const LogoSignet = styled.div<LogoSignetProps>`
 
 export const Logo = ({ white, logoWidth = 144 }: LogoProps) => {
   return (
-    <LogoStyledContainer logoWidth={logoWidth} white={white}>
+    <LogoStyledContainer logoWidth={logoWidth} white={white} href={"/"}>
       <LogoSignet logoWidth={logoWidth} white={white} />
       <span>Inbudget</span>
     </LogoStyledContainer>
