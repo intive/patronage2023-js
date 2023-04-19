@@ -68,7 +68,7 @@ const SelectIcon = styled(Select.Icon)`
 
 const SelectPortal = styled(Select.Portal)`
   margin-top: 2px;
-  
+  z-index: 100;
 `;
 
 const SelectContent = styled(Select.Content)`
@@ -109,6 +109,7 @@ const SelectItem = styled(Select.Item)`
 
 const StyledTag = styled.span`
   color: #515151; 
+  margin-right: 8px;
   ${SelectItem}:focus & {
     color: #397b65;
   }
