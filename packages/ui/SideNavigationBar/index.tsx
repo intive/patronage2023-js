@@ -96,9 +96,7 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={
-                !isNavListItemClicked && activeSideNavBarItemIndex === index
-              }
+              activeFlag={activeSideNavBarItemIndex === index}
               onClick={() => handleLinkClick(index)}
             />
           );
