@@ -15,10 +15,13 @@ type SideNavigationBarItemProps = {
 
 type SideNavigationBarProps = {
   items: SideNavigationBarItemProps[];
+  isNavListItemClicked: boolean;
+  resetIsNavListItemClicked: () => void;
 };
 
 type SubMenuBoolean = {
   isSubMenuShown: boolean;
+  isNavListItemClicked: boolean;
 };
 
 const Wrapper = styled.div`
@@ -34,13 +37,17 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   height: 100%;
   padding: 40px 0 0 0;
   list-style: none;
-  background-color: ${({ isSubMenuShown, theme }) =>
-    isSubMenuShown
+  background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
+    !isNavListItemClicked && isSubMenuShown
       ? theme.sideNavigationBar.background.activeColor
       : theme.sideNavigationBar.background.inactiveColor};
 `;
 
-export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
+export const SideNavigationBar = ({
+  items,
+  isNavListItemClicked,
+  resetIsNavListItemClicked,
+}: SideNavigationBarProps) => {
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
   const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
   const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
@@ -56,6 +63,7 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
     if (activeSideNavBarItemIndex === index) {
       return hideSubMenu();
     }
+    resetIsNavListItemClicked();
     setActiveSideNavBarItemIndex(index);
     setSubMenuData(subMenu);
     setIsSubMenuShown(true);
@@ -68,7 +76,9 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
 
   return (
     <Wrapper>
-      <SideNavigationBarStyled isSubMenuShown={isSubMenuShown}>
+      <SideNavigationBarStyled
+        isSubMenuShown={isSubMenuShown}
+        isNavListItemClicked={isNavListItemClicked}>
         {items.map(({ href, icon, textValue, subMenu, id }, index) => {
           return subMenu ? (
             <SideNavigationBarButton
@@ -76,7 +86,9 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
               onClick={() => showSubMenu(subMenu, index)}
               icon={icon}
               textValue={textValue}
-              activeFlag={activeSideNavBarItemIndex === index}
+              activeFlag={
+                !isNavListItemClicked && activeSideNavBarItemIndex === index
+              }
             />
           ) : (
             <SideNavigationBarLink
@@ -84,13 +96,17 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={activeSideNavBarItemIndex === index}
+              activeFlag={
+                !isNavListItemClicked && activeSideNavBarItemIndex === index
+              }
               onClick={() => handleLinkClick(index)}
             />
           );
         })}
       </SideNavigationBarStyled>
-      {subMenuData && <SubMenu subMenuDataObject={subMenuData} />}
+      {!isNavListItemClicked && subMenuData && (
+        <SubMenu subMenuDataObject={subMenuData} />
+      )}
     </Wrapper>
   );
 };

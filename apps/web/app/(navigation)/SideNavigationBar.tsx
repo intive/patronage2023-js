@@ -14,8 +14,18 @@ export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
 
+  const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
+
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+
+  const resetIsNavListItemClicked = () => {
+    setIsNavItemClicked(false);
+  };
+
+  const hideSubMenu = () => {
+    setIsNavItemClicked(true);
+  };
 
   const closeModal = () => {
     setIsCreateNewBudgetModalVisible(false);
@@ -34,7 +44,12 @@ export default function SideNav() {
     searchInput: {
       placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
     },
-    navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
+    navigationList: (
+      <NavList
+        contents={BudgetsSubMenuNavListContents}
+        onNavListItemClick={hideSubMenu}
+      />
+    ),
     button: {
       clickHandler: () => {
         openModal();
@@ -45,7 +60,12 @@ export default function SideNav() {
 
   const SettingsSubMenuData = {
     title: t(SideNav.settingsItem.title),
-    navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
+    navigationList: (
+      <NavList
+        contents={SettingsSubMenuNavListContents}
+        onNavListItemClick={hideSubMenu}
+      />
+    ),
   };
 
   return (
@@ -73,6 +93,8 @@ export default function SideNav() {
             id: 3,
           },
         ]}
+        isNavListItemClicked={isNavListItemClicked}
+        resetIsNavListItemClicked={resetIsNavListItemClicked}
       />
       <>
         {isCreateNewBudgetModalVisible && (
