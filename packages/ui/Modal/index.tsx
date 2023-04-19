@@ -34,8 +34,8 @@ const CardStyled = styled(Card)`
   align-items: center;
   padding: 24px 16px;
   z-index: 1;
-  height: calc(100% - 32px);
-  max-height: 992px;
+  height: calc(100% - 48px);
+  max-height: 922px;
 
   @media (min-width: 768px) {
     padding: 24px;

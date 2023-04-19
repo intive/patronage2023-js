@@ -7,18 +7,6 @@ type TextareaErrorType = {
   hasError?: boolean;
 };
 
-export const TabsStyled = styled(Tabs.Root)`
-  width: 311px;
-  ${device.tablet} {
-    width: 464px;
-  }
-`;
-
-export const TabsListStyled = styled(Tabs.List)`
-  display: flex;
-  margin-bottom: 24px;
-`;
-
 export const TabsTriggerStyled = styled(Tabs.Trigger)`
   font-size: 14px;
   font-weight: 600;
@@ -43,14 +31,15 @@ export const TabsTriggerStyled = styled(Tabs.Trigger)`
   }
 `;
 
-export const TabsContentStyled = styled(Tabs.Content)``;
-
 export const ParagraphStyled = styled.p`
   font-style: unset;
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 24px;
   padding-left: 3px;
+  :first-of-type {
+    padding-top: 24px;
+  }
 `;
 
 export const IconPickerStyled = styled.div`
@@ -89,7 +78,6 @@ export const InputWrapperFullFlex = styled.div`
 export const SeparatorStyled = styled(Separator)`
   display: block;
   width: calc(100% + calc(48px * 2));
-  margin-top: 48px;
   margin-left: -48px;
 `;
 
@@ -101,7 +89,7 @@ export const SeparatorStyledTop = styled(Separator)`
 
 export const ButtonWrapperStyled = styled.div`
   display: block;
-  padding-top: 24px;
+  margin-top: 24px;
 `;
 
 export const TextAreaWrapperStyled = styled.div`
@@ -132,4 +120,34 @@ export const DatePickerErrorStyled = styled.div`
   font-size: 12px;
   margin: 4px 10px 0 10px;
   bottom: 0px;
+`;
+
+export const TabsStyled = styled(Tabs.Root)`
+  width: 311px;
+  min-height: calc(100% - 48px);
+  & form {
+    height: calc(100% - 38px);
+    display: grid;
+    grid-template-rows: auto 78px [end];
+  }
+  ${device.tablet} {
+    width: 464px;
+    min-height: calc(100% - 64px);
+  }
+`;
+
+export const ContentStyled = styled.div`
+  display: grid;
+  overflow-y: scroll;
+  grid-row-start: 1;
+  grid-row-end: 2;
+`;
+
+export const TabsContentStyled = styled(Tabs.Content)`
+  /* display: grid; */
+`;
+
+export const FooterStyled = styled.div`
+  /* background-color: aquamarine; */
+  /* height: 80px; */
 `;

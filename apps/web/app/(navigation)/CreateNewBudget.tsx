@@ -5,7 +5,6 @@ import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
 import { IconType } from "ui/Icon";
 import {
   TabsContentStyled,
-  TabsListStyled,
   TabsStyled,
   TabsTriggerStyled,
   ParagraphStyled,
@@ -21,10 +20,13 @@ import {
   TextAreaWrapperStyled,
   DatePickerWrapperStyled,
   DatePickerErrorStyled,
+  FooterStyled,
+  ContentStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
+import * as Tabs from "@radix-ui/react-tabs";
 
 type NewBudget = {
   onClose?: Function;
@@ -92,206 +94,216 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
       <SeparatorStyledTop />
-      <Form
-        onSubmit={(values) => {
-          console.log(values);
-          console.log(budgetObject);
-        }}>
-        {({ submit }) => (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}>
-            <TabsStyled defaultValue={defaultValue}>
-              <TabsListStyled>
-                <TabsTriggerStyled value="settings">
-                  {t(dict.tabs.settings)}
-                </TabsTriggerStyled>
-                <TabsTriggerStyled value="share">
-                  {t(dict.tabs.share)}
-                </TabsTriggerStyled>
-              </TabsListStyled>
-              <TabsContentStyled value="settings">
-                <ParagraphStyled>{t(dict.paragraphs.details)}</ParagraphStyled>
-                <IconPickerStyled>
-                  <IconPicker
-                    defaultIcon={selectedIcon}
-                    icons={icons}
-                    onSelect={(icon) => {
-                      setBudgetObject({ ...budgetObject, budgetIcon: icon });
-                      setSelectedIcon(icon);
-                    }}
-                  />
-                </IconPickerStyled>
-                <InputWrapperFullStyled>
-                  <Field
-                    name="budget-name"
-                    initialValue={budgetObject.budgetName}
-                    onSubmitValidate={checkBudgetNameOnSubmit}
-                    onChangeValidate={checkBudgetNameOnChange}>
-                    {({ value, setValue, errors }) => {
-                      return (
+
+      <TabsStyled defaultValue={defaultValue}>
+        <Tabs.List>
+          <TabsTriggerStyled value="settings">
+            {t(dict.tabs.settings)}
+          </TabsTriggerStyled>
+          <TabsTriggerStyled value="share">
+            {t(dict.tabs.share)}
+          </TabsTriggerStyled>
+        </Tabs.List>
+        <Form
+          onSubmit={(values) => {
+            console.log(values);
+            console.log(budgetObject);
+          }}>
+          {({ submit }) => (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}>
+              <ContentStyled>
+                <TabsContentStyled value="settings">
+                  <ParagraphStyled>
+                    {t(dict.paragraphs.details)}
+                  </ParagraphStyled>
+                  <IconPickerStyled>
+                    <IconPicker
+                      defaultIcon={selectedIcon}
+                      icons={icons}
+                      onSelect={(icon) => {
+                        setBudgetObject({ ...budgetObject, budgetIcon: icon });
+                        setSelectedIcon(icon);
+                      }}
+                    />
+                  </IconPickerStyled>
+                  <InputWrapperFullStyled>
+                    <Field
+                      name="budget-name"
+                      initialValue={budgetObject.budgetName}
+                      onSubmitValidate={checkBudgetNameOnSubmit}
+                      onChangeValidate={checkBudgetNameOnChange}>
+                      {({ value, setValue, errors }) => {
+                        return (
+                          <Input
+                            name="budget-name"
+                            value={value}
+                            hasError={errors.length > 0}
+                            supportingLabel={errors.length ? errors : null}
+                            onChange={(e) => {
+                              setBudgetObject({
+                                ...budgetObject,
+                                budgetName: e.currentTarget.value,
+                              });
+                              setValue(e.currentTarget.value);
+                            }}
+                            onInputCleared={() => setValue("")}
+                            label={t(dict.inputNames.budgetName)}>
+                            {budgetObject.budgetName}
+                          </Input>
+                        );
+                      }}
+                    </Field>
+                  </InputWrapperFullStyled>
+                  <InputWrapperHalfStyled>
+                    <Field
+                      name="budget-limit"
+                      initialValue={budgetObject.budgetLimit}
+                      onChangeValidate={checkBudgetLimit}
+                      onSubmitValidate={checkBudgetLimit}>
+                      {({ value, setValue, errors }) => (
                         <Input
-                          name="budget-name"
                           value={value}
                           hasError={errors.length > 0}
-                          supportingLabel={errors.length ? errors : null}
                           onChange={(e) => {
-                            setBudgetObject({
-                              ...budgetObject,
-                              budgetName: e.currentTarget.value,
-                            });
-                            setValue(e.currentTarget.value);
+                            const roundedValue =
+                              Math.round(
+                                parseFloat(e.currentTarget.value) * 100
+                              ) / 100;
+                            if (e.currentTarget.value) {
+                              setBudgetObject({
+                                ...budgetObject,
+                                budgetLimit: roundedValue,
+                              });
+                              setValue(roundedValue);
+                            } else setValue("");
                           }}
+                          supportingLabel={errors.length ? errors : null}
+                          label={t(dict.inputNames.budgetLimit)}
+                          name="budget-limit"
+                          type="number"
                           onInputCleared={() => setValue("")}
-                          label={t(dict.inputNames.budgetName)}>
-                          {budgetObject.budgetName}
-                        </Input>
+                        />
+                      )}
+                    </Field>
+                  </InputWrapperHalfStyled>
+                  <InputWrapperHalfStyled>
+                    <Input
+                      label={t(dict.inputNames.currency)}
+                      name="currency"
+                    />
+                  </InputWrapperHalfStyled>
+                  <Field
+                    name="description"
+                    initialValue={budgetObject.budgetDescription}
+                    onSubmitValidate={checkDescription}
+                    onChangeValidate={checkDescription}>
+                    {({ value, setValue, errors }) => {
+                      return (
+                        <TextAreaWrapperStyled>
+                          <TextareaStyled
+                            placeholder={budgetObject.budgetDescription}
+                            label={t(dict.inputNames.description)}
+                            value={value}
+                            hasError={errors.length > 0}
+                            onChange={(e) => {
+                              setBudgetObject({
+                                ...budgetObject,
+                                budgetDescription: e.currentTarget.value,
+                              });
+                              setValue(e.currentTarget.value);
+                            }}
+                          />
+                          <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
+                        </TextAreaWrapperStyled>
                       );
                     }}
                   </Field>
-                </InputWrapperFullStyled>
-                <InputWrapperHalfStyled>
-                  <Field
-                    name="budget-limit"
-                    initialValue={budgetObject.budgetLimit}
-                    onChangeValidate={checkBudgetLimit}
-                    onSubmitValidate={checkBudgetLimit}>
-                    {({ value, setValue, errors }) => (
-                      <Input
-                        value={value}
-                        hasError={errors.length > 0}
-                        onChange={(e) => {
-                          const roundedValue =
-                            Math.round(
-                              parseFloat(e.currentTarget.value) * 100
-                            ) / 100;
-                          if (e.currentTarget.value) {
-                            setBudgetObject({
-                              ...budgetObject,
-                              budgetLimit: roundedValue,
-                            });
-                            setValue(roundedValue);
-                          } else setValue("");
-                        }}
-                        supportingLabel={errors.length ? errors : null}
-                        label={t(dict.inputNames.budgetLimit)}
-                        name="budget-limit"
-                        type="number"
-                        onInputCleared={() => setValue("")}
-                      />
-                    )}
-                  </Field>
-                </InputWrapperHalfStyled>
-                <InputWrapperHalfStyled>
-                  <Input label={t(dict.inputNames.currency)} name="currency" />
-                </InputWrapperHalfStyled>
-                <Field
-                  name="description"
-                  initialValue={budgetObject.budgetDescription}
-                  onSubmitValidate={checkDescription}
-                  onChangeValidate={checkDescription}>
-                  {({ value, setValue, errors }) => {
-                    return (
-                      <TextAreaWrapperStyled>
-                        <TextareaStyled
-                          placeholder={budgetObject.budgetDescription}
-                          label={t(dict.inputNames.description)}
-                          value={value}
-                          hasError={errors.length > 0}
-                          onChange={(e) => {
-                            setBudgetObject({
-                              ...budgetObject,
-                              budgetDescription: e.currentTarget.value,
-                            });
-                            setValue(e.currentTarget.value);
-                          }}
-                        />
-                        <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
-                      </TextAreaWrapperStyled>
-                    );
-                  }}
-                </Field>
-                <ParagraphStyled>
-                  {t(dict.paragraphs.budgetPeriod)}
-                </ParagraphStyled>
-                <InputWrapperFullFlex>
-                  <Field
-                    name="date-start"
-                    initialValue={
-                      budgetObject.budgetDateStart
-                        ? new Date(budgetObject.budgetDateStart)
-                        : null
-                    }
-                    onSubmitValidate={checkStartDate}
-                    onChangeValidate={checkStartDate}>
-                    {({ setValue, errors }) => (
-                      <DatePickerWrapperStyled>
-                        <CustomDatePicker
-                          hasError={errors.length > 0}
-                          label={t(dict.inputNames.dateStart)}
-                          selected={
-                            budgetObject.budgetDateStart
-                              ? new Date(budgetObject.budgetDateStart)
-                              : null
-                          }
-                          onSelect={(date) => {
-                            setValue(date);
-                            onSelectStartDate(date);
-                          }}
-                        />
-                        <DatePickerErrorStyled>
-                          {errors[0]}
-                        </DatePickerErrorStyled>
-                      </DatePickerWrapperStyled>
-                    )}
-                  </Field>
-                  <div style={{ alignSelf: "flex-start", marginTop: "18px" }}>
-                    {t(dict.paragraphs.wordIt)}
-                  </div>
-                  <Field
-                    name="date-end"
-                    initialValue={
-                      budgetObject.budgetDateEnd
-                        ? new Date(budgetObject.budgetDateEnd)
-                        : null
-                    }
-                    onSubmitValidate={checkEndDate}
-                    onChangeValidate={checkEndDate}>
-                    {({ setValue, errors }) => (
-                      <DatePickerWrapperStyled>
-                        <CustomDatePicker
-                          hasError={errors.length > 0}
-                          label={t(dict.inputNames.dateEnd)}
-                          selected={
-                            budgetObject.budgetDateEnd
-                              ? new Date(budgetObject.budgetDateEnd)
-                              : null
-                          }
-                          onSelect={(date) => {
-                            setValue(date);
-                            onSelectEndDate(date);
-                          }}
-                        />
-                        <DatePickerErrorStyled>
-                          {errors[0]}
-                        </DatePickerErrorStyled>
-                      </DatePickerWrapperStyled>
-                    )}
-                  </Field>
-                </InputWrapperFullFlex>
-              </TabsContentStyled>
-              <TabsContentStyled value="share">
-                Welcome to share
-              </TabsContentStyled>
-              <SeparatorStyled />
-              <ButtonWrapperStyled>
-                <Button onClick={submit}>{t(dict.button)}</Button>
-              </ButtonWrapperStyled>
-            </TabsStyled>
-          </form>
-        )}
-      </Form>
+                  <ParagraphStyled>
+                    {t(dict.paragraphs.budgetPeriod)}
+                  </ParagraphStyled>
+                  <InputWrapperFullFlex>
+                    <Field
+                      name="date-start"
+                      initialValue={
+                        budgetObject.budgetDateStart
+                          ? new Date(budgetObject.budgetDateStart)
+                          : null
+                      }
+                      onSubmitValidate={checkStartDate}
+                      onChangeValidate={checkStartDate}>
+                      {({ setValue, errors }) => (
+                        <DatePickerWrapperStyled>
+                          <CustomDatePicker
+                            hasError={errors.length > 0}
+                            label={t(dict.inputNames.dateStart)}
+                            selected={
+                              budgetObject.budgetDateStart
+                                ? new Date(budgetObject.budgetDateStart)
+                                : null
+                            }
+                            onSelect={(date) => {
+                              setValue(date);
+                              onSelectStartDate(date);
+                            }}
+                          />
+                          <DatePickerErrorStyled>
+                            {errors[0]}
+                          </DatePickerErrorStyled>
+                        </DatePickerWrapperStyled>
+                      )}
+                    </Field>
+                    <div style={{ alignSelf: "flex-start", marginTop: "18px" }}>
+                      {t(dict.paragraphs.wordIt)}
+                    </div>
+                    <Field
+                      name="date-end"
+                      initialValue={
+                        budgetObject.budgetDateEnd
+                          ? new Date(budgetObject.budgetDateEnd)
+                          : null
+                      }
+                      onSubmitValidate={checkEndDate}
+                      onChangeValidate={checkEndDate}>
+                      {({ setValue, errors }) => (
+                        <DatePickerWrapperStyled>
+                          <CustomDatePicker
+                            hasError={errors.length > 0}
+                            label={t(dict.inputNames.dateEnd)}
+                            selected={
+                              budgetObject.budgetDateEnd
+                                ? new Date(budgetObject.budgetDateEnd)
+                                : null
+                            }
+                            onSelect={(date) => {
+                              setValue(date);
+                              onSelectEndDate(date);
+                            }}
+                          />
+                          <DatePickerErrorStyled>
+                            {errors[0]}
+                          </DatePickerErrorStyled>
+                        </DatePickerWrapperStyled>
+                      )}
+                    </Field>
+                  </InputWrapperFullFlex>
+                </TabsContentStyled>
+                <TabsContentStyled value="share">
+                  Welcome to share
+                </TabsContentStyled>
+              </ContentStyled>
+              <FooterStyled>
+                <SeparatorStyled />
+                <ButtonWrapperStyled>
+                  <Button onClick={submit}>{t(dict.button)}</Button>
+                </ButtonWrapperStyled>
+              </FooterStyled>
+            </form>
+          )}
+        </Form>
+      </TabsStyled>
     </Modal>
   );
 };
