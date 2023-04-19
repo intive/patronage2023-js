@@ -21,6 +21,25 @@ type SubMenuBoolean = {
   isSubMenuShown: boolean;
 };
 
+const Wrapper = styled.div`
+  position: relative;
+`;
+
+const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  height: 100%;
+  padding: 40px 0 0 0;
+  list-style: none;
+  background-color: ${({ isSubMenuShown, theme }) =>
+    isSubMenuShown
+      ? theme.sideNavigationBar.background.activeColor
+      : theme.sideNavigationBar.background.inactiveColor};
+`;
+
 export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
   const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
@@ -48,7 +67,7 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
   };
 
   return (
-    <>
+    <Wrapper>
       <SideNavigationBarStyled isSubMenuShown={isSubMenuShown}>
         {items.map(({ href, icon, textValue, subMenu, id }, index) => {
           return subMenu ? (
@@ -72,19 +91,6 @@ export const SideNavigationBar = ({ items }: SideNavigationBarProps) => {
         })}
       </SideNavigationBarStyled>
       {subMenuData && <SubMenu subMenuDataObject={subMenuData} />}
-    </>
+    </Wrapper>
   );
 };
-
-const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 40px 0 0 0;
-  list-style: none;
-  background-color: ${({ isSubMenuShown, theme }) =>
-    isSubMenuShown
-      ? theme.sideNavigationBar.background.activeColor
-      : theme.sideNavigationBar.background.inactiveColor};
-`;

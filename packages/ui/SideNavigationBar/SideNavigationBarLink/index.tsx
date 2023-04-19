@@ -1,27 +1,6 @@
-import styled, { css, ThemeContext } from "styled-components";
+import styled, { css } from "styled-components";
 import { ReactNode } from "react";
 import Link from "next/link";
-import { useContext } from "react";
-
-export const SideNavigationBarLink = ({
-  href,
-  icon,
-  textValue,
-  activeFlag,
-  onClick,
-}: SideNavigationBarLinkProps) => {
-  return (
-    <ListItemStyled>
-      <LinkStyled href={href} onClick={onClick}>
-        <Wrapper activeFlag={activeFlag}>
-          {icon}
-          <SpanStyled fontSize={10}>{textValue}</SpanStyled>
-          {activeFlag && <DivStyled />}
-        </Wrapper>
-      </LinkStyled>
-    </ListItemStyled>
-  );
-};
 
 type SideNavigationBarLinkProps = {
   href: string;
@@ -31,13 +10,13 @@ type SideNavigationBarLinkProps = {
   onClick: () => void;
 } & React.HTMLProps<HTMLAnchorElement>;
 
-type SpanProps = {
-  fontSize: number;
-} & React.HTMLProps<HTMLSpanElement>;
-
 type SideNavigationBarLinkState = {
   activeFlag?: boolean;
 };
+
+type SpanProps = {
+  fontSize: number;
+} & React.HTMLProps<HTMLSpanElement>;
 
 const ListItemStyled = styled.li`
   list-style: none;
@@ -62,9 +41,8 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
 
   position: relative;
   height: auto;
-  width: 60px;
 
-  padding: 17px 34px 17px 34px;
+  padding: 17px 0px 17px 0px;
   color: ${({ activeFlag }) =>
     activeFlag
       ? ({ theme }) => theme.sideNavigationBar.sideNavigationBarItem.main
@@ -79,6 +57,8 @@ const SpanStyled = styled.span<SpanProps>`
     css`
       font-size: ${fontSize}px;
     `};
+
+  padding: 0 20px 0 20px;
 `;
 
 const DivStyled = styled.div`
@@ -91,3 +71,23 @@ const DivStyled = styled.div`
   width: 4px;
   border-radius: 0 8px 8px 0;
 `;
+
+export const SideNavigationBarLink = ({
+  href,
+  icon,
+  textValue,
+  activeFlag,
+  onClick,
+}: SideNavigationBarLinkProps) => {
+  return (
+    <ListItemStyled>
+      <LinkStyled href={href} onClick={onClick}>
+        <Wrapper activeFlag={activeFlag}>
+          {icon}
+          <SpanStyled fontSize={10}>{textValue}</SpanStyled>
+          {activeFlag && <DivStyled />}
+        </Wrapper>
+      </LinkStyled>
+    </ListItemStyled>
+  );
+};

@@ -2,28 +2,17 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
 
-import { SideNavigationBar } from "ui";
-import { Icon } from "ui";
-import { SpanStyled } from "ui/NavList";
-import { NavList } from "ui/NavList";
-import { Avatar } from "ui";
+import { SideNavigationBar, Icon, Avatar } from "ui";
+import { SpanStyled, NavList } from "ui/NavList";
 
 export default {
   title: "SideNavigationBar",
   component: SideNavigationBar,
 } as ComponentMeta<typeof SideNavigationBar>;
 
-const Wrapper = styled.div`
-  display: flex;
-`;
-
 const SideNavigationBarTemplate: ComponentStory<typeof SideNavigationBar> = ({
   ...args
-}) => (
-  <Wrapper>
-    <SideNavigationBar {...args}></SideNavigationBar>
-  </Wrapper>
-);
+}) => <SideNavigationBar {...args}></SideNavigationBar>;
 
 const AvatarStyled = styled(Avatar)`
   width: 28px;

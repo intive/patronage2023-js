@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { ReactNode } from "react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
 
@@ -25,17 +24,44 @@ type SubMenuProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
+  position: absolute;
+  top: 0;
+  left: 80px;
+
+  height: 100%;
+
   width: 288px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 25px;
 
   padding: 40px 16px 24px 16px;
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
   background-color: ${({ theme }) =>
     theme.sideNavigationBar.subMenu.background};
+  box-shadow: 3px 0 10px lightgray;
+`;
+
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+`;
+
+const HeaderStyled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.span`
+  font-family: "Signika";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  color: ${({ theme }) => theme.sideNavigationBar.subMenu.title};
+  line-height: 36px;
 `;
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
@@ -70,24 +96,3 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     </SubMenuStyled>
   );
 };
-
-const HeaderStyled = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Title = styled.span`
-  font-family: "Signika";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  color: ${({ theme }) => theme.sideNavigationBar.subMenu.title};
-  line-height: 36px;
-`;
-
-const MainDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-`;

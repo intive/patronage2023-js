@@ -20,7 +20,6 @@ const NavListStyled = styled.ul`
   list-style: none;
   width: 100%;
   height: auto;
-  padding: 0;
 `;
 
 //wrapper for text coming from ComponentToRender; currently imported in places where NavList is being used
