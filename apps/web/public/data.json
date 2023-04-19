@@ -1,0 +1,214 @@
+{
+  "transactions": [
+    {
+      "id": "95dc1a67-cbe4-4e6b-8568-40a8e2f3d191",
+      "date": "2023-04-21",
+      "amount": -24.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "play",
+          "foreground": "darkbrown",
+          "background": "brown"
+        }
+      },
+      "description": "Netflix",
+      "status": "Recurring",
+      "creator": "John Doe"
+    },
+    {
+      "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
+      "date": "2023-04-21",
+      "amount": -600,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 1,
+        "name": "Home spendings",
+        "icon": {
+          "name": "home",
+          "foreground": "darkgreen",
+          "background": "green"
+        }
+      },
+      "description": "Rent",
+      "status": "Done",
+      "creator": "Mary Doe"
+    },
+    {
+      "id": "4aa5af81-7745-42d8-bbd4-d804e407b8be",
+      "date": "2023-04-21",
+      "amount": 44.0,
+      "currency": {
+        "ISO": "EUR",
+        "locale": "de-DE"
+      },
+      "category": {
+        "id": 2,
+        "name": "Income",
+        "icon": {
+          "name": "money",
+          "foreground": "darkblue",
+          "background": "blue"
+        }
+      },
+      "description": "Lift share",
+      "status": "Done",
+      "creator": "Hans Niemann"
+    },
+    {
+      "id": "d26ed662-8807-40e2-b9c5-197862763151",
+      "date": "2023-04-20",
+      "amount": -9.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "play",
+          "foreground": "darkbrown",
+          "background": "brown"
+        }
+      },
+      "description": "Spotify",
+      "status": "Cancelled",
+      "creator": "John Doe"
+    },
+    {
+      "id": "abe47732-673d-4bb1-a24b-c9a89b2dd5e5",
+      "date": "2023-04-20",
+      "amount": -77.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 4,
+        "name": "Grocery",
+        "icon": {
+          "name": "cart",
+          "foreground": "red",
+          "background": "none"
+        }
+      },
+      "description": "Grocery",
+      "status": "Done",
+      "creator": "Mary Doe"
+    },
+    {
+      "id": "abe47732-673d-4bb1-a24b-c9a89b2dd5e5",
+      "date": "2023-04-19",
+      "amount": -47.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 1,
+        "name": "Home spendings",
+        "icon": {
+          "name": "play",
+          "foreground": "darkgreen",
+          "background": "green"
+        }
+      },
+      "description": "Rug store",
+      "status": "Done",
+      "creator": "Mary Doe"
+    },
+    {
+      "id": "fddf4174-d4f5-4b5e-a862-a0f340b91650",
+      "date": "2023-04-17",
+      "amount": -15,
+      "currency": {
+        "ISO": "EUR",
+        "locale": "de-DE"
+      },
+      "category": {
+        "id": 3,
+        "name": "Car",
+        "icon": {
+          "name": "car",
+          "foreground": "darkblue",
+          "background": "blue"
+        }
+      },
+      "description": "Car wash",
+      "status": "Done",
+      "creator": "John Doe"
+    },
+    {
+      "id": "63a400ce-4f0a-4ceb-917d-1d836a486471",
+      "date": "2023-04-17",
+      "amount": -43.39,
+      "currency": {
+        "ISO": "EUR",
+        "locale": "de-DE"
+      },
+      "category": {
+        "id": 3,
+        "name": "Car",
+        "icon": {
+          "name": "car",
+          "foreground": "darkblue",
+          "background": "blue"
+        }
+      },
+      "description": "Petrol",
+      "status": "Done",
+      "creator": "John Doe"
+    },
+    {
+      "id": "4e55e497-3205-476d-8a26-cd1ad8db8b31",
+      "date": "2023-04-16",
+      "amount": -25.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "en-US"
+      },
+      "category": {
+        "id": 4,
+        "name": "Grocery",
+        "icon": {
+          "name": "cart",
+          "foreground": "red",
+          "background": "none"
+        }
+      },
+      "description": "Grocery",
+      "status": "Done",
+      "creator": "Mary Doe"
+    },
+    {
+      "id": "b7c75f42-9b0c-4939-a6e7-2b372f2b687c",
+      "date": "2023-04-16",
+      "amount": -25.99,
+      "currency": {
+        "ISO": "USD",
+        "locale": "de-DE"
+      },
+      "category": {
+        "id": 4,
+        "name": "Grocery",
+        "icon": {
+          "name": "cart",
+          "foreground": "red",
+          "background": "none"
+        }
+      },
+      "description": "Grocery",
+      "status": "Done",
+      "creator": "John Doe"
+    }
+  ]
+}
