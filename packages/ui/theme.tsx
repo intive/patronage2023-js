@@ -190,6 +190,11 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+  infoTile: {
+    border: colors.Neutral2,
+    label: colors.Neutral6,
+    value: colors.Neutral8,
+  }
 };
 
 export type ThemeType = typeof theme;
