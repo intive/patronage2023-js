@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import styled, { css } from "styled-components";
 
 const logoVersions = {
@@ -20,7 +21,7 @@ type ContainerProps = {
   children?: React.ReactNode;
 } & Pick<LogoProps, "logoWidth" | "white">;
 
-const LogoStyledContainer = styled.a<ContainerProps>`
+const LogoStyledContainer = styled(Link)<ContainerProps>`
   @import url("https://fonts.googleapis.com/css2?family=Signika:wght@600&display=swap");
   font-family: "Signika", sans-serif;
   font-weight: 600;
