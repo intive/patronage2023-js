@@ -14,7 +14,7 @@ const ModalStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
+  height: 100%;
   z-index: 100;
   overflow: auto;
   width: 100%;
@@ -33,8 +33,9 @@ const CardStyled = styled(Card)`
   justify-content: flex-start;
   align-items: center;
   padding: 24px 16px;
-  margin: 4px;
   z-index: 1;
+  height: calc(100% - 32px);
+  max-height: 992px;
 
   @media (min-width: 768px) {
     padding: 24px;
