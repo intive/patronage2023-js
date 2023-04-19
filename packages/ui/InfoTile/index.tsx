@@ -40,10 +40,10 @@ export const InfoTile = ({ label, value }: InfoTileProps) => {
   if (typeof value === "object") {
     return (
       <InfoTileStyled>
-        <div>{label}</div>
-        <InfoValueWrapper>
-          <InfoValueStyled>{Object.values(value)[0]}</InfoValueStyled>
-          <AddInfoValueStyled>{Object.values(value)[1]}</AddInfoValueStyled>
+        {label}
+        <InfoValueWrapper> 
+          <InfoValueStyled>{value["symbol"]}</InfoValueStyled>
+          <AddInfoValueStyled>{value["description"]}</AddInfoValueStyled>
         </InfoValueWrapper>
       </InfoTileStyled>
     );
