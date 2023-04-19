@@ -8,6 +8,7 @@ export const Button = ({
   disabled = false,
   children,
   onClick,
+  className,
   small = false,
 }: ButtonProps) => {
   return (
@@ -16,7 +17,8 @@ export const Button = ({
       onClick={onClick}
       fullWidth={fullWidth}
       disabled={disabled}
-      small={small}>
+      small={small}
+      className={className}>
       {children}
     </ButtonStyled>
   );
@@ -30,7 +32,7 @@ type ButtonProps = {
   small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
-const ButtonStyled = styled.button<ButtonProps>`
+export const ButtonStyled = styled.button<ButtonProps>`
   box-sizing: border-box;
   display: inline-flex;
   justify-content: center;
@@ -40,7 +42,6 @@ const ButtonStyled = styled.button<ButtonProps>`
   border-radius: 8px;
   color: white;
   background-color: ${({ theme }) => theme.button.primary.main};
-  font-family: "Inter", sans-serif;
   font-weight: 600;
   padding: 16px 24px;
   font-size: 1em;
@@ -75,7 +76,7 @@ const ButtonStyled = styled.button<ButtonProps>`
         color: ${({ theme }) => theme.button.secondary.hover};
       }
       &:disabled {
-        color: lightgray;
+        color: ${({ theme }) => theme.button.secondary.disabled};
         background-color: ${({ theme }) => theme.button.secondary.background};
         border: 2px solid ${({ theme }) => theme.button.secondary.disabled};
       }

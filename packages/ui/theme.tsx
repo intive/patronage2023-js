@@ -44,18 +44,18 @@ export const theme = {
     primary: {
       main: colors.Teal10,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     secondary: {
       main: colors.Teal10,
       background: colors.BasicTransparent,
       hover: colors.Teal7,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
     simple: {
       main: colors.Teal6,
       background: colors.BasicTransparent,
-      disabled: colors.Teal4,
+      disabled: colors.Neutral3,
     },
   },
   buttonGroup: {
@@ -112,10 +112,36 @@ export const theme = {
     withText: colors.Neutral5,
     withoutText: colors.Neutral2,
   },
-  sideNavigationBarItem: {
+  sideNavigationBar: {
+    background: {
+      activeColor: colors.BasicWhite,
+      inactiveColor: "#e5e5e5",
+    },
+    sideNavigationBarItem: {
+      main: colors.Teal10,
+      inactive: colors.Neutral6,
+      background: colors.Teal7,
+    },
+    subMenu: {
+      separator: colors.Neutral2,
+      title: colors.Teal10,
+    },
+  },
+  nav: {
     main: colors.Teal10,
-    inactive: colors.Neutral6,
-    background: colors.Teal7,
+    avatarSelector: {
+      active: colors.Teal6,
+    },
+  },
+  navList: {
+    navItem: {
+      activeColor: colors.Teal10,
+      inactiveColor: colors.Neutral8,
+      activeBackground: colors.Teal1,
+      inactiveBackground: "transparent",
+      hoverAndFocusBackground: colors.Teal1,
+      focusOutline: colors.Teal10,
+    },
   },
   avatarSelector: {
     active: colors.Teal6,
@@ -123,6 +149,47 @@ export const theme = {
   checkbox: {
     main: colors.Teal6,
     inactive: colors.Neutral4,
+  },
+  primary: colors.Teal10,
+  secondary: colors.Neutral8,
+  datePicker: {
+    basicWhite: colors.BasicWhite,
+    neutral2: colors.Neutral2,
+    neutral5: colors.Neutral5,
+    neutral8: colors.Neutral8,
+    neutral10: colors.Neutral10,
+    teal1: colors.Teal1,
+    teal2: colors.Teal2,
+    teal3: colors.Teal3,
+    teal4: colors.Teal4,
+    teal6: colors.Teal6,
+    teal8: colors.Teal8,
+    teal10: colors.Teal10,
+  },
+  textarea: {
+    font: colors.Neutral8,
+    disabled: colors.Neutral2,
+    focus: colors.Teal5,
+  },
+  iconPicker: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+    edit: colors.BasicWhite,
+    hover: colors.Teal1,
+    outline: colors.Teal5,
+  },
+  modal: {
+    background: colors.Neutral8,
+    header: colors.Teal10,
+    closeButton: colors.Neutral6,
+  },
+  signUp: {
+    main: colors.Teal10,
+    text: colors.Neutral8,
+    error: colors.Supporting4,
+    icon: colors.BasicWhite,
+    link: colors.BasicWhite,
+    accent: colors.Neutral2,
   },
 };
 

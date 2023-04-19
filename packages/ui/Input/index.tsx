@@ -173,7 +173,6 @@ const StyledLabel = styled.label<StyledErrorProps>`
   text-overflow: ellipsis;
   max-width: calc(100% - 32px);
   transition: all 200ms linear;
-  transition-delay: 0.25s;
   cursor: text;
 `;
 
