@@ -26,7 +26,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -51,7 +51,7 @@
           "creator": {
             "id": "45e65eba-5b30-4fdc-a535-8a4ddc16d082",
             "name": "Hans Niemann",
-            "avatar": "5"
+            "avatar": "5.svg"
           }
         },
         {
@@ -76,7 +76,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -101,7 +101,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -126,7 +126,7 @@
           "creator": {
             "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
             "name": "John Doe",
-            "avatar": "3"
+            "avatar": "3.svg"
           }
         },
         {
@@ -148,7 +148,11 @@
           },
           "description": "Petrol",
           "status": "Done",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "4e55e497-3205-476d-8a26-cd1ad8db8b31",
@@ -172,7 +176,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -194,7 +198,11 @@
           },
           "description": "Grocery",
           "status": "Done",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         }
       ]
     },
@@ -221,7 +229,11 @@
           },
           "description": "Netflix",
           "status": "Recurring",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "d26ed662-8807-40e2-b9c5-197862763151",
@@ -242,7 +254,11 @@
           },
           "description": "Spotify",
           "status": "Cancelled",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "b71e756e-c597-46d2-80da-f8bca4cfae26",
@@ -263,7 +279,11 @@
           },
           "description": "Amazon Prime",
           "status": "Recurring",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "1899a45e-52cf-4549-be0d-2218fb1f81e8",
@@ -284,7 +304,11 @@
           },
           "description": "Amazon Prime",
           "status": "Recurring",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "62553bbc-9782-430b-8642-8c6c3dc764cc",
@@ -305,7 +329,11 @@
           },
           "description": "ICloud Storage",
           "status": "Recurring",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         }
       ]
     },
@@ -335,7 +363,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -357,7 +385,11 @@
           },
           "description": "Petrol",
           "status": "Done",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "084875dd-a2f0-4f11-be0d-526f6cbe4980",
@@ -378,7 +410,11 @@
           },
           "description": "Petrol",
           "status": "Done",
-          "creator": "John Doe"
+          "creator": {
+            "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+            "name": "John Doe",
+            "avatar": "3.svg"
+          }
         },
         {
           "id": "6d0a2644-2b03-4772-9db3-6eda9e5584c5",
@@ -402,7 +438,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         },
         {
@@ -427,7 +463,7 @@
           "creator": {
             "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
             "name": "Mary Doe",
-            "avatar": "8"
+            "avatar": "8.svg"
           }
         }
       ]
@@ -458,7 +494,7 @@
           "creator": {
             "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
             "name": "Jan Kowalski",
-            "avatar": "2"
+            "avatar": "2.svg"
           }
         },
         {
@@ -483,7 +519,7 @@
           "creator": {
             "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
             "name": "Jan Kowalski",
-            "avatar": "2"
+            "avatar": "2.svg"
           }
         },
         {
@@ -508,7 +544,7 @@
           "creator": {
             "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
             "name": "Jan Kowalski",
-            "avatar": "2"
+            "avatar": "2.svg"
           }
         }
       ]
