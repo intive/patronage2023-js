@@ -9,7 +9,7 @@
           "date": "2023-04-21",
           "amount": -1337.69,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -34,7 +34,7 @@
           "date": "2023-04-21",
           "amount": 44.0,
           "currency": {
-            "ISO": "EUR",
+            "tag": "EUR",
             "locale": "de-DE"
           },
           "category": {
@@ -59,7 +59,7 @@
           "date": "2023-04-20",
           "amount": -77.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -84,7 +84,7 @@
           "date": "2023-04-19",
           "amount": -4000.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -109,7 +109,7 @@
           "date": "2023-04-17",
           "amount": -15,
           "currency": {
-            "ISO": "EUR",
+            "tag": "EUR",
             "locale": "de-DE"
           },
           "category": {
@@ -134,7 +134,7 @@
           "date": "2023-04-17",
           "amount": -43.39,
           "currency": {
-            "ISO": "EUR",
+            "tag": "EUR",
             "locale": "de-DE"
           },
           "category": {
@@ -159,7 +159,7 @@
           "date": "2023-04-16",
           "amount": -25.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -184,7 +184,7 @@
           "date": "2023-04-16",
           "amount": -25.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "de-DE"
           },
           "category": {
@@ -215,7 +215,7 @@
           "date": "2023-04-21",
           "amount": -24.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -240,7 +240,7 @@
           "date": "2023-04-20",
           "amount": -9.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -265,7 +265,7 @@
           "date": "2023-04-14",
           "amount": -9.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -290,7 +290,7 @@
           "date": "2023-04-10",
           "amount": -9.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -315,7 +315,7 @@
           "date": "2023-04-08",
           "amount": -0.99,
           "currency": {
-            "ISO": "USD",
+            "tag": "USD",
             "locale": "en-US"
           },
           "category": {
@@ -346,7 +346,7 @@
           "date": "2023-03-14",
           "amount": -25.99,
           "currency": {
-            "ISO": "GBP",
+            "tag": "GBP",
             "locale": "en-GB"
           },
           "category": {
@@ -371,7 +371,7 @@
           "date": "2023-03-11",
           "amount": -50.27,
           "currency": {
-            "ISO": "GBP",
+            "tag": "GBP",
             "locale": "en-GB"
           },
           "category": {
@@ -396,7 +396,7 @@
           "date": "2023-03-08",
           "amount": -43.39,
           "currency": {
-            "ISO": "GBP",
+            "tag": "GBP",
             "locale": "en-GB"
           },
           "category": {
@@ -421,7 +421,7 @@
           "date": "2023-03-04",
           "amount": -100.99,
           "currency": {
-            "ISO": "GBP",
+            "tag": "GBP",
             "locale": "en-GB"
           },
           "category": {
@@ -446,7 +446,7 @@
           "date": "2023-04-21",
           "amount": -8996.3,
           "currency": {
-            "ISO": "GBP",
+            "tag": "GBP",
             "locale": "en-GB"
           },
           "category": {
@@ -477,7 +477,7 @@
           "date": "2023-02-14",
           "amount": -12000,
           "currency": {
-            "ISO": "PLN",
+            "tag": "PLN",
             "locale": "pl-PL"
           },
           "category": {
@@ -502,7 +502,7 @@
           "date": "2023-01-10",
           "amount": -60000,
           "currency": {
-            "ISO": "PLN",
+            "tag": "PLN",
             "locale": "pl-PL"
           },
           "category": {
@@ -527,7 +527,7 @@
           "date": "2023-01-09",
           "amount": 1200000,
           "currency": {
-            "ISO": "PLN",
+            "tag": "PLN",
             "locale": "pl-PL"
           },
           "category": {
