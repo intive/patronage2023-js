@@ -1,21 +1,34 @@
-export interface Transaction {
+export interface Budget {
   id: string;
-  date: string;
-  amount: number;
+  name: string;
+  description: string;
+  icon: string;
+  startDate: number;
+  endDate: number;
+  limit: number;
   currency: {
-    ISO: string;
+    tag: string;
     locale: string;
   };
-  category: {
-    id: number;
-    name: string;
-    icon: {
+  transactions: {
+    id: string;
+    date: number;
+    amount: number;
+    category: {
+      id: number;
       name: string;
-      foreground: string;
-      background: string;
+      icon: {
+        name: string;
+        foreground: string;
+        background: string;
+      };
     };
-  };
-  description: string;
-  status: string;
-  creator: string;
+    description: string;
+    status: string;
+    creator: {
+      id: string;
+      name: string;
+      avatar: string;
+    };
+  }[];
 }
