@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslate } from "lib/hooks";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
 
@@ -11,6 +11,9 @@ import {
   SettingsSubMenuNavListContents,
 } from "./SideNavigationBarNavListData";
 
+import { closeModal, openModal } from "actions/app";
+import AppContext from "context/app";
+
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
@@ -18,13 +21,15 @@ export default function SideNav() {
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
 
-  const closeModal = () => {
-    setIsCreateNewBudgetModalVisible(false);
-  };
+  const { isModalOpen } = useContext(AppContext);
 
-  const openModal = () => {
-    setIsCreateNewBudgetModalVisible(true);
-  };
+  // const closeModal = () => {
+  //   setIsCreateNewBudgetModalVisible(false);
+  // };
+
+  // const openModal = () => {
+  //   setIsCreateNewBudgetModalVisible(true);
+  // };
 
   const BudgetsSubMenuData = {
     title: "Budgets",
@@ -38,9 +43,7 @@ export default function SideNav() {
     },
     navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
     button: {
-      method: () => {
-        openModal();
-      },
+      method: openModal,
       label: "Add new budget",
     },
   };
@@ -100,11 +103,7 @@ export default function SideNav() {
           },
         ]}
       />
-      <>
-        {isCreateNewBudgetModalVisible && (
-          <CreateNewBudget onClose={closeModal} />
-        )}
-      </>
+      <>{isModalOpen && <CreateNewBudget onClose={closeModal} />}</>
     </>
   );
 }

@@ -6,6 +6,8 @@ import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
+import AppContext from "context/app";
+import { useActions } from "actions/app";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -17,6 +19,12 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children }: LayoutProps) {
+  // initialState
+  const appState = useActions({
+    isModalOpen: false,
+    budget: 0,
+  });
+
   return (
     <html lang="en">
       <head>
@@ -32,9 +40,11 @@ export default function RootLayout({ children }: LayoutProps) {
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <LanguageProvider>
-            <StyledComponentsThemeWrapper>
-              {children}
-            </StyledComponentsThemeWrapper>
+            <AppContext.Provider value={appState}>
+              <StyledComponentsThemeWrapper>
+                {children}
+              </StyledComponentsThemeWrapper>
+            </AppContext.Provider>
           </LanguageProvider>
         </StyledComponentsRegistry>
       </body>
