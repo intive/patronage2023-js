@@ -73,6 +73,7 @@ export const InputWrapperFullFlex = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  margin-bottom: 24px;
 `;
 
 export const SeparatorStyled = styled(Separator)`

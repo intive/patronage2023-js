@@ -303,7 +303,6 @@ const dictionary = {
         en: "Must be grater than 0.",
         pl: "Powinien być większy niż 0.",
       },
-
       specifyBudgetLimit: {
         en: "Please specify budget limit.",
         pl: "Podaj limit budżetu.",
@@ -315,6 +314,10 @@ const dictionary = {
       endingDate: {
         en: "Please specify ending date",
         pl: "Podaj datę końca.",
+      },
+      dateBeforeStart: {
+        en: "Must be after start date.",
+        pl: "Podaj datę późniejszą.",
       },
     },
   },

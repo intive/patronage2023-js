@@ -105,8 +105,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           </TabsTriggerStyled>
         </Tabs.List>
         <Form
-          onSubmit={(values) => {
-            console.log(values);
+          onSubmit={() => {
             console.log(budgetObject);
           }}>
           {({ submit }) => (
@@ -260,13 +259,28 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     </div>
                     <Field
                       name="date-end"
+                      listenTo={["date-start"]}
                       initialValue={
                         budgetObject.budgetDateEnd
                           ? new Date(budgetObject.budgetDateEnd)
                           : null
                       }
                       onSubmitValidate={checkEndDate}
-                      onChangeValidate={checkEndDate}>
+                      onChangeValidate={(val, form) => {
+                        const start = val! && val.getTime();
+                        const end =
+                          form.getFieldValue("date-start")!.value &&
+                          form.getFieldValue("date-start")!.value.getTime();
+
+                        if (start && end) {
+                          if (start < end)
+                            return Promise.reject(
+                              t(dict.errors.dateBeforeStart)
+                            );
+                          else return Promise.resolve(true);
+                        }
+                        return Promise.resolve(true);
+                      }}>
                       {({ setValue, errors }) => (
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
