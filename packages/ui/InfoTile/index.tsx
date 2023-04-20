@@ -12,38 +12,31 @@ const InfoTileStyled = styled.div`
 `;
 
 const InfoValueWrapper = styled.div`
+  font-family: "Signika", sans-serif;
   display: flex;
   gap: 5px;
-`;
-
-const InfoValueStyled = styled.span`
   color: ${({ theme }) => theme.infoTile.value};
-  font-family: "Signika", sans-serif;
-  font-weight: 600;
   font-size: 16px;
+  font-weight: 600;
 `;
 
 const AddInfoValueStyled = styled.span`
-  color: ${({ theme }) => theme.infoTile.value};
-  font-family: "Signika", sans-serif;
   font-weight: 400;
-  font-size: 16px;
 `;
 
 type InfoTileProps = {
   label: string;
-  value: string | { [ key: string ]: string };
+  value: string | { symbol: string; description: string };
 };
 
 export const InfoTile = ({ label, value }: InfoTileProps) => {
-
   if (typeof value === "object") {
     return (
       <InfoTileStyled>
         {label}
-        <InfoValueWrapper> 
-          <InfoValueStyled>{value["symbol"]}</InfoValueStyled>
-          <AddInfoValueStyled>{value["description"]}</AddInfoValueStyled>
+        <InfoValueWrapper>
+          {value.symbol}
+          <AddInfoValueStyled>{value.description}</AddInfoValueStyled>
         </InfoValueWrapper>
       </InfoTileStyled>
     );
@@ -52,7 +45,7 @@ export const InfoTile = ({ label, value }: InfoTileProps) => {
   return (
     <InfoTileStyled>
       {label}
-      <InfoValueStyled>{value}</InfoValueStyled>
+      <InfoValueWrapper>{value}</InfoValueWrapper>
     </InfoTileStyled>
   );
 };
