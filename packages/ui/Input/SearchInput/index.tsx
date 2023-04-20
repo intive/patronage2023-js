@@ -17,7 +17,6 @@ const StyledInput = styled(StyledInputBase)`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-
   padding: 8px 0px 8px 48px;
 
   &::placeholder {
@@ -29,7 +28,6 @@ const StyledIconSearch = styled.span`
   position: absolute;
   left: 18px;
   bottom: 3px;
-
   color: ${({ theme }) => theme.input.neutral};
 `;
 
@@ -37,7 +35,6 @@ const StyledIconCancel = styled(StyledIcon)`
   position: absolute;
   top: 9px;
   right: 10px;
-
   color: ${({ theme }) => theme.input.main};
 `;
 

@@ -38,10 +38,8 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   justify-content: center;
   align-items: center;
   gap: 10px;
-
   position: relative;
   height: auto;
-
   padding: 17px 0px 17px 0px;
   color: ${({ activeFlag }) =>
     activeFlag

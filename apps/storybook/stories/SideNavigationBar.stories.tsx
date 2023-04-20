@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
 
@@ -12,7 +12,19 @@ export default {
 
 const SideNavigationBarTemplate: ComponentStory<typeof SideNavigationBar> = ({
   ...args
-}) => <SideNavigationBar {...args}></SideNavigationBar>;
+}) => {
+  const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
+  const resetIsNavListItemClicked = () => {
+    setIsNavItemClicked(false);
+  };
+
+  return (
+    <SideNavigationBar
+      {...args}
+      isNavListItemClicked={isNavListItemClicked}
+      resetIsNavListItemClicked={resetIsNavListItemClicked}></SideNavigationBar>
+  );
+};
 
 const AvatarStyled = styled(Avatar)`
   width: 28px;
@@ -27,7 +39,7 @@ const BudgetsSubMenuNavListContents = [
         <SpanStyled>Bills</SpanStyled>
       </>
     ),
-    href: "/reports",
+    href: "/budgets/payments",
     id: 1,
   },
   {
@@ -52,39 +64,6 @@ const BudgetsSubMenuNavListContents = [
   },
 ];
 
-const TeamSubMenuNavListContents = [
-  {
-    ComponentToRender: (
-      <>
-        <AvatarStyled src="/avatars/1.svg" username="Leonard Hofstadter" />
-        <SpanStyled>Leonard Hofstadter</SpanStyled>
-      </>
-    ),
-    href: "/team/1",
-    id: 1,
-  },
-  {
-    ComponentToRender: (
-      <>
-        <AvatarStyled src="/avatars/2.svg" username="Howard Wolowitz" />
-        <SpanStyled>Howard Wolowitz</SpanStyled>
-      </>
-    ),
-    href: "/team/2",
-    id: 2,
-  },
-  {
-    ComponentToRender: (
-      <>
-        <AvatarStyled src="/avatars/3.svg" username="Rajesh Koothrappali" />
-        <SpanStyled>Rajesh Koothrappali</SpanStyled>
-      </>
-    ),
-    href: "/team/3",
-    id: 3,
-  },
-];
-
 const BudgetsSubMenuData = {
   title: "Budgets",
   sort: {
@@ -95,27 +74,15 @@ const BudgetsSubMenuData = {
     placeholder: "Search budgets",
     icon: <Icon icon="search" />,
   },
-  navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
+  navigationList: (
+    <NavList
+      contents={BudgetsSubMenuNavListContents}
+      onNavListItemClick={() => console.log("Submenu should hide now!")}
+    />
+  ),
   button: {
     method: () => {},
     label: "Add new budget",
-  },
-};
-
-const TeamSubMenuData = {
-  title: "Team",
-  sort: {
-    method: () => {},
-    icon: <Icon icon="filter_list" />,
-  },
-  searchInput: {
-    icon: <Icon icon="search" />,
-    placeholder: "Search team",
-  },
-  navigationList: <NavList contents={TeamSubMenuNavListContents} />,
-  button: {
-    method: () => {},
-    label: "Add new member",
   },
 };
 
@@ -151,7 +118,12 @@ const SettingsSubMenuNavListContents = [
 
 const SettingsSubMenuData = {
   title: "Settings",
-  navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
+  navigationList: (
+    <NavList
+      contents={SettingsSubMenuNavListContents}
+      onNavListItemClick={() => console.log("Submenu should hide now!")}
+    />
+  ),
 };
 
 export const SideNavBar = SideNavigationBarTemplate.bind({});
@@ -171,18 +143,11 @@ SideNavBar.args = {
       id: 2,
     },
     {
-      href: "/team",
-      icon: <Icon icon="account_circle" iconSize={30} />,
-      textValue: "Team",
-      subMenu: TeamSubMenuData,
-      id: 3,
-    },
-    {
       href: "/settings",
       icon: <Icon icon="settings" iconSize={30} />,
       textValue: "Settings",
       subMenu: SettingsSubMenuData,
-      id: 4,
+      id: 3,
     },
   ],
   pathname: "/reports",

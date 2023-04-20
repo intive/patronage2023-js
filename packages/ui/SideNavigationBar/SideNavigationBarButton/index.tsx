@@ -18,7 +18,6 @@ type SpanProps = {
 
 const ListItemStyled = styled.li`
   list-style: none;
-  /* padding: 0; */
 `;
 
 const ButtonStyled = styled.button`
@@ -33,10 +32,8 @@ const Wrapper = styled.div<WrapperProps>`
   justify-content: center;
   align-items: center;
   gap: 10px;
-
   position: relative;
   height: auto;
-
   padding: 17px 0px 17px 0px;
   color: ${({ activeFlag, theme }) =>
     activeFlag

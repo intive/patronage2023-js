@@ -27,9 +27,7 @@ const SubMenuStyled = styled.div`
   position: absolute;
   top: 0;
   left: 80px;
-
   height: 100%;
-
   width: 288px;
   display: flex;
   flex-direction: column;
