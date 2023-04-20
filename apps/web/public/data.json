@@ -3,15 +3,20 @@
     {
       "id": "71ee9a04-6b27-423a-9caa-7d6a92335dae",
       "name": "Main budget",
+      "description": "Main budget of me and my wife",
+      "icon": "home",
+      "currency": {
+        "locale": "en-US",
+        "tag": "USD"
+      },
+      "startDate": 1680307200000,
+      "endDate": 1682899200000,
+      "limit": 10000,
       "transactions": [
         {
           "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
-          "date": "2023-04-21",
+          "date": 1682035200000,
           "amount": -1337.69,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 1,
             "name": "Home spendings",
@@ -31,12 +36,8 @@
         },
         {
           "id": "4aa5af81-7745-42d8-bbd4-d804e407b8be",
-          "date": "2023-04-21",
+          "date": 1682035200000,
           "amount": 44.0,
-          "currency": {
-            "tag": "EUR",
-            "locale": "de-DE"
-          },
           "category": {
             "id": 5,
             "name": "Income",
@@ -56,12 +57,8 @@
         },
         {
           "id": "abe47732-673d-4bb1-a24b-c9a89b2dd5e5",
-          "date": "2023-04-20",
+          "date": 1681948800000,
           "amount": -77.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 4,
             "name": "Grocery",
@@ -81,12 +78,8 @@
         },
         {
           "id": "b8485583-4cc3-476a-a1ee-f25828cfc74c",
-          "date": "2023-04-19",
+          "date": 1681862400000,
           "amount": -4000.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 1,
             "name": "Home spendings",
@@ -106,12 +99,8 @@
         },
         {
           "id": "fddf4174-d4f5-4b5e-a862-a0f340b91650",
-          "date": "2023-04-17",
+          "date": 1681689600000,
           "amount": -15,
-          "currency": {
-            "tag": "EUR",
-            "locale": "de-DE"
-          },
           "category": {
             "id": 3,
             "name": "Car",
@@ -131,12 +120,8 @@
         },
         {
           "id": "63a400ce-4f0a-4ceb-917d-1d836a486471",
-          "date": "2023-04-17",
+          "date": 1681689600000,
           "amount": -43.39,
-          "currency": {
-            "tag": "EUR",
-            "locale": "de-DE"
-          },
           "category": {
             "id": 3,
             "name": "Car",
@@ -156,12 +141,8 @@
         },
         {
           "id": "4e55e497-3205-476d-8a26-cd1ad8db8b31",
-          "date": "2023-04-16",
+          "date": 1681603200000,
           "amount": -25.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 4,
             "name": "Grocery",
@@ -181,12 +162,8 @@
         },
         {
           "id": "b7c75f42-9b0c-4939-a6e7-2b372f2b687c",
-          "date": "2023-04-16",
+          "date": 1681603200000,
           "amount": -25.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "de-DE"
-          },
           "category": {
             "id": 4,
             "name": "Grocery",
@@ -209,15 +186,20 @@
     {
       "id": "3694a39d-7ecd-4e08-b56a-5dc857c09237",
       "name": "Subscriptions",
+      "description": "All of our subscriptions",
+      "icon": "subscriptions",
+      "currency": {
+        "locale": "en-US",
+        "tag": "USD"
+      },
+      "startDate": 1672531200000,
+      "endDate": 1704067200000,
+      "limit": 1000,
       "transactions": [
         {
           "id": "95dc1a67-cbe4-4e6b-8568-40a8e2f3d191",
-          "date": "2023-04-21",
+          "date": 1682035200000,
           "amount": -24.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 2,
             "name": "Subscriptions",
@@ -237,12 +219,8 @@
         },
         {
           "id": "d26ed662-8807-40e2-b9c5-197862763151",
-          "date": "2023-04-20",
+          "date": 1681948800000,
           "amount": -9.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 2,
             "name": "Subscriptions",
@@ -262,12 +240,8 @@
         },
         {
           "id": "b71e756e-c597-46d2-80da-f8bca4cfae26",
-          "date": "2023-04-14",
+          "date": 1681430400000,
           "amount": -9.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 2,
             "name": "Subscriptions",
@@ -287,12 +261,8 @@
         },
         {
           "id": "1899a45e-52cf-4549-be0d-2218fb1f81e8",
-          "date": "2023-04-10",
+          "date": 1681084800000,
           "amount": -9.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 2,
             "name": "Subscriptions",
@@ -312,12 +282,8 @@
         },
         {
           "id": "62553bbc-9782-430b-8642-8c6c3dc764cc",
-          "date": "2023-04-08",
+          "date": 1680912000000,
           "amount": -0.99,
-          "currency": {
-            "tag": "USD",
-            "locale": "en-US"
-          },
           "category": {
             "id": 2,
             "name": "Subscriptions",
@@ -340,6 +306,16 @@
     {
       "id": "36cc0777-2874-4d0c-a389-91280e45e836",
       "name": "Trip to London",
+      "description": "Two week vacations in London",
+      "icon": "directions_car",
+      "currency": {
+        "locale": "en-GB",
+        "tag": "GBP"
+      },
+      "startDate": 1677628800000,
+      "endDate": 1678838400000,
+      "limit": 20000,
+
       "transactions": [
         {
           "id": "4ace5f31-f56a-4430-8267-f19278d8ebf3",
@@ -443,7 +419,7 @@
         },
         {
           "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
-          "date": "2023-04-21",
+          "date": 1677715200000,
           "amount": -8996.3,
           "currency": {
             "tag": "GBP",
@@ -470,16 +446,22 @@
     },
     {
       "id": "b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
-      "name": "Work",
+      "name": "Praca",
+      "description": "Wychody i przychody Jana",
+      "icon": "payments",
+      "currency": {
+        "locale": "pl-PL",
+        "tag": "PLN"
+      },
+      "startDate": 1672531200000,
+      "endDate": 1704067200000,
+      "limit": 2000000,
       "transactions": [
         {
           "id": "a291db86-2857-4e8a-958b-f9ba52c884b1",
           "date": "2023-02-14",
           "amount": -12000,
-          "currency": {
-            "tag": "PLN",
-            "locale": "pl-PL"
-          },
+
           "category": {
             "id": 1,
             "name": "Home spendings",
@@ -501,10 +483,6 @@
           "id": "0bfc80b3-96a9-4420-a153-0cd7673d8d18",
           "date": "2023-01-10",
           "amount": -60000,
-          "currency": {
-            "tag": "PLN",
-            "locale": "pl-PL"
-          },
           "category": {
             "id": 1,
             "name": "Home spendings",
@@ -526,10 +504,6 @@
           "id": "7c358eed-8915-451d-bcc8-6de4a8b804ad",
           "date": "2023-01-09",
           "amount": 1200000,
-          "currency": {
-            "tag": "PLN",
-            "locale": "pl-PL"
-          },
           "category": {
             "id": 5,
             "name": "Income",
