@@ -8,7 +8,7 @@ const category = {
   id: 2,
   name: "Subscriptions",
   icon: {
-    name: "play",
+    name: "subscriptions",
     foreground: "#643400",
     background: "#FFF3E5",
   },
@@ -21,10 +21,17 @@ const CardStyled = styled(Card)`
   height: 200px;
 `;
 
+const Wrapper = styled.div`
+  width: 40px;
+  height: 40px;
+`;
+
 export const IncomeExpenseIconDemo = () => {
   return (
     <CardStyled>
-      <IncomeExpenseIcon category={category} />
+      <Wrapper>
+        <IncomeExpenseIcon category={category} />
+      </Wrapper>
     </CardStyled>
   );
 };
