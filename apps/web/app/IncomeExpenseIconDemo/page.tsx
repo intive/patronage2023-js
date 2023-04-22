@@ -75,14 +75,14 @@ const SmallWrapper = styled.div`
   gap: 0.5rem;
 `;
 
-export const IncomeExpenseIconDemo = () => {
+export default function IncomeExpenseIconDemo() {
   return (
     <Page>
       <CardStyled>
         <h2>Big</h2>
         {mockedCategories.map((category) => {
           return (
-            <Wrapper>
+            <Wrapper key={category.id}>
               <IncomeExpenseIcon category={category} />
               <span>{category.name}</span>
             </Wrapper>
@@ -94,7 +94,7 @@ export const IncomeExpenseIconDemo = () => {
         <h2>Small</h2>
         {mockedCategories.map((category) => {
           return (
-            <SmallWrapper>
+            <SmallWrapper key={category.id}>
               <IncomeExpenseIcon category={category} small />
               <span>{category.name}</span>
             </SmallWrapper>
@@ -103,6 +103,4 @@ export const IncomeExpenseIconDemo = () => {
       </CardStyled>
     </Page>
   );
-};
-
-export default IncomeExpenseIconDemo;
+}
