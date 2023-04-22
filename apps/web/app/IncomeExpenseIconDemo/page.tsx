@@ -14,16 +14,49 @@ const mockedCategories = [
       background: "#F1FBF6",
     },
   },
+  {
+    id: 2,
+    name: "Subscriptions",
+    icon: {
+      name: "subscriptions",
+      foreground: "#643400",
+      background: "#FFF3E5",
+    },
+  },
+  {
+    id: 3,
+    name: "Car",
+    icon: {
+      name: "directions_car",
+      foreground: "#003150",
+      background: "#E0F3FF",
+    },
+  },
+  {
+    id: 4,
+    name: "Grocery",
+    icon: {
+      name: "shopping_cart",
+      foreground: "#5A092F",
+      background: "#FDE7F1",
+    },
+  },
 ];
 
+const Page = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  margin: 50px;
+`;
+
 const CardStyled = styled(Card)`
-  width: 500px;
-  margin: 0 auto;
-  margin-top: 200px;
-  height: 200px;
+  width: 300px;
+  height: 400px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  justify-content: flex-start;
+  gap: 24px;
   align-items: flex-start;
   padding: 40px;
 `;
@@ -44,17 +77,31 @@ const SmallWrapper = styled.div`
 
 export const IncomeExpenseIconDemo = () => {
   return (
-    <CardStyled>
-      <Wrapper>
-        <IncomeExpenseIcon category={mockedCategories[0]} />
-        <span>Home spendings</span>
-      </Wrapper>
+    <Page>
+      <CardStyled>
+        <h2>Big</h2>
+        {mockedCategories.map((category) => {
+          return (
+            <Wrapper>
+              <IncomeExpenseIcon category={category} />
+              <span>{category.name}</span>
+            </Wrapper>
+          );
+        })}
+      </CardStyled>
 
-      <SmallWrapper>
-        <IncomeExpenseIcon category={mockedCategories[0]} small />
-        <span>Home spendings</span>
-      </SmallWrapper>
-    </CardStyled>
+      <CardStyled>
+        <h2>Small</h2>
+        {mockedCategories.map((category) => {
+          return (
+            <SmallWrapper>
+              <IncomeExpenseIcon category={category} small />
+              <span>{category.name}</span>
+            </SmallWrapper>
+          );
+        })}
+      </CardStyled>
+    </Page>
   );
 };
 

@@ -39,9 +39,9 @@ HomeSpendings.args = {
 
 export const Subscriptions = Template.bind({});
 Subscriptions.args = {
-  small: true,
+  small: false,
   category: {
-    id: 1,
+    id: 2,
     name: "Subscriptions",
     icon: {
       name: "subscriptions",
@@ -55,7 +55,7 @@ export const Car = Template.bind({});
 Car.args = {
   small: false,
   category: {
-    id: 1,
+    id: 3,
     name: "Car",
     icon: {
       name: "directions_car",
@@ -69,7 +69,7 @@ export const Grocery = Template.bind({});
 Grocery.args = {
   small: false,
   category: {
-    id: 1,
+    id: 4,
     name: "Grocery",
     icon: {
       name: "shopping_cart",
