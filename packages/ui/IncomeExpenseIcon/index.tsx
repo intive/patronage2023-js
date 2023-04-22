@@ -14,29 +14,33 @@ type categoryType = {
 
 type IncomeExpenseIconProps = {
   category: categoryType;
+  small?: boolean;
 };
 
 type BackgroundProps = {
   background: string;
+  small?: boolean;
 };
 
 const IconBackground = styled.div<BackgroundProps>`
-  font-size: 1em;
-  width: 100%;
-  height: 100%;
+  width: ${({ small }) => (small ? "2.286em" : "2.5em")};
+  height: ${({ small }) => (small ? "2.286em" : "2.5em")};
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ background }) => background || "lightgrey"};
 `;
 
-export const IncomeExpenseIcon = ({ category }: IncomeExpenseIconProps) => {
+export const IncomeExpenseIcon = ({
+  category,
+  small,
+}: IncomeExpenseIconProps) => {
   const { icon } = category;
   const { name, foreground, background } = icon;
 
   return (
-    <IconBackground background={background}>
+    <IconBackground background={background} small={small}>
       <Icon
         icon={(name as IconType) || "help"}
         color={foreground || "black"}

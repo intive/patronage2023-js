@@ -21,16 +21,25 @@ const CardStyled = styled(Card)`
   margin: 0 auto;
   margin-top: 200px;
   height: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 40px;
 `;
 
 const Wrapper = styled.div`
-  width: 40px;
-  height: 40px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 const SmallWrapper = styled.div`
-  width: 32px;
-  height: 32px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 0.5rem;
 `;
 
 export const IncomeExpenseIconDemo = () => {
@@ -39,8 +48,10 @@ export const IncomeExpenseIconDemo = () => {
       <Wrapper>
         <IncomeExpenseIcon category={mockedCategories[0]} />
       </Wrapper>
+
       <SmallWrapper>
-        <IncomeExpenseIcon category={mockedCategories[0]} />
+        <IncomeExpenseIcon category={mockedCategories[0]} small />
+        <span>test</span>
       </SmallWrapper>
     </CardStyled>
   );
