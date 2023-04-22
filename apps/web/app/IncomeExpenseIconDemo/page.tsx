@@ -47,11 +47,12 @@ export const IncomeExpenseIconDemo = () => {
     <CardStyled>
       <Wrapper>
         <IncomeExpenseIcon category={mockedCategories[0]} />
+        <span>Home spendings</span>
       </Wrapper>
 
       <SmallWrapper>
         <IncomeExpenseIcon category={mockedCategories[0]} small />
-        <span>test</span>
+        <span>Home spendings</span>
       </SmallWrapper>
     </CardStyled>
   );
