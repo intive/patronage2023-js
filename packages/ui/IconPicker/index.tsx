@@ -2,11 +2,11 @@
 import { ReactNode, useEffect, useState } from "react";
 import {
   IconPickerStyled,
-  IconAndButtonWrapperStyled,
   IconsSelectorStyled,
   EditButtonStyled,
   SelectIconButtonStyled,
 } from "./iconPicker.styled";
+import { BudgetIcon } from "../BudgetIcon";
 import { Icon, IconType } from "../Icon";
 
 type IconPickerProps = {
@@ -90,16 +90,11 @@ export const IconPicker = ({
 
   return (
     <IconPickerStyled>
-      <IconAndButtonWrapperStyled>
-        {currentIcon ? (
-          <Icon icon={currentIcon} iconSize={40} />
-        ) : (
-          <>{children}</>
-        )}
+      <BudgetIcon icon={currentIcon}>
         <EditButtonStyled onClick={handleEditButtonClick}>
           <Icon icon="edit" iconSize={12} />
         </EditButtonStyled>
-      </IconAndButtonWrapperStyled>
+      </BudgetIcon>
       {iconSelectorVisible && (
         <IconSelector
           icons={icons}

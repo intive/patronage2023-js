@@ -190,6 +190,10 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+  budgetIcon: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+  },
 };
 
 export type ThemeType = typeof theme;
