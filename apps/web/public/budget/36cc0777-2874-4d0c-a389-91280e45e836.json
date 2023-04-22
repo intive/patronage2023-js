@@ -1,0 +1,129 @@
+{
+  "transactions": [
+    {
+      "id": "4ace5f31-f56a-4430-8267-f19278d8ebf3",
+      "date": 1678752000000,
+      "amount": -25.99,
+      "currency": {
+        "tag": "GBP",
+        "locale": "en-GB"
+      },
+      "category": {
+        "id": 4,
+        "name": "Grocery",
+        "icon": {
+          "name": "cart",
+          "foreground": "#5A092F",
+          "background": "#FDE7F1"
+        }
+      },
+      "description": "Grocery",
+      "status": "Done",
+      "creator": {
+        "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
+        "name": "Mary Doe",
+        "avatar": "8.svg"
+      }
+    },
+    {
+      "id": "e865e4d7-9760-49df-8010-648f8da8cb1c",
+      "date": 1678492800000,
+      "amount": -50.27,
+      "currency": {
+        "tag": "GBP",
+        "locale": "en-GB"
+      },
+      "category": {
+        "id": 3,
+        "name": "Car",
+        "icon": {
+          "name": "car",
+          "foreground": "#003150",
+          "background": "#E0F3FF"
+        }
+      },
+      "description": "Petrol",
+      "status": "Done",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "084875dd-a2f0-4f11-be0d-526f6cbe4980",
+      "date": 1678233600000,
+      "amount": -43.39,
+      "currency": {
+        "tag": "GBP",
+        "locale": "en-GB"
+      },
+      "category": {
+        "id": 3,
+        "name": "Car",
+        "icon": {
+          "name": "car",
+          "foreground": "#003150",
+          "background": "#E0F3FF"
+        }
+      },
+      "description": "Petrol",
+      "status": "Done",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "6d0a2644-2b03-4772-9db3-6eda9e5584c5",
+      "date": 1677888000000,
+      "amount": -100.99,
+      "currency": {
+        "tag": "GBP",
+        "locale": "en-GB"
+      },
+      "category": {
+        "id": 4,
+        "name": "Grocery",
+        "icon": {
+          "name": "cart",
+          "foreground": "#5A092F",
+          "background": "#FDE7F1"
+        }
+      },
+      "description": "Grocery",
+      "status": "Done",
+      "creator": {
+        "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
+        "name": "Mary Doe",
+        "avatar": "8.svg"
+      }
+    },
+    {
+      "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
+      "date": 1677715200000,
+      "amount": -8996.3,
+      "currency": {
+        "tag": "GBP",
+        "locale": "en-GB"
+      },
+      "category": {
+        "id": 1,
+        "name": "Home spendings",
+        "icon": {
+          "name": "home",
+          "foreground": "#1E4C40",
+          "background": "#F1FBF6"
+        }
+      },
+      "description": "Ikea London",
+      "status": "Done",
+      "creator": {
+        "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
+        "name": "Mary Doe",
+        "avatar": "8.svg"
+      }
+    }
+  ]
+}
