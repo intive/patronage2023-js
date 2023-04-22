@@ -12,7 +12,7 @@ type categoryType = {
   };
 };
 
-type IncomeExpenseIconProps = {
+export type IncomeExpenseIconProps = {
   category: categoryType;
   small?: boolean;
 };
