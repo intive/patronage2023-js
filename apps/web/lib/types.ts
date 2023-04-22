@@ -1,3 +1,33 @@
+interface Currency {
+  tag: string;
+  locale: string;
+}
+interface Icon {
+  name: string;
+  foreground: string;
+  background: string;
+}
+interface Category {
+  id: number;
+  name: string;
+  icon: Icon;
+}
+
+interface Creator {
+  id: string;
+  name: string;
+  avatar: string;
+}
+interface Transaction {
+  id: string;
+  date: number;
+  amount: number;
+  category: Category;
+  description: string;
+  status: string;
+  creator: Creator;
+}
+
 export interface Budget {
   id: string;
   name: string;
@@ -6,29 +36,10 @@ export interface Budget {
   startDate: number;
   endDate: number;
   limit: number;
-  currency: {
-    tag: string;
-    locale: string;
-  };
-  transactions: {
-    id: string;
-    date: number;
-    amount: number;
-    category: {
-      id: number;
-      name: string;
-      icon: {
-        name: string;
-        foreground: string;
-        background: string;
-      };
-    };
-    description: string;
-    status: string;
-    creator: {
-      id: string;
-      name: string;
-      avatar: string;
-    };
-  }[];
+  currency: Currency;
+}
+
+export interface BudgetTransaction {
+  budgetID: string;
+  transactions: Transaction[];
 }
