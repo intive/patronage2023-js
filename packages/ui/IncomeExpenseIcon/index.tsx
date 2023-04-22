@@ -21,14 +21,14 @@ type BackgroundProps = {
 };
 
 const IconBackground = styled.div<BackgroundProps>`
-  font-size: 1rem;
+  font-size: 1em;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ background }) => background || "grey"};
+  background-color: ${({ background }) => background || "lightgrey"};
 `;
 
 export const IncomeExpenseIcon = ({ category }: IncomeExpenseIconProps) => {
@@ -37,15 +37,11 @@ export const IncomeExpenseIcon = ({ category }: IncomeExpenseIconProps) => {
 
   return (
     <IconBackground background={background}>
-      <Icon icon={name as IconType} color={foreground} />
+      <Icon
+        icon={(name as IconType) || "help"}
+        color={foreground || "black"}
+        iconSize={24}
+      />
     </IconBackground>
   );
 };
-
-// <div>
-//   <p>id: {category.id}</p>
-//   <p>name: {category.name}</p>
-//   <p>icon name: {category.icon.name}</p>
-//   <p>icon foreground: {category.icon.foreground}</p>
-//   <p>icon background: {category.icon.background}</p>
-// </div>.

@@ -4,15 +4,17 @@ import styled from "styled-components";
 import { Card } from "ui";
 import { IncomeExpenseIcon } from "ui/IncomeExpenseIcon";
 
-const category = {
-  id: 2,
-  name: "Subscriptions",
-  icon: {
-    name: "subscriptions",
-    foreground: "#643400",
-    background: "#FFF3E5",
+const mockedCategories = [
+  {
+    id: 1,
+    name: "Home spendings",
+    icon: {
+      name: "home",
+      foreground: "#1E4C40",
+      background: "#F1FBF6",
+    },
   },
-};
+];
 
 const CardStyled = styled(Card)`
   width: 500px;
@@ -26,12 +28,20 @@ const Wrapper = styled.div`
   height: 40px;
 `;
 
+const SmallWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+`;
+
 export const IncomeExpenseIconDemo = () => {
   return (
     <CardStyled>
       <Wrapper>
-        <IncomeExpenseIcon category={category} />
+        <IncomeExpenseIcon category={mockedCategories[0]} />
       </Wrapper>
+      <SmallWrapper>
+        <IncomeExpenseIcon category={mockedCategories[0]} />
+      </SmallWrapper>
     </CardStyled>
   );
 };
