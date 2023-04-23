@@ -15,7 +15,7 @@ export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
   return (
     <Select.Root>
       <SelectTrigger>
-        <Select.Value placeholder="Currency"></Select.Value>
+        <SelectValue placeholder="Currency"></SelectValue>
         <SelectIcon>
           <Icon icon="arrow_drop_down" iconSize={23} />
         </SelectIcon>
@@ -40,6 +40,7 @@ export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
 
 
 const SelectTrigger = styled(Select.Trigger)`
+  color: #515151;
   background-color: ${({ theme }) => theme.card.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
@@ -59,6 +60,9 @@ const SelectTrigger = styled(Select.Trigger)`
   }
 `;
 
+const SelectValue = styled(Select.Value)`
+  color: red;
+`;
 
 
 const SelectIcon = styled(Select.Icon)`
