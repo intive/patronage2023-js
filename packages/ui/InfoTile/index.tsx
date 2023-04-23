@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+"use client"
+
 import {InfoTileStyled, InfoValueWrapper} from './infoTile.styled'
 
 export type InfoTileProps = {
