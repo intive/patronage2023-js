@@ -6,14 +6,14 @@ import { loggedUserExistingBudgets } from "./CreateNewBudget";
 export const useValidateBudgetModal = (value: "AddNewBudgetModal") => {
   const { t, dict } = useTranslate(value);
   return {
-    checkBudgetNameOnChange: z
+    checkNameOnChange: z
       .string()
       .max(30, t(dict.errors.max30characters))
       .refine(
         (val) => !loggedUserExistingBudgets.includes(val),
         t(dict.errors.nameTaken)
       ),
-    checkBudgetNameOnSubmit: z
+    checkNameOnSubmit: z
       .string()
       .min(3, t(dict.errors.min3characters))
       .max(30, t(dict.errors.max30characters))
@@ -21,7 +21,7 @@ export const useValidateBudgetModal = (value: "AddNewBudgetModal") => {
         (val) => !loggedUserExistingBudgets.includes(val),
         t(dict.errors.nameTaken)
       ),
-    checkBudgetLimit: z.union([
+    checkLimit: z.union([
       z.string().nonempty({ message: t(dict.errors.specifyBudgetLimit) }),
       z.number().positive({ message: t(dict.errors.moreThanZero) }),
     ]),

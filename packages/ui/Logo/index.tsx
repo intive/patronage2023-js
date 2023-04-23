@@ -43,8 +43,7 @@ export const LogoStyledContainer = styled.div<ContainerProps>`
     `}
 `;
 export const LogoSignet = styled.div<LogoSignetProps>`
-  background: url(${({ white }) =>
-      white ? logoVersions.whiteURL : logoVersions.colorURL})
+  background: url(${({ white }) => white ? logoVersions.whiteURL : logoVersions.colorURL})
     no-repeat center / contain;
   height: 100%;
   ${({ logoWidth }) =>
