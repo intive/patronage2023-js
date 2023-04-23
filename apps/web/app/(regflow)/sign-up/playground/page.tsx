@@ -6,18 +6,14 @@ import { StyledAddInfoSpan, TileListStyled } from 'ui/InfoTile/infoTile.styled'
 
 
 type InfoTileContents = {
-  dataToRender: ReactElement;
+  dataToRender: string | ReactElement;
   label: string;
   id: number;
 };
 
 const DUMMY_DATA: Array<InfoTileContents> = [
   {
-    dataToRender: (
-      <>
-        <span>Jan 1 - Jan 31</span>
-      </>
-    ),
+    dataToRender: "Jan 1 - Jan 31",
     label: "Budget period",
     id: 1,
   },

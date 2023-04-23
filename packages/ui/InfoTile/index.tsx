@@ -3,7 +3,7 @@ import {InfoTileStyled, InfoValueWrapper} from './infoTile.styled'
 
 type InfoTileProps = {
   label: string;
-  children: ReactNode | JSX.Element;
+  children: string | ReactNode | JSX.Element;
 }
 
 export const InfoTile = ({ label, children }: InfoTileProps) => {
