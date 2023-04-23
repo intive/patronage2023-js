@@ -1,50 +1,77 @@
 "use client";
 
-import { PasswordSubComponent } from "../PasswordSubComponent";
-import { InfoTile } from "ui";
-import styled, { css } from "styled-components";
+import { InfoTile, Icon, Avatar } from "ui";
+import { ReactElement } from "react";
+import { StyledAddInfoSpan, TileListStyled } from 'ui/InfoTile/infoTile.styled'
 
-const DUMMY_DATA = {
-  1: {
+
+type InfoTileContents = {
+  dataToRender: ReactElement;
+  label: string;
+  id: number;
+};
+
+const DUMMY_DATA: Array<InfoTileContents> = [
+  {
+    dataToRender: (
+      <>
+        <span>Jan 1 - Jan 31</span>
+      </>
+    ),
     label: "Budget period",
-    value: "Jan 1 - Jan 31"
+    id: 1,
   },
-  2: {
+  {
+    dataToRender: (
+      <>
+        <span>$ 10,000.00</span>
+      </>
+    ),
     label: "Budget limit",
-    value: "$ 10,000.00",
+    id: 2,
   },
-  3: {
+  {
+    dataToRender: (
+      <>
+        <span>USD</span>
+        <StyledAddInfoSpan>United States Dollar</StyledAddInfoSpan>
+      </>
+    ),
     label: "Currency",
-    value: {
-      symbol: "USD",
-      description: "United States Dollar"
-    }
-  }
-}
+    id: 3,
+  },
+  {
+    dataToRender: (
+      <>
+        <Icon icon="subscriptions" color="#1E4C40" />
+      </>
+    ),
+    label: "Some icon",
+    id: 4,
+  },
+  {
+    dataToRender: (
+      <>
+        <div style={{fontSize: "24px"}}>
+          <Avatar src="/avatars/1.svg" />
+        </div>
+        
+      </>
+    ),
+    label: "Some avatar",
+    id: 5,
+  },
+];
 
-const TileListStyled = styled.div`
-  display: flex;
-  gap: 10px;
-`;
 
-const TileList = () => {
-
-  return (
-    <TileListStyled>
-      {Object.values(DUMMY_DATA).map( el => <InfoTile key={el.label} label={el.label} value={el.value} />)}
-    </TileListStyled>
-  )
-}
-
-//TODO delete this page before merge
-export default function PasswordPlayground() {
+export default function Playground() {
   return (
     <>
-      {/* <PasswordSubComponent
-        onNext={(text) => console.log(text)}
-        onBack={() => console.log("Back")}
-      /> */}
-      <TileList />
+      <TileListStyled>
+        {Object.values(DUMMY_DATA).map( el => <InfoTile key={el.id} label={el.label}>{el.dataToRender}</InfoTile>)}
+      </TileListStyled>
     </>
   );
 }
+
+
