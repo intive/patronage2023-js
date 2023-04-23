@@ -1,5 +1,5 @@
 import React from "react";
-import { ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import styled from "styled-components";
 
 import { InfoTile, InfoTileProps } from "ui/InfoTile";
@@ -15,7 +15,7 @@ export default {
   component: InfoTile,
 } as ComponentMeta<typeof InfoTile>;
 
-const Template = ({ children, ...args }: InfoTileProps) => (
+const Template: ComponentStory<typeof InfoTile> = ({ children, ...args }: InfoTileProps) => (
   <Wrapper>
     <InfoTile {...args}>{children}</InfoTile>
   </Wrapper>
@@ -50,3 +50,6 @@ TileWithComponent.args = {
       
   ),
 };
+
+
+
