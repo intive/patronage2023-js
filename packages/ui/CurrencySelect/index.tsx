@@ -65,8 +65,8 @@ export const CurrencySelect = ({
 
 
 const SelectTrigger = styled(Select.Trigger)`
-  color: #515151;
-  background-color: ${({ theme }) => theme.card.background};
+  color: ${({ theme }) => theme.input.neutral};
+  background-color: ${({ theme }) => theme.currencySelect.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
   font-size: 1em;
@@ -97,7 +97,7 @@ const SelectValue = styled(Select.Value)`
 
 
 const SelectIcon = styled(Select.Icon)`
-  color: #626262;
+  color: ${({ theme }) => theme.currencySelect.icon};
   margin-top: -2px;
 `;
 
@@ -119,7 +119,7 @@ const SelectPortal = styled(Select.Portal)`
 const SelectContent = styled(Select.Content)`
   border-radius: 1em;
   overflow: hidden;
-  background-color: white;
+  background-color: ${({ theme }) => theme.currencySelect.background};
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
   
@@ -128,7 +128,7 @@ const SelectContent = styled(Select.Content)`
 
 
 const SelectViewport = styled(Select.Viewport)`
-  box-shadow: 0px 2px 4px 0px #20253208;
+  /* box-shadow: 0px 2px 4px 0px #20253208; */
 
 `;
 
@@ -139,8 +139,8 @@ const SelectItem = styled(Select.Item)`
   gap: 8px;
 
   &:focus {
-    color: #397b65;
-    background-color: #f1fbf6;
+    color: ${({ theme }) => theme.input.main};
+    background-color: ${({ theme }) => theme.currencySelect.focusBackground};
     &:first-child {
       border-radius: 1em 1em 0 0;
     }
@@ -153,15 +153,15 @@ const SelectItem = styled(Select.Item)`
 `;
 
 const StyledTag = styled.span`
-  color: #515151; 
+  color: ${({ theme }) => theme.currencySelect.tag}; 
   margin-right: 8px;
   ${SelectItem}:focus & {
-    color: #397b65;
+    color: ${({ theme }) => theme.currencySelect.tagFocus};
   }
 `;
 
 const SelectItemText = styled(Select.ItemText)`
-  color: #222222;
+  /* color: #222222; */
 `;
 
 const StyledCurrencyLabel = styled.span`
