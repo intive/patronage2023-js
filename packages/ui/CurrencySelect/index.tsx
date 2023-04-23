@@ -2,27 +2,47 @@
 
 import { useState } from "react";
 import * as Select from "@radix-ui/react-select";
-import styled from "styled-components";
+import styled, { css, ThemeContext } from "styled-components";
 import { Icon } from "../Icon";
+
+type StyledErrorProps = {
+  hasError?: boolean;
+  hasSupportingLabel?: boolean;
+};
+
+// type StyledInputProps = {
+//   hasSupportingLabel?: boolean;
+// };
 
 export type CurrencySelectComponentProps = {
   // tag: string;
   // label: string;
   // id: string | number;
   // value: string;
-} & React.HTMLProps<HTMLElement>;
+  hasError?: boolean;
+  supportingLabel?: React.ReactNode;
+  
+} & StyledErrorProps & React.HTMLProps<HTMLElement>;
 
-export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
+export const CurrencySelect = ({
+  hasError = false,
+  supportingLabel,
+}: CurrencySelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <Select.Root onOpenChange={() => { setIsOpen(!isOpen);}}>
-      <SelectTrigger>
+      <SelectTrigger hasError={hasError} hasSupportingLabel={Boolean(supportingLabel)}>
         <SelectValue placeholder="Currency"></SelectValue>
         <SelectIcon>
-          {/* <Icon icon="arrow_drop_down" iconSize={23} /> */}
           <Icon icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"} iconSize={23} />
         </SelectIcon>
       </SelectTrigger>
+      {supportingLabel && (
+        <StyledSupportingLabel hasError={hasError}>
+          Choose Currency
+        </StyledSupportingLabel>
+      )}
       <SelectPortal>
         <SelectContent position="popper">
           <SelectViewport>
@@ -61,16 +81,32 @@ const SelectTrigger = styled(Select.Trigger)`
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
   }
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      border-color: ${({ theme }) => theme.input.error};
+    `}
 `;
 
 const SelectValue = styled(Select.Value)`
-  color: red;
+  
 `;
 
 
 const SelectIcon = styled(Select.Icon)`
   color: #626262;
   margin-top: -2px;
+`;
+
+const StyledSupportingLabel = styled.div<StyledErrorProps>`
+  color: ${({ hasError }) =>
+    hasError
+      ? ({ theme }) => theme.input.error
+      : ({ theme }) => theme.input.neutral};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0 10px;
 `;
 
 const SelectPortal = styled(Select.Portal)`
