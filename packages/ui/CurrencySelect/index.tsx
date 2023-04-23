@@ -7,6 +7,10 @@ import { Icon } from "../Icon";
 
 type StyledErrorProps = {
   hasError?: boolean;
+};
+
+type SelectTriggerProps = {
+  hasError?: boolean;
   hasSupportingLabel?: boolean;
 };
 
@@ -15,6 +19,7 @@ export type CurrencySelectComponentProps = {
   supportingLabel?: React.ReactNode;
   onValueChange?: (value: string) => void;
 } & StyledErrorProps &
+  Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
 
 const currency = [
@@ -40,7 +45,7 @@ const currency = [
   },
 ];
 
-const SelectTrigger = styled(Select.Trigger)`
+const SelectTrigger = styled(Select.Trigger)<SelectTriggerProps>`
   color: ${({ theme }) => theme.input.neutral};
   background-color: ${({ theme }) => theme.currencySelect.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
@@ -130,7 +135,7 @@ const StyledCurrencyLabel = styled.span`
 export const CurrencySelect = ({
   hasError = false,
   supportingLabel,
-}: CurrencySelectComponentProps) => {
+}: CurrencySelectComponentProps & Select.SelectTriggerProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("");
 
