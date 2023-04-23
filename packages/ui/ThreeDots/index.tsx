@@ -38,12 +38,12 @@ export const ThreeDots = ({ items }: ThreeDotsProps) => {
     <DropdownMenu.Root>
       <DropdownMenuTriggerStyled asChild>
         <button>
-          <Icon icon="more_vert" />
+          <Icon icon="more_vert" color="#7E7E7E"/>
         </button>
       </DropdownMenuTriggerStyled>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled side="right">
-          {items.map((item, i) => {
+          {items.map((item) => {
             return <DropdownMenuItemStyled>{item}</DropdownMenuItemStyled>;
           })}
         </DropdownMenuContentStyled>

@@ -190,10 +190,10 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
-  threeDots:{
-    outlineFocus:colors.Teal10,
-    backgroundHover:colors.Teal1,
-  }
+  threeDots: {
+    outlineFocus: colors.Teal10,
+    backgroundHover: colors.Teal1,
+  },
 };
 
 export type ThemeType = typeof theme;
