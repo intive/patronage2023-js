@@ -21,6 +21,7 @@ export type CurrencySelectComponentProps = {
   // value: string;
   hasError?: boolean;
   supportingLabel?: React.ReactNode;
+  onValueChange?: (value: string) => void;
   
 } & StyledErrorProps & React.HTMLProps<HTMLElement>;
 
@@ -29,9 +30,10 @@ export const CurrencySelect = ({
   supportingLabel,
 }: CurrencySelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
 
   return (
-    <Select.Root onOpenChange={() => { setIsOpen(!isOpen);}}>
+    <Select.Root onValueChange={() => {setSelected(selected)}} onOpenChange={() => { setIsOpen(!isOpen);}}>
       <SelectTrigger hasError={hasError} hasSupportingLabel={Boolean(supportingLabel)}>
         <SelectValue placeholder="Currency"></SelectValue>
         <SelectIcon>
@@ -40,14 +42,14 @@ export const CurrencySelect = ({
       </SelectTrigger>
       {supportingLabel && (
         <StyledSupportingLabel hasError={hasError}>
-          Choose Currency
+          Choose Currency 
         </StyledSupportingLabel>
       )}
       <SelectPortal>
         <SelectContent position="popper">
           <SelectViewport>
             {currency.map((currency) => (
-              <SelectItem value={currency.id} key={currency.id}>
+              <SelectItem value={currency.id}>
                 <SelectItemText>
                   <StyledTag>{currency.tag}</StyledTag>{" "}<StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
                 </SelectItemText>
