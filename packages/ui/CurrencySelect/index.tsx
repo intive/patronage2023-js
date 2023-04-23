@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import * as Select from "@radix-ui/react-select";
-import styled, { css, ThemeContext } from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "../Icon";
 
 type StyledErrorProps = {
@@ -10,59 +10,35 @@ type StyledErrorProps = {
   hasSupportingLabel?: boolean;
 };
 
-// type StyledInputProps = {
-//   hasSupportingLabel?: boolean;
-// };
-
 export type CurrencySelectComponentProps = {
-  // tag: string;
-  // label: string;
-  // id: string | number;
-  // value: string;
   hasError?: boolean;
   supportingLabel?: React.ReactNode;
   onValueChange?: (value: string) => void;
-  
-} & StyledErrorProps & React.HTMLProps<HTMLElement>;
+} & StyledErrorProps &
+  React.HTMLProps<HTMLElement>;
 
-export const CurrencySelect = ({
-  hasError = false,
-  supportingLabel,
-}: CurrencySelectComponentProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("");
-
-  return (
-    <Select.Root onValueChange={() => {setSelected(selected)}} onOpenChange={() => { setIsOpen(!isOpen);}}>
-      <SelectTrigger hasError={hasError} hasSupportingLabel={Boolean(supportingLabel)}>
-        <SelectValue placeholder="Currency"></SelectValue>
-        <SelectIcon>
-          <Icon icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"} iconSize={23} />
-        </SelectIcon>
-      </SelectTrigger>
-      {supportingLabel && (
-        <StyledSupportingLabel hasError={hasError}>
-          Choose Currency 
-        </StyledSupportingLabel>
-      )}
-      <SelectPortal>
-        <SelectContent position="popper">
-          <SelectViewport>
-            {currency.map((currency) => (
-              <SelectItem value={currency.id}>
-                <SelectItemText>
-                  <StyledTag>{currency.tag}</StyledTag>{" "}<StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
-                </SelectItemText>
-              </SelectItem>
-            ))}
-          </SelectViewport>
-        </SelectContent>
-      </SelectPortal>
-    </Select.Root>
-  );
-};
-
-
+const currency = [
+  {
+    tag: "PLN",
+    label: "Polish Zloty",
+    id: "1",
+  },
+  {
+    tag: "GBP",
+    label: "British Pound",
+    id: "2",
+  },
+  {
+    tag: "EUR",
+    label: "Euro",
+    id: "3",
+  },
+  {
+    tag: "USD",
+    label: "United States Dollar",
+    id: "4",
+  },
+];
 
 const SelectTrigger = styled(Select.Trigger)`
   color: ${({ theme }) => theme.input.neutral};
@@ -91,11 +67,6 @@ const SelectTrigger = styled(Select.Trigger)`
     `}
 `;
 
-const SelectValue = styled(Select.Value)`
-  
-`;
-
-
 const SelectIcon = styled(Select.Icon)`
   color: ${({ theme }) => theme.currencySelect.icon};
   margin-top: -2px;
@@ -122,14 +93,6 @@ const SelectContent = styled(Select.Content)`
   background-color: ${({ theme }) => theme.currencySelect.background};
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
-  
-`;
-
-
-
-const SelectViewport = styled(Select.Viewport)`
-  /* box-shadow: 0px 2px 4px 0px #20253208; */
-
 `;
 
 const SelectItem = styled(Select.Item)`
@@ -148,20 +111,14 @@ const SelectItem = styled(Select.Item)`
       border-radius: 0 0 1em 1em;
     }
   }
-
-
 `;
 
 const StyledTag = styled.span`
-  color: ${({ theme }) => theme.currencySelect.tag}; 
+  color: ${({ theme }) => theme.currencySelect.tag};
   margin-right: 8px;
   ${SelectItem}:focus & {
     color: ${({ theme }) => theme.currencySelect.tagFocus};
   }
-`;
-
-const SelectItemText = styled(Select.ItemText)`
-  /* color: #222222; */
 `;
 
 const StyledCurrencyLabel = styled.span`
@@ -170,25 +127,51 @@ const StyledCurrencyLabel = styled.span`
   }
 `;
 
-const currency = [
-  {
-    tag: "PLN",
-    label: "Polish Zloty",
-    id: "1",
-  },
-  {
-    tag: "GBP",
-    label: "British Pound",
-    id: "2",
-  },
-  {
-    tag: "EUR",
-    label: "Euro",
-    id: "3",
-  },
-  {
-    tag: "USD",
-    label: "United States Dollar",
-    id: "4",
-  },
-];
+export const CurrencySelect = ({
+  hasError = false,
+  supportingLabel,
+}: CurrencySelectComponentProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+
+  return (
+    <Select.Root
+      onValueChange={() => {
+        setSelected(selected);
+      }}
+      onOpenChange={() => {
+        setIsOpen(!isOpen);
+      }}>
+      <SelectTrigger
+        hasError={hasError}
+        hasSupportingLabel={Boolean(supportingLabel)}>
+        <Select.Value placeholder="Currency"></Select.Value>
+        <SelectIcon>
+          <Icon
+            icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+            iconSize={23}
+          />
+        </SelectIcon>
+      </SelectTrigger>
+      {supportingLabel && (
+        <StyledSupportingLabel hasError={hasError}>
+          Choose Currency
+        </StyledSupportingLabel>
+      )}
+      <SelectPortal>
+        <SelectContent position="popper">
+          <Select.Viewport>
+            {currency.map((currency) => (
+              <SelectItem value={currency.id}>
+                <Select.ItemText>
+                  <StyledTag>{currency.tag}</StyledTag>{" "}
+                  <StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
+                </Select.ItemText>
+              </SelectItem>
+            ))}
+          </Select.Viewport>
+        </SelectContent>
+      </SelectPortal>
+    </Select.Root>
+  );
+};
