@@ -140,8 +140,8 @@ export const DatePickerStyled = styled.div<DatePickerStyledProps>`
   }
 
   .react-datepicker__close-icon:after {
-    width: 14px;
-    height: 14px;
+    width: 15px;
+    height: 15px;
     background-color: ${({ theme }) => theme.datePicker.teal8};
   }
 

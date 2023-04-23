@@ -1,7 +1,10 @@
 import { useTranslate } from "lib/hooks";
 
 import { z } from "zod";
-import { loggedUserExistingBudgets } from "./CreateNewBudget";
+import {
+  acceptedCurrencies,
+  loggedUserExistingBudgets,
+} from "./CreateNewBudget";
 
 export const useValidateBudgetModal = (value: "AddNewBudgetModal") => {
   const { t, dict } = useTranslate(value);
@@ -21,6 +24,11 @@ export const useValidateBudgetModal = (value: "AddNewBudgetModal") => {
         (val) => !loggedUserExistingBudgets.includes(val),
         t(dict.errors.nameTaken)
       ),
+    // WIP
+    checkCurrency: z
+      .string()
+      .nonempty({ message: "Must be selected." })
+      .refine((val) => acceptedCurrencies.includes(val), "PLN, EUR, USD, GBP"),
     checkLimit: z.union([
       z.string().nonempty({ message: t(dict.errors.specifyBudgetLimit) }),
       z.number().positive({ message: t(dict.errors.moreThanZero) }),

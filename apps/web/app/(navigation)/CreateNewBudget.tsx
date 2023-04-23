@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
 import { IconType } from "ui/Icon";
 import {
@@ -35,7 +35,7 @@ type NewBudget = {
 
 type currencyType = {
   tag: string;
-  locale: string;
+  locale?: string;
 };
 
 type newBudgetType = {
@@ -63,21 +63,20 @@ const icons: IconType[] = [
 //mocked existing user budgets
 export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 //mocked currency
-export const currencies: Array<currencyType> = [
-  { tag: "USD", locale: "en-US" },
-  { tag: "GPB", locale: "en-GB" },
-  { tag: "EUR", locale: "en-IE" },
-  { tag: "PLN", locale: "pl-PL" },
-];
+export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
-  const { t, dict } = useTranslate("AddNewBudgetModal");
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
+  const [lang, setLang] = useState<string>("en-US");
+
+  const { t, dict } = useTranslate("AddNewBudgetModal");
+  const { currentLang } = useContext(LanguageContext);
 
   const {
     checkNameOnChange,
     checkNameOnSubmit,
+    checkCurrency,
     checkLimit,
     checkDescription,
     checkStartDate,
@@ -93,7 +92,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     dateEnd: null,
     currency: {
       tag: "",
-      locale: "",
+      locale: lang,
     },
   });
 
@@ -108,6 +107,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
       : setNewBudget({ ...newBudget, dateEnd: null });
   };
+
+  useEffect(() => {
+    currentLang === "en" && setLang("en-US");
+    currentLang === "pl" && setLang("pl-PL");
+  }, [lang]);
 
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
@@ -207,10 +211,32 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     </Field>
                   </InputWrapperHalfStyled>
                   <InputWrapperHalfStyled>
-                    <Input
-                      label={t(dict.inputNames.currency)}
+                    <Field
                       name="currency"
-                    />
+                      initialValue={newBudget.currency.tag}
+                      onSubmitValidate={checkCurrency}
+                      onChangeValidate={checkCurrency}>
+                      {({ value, setValue, errors }) => (
+                        // WIP
+                        <Input
+                          value={value}
+                          onChange={(e) => {
+                            setNewBudget({
+                              ...newBudget,
+                              currency: {
+                                ...newBudget.currency,
+                                tag: e.currentTarget.value,
+                              },
+                            });
+                            setValue(e.currentTarget.value);
+                          }}
+                          label={t(dict.inputNames.currency)}
+                          onInputCleared={() => setValue("")}
+                          hasError={errors.length > 0}
+                          supportingLabel={errors[0]}
+                        />
+                      )}
+                    </Field>
                   </InputWrapperHalfStyled>
                   <Field
                     name="description"
