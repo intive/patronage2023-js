@@ -13,3 +13,9 @@ const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({...args 
 export const Select = CurrencySelectTemplate.bind({});
 Select.args = {
 };
+
+export const SelectWithError = CurrencySelectTemplate.bind({});
+SelectWithError.args = {
+    hasError: true,
+    hasSupportingLabel: true,
+}
