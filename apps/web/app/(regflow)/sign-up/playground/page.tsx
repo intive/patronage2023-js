@@ -1,12 +1,11 @@
 "use client";
 
 import { InfoTile, Icon, Avatar } from "ui";
-import { ReactElement } from "react";
 import { StyledAddInfoSpan, TileListStyled } from 'ui/InfoTile/infoTile.styled'
 
 
 type InfoTileContents = {
-  dataToRender: string | ReactElement;
+  dataToRender: string | JSX.Element;
   label: string;
   id: number;
 };
