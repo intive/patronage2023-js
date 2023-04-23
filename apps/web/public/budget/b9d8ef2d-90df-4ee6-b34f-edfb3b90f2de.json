@@ -51,7 +51,7 @@
         "id": 5,
         "name": "Income",
         "icon": {
-          "name": "money",
+          "name": "payments",
           "foreground": "#162A41",
           "background": "#F0F3F7"
         }

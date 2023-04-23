@@ -50,7 +50,7 @@
         "id": 4,
         "name": "Grocery",
         "icon": {
-          "name": "cart",
+          "name": "shopping_cart",
           "foreground": "#5A092F",
           "background": "#FDE7F1"
         }
@@ -71,7 +71,7 @@
         "id": 1,
         "name": "Home spendings",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#1E4C40",
           "background": "#F1FBF6"
         }
@@ -92,7 +92,7 @@
         "id": 3,
         "name": "Car",
         "icon": {
-          "name": "car",
+          "name": "directions_car",
           "foreground": "#003150",
           "background": "#E0F3FF"
         }
@@ -113,7 +113,7 @@
         "id": 3,
         "name": "Car",
         "icon": {
-          "name": "car",
+          "name": "directions_car",
           "foreground": "#003150",
           "background": "#E0F3FF"
         }
@@ -134,7 +134,7 @@
         "id": 4,
         "name": "Grocery",
         "icon": {
-          "name": "cart",
+          "name": "shopping_cart",
           "foreground": "#5A092F",
           "background": "#FDE7F1"
         }
@@ -155,7 +155,7 @@
         "id": 4,
         "name": "Grocery",
         "icon": {
-          "name": "cart",
+          "name": "shopping_cart",
           "foreground": "#5A092F",
           "background": "#FDE7F1"
         }

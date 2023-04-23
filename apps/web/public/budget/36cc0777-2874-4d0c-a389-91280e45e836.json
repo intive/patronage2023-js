@@ -12,7 +12,7 @@
         "id": 4,
         "name": "Grocery",
         "icon": {
-          "name": "cart",
+          "name": "shopping_cart",
           "foreground": "#5A092F",
           "background": "#FDE7F1"
         }
@@ -37,7 +37,7 @@
         "id": 3,
         "name": "Car",
         "icon": {
-          "name": "car",
+          "name": "directions_car",
           "foreground": "#003150",
           "background": "#E0F3FF"
         }
@@ -62,7 +62,7 @@
         "id": 3,
         "name": "Car",
         "icon": {
-          "name": "car",
+          "name": "directions_car",
           "foreground": "#003150",
           "background": "#E0F3FF"
         }
@@ -87,7 +87,7 @@
         "id": 4,
         "name": "Grocery",
         "icon": {
-          "name": "cart",
+          "name": "shopping_cart",
           "foreground": "#5A092F",
           "background": "#FDE7F1"
         }

@@ -8,7 +8,7 @@
         "id": 2,
         "name": "Subscriptions",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#643400",
           "background": "#FFF3E5"
         }
@@ -29,7 +29,7 @@
         "id": 2,
         "name": "Subscriptions",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#643400",
           "background": "#FFF3E5"
         }
@@ -50,7 +50,7 @@
         "id": 2,
         "name": "Subscriptions",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#643400",
           "background": "#FFF3E5"
         }
@@ -71,7 +71,7 @@
         "id": 2,
         "name": "Subscriptions",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#643400",
           "background": "#FFF3E5"
         }
@@ -92,7 +92,7 @@
         "id": 2,
         "name": "Subscriptions",
         "icon": {
-          "name": "play",
+          "name": "subscriptions",
           "foreground": "#643400",
           "background": "#FFF3E5"
         }
