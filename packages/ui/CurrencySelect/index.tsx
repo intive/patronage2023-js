@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import styled from "styled-components";
 import { Icon } from "../Icon";
@@ -12,21 +13,23 @@ export type CurrencySelectComponentProps = {
 } & React.HTMLProps<HTMLElement>;
 
 export const CurrencySelect = ({}: CurrencySelectComponentProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <Select.Root>
+    <Select.Root onOpenChange={() => { setIsOpen(!isOpen);}}>
       <SelectTrigger>
         <SelectValue placeholder="Currency"></SelectValue>
         <SelectIcon>
-          <Icon icon="arrow_drop_down" iconSize={23} />
+          {/* <Icon icon="arrow_drop_down" iconSize={23} /> */}
+          <Icon icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"} iconSize={23} />
         </SelectIcon>
       </SelectTrigger>
       <SelectPortal>
         <SelectContent position="popper">
           <SelectViewport>
             {currency.map((currency) => (
-              <SelectItem value={currency.id}>
+              <SelectItem value={currency.id} key={currency.id}>
                 <SelectItemText>
-                  <StyledTag>{currency.tag}</StyledTag> <StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
+                  <StyledTag>{currency.tag}</StyledTag>{" "}<StyledCurrencyLabel>{currency.label}</StyledCurrencyLabel>
                 </SelectItemText>
               </SelectItem>
             ))}
