@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import {InfoTileStyled, InfoValueWrapper} from './infoTile.styled'
 
-type InfoTileProps = {
+export type InfoTileProps = {
   label: string;
   children: string | ReactNode | JSX.Element;
 }

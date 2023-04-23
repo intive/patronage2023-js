@@ -39,7 +39,7 @@ const DUMMY_DATA: Array<InfoTileContents> = [
   {
     dataToRender: (
       <>
-        <Icon icon="subscriptions" color="#1E4C40" />
+        <Icon icon="subscriptions" />
       </>
     ),
     label: "Some icon",
