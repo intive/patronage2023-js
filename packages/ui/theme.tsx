@@ -191,6 +191,13 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+  currencySelect: {
+    background: colors.BasicWhite,
+    icon: colors.Neutral7,
+    focusBackground: colors.Teal1,
+    tag: colors.Neutral8,
+    tagFocus: colors.Teal8,
+  }
 };
 
 export type ThemeType = typeof theme;
