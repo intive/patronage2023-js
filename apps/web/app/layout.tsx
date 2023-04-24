@@ -6,7 +6,7 @@ import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
-import { SessionProvider } from "next-auth/react";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -32,7 +32,7 @@ export default function RootLayout({ children, session }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <SessionProvider session={session}>
+        <SessionProviderWrapper>
           <StyledComponentsRegistry>
             <LanguageProvider>
               <StyledComponentsThemeWrapper>
@@ -40,7 +40,7 @@ export default function RootLayout({ children, session }: LayoutProps) {
               </StyledComponentsThemeWrapper>
             </LanguageProvider>
           </StyledComponentsRegistry>
-        </SessionProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );

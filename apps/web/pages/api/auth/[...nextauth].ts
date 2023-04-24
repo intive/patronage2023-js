@@ -6,7 +6,15 @@ type CredentialType = {
   password: string;
 };
 export const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      session.user = token;
+      return session;
+    },
+  },
   providers: [
     CredentialsProvider({
       credentials: {
@@ -27,7 +35,7 @@ export const authOptions: NextAuthOptions = {
           }
         );
         const user = await res.json();
-        if (res.ok && user) {
+        if (user) {
           return user;
         } else return null;
       },
