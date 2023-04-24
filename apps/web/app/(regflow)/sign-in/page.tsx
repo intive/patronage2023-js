@@ -7,6 +7,7 @@ import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
+import { signIn } from "next-auth/react";
 
 const FormWrapper = styled.div`
   margin: 0 auto;
@@ -62,10 +63,13 @@ export default function SignInPage() {
 
   return (
     <Form
-      onSubmit={(values) => {
-        values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
-          ? router.push("/home")
-          : setErrMsg(t(form.errorMessage));
+      onSubmit={async (values) => {
+        const result = await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: true,
+          callbackUrl: "/",
+        });
       }}>
       {({ submit, errors }) => (
         <FormWrapper>

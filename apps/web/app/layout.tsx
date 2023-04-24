@@ -6,9 +6,11 @@ import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
+import { SessionProvider } from "next-auth/react";
 
 export type LayoutProps = {
   children: React.ReactNode;
+  session: any;
 };
 
 const inter = Inter({
@@ -16,7 +18,7 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({ children, session }: LayoutProps) {
   return (
     <html lang="en">
       <head>
@@ -30,13 +32,15 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <LanguageProvider>
-            <StyledComponentsThemeWrapper>
-              {children}
-            </StyledComponentsThemeWrapper>
-          </LanguageProvider>
-        </StyledComponentsRegistry>
+        <SessionProvider session={session}>
+          <StyledComponentsRegistry>
+            <LanguageProvider>
+              <StyledComponentsThemeWrapper>
+                {children}
+              </StyledComponentsThemeWrapper>
+            </LanguageProvider>
+          </StyledComponentsRegistry>
+        </SessionProvider>
       </body>
     </html>
   );

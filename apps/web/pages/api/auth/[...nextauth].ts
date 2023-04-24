@@ -2,7 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 type CredentialType = {
-  username: string;
+  email: string;
   password: string;
 };
 export const authOptions: NextAuthOptions = {
@@ -10,11 +10,11 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        username: { label: "Username", type: "text" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const { username, password } = credentials as CredentialType;
+        const { email, password } = credentials as CredentialType;
         const res = await fetch(
           "https://inbudget-patronage-api-dev.azurewebsites.net/user/sign-in",
           {
@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
               accept: "text/plain",
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ email, password }),
           }
         );
         const user = await res.json();
@@ -35,6 +35,9 @@ export const authOptions: NextAuthOptions = {
   ],
   session: {
     strategy: "jwt",
+  },
+  pages: {
+    signIn: "/sign-in/",
   },
 };
 export default NextAuth(authOptions);
