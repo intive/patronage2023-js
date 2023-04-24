@@ -13,7 +13,7 @@ type DropDownMenuSingleItem = {
 
 //creating a wrapper for proper display on Storybook
 const TransactionDropdownMenuWrapper = styled.div`
-margin: 120px 100px;
+  margin: 120px 100px;
 `;
 
 const LinkStyled = styled(Link)`
@@ -27,11 +27,11 @@ const ButtonStyled = styled.button`
   width: 100%;
   padding: 0;
   text-align: left;
-  cursor:pointer;
+  cursor: pointer;
 `;
 
 //DropdownMenu accepts `children` prop in order to be more generic - it can be used in diffrent places with diffrent items.
-const dummyItems: Array<DropDownMenuSingleItem> = [
+export const dummyItems: Array<DropDownMenuSingleItem> = [
   {
     ComponentToRender: <LinkStyled href="">Edit</LinkStyled>,
     id: "edit-budget",
