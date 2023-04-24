@@ -23,6 +23,7 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting7: "#49AD1F",
   Supporting6: "#3F80BD",
   Supporting5: "#B96232",
   Supporting4: "#AB322C",
@@ -202,6 +203,10 @@ export const theme = {
     focusBackground: colors.Teal1,
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
+  },
+  currencyAmount: {
+    positive: colors.Supporting7,
+    text: colors.Neutral8,
   },
 };
 
