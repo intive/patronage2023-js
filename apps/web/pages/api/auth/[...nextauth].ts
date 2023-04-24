@@ -1,5 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import jwt_decode from "jwt-decode";
 
 type CredentialType = {
   email: string;
@@ -11,7 +12,7 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token.accessToken as string;
+      session.user = await jwt_decode(token.accessToken as string);
       return session;
     },
   },

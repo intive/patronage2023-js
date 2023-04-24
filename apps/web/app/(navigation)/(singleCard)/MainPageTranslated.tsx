@@ -3,6 +3,7 @@
 import { TypoStyled, LinkStyled } from "app/(navigation)/HomePageComponents";
 import { useTranslate } from "lib/hooks";
 import { signIn, signOut, useSession } from "next-auth/react";
+import jwt_decode from "jwt-decode";
 
 export const MainPageTranslated = () => {
   const { dict, t } = useTranslate("MainPage");
@@ -14,9 +15,7 @@ export const MainPageTranslated = () => {
       <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
       <button onClick={() => signOut()}>Log out</button>
       <button onClick={() => signIn()}>Sign in</button>
-      <button onClick={() => console.log(process.env.NEXTAUTH_URL)}>
-        Check data
-      </button>
+      <button onClick={() => console.log(data)}>Check data</button>
     </>
   );
 };
