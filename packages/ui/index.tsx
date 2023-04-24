@@ -21,3 +21,4 @@ export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
 export { CurrencySelect } from "./CurrencySelect";
 export { CurrencyAmount } from "./CurrencyAmount";
+export { CategoryIcon } from "./CategoryIcon";
