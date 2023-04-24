@@ -18,7 +18,7 @@ export type IncomeExpenseIconProps = {
 };
 
 type BackgroundProps = {
-  background: string;
+  backgroundColor: string;
   small?: boolean;
 };
 
@@ -29,7 +29,7 @@ const IconBackground = styled.div<BackgroundProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ background }) => background || "lightgrey"};
+  background-color: ${({ backgroundColor }) => backgroundColor || "lightgrey"};
 `;
 
 export const IncomeExpenseIcon = ({
@@ -40,7 +40,7 @@ export const IncomeExpenseIcon = ({
   const { name, foreground, background } = icon;
 
   return (
-    <IconBackground background={background} small={small}>
+    <IconBackground backgroundColor={background} small={small}>
       <Icon
         icon={(name as IconType) || "help"}
         color={foreground || "black"}
