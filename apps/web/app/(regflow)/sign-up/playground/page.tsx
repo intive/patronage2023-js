@@ -1,10 +1,10 @@
 "use client";
 
-import { InfoTileList, Icon, Avatar } from "ui";
-import { InfoTileContents } from 'ui/InfoTileList';
-import { StyledAddInfoSpan } from 'ui/InfoTile/infoTile.styled';
+import { InfoTile, Icon, Avatar } from "ui";
+import { StyledAddInfoSpan } from "ui/InfoTile";
+import styled from "styled-components";
 
-const DUMMY_DATA: Array<InfoTileContents> = [
+const DUMMY_DATA = [
   {
     dataToRender: "Jan 1 - Jan 31",
     label: "Budget period",
@@ -41,10 +41,9 @@ const DUMMY_DATA: Array<InfoTileContents> = [
   {
     dataToRender: (
       <>
-        <div style={{fontSize: "24px"}}>
+        <div style={{ fontSize: "24px" }}>
           <Avatar src="/avatars/1.svg" />
         </div>
-        
       </>
     ),
     label: "Some avatar",
@@ -52,11 +51,24 @@ const DUMMY_DATA: Array<InfoTileContents> = [
   },
 ];
 
+const Wrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 
 export default function Playground() {
   return (
     <>
-      <InfoTileList contents={DUMMY_DATA}/>
+      <Wrapper>
+        <InfoTile
+          label={DUMMY_DATA[3].label}
+          dataToRender={DUMMY_DATA[3].dataToRender}
+        />
+        <InfoTile
+          label={DUMMY_DATA[2].label}
+          dataToRender={DUMMY_DATA[2].dataToRender}
+        />
+      </Wrapper>
     </>
   );
 }
