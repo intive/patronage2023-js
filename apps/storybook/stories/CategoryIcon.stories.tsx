@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
-import { IncomeExpenseIcon } from "ui";
-import { IncomeExpenseIconProps } from "ui/IncomeExpenseIcon";
+import { CategoryIcon } from "ui";
+import { CategoryIconProps } from "ui/CategoryIcon";
 
 export default {
-  title: "Income-Expense Icon",
-  component: IncomeExpenseIcon,
-} as ComponentMeta<typeof IncomeExpenseIcon>;
+  title: "Category Icon",
+  component: CategoryIcon,
+} as ComponentMeta<typeof CategoryIcon>;
 
 type WrapperProps = {
   small?: boolean;
@@ -17,9 +17,9 @@ const Wrapper = styled.div<WrapperProps>`
   font-size: ${({ small }) => (small ? "14px" : "16px")};
 `;
 
-const Template = ({ ...args }: IncomeExpenseIconProps) => (
+const Template = ({ ...args }: CategoryIconProps) => (
   <Wrapper small={args.small}>
-    <IncomeExpenseIcon {...args} />
+    <CategoryIcon {...args} />
   </Wrapper>
 );
 

@@ -12,10 +12,10 @@ type categoryType = {
   };
 };
 
-export type IncomeExpenseIconProps = {
+export type CategoryIconProps = {
   category: categoryType;
   small?: boolean;
-  className?: "string";
+  className?: string;
 };
 
 type BackgroundProps = {
@@ -33,11 +33,11 @@ const IconBackground = styled.div<BackgroundProps>`
   background-color: ${({ backgroundColor }) => backgroundColor || "lightgrey"};
 `;
 
-export const IncomeExpenseIcon = ({
+export const CategoryIcon = ({
   category,
   small,
   className,
-}: IncomeExpenseIconProps) => {
+}: CategoryIconProps) => {
   const { icon } = category;
   const { name, foreground, background } = icon;
 

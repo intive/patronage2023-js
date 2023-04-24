@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Card } from "ui";
-import { IncomeExpenseIcon } from "ui/IncomeExpenseIcon";
+import { CategoryIcon } from "ui";
 
 const mockedCategories = [
   {
@@ -83,7 +83,7 @@ export default function IncomeExpenseIconDemo() {
         {mockedCategories.map((category) => {
           return (
             <Wrapper key={category.id}>
-              <IncomeExpenseIcon category={category} />
+              <CategoryIcon category={category} />
               <span>{category.name}</span>
             </Wrapper>
           );
@@ -95,7 +95,7 @@ export default function IncomeExpenseIconDemo() {
         {mockedCategories.map((category) => {
           return (
             <SmallWrapper key={category.id}>
-              <IncomeExpenseIcon category={category} small />
+              <CategoryIcon category={category} small />
               <span>{category.name}</span>
             </SmallWrapper>
           );
