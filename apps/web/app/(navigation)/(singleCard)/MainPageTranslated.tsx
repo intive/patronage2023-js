@@ -14,7 +14,9 @@ export const MainPageTranslated = () => {
       <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
       <button onClick={() => signOut()}>Log out</button>
       <button onClick={() => signIn()}>Sign in</button>
-      <button onClick={() => console.log(data)}>Check data</button>
+      <button onClick={() => console.log(process.env.NEXTAUTH_URL)}>
+        Check data
+      </button>
     </>
   );
 };
