@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { InfoTileList, InfoTileContents, InfoTileListProps } from "ui/InfoTileList";
 import { Icon, Avatar } from 'ui'
-import { StyledAddInfoSpan } from "ui/Infotile/infoTile.styled";
+import { StyledAddInfoSpan } from "ui/InfoTile/infoTile.styled";
 
 const Wrapper = styled.div`
   width: fit-content;
@@ -59,7 +59,7 @@ const DUMMY_DATA: Array<InfoTileContents> = [
 ];
 
 export default {
-  title: "InfoTile",
+  title: "Info Tile List",
   component: InfoTileList,
 } as ComponentMeta<typeof InfoTileList>;
 
