@@ -11,7 +11,7 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token;
+      session.user = token.accessToken as string;
       return session;
     },
   },
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
           }
         );
         const user = await res.json();
-        if (user) {
+        if (res.ok && user) {
           return user;
         } else return null;
       },
