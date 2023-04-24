@@ -30,7 +30,7 @@ const IconBackground = styled.div<BackgroundProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: ${({ backgroundColor }) => backgroundColor || "lightgrey"};
+  background-color: ${({ backgroundColor }) => backgroundColor || "#E1E1E1"};
 `;
 
 export const CategoryIcon = ({
