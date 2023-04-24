@@ -44,8 +44,10 @@ const LogoStyledContainer = styled(Link)<ContainerProps>`
       letter-spacing: ${((logoWidth / 6) * -0.02).toFixed(2) + "px"};
     `}
 `;
-export const LogoSignet = styled.div<LogoSignetProps>`
-  background: url(${({ white }) => white ? logoVersions.whiteURL : logoVersions.colorURL})
+
+const LogoSignet = styled.span<LogoSignetProps>`
+  background: url(${({ white }) =>
+      white ? logoVersions.whiteURL : logoVersions.colorURL})
     no-repeat center / contain;
   height: 100%;
   ${({ logoWidth }) =>
