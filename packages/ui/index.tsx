@@ -20,3 +20,4 @@ export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
 export { InfoTile } from "./InfoTile";
+export { InfoTileList } from "./InfoTileList";

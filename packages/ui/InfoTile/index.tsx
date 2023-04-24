@@ -1,11 +1,12 @@
 "use client"
 
+import { ReactHTMLElement } from 'react';
 import {InfoTileStyled, InfoValueWrapper} from './infoTile.styled'
 
 export type InfoTileProps = {
   label: string;
-  children: string | JSX.Element;
-}
+  children: React.ReactNode
+} 
 
 export const InfoTile = ({ label, children }: InfoTileProps) => {
 

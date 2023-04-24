@@ -1,14 +1,8 @@
 "use client";
 
-import { InfoTile, Icon, Avatar } from "ui";
-import { StyledAddInfoSpan, TileListStyled } from 'ui/InfoTile/infoTile.styled'
-
-
-type InfoTileContents = {
-  dataToRender: string | JSX.Element;
-  label: string;
-  id: number;
-};
+import { InfoTileList, Icon, Avatar } from "ui";
+import { InfoTileContents } from 'ui/InfoTileList';
+import { StyledAddInfoSpan } from 'ui/InfoTile/infoTile.styled';
 
 const DUMMY_DATA: Array<InfoTileContents> = [
   {
@@ -62,9 +56,7 @@ const DUMMY_DATA: Array<InfoTileContents> = [
 export default function Playground() {
   return (
     <>
-      <TileListStyled>
-        {Object.values(DUMMY_DATA).map( el => <InfoTile key={el.id} label={el.label}>{el.dataToRender}</InfoTile>)}
-      </TileListStyled>
+      <InfoTileList contents={DUMMY_DATA}/>
     </>
   );
 }
