@@ -95,13 +95,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     },
   });
 
-  const onSelectStartDate = (date: Date) => {
+  const onSelectStartDate = (date: Date | null) => {
     date
       ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
       : setNewBudget({ ...newBudget, dateStart: null });
   };
 
-  const onSelectEndDate = (date: Date) => {
+  const onSelectEndDate = (date: Date | null) => {
     date
       ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
       : setNewBudget({ ...newBudget, dateEnd: null });
