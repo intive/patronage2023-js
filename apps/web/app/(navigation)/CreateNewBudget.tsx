@@ -277,7 +277,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             return Promise.reject(
                               t(dict.errors.dateBeforeStart)
                             );
-                          else return Promise.resolve(true);
                         }
                         return Promise.resolve(true);
                       }}>
