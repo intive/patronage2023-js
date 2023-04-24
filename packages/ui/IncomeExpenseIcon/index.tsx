@@ -15,7 +15,6 @@ type categoryType = {
 export type IncomeExpenseIconProps = {
   category: categoryType;
   small?: boolean;
-  className?: "string";
 };
 
 type BackgroundProps = {
@@ -36,16 +35,12 @@ const IconBackground = styled.div<BackgroundProps>`
 export const IncomeExpenseIcon = ({
   category,
   small,
-  className,
 }: IncomeExpenseIconProps) => {
   const { icon } = category;
   const { name, foreground, background } = icon;
 
   return (
-    <IconBackground
-      className={className}
-      backgroundColor={background}
-      small={small}>
+    <IconBackground backgroundColor={background} small={small}>
       <Icon
         icon={(name as IconType) || "help"}
         color={foreground || "black"}
