@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 type CurrencyType = {
-  ISO: string;
+  tag: string;
   locale: string;
 };
 
@@ -27,10 +27,10 @@ export const CurrencyAmount = ({
   currencyOptions,
   className,
 }: CurrencyAmountProps) => {
-  const { ISO, locale } = currencyOptions;
+  const { tag, locale } = currencyOptions;
   const options = {
     style: "currency",
-    currency: ISO,
+    currency: tag,
   } as Intl.NumberFormatOptions;
 
   const currencyAmountNumber = new Intl.NumberFormat(locale, options)
