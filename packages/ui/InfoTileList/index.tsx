@@ -10,7 +10,7 @@ export type InfoTileContents = {
   id: number;
 };
 
-type InfoTileListProps = {
+export type InfoTileListProps = {
   contents: InfoTileContents[];
 }
 
