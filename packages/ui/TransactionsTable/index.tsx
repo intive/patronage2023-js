@@ -1,4 +1,5 @@
 "use client";
+
 import { Table } from "ka-table";
 import {
   DataType,
@@ -6,10 +7,12 @@ import {
   PagingPosition,
   SortingMode,
 } from "ka-table/enums";
+
 import { Icon } from "../Icon";
 import { Avatar } from "../Avatar";
 import { useState } from "react";
 import { SearchInput } from "../Input/SearchInput";
+
 import { search } from "ka-table/actionCreators";
 import "./tablestyles.css";
 import { Chip } from "../Chip";
