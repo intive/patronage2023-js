@@ -7,6 +7,8 @@ type TextareaProps = {
   className?: string;
   hasError?: boolean;
   value?: string;
+  id?: string;
+  name?: string;
 } & React.HTMLProps<HTMLTextAreaElement>;
 
 type LabelProps = {
@@ -79,17 +81,22 @@ export const Textarea = ({
   className,
   hasError,
   value,
+  id,
+  name,
 }: TextareaProps) => {
   return (
     <Wrapper>
       <TextareaStyled
+        id={id || name}
         placeholder=" "
         onChange={onChange}
         className={className}
         hasError={hasError}
         value={value}
       />
-      <StyledLabel hasError={hasError}>{label}</StyledLabel>
+      <StyledLabel htmlFor={id || name} hasError={hasError}>
+        {label}
+      </StyledLabel>
     </Wrapper>
   );
 };

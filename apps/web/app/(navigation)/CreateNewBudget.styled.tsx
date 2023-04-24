@@ -120,7 +120,7 @@ export const DatePickerErrorStyled = styled.div`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
-  bottom: 0px;
+  top: 55px;
 `;
 
 export const TabsStyled = styled(Tabs.Root)`
@@ -143,6 +143,8 @@ export const ContentStyled = styled.div`
   grid-row-start: 1;
   grid-row-end: 2;
 `;
+
+// that's some debuggers :P
 
 export const TabsContentStyled = styled(Tabs.Content)`
   /* display: grid; */

@@ -34,13 +34,8 @@ export const useValidateBudgetModal = (value: "AddNewBudgetModal") => {
       z.number().positive({ message: t(dict.errors.moreThanZero) }),
     ]),
     checkDescription: z.string().max(50, t(dict.errors.max50characters)),
-    checkStartDate: z.union([
-      z.date(),
-      z.string().nonempty({ message: t(dict.errors.startingDate) }),
-    ]),
-    checkEndDate: z.union([
-      z.date(),
-      z.string().nonempty({ message: t(dict.errors.endingDate) }),
-    ]),
+    checkDate: z.date({
+      invalid_type_error: t(dict.errors.cantBeEmpty),
+    }),
   };
 };

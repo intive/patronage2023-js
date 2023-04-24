@@ -54,8 +54,8 @@ const HeaderWrapperStyled = styled.div`
   min-height: 24px;
   margin-bottom: 16px;
 
-  @media (min-width: 768px) {
-    margin-bottom: 24px;
+  @media (min-witdh: 1024px) {
+      margin-bottom: 32px;
   }
 `;
 
@@ -73,6 +73,7 @@ const HeaderStyled = styled.h3`
   @media (min-width: 1024px) {
     margin-right: 72px;
     font-size: 24px;
+    margin-bottom: 32px;
   }
 `;
 

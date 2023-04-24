@@ -79,8 +79,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     checkCurrency,
     checkLimit,
     checkDescription,
-    checkStartDate,
-    checkEndDate,
+    checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
   const [newBudget, setNewBudget] = useState<newBudgetType>({
@@ -247,6 +246,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       return (
                         <TextAreaWrapperStyled>
                           <TextareaStyled
+                            id="description"
+                            name="description"
                             placeholder={newBudget.description}
                             label={t(dict.inputNames.description)}
                             value={value}
@@ -275,8 +276,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           ? new Date(newBudget.dateStart)
                           : null
                       }
-                      onSubmitValidate={checkStartDate}
-                      onChangeValidate={checkStartDate}>
+                      onSubmitValidate={checkDate}
+                      onChangeValidate={checkDate}>
                       {({ setValue, errors }) => (
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
@@ -307,7 +308,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       initialValue={
                         newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
                       }
-                      onSubmitValidate={checkEndDate}
+                      onSubmitValidate={checkDate}
                       onChangeValidate={(val, form) => {
                         const start = val! && val.getTime();
                         const end =
