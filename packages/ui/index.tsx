@@ -19,4 +19,4 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
-export { ThreeDots } from "./ThreeDots";
+export { TransactionDropdownMenu } from "./TransactionDropdownMenu";

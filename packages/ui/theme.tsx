@@ -190,9 +190,11 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
-  threeDots: {
+  transactionDropdownMenu: {
     outlineFocus: colors.Teal10,
     backgroundHover: colors.Teal1,
+    iconColor: colors.Neutral6,
+    contentBorder: colors.Neutral2,
   },
 };
 
