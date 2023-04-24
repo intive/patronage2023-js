@@ -1,7 +1,14 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
+import {
+  Button,
+  CurrencySelect,
+  CustomDatePicker,
+  IconPicker,
+  Input,
+  Modal,
+} from "ui";
 import { IconType } from "ui/Icon";
 import {
   TabsContentStyled,
@@ -22,12 +29,14 @@ import {
   DatePickerErrorStyled,
   FooterStyled,
   ContentStyled,
+  InputWrapperHalfStyledCurrency,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
+import { log } from "console";
 
 type NewBudget = {
   onClose?: Function;
@@ -209,7 +218,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       )}
                     </Field>
                   </InputWrapperHalfStyled>
-                  <InputWrapperHalfStyled>
+                  <InputWrapperHalfStyledCurrency>
                     <Field
                       name="currency"
                       initialValue={newBudget.currency.tag}
@@ -217,26 +226,25 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
                         // WIP
-                        <Input
+                        <CurrencySelect
                           value={value}
-                          onChange={(e) => {
+                          hasError={errors.length > 0}
+                          label="currency"
+                          supportingLabel={errors[0]}
+                          onValueChange={(e) => {
+                            console.log("e", e);
+                            setValue(e);
+                            console.log("val", value);
+                            //is it working
                             setNewBudget({
                               ...newBudget,
-                              currency: {
-                                ...newBudget.currency,
-                                tag: e.currentTarget.value,
-                              },
+                              currency: { ...newBudget.currency, tag: e },
                             });
-                            setValue(e.currentTarget.value);
                           }}
-                          label={t(dict.inputNames.currency)}
-                          onInputCleared={() => setValue("")}
-                          hasError={errors.length > 0}
-                          supportingLabel={errors[0]}
                         />
                       )}
                     </Field>
-                  </InputWrapperHalfStyled>
+                  </InputWrapperHalfStyledCurrency>
                   <Field
                     name="description"
                     initialValue={newBudget.description}

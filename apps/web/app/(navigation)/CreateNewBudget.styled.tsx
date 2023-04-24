@@ -68,6 +68,15 @@ export const InputWrapperHalfStyled = styled.div`
   }
 `;
 
+export const InputWrapperHalfStyledCurrency = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 210px;
+  height: 56px;
+  margin-bottom: 29px;
+`;
+
 export const InputWrapperFullFlex = styled.div`
   display: flex;
   justify-content: center;
