@@ -451,13 +451,6 @@ export const BudgetsTable = () => {
   const [searchText, setSearchText] = useState("");
   return (
     <div className="table-wrapper">
-      <div className="search-input-position">
-      <SearchInput
-        searchInput={{ placeholder: "", icon: <Icon icon="search" /> }}
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      </div>
       <Table
         columns={columns}
         rowKeyField={"id"}
