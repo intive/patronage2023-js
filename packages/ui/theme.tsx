@@ -198,7 +198,7 @@ export const theme = {
     focusBackground: colors.Teal1,
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
-  }
+  },
 
   createNewBudget: {
     background: colors.BasicWhite,
