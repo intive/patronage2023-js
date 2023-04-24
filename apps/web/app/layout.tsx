@@ -7,6 +7,8 @@ import { LanguageProvider } from "lib/contexts";
 import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
 
+import 'ka-table/style.css';
+
 export type LayoutProps = {
   children: React.ReactNode;
 };

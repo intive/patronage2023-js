@@ -11,11 +11,12 @@ import {
 import { Icon } from "../Icon";
 import { Avatar } from "../Avatar";
 import { useState } from "react";
-import { SearchInput } from "../Input/SearchInput";
-
-import { search } from "ka-table/actionCreators";
-import "./tablestyles.css";
 import { Chip } from "../Chip";
+
+import { SearchInput } from "../Input/SearchInput";
+import { search } from "ka-table/actionCreators";
+
+import "./tablestyles.css";
 
 export interface Transaction {
   id: string;
@@ -447,7 +448,7 @@ const getDayName = (dateStr: string, locale: string) => {
   return date.toLocaleDateString(locale, { weekday: "long" });
 };
 
-export const BudgetsTable = () => {
+export const TransactionsTable = () => {
   const [searchText, setSearchText] = useState("");
   return (
     <div className="table-wrapper">
