@@ -208,13 +208,12 @@ export const theme = {
       positive: colors.Supporting7,
       text: colors.Neutral8,
     },
-
-    createNewBudget: {
-      background: colors.BasicWhite,
-      inactive: colors.Neutral6,
-      active: colors.Teal8,
-      hover: colors.Teal10,
-    },
+  },
+  createNewBudget: {
+    background: colors.BasicWhite,
+    inactive: colors.Neutral6,
+    active: colors.Teal8,
+    hover: colors.Teal10,
   },
 };
 

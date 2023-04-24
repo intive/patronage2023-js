@@ -46,8 +46,7 @@ const LogoStyledContainer = styled(Link)<ContainerProps>`
 `;
 
 const LogoSignet = styled.span<LogoSignetProps>`
-  background: url(${({ white }) =>
-      white ? logoVersions.whiteURL : logoVersions.colorURL})
+  background: url(${({ white }) => white ? logoVersions.whiteURL : logoVersions.colorURL})
     no-repeat center / contain;
   height: 100%;
   ${({ logoWidth }) =>
