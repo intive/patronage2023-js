@@ -14,7 +14,7 @@ export const InfoTileStyled = styled.div`
 `;
 
 export const InfoValueWrapper = styled.div`
-margin-top: 4px;
+  margin-top: 4px;
   font-family: "Signika", sans-serif;
   display: flex;
   gap: 8px;
