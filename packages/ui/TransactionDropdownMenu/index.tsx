@@ -12,10 +12,18 @@ type TransactionDropdownMenuProps = {
 const DropdownMenuTriggerStyled = styled(DropdownMenu.Trigger)`
   background-color: transparent;
   border: 0;
+  border-radius: 50%;
+  padding: 8px;
+  height: 28px;
+  width: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 
   &:focus {
-    outline: ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+    outline: 2px solid
+      ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
   }
 `;
 
@@ -25,8 +33,6 @@ const IconStyled = styled(Icon)`
 
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   margin: 8px;
-  border: 1px solid
-    ${({ theme }) => theme.transactionDropdownMenu.contentBorder};
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
@@ -36,17 +42,31 @@ const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
 
 //item is created here, because DropdownMenu.Item is necessary anyway for dropdown proper functionality
 export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
-  width: 100%;
-  padding: 10px 15px;
+  padding: 6px 11px;
   font-size: 14px;
-  border-radius: 5px;
+  border: 1px solid transparent;
   cursor: pointer;
 
+  &:first-child {
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+  &:last-child {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
   &:focus {
-    outline: ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+    border-color: ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+    background-color: ${({ theme }) =>
+      theme.transactionDropdownMenu.activeBackground};
+    outline: 0;
   }
   &:hover {
-    background: ${({ theme }) => theme.transactionDropdownMenu.backgroundHover};
+    background-color: ${({ theme }) =>
+      theme.transactionDropdownMenu.activeBackground};
+    outline: 0;
+    border: 1px solid transparent;
   }
 `;
 

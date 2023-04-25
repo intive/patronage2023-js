@@ -194,9 +194,8 @@ export const theme = {
   },
   transactionDropdownMenu: {
     outlineFocus: colors.Teal10,
-    backgroundHover: colors.Teal1,
+    activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
-    contentBorder: colors.Neutral2,
   },
   infoTile: {
     border: colors.Neutral2,
