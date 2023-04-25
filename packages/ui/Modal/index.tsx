@@ -14,7 +14,7 @@ const ModalStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100%;
+  height: 100%;
   z-index: 100;
   overflow: auto;
   width: 100%;
@@ -33,8 +33,9 @@ const CardStyled = styled(Card)`
   justify-content: flex-start;
   align-items: center;
   padding: 24px 16px;
-  margin: 4px;
   z-index: 1;
+  height: calc(100% - 48px);
+  max-height: 922px;
 
   @media (min-width: 768px) {
     padding: 24px;
@@ -53,8 +54,8 @@ const HeaderWrapperStyled = styled.div`
   min-height: 24px;
   margin-bottom: 16px;
 
-  @media (min-width: 768px) {
-    margin-bottom: 24px;
+  @media (min-witdh: 1024px) {
+      margin-bottom: 32px;
   }
 `;
 
@@ -72,6 +73,7 @@ const HeaderStyled = styled.h3`
   @media (min-width: 1024px) {
     margin-right: 72px;
     font-size: 24px;
+    margin-bottom: 32px;
   }
 `;
 

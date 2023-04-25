@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, forwardRef } from "react";
 import styled, { css, ThemeContext } from "styled-components";
 
 import { Icon } from "../Icon";
@@ -21,7 +21,7 @@ export type InputProps = {
 } & StyledErrorProps &
   React.HTMLProps<HTMLInputElement>;
 
-export const Input = ({
+export const Input = forwardRef(({
   label,
   hasError = false,
   name,
@@ -33,7 +33,7 @@ export const Input = ({
   onFocus,
   onBlur,
   onInputCleared,
-}: InputProps) => {
+}: InputProps, ref) => {
   const theme = useContext(ThemeContext);
   const [typeOverride, setTypeOverride] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -108,7 +108,7 @@ export const Input = ({
       )}
     </Wrapper>
   );
-};
+});
 
 const Wrapper = styled.div`
   position: relative;

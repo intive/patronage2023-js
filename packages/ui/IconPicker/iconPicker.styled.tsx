@@ -1,13 +1,18 @@
 import styled from "styled-components";
 import { Card } from "../Card";
 
-export const IconPickerStyled = styled.div`
+type IconPickerStyledProps = {
+  ref: React.Ref<any> | null;
+};
+
+export const IconPickerStyled = styled.div<IconPickerStyledProps>`
   position: relative;
   justify-content: flex-start;
   width: 112px;
   height: 112px;
   gap: 2px;
   z-index: 1;
+  cursor: pointer;
 `;
 
 export const IconAndButtonWrapperStyled = styled.div`
