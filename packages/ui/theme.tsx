@@ -209,10 +209,10 @@ export const theme = {
     focusBackground: colors.Teal1,
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
-    currencyAmount: {
-      positive: colors.Supporting7,
-      text: colors.Neutral8,
-    },
+  },
+  currencyAmount: {
+    positive: colors.Supporting7,
+    text: colors.Neutral8,
   },
   createNewBudget: {
     background: colors.BasicWhite,
