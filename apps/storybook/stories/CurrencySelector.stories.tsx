@@ -1,3 +1,4 @@
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CurrencySelect } from "ui";
 import styled from "styled-components";
