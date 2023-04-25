@@ -19,7 +19,7 @@ export const SelectTrigger = styled(Select.Trigger)<SelectTriggerProps>`
   display: flex;
   justify-content: space-between;
   padding-top: 1em;
-  padding-left: 1em;
+  padding-left: 13px;
   padding-right: 10px;
   transition: border-color 200ms ease-out;
 
@@ -59,7 +59,6 @@ export const SelectContent = styled(Select.Content)`
 `;
 
 export const SelectItem = styled(Select.Item)`
-  /* height: 56px; */
   outline-color: ${({ theme }) => theme.input.focus};
   padding: 16px;
   gap: 8px;

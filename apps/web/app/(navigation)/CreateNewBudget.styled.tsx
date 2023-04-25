@@ -151,6 +151,18 @@ export const ContentStyled = styled.div`
   overflow-y: scroll;
   grid-row-start: 1;
   grid-row-end: 2;
+  padding: 10px;
+
+  &::-webkit-scrollbar {
+    background-color: #e1e1e1;
+    border-radius: 10px;
+    width: 6px;
+    margin-bottom: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #7e7e7e;
+    border-radius: 10px;
+  }
 `;
 
 // that's some debuggers :P
