@@ -1,6 +1,6 @@
 import * as Select from "@radix-ui/react-select";
-import styled, { css } from "styled-components";
-import { SelectTriggerProps, StyledErrorProps } from ".";
+import styled from "styled-components";
+import { SelectTriggerProps } from ".";
 
 export const SelectRoot = styled(Select.Root)`
   position: relative;
