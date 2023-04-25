@@ -2,7 +2,7 @@
 
 import { Budget } from "lib/types";
 import { useState, useEffect } from "react";
-import { InfoTile, Icon } from "ui";
+import { InfoTile, Icon, CurrencyAmount } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import styled from "styled-components";
 
@@ -13,17 +13,18 @@ const currencyNames = {
   "EUR": "Euro",
 };
 
-const currencySymbols = {
-  "USD": "$",
-  "GBP": "£",
-  "PLN": "PLN",
-  "EUR": "€",
-}
+// const currencySymbols = {
+//   "USD": "$",
+//   "GBP": "£",
+//   "PLN": "PLN",
+//   "EUR": "€",
+// }
 
 //STYLING
 const BasicInfoWrapper = styled.div`
   width: 100%;
   border: 1px solid red;
+  //remove padding as it's Card's job to add it
   padding: 48px;
   align-self: flex-start;
   justify-self: flex-start;
@@ -95,7 +96,8 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
       <StyledAddInfoSpan>{currencyNames[budget?.currency.tag]}</StyledAddInfoSpan>
     </>
   );
-  const budgetLimit = <>{currencySymbols[budget?.currency.tag]} {budget?.limit}</>;
+  // const budgetLimit = <>{currencySymbols[budget?.currency.tag]} {budget?.limit}</>;
+  const budgetLimit = <><CurrencyAmount amount={budget?.limit} currencyOptions={budget?.currency} viewRaw /></>;
   //DATA for information tiles
 
 
@@ -113,9 +115,9 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
             </div>
           </TopSectionWrapper>
           <TileWrapper>
-            <InfoTile label="Budget Period" dataToRender="1 Jan - 21 Jan" />
-            <InfoTile label="Budget Limit" dataToRender={budgetLimit} />
-            <InfoTile label="Budget Currency" dataToRender={currencyInfo} />
+            <InfoTile label="Budget period" dataToRender="1 Jan - 21 Jan" />
+            <InfoTile label="Budget limit" dataToRender={budgetLimit} />
+            <InfoTile label="Currency" dataToRender={currencyInfo} />
           </TileWrapper>
         </BasicInfoWrapper>
       )}

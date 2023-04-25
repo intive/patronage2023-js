@@ -9,7 +9,8 @@ export const BudgetsTitle = ({ name = "" }) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const mainCardContent = (
     <>
-      <BudgetBasicInformation budgetId="36cc0777-2874-4d0c-a389-91280e45e836"/>
+      <BudgetBasicInformation budgetId="b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de"/>
+      <BudgetBasicInformation budgetId="3694a39d-7ecd-4e08-b56a-5dc857c09237"/>
     </>
   );
 
