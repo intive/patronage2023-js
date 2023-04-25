@@ -46,17 +46,33 @@ const dummyItems: Array<DropdownMenuSingleItem> = [
 ];
 
 export default {
-  title: "TransactionDropdownMenu",
+  title: "Transaction dropdown menu",
+  argTypes: {
+    items: {
+      mapping: { Default: dummyItems },
+    },
+  },
   component: TransactionDropdownMenu,
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "https://github.com/storybookjs/storybook/issues/16855 link to issue solution with component's rendering",
+      },
+    },
+  },
 } as ComponentMeta<typeof TransactionDropdownMenu>;
 
-const Template: ComponentStory<typeof TransactionDropdownMenu> = ({ ...args }) => (
+const Template: ComponentStory<typeof TransactionDropdownMenu> = ({
+  ...args
+}) => (
   <TransactionDropdownMenuWrapper>
-    <TransactionDropdownMenu {...args} items={dummyItems}/>
+    <TransactionDropdownMenu {...args} />
   </TransactionDropdownMenuWrapper>
 );
 
-export const Simple = Template.bind({});
-Simple.args = {
+export const Basic = Template.bind({});
+Basic.args = {
+  items: 'Default',
   side: "right",
 };

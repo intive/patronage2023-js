@@ -2,7 +2,7 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Icon } from "ui";
 import styled from "styled-components";
-import { PropsWithChildren, ReactElement } from "react";
+import { ReactElement } from "react";
 
 //type for every item in DropdownMenu
 type DropdownMenuSingleItem = {
@@ -14,7 +14,7 @@ type TransactionDropdownMenuProps = {
   items: Array<DropdownMenuSingleItem>;
   side: "top" | "right" | "bottom" | "left";
   ariaLabel?: string;
-} & PropsWithChildren;
+};
 
 const DropdownMenuTriggerStyled = styled(DropdownMenu.Trigger)`
   background-color: transparent;
@@ -90,10 +90,10 @@ export const TransactionDropdownMenu = ({
       </DropdownMenuTriggerStyled>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled side={side}>
-          {items.map(({ ComponentToRender, id }) => {
+          {items.map((item) => {
             return (
-              <DropdownMenuItemStyled key={id}>
-                {ComponentToRender}
+              <DropdownMenuItemStyled key={item.id}>
+                {item.ComponentToRender}
               </DropdownMenuItemStyled>
             );
           })}
