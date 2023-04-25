@@ -7,8 +7,10 @@ import { DataType } from "ka-table/enums";
 
 import { Icon } from "../Icon";
 import { Avatar } from "../Avatar";
-import { useEffect, useState } from "react";
 import { Chip } from "../Chip";
+import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
+
+import { useEffect, useState } from "react";
 
 import "./tablestyles.css";
 
@@ -35,7 +37,6 @@ const columns = [
   },
   {
     key: "editColumn",
-    width: 30
   },
   //not intuit.
   { key: "date", title: "Date", isSortable: false, dataType: DataType.String },
@@ -58,6 +59,21 @@ export const TransactionsTable = ({ budgetId }: Props) => {
       .then((response) => response.json())
       .then((result) => setTransactions(result.transactions));
   }, [budgetId]);
+
+  const dummyItems = [
+    {
+      ComponentToRender: "Edit",
+      id: "edit-budget",
+    },
+    {
+      ComponentToRender: "Clone",
+      id: "clone-budget",
+    },
+    {
+      ComponentToRender: "Remove",
+      id: "remove-budget",
+    },
+  ];
 
   return (
     <div className="table-wrapper">
@@ -88,7 +104,7 @@ export const TransactionsTable = ({ budgetId }: Props) => {
                 case "status":
                   return <Chip type={props.value}>{props.value}</Chip>;
                 case "editColumn":
-                  return <Icon icon="more_vert" />
+                  return <TransactionDropdownMenu items={dummyItems} side='right' />
               }
             },
           },
