@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import {
   IconPickerStyled,
   IconsSelectorStyled,
@@ -8,6 +8,7 @@ import {
 } from "./iconPicker.styled";
 import { BudgetIcon } from "../BudgetIcon";
 import { Icon, IconType } from "../Icon";
+import { useOnClickOutside } from "./useOnclickOutside";
 
 type IconPickerProps = {
   defaultIcon?: IconType;
@@ -76,6 +77,9 @@ export const IconPicker = ({
   const [currentIcon, setCurrentIcon] = useState(defaultIcon);
   const [iconSelectorVisible, setIconSelectorVisible] = useState(false);
 
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => setIconSelectorVisible(false));
+
   const handleEditButtonClick = () => {
     setIconSelectorVisible(!iconSelectorVisible);
   };
@@ -89,7 +93,7 @@ export const IconPicker = ({
   const handleCloseIconSelector = () => setIconSelectorVisible(false);
 
   return (
-    <IconPickerStyled>
+    <IconPickerStyled ref={ref} onClick={handleEditButtonClick}>
       <BudgetIcon icon={currentIcon}>
         <EditButtonStyled onClick={handleEditButtonClick}>
           <Icon icon="edit" iconSize={12} />

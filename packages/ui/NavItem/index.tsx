@@ -8,6 +8,7 @@ import Link from "next/link";
 export type NavItemProps = {
   active: boolean;
   href: string;
+  onClick: () => void;
 } & React.HTMLProps<HTMLAnchorElement>;
 
 type NavItemPropsTransient = Omit<NavItemProps, "active"> & {
@@ -59,9 +60,9 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   }
 `;
 
-export const NavItem = ({ active, href, children }: NavItemProps) => {
+export const NavItem = ({ active, href, children, onClick }: NavItemProps) => {
   return (
-    <NavItemStyled $active={active} href={href}>
+    <NavItemStyled $active={active} href={href} onClick={onClick}>
       <ChildrenWrapper>{children}</ChildrenWrapper>
       {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
     </NavItemStyled>
