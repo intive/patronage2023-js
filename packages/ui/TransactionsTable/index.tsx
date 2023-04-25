@@ -1,11 +1,14 @@
 "use client";
 
-import { Transaction } from "./../../../apps/web/lib/types";
+import { Budget, Transaction } from "./../../../apps/web/lib/types";
 
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 
 import { Icon } from "../Icon";
+import { CategoryIcon } from "../CategoryIcon";
+import { CurrencyAmount } from "../CurrencyAmount";
+
 import { Avatar } from "../Avatar";
 import { Chip } from "../Chip";
 import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
@@ -48,17 +51,17 @@ const getDayName = (dateStr: string, locale: string) => {
 };
 
 type Props = {
-  budgetId: string;
+  budget: Budget;
 };
 
-export const TransactionsTable = ({ budgetId }: Props) => {
+export const TransactionsTable = ({ budget }: Props) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    fetch(`/budget/${budgetId}.json`)
+    fetch(`/budget/${budget.id}.json`)
       .then((response) => response.json())
       .then((result) => setTransactions(result.transactions));
-  }, [budgetId]);
+  }, [budget]);
 
   const dummyItems = [
     {
@@ -90,21 +93,23 @@ export const TransactionsTable = ({ budgetId }: Props) => {
             content: (props) => {
               switch (props.column.key) {
                 case "category":
+                  return <CategoryIcon category={props.value} small={false} />;
+                case "status":
+                  return <Chip type={props.value}>{props.value}</Chip>;
+                case "amount":
                   return (
-                    <Icon
-                      color={props.value.icon.foreground}
-                      icon={props.value.icon.name}></Icon>
+                    <CurrencyAmount amount={props.value} currencyOptions={budget.currency} />
                   );
                 case "creator":
                   return (
                     <div className="avatar-icon-wrapper">
-                      <Avatar className="avatar" src={props.value.avatar} />{" "}
+                      <Avatar className="avatar" src={`/avatars/${props.value.avatar}`} />{" "}
                     </div>
                   );
-                case "status":
-                  return <Chip type={props.value}>{props.value}</Chip>;
                 case "editColumn":
-                  return <TransactionDropdownMenu items={dummyItems} side='right' />
+                  return (
+                    <TransactionDropdownMenu items={dummyItems} side="right" />
+                  );
               }
             },
           },
@@ -126,14 +131,9 @@ export const TransactionsTable = ({ budgetId }: Props) => {
               return (
                 <>
                   {column.title}
-                  {column.key !== "status" && <Icon icon="sort" />}
+                  {column.key !== "editColumn" && <Icon icon="sort" />}
                 </>
               );
-            },
-          },
-          sortIcon: {
-            content: ({ column }) => {
-              return <></>;
             },
           },
         }}
