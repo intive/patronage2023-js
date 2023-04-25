@@ -99,7 +99,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     dateStart: null,
     dateEnd: null,
     currency: {
-      tag: "",
+      tag: "USD",
       locale: lang,
     },
   });

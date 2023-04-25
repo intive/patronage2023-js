@@ -45,17 +45,6 @@ export const SelectIcon = styled(Select.Icon)`
   margin-top: -2px;
 `;
 
-export const StyledSupportingLabel = styled.div<StyledErrorProps>`
-  color: ${({ hasError }) =>
-    hasError
-      ? ({ theme }) => theme.input.error
-      : ({ theme }) => theme.input.neutral};
-  font-weight: 400;
-  font-size: 12px;
-  margin: 4px 10px 0 10px;
-  position: absolute;
-`;
-
 export const SelectPortal = styled(Select.Portal)`
   margin-top: 2px;
   z-index: 100;

@@ -11,7 +11,6 @@ import {
   SelectRoot,
   SelectTrigger,
   StyledCurrencyLabel,
-  StyledSupportingLabel,
   StyledTag,
 } from "./CurrencySelect.styled";
 
@@ -56,7 +55,6 @@ const currency = [
 
 export const CurrencySelect = ({
   hasError = false,
-  supportingLabel,
   onValueChange,
   value,
   id,
@@ -82,11 +80,7 @@ export const CurrencySelect = ({
           />
         </SelectIcon>
       </SelectTrigger>
-      {supportingLabel && (
-        <StyledSupportingLabel hasError={hasError}>
-          Choose Currency
-        </StyledSupportingLabel>
-      )}
+
       <SelectPortal>
         <SelectContent position="popper">
           <Select.Viewport>
