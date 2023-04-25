@@ -1,17 +1,19 @@
 import styled from "styled-components";
+import { device } from "lib/media-queries";
 
 interface WrapperProps {
   center?: boolean;
 }
 
 export const FormWrapper = styled.div<WrapperProps>`
-  display: flex;
   height: 542px;
-  width: 416px;
+  width: 312px;
+  display: flex;
   flex-direction: column;
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
-  @media (max-width: 767px) {
-    width: 312px;
+
+  ${device.desktop} {
+    width: 416px;
   }
 `;
 
