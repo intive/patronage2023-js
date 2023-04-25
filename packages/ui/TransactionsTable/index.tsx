@@ -3,9 +3,7 @@
 import { Transaction } from "./../../../apps/web/lib/types";
 
 import { Table } from "ka-table";
-import {
-  DataType,
-} from "ka-table/enums";
+import { DataType } from "ka-table/enums";
 
 import { Icon } from "../Icon";
 import { Avatar } from "../Avatar";
@@ -18,21 +16,21 @@ const columns = [
   {
     key: "category",
     title: "Category",
-    isSortable: false,
+    isSortable: true,
     dataType: DataType.Object,
   },
-  { key: "description", title: "Description", dataType: DataType.String },
+  { key: "description", title: "Name", dataType: DataType.String },
   {
     key: "status",
     title: "Status",
-    isSortable: false,
+    isSortable: true,
     dataType: DataType.String,
   },
   { key: "amount", title: "Amount", dataType: DataType.Number },
   {
     key: "creator",
     title: "Creator",
-    isSortable: false,
+    isSortable: true,
     dataType: DataType.Object,
   },
   //not intuit.
@@ -125,12 +123,8 @@ export const TransactionsTable = ({ budgetId }: Props) => {
               return <Icon icon="sort" />;
             },
           },
-          tableWrapper: {
-            elementAttributes: () => ({
-              style: { maxHeight: 350, minHeight: 350 },
-            }),
-          },
-        }}></Table>
+        }}
+      />
     </div>
   );
 };
