@@ -154,13 +154,13 @@ export const ContentStyled = styled.div`
   padding: 10px;
 
   &::-webkit-scrollbar {
-    background-color: #e1e1e1;
+    background-color: ${({ theme }) => theme.textarea.Neutral2};
     border-radius: 10px;
     width: 6px;
     margin-bottom: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: #7e7e7e;
+    background-color: ${({ theme }) => theme.modal.closeButton};
     border-radius: 10px;
   }
 `;

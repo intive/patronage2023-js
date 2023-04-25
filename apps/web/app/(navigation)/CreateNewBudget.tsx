@@ -116,7 +116,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   useEffect(() => {
     currentLang === "en" && setLang("en-US");
     currentLang === "pl" && setLang("pl-PL");
-  }, [lang]);
+  }, [lang, currentLang]);
 
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
