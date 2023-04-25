@@ -84,10 +84,12 @@ export const FormWrapperStyled = styled.div`
   ${device.tablet} {
     width: 60%;
     margin-right: 2rem;
+    padding: 2rem 0;
   }
 
   ${device.desktop} {
     margin-right: 3rem;
+    padding: 3rem;
   }
 `;
 
