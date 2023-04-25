@@ -149,7 +149,13 @@ const dictionary = {
       firstNameInputLabel: {
         en: "First name",
         pl: "Imię",
+      firstNameInputLabel: {
+        en: "First name",
+        pl: "Imię",
       },
+      lastNameInputLabel: {
+        en: "Last name",
+        pl: "Nazwisko",
       lastNameInputLabel: {
         en: "Last name",
         pl: "Nazwisko",

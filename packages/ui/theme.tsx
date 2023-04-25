@@ -193,6 +193,11 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+  transactionDropdownMenu: {
+    outlineFocus: colors.Teal10,
+    activeBackground: colors.Teal1,
+    iconColor: colors.Neutral6,
+  },
   infoTile: {
     border: colors.Neutral2,
     label: colors.Neutral6,
