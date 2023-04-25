@@ -8,14 +8,14 @@ export default {
 } as ComponentMeta<typeof CurrencySelect>;
 
 const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({...args }) => (
-    <StyledDiv><CurrencySelect {...args}/></StyledDiv>
+    <Wrapper><CurrencySelect {...args}/></Wrapper>
 );
 
 export const Select = CurrencySelectTemplate.bind({});
 Select.args = {
-    label: "Currency"
+    label: "Currency",
 };
 
-const StyledDiv = styled.div`
+const Wrapper = styled.div`
   width: 206px;  
 `;
