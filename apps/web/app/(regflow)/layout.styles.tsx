@@ -32,7 +32,7 @@ export const ContentStyled = styled.div`
   }
 
   ${device.desktop} {
-    gap: 4rem;
+    gap: 0;
   }
 
   ${device.tv} {
@@ -59,7 +59,7 @@ export const SectionStyled = styled.div`
   }
 
   ${device.desktop} {
-    margin-left: 6rem;
+    margin-left: 4rem;
   }
 `;
 
@@ -72,7 +72,7 @@ export const TypoStyled = styled.div`
     height: 255px;
   }
 
-  ${device.tablet} {
+  ${device.desktop} {
     height: 220px;
     max-width: 580px;
   }
