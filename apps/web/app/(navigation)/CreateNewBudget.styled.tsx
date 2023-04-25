@@ -170,8 +170,3 @@ export const ContentStyled = styled.div`
 export const TabsContentStyled = styled(Tabs.Content)`
   /* display: grid; */
 `;
-
-export const FooterStyled = styled.div`
-  /* background-color: aquamarine; */
-  /* height: 80px; */
-`;

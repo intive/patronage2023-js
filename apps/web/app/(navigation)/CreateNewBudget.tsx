@@ -11,7 +11,6 @@ import {
 } from "ui";
 import { IconType } from "ui/Icon";
 import {
-  TabsContentStyled,
   TabsStyled,
   TabsTriggerStyled,
   ParagraphStyled,
@@ -27,7 +26,6 @@ import {
   TextAreaWrapperStyled,
   DatePickerWrapperStyled,
   DatePickerErrorStyled,
-  FooterStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
 } from "./CreateNewBudget.styled";
@@ -144,7 +142,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 e.preventDefault();
               }}>
               <ContentStyled>
-                <TabsContentStyled value="settings">
+                <Tabs.Content value="settings">
                   <ParagraphStyled>
                     {t(dict.paragraphs.details)}
                   </ParagraphStyled>
@@ -352,17 +350,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       )}
                     </Field>
                   </InputWrapperFullFlex>
-                </TabsContentStyled>
-                <TabsContentStyled value="share">
-                  Welcome to share
-                </TabsContentStyled>
+                </Tabs.Content>
+                <Tabs.Content value="share">Welcome to share</Tabs.Content>
               </ContentStyled>
-              <FooterStyled>
+              <div>
                 <SeparatorStyled />
                 <ButtonWrapperStyled>
                   <Button onClick={submit}>{t(dict.button)}</Button>
                 </ButtonWrapperStyled>
-              </FooterStyled>
+              </div>
             </form>
           )}
         </Form>
