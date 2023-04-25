@@ -31,7 +31,7 @@ const ButtonStyled = styled.button`
 `;
 
 //DropdownMenu accepts `children` prop in order to be more generic - it can be used in diffrent places with diffrent items.
-export const dummyItems: Array<DropDownMenuSingleItem> = [
+const dummyItems: Array<DropDownMenuSingleItem> = [
   {
     ComponentToRender: <LinkStyled href="">Edit</LinkStyled>,
     id: "edit-budget",
