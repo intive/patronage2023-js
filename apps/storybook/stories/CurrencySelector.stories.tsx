@@ -18,5 +18,5 @@ Select.args = {
 };
 
 const Wrapper = styled.div`
-  width: 206px;  
+  width: 210px;  
 `;
