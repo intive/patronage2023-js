@@ -164,9 +164,3 @@ export const ContentStyled = styled.div`
     border-radius: 10px;
   }
 `;
-
-// that's some debuggers :P
-
-export const TabsContentStyled = styled(Tabs.Content)`
-  /* display: grid; */
-`;
