@@ -11,17 +11,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user = await jwt_decode(token.accessToken as string);
       return session;
     },
   },
   providers: [
     CredentialsProvider({
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" },
-      },
+      credentials: {},
       async authorize(credentials, req) {
         const { email, password } = credentials as CredentialType;
         const res = await fetch(
@@ -48,7 +45,6 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/sign-in/",
     signOut: "/sign-in",
-    error: "/sign-in",
   },
 };
 export default NextAuth(authOptions);
