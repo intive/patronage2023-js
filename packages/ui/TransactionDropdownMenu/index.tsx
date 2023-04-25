@@ -2,9 +2,16 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Icon } from "ui";
 import styled from "styled-components";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactElement } from "react";
+
+//type for every item in DropdownMenu
+type DropDownMenuSingleItem = {
+  ComponentToRender?: ReactElement;
+  id: string;
+};
 
 type TransactionDropdownMenuProps = {
+  items: Array<DropDownMenuSingleItem>;
   side: "top" | "right" | "bottom" | "left";
   ariaLabel?: string;
 } & PropsWithChildren;
@@ -40,7 +47,6 @@ const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   overflow: hidden;
 `;
 
-//item is created here, because DropdownMenu.Item is necessary anyway for dropdown proper functionality
 export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   padding: 6px 11px;
   font-size: 14px;
@@ -71,9 +77,9 @@ export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
 `;
 
 export const TransactionDropdownMenu = ({
+  items,
   side,
   ariaLabel,
-  children,
 }: TransactionDropdownMenuProps) => {
   return (
     <DropdownMenu.Root>
@@ -84,7 +90,13 @@ export const TransactionDropdownMenu = ({
       </DropdownMenuTriggerStyled>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled side={side}>
-          {children}
+          {items.map(({ ComponentToRender, id }) => {
+            return (
+              <DropdownMenuItemStyled key={id}>
+                {ComponentToRender}
+              </DropdownMenuItemStyled>
+            );
+          })}
         </DropdownMenuContentStyled>
       </DropdownMenu.Portal>
     </DropdownMenu.Root>

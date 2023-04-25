@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { TransactionDropdownMenu } from "ui";
 import styled from "styled-components";
-import { DropdownMenuItemStyled } from "ui/TransactionDropdownMenu";
 import Link from "next/link";
 import React, { ReactElement } from "react";
 
@@ -51,19 +50,9 @@ export default {
   component: TransactionDropdownMenu,
 } as ComponentMeta<typeof TransactionDropdownMenu>;
 
-const Template: ComponentStory<typeof TransactionDropdownMenu> = ({
-  ...args
-}) => (
+const Template: ComponentStory<typeof TransactionDropdownMenu> = ({ ...args }) => (
   <TransactionDropdownMenuWrapper>
-    <TransactionDropdownMenu {...args}>
-      {dummyItems.map(({ ComponentToRender, id }) => {
-        return (
-          <DropdownMenuItemStyled key={id}>
-            {ComponentToRender}
-          </DropdownMenuItemStyled>
-        );
-      })}
-    </TransactionDropdownMenu>
+    <TransactionDropdownMenu {...args} items={dummyItems}/>
   </TransactionDropdownMenuWrapper>
 );
 
