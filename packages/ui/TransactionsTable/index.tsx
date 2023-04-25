@@ -33,6 +33,10 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
   },
+  {
+    key: "editColumn",
+    width: 30
+  },
   //not intuit.
   { key: "date", title: "Date", isSortable: false, dataType: DataType.String },
 ];
@@ -79,11 +83,12 @@ export const TransactionsTable = ({ budgetId }: Props) => {
                   return (
                     <div className="avatar-icon-wrapper">
                       <Avatar className="avatar" src={props.value.avatar} />{" "}
-                      <Icon icon="more_vert" />
                     </div>
                   );
                 case "status":
                   return <Chip type={props.value}>{props.value}</Chip>;
+                case "editColumn":
+                  return <Icon icon="more_vert" />
               }
             },
           },
@@ -113,14 +118,6 @@ export const TransactionsTable = ({ budgetId }: Props) => {
           sortIcon: {
             content: ({ column }) => {
               return <></>;
-            },
-          },
-          headFilterButton: {
-            content: ({ column: { key } }) => {
-              if (key !== "status") {
-                return <></>;
-              }
-              return <Icon icon="sort" />;
             },
           },
         }}
