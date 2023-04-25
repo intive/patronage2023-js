@@ -173,6 +173,7 @@ export const theme = {
     font: colors.Neutral8,
     disabled: colors.Neutral2,
     focus: colors.Teal5,
+    error: colors.Supporting4,
   },
   iconPicker: {
     main: colors.Teal10,
@@ -214,6 +215,12 @@ export const theme = {
   currencyAmount: {
     positive: colors.Supporting7,
     text: colors.Neutral8,
+  },
+  createNewBudget: {
+    background: colors.BasicWhite,
+    inactive: colors.Neutral6,
+    active: colors.Teal8,
+    hover: colors.Teal10,
   },
 };
 
