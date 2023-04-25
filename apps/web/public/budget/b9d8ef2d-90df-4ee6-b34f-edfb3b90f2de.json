@@ -1,0 +1,68 @@
+{
+  "transactions": [
+    {
+      "id": "a291db86-2857-4e8a-958b-f9ba52c884b1",
+      "date": 1676332800000,
+      "amount": -12000,
+
+      "category": {
+        "id": 1,
+        "name": "Home spendings",
+        "icon": {
+          "name": "home",
+          "foreground": "#1E4C40",
+          "background": "#F1FBF6"
+        }
+      },
+      "description": "IKEA",
+      "status": "Done",
+      "creator": {
+        "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
+        "name": "Jan Kowalski",
+        "avatar": "2.svg"
+      }
+    },
+    {
+      "id": "0bfc80b3-96a9-4420-a153-0cd7673d8d18",
+      "date": 1673308800000,
+      "amount": -60000,
+      "category": {
+        "id": 1,
+        "name": "Home spendings",
+        "icon": {
+          "name": "home",
+          "foreground": "#1E4C40",
+          "background": "#F1FBF6"
+        }
+      },
+      "description": "Zakupy",
+      "status": "Done",
+      "creator": {
+        "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
+        "name": "Jan Kowalski",
+        "avatar": "2.svg"
+      }
+    },
+    {
+      "id": "7c358eed-8915-451d-bcc8-6de4a8b804ad",
+      "date": 1673222400000,
+      "amount": 1200000,
+      "category": {
+        "id": 5,
+        "name": "Income",
+        "icon": {
+          "name": "payments",
+          "foreground": "#162A41",
+          "background": "#F0F3F7"
+        }
+      },
+      "description": "Wynagrodzenie za 1 kwartał UOP",
+      "status": "Done",
+      "creator": {
+        "id": "b7f83347-5d65-43d0-a5a9-3cb6397b5fe2",
+        "name": "Jan Kowalski",
+        "avatar": "2.svg"
+      }
+    }
+  ]
+}

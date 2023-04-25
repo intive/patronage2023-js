@@ -20,3 +20,7 @@ export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
 export { TransactionDropdownMenu } from "./TransactionDropdownMenu";
+export { InfoTile } from "./InfoTile";
+export { CurrencySelect } from "./CurrencySelect";
+export { CurrencyAmount } from "./CurrencyAmount";
+export { CategoryIcon } from "./CategoryIcon";
