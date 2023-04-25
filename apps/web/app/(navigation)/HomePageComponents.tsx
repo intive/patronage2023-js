@@ -10,7 +10,7 @@ export const CardWrapperStyled = styled.div`
   align-items: center;
   height: 100%;
   background-color: #e5e5e5;
-  padding: 25px;
+  padding: 25px 25px 25px 0px;
 `;
 
 export const CardStyled = styled(Card)`

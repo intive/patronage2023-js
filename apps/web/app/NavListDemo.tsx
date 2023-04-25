@@ -56,7 +56,9 @@ export default function NavListDemo() {
   return (
     <>
       <NavListWrapperStyled>
-        <NavList contents={dummyNavItemContents}></NavList>
+        <NavList
+          contents={dummyNavItemContents}
+          onNavListItemClick={() => console.log("dummy")}></NavList>
       </NavListWrapperStyled>
     </>
   );
