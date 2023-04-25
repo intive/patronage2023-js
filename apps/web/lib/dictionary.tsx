@@ -149,13 +149,7 @@ const dictionary = {
       firstNameInputLabel: {
         en: "First name",
         pl: "Imię",
-      firstNameInputLabel: {
-        en: "First name",
-        pl: "Imię",
       },
-      lastNameInputLabel: {
-        en: "Last name",
-        pl: "Nazwisko",
       lastNameInputLabel: {
         en: "Last name",
         pl: "Nazwisko",
@@ -325,7 +319,10 @@ const dictionary = {
     },
   },
 
-  BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
+  BudgetsPage: {
+    title: { en: "Budgets page", pl: "Budżety" },
+    dropdownButtonAriaLabel: { en: "More options", pl: "Więcej opcji" },
+  },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
   SettingsPage: { title: { en: "Settings page", pl: "Ustawienia" } },
   TeamPage: { title: { en: "Team page", pl: "Zespoły" } },
