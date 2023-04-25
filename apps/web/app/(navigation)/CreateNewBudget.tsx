@@ -34,7 +34,6 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
-import { log } from "console";
 
 type NewBudget = {
   onClose?: Function;

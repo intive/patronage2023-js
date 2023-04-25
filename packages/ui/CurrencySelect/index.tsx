@@ -14,8 +14,6 @@ import {
   StyledTag,
 } from "./CurrencySelect.styled";
 
-export type StyledErrorProps = {};
-
 export type SelectTriggerProps = {
   hasSupportingLabel?: boolean;
 };
@@ -26,8 +24,7 @@ export type CurrencySelectComponentProps = {
   value: string;
   id?: string;
   label?: string;
-} & StyledErrorProps &
-  Select.SelectTriggerProps &
+} & Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
 
 const currency = [
