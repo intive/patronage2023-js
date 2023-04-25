@@ -4,10 +4,6 @@
       "id": "4ace5f31-f56a-4430-8267-f19278d8ebf3",
       "date": 1678752000000,
       "amount": -25.99,
-      "currency": {
-        "tag": "GBP",
-        "locale": "en-GB"
-      },
       "category": {
         "id": 4,
         "name": "Grocery",
@@ -29,10 +25,6 @@
       "id": "e865e4d7-9760-49df-8010-648f8da8cb1c",
       "date": 1678492800000,
       "amount": -50.27,
-      "currency": {
-        "tag": "GBP",
-        "locale": "en-GB"
-      },
       "category": {
         "id": 3,
         "name": "Car",
@@ -54,10 +46,6 @@
       "id": "084875dd-a2f0-4f11-be0d-526f6cbe4980",
       "date": 1678233600000,
       "amount": -43.39,
-      "currency": {
-        "tag": "GBP",
-        "locale": "en-GB"
-      },
       "category": {
         "id": 3,
         "name": "Car",
@@ -79,10 +67,6 @@
       "id": "6d0a2644-2b03-4772-9db3-6eda9e5584c5",
       "date": 1677888000000,
       "amount": -100.99,
-      "currency": {
-        "tag": "GBP",
-        "locale": "en-GB"
-      },
       "category": {
         "id": 4,
         "name": "Grocery",
@@ -104,10 +88,6 @@
       "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
       "date": 1677715200000,
       "amount": -8996.3,
-      "currency": {
-        "tag": "GBP",
-        "locale": "en-GB"
-      },
       "category": {
         "id": 1,
         "name": "Home spendings",

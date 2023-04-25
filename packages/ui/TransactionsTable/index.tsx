@@ -8,10 +8,10 @@ import { DataType } from "ka-table/enums";
 import { Icon } from "../Icon";
 import { CategoryIcon } from "../CategoryIcon";
 import { CurrencyAmount } from "../CurrencyAmount";
-
 import { Avatar } from "../Avatar";
 import { Chip } from "../Chip";
 import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
+import * as dayjs from 'dayjs'
 
 import { useEffect, useState } from "react";
 
@@ -98,12 +98,18 @@ export const TransactionsTable = ({ budget }: Props) => {
                   return <Chip type={props.value}>{props.value}</Chip>;
                 case "amount":
                   return (
-                    <CurrencyAmount amount={props.value} currencyOptions={budget.currency} />
+                    <CurrencyAmount
+                      amount={props.value}
+                      currencyOptions={budget.currency}
+                    />
                   );
                 case "creator":
                   return (
                     <div className="avatar-icon-wrapper">
-                      <Avatar className="avatar" src={`/avatars/${props.value.avatar}`} />{" "}
+                      <Avatar
+                        className="avatar"
+                        src={`/avatars/${props.value.avatar}`}
+                      />{" "}
                     </div>
                   );
                 case "editColumn":
