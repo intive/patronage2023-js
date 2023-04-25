@@ -8,6 +8,7 @@ import {
   SelectIcon,
   SelectItem,
   SelectPortal,
+  SelectRoot,
   SelectTrigger,
   StyledCurrencyLabel,
   StyledSupportingLabel,
@@ -27,6 +28,9 @@ export type CurrencySelectComponentProps = {
   hasError?: boolean;
   supportingLabel?: React.ReactNode;
   onValueChange?: (value: string) => void;
+  value: string;
+  id?: string;
+  label?: string;
 } & StyledErrorProps &
   Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
@@ -54,19 +58,23 @@ export const CurrencySelect = ({
   hasError = false,
   supportingLabel,
   onValueChange,
+  value,
+  id,
+  label,
 }: CurrencySelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Select.Root
+    <SelectRoot
+      name="currency"
+      value={value}
       onValueChange={onValueChange}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTrigger
-        hasError={hasError}
-        hasSupportingLabel={Boolean(supportingLabel)}>
-        <Select.Value placeholder="Currency"></Select.Value>
+      <SelectTrigger id={id} hasError={hasError} hasSupportingLabel={hasError}>
+        <label htmlFor="currency">{label}</label>
+        <Select.Value></Select.Value>
         <SelectIcon>
           <Icon
             icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
@@ -93,6 +101,6 @@ export const CurrencySelect = ({
           </Select.Viewport>
         </SelectContent>
       </SelectPortal>
-    </Select.Root>
+    </SelectRoot>
   );
 };

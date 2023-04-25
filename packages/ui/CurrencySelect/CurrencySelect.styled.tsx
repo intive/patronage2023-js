@@ -2,7 +2,12 @@ import * as Select from "@radix-ui/react-select";
 import styled, { css } from "styled-components";
 import { SelectTriggerProps, StyledErrorProps } from ".";
 
+export const SelectRoot = styled(Select.Root)`
+  position: relative;
+`;
+
 export const SelectTrigger = styled(Select.Trigger)<SelectTriggerProps>`
+  position: relative;
   color: ${({ theme }) => theme.input.neutral};
   background-color: ${({ theme }) => theme.currencySelect.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
@@ -16,17 +21,23 @@ export const SelectTrigger = styled(Select.Trigger)<SelectTriggerProps>`
   padding-top: 1em;
   padding-left: 1em;
   padding-right: 10px;
+  transition: border-color 200ms ease-out;
 
-  &:focus {
+  & label {
+    position: absolute;
+    transform: translateY(-24px);
+    font-size: 12px;
+    font-weight: 600;
+    background-color: ${({ theme }) => theme.input.labelBackground};
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  :focus {
+    transition: border-color 200ms ease-out;
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
   }
-
-  ${({ hasError }) =>
-    hasError &&
-    css`
-      border-color: ${({ theme }) => theme.input.error};
-    `}
 `;
 
 export const SelectIcon = styled(Select.Icon)`
@@ -42,6 +53,7 @@ export const StyledSupportingLabel = styled.div<StyledErrorProps>`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
+  position: absolute;
 `;
 
 export const SelectPortal = styled(Select.Portal)`
@@ -58,7 +70,7 @@ export const SelectContent = styled(Select.Content)`
 `;
 
 export const SelectItem = styled(Select.Item)`
-  height: 56px;
+  /* height: 56px; */
   outline-color: ${({ theme }) => theme.input.focus};
   padding: 16px;
   gap: 8px;

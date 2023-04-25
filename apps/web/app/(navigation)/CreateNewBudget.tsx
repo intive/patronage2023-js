@@ -229,13 +229,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <CurrencySelect
                           value={value}
                           hasError={errors.length > 0}
-                          label="currency"
+                          id="currency"
+                          label="Currency"
                           supportingLabel={errors[0]}
                           onValueChange={(e) => {
-                            console.log("e", e);
                             setValue(e);
-                            console.log("val", value);
-                            //is it working
                             setNewBudget({
                               ...newBudget,
                               currency: { ...newBudget.currency, tag: e },
