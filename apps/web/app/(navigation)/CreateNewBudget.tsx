@@ -2,7 +2,7 @@
 
 import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useState } from "react";
-import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
+import { Button, CustomDatePicker, IconPicker, Input, Modal, CurrencySelect } from "ui";
 import { IconType } from "ui/Icon";
 import {
   TabsContentStyled,
@@ -100,7 +100,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Input label="Budget limit" name="budget-limit"></Input>
                 </InputWrapperHalfStyled>
                 <InputWrapperHalfStyled>
-                  <Input label="Currency" name="currency"></Input>
+                  <CurrencySelect />
                 </InputWrapperHalfStyled>
                 <TextareaStyled label="Description"></TextareaStyled>
                 <ParagraphStyled>Budget period</ParagraphStyled>
