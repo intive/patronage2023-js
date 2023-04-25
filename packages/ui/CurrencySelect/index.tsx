@@ -10,6 +10,7 @@ import {
   SelectPortal,
   SelectRoot,
   SelectTrigger,
+  StyledLabel,
   StyledCurrencyLabel,
   StyledTag,
 } from "./CurrencySelect.styled";
@@ -63,7 +64,7 @@ export const CurrencySelect = ({
         setIsOpen(!isOpen);
       }}>
       <SelectTrigger id={id}>
-        <label htmlFor="currency">{label}</label>
+        <StyledLabel htmlFor="currency">{label}</StyledLabel>
         <Select.Value></Select.Value>
         <SelectIcon>
           <Icon
