@@ -10,5 +10,10 @@ type PageProps = {
 
 export default function BudgetsPage({ params }: PageProps) {
   const { id } = params;
-  return <BudgetsTitle name={id} />;
+  return (
+    <>
+      <BudgetsTitle name={id} />
+    </>
+  
+  );
 }
