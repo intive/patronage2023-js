@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { PropsWithChildren, ReactElement } from "react";
 
 //type for every item in DropdownMenu
-type DropDownMenuSingleItem = {
+type DropdownMenuSingleItem = {
   ComponentToRender?: ReactElement;
   id: string;
 };
 
 type TransactionDropdownMenuProps = {
-  items: Array<DropDownMenuSingleItem>;
+  items: Array<DropdownMenuSingleItem>;
   side: "top" | "right" | "bottom" | "left";
   ariaLabel?: string;
 } & PropsWithChildren;

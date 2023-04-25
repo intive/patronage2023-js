@@ -5,7 +5,7 @@ import Link from "next/link";
 import React, { ReactElement } from "react";
 
 //type for every item in DropdownMenu
-type DropDownMenuSingleItem = {
+type DropdownMenuSingleItem = {
   ComponentToRender?: ReactElement;
   id: string;
 };
@@ -30,7 +30,7 @@ const ButtonStyled = styled.button`
 `;
 
 //DropdownMenu accepts `children` prop in order to be more generic - it can be used in diffrent places with diffrent items.
-const dummyItems: Array<DropDownMenuSingleItem> = [
+const dummyItems: Array<DropdownMenuSingleItem> = [
   {
     ComponentToRender: <LinkStyled href="">Edit</LinkStyled>,
     id: "edit-budget",
