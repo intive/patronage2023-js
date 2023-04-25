@@ -226,7 +226,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         // WIP
                         <CurrencySelect
                           value={value}
-                          hasError={errors.length > 0}
                           id="currency"
                           label="Currency"
                           supportingLabel={errors[0]}

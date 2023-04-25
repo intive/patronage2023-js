@@ -14,17 +14,13 @@ import {
   StyledTag,
 } from "./CurrencySelect.styled";
 
-export type StyledErrorProps = {
-  hasError?: boolean;
-};
+export type StyledErrorProps = {};
 
 export type SelectTriggerProps = {
-  hasError?: boolean;
   hasSupportingLabel?: boolean;
 };
 
 export type CurrencySelectComponentProps = {
-  hasError?: boolean;
   supportingLabel?: React.ReactNode;
   onValueChange?: (value: string) => void;
   value: string;
@@ -54,7 +50,6 @@ const currency = [
 ];
 
 export const CurrencySelect = ({
-  hasError = false,
   onValueChange,
   value,
   id,
@@ -70,7 +65,7 @@ export const CurrencySelect = ({
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTrigger id={id} hasError={hasError} hasSupportingLabel={hasError}>
+      <SelectTrigger id={id}>
         <label htmlFor="currency">{label}</label>
         <Select.Value></Select.Value>
         <SelectIcon>
