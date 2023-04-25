@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { ReactNode } from "react";
 import { Icon, IconType } from "../Icon";
 
 type BudgetIconProps = {
   icon?: IconType;
-  children: ReactNode;
-};
+  className?: string;
+} & React.HTMLProps<HTMLDivElement>;
 
 const BudgetIconStyled = styled.div`
   position: relative;
@@ -19,17 +18,14 @@ const BudgetIconStyled = styled.div`
   color: ${({ theme }) => theme.budgetIcon.main};
 `;
 
-export const BudgetIcon = ({ icon, children }: BudgetIconProps) => {
+const IconExtended = styled(Icon)`
+  font-size: 2em;
+`;
+
+export const BudgetIcon = ({ icon, className, children }: BudgetIconProps) => {
   return (
-    <BudgetIconStyled>
-      {icon ? (
-        <>
-          <Icon icon={icon} iconSize={40} />
-          {children}
-        </>
-      ) : (
-        <>{children}</>
-      )}
+    <BudgetIconStyled className={className}>
+      {icon ? <IconExtended icon={icon} /> : children}
     </BudgetIconStyled>
   );
 };
