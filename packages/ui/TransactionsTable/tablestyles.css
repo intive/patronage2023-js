@@ -17,12 +17,27 @@
   display: none;
 }
 
+.ka-thead-cell {
+  padding-left: 0;
+}
+
 .ka-group-cell-content {
   font-size: 12px;
-  margin-left: 5px;
   color: #888888;
 }
 
 .ka-thead {
   background-color: transparent;
+}
+
+.ka-cell-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: #222222;
+}
+
+.ka-cell {
+  text-align: left;
+  padding-left: 0;
 }

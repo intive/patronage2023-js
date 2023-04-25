@@ -11,7 +11,7 @@ import { CurrencyAmount } from "../CurrencyAmount";
 import { Avatar } from "../Avatar";
 import { Chip } from "../Chip";
 import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
-import * as dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
@@ -24,14 +24,24 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
   },
-  { key: "description", title: "Name", dataType: DataType.String },
+  {
+    key: "description",
+    title: "Name",
+    isSortable: true,
+    dataType: DataType.String,
+  },
   {
     key: "status",
     title: "Status",
     isSortable: true,
     dataType: DataType.String,
   },
-  { key: "amount", title: "Amount", dataType: DataType.Number },
+  {
+    key: "amount",
+    title: "Amount",
+    isSortable: true,
+    dataType: DataType.Number,
+  },
   {
     key: "creator",
     title: "Creator",
@@ -42,12 +52,13 @@ const columns = [
     key: "editColumn",
   },
   //not intuit.
-  { key: "date", title: "Date", isSortable: false, dataType: DataType.String },
+  { key: "date", title: "Date", isSortable: false, dataType: DataType.Number },
 ];
 
-const getDayName = (dateStr: string, locale: string) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString(locale, { weekday: "long" });
+const getDayName = (timestamp: number, locale: string) => {
+  // const date = new Date(timestamp);
+  // return date.toLocaleDateString(locale, { weekday: "long" });
+  return dayjs(timestamp).format("DD/MM/YYYY");
 };
 
 type Props = {
@@ -126,7 +137,7 @@ export const TransactionsTable = ({ budget }: Props) => {
                   const value = props.groupKey[props.groupIndex];
                   return (
                     <>
-                      {getDayName(value, "en-US")} {value}
+                      {getDayName(value, budget.currency.locale)}
                     </>
                   );
               }
