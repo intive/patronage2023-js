@@ -13,7 +13,7 @@ import en from "date-fns/locale/en-US";
 import pl from "date-fns/locale/pl";
 
 type CustomDatePickerProps = {
-  onSelect: (date: Date) => void;
+  onSelect: (date: Date | null) => void;
   selected?: Date | null;
   hasError?: boolean;
   label: string;
@@ -42,7 +42,7 @@ export const CustomDatePicker = ({
       <DatePicker
         id={label}
         locale={datePickerLanguageConfig[currentLang]}
-        popperPlacement="top-start"
+        popperPlacement="top"
         popperModifiers={[
           {
             name: "preventOverflow",
@@ -64,10 +64,15 @@ export const CustomDatePicker = ({
         }}
         autoComplete="off"
         showYearDropdown
-        isClearable
         onFocus={(e) => (e.target.readOnly = true)}
         dropdownMode="select"
-        customInput={<Input label={label} hasError={hasError} />}
+        customInput={
+          <Input
+            label={label}
+            hasError={hasError}
+            onInputCleared={() => onSelect(null)}
+          />
+        }
       />
     </DatePickerStyled>
   );

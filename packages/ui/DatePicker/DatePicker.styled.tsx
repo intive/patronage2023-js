@@ -131,20 +131,6 @@ export const DatePickerStyled = styled.div<DatePickerStyledProps>`
     color: ${({ theme }) => theme.datePicker.neutral5};
   }
 
-  .react-datepicker__close-icon {
-    padding-right: 5px;
-    top: -9px;
-    ${device.tablet} {
-      padding-right: 15px;
-    }
-  }
-
-  .react-datepicker__close-icon:after {
-    width: 14px;
-    height: 14px;
-    background-color: ${({ theme }) => theme.datePicker.teal8};
-  }
-
   .react-datepicker__year-option {
     position: relative;
     font-size: 1rem;

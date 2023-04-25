@@ -68,6 +68,15 @@ export const InputWrapperHalfStyled = styled.div`
   }
 `;
 
+export const InputWrapperHalfStyledCurrency = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 210px;
+  height: 56px;
+  margin-bottom: 29px;
+`;
+
 export const InputWrapperFullFlex = styled.div`
   display: flex;
   justify-content: center;
@@ -120,7 +129,7 @@ export const DatePickerErrorStyled = styled.div`
   font-weight: 400;
   font-size: 12px;
   margin: 4px 10px 0 10px;
-  bottom: 0px;
+  top: 55px;
 `;
 
 export const TabsStyled = styled(Tabs.Root)`
@@ -142,13 +151,16 @@ export const ContentStyled = styled.div`
   overflow-y: scroll;
   grid-row-start: 1;
   grid-row-end: 2;
-`;
+  padding: 10px;
 
-export const TabsContentStyled = styled(Tabs.Content)`
-  /* display: grid; */
-`;
-
-export const FooterStyled = styled.div`
-  /* background-color: aquamarine; */
-  /* height: 80px; */
+  &::-webkit-scrollbar {
+    background-color: #e1e1e1;
+    border-radius: 10px;
+    width: 6px;
+    margin-bottom: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #7e7e7e;
+    border-radius: 10px;
+  }
 `;

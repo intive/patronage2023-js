@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import { Button, CustomDatePicker, IconPicker, Input, Modal } from "ui";
+import { useContext, useEffect, useState } from "react";
+import {
+  Button,
+  CurrencySelect,
+  CustomDatePicker,
+  IconPicker,
+  Input,
+  Modal,
+} from "ui";
 import { IconType } from "ui/Icon";
 import {
-  TabsContentStyled,
   TabsStyled,
   TabsTriggerStyled,
   ParagraphStyled,
@@ -20,25 +26,33 @@ import {
   TextAreaWrapperStyled,
   DatePickerWrapperStyled,
   DatePickerErrorStyled,
-  FooterStyled,
   ContentStyled,
+  InputWrapperHalfStyledCurrency,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
+import { LanguageContext } from "lib/contexts";
+import { log } from "console";
 
 type NewBudget = {
   onClose?: Function;
 };
 
-type budgetObjectType = {
-  budgetName: string;
-  budgetLimit: number | string;
-  budgetDescription: string;
-  budgetIcon: string;
-  budgetDateStart: number | null;
-  budgetDateEnd: number | null;
+type currencyType = {
+  tag: string;
+  locale?: string;
+};
+
+type newBudgetType = {
+  name: string;
+  limit: number | string;
+  description: string;
+  icon: string;
+  dateStart: number | null;
+  dateEnd: number | null;
+  currency: currencyType;
 };
 
 const icons: IconType[] = [
@@ -55,41 +69,55 @@ const icons: IconType[] = [
 
 //mocked existing user budgets
 export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
+//mocked currency
+export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
-  const { t, dict } = useTranslate("AddNewBudgetModal");
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
+  const [lang, setLang] = useState<string>("en-US");
+
+  const { t, dict } = useTranslate("AddNewBudgetModal");
+  const { currentLang } = useContext(LanguageContext);
 
   const {
-    checkBudgetNameOnChange,
-    checkBudgetNameOnSubmit,
-    checkBudgetLimit,
+    checkNameOnChange,
+    checkNameOnSubmit,
+    checkCurrency,
+    checkLimit,
     checkDescription,
-    checkStartDate,
-    checkEndDate,
+    checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
-  const [budgetObject, setBudgetObject] = useState<budgetObjectType>({
-    budgetName: "",
-    budgetLimit: "",
-    budgetDescription: "",
-    budgetIcon: selectedIcon,
-    budgetDateStart: null,
-    budgetDateEnd: null,
+  const [newBudget, setNewBudget] = useState<newBudgetType>({
+    name: "",
+    limit: "",
+    description: "",
+    icon: selectedIcon,
+    dateStart: null,
+    dateEnd: null,
+    currency: {
+      tag: "USD",
+      locale: lang,
+    },
   });
 
-  const onSelectStartDate = (date: Date) => {
+  const onSelectStartDate = (date: Date | null) => {
     date
-      ? setBudgetObject({ ...budgetObject, budgetDateStart: date.getTime() })
-      : setBudgetObject({ ...budgetObject, budgetDateStart: null });
+      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
+      : setNewBudget({ ...newBudget, dateStart: null });
   };
 
-  const onSelectEndDate = (date: Date) => {
+  const onSelectEndDate = (date: Date | null) => {
     date
-      ? setBudgetObject({ ...budgetObject, budgetDateEnd: date.getTime() })
-      : setBudgetObject({ ...budgetObject, budgetDateEnd: null });
+      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
+      : setNewBudget({ ...newBudget, dateEnd: null });
   };
+
+  useEffect(() => {
+    currentLang === "en" && setLang("en-US");
+    currentLang === "pl" && setLang("pl-PL");
+  }, [lang]);
 
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
@@ -106,7 +134,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         </Tabs.List>
         <Form
           onSubmit={() => {
-            console.log(budgetObject);
+            console.log(newBudget);
           }}>
           {({ submit }) => (
             <form
@@ -114,7 +142,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 e.preventDefault();
               }}>
               <ContentStyled>
-                <TabsContentStyled value="settings">
+                <Tabs.Content value="settings">
                   <ParagraphStyled>
                     {t(dict.paragraphs.details)}
                   </ParagraphStyled>
@@ -123,7 +151,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       defaultIcon={selectedIcon}
                       icons={icons}
                       onSelect={(icon) => {
-                        setBudgetObject({ ...budgetObject, budgetIcon: icon });
+                        setNewBudget({ ...newBudget, icon });
                         setSelectedIcon(icon);
                       }}
                     />
@@ -131,9 +159,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <InputWrapperFullStyled>
                     <Field
                       name="budget-name"
-                      initialValue={budgetObject.budgetName}
-                      onSubmitValidate={checkBudgetNameOnSubmit}
-                      onChangeValidate={checkBudgetNameOnChange}>
+                      initialValue={newBudget.name}
+                      onSubmitValidate={checkNameOnSubmit}
+                      onChangeValidate={checkNameOnChange}>
                       {({ value, setValue, errors }) => {
                         return (
                           <Input
@@ -142,15 +170,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             hasError={errors.length > 0}
                             supportingLabel={errors.length ? errors : null}
                             onChange={(e) => {
-                              setBudgetObject({
-                                ...budgetObject,
-                                budgetName: e.currentTarget.value,
+                              setNewBudget({
+                                ...newBudget,
+                                name: e.currentTarget.value,
                               });
                               setValue(e.currentTarget.value);
                             }}
                             onInputCleared={() => setValue("")}
                             label={t(dict.inputNames.budgetName)}>
-                            {budgetObject.budgetName}
+                            {newBudget.name}
                           </Input>
                         );
                       }}
@@ -159,9 +187,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <InputWrapperHalfStyled>
                     <Field
                       name="budget-limit"
-                      initialValue={budgetObject.budgetLimit}
-                      onChangeValidate={checkBudgetLimit}
-                      onSubmitValidate={checkBudgetLimit}>
+                      initialValue={newBudget.limit}
+                      onChangeValidate={checkLimit}
+                      onSubmitValidate={checkLimit}>
                       {({ value, setValue, errors }) => (
                         <Input
                           value={value}
@@ -172,9 +200,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                                 parseFloat(e.currentTarget.value) * 100
                               ) / 100;
                             if (e.currentTarget.value) {
-                              setBudgetObject({
-                                ...budgetObject,
-                                budgetLimit: roundedValue,
+                              setNewBudget({
+                                ...newBudget,
+                                limit: roundedValue,
                               });
                               setValue(roundedValue);
                             } else setValue("");
@@ -188,29 +216,50 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       )}
                     </Field>
                   </InputWrapperHalfStyled>
-                  <InputWrapperHalfStyled>
-                    <Input
-                      label={t(dict.inputNames.currency)}
+                  <InputWrapperHalfStyledCurrency>
+                    <Field
                       name="currency"
-                    />
-                  </InputWrapperHalfStyled>
+                      initialValue={newBudget.currency.tag}
+                      onSubmitValidate={checkCurrency}
+                      onChangeValidate={checkCurrency}>
+                      {({ value, setValue, errors }) => (
+                        // WIP
+                        <CurrencySelect
+                          value={value}
+                          hasError={errors.length > 0}
+                          id="currency"
+                          label="Currency"
+                          supportingLabel={errors[0]}
+                          onValueChange={(e) => {
+                            setValue(e);
+                            setNewBudget({
+                              ...newBudget,
+                              currency: { ...newBudget.currency, tag: e },
+                            });
+                          }}
+                        />
+                      )}
+                    </Field>
+                  </InputWrapperHalfStyledCurrency>
                   <Field
                     name="description"
-                    initialValue={budgetObject.budgetDescription}
+                    initialValue={newBudget.description}
                     onSubmitValidate={checkDescription}
                     onChangeValidate={checkDescription}>
                     {({ value, setValue, errors }) => {
                       return (
                         <TextAreaWrapperStyled>
                           <TextareaStyled
-                            placeholder={budgetObject.budgetDescription}
+                            id="description"
+                            name="description"
+                            placeholder={newBudget.description}
                             label={t(dict.inputNames.description)}
                             value={value}
                             hasError={errors.length > 0}
                             onChange={(e) => {
-                              setBudgetObject({
-                                ...budgetObject,
-                                budgetDescription: e.currentTarget.value,
+                              setNewBudget({
+                                ...newBudget,
+                                description: e.currentTarget.value,
                               });
                               setValue(e.currentTarget.value);
                             }}
@@ -227,20 +276,20 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     <Field
                       name="date-start"
                       initialValue={
-                        budgetObject.budgetDateStart
-                          ? new Date(budgetObject.budgetDateStart)
+                        newBudget.dateStart
+                          ? new Date(newBudget.dateStart)
                           : null
                       }
-                      onSubmitValidate={checkStartDate}
-                      onChangeValidate={checkStartDate}>
+                      onSubmitValidate={checkDate}
+                      onChangeValidate={checkDate}>
                       {({ setValue, errors }) => (
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.dateStart)}
                             selected={
-                              budgetObject.budgetDateStart
-                                ? new Date(budgetObject.budgetDateStart)
+                              newBudget.dateStart
+                                ? new Date(newBudget.dateStart)
                                 : null
                             }
                             onSelect={(date) => {
@@ -261,11 +310,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       name="date-end"
                       listenTo={["date-start"]}
                       initialValue={
-                        budgetObject.budgetDateEnd
-                          ? new Date(budgetObject.budgetDateEnd)
-                          : null
+                        newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
                       }
-                      onSubmitValidate={checkEndDate}
+                      onSubmitValidate={checkDate}
                       onChangeValidate={(val, form) => {
                         const start = val! && val.getTime();
                         const end =
@@ -286,8 +333,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.dateEnd)}
                             selected={
-                              budgetObject.budgetDateEnd
-                                ? new Date(budgetObject.budgetDateEnd)
+                              newBudget.dateEnd
+                                ? new Date(newBudget.dateEnd)
                                 : null
                             }
                             onSelect={(date) => {
@@ -302,17 +349,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       )}
                     </Field>
                   </InputWrapperFullFlex>
-                </TabsContentStyled>
-                <TabsContentStyled value="share">
-                  Welcome to share
-                </TabsContentStyled>
+                </Tabs.Content>
+                <Tabs.Content value="share">Welcome to share</Tabs.Content>
               </ContentStyled>
-              <FooterStyled>
+              <div>
                 <SeparatorStyled />
                 <ButtonWrapperStyled>
                   <Button onClick={submit}>{t(dict.button)}</Button>
                 </ButtonWrapperStyled>
-              </FooterStyled>
+              </div>
             </form>
           )}
         </Form>

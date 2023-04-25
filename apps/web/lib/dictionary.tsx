@@ -307,14 +307,11 @@ const dictionary = {
         en: "Please specify budget limit.",
         pl: "Podaj limit budżetu.",
       },
-      startingDate: {
-        en: "Please specify starting date",
-        pl: "Podaj datę startu.",
+      cantBeEmpty: {
+        en: "Not selected.",
+        pl: "Nie wybrano.",
       },
-      endingDate: {
-        en: "Please specify ending date",
-        pl: "Podaj datę końca.",
-      },
+
       dateBeforeStart: {
         en: "Must be after start date.",
         pl: "Podaj datę późniejszą.",
