@@ -1,0 +1,109 @@
+{
+  "transactions": [
+    {
+      "id": "95dc1a67-cbe4-4e6b-8568-40a8e2f3d191",
+      "date": 1682035200000,
+      "amount": -24.99,
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "subscriptions",
+          "foreground": "#643400",
+          "background": "#FFF3E5"
+        }
+      },
+      "description": "Netflix",
+      "status": "Recurring",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "d26ed662-8807-40e2-b9c5-197862763151",
+      "date": 1681948800000,
+      "amount": -9.99,
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "subscriptions",
+          "foreground": "#643400",
+          "background": "#FFF3E5"
+        }
+      },
+      "description": "Spotify",
+      "status": "Cancelled",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "b71e756e-c597-46d2-80da-f8bca4cfae26",
+      "date": 1681430400000,
+      "amount": -9.99,
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "subscriptions",
+          "foreground": "#643400",
+          "background": "#FFF3E5"
+        }
+      },
+      "description": "Amazon Prime",
+      "status": "Recurring",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "1899a45e-52cf-4549-be0d-2218fb1f81e8",
+      "date": 1681084800000,
+      "amount": -9.99,
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "subscriptions",
+          "foreground": "#643400",
+          "background": "#FFF3E5"
+        }
+      },
+      "description": "Amazon Prime",
+      "status": "Recurring",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    },
+    {
+      "id": "62553bbc-9782-430b-8642-8c6c3dc764cc",
+      "date": 1680912000000,
+      "amount": -0.99,
+      "category": {
+        "id": 2,
+        "name": "Subscriptions",
+        "icon": {
+          "name": "subscriptions",
+          "foreground": "#643400",
+          "background": "#FFF3E5"
+        }
+      },
+      "description": "ICloud Storage",
+      "status": "Recurring",
+      "creator": {
+        "id": "2530324b-cabc-4ab4-ba10-8d1716c267e7",
+        "name": "John Doe",
+        "avatar": "3.svg"
+      }
+    }
+  ]
+}
