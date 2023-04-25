@@ -65,7 +65,7 @@ export const CurrencySelect = ({
       }}>
       <SelectTrigger id={id}>
         <StyledLabel htmlFor="currency">{label}</StyledLabel>
-        <Select.Value></Select.Value>
+        <Select.Value placeholder="USD"></Select.Value>
         <SelectIcon>
           <Icon
             icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
