@@ -3,29 +3,23 @@
 import { Budget } from "lib/types";
 import { useState, useEffect } from "react";
 import { InfoTile, Icon, CurrencyAmount } from "ui";
+import { CurrencyAmountProps } from "ui/CurrencyAmount";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import styled from "styled-components";
 
-const currencyNames = {
+const currencyNames:  Record<string, string>  = {
   "USD": "United States Dollar",
   "GBP": "British Pound",
   "PLN": "Polish Zloty",
   "EUR": "Euro",
 };
 
-// const currencySymbols = {
-//   "USD": "$",
-//   "GBP": "£",
-//   "PLN": "PLN",
-//   "EUR": "€",
-// }
-
 //STYLING
 const BasicInfoWrapper = styled.div`
   width: 100%;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   //remove padding as it's Card's job to add it
-  padding: 48px;
+  padding: 48px 0 0 48px;
   align-self: flex-start;
   justify-self: flex-start;
 `;
@@ -39,6 +33,7 @@ const TopSectionWrapper = styled.div`
 
 const TileWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 `;
 
@@ -72,6 +67,10 @@ const StyledDescription = styled.span`
   text-align: left;
   color: ${({ theme }) => theme.infoTile.label};
 `;
+
+const InfoTileAmount = styled(CurrencyAmount)<CurrencyAmountProps>`
+  color: ${({ theme }) => theme.infoTile.value};
+`;
 //STYLING
 
 //TYPES
@@ -86,28 +85,44 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
   useEffect(() => {
     fetch("/budgets.json")
       .then((response) => response.json())
-      .then((res) => setBudget(res.budgets.find((el) => el.id === budgetId)));
+      .then((res) => setBudget(res.budgets.find((el: any) => el.id === budgetId) as Budget));
   }, [budgetId]);
 
-  //DATA for information tiles
-  const currencyInfo = (
-    <>
-      {budget?.currency.tag}
-      <StyledAddInfoSpan>{currencyNames[budget?.currency.tag]}</StyledAddInfoSpan>
-    </>
-  );
-  // const budgetLimit = <>{currencySymbols[budget?.currency.tag]} {budget?.limit}</>;
-  const budgetLimit = <><CurrencyAmount amount={budget?.limit} currencyOptions={budget?.currency} viewRaw /></>;
-  //DATA for information tiles
+  let dataRangeInfo, currencyInfo, limitInfo;
 
+  function convertTimestamp(timestamp: number){
+    const date = new Date(timestamp);
+
+    return date.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: '2-digit'})
+  }
+
+  //DATA for information tiles
+  if (budget) {
+    dataRangeInfo = (
+      <>
+        {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
+      </>
+    );
+    currencyInfo = (
+      <>
+          <span>{budget?.currency.tag}</span>
+          <StyledAddInfoSpan>{currencyNames[budget?.currency.tag]}</StyledAddInfoSpan>
+      </>
+    );
+    limitInfo = (
+      <InfoTileAmount amount={budget?.limit} currencyOptions={budget?.currency} hidePlus />
+    );
+  }
+  //DATA for information tiles
 
   return (
     <>
+      {!budget && <h1 style={{color: "lightgrey"}}>Loading...</h1>}
       {budget && (
         <BasicInfoWrapper>
           <TopSectionWrapper>
             <IconWrapperStyled>
-              <Icon icon={budget.icon} iconSize={40} color={({ theme }) => theme.main }/>
+              <Icon icon={budget.icon} iconSize={40}/>
             </IconWrapperStyled>
             <div>
               <StyledTitle>{budget.name}</StyledTitle>
@@ -115,8 +130,8 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
             </div>
           </TopSectionWrapper>
           <TileWrapper>
-            <InfoTile label="Budget period" dataToRender="1 Jan - 21 Jan" />
-            <InfoTile label="Budget limit" dataToRender={budgetLimit} />
+            <InfoTile label="Budget period" dataToRender={dataRangeInfo} />
+            <InfoTile label="Budget limit" dataToRender={limitInfo} />
             <InfoTile label="Currency" dataToRender={currencyInfo} />
           </TileWrapper>
         </BasicInfoWrapper>

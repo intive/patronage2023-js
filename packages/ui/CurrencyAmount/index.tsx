@@ -8,27 +8,26 @@ type CurrencyType = {
 
 type CurrencyAmountSpanProps = {
   amount: number;
-  viewRaw?: boolean;
 } & React.HTMLProps<HTMLSpanElement>;
 
-type CurrencyAmountProps = {
+export type CurrencyAmountProps = {
   currencyOptions: CurrencyType;
   className?: string;
-  viewRaw?: boolean;
+  hidePlus?: boolean;
 } & CurrencyAmountSpanProps;
 
 const SpanStyled = styled.span<CurrencyAmountSpanProps>`
   font-family: "Signika";
   line-height: 1.5em;
-  color: ${({ theme, amount, viewRaw }) =>
-    (amount > 0 && !viewRaw) ? theme.currencyAmount.positive : theme.currencyAmount.text};
+  color: ${({ theme, amount }) =>
+    amount > 0 ? theme.currencyAmount.positive : theme.currencyAmount.text};
 `;
 
 export const CurrencyAmount = ({
   amount,
   currencyOptions,
   className,
-  viewRaw,
+  hidePlus,
 }: CurrencyAmountProps) => {
   const { tag, locale } = currencyOptions;
   const options = {
@@ -44,8 +43,8 @@ export const CurrencyAmount = ({
   const positiveChar = amount > 0 ? "+ " : "";
 
   return (
-    <SpanStyled className={className} amount={amount} viewRaw={viewRaw}>
-      {`${!viewRaw ? positiveChar : ""}${currencyAmountNumber}`}
+    <SpanStyled className={className} amount={amount}>
+      {`${!hidePlus ? positiveChar : ""}${currencyAmountNumber}`}
     </SpanStyled>
   );
 };
