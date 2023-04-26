@@ -25,12 +25,14 @@ const columns = [
     title: "Category",
     isSortable: true,
     dataType: DataType.Object,
+    width: 120,
   },
   {
     key: "description",
     title: "Name",
     isSortable: true,
     dataType: DataType.String,
+    width: 170,
   },
   {
     key: "status",
@@ -43,18 +45,25 @@ const columns = [
     title: "Amount",
     isSortable: true,
     dataType: DataType.Number,
+    width: 140,
   },
   {
     key: "creator",
     title: "Creator",
     isSortable: true,
     dataType: DataType.Object,
+    width: 70,
   },
   {
     key: "editColumn",
     width: 30,
   },
-  { key: "date", title: "Date", isSortable: false, dataType: DataType.Number },
+  {
+    key: "date",
+    title: "Date",
+    isSortable: false,
+    dataType: DataType.Number,
+  },
 ];
 
 const getDayName = (timestamp: number, locale: string) => {
@@ -117,12 +126,10 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
                   );
                 case "creator":
                   return (
-                    <div className="avatar-icon-wrapper">
-                      <Avatar
-                        className="avatar"
-                        src={`/avatars/${props.value.avatar}`}
-                      />{" "}
-                    </div>
+                    <Avatar
+                      className="avatar"
+                      src={`/avatars/${props.value.avatar}`}
+                    />
                   );
                 case "editColumn":
                   return (
@@ -149,7 +156,7 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
                 <>
                   <span>{column.title}</span>
                   {column.key !== "editColumn" && (
-                    <button onClick={ () => setSorting(column.key)}>
+                    <button onClick={() => setSorting(column.key)}>
                       <Icon icon="sort" iconSize={20} color={"#515151"} />
                     </button>
                   )}

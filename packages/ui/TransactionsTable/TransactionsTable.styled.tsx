@@ -107,17 +107,16 @@ export const TableWrapperStyled = styled.div`
     padding-left: 0;
   }
 
-  .avatar-icon-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-
+  // avatar styles
   .avatar {
-    font-size: 1.5em;
+    width: 24px;
+    height: 24px;
   }
 `;
 
 export const StyledCurrencyAmount = styled(CurrencyAmount)`
   display: block;
   text-align: right;
+  // components add Signika font
+  font-family: unset;
 `
