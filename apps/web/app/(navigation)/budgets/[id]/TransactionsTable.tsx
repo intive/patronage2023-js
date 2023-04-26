@@ -17,9 +17,9 @@ import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import "dayjs/locale/pl";
-import "dayjs/locale/en-GB";
-import "dayjs/locale/en";
+// import "dayjs/locale/pl";
+// import "dayjs/locale/en-GB";
+// import "dayjs/locale/en";
 
 import { useEffect, useState } from "react";
 import {
@@ -94,7 +94,7 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
 
   const getDayName = (timestamp: number, locale: string) => {
     dayjs.extend(isToday);
-    dayjs.extend(localizedFormat);
+   // dayjs.extend(localizedFormat);
     dayjs.extend(isYesterday);
 
     const date = dayjs(timestamp);
