@@ -1,5 +1,5 @@
 import styled, { css, ThemeContext } from "styled-components";
-import { CurrencyAmount } from "../CurrencyAmount";
+import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
   width: 100%;
@@ -46,7 +46,6 @@ export const TableWrapperStyled = styled.div`
   }
 
   .ka-cell {
-
   }
 
   button {
@@ -81,13 +80,13 @@ export const TableWrapperStyled = styled.div`
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
-    color: #7E7E7E;
+    color: #7e7e7e;
   }
 
   // normal row styles
   .ka-row {
     border: none;
-    border-top: 1px solid #F7F7F7;
+    border-top: 1px solid #f7f7f7;
   }
 
   .ka-group-row + .ka-row {
@@ -117,6 +116,5 @@ export const TableWrapperStyled = styled.div`
 export const StyledCurrencyAmount = styled(CurrencyAmount)`
   display: block;
   text-align: right;
-  // components add Signika font
-  font-family: unset;
-`
+  font-family: unset; // component adds Signika font so I need to reset it
+`;

@@ -1,5 +1,9 @@
 {
   "extends": "tsconfig/react-library.json",
-  "include": ["."],
+  "include": [
+    ".",
+    "../../apps/web/app/(navigation)/budgets/[id]/TransactionsTable.tsx",
+    "../../apps/web/app/(navigation)/budgets/[id]/TransactionsTable.styled.tsx"
+  ],
   "exclude": ["dist", "build", "node_modules"]
 }

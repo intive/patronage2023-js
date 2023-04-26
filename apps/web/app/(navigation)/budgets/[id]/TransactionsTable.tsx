@@ -1,13 +1,13 @@
 "use client";
 
-import { Budget, Transaction } from "./../../../apps/web/lib/types";
+import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
-import { Icon } from "../Icon";
-import { CategoryIcon } from "../CategoryIcon";
-import { Avatar } from "../Avatar";
-import { Chip } from "../Chip";
-import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
+import { Icon } from "ui/Icon";
+import { CategoryIcon } from "ui/CategoryIcon";
+import { Avatar } from "ui/Avatar";
+import { Chip } from "ui/Chip";
+import { TransactionDropdownMenu } from "ui/TransactionDropdownMenu";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
@@ -74,21 +74,6 @@ const columns = [
   },
 ];
 
-const getDayName = (timestamp: number, locale: string) => {
-  dayjs.locale("en-GB");
-
-  const date = dayjs(timestamp);
-  const formattedDate = date.format("L");
-
-  let dayOfWeek = date.format("dddd");
-  if (date.isToday()) {
-    dayOfWeek = "Today";
-  } else if (date.isYesterday()) {
-    dayOfWeek = "Yesterday";
-  }
-  return `${dayOfWeek}, ${formattedDate}`;
-};
-
 type Props = {
   budget: Budget;
   setSorting: (column: string) => void;
@@ -102,6 +87,20 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
       .then((response) => response.json())
       .then((result) => setTransactions(result.transactions));
   }, [budget]);
+
+  const getDayName = (timestamp: number, locale: string) => {
+
+    const date = dayjs(timestamp);
+    const formattedDate = date.format("DD.MM.YYYY");
+
+    let dayOfWeek = date.format("dddd");
+    if (date.isToday()) {
+      dayOfWeek = "Today";
+    } else if (date.isYesterday()) {
+      dayOfWeek = "Yesterday";
+    }
+    return `${dayOfWeek}, ${formattedDate}`;
+  };
 
   const dropdownMenuItems = [
     {
