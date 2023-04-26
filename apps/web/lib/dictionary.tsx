@@ -1,10 +1,22 @@
 const dictionary = {
   NavigationLayout: {
     SideNav: {
-      budgetsItem: { en: "Budgets", pl: "Budżety" },
-      reportsItem: { en: "Reports", pl: "Raporty" },
-      settingsItem: { en: "Settings", pl: "Ustawienia" },
-      teamsItem: { en: "Teams", pl: "Zespoły" },
+      budgetsItem: {
+        title: { en: "Budgets", pl: "Budżety" },
+        searchInputPlaceholder: { en: "Search budget", pl: "Wyszukaj budżet" },
+        buttonLabel: { en: "Add new budget", pl: "Dodaj nowy budżet" },
+      },
+      reportsItem: {
+        title: { en: "Reports", pl: "Raporty" },
+      },
+      settingsItem: {
+        title: { en: "Settings", pl: "Ustawienia" },
+      },
+      teamsItem: {
+        title: { en: "Teams", pl: "Zespoły" },
+        searchInputPlaceholder: { en: "Search team", pl: "Wyszukaj zespół" },
+        buttonLabel: { en: "Add new member", pl: "Dodaj nowego członka" },
+      },
     },
   },
   RegFlowLayout: {

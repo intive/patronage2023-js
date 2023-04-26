@@ -15,20 +15,6 @@ export const IconPickerStyled = styled.div<IconPickerStyledProps>`
   cursor: pointer;
 `;
 
-export const IconAndButtonWrapperStyled = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 112px;
-  width: 112px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.iconPicker.background};
-  color: ${({ theme }) => theme.iconPicker.main};
-`;
-
 export const EditButtonStyled = styled.button`
   position: absolute;
   left: 84px;

@@ -102,6 +102,7 @@ export const theme = {
     neutralLabel: colors.Neutral10,
     focus: colors.Teal5,
     labelBackground: colors.BasicWhite,
+    placeholder: colors.Neutral4,
   },
   link: {
     main: colors.Teal8,
@@ -126,6 +127,7 @@ export const theme = {
     subMenu: {
       separator: colors.Neutral2,
       title: colors.Teal10,
+      background: colors.BasicWhite,
     },
   },
   nav: {
@@ -209,6 +211,10 @@ export const theme = {
     focusBackground: colors.Teal1,
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
+  },
+  budgetIcon: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
   },
   currencyAmount: {
     positive: colors.Supporting7,

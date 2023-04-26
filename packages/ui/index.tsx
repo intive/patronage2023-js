@@ -22,5 +22,6 @@ export { Modal } from "./Modal";
 export { TransactionDropdownMenu } from "./TransactionDropdownMenu";
 export { InfoTile } from "./InfoTile";
 export { CurrencySelect } from "./CurrencySelect";
+export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";

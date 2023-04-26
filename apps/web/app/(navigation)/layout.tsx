@@ -14,6 +14,7 @@ const Main = styled.main`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+  background-color: #e5e5e5;
 `;
 const Content = styled.div`
   flex-grow: 1;
