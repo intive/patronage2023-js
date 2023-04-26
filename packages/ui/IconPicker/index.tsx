@@ -2,11 +2,11 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
 import {
   IconPickerStyled,
-  IconAndButtonWrapperStyled,
   IconsSelectorStyled,
   EditButtonStyled,
   SelectIconButtonStyled,
 } from "./iconPicker.styled";
+import { BudgetIcon } from "../BudgetIcon";
 import { Icon, IconType } from "../Icon";
 import { useOnClickOutside } from "./useOnclickOutside";
 
@@ -94,16 +94,14 @@ export const IconPicker = ({
 
   return (
     <IconPickerStyled ref={ref} onClick={handleEditButtonClick}>
-      <IconAndButtonWrapperStyled>
-        {currentIcon ? (
-          <Icon icon={currentIcon} iconSize={40} />
-        ) : (
-          <>{children}</>
-        )}
-        <EditButtonStyled>
-          <Icon icon="edit" iconSize={12} />
-        </EditButtonStyled>
-      </IconAndButtonWrapperStyled>
+      {currentIcon ? (
+        <BudgetIcon icon={currentIcon} />
+      ) : (
+        <BudgetIcon>{children}</BudgetIcon>
+      )}
+      <EditButtonStyled onClick={handleEditButtonClick}>
+        <Icon icon="edit" iconSize={12} />
+      </EditButtonStyled>
       {iconSelectorVisible && (
         <IconSelector
           icons={icons}
