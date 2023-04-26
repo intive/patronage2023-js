@@ -333,7 +333,7 @@ const dictionary = {
     dropdownButtonAriaLabel: { en: "More options", pl: "Więcej opcji" },
     basicInformation: {
       labels: {
-        period: { en: "Budget period", pl: "Okres trwania budżetu"},
+        period: { en: "Budget period", pl: "Okres trwania"},
         limit: { en: "Budget limit", pl: "Limit budżetu"},
         currency: { en: "Currency", pl: "Waluta"},
       },
