@@ -343,7 +343,11 @@ const dictionary = {
         GBP: { en: "British Pound", pl: "Funt Brytyjski"},
         EUR: { en: "Euro", pl: "Euro"},
       },
-      dateFormats: { en: "en-GB", pl: "pl"}
+      dateFormats: { en: "en-GB", pl: "pl"},
+    },
+    tableDates: {
+      yesterday: { en: "Yesterday", pl: "Wczoraj" },
+      today: { en: "Today", pl: "Jutro" },
     },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },

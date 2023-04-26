@@ -2,7 +2,7 @@
   "transactions": [
     {
       "id": "df8c7760-43a5-4379-a229-6495f3e67f9c",
-      "date": 1682035200000,
+      "date": 1682534875000,
       "amount": -1337.69,
       "category": {
         "id": 1,
@@ -14,7 +14,7 @@
         }
       },
       "description": "Rent",
-      "status": "Done",
+      "status": "Cancelled",
       "creator": {
         "id": "5985e3b5-dbc5-46ba-bc71-781017fbc6f0",
         "name": "Mary Doe",
@@ -23,7 +23,7 @@
     },
     {
       "id": "4aa5af81-7745-42d8-bbd4-d804e407b8be",
-      "date": 1682035200000,
+      "date": 1682448523000,
       "amount": 44.0,
       "category": {
         "id": 5,
@@ -35,7 +35,7 @@
         }
       },
       "description": "Lift share",
-      "status": "Done",
+      "status": "Due",
       "creator": {
         "id": "45e65eba-5b30-4fdc-a535-8a4ddc16d082",
         "name": "Hans Niemann",
