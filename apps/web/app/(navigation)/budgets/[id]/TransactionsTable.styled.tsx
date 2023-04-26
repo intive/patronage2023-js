@@ -5,7 +5,7 @@ export const TableWrapperStyled = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 32px 48px 48px 48px; // REMOVE LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  padding: 32px 48px 48px 48px; // just for displaying now, have to be removed later!
 
   // table styles
   .ka-table {
