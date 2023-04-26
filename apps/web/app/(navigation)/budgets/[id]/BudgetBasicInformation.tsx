@@ -75,19 +75,17 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   }
 
   //DATA to display for information tiles
-  let dataRangeInfo, limitInfo, currencyInfo;
-
-  dataRangeInfo = (
+  const dataRangeInfo = (
     <>
       {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
     </>
   );
 
-  limitInfo = (
+  const limitInfo = (
     <InfoTileAmount amount={budget.limit} currencyOptions={budget.currency} hidePlus />
   );
 
-  currencyInfo = (
+  const currencyInfo = (
     <>
       <span>{budget.currency.tag}</span>
       <StyledAddInfoSpan>
