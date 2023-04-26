@@ -86,7 +86,7 @@ export default function SignInPage() {
             <FieldsWrapper>
               <Field
                 name="email"
-                initialValue={""}
+                initialValue={"smutnarzaba@png.pl"}
                 onBlurValidate={z
                   .string()
                   .email(t(form.emailInput.wrongFormatError))}>
@@ -110,7 +110,7 @@ export default function SignInPage() {
               </Field>
               <Field
                 name="password"
-                initialValue={""}
+                initialValue={"Frytki123.FE"}
                 onBlurValidate={z
                   .string()
                   .min(3, t(form.passwordInput.min3CharactersError))}>

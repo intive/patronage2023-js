@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt_decode from "jwt-decode";
 
@@ -12,7 +12,12 @@ export const authOptions: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token }) {
-      session.user = await jwt_decode(token.accessToken as string);
+      const decodedData = await jwt_decode(token.accessToken as string);
+      session.user = {
+        accessToken: token.accessToken as string,
+        name: decodedData.name,
+        avatar: decodedData.avatar,
+      };
       return session;
     },
   },
