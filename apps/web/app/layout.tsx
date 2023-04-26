@@ -10,7 +10,6 @@ import SessionProviderWrapper from "./SessionProviderWrapper";
 
 export type LayoutProps = {
   children: React.ReactNode;
-  session: any;
 };
 
 const inter = Inter({

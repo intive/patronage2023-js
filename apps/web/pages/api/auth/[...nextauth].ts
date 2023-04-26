@@ -1,4 +1,4 @@
-import NextAuth, { NextAuthOptions, Session } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt_decode from "jwt-decode";
 
@@ -6,13 +6,20 @@ type CredentialType = {
   email: string;
   password: string;
 };
+
+type decodedData = {
+  name: string;
+  avatar: string;
+};
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
     async session({ session, token }) {
-      const decodedData = await jwt_decode(token.accessToken as string);
+      const decodedData = await jwt_decode<decodedData>(
+        token.accessToken as string
+      );
       session.user = {
         accessToken: token.accessToken as string,
         name: decodedData.name,
@@ -50,6 +57,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/sign-in/",
     signOut: "/sign-in",
+    error: '"/sign-in/"',
   },
 };
 export default NextAuth(authOptions);
