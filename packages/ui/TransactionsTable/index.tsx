@@ -15,7 +15,8 @@ import dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
-import "./tablestyles.css";
+import {TableWrapperStyled} from './TransactionsTable.styled'
+//import "./tablestyles.css";
 
 const columns = [
   {
@@ -51,7 +52,6 @@ const columns = [
   {
     key: "editColumn",
   },
-  //not intuit.
   { key: "date", title: "Date", isSortable: false, dataType: DataType.Number },
 ];
 
@@ -74,7 +74,7 @@ export const TransactionsTable = ({ budget }: Props) => {
       .then((result) => setTransactions(result.transactions));
   }, [budget]);
 
-  const dummyItems = [
+  const dropdownMenuItems = [
     {
       ComponentToRender: "Edit",
       id: "edit-budget",
@@ -90,7 +90,7 @@ export const TransactionsTable = ({ budget }: Props) => {
   ];
 
   return (
-    <div className="table-wrapper">
+    <TableWrapperStyled>
       <Table
         columns={columns}
         rowKeyField={"id"}
@@ -125,7 +125,10 @@ export const TransactionsTable = ({ budget }: Props) => {
                   );
                 case "editColumn":
                   return (
-                    <TransactionDropdownMenu items={dummyItems} side="right" />
+                    <TransactionDropdownMenu
+                      items={dropdownMenuItems}
+                      side="right"
+                    />
                   );
               }
             },
@@ -135,11 +138,7 @@ export const TransactionsTable = ({ budget }: Props) => {
               switch (props.column.key) {
                 case "date":
                   const value = props.groupKey[props.groupIndex];
-                  return (
-                    <>
-                      {getDayName(value, budget.currency.locale)}
-                    </>
-                  );
+                  return <>{getDayName(value, budget.currency.locale)}</>;
               }
             },
           },
@@ -155,6 +154,6 @@ export const TransactionsTable = ({ budget }: Props) => {
           },
         }}
       />
-    </div>
+    </TableWrapperStyled>
   );
 };
