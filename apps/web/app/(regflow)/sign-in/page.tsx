@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
 import { device } from "lib/media-queries";
+import { signIn } from "next-auth/react";
 
 const FormWrapper = styled.div`
   height: 542px;
