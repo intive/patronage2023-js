@@ -1,4 +1,4 @@
-import styled, { css, ThemeContext } from "styled-components";
+import styled from "styled-components";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
@@ -18,11 +18,12 @@ export const TableWrapperStyled = styled.div`
 
   // header styles
   .ka-thead-background {
-    background-color: white;
+    background-color: ${({ theme }) => theme.transactionsTable.background};
   }
 
   .ka-thead-row {
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid
+      ${({ theme }) => theme.transactionsTable.headRowBottomBorder};
   }
 
   .ka-thead-cell-height {
@@ -39,13 +40,10 @@ export const TableWrapperStyled = styled.div`
     flex-direction: row;
     align-items: center;
     gap: 4px;
-    color: #515151;
+    color: ${({ theme }) => theme.transactionsTable.columnName};
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
-  }
-
-  .ka-cell {
   }
 
   button {
@@ -69,7 +67,7 @@ export const TableWrapperStyled = styled.div`
   }
 
   .ka-group-row {
-    background-color: white;
+    background-color: ${({ theme }) => theme.transactionsTable.background};
   }
 
   .ka-group-cell {
@@ -80,13 +78,13 @@ export const TableWrapperStyled = styled.div`
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
-    color: #7e7e7e;
+    color: ${({ theme }) => theme.transactionsTable.date};
   }
 
   // normal row styles
   .ka-row {
     border: none;
-    border-top: 1px solid #f7f7f7;
+    border-top: 1px solid ${({ theme }) => theme.transactionsTable.rowSeparator};
   }
 
   .ka-group-row + .ka-row {
@@ -98,7 +96,7 @@ export const TableWrapperStyled = styled.div`
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-    color: #222222;
+    color: ${({ theme }) => theme.transactionsTable.cellText};
   }
 
   .ka-cell {

@@ -1,5 +1,8 @@
 "use client";
 
+import { useContext } from "react";
+import styled, { css, ThemeContext } from "styled-components";
+
 import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
@@ -80,6 +83,7 @@ type Props = {
 };
 
 export const TransactionsTable = ({ budget, setSorting }: Props) => {
+  const theme = useContext(ThemeContext);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
@@ -174,7 +178,7 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
                   <span>{column.title}</span>
                   {column.key !== "editColumn" && (
                     <button onClick={() => setSorting(column.key)}>
-                      <Icon icon="sort" iconSize={20} color={"#515151"} />
+                      <Icon icon="sort" iconSize={20} color={theme.transactionsTable.sortIcon} />
                     </button>
                   )}
                 </>
