@@ -59,18 +59,21 @@ export const SelectContent = styled(Select.Content)`
 `;
 
 export const SelectItem = styled(Select.Item)`
+  outline-color: ${({ theme }) => theme.input.focus};
   padding: 16px;
   gap: 8px;
-
+  
   &:focus {
     color: ${({ theme }) => theme.input.main};
     background-color: ${({ theme }) => theme.currencySelect.focusBackground};
-    outline-color: transparent;
     &:first-child {
       border-radius: 1em 1em 0 0;
     }
     &:last-child {
       border-radius: 0 0 1em 1em;
+    }
+    &:hover{
+      outline: transparent;
     }
   }
 `;
