@@ -23,7 +23,7 @@ const budget = {
 export const BudgetsTitle = ({ name = "" }) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const mainCardContent = (
-    <TransactionsTable budget={budget} />
+    <TransactionsTable budget={budget} setSorting={column => console.log(column)} />
   );
 
   return (

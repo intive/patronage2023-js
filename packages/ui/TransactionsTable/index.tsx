@@ -14,7 +14,10 @@ import dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
-import { TableWrapperStyled, StyledCurrencyAmount } from "./TransactionsTable.styled";
+import {
+  TableWrapperStyled,
+  StyledCurrencyAmount,
+} from "./TransactionsTable.styled";
 
 const columns = [
   {
@@ -49,21 +52,21 @@ const columns = [
   },
   {
     key: "editColumn",
+    width: 30,
   },
   { key: "date", title: "Date", isSortable: false, dataType: DataType.Number },
 ];
 
 const getDayName = (timestamp: number, locale: string) => {
-  // const date = new Date(timestamp);
-  // return date.toLocaleDateString(locale, { weekday: "long" });
   return dayjs(timestamp).format("DD/MM/YYYY");
 };
 
 type Props = {
   budget: Budget;
+  setSorting: (column: string) => void;
 };
 
-export const TransactionsTable = ({ budget }: Props) => {
+export const TransactionsTable = ({ budget, setSorting }: Props) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
@@ -145,7 +148,11 @@ export const TransactionsTable = ({ budget }: Props) => {
               return (
                 <>
                   <span>{column.title}</span>
-                  {column.key !== "editColumn" && <button><Icon icon="sort" iconSize={20} color={'#515151'}/></button>}
+                  {column.key !== "editColumn" && (
+                    <button onClick={ () => setSorting(column.key)}>
+                      <Icon icon="sort" iconSize={20} color={"#515151"} />
+                    </button>
+                  )}
                 </>
               );
             },

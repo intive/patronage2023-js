@@ -1,11 +1,6 @@
 import styled, { css, ThemeContext } from "styled-components";
 import { CurrencyAmount } from "../CurrencyAmount";
 
-export const StyledCurrencyAmount = styled(CurrencyAmount)`
-  display: block;
-  text-align: right;
-`
-
 export const TableWrapperStyled = styled.div`
   width: 100%;
   display: flex;
@@ -100,7 +95,6 @@ export const TableWrapperStyled = styled.div`
   }
 
   // cell styles
-
   .ka-cell-text {
     font-weight: 500;
     font-size: 16px;
@@ -122,3 +116,8 @@ export const TableWrapperStyled = styled.div`
     font-size: 1.5em;
   }
 `;
+
+export const StyledCurrencyAmount = styled(CurrencyAmount)`
+  display: block;
+  text-align: right;
+`
