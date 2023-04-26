@@ -16,16 +16,16 @@ export const Normal = Template.bind({});
 
 export const White = Template.bind({});
 White.args = {
-  white: true,
+  $white: true,
 };
 
 export const CustomWidth = Template.bind({});
 CustomWidth.args = {
-  logoWidth: 250,
+  $logoWidth: 250,
 };
 
 export const CustomWidthWhite = Template.bind({});
 CustomWidthWhite.args = {
-  logoWidth: 250,
-  white: true,
+  $logoWidth: 250,
+  $white: true,
 };

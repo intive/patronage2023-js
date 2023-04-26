@@ -11,54 +11,49 @@ const logoVersions = {
 };
 
 type LogoProps = {
-  white?: boolean;
-  logoWidth?: number;
+  $white?: boolean;
+  $logoWidth?: number;
 };
 
-type ContainerProps = {
-  children?: React.ReactNode;
-} & Pick<LogoProps, "logoWidth" | "white">;
-
-const LogoStyledContainer = styled(Link)<ContainerProps>`
+const LogoStyledContainer = styled(Link)<LogoProps>`
   font-family: "Signika", sans-serif;
   font-weight: 600;
   text-decoration: none;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: ${({ white }) => (white ? "white" : "#1E4C40")};
+  color: ${({ $white }) => ($white ? "white" : "#1E4C40")};
   /*
 	temporarily adding background to white version to make it visible on white background
 	*/
-  background: ${({ white }) =>
-    white ? ({ theme }) => theme.logo.main : "none"};
-  ${({ logoWidth }) =>
-    logoWidth &&
+  background: ${({ $white, theme }) => ($white ? theme.logo.main : "none")};
+  ${({ $logoWidth }) =>
+    $logoWidth &&
     css`
-      width: ${logoWidth + "px"};
-      height: ${(logoWidth * 0.27).toFixed(2) + "px"};
-      font-size: ${(logoWidth / 6).toFixed(2) + "px"};
-      letter-spacing: ${((logoWidth / 6) * -0.02).toFixed(2) + "px"};
+      width: ${$logoWidth + "px"};
+      height: ${($logoWidth * 0.27).toFixed(2) + "px"};
+      font-size: ${($logoWidth / 6).toFixed(2) + "px"};
+      letter-spacing: ${(($logoWidth / 6) * -0.02).toFixed(2) + "px"};
     `}
 `;
 
 const LogoSignet = styled.span<LogoProps>`
-  background-image: url(${({ white }) => white && logoVersions.white});
+  background-image: url(${({ $white }) => $white && logoVersions.white});
   background-image: url(${() => logoVersions.color});
   background-repeat: no-repeat;
   background-size: contain;
   height: 100%;
-  ${({ logoWidth }) =>
-    logoWidth &&
+  ${({ $logoWidth }) =>
+    $logoWidth &&
     css`
-      width: ${(logoWidth * 0.25).toFixed(2) + "px"};
+      width: ${($logoWidth * 0.25).toFixed(2) + "px"};
     `}
 `;
 
-export const Logo = ({ white, logoWidth = 144 }: LogoProps) => {
+export const Logo = ({ $white, $logoWidth = 144 }: LogoProps) => {
   return (
-    <LogoStyledContainer logoWidth={logoWidth} white={white} href="/">
-      <LogoSignet logoWidth={logoWidth} white={white} />
+    <LogoStyledContainer $logoWidth={$logoWidth} $white={$white} href="/">
+      <LogoSignet $logoWidth={$logoWidth} $white={$white} />
       <span>Inbudget</span>
     </LogoStyledContainer>
   );

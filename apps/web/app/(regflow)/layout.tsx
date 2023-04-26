@@ -62,7 +62,7 @@ export default function RegFlowLayout({ children }: LayoutProps) {
       <ContentStyled>
         <SectionStyled>
           <TypoStyled>
-            <Logo logoWidth={138} white />
+            <Logo logoWidth={138} $white />
             <H1Styled>{getLeftColumnText("h1")}</H1Styled>
             <ParagraphStyled>{getLeftColumnText("p")}</ParagraphStyled>
           </TypoStyled>
