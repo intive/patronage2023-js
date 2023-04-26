@@ -227,6 +227,15 @@ export const theme = {
     active: colors.Teal8,
     hover: colors.Teal10,
   },
+  transactionsTable: {
+    background: colors.BasicWhite,
+    headRowBottomBorder: colors.Neutral2,
+    columnName: colors.Neutral8,
+    date: colors.Neutral6,
+    rowSeparator: colors.Neutral1,
+    cellText: colors.Neutral10,
+    sortIcon: colors.Neutral8,
+  }
 };
 
 export type ThemeType = typeof theme;

@@ -333,17 +333,21 @@ const dictionary = {
     dropdownButtonAriaLabel: { en: "More options", pl: "Więcej opcji" },
     basicInformation: {
       labels: {
-        period: { en: "Budget period", pl: "Okres trwania"},
-        limit: { en: "Budget limit", pl: "Limit budżetu"},
-        currency: { en: "Currency", pl: "Waluta"},
+        period: { en: "Budget period", pl: "Okres trwania" },
+        limit: { en: "Budget limit", pl: "Limit budżetu" },
+        currency: { en: "Currency", pl: "Waluta" },
       },
       currencyNames: {
-        USD: { en: "United States Dollar", pl: "Dolar Amerykański"},
-        PLN: { en: "Polish Zloty", pl: "Polski Złoty"},
-        GBP: { en: "British Pound", pl: "Funt Brytyjski"},
-        EUR: { en: "Euro", pl: "Euro"},
+        USD: { en: "United States Dollar", pl: "Dolar Amerykański" },
+        PLN: { en: "Polish Zloty", pl: "Polski Złoty" },
+        GBP: { en: "British Pound", pl: "Funt Brytyjski" },
+        EUR: { en: "Euro", pl: "Euro" },
       },
-      dateFormats: { en: "en-GB", pl: "pl"}
+      dateFormats: { en: "en-GB", pl: "pl" },
+    },
+    tableDates: {
+      yesterday: { en: "Yesterday", pl: "Wczoraj" },
+      today: { en: "Today", pl: "Jutro" },
     },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
