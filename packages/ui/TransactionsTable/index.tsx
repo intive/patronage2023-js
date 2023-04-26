@@ -1,23 +1,31 @@
 "use client";
 
 import { Budget, Transaction } from "./../../../apps/web/lib/types";
-
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
-
 import { Icon } from "../Icon";
 import { CategoryIcon } from "../CategoryIcon";
 import { Avatar } from "../Avatar";
 import { Chip } from "../Chip";
 import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
+
 import dayjs from "dayjs";
+import isToday from "dayjs/plugin/isToday";
+import isYesterday from "dayjs/plugin/isYesterday";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import "dayjs/locale/pl";
+import "dayjs/locale/en-GB";
+import "dayjs/locale/en";
 
 import { useEffect, useState } from "react";
-
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+
+dayjs.extend(isToday);
+dayjs.extend(localizedFormat);
+dayjs.extend(isYesterday);
 
 const columns = [
   {
@@ -67,7 +75,18 @@ const columns = [
 ];
 
 const getDayName = (timestamp: number, locale: string) => {
-  return dayjs(timestamp).format("DD/MM/YYYY");
+  dayjs.locale("en-GB");
+
+  const date = dayjs(timestamp);
+  const formattedDate = date.format("L");
+
+  let dayOfWeek = date.format("dddd");
+  if (date.isToday()) {
+    dayOfWeek = "Today";
+  } else if (date.isYesterday()) {
+    dayOfWeek = "Yesterday";
+  }
+  return `${dayOfWeek}, ${formattedDate}`;
 };
 
 type Props = {
