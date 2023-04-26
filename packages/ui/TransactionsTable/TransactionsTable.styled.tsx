@@ -4,7 +4,7 @@ export const TableWrapperStyled = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 32px 48px 48px 48px; //remove later
+  padding: 32px 48px 48px 48px; // REMOVE LATER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
   // table styles
   .ka-table {
@@ -39,7 +39,6 @@ export const TableWrapperStyled = styled.div`
     align-items: center;
     gap: 4px;
     color: #515151;
-
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -55,16 +54,42 @@ export const TableWrapperStyled = styled.div`
     cursor: pointer;
   }
 
+  // table body
+  tbody > tr:first-child > td {
+    padding-top: 16px;
+  }
+
+  // group row styles
   .ka-icon-group-arrow {
     display: none;
   }
 
+  .ka-group-row {
+    background-color: white;
+  }
+
+  .ka-group-cell {
+    padding: 8px 8px 8px 0;
+  }
 
   .ka-group-cell-content {
     font-size: 12px;
-    color: #888888;
+    font-weight: 400;
+    line-height: 16px;
+    color: #7E7E7E;
   }
 
+  // normal row styles
+  .ka-row {
+    border: none;
+    border-top: 1px solid #F7F7F7;
+  }
+
+  .ka-group-row + .ka-row {
+    border-top: none;
+  }
+
+  // cell styles
 
   .ka-cell-text {
     font-weight: 500;
