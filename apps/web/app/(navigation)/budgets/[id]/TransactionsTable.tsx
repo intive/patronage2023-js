@@ -60,7 +60,7 @@ const columns = [
     title: "Creator",
     isSortable: true,
     dataType: DataType.Object,
-    width: 70,
+    width: 80,
   },
   {
     key: "editColumn",
@@ -74,12 +74,12 @@ const columns = [
   },
 ];
 
-type Props = {
+type TransactionsTableProps  = {
   budget: Budget;
   setSorting: (column: string) => void;
 };
 
-export const TransactionsTable = ({ budget, setSorting }: Props) => {
+export const TransactionsTable = ({ budget, setSorting }: TransactionsTableProps ) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { tableDates } = dict;
