@@ -1,31 +1,17 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { device } from "../../../apps/web/lib/media-queries";
 
-export const DatePickerStyled = styled.div`
-  position: relative;
+type DatePickerStyledProps = {
+  hasError?: boolean;
+  label?: string;
+};
 
-  .react-datepicker__input-container input {
-    font-family: unset;
-    position: relative;
-    border: solid 2px ${({ theme }) => theme.datePicker.neutral2};
-    border-radius: 8px;
-    padding: 14px 0 14px 14px;
-    font-size: 16px;
-    line-height: 1.5rem;
-    caret-color: ${({ theme }) => theme.datePicker.neutral2};
-    transition: border-color 200ms ease-out;
-    color: ${({ theme }) => theme.datePicker.neutral8};
-    width: 100%;
-    :focus {
-      outline: none;
-      border-color: ${({ theme }) => theme.datePicker.teal6};
-    }
-  }
+export const DatePickerStyled = styled.div<DatePickerStyledProps>`
+  position: relative;
 
   .react-datepicker-popper {
     z-index: 20;
   }
-
   .react-datepicker__triangle {
     display: none;
   }
@@ -143,17 +129,6 @@ export const DatePickerStyled = styled.div`
   .react-datepicker__day--outside-month {
     font-size: 0.7rem;
     color: ${({ theme }) => theme.datePicker.neutral5};
-  }
-
-  .react-datepicker__close-icon {
-    padding-right: 5px;
-    ${device.tablet} {
-      padding-right: 15px;
-    }
-  }
-
-  .react-datepicker__close-icon:after {
-    background-color: ${({ theme }) => theme.datePicker.teal8};
   }
 
   .react-datepicker__year-option {

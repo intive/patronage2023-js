@@ -27,7 +27,7 @@ export default function RootLayout({ children }: LayoutProps) {
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Signika:wght@600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap"
         />
       </head>
       <body className={inter.className}>

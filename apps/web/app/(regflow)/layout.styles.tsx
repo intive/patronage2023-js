@@ -6,10 +6,12 @@ import { Background, Card } from "ui";
 
 export const BackgroundFlex = styled(Background)`
   display: flex;
+  justify-content: center;
+  align-items: center;
 
   ${device.tablet} {
     background-attachment: fixed;
-    background-position: right -370px center;
+    background-position: right -300px center;
   }
 
   ${device.desktop} {
@@ -25,51 +27,68 @@ export const ContentStyled = styled.div`
 
   ${device.tablet} {
     flex-direction: row;
-    justify-content: flex-end;
-    gap: 3rem;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  ${device.desktop} {
+    gap: 0;
   }
 
   ${device.tv} {
-    justify-content: center;
-    gap: 10rem;
+    max-width: 1440px;
   }
 `;
 
 export const SectionStyled = styled.div`
   color: white;
-  padding: 52px 16px 0px 16px;
+  padding-top: 52px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 
   ${device.tablet} {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    flex-grow: 1;
+    align-items: flex-start;
+    width: 40%;
     padding: 0;
-    margin-left: 32px;
+    margin-left: 3rem;
   }
 
   ${device.desktop} {
-    margin-left: 64px;
-  }
-
-  ${device.tv} {
-    flex-grow: 0;
+    margin-left: 4rem;
   }
 `;
 
 export const TypoStyled = styled.div`
-  max-width: 415px;
+  width: 343px;
+  height: 155px;
+
+  ${device.tablet} {
+    width: auto;
+    height: 255px;
+  }
+
+  ${device.desktop} {
+    height: 220px;
+    max-width: 580px;
+  }
 `;
 
 export const FormWrapperStyled = styled.div`
   overflow-x: auto;
 
   ${device.tablet} {
-    padding-right: 32px;
+    width: 60%;
+    margin-right: 2rem;
+    padding: 2rem 0;
   }
+
   ${device.desktop} {
-    padding-right: 64px;
+    margin-right: 3rem;
+    padding: 3rem;
   }
 `;
 
@@ -77,10 +96,10 @@ export const H1Styled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 1.5rem;
   line-height: 1.5rem;
-  margin-top: 16px;
+  margin-top: 1rem;
 
   ${device.tablet} {
-    margin-top: 32px;
+    margin-top: 2rem;
     font-size: 2.5rem;
     line-height: 2.5rem;
   }
@@ -103,10 +122,10 @@ export const CustomCard = styled(Card)`
   padding: 1.5rem;
 
   ${device.tablet} {
-    padding: 2.5rem;
+    padding: 2rem 1rem;
   }
 
   ${device.desktop} {
-    padding: 5rem;
+    padding: 5rem 2rem;
   }
 `;

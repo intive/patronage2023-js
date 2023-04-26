@@ -7,18 +7,17 @@ import { ErrorMessage, Button, Input } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
-import { signIn } from "next-auth/react";
+import { device } from "lib/media-queries";
 
 const FormWrapper = styled.div`
-  margin: 0 auto;
-  padding-top: 6rem;
-  width: 416px;
-  position: relative;
+  height: 542px;
+  width: 312px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @media (max-width: 767px) {
-    width: 312px;
+
+  ${device.desktop} {
+    width: 416px;
   }
 `;
 
@@ -60,6 +59,7 @@ export default function SignInPage() {
   const closeErrorMessage = () => {
     setErrMsg("");
   };
+
   return (
     <Form
       onSubmit={async (values) => {
