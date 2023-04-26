@@ -1,7 +1,8 @@
 "use client";
 
 import { useContext } from "react";
-import styled, { css, ThemeContext } from "styled-components";
+import { ThemeContext } from "styled-components";
+import { useTranslate } from "lib/hooks";
 
 import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
@@ -84,6 +85,9 @@ type Props = {
 
 export const TransactionsTable = ({ budget, setSorting }: Props) => {
   const theme = useContext(ThemeContext);
+  const { t, dict } = useTranslate("BudgetsPage");
+  const { tableDates } = dict;
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
@@ -98,9 +102,9 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
 
     let dayOfWeek = date.format("dddd");
     if (date.isToday()) {
-      dayOfWeek = "Today";
+      dayOfWeek = t(tableDates.today);
     } else if (date.isYesterday()) {
-      dayOfWeek = "Yesterday";
+      dayOfWeek = t(tableDates.yesterday);
     }
     return `${dayOfWeek}, ${formattedDate}`;
   };
