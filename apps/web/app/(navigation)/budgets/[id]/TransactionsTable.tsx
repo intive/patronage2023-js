@@ -71,7 +71,7 @@ const columns = [
     title: "Date",
     isSortable: false,
     dataType: DataType.Number,
-  },
+  }
 ];
 
 type Props = {
@@ -89,7 +89,6 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
   }, [budget]);
 
   const getDayName = (timestamp: number, locale: string) => {
-
     const date = dayjs(timestamp);
     const formattedDate = date.format("DD.MM.YYYY");
 
