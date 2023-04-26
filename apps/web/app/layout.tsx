@@ -17,7 +17,7 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function RootLayout({ children, session }: LayoutProps) {
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en">
       <head>
