@@ -15,8 +15,7 @@ import dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
-import {TableWrapperStyled} from './TransactionsTable.styled'
-//import "./tablestyles.css";
+import { TableWrapperStyled } from "./TransactionsTable.styled";
 
 const columns = [
   {
@@ -146,8 +145,8 @@ export const TransactionsTable = ({ budget }: Props) => {
             content: ({ column }) => {
               return (
                 <>
-                  {column.title}
-                  {column.key !== "editColumn" && <Icon icon="sort" />}
+                  <span>{column.title}</span>
+                  {column.key !== "editColumn" && <button><Icon icon="sort" iconSize={20} color={'#515151'}/></button>}
                 </>
               );
             },
