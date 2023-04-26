@@ -3,13 +3,13 @@
 import styled from "styled-components";
 import { Budget } from "lib/types";
 import { InfoTile, BudgetIcon, CurrencyAmount } from "ui";
-import { CurrencyAmountProps } from "ui/CurrencyAmount";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
 //STYLING
 const BasicInfoWrapper = styled.div`
   width: 100%;
+  //might be helpful - loose the border once finished putting the page together
   border: 1px solid red;
 `;
 
@@ -30,6 +30,7 @@ const TileWrapper = styled.div`
 const BudgetIconStyled = styled(BudgetIcon)`
   height: 80px;
   width: 80px;
+  font-size: 1.5em;
 `;
 
 const StyledTitle = styled.h1`
@@ -37,8 +38,6 @@ const StyledTitle = styled.h1`
   font-size: 32px;
   font-weight: 600;
   line-height: 48px;
-  letter-spacing: 0px;
-  text-align: left;
   color: ${({ theme }) => theme.main};
 `;
 
@@ -46,11 +45,10 @@ const StyledDescription = styled.span`
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0px;
-  text-align: left;
   color: ${({ theme }) => theme.infoTile.label};
 `;
 
-const InfoTileAmount = styled(CurrencyAmount)<CurrencyAmountProps>`
+const InfoTileAmount = styled(CurrencyAmount)`
   color: ${({ theme }) => theme.infoTile.value};
 `;
 //STYLING end
@@ -77,13 +75,18 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   }
 
   //DATA to display for information tiles
-  let dataRangeInfo, currencyInfo, limitInfo;
+  let dataRangeInfo, limitInfo, currencyInfo;
 
   dataRangeInfo = (
     <>
       {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
     </>
   );
+
+  limitInfo = (
+    <InfoTileAmount amount={budget.limit} currencyOptions={budget.currency} hidePlus />
+  );
+
   currencyInfo = (
     <>
       <span>{budget.currency.tag}</span>
@@ -91,9 +94,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
         {t(basicInformation.currencyNames[budget.currency.tag as keyof typeof basicInformation.currencyNames])}
       </StyledAddInfoSpan>
     </>
-  );
-  limitInfo = (
-    <InfoTileAmount amount={budget.limit} currencyOptions={budget.currency} hidePlus />
   );
   //DATA for information tiles end
 

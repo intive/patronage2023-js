@@ -10,7 +10,7 @@ const budget: Budget = {
   "id": "36cc0777-2874-4d0c-a389-91280e45e836",
   "name": "Trip to London",
   "description": "Two week vacations in London",
-  "icon": "directions_car",
+  "icon": "savings",
   "currency": {
     "locale": "en-GB",
     "tag": "GBP"
