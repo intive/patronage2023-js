@@ -62,6 +62,8 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { basicInformation } = dict;
+  const { startDate, endDate, limit, currency, name, icon, description } = budget;
+  const { tag } = currency;
 
   //DATE formatting
   function convertTimestamp(timestamp: number) {
@@ -77,19 +79,19 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA to display for information tiles
   const dataRangeInfo = (
     <>
-      {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
+      {convertTimestamp(startDate)} - {convertTimestamp(endDate)}
     </>
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={budget.limit} currencyOptions={budget.currency} hidePlus />
+    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
   );
 
   const currencyInfo = (
     <>
-      <span>{budget.currency.tag}</span>
+      <span>{tag}</span>
       <StyledAddInfoSpan>
-        {t(basicInformation.currencyNames[budget.currency.tag as keyof typeof basicInformation.currencyNames])}
+        {t(basicInformation.currencyNames[tag as keyof typeof basicInformation.currencyNames])}
       </StyledAddInfoSpan>
     </>
   );
@@ -99,10 +101,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     <>
       <BasicInfoWrapper>
         <TopSectionWrapper>
-          <BudgetIconStyled icon={budget.icon} />
+          <BudgetIconStyled icon={icon} />
           <div>
-            <StyledTitle>{budget.name}</StyledTitle>
-            <StyledDescription>{budget.description}</StyledDescription>
+            <StyledTitle>{name}</StyledTitle>
+            <StyledDescription>{description}</StyledDescription>
           </div>
         </TopSectionWrapper>
         <TileWrapper>
