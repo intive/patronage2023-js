@@ -332,7 +332,7 @@ const dictionary = {
     title: { en: "Budgets page", pl: "Budżety" },
     dropdownButtonAriaLabel: { en: "More options", pl: "Więcej opcji" },
     basicInformation: {
-      labels: {
+    labels: {
         period: { en: "Budget period", pl: "Okres trwania"},
         limit: { en: "Budget limit", pl: "Limit budżetu"},
         currency: { en: "Currency", pl: "Waluta"},
@@ -344,6 +344,10 @@ const dictionary = {
         EUR: { en: "Euro", pl: "Euro"},
       },
       dateFormats: { en: "en-GB", pl: "pl"}
+     },
+    tableDates: {
+      yesterday: { en: "Yesterday", pl: "Wczoraj" },
+      today: { en: "Today", pl: "Jutro" },
     },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
