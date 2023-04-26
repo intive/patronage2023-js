@@ -7,7 +7,6 @@ import { DataType } from "ka-table/enums";
 
 import { Icon } from "../Icon";
 import { CategoryIcon } from "../CategoryIcon";
-import { CurrencyAmount } from "../CurrencyAmount";
 import { Avatar } from "../Avatar";
 import { Chip } from "../Chip";
 import { TransactionDropdownMenu } from "../TransactionDropdownMenu";
@@ -15,7 +14,7 @@ import dayjs from "dayjs";
 
 import { useEffect, useState } from "react";
 
-import { TableWrapperStyled } from "./TransactionsTable.styled";
+import { TableWrapperStyled, StyledCurrencyAmount } from "./TransactionsTable.styled";
 
 const columns = [
   {
@@ -108,7 +107,7 @@ export const TransactionsTable = ({ budget }: Props) => {
                   return <Chip type={props.value}>{props.value}</Chip>;
                 case "amount":
                   return (
-                    <CurrencyAmount
+                    <StyledCurrencyAmount
                       amount={props.value}
                       currencyOptions={budget.currency}
                     />
