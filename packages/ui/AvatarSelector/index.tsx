@@ -48,7 +48,7 @@ const AvatarsWrapper = styled.div`
   margin-right: -1em;
   margin-bottom: 2em;
 
-  ${device.tablet} {
+  ${device.desktop} {
     width: 100%;
     max-width: 480px;
     min-width: 310px;
@@ -78,7 +78,7 @@ const AvatarGridStyled = styled.div`
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 1024px) {
     flex-wrap: nowrap;
     justify-content: flex-start;
 

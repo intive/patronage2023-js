@@ -7,7 +7,6 @@ import { CreateNewBudget } from "./CreateNewBudget";
 
 import {
   BudgetsSubMenuNavListContents,
-  TeamSubMenuNavListContents,
   SettingsSubMenuNavListContents,
 } from "./SideNavigationBarNavListData";
 
@@ -15,8 +14,18 @@ export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
 
+  const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
+
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+
+  const resetIsNavListItemClicked = () => {
+    setIsNavItemClicked(false);
+  };
+
+  const hideSubMenu = () => {
+    setIsNavItemClicked(true);
+  };
 
   const closeModal = () => {
     setIsCreateNewBudgetModalVisible(false);
@@ -27,44 +36,36 @@ export default function SideNav() {
   };
 
   const BudgetsSubMenuData = {
-    title: "Budgets",
+    title: t(SideNav.budgetsItem.title),
     sort: {
-      method: () => {},
+      clickHandler: () => {},
       icon: <Icon icon="filter_list" />,
     },
     searchInput: {
-      placeholder: "Search budgets",
-      icon: <Icon icon="search" color="#515151" />,
+      placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
     },
-    navigationList: <NavList contents={BudgetsSubMenuNavListContents} />,
+    navigationList: (
+      <NavList
+        contents={BudgetsSubMenuNavListContents}
+        onNavListItemClick={hideSubMenu}
+      />
+    ),
     button: {
-      method: () => {
+      clickHandler: () => {
         openModal();
       },
-      label: "Add new budget",
-    },
-  };
-
-  const TeamSubMenuData = {
-    title: "Team",
-    sort: {
-      method: () => {},
-      icon: <Icon icon="filter_list" />,
-    },
-    searchInput: {
-      icon: <Icon icon="search" color="#515151" />,
-      placeholder: "Search team",
-    },
-    navigationList: <NavList contents={TeamSubMenuNavListContents} />,
-    button: {
-      method: () => {},
-      label: "Add new member",
+      label: t(SideNav.budgetsItem.buttonLabel),
     },
   };
 
   const SettingsSubMenuData = {
-    title: "Settings",
-    navigationList: <NavList contents={SettingsSubMenuNavListContents} />,
+    title: t(SideNav.settingsItem.title),
+    navigationList: (
+      <NavList
+        contents={SettingsSubMenuNavListContents}
+        onNavListItemClick={hideSubMenu}
+      />
+    ),
   };
 
   return (
@@ -74,31 +75,26 @@ export default function SideNav() {
           {
             href: "/budgets",
             icon: <Icon icon="wallet" iconSize={32} />,
-            textValue: t(SideNav.budgetsItem),
+            textValue: t(SideNav.budgetsItem.title),
             subMenu: BudgetsSubMenuData,
             id: 1,
           },
           {
             href: "/reports",
             icon: <Icon icon="query_stats" iconSize={32} />,
-            textValue: t(SideNav.reportsItem),
+            textValue: t(SideNav.reportsItem.title),
             id: 2,
-          },
-          {
-            href: "/team",
-            icon: <Icon icon="account_circle" iconSize={32} />,
-            textValue: t(SideNav.teamsItem),
-            subMenu: TeamSubMenuData,
-            id: 3,
           },
           {
             href: "/settings",
             icon: <Icon icon="settings" iconSize={32} />,
-            textValue: t(SideNav.settingsItem),
+            textValue: t(SideNav.settingsItem.title),
             subMenu: SettingsSubMenuData,
-            id: 4,
+            id: 3,
           },
         ]}
+        isNavListItemClicked={isNavListItemClicked}
+        resetIsNavListItemClicked={resetIsNavListItemClicked}
       />
       <>
         {isCreateNewBudgetModalVisible && (

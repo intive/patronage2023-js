@@ -1,18 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useContext } from "react";
 
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
 import "react-datepicker/dist/react-datepicker.css";
+import { LanguageContext } from "../../../apps/web/lib/contexts/LanguageContext";
+
+import { Input } from "../Input";
 
 import en from "date-fns/locale/en-US";
 import pl from "date-fns/locale/pl";
 
 type CustomDatePickerProps = {
-  placeholder: string;
-  lang: string | undefined;
-  onSelect: (date: Date) => void;
+  onSelect: (date: Date | null) => void;
+  selected?: Date | null;
+  hasError?: boolean;
+  label: string;
 };
 
 type DatePickerLanguageConfigType = {
@@ -26,17 +30,19 @@ const datePickerLanguageConfig: DatePickerLanguageConfigType = {
 };
 
 export const CustomDatePicker = ({
-  placeholder = "",
-  lang = "en",
   onSelect,
+  selected,
+  hasError,
+  label,
 }: CustomDatePickerProps) => {
-  const [date, setDate] = useState<Date | null>(null);
+  const { currentLang } = useContext(LanguageContext);
 
   return (
-    <DatePickerStyled>
+    <DatePickerStyled hasError={hasError} label={label}>
       <DatePicker
-        locale={datePickerLanguageConfig[lang]}
-        popperPlacement="top-start"
+        id={label}
+        locale={datePickerLanguageConfig[currentLang]}
+        popperPlacement="top"
         popperModifiers={[
           {
             name: "preventOverflow",
@@ -51,18 +57,22 @@ export const CustomDatePicker = ({
           strategy: "fixed",
         }}
         onSelect={onSelect}
-        selected={date}
-        name={placeholder}
+        selected={selected}
+        name={label}
         onChange={(date: Date) => {
-          setDate(date);
           onSelect(date);
         }}
         autoComplete="off"
-        placeholderText={placeholder}
         showYearDropdown
-        isClearable
         onFocus={(e) => (e.target.readOnly = true)}
         dropdownMode="select"
+        customInput={
+          <Input
+            label={label}
+            hasError={hasError}
+            onInputCleared={() => onSelect(null)}
+          />
+        }
       />
     </DatePickerStyled>
   );
