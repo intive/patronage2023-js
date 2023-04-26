@@ -22,7 +22,7 @@ const LogoStyledContainer = styled(Link)<LogoProps>`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  color: ${({ $white }) => ($white ? "white" : "#1E4C40")};
+  color: ${({ $white, theme }) => ($white ? "white" : theme.logo.main)};
 
   ${({ $logoWidth }) =>
     $logoWidth &&
@@ -35,8 +35,7 @@ const LogoStyledContainer = styled(Link)<LogoProps>`
 `;
 
 const LogoSignet = styled.span<LogoProps>`
-  background-image: url(${({ $white }) => $white && logoVersions.white});
-  background-image: url(${() => logoVersions.color});
+  background-image: url(${({ $white }) => $white && logoVersions.white || logoVersions.color});
   background-repeat: no-repeat;
   background-size: contain;
   height: 100%;
