@@ -23,10 +23,7 @@ const LogoStyledContainer = styled(Link)<LogoProps>`
   justify-content: space-around;
   align-items: center;
   color: ${({ $white }) => ($white ? "white" : "#1E4C40")};
-  /*
-	temporarily adding background to white version to make it visible on white background
-	*/
-  background: ${({ $white, theme }) => ($white ? theme.logo.main : "none")};
+
   ${({ $logoWidth }) =>
     $logoWidth &&
     css`
