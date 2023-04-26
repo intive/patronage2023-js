@@ -109,7 +109,7 @@ export function BudgetBasicInformation ( { budgetId } : BudgetBasicInfoProps) {
     currencyInfo = (
       <>
           <span>{budget?.currency.tag}</span>
-          <StyledAddInfoSpan>{t(basicInformation.currencyNames[budget?.currency.tag])}</StyledAddInfoSpan>
+          <StyledAddInfoSpan>{t(basicInformation.currencyNames[budget?.currency.tag as keyof typeof basicInformation.currencyNames])}</StyledAddInfoSpan>
       </>
     );
     limitInfo = (
