@@ -10,7 +10,7 @@ type CurrencyAmountSpanProps = {
   amount: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
-export type CurrencyAmountProps = {
+type CurrencyAmountProps = {
   currencyOptions: CurrencyType;
   className?: string;
   hidePlus?: boolean;
