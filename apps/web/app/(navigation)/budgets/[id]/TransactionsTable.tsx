@@ -27,10 +27,6 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 
-dayjs.extend(isToday);
-dayjs.extend(localizedFormat);
-dayjs.extend(isYesterday);
-
 const columns = [
   {
     key: "category",
@@ -75,7 +71,7 @@ const columns = [
     title: "Date",
     isSortable: false,
     dataType: DataType.Number,
-  }
+  },
 ];
 
 type Props = {
@@ -97,6 +93,10 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
   }, [budget]);
 
   const getDayName = (timestamp: number, locale: string) => {
+    dayjs.extend(isToday);
+    dayjs.extend(localizedFormat);
+    dayjs.extend(isYesterday);
+
     const date = dayjs(timestamp);
     const formattedDate = date.format("DD.MM.YYYY");
 
@@ -182,7 +182,11 @@ export const TransactionsTable = ({ budget, setSorting }: Props) => {
                   <span>{column.title}</span>
                   {column.key !== "editColumn" && (
                     <button onClick={() => setSorting(column.key)}>
-                      <Icon icon="sort" iconSize={20} color={theme.transactionsTable.sortIcon} />
+                      <Icon
+                        icon="sort"
+                        iconSize={20}
+                        color={theme.transactionsTable.sortIcon}
+                      />
                     </button>
                   )}
                 </>
