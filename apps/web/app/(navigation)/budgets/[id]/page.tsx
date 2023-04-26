@@ -1,5 +1,5 @@
 import { NextPageContext } from "next";
-import { BudgetsTitle } from "../BudgetsTranslated";
+import { BudgetsContent } from "../BudgetsContent";
 
 // TODO: there's probably a next type for this which I can't find
 type PageProps = {
@@ -10,5 +10,5 @@ type PageProps = {
 
 export default function BudgetsPage({ params }: PageProps) {
   const { id } = params;
-  return <BudgetsTitle name={id} />;
+  return <BudgetsContent id={id} />;
 }
