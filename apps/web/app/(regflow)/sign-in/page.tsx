@@ -60,18 +60,22 @@ export default function SignInPage() {
   const closeErrorMessage = () => {
     setErrMsg("");
   };
-
   return (
     <Form
       onSubmit={async (values) => {
         const result = await signIn("credentials", {
           email: values.email,
           password: values.password,
-          redirect: true,
-          callbackUrl: "/",
+          redirect: false,
+        }).then((res) => {
+          if (res!.ok) {
+            router.push("/");
+          } else {
+            setErrMsg(t(form.errorMessage));
+          }
         });
       }}>
-      {({ submit, errors }) => (
+      {({ submit }) => (
         <FormWrapper>
           <form
             onSubmit={(e) => {

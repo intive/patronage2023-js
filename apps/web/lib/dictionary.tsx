@@ -42,8 +42,8 @@ const dictionary = {
   SignInPage: {
     form: {
       errorMessage: {
-        en: "Invalid credentials. Please try again.",
-        pl: "Nieprawidłowy email lub hasło. Proszę spróbuj ponownie.",
+        en: "Invalid credentials.",
+        pl: "Nieprawidłowy email lub hasło.",
       },
       emailInput: {
         label: { en: "Email", pl: "Email" },
@@ -139,32 +139,32 @@ const dictionary = {
     },
     profileScreen: {
       title: {
-        en:"Customise the account",
-        pl:"Spersonalizuj swoje konto",
+        en: "Customise the account",
+        pl: "Spersonalizuj swoje konto",
       },
       subtitle: {
         en: "Select your avatar and tell us your name",
         pl: "Wybierz avatar i powiedz jak się nazywasz",
       },
-      firstNameInputLabel:{
-          en: "First name",
-          pl: "Imię",
+      firstNameInputLabel: {
+        en: "First name",
+        pl: "Imię",
       },
-      lastNameInputLabel:{
-          en: "Last name",
-          pl: "Nazwisko",
+      lastNameInputLabel: {
+        en: "Last name",
+        pl: "Nazwisko",
       },
-      inputErrorMsg : {
+      inputErrorMsg: {
         en: "The field cannot be empty",
         pl: "Pole nie może być puste",
       },
-      backButton: { 
-        en: "Back", 
-        pl: "Powrót" 
+      backButton: {
+        en: "Back",
+        pl: "Powrót",
       },
-      submitButton: { 
-        en: "Create account", 
-        pl: "Utwórz konto" 
+      submitButton: {
+        en: "Create account",
+        pl: "Utwórz konto",
       },
     },
     emailScreen: {
