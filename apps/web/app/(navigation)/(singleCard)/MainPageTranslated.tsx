@@ -13,11 +13,11 @@ export const MainPageTranslated = () => {
     <>
       <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
       <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
-      <Button onClick={() => signOut()}>Log out</Button>
-      <br />
-      <Button onClick={() => signIn()}>Sign in</Button>
+      <LinkStyled href="/sign-in">Sign in</LinkStyled>
       <br />
       <Button onClick={() => console.log(data)}>Check data</Button>
+      <br />
+      <Button onClick={() => signOut()}>Log out</Button>
     </>
   );
 };
