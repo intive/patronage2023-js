@@ -1,27 +1,18 @@
 import styled from "styled-components";
 import { Card } from "../Card";
 
-export const IconPickerStyled = styled.div`
+type IconPickerStyledProps = {
+  ref: React.Ref<any> | null;
+};
+
+export const IconPickerStyled = styled.div<IconPickerStyledProps>`
   position: relative;
   justify-content: flex-start;
   width: 112px;
   height: 112px;
   gap: 2px;
   z-index: 1;
-`;
-
-export const IconAndButtonWrapperStyled = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 112px;
-  width: 112px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.iconPicker.background};
-  color: ${({ theme }) => theme.iconPicker.main};
+  cursor: pointer;
 `;
 
 export const EditButtonStyled = styled.button`

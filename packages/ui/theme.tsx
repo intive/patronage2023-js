@@ -103,6 +103,7 @@ export const theme = {
     neutralLabel: colors.Neutral10,
     focus: colors.Teal5,
     labelBackground: colors.BasicWhite,
+    placeholder: colors.Neutral4,
   },
   link: {
     main: colors.Teal8,
@@ -127,6 +128,7 @@ export const theme = {
     subMenu: {
       separator: colors.Neutral2,
       title: colors.Teal10,
+      background: colors.BasicWhite,
     },
   },
   nav: {
@@ -172,6 +174,7 @@ export const theme = {
     font: colors.Neutral8,
     disabled: colors.Neutral2,
     focus: colors.Teal5,
+    error: colors.Supporting4,
   },
   iconPicker: {
     main: colors.Teal10,
@@ -193,6 +196,11 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
+  transactionDropdownMenu: {
+    outlineFocus: colors.Teal10,
+    activeBackground: colors.Teal1,
+    iconColor: colors.Neutral6,
+  },
   infoTile: {
     border: colors.Neutral2,
     label: colors.Neutral6,
@@ -205,9 +213,19 @@ export const theme = {
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
   },
+  budgetIcon: {
+    main: colors.Teal10,
+    background: colors.Neutral1,
+  },
   currencyAmount: {
     positive: colors.Supporting7,
     text: colors.Neutral8,
+  },
+  createNewBudget: {
+    background: colors.BasicWhite,
+    inactive: colors.Neutral6,
+    active: colors.Teal8,
+    hover: colors.Teal10,
   },
 };
 

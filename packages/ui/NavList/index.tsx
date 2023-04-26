@@ -14,6 +14,7 @@ export type NavItemContents = {
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
 export type NavListProps = {
   contents: Array<NavItemContents>;
+  onNavListItemClick: () => void;
 } & React.HTMLProps<HTMLUListElement>;
 
 const NavListStyled = styled.ul`
@@ -42,7 +43,7 @@ export const IconWrapper = styled.div`
   border-radius: 8px;
 `;
 
-export const NavList = ({ contents }: NavListProps) => {
+export const NavList = ({ contents, onNavListItemClick }: NavListProps) => {
   const currentPage = usePathname() || "";
 
   return (
@@ -52,7 +53,8 @@ export const NavList = ({ contents }: NavListProps) => {
           <NavItem
             active={content.href === currentPage}
             key={content.id}
-            href={content.href}>
+            href={content.href}
+            onClick={onNavListItemClick}>
             {content.ComponentToRender}
           </NavItem>
         );

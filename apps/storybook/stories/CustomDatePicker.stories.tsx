@@ -21,7 +21,7 @@ const Template: ComponentStory<typeof CustomDatePicker> = ({ ...args }) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  placeholder: "Placeholder",
+  label: "Placeholder",
   onSelect: (date: Date) => {
     console.log(date);
   },
@@ -29,7 +29,7 @@ Default.args = {
 
 export const TranslatedToPolish = Template.bind({});
 TranslatedToPolish.args = {
-  placeholder: "Zaślepka",
+  label: "Zaślepka",
   onSelect: (date: Date) => {
     console.log(date);
   },
