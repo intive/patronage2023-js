@@ -6,6 +6,7 @@ import { InfoTile, Icon, CurrencyAmount } from "ui";
 import { CurrencyAmountProps } from "ui/CurrencyAmount";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import styled from "styled-components";
+import { useTranslate } from "lib/hooks";
 
 const currencyNames:  Record<string, string>  = {
   "USD": "United States Dollar",
@@ -79,8 +80,10 @@ type BudgetBasicInfoProps = {
 };
 //TYPES
 
-export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
+export function BudgetBasicInformation ( { budgetId } : BudgetBasicInfoProps) {
   const [budget, setBudget] = useState<Budget | null>(null);
+  const { t, dict } = useTranslate("BudgetsPage");
+  const { basicInformation } = dict;
 
   useEffect(() => {
     fetch("/budgets.json")
@@ -106,7 +109,7 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
     currencyInfo = (
       <>
           <span>{budget?.currency.tag}</span>
-          <StyledAddInfoSpan>{currencyNames[budget?.currency.tag]}</StyledAddInfoSpan>
+          <StyledAddInfoSpan>{t(basicInformation.currencyNames[budget?.currency.tag])}</StyledAddInfoSpan>
       </>
     );
     limitInfo = (
@@ -130,9 +133,9 @@ export function BudgetBasicInformation({ budgetId }: BudgetBasicInfoProps) {
             </div>
           </TopSectionWrapper>
           <TileWrapper>
-            <InfoTile label="Budget period" dataToRender={dataRangeInfo} />
-            <InfoTile label="Budget limit" dataToRender={limitInfo} />
-            <InfoTile label="Currency" dataToRender={currencyInfo} />
+            <InfoTile label={t(basicInformation.labels.period)} dataToRender={dataRangeInfo} />
+            <InfoTile label={t(basicInformation.labels.limit)} dataToRender={limitInfo} />
+            <InfoTile label={t(basicInformation.labels.currency)} dataToRender={currencyInfo} />
           </TileWrapper>
         </BasicInfoWrapper>
       )}

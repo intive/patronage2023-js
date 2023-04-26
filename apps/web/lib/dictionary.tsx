@@ -222,7 +222,22 @@ const dictionary = {
       },
     },
   },
-  BudgetsPage: { title: { en: "Budgets page", pl: "Budżety" } },
+  BudgetsPage: { 
+    title: { en: "Budgets page", pl: "Budżety" },
+    basicInformation: {
+      labels: {
+        period: { en: "Budget period", pl: "Czas trwania"},
+        limit: { en: "Budget limit", pl: "Limit budżetu"},
+        currency: { en: "Currency", pl: "Waluta"},
+      },
+      currencyNames: {
+        USD: { en: "United States Dollar", pl: "Dolar Amerykański"},
+        PLN: { en: "Polish Zloty", pl: "Polski Złoty"},
+        GBP: { en: "British Pound", pl: "Funt Brytyjski"},
+        EUR: { en: "Euro", pl: "Euro"},
+      }
+    }
+  },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
   SettingsPage: { title: { en: "Settings page", pl: "Ustawienia" } },
   TeamPage: { title: { en: "Team page", pl: "Zespoły" } },
