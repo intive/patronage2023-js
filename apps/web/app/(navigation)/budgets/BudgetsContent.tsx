@@ -5,6 +5,7 @@ import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
 
 import { TransactionsTable } from "./[id]/TransactionsTable";
+import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useState } from "react";
 
@@ -30,10 +31,13 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const [budget, setBudget] = useState<Budget>();
   const { t, dict } = useTranslate("BudgetsPage");
   const mainCardContent = budget && (
-    <TransactionsTable
-      budget={budget}
-      setSorting={(column) => console.log(column)}
-    />
+    <>
+      <BudgetBasicInformation budget={budget} />
+      <TransactionsTable
+        budget={budget}
+        setSorting={(column) => console.log(column)}
+      />
+    </>
   );
 
   useEffect(() => {
