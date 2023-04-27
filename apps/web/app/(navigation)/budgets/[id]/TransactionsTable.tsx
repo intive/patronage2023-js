@@ -26,6 +26,7 @@ import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+import { Column } from "ka-table/models";
 
 const columns = [
   {
@@ -61,6 +62,7 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     width: 80,
+    style: { textAlign: "center", verticalAlign: "middle", lineHeight: 0 },
   },
   {
     key: "editColumn",
@@ -72,14 +74,17 @@ const columns = [
     isSortable: false,
     dataType: DataType.Number,
   },
-];
+] as Column[];
 
-type TransactionsTableProps  = {
+type TransactionsTableProps = {
   budget: Budget;
   setSorting: (column: string) => void;
 };
 
-export const TransactionsTable = ({ budget, setSorting }: TransactionsTableProps ) => {
+export const TransactionsTable = ({
+  budget,
+  setSorting,
+}: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { tableDates } = dict;
@@ -94,7 +99,7 @@ export const TransactionsTable = ({ budget, setSorting }: TransactionsTableProps
 
   const getDayName = (timestamp: number, locale: string) => {
     dayjs.extend(isToday);
-   // dayjs.extend(localizedFormat);
+    // dayjs.extend(localizedFormat);
     dayjs.extend(isYesterday);
 
     const date = dayjs(timestamp);

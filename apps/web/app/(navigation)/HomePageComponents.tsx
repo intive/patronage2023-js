@@ -15,11 +15,11 @@ export const CardWrapperStyled = styled.div`
 
 export const CardStyled = styled(Card)`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100%;
   width: 100%;
+  padding: 32px 48px;
 `;
 
 export const LinkStyled = styled(Link)`
