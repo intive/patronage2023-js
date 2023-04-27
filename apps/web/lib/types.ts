@@ -1,3 +1,5 @@
+import { IconType } from "ui/Icon";
+
 interface Currency {
   tag: string;
   locale: string;
@@ -32,7 +34,7 @@ export interface Budget {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  icon: IconType;
   startDate: number;
   endDate: number;
   limit: number;
