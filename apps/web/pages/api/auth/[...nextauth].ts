@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt_decode from "jwt-decode";
-// @ts-ignore
 import jwt from "jsonwebtoken";
 
 type CredentialType = {
@@ -62,9 +61,11 @@ export const authOptions: NextAuthOptions = {
   },
   jwt: {
     async encode({ token, secret }) {
+      // @ts-ignore
       return jwt.sign(token, secret);
     },
     async decode({ token, secret }) {
+      // @ts-ignore
       return jwt.verify(token, secret);
     },
   },
