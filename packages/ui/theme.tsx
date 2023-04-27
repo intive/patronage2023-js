@@ -35,6 +35,7 @@ const colors = {
 };
 
 export const theme = {
+  main: colors.Teal10,
   avatar: {
     outline: colors.BasicWhite,
   },
