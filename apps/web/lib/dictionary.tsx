@@ -334,6 +334,10 @@ const dictionary = {
   BudgetsPage: {
     title: { en: "Budgets page", pl: "Budżety" },
     dropdownButtonAriaLabel: { en: "More options", pl: "Więcej opcji" },
+    tableDates: {
+      yesterday: { en: "Yesterday", pl: "Wczoraj" },
+      today: { en: "Today", pl: "Jutro" },
+    },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
   SettingsPage: { title: { en: "Settings page", pl: "Ustawienia" } },
