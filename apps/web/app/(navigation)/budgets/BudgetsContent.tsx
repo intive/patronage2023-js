@@ -8,10 +8,7 @@ import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-
-type BudgetsContentProps = {
-  id: string;
-};
+import { usePathname } from "next/navigation";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -22,11 +19,13 @@ const BudgetContentWrapperStyled = styled.div`
   gap: 32px;
 `;
 
-export const BudgetsContent = ({ id }: BudgetsContentProps) => {
+export const BudgetsContent = () => {
+  const id = usePathname()?.replace("/budgets/", "");
+
   const [budgets, setBudgets] = useState<Budget[]>([]);
 
   useEffect(() => {
-    fetch(`../budgets.json`)
+    fetch(`/budgets.json`)
       .then((response) => response.json())
       .then((result) => {
         setBudgets(result.budgets);
