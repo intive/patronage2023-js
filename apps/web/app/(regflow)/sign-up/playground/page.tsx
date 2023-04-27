@@ -59,6 +59,7 @@ const Wrapper = styled.div`
 export default function Playground() {
   return (
     <>
+    <h1>Hello World</h1>
       <Wrapper>
         <InfoTile
           label={DUMMY_DATA[3].label}
