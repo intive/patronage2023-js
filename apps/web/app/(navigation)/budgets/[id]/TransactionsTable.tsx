@@ -26,6 +26,7 @@ import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+import { Column } from "ka-table/models";
 
 const columns = [
   {
@@ -61,6 +62,7 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     width: 80,
+    style: { textAlign: "center", verticalAlign: "middle", lineHeight: 0 },
   },
   {
     key: "editColumn",
@@ -72,7 +74,7 @@ const columns = [
     isSortable: false,
     dataType: DataType.Number,
   },
-];
+] as Column[];
 
 type TransactionsTableProps = {
   budget: Budget;

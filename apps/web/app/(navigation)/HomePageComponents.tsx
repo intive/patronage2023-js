@@ -15,7 +15,6 @@ export const CardWrapperStyled = styled.div`
 
 export const CardStyled = styled(Card)`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100%;

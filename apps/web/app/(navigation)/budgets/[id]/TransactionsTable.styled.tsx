@@ -31,7 +31,7 @@ export const TableWrapperStyled = styled.div`
 
   .ka-thead-cell {
     border: none;
-    padding: 16px 8px 16px 0;
+    padding: 16px 16px 16px 0;
   }
 
   .ka-thead-cell-content {
