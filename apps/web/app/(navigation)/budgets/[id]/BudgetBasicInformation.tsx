@@ -9,8 +9,6 @@ import { useTranslate } from "lib/hooks";
 //STYLING
 const BasicInfoWrapper = styled.div`
   width: 100%;
-  //might be helpful - loose the border once finished putting the page together
-  border: 1px solid red;
 `;
 
 const TopSectionWrapper = styled.div`
@@ -62,7 +60,8 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { basicInformation } = dict;
-  const { startDate, endDate, limit, currency, name, icon, description } = budget;
+  const { startDate, endDate, limit, currency, name, icon, description } =
+    budget;
   const { tag } = currency;
 
   //DATE formatting
@@ -91,7 +90,11 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     <>
       <span>{tag}</span>
       <StyledAddInfoSpan>
-        {t(basicInformation.currencyNames[tag as keyof typeof basicInformation.currencyNames])}
+        {t(
+          basicInformation.currencyNames[
+            tag as keyof typeof basicInformation.currencyNames
+          ]
+        )}
       </StyledAddInfoSpan>
     </>
   );

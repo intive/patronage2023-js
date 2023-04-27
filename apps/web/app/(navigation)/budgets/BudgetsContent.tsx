@@ -8,6 +8,7 @@ import { TransactionsTable } from "./[id]/TransactionsTable";
 import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 // const budget = {
 //   id: "71ee9a04-6b27-423a-9caa-7d6a92335dae",
@@ -26,18 +27,26 @@ type BudgetsContentProps = {
   id: string;
 };
 
+const BudgetContentWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+`;
+
 export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const [budgets, setBudgets] = useState<Budget[]>();
   const [budget, setBudget] = useState<Budget>();
   const { t, dict } = useTranslate("BudgetsPage");
   const mainCardContent = budget && (
-    <>
+    <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
       />
-    </>
+    </BudgetContentWrapperStyled>
   );
 
   useEffect(() => {
