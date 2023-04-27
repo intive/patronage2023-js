@@ -11,6 +11,7 @@ import { device } from "lib/media-queries";
 import { signIn } from "next-auth/react";
 
 const FormWrapper = styled.div`
+  position: relative;
   height: 542px;
   width: 312px;
   display: flex;

@@ -38,15 +38,14 @@ export const authOptions: NextAuthOptions = {
           {
             method: "POST",
             headers: {
-              accept: "text/plain",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ email, password }),
           }
         );
-        const user = await res.json();
-        if (res.ok && user) {
-          return user;
+
+        if (res.ok) {
+          return await res.json();
         } else return null;
       },
     }),
@@ -56,8 +55,8 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/sign-in/",
-    signOut: "/sign-in",
-    error: '"/sign-in/"',
+    signOut: "/sign-in/",
+    error: "/sign-in/",
   },
 };
 export default NextAuth(authOptions);

@@ -15,9 +15,17 @@ export const MainPageTranslated = () => {
       <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
       <LinkStyled href="/sign-in">Sign in</LinkStyled>
       <br />
-      <Button onClick={() => console.log(data)}>Check data</Button>
-      <br />
       <Button onClick={() => signOut()}>Log out</Button>
+      <br />
+      {data ? (
+        <p>
+          User: {data.user.name}, <br /> Avatar: {data.user.avatar}, <br />{" "}
+          AccessToken:
+          {data.user.accessToken.substring(0, 30)}...
+        </p>
+      ) : (
+        <p>Please log in</p>
+      )}
     </>
   );
 };
