@@ -16,10 +16,10 @@ type LogoProps = {
 };
 
 const LogoStyledContainer = styled(Link)<LogoProps>`
+  display: flex;
   font-family: "Signika", sans-serif;
   font-weight: 600;
   text-decoration: none;
-  display: flex;
   justify-content: space-around;
   align-items: center;
   color: ${({ $white, theme }) => ($white ? "white" : theme.logo.main)};
