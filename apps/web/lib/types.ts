@@ -18,7 +18,7 @@ interface Creator {
   name: string;
   avatar: string;
 }
-interface Transaction {
+export interface Transaction {
   id: string;
   date: number;
   amount: number;
