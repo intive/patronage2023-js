@@ -21,6 +21,7 @@ const AsideCard = styled(MainCard)`
     min-width: 250px;
     min-height: 220px;
     margin-left: 20px;
+    padding: 32px;
   }
 `;
 

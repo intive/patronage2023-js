@@ -8,8 +8,7 @@ const DescriptionsWrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px;
-  margin-top: 15px;
+  margin-bottom: 8px;
 `;
 
 const CheckboxesWrapper = styled.div`
@@ -18,7 +17,6 @@ const CheckboxesWrapper = styled.div`
   justify-content: space-evenly;
   flex-grow: 1;
   width: 100%;
-  padding: 20px;
 `;
 
 export const H3Styled = styled.h3`

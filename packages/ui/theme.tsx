@@ -90,6 +90,10 @@ export const theme = {
       main: colors.Supporting4,
       background: colors.Supporting1,
     },
+    reccuring: {
+      main: colors.Supporting5,
+      background: colors.Supporting2,
+    },
   },
   errorMessage: {
     main: colors.Supporting4,
@@ -235,7 +239,7 @@ export const theme = {
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
     sortIcon: colors.Neutral8,
-  }
+  },
 };
 
 export type ThemeType = typeof theme;
