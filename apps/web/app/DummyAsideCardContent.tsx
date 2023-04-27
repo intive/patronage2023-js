@@ -5,9 +5,9 @@ import { CheckboxWrapper } from "./CheckboxWrapper";
 //creating imitation of RightCard content
 const DescriptionsWrapper = styled.div`
   display: flex;
-  width: 100%;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
   margin-bottom: 8px;
 `;
 
