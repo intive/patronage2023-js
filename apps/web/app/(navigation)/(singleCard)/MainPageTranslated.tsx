@@ -2,7 +2,7 @@
 
 import { TypoStyled, LinkStyled } from "app/(navigation)/HomePageComponents";
 import { useTranslate } from "lib/hooks";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Button } from "ui";
 
 export const MainPageTranslated = () => {

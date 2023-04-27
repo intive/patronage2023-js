@@ -1,6 +1,8 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt_decode from "jwt-decode";
+// @ts-ignore
+import jwt from "jsonwebtoken";
 
 type CredentialType = {
   email: string;
@@ -57,6 +59,14 @@ export const authOptions: NextAuthOptions = {
     signIn: "/sign-in/",
     signOut: "/sign-in/",
     error: "/sign-in/",
+  },
+  jwt: {
+    async encode({ token, secret }) {
+      return jwt.sign(token, secret);
+    },
+    async decode({ token, secret }) {
+      return jwt.verify(token, secret);
+    },
   },
 };
 export default NextAuth(authOptions);
