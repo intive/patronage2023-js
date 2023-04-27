@@ -34,16 +34,15 @@ export const authOptions: NextAuthOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { email, password } = credentials as CredentialType;
-        const res = await fetch(
-          "https://inbudget-patronage-api-dev.azurewebsites.net/user/sign-in",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email, password }),
-          }
-        );
+        // @ts-ignore
+        // eslint-disable-next-line turbo/no-undeclared-env-vars
+        const res = await fetch(process.env.API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
         if (res.ok) {
           return await res.json();
