@@ -26,7 +26,7 @@ export const MainPageTranslated = () => {
       <br />
       {data ? (
         <p>
-          User: {data.user.name}, <br /> Avatar: {data.user.avatar}, <br />{" "}
+          User: {data.user.name}, <br /> Avatar: {data.user.image}, <br />{" "}
           AccessToken:
           {data.user.accessToken.substring(0, 30)}...
         </p>

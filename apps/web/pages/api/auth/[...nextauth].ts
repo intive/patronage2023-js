@@ -1,6 +1,5 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import jwt_decode from "jwt-decode";
 import jwt from "jsonwebtoken";
 
 type CredentialType = {
@@ -11,21 +10,24 @@ type CredentialType = {
 type decodedData = {
   name: string;
   avatar: string;
+  sub: string;
 };
+
+interface DefaultUser extends User {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    async jwt({ token, user }) {
-      return { ...token, ...user };
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = (user as DefaultUser).accessToken;
+      }
+      return token;
     },
-    async session({ session, token }) {
-      const decodedData = await jwt_decode<decodedData>(
-        token.accessToken as string
-      );
-      session.user = {
-        accessToken: token.accessToken as string,
-        name: decodedData.name,
-        avatar: decodedData.avatar,
-      };
+    session({ session, token, user }) {
+      session.user.accessToken = token.accessToken as string;
       return session;
     },
   },
@@ -45,7 +47,15 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (res.ok) {
-          return await res.json();
+          const { accessToken, refreshToken } = await res.json();
+          const { sub, name, avatar } = jwt.decode(accessToken) as decodedData;
+          return {
+            id: sub,
+            accessToken,
+            refreshToken,
+            name,
+            image: avatar,
+          };
         } else return null;
       },
     }),
