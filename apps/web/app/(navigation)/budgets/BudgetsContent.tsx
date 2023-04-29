@@ -9,6 +9,7 @@ import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { EditBudget } from "../EditBudget";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -21,6 +22,8 @@ const BudgetContentWrapperStyled = styled.div`
 
 export const BudgetsContent = () => {
   const id = usePathname()?.replace("/budgets/", "");
+
+  const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
 
   const [budgets, setBudgets] = useState<Budget[]>([]);
 
@@ -38,13 +41,32 @@ export const BudgetsContent = () => {
     [id, budgets]
   );
 
+  const showEditBudgetModal = () => {
+    setIsEditBudgetModalOpen(true);
+  };
+
+  const hideEditBudgetModal = () => {
+    setIsEditBudgetModalOpen(false);
+  };
+
+  /*
+  Create a "EditIcon" component (Figma)
+  */
+
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
-      <BudgetBasicInformation budget={budget} />
+      <BudgetBasicInformation
+        budget={budget}
+        handleEditBudgetModalVisibility={{
+          showEditBudgetModal,
+          hideEditBudgetModal,
+        }}
+      />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
       />
+      {isEditBudgetModalOpen && <EditBudget onClose={hideEditBudgetModal} />}
     </BudgetContentWrapperStyled>
   );
 

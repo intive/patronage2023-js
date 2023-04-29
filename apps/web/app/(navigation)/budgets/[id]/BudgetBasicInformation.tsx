@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Budget } from "lib/types";
-import { InfoTile, BudgetIcon, CurrencyAmount } from "ui";
+import { InfoTile, BudgetIcon, CurrencyAmount, EditIcon } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
@@ -31,7 +31,7 @@ const BudgetIconStyled = styled(BudgetIcon)`
   font-size: 1.5em;
 `;
 
-const StyledTitle = styled.h1`
+const StyledTitle = styled.span`
   font-family: "Signika", sans-serif;
   font-size: 32px;
   font-weight: 600;
@@ -49,15 +49,29 @@ const StyledDescription = styled.span`
 const InfoTileAmount = styled(CurrencyAmount)`
   color: ${({ theme }) => theme.infoTile.value};
 `;
+
+const TitleEditButton = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+`;
 //STYLING end
 
 //TYPES
 type BudgetBasicInfoProps = {
   budget: Budget;
+  handleEditBudgetModalVisibility: {
+    showEditBudgetModal: () => void;
+    hideEditBudgetModal: () => void;
+  };
 };
 //TYPES end
 
-export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
+export function BudgetBasicInformation({
+  budget,
+  handleEditBudgetModalVisibility,
+}: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { basicInformation } = dict;
   const { startDate, endDate, limit, currency, name, icon, description } =
@@ -106,7 +120,13 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
         <TopSectionWrapper>
           <BudgetIconStyled icon={icon} />
           <div>
-            <StyledTitle>{name}</StyledTitle>
+            <TitleEditButton>
+              <StyledTitle>{name}</StyledTitle>
+              <EditIcon
+                onClick={handleEditBudgetModalVisibility.showEditBudgetModal}
+              />
+            </TitleEditButton>
+
             <StyledDescription>{description}</StyledDescription>
           </div>
         </TopSectionWrapper>

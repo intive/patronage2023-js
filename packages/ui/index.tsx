@@ -1,3 +1,5 @@
+import { EditIcon } from "./EditIcon";
+
 export { NavItem } from "./NavItem";
 export { NavList } from "./NavList";
 export { Button, ButtonStyled } from "./Button";
@@ -25,3 +27,4 @@ export { CurrencySelect } from "./CurrencySelect";
 export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";
+export { EditIcon } from "./EditIcon";
