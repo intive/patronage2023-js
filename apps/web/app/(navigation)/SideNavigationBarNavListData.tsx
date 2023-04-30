@@ -5,23 +5,13 @@ import styled from "styled-components";
 import { Icon } from "ui";
 import { SpanStyled } from "ui/NavList";
 
-const IconStyled = styled(Icon)`
+export const IconStyled = styled(Icon)`
   background: white;
   padding: 4px;
   border-radius: 8px;
 `;
 
 export const BudgetsSubMenuNavListContents = [
-  {
-    ComponentToRender: (
-      <>
-        <IconStyled icon="home" iconSize={24} />
-        <SpanStyled>Main Budget</SpanStyled>
-      </>
-    ),
-    href: "/budgets/71ee9a04-6b27-423a-9caa-7d6a92335dae",
-    id: 1,
-  },
   {
     ComponentToRender: (
       <>
