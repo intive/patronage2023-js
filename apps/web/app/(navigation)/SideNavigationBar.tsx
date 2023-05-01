@@ -95,8 +95,8 @@ export default function SideNav() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        pageSize: 10,
-        pageIndex: 1,
+        pageSize: 5,
+        pageIndex: 3,
         search: "",
         sortDescriptors: [
           {
