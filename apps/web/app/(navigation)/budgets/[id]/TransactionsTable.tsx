@@ -7,6 +7,7 @@ import { useTranslate } from "lib/hooks";
 import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
+import { Column } from "ka-table/models";
 import { Icon } from "ui/Icon";
 import { CategoryIcon } from "ui/CategoryIcon";
 import { Avatar } from "ui/Avatar";
@@ -26,7 +27,6 @@ import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
-import { Column } from "ka-table/models";
 
 const columns = [
   {
@@ -34,45 +34,75 @@ const columns = [
     title: "Category",
     isSortable: true,
     dataType: DataType.Object,
-    width: 120,
+    style: {
+      // backgroundColor: "Wheat",
+      verticalAlign: "middle",
+      lineHeight: 0,
+    },
+    width: "19%",
   },
   {
     key: "description",
     title: "Name",
     isSortable: true,
     dataType: DataType.String,
-    width: 170,
+    // style: { backgroundColor: "PaleTurquoise" },
+    width: "22%",
   },
   {
     key: "status",
     title: "Status",
     isSortable: true,
     dataType: DataType.String,
+    // style: { backgroundColor: "RosyBrown" },
+    width: "18%",
   },
   {
     key: "amount",
     title: "Amount",
     isSortable: true,
     dataType: DataType.Number,
-    width: 140,
+    // style: { backgroundColor: "LightBlue" },
+    width: "23%",
   },
   {
     key: "creator",
     title: "Creator",
     isSortable: true,
     dataType: DataType.Object,
-    width: 80,
-    style: { textAlign: "center", verticalAlign: "middle", lineHeight: 0 },
+    style: {
+      // backgroundColor: "Coral",
+      textAlign: "center",
+      verticalAlign: "middle",
+      lineHeight: 0,
+      paddingLeft: "8px",
+      paddingRight: "8px",
+    },
+    width: "13%",
   },
   {
     key: "editColumn",
-    width: 30,
+    style: {
+      // backgroundColor: "LightPink",
+      textAlign: "center",
+      verticalAlign: "middle",
+      lineHeight: 0,
+      paddingLeft: "8px",
+      paddingRight: "8px",
+    },
+    width: "5%",
   },
   {
     key: "date",
     title: "Date",
     isSortable: false,
     dataType: DataType.Number,
+  },
+  {
+    key: "empty",
+    title: "",
+    isSortable: false,
+    width: '48px'
   },
 ] as Column[];
 
@@ -99,6 +129,7 @@ export const TransactionsTable = ({
 
   const getDayName = (timestamp: number, locale: string) => {
     dayjs.extend(isToday);
+    // dayjs.extend(localizedFormat);
     // dayjs.extend(localizedFormat);
     dayjs.extend(isYesterday);
 
@@ -182,6 +213,9 @@ export const TransactionsTable = ({
           },
           headCellContent: {
             content: ({ column }) => {
+              if ( column.key === 'empty') {
+                return null;
+              }
               return (
                 <>
                   <span>{column.title}</span>
