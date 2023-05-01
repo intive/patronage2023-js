@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 export type NavItemContents = {
   ComponentToRender?: ReactElement;
   href: string;
-  id: number;
+  id: string | number;
 };
 
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type

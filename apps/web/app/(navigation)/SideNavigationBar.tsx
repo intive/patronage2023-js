@@ -8,25 +8,85 @@ import { IconStyled } from "./SideNavigationBarNavListData";
 
 import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
 import { SpanStyled } from "ui/NavList";
+import { IconType } from "ui/Icon";
+
+const iconNames = [
+  "home",
+  "add",
+  "cancel",
+  "bar_chart",
+  "settings",
+  "account_circle",
+  "check_box",
+  "edit",
+  "history",
+  "visibility",
+  "check_indeterminate_small",
+  "trending_up",
+  "search",
+  "filter_list",
+  "sort",
+  "delete",
+  "close",
+  "check_box_outline_blank",
+  "person_add",
+  "notifications",
+  "visibility_off",
+  "event",
+  "trending_down",
+  "arrow_drop_down",
+  "arrow_back",
+  "arrow_forward",
+  "chevron_left",
+  "chevron_right",
+  "radio_button_checked",
+  "error",
+  "schedule",
+  "check",
+  "area_chart",
+  "shopping_cart",
+  "drafts",
+  "more_vert",
+  "wallet",
+  "menu",
+  "drag_handle",
+  "radio_button_unchecked",
+  "help",
+  "arrow_drop_up",
+  "check_small",
+  "query_stats",
+  "savings",
+  "directions_car",
+  "payments",
+  "subscriptions",
+  "done",
+  "priority_high",
+];
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
-
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+  const [data, setData] = useState<Array<BudgetType>>([]);
 
-  const [data, setData] = useState([]);
+  type BudgetType = {
+    name: string;
+    icon: IconType;
+    id: {
+      value: string | number;
+    };
+  };
 
   const url =
     "https://inbudget-patronage-api-dev.azurewebsites.net/budgets/list";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODI4NTAxNjUsImlhdCI6MTY4Mjg0Mjk2NSwianRpIjoiMGE5YjM2NjItODliMC00NTcxLWFlZmItYTJkYmNlY2NhOGNkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjAxZGVhYzY3LTYzZmEtNDI1YS1hM2RlLTU1NGJiNmY1M2E2NCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjAxZGVhYzY3LTYzZmEtNDI1YS1hM2RlLTU1NGJiNmY1M2E2NCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.hWx85q30pClpBk860YhK43MCSkT97y6Yp9gPq_vy3yiZxq8hH2P6HVAUH-kOI3NGhtUhEejJfQSJm07DVfxTrOPvw5l6p9wZojK2zIUsDKutiTRc0Lodv6lDgOxVnvLXPKN0uzLp6oO5ydAvEl6Ir-ZZHL28bRyzx5I3LmKxrSo8TnGdhwotXa1pTNx8nO9p23dL6_rguD-E0chQy1hBQAjO70-nEwrDT57C_lkOmOixO38AZ7pkTbWz5gVL226iIa5mOuUHroz3q2TgOpIdk_Fz6AmJkDnydSjRVM0Frhj5QTakG8UbaBi_9hwKnrJrG71G4shpz60WVB7VyBk5RA";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODI5MjgxOTIsImlhdCI6MTY4MjkyMDk5MiwianRpIjoiMWFhNzFlZmYtMmNmOS00OTRhLTgzMGItZThlYmRkNzU5ZjlkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNlZDIyY2MyLTBlYWQtNGQ2ZC1iMDUyLTBlNTFkMWNkYjAzMSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImNlZDIyY2MyLTBlYWQtNGQ2ZC1iMDUyLTBlNTFkMWNkYjAzMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.kMsEBr7zjGTofPNjIDDrk8YAKcqDUaTfycyBbjGsD6tofNNquTdhc03TEkaZveUeNDnkEDMXdK_8Um5blgtfYyAa4s7_q8697nka2bD1n8XpOhY4h9V6m-45lZLqrxyxjcBIa0L3J6Yjz3PUq76C2-yW6Mh2p6_BoP-VSJvZh-5qSf_XjrAZHsQMuHD3rn_OfhmhOeiehC1CgSb4GGTw4iGJD_P1b8K4PFkfVKN9Pu9lWIw9gpGA8BUvhUfE99hoNIdgqkuOez7GkuZlu8zryhennfdeziMwJqP-3Jh9xsQ6hoOp2kT7QatqWoFw-M0eXhWkaNvLl0Hk-6YrRsFcVw";
 
-  const getBudgetsList = async (url: any) => {
+  const getBudgetsList = async (url: string) => {
     await fetch(url, {
       method: "POST",
       headers: {
@@ -47,9 +107,8 @@ export default function SideNav() {
       }),
     })
       .then((res) => res.json())
-      .then((json) => {
-        setData(json.items);
-      });
+      .then((json) => setData(json.items))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
@@ -89,11 +148,16 @@ export default function SideNav() {
           return {
             ComponentToRender: (
               <>
-                <IconStyled icon={"directions_car"} iconSize={24} />
+                <IconStyled
+                  icon={
+                    iconNames.includes(item.icon) ? item.icon : "notifications"
+                  }
+                  iconSize={24}
+                />
                 <SpanStyled>{item.name}</SpanStyled>
               </>
             ),
-            href: item.id.value,
+            href: `/budgets/${item.id.value}`,
             id: item.id.value,
           };
         })}
