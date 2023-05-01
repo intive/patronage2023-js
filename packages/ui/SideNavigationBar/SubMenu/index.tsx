@@ -11,6 +11,9 @@ export type SubMenuDataProps = {
   };
   searchInput?: {
     placeholder: string;
+    onChange?: (event: any) => void;
+    onInputCleared: () => void;
+    value: string;
   };
   navigationList?: ReactNode;
   button?: {
@@ -66,7 +69,6 @@ const Title = styled.span`
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
-  const [value, setValue] = useState("");
   return (
     <SubMenuStyled>
       <MainDiv>
@@ -79,9 +81,9 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
             name="searchInput"
             type="text"
             placeholder={searchInput.placeholder}
-            value={value}
-            onChange={(event) => setValue(event.currentTarget.value)}
-            onInputCleared={() => setValue("")}
+            value={searchInput.value}
+            onChange={searchInput.onChange}
+            onInputCleared={searchInput.onInputCleared}
           />
         )}
         {navigationList}
