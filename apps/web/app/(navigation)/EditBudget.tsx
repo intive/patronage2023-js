@@ -49,7 +49,7 @@ export const EditBudget = ({
     useValidateBudgetModal("AddNewBudgetModal");
 
   return (
-    <Modal header="Edit Budget" onClose={handleHideEditBudgetModal}>
+    <Modal header={t(dict.title)} onClose={handleHideEditBudgetModal}>
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValueTabs}>
         <Tabs.List>
