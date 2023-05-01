@@ -61,7 +61,8 @@ export const TableWrapperStyled = styled.div`
   }
 
   // center "Creator" and "Amount" headers
-  .ka-thead-cell#creator .ka-thead-cell-content, .ka-thead-cell#amount .ka-thead-cell-content {
+  .ka-thead-cell#creator .ka-thead-cell-content,
+  .ka-thead-cell#amount .ka-thead-cell-content {
     justify-content: center;
   }
 
