@@ -6,7 +6,8 @@ export const env = createEnv({
     NEXT_PUBLIC_API_URL: z.string().url(),
   },
 
-  // need to use [] because process.env works differently in turbo-land
+  // need to use [] because process.env works in next js
+  //https://stackoverflow.com/a/76105098
   runtimeEnv: {
     NEXT_PUBLIC_API_URL: process.env["NEXT_PUBLIC_API_URL"],
   },
