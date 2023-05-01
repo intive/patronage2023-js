@@ -179,7 +179,7 @@ export const EditBudget = ({
                               setValue(date);
                               setEditBudget({
                                 ...editBudget,
-                                startDate: date!.getTime(),
+                                startDate: date?.getTime(),
                               });
                             }}
                           />
@@ -227,7 +227,7 @@ export const EditBudget = ({
                               setValue(date);
                               setEditBudget({
                                 ...editBudget,
-                                endDate: date!.getTime(),
+                                endDate: date?.getTime(),
                               });
                             }}
                           />
