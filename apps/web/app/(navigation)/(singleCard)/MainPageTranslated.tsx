@@ -1,12 +1,15 @@
 "use client";
 
-import { TypoStyled, LinkStyled } from "app/(navigation)/HomePageComponents";
-import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
+import { Pagination } from "app/(navigation)/Pagination";
+
+//simulation of transaction's data
+const items: number[] = [];
+for (let i = 1; i <= 100; i++) {
+  items.push(i);
+}
 
 export const MainPageTranslated = () => {
-  const { dict, t } = useTranslate("MainPage");
-
   const ContentWrapperStyled = styled.div`
     display: flex;
     flex-direction: column;
@@ -15,8 +18,7 @@ export const MainPageTranslated = () => {
 
   return (
     <ContentWrapperStyled>
-      <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
-      <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
+      <Pagination data={items} itemsPerPage={10} />
     </ContentWrapperStyled>
   );
 };

@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+  list-style: none;
+  margin-top: 20px;
+  font-size: 1em;
+  gap: 10px;
+}
+
+.next,
+.previous {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ececec;
+  cursor: pointer;
+}
+
+.previous-link,
+.next-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 300;
+}
+
+.page,
+.break {
+  cursor: pointer;
+}
+
+.page-active {
+  color: #52a785;
+}
