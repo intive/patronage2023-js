@@ -17,7 +17,7 @@ export const TableWrapperStyled = styled.div`
   }
 
   .ka-empty-cell {
-    width: 48px;
+    width: 1px;
   }
 
   // header styles
@@ -98,6 +98,7 @@ export const TableWrapperStyled = styled.div`
         ${({ theme }) => theme.transactionsTable.rowSeparator};
     }
 
+    // no border on first and last empty columns
     td:first-child,
     td:last-child {
       border-top: none;
