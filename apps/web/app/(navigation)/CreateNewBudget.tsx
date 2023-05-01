@@ -36,7 +36,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
 
 type NewBudget = {
-  onClose?: Function;
+  onClose: Function;
 };
 
 type currencyType = {
@@ -49,12 +49,12 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  dateStart: number | null;
-  dateEnd: number | null;
+  startDate: number | null;
+  endDate: number | null;
   currency: currencyType;
 };
 
-const icons: IconType[] = [
+export const icons: IconType[] = [
   "savings",
   "directions_car",
   "payments",
@@ -93,8 +93,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     limit: "",
     description: "",
     icon: selectedIcon,
-    dateStart: null,
-    dateEnd: null,
+    startDate: null,
+    endDate: null,
     currency: {
       tag: "USD",
       locale: lang,
@@ -103,14 +103,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const onSelectStartDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
-      : setNewBudget({ ...newBudget, dateStart: null });
+      ? setNewBudget({ ...newBudget, startDate: date.getTime() })
+      : setNewBudget({ ...newBudget, startDate: null });
   };
 
   const onSelectEndDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
-      : setNewBudget({ ...newBudget, dateEnd: null });
+      ? setNewBudget({ ...newBudget, endDate: date.getTime() })
+      : setNewBudget({ ...newBudget, endDate: null });
   };
 
   useEffect(() => {
@@ -139,6 +139,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                onClose();
               }}>
               <ContentStyled>
                 <Tabs.Content value="settings">
@@ -272,10 +273,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   </ParagraphStyled>
                   <InputWrapperFullFlex>
                     <Field
-                      name="date-start"
+                      name="start-date"
                       initialValue={
-                        newBudget.dateStart
-                          ? new Date(newBudget.dateStart)
+                        newBudget.startDate
+                          ? new Date(newBudget.startDate)
                           : null
                       }
                       onSubmitValidate={checkDate}
@@ -284,10 +285,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
-                            label={t(dict.inputNames.dateStart)}
+                            label={t(dict.inputNames.startDate)}
                             selected={
-                              newBudget.dateStart
-                                ? new Date(newBudget.dateStart)
+                              newBudget.startDate
+                                ? new Date(newBudget.startDate)
                                 : null
                             }
                             onSelect={(date) => {
@@ -305,17 +306,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       {t(dict.paragraphs.wordIt)}
                     </div>
                     <Field
-                      name="date-end"
-                      listenTo={["date-start"]}
+                      name="end-date"
+                      listenTo={["start-date"]}
                       initialValue={
-                        newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
+                        newBudget.endDate ? new Date(newBudget.endDate) : null
                       }
                       onSubmitValidate={checkDate}
                       onChangeValidate={(val, form) => {
                         const start = val! && val.getTime();
                         const end =
-                          form.getFieldValue("date-start")!.value &&
-                          form.getFieldValue("date-start")!.value.getTime();
+                          form.getFieldValue("start-date")!.value &&
+                          form.getFieldValue("start-date")!.value.getTime();
 
                         if (start && end) {
                           if (start < end)
@@ -329,10 +330,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
-                            label={t(dict.inputNames.dateEnd)}
+                            label={t(dict.inputNames.endDate)}
                             selected={
-                              newBudget.dateEnd
-                                ? new Date(newBudget.dateEnd)
+                              newBudget.endDate
+                                ? new Date(newBudget.endDate)
                                 : null
                             }
                             onSelect={(date) => {

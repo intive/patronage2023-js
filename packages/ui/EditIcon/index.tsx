@@ -14,6 +14,10 @@ const EditIconStyled = styled.span`
   border-radius: 8px;
   background-color: #f7f7f7;
   color: #7e7e7e;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const EditIcon = ({ onClick }: EditIconInterface) => {

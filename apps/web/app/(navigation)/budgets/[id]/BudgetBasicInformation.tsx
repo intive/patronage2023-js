@@ -61,16 +61,13 @@ const TitleEditButton = styled.div`
 //TYPES
 type BudgetBasicInfoProps = {
   budget: Budget;
-  handleEditBudgetModalVisibility: {
-    showEditBudgetModal: () => void;
-    hideEditBudgetModal: () => void;
-  };
+  handleShowEditBudgetModal: () => void;
 };
 //TYPES end
 
 export function BudgetBasicInformation({
   budget,
-  handleEditBudgetModalVisibility,
+  handleShowEditBudgetModal,
 }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { basicInformation } = dict;
@@ -122,9 +119,7 @@ export function BudgetBasicInformation({
           <div>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
-              <EditIcon
-                onClick={handleEditBudgetModalVisibility.showEditBudgetModal}
-              />
+              <EditIcon onClick={handleShowEditBudgetModal} />
             </TitleEditButton>
 
             <StyledDescription>{description}</StyledDescription>

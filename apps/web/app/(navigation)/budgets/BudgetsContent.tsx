@@ -49,6 +49,10 @@ export const BudgetsContent = () => {
     setIsEditBudgetModalOpen(false);
   };
 
+  const handleBudgetsEdit = (budgetsAfterEdit: Budget[]) => {
+    setBudgets(budgetsAfterEdit);
+  };
+
   /*
   Create a "EditIcon" component (Figma)
   */
@@ -57,16 +61,20 @@ export const BudgetsContent = () => {
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation
         budget={budget}
-        handleEditBudgetModalVisibility={{
-          showEditBudgetModal,
-          hideEditBudgetModal,
-        }}
+        handleShowEditBudgetModal={showEditBudgetModal}
       />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
       />
-      {isEditBudgetModalOpen && <EditBudget onClose={hideEditBudgetModal} />}
+      {isEditBudgetModalOpen && (
+        <EditBudget
+          budget={budget}
+          onClose={hideEditBudgetModal}
+          handleHideEditBudgetModal={hideEditBudgetModal}
+          handleBudgetsEdit={handleBudgetsEdit}
+        />
+      )}
     </BudgetContentWrapperStyled>
   );
 

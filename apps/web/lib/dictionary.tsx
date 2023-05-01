@@ -12,11 +12,6 @@ const dictionary = {
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia" },
       },
-      teamsItem: {
-        title: { en: "Teams", pl: "Zespoły" },
-        searchInputPlaceholder: { en: "Search team", pl: "Wyszukaj zespół" },
-        buttonLabel: { en: "Add new member", pl: "Dodaj nowego członka" },
-      },
     },
   },
   RegFlowLayout: {
@@ -284,11 +279,97 @@ const dictionary = {
         en: "Description",
         pl: "Opis",
       },
-      dateStart: {
+      startDate: {
         en: "Start date",
         pl: "Data początkowa",
       },
-      dateEnd: {
+      endDate: {
+        en: "End date",
+        pl: "Data końcowa",
+      },
+    },
+    errors: {
+      min3characters: {
+        en: "Budget name must have at least 3 characters.",
+        pl: "Nazwa musi mieć conajmniej 3 znaki.",
+      },
+      max30characters: {
+        en: "Budget must not have more than 30 characters.",
+        pl: "Nazwa nie może mieć więcej niż 30 znaków.",
+      },
+      max50characters: {
+        en: "Character limit of 50 reached.",
+        pl: "Limit znaków osiągnięty (50).",
+      },
+      nameTaken: {
+        en: "Name is taken, please choose another.",
+        pl: "Nazwa zajęta. Proszę wybierz inną.",
+      },
+      moreThanZero: {
+        en: "Must be grater than 0.",
+        pl: "Powinien być większy niż 0.",
+      },
+      specifyBudgetLimit: {
+        en: "Please specify budget limit.",
+        pl: "Podaj limit budżetu.",
+      },
+      cantBeEmpty: {
+        en: "Not selected.",
+        pl: "Nie wybrano.",
+      },
+      dateBeforeStart: {
+        en: "Must be after start date.",
+        pl: "Podaj datę późniejszą.",
+      },
+    },
+  },
+  EditBudgetModal: {
+    title: {
+      en: "Edit budget",
+      pl: "Edytuj budżet",
+    },
+    tabs: {
+      settings: {
+        en: "Settings",
+        pl: "Ustawiena",
+      },
+      share: {
+        en: "Share",
+        pl: "Udostępnij",
+      },
+    },
+    paragraphs: {
+      details: {
+        en: "Details",
+        pl: "Szczegóły",
+      },
+      budgetPeriod: {
+        en: "Budget period",
+        pl: "Data ważności budżetu",
+      },
+      wordIt: {
+        en: "to",
+        pl: "do",
+      },
+    },
+    button: {
+      en: "Save",
+      pl: "Zapisz",
+    },
+    inputNames: {
+      budgetName: {
+        en: "Budget name",
+        pl: "Nazwa budżetu",
+      },
+      description: {
+        en: "Description",
+        pl: "Opis",
+      },
+      startDate: {
+        en: "Start date",
+        pl: "Data początkowa",
+      },
+      endDate: {
         en: "End date",
         pl: "Data końcowa",
       },
