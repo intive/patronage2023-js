@@ -98,7 +98,7 @@ const columns = [
     key: "empty",
     title: "",
     isSortable: false,
-    width: '48px'
+    width: "48px",
   },
 ] as Column[];
 
@@ -141,15 +141,15 @@ export const TransactionsTable = ({
 
   const dropdownMenuItems = [
     {
-      ComponentToRender: "Edit",
+      ComponentToRender: <div>Edit</div>,
       id: "edit-budget",
     },
     {
-      ComponentToRender: "Clone",
+      ComponentToRender: <div>Clone</div>,
       id: "clone-budget",
     },
     {
-      ComponentToRender: "Remove",
+      ComponentToRender: <div>Remove</div>,
       id: "remove-budget",
     },
   ];
@@ -207,7 +207,7 @@ export const TransactionsTable = ({
           },
           headCellContent: {
             content: ({ column }) => {
-              if ( column.key === 'empty') {
+              if (column.key === "empty") {
                 return null;
               }
               return (
