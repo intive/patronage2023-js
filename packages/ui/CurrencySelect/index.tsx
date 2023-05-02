@@ -10,6 +10,7 @@ import {
   SelectPortal,
   SelectRoot,
   SelectTrigger,
+  StyledLabel,
   StyledCurrencyLabel,
   StyledTag,
 } from "./CurrencySelect.styled";
@@ -63,8 +64,8 @@ export const CurrencySelect = ({
         setIsOpen(!isOpen);
       }}>
       <SelectTrigger id={id}>
-        <label htmlFor="currency">{label}</label>
-        <Select.Value></Select.Value>
+        <StyledLabel htmlFor="currency">{label}</StyledLabel>
+        <Select.Value placeholder="USD"></Select.Value>
         <SelectIcon>
           <Icon
             icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}

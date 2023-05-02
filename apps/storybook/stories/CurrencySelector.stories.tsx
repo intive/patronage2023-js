@@ -1,5 +1,7 @@
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CurrencySelect } from "ui";
+import styled from "styled-components";
 
 export default {
     title: "Currency Select",
@@ -7,15 +9,14 @@ export default {
 } as ComponentMeta<typeof CurrencySelect>;
 
 const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({...args }) => (
-    <CurrencySelect />
+    <Wrapper><CurrencySelect {...args}/></Wrapper>
 );
 
 export const Select = CurrencySelectTemplate.bind({});
 Select.args = {
+    label: "Currency",
 };
 
-export const SelectWithError = CurrencySelectTemplate.bind({});
-SelectWithError.args = {
-    hasError: true,
-    hasSupportingLabel: true,
-}
+const Wrapper = styled.div`
+  width: 210px;  
+`;
