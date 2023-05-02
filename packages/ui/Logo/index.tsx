@@ -11,11 +11,17 @@ const logoVersions = {
 };
 
 type LogoProps = {
-  $white?: boolean;
-  $logoWidth?: number;
+  white?: boolean;
+  logoWidth?: number;
 };
 
-const LogoStyledContainer = styled(Link)<LogoProps>`
+type InnerProps = {
+  $white?: boolean;
+  $logoWidth?: number;
+}
+
+
+const LogoStyledContainer = styled(Link)<InnerProps>`
   display: flex;
   font-family: "Signika", sans-serif;
   font-weight: 600;
@@ -34,7 +40,7 @@ const LogoStyledContainer = styled(Link)<LogoProps>`
     `}
 `;
 
-const LogoSignet = styled.span<LogoProps>`
+const LogoSignet = styled.span<InnerProps>`
   background-image: url(${({ $white }) => $white ? logoVersions.white : logoVersions.color});
   background-repeat: no-repeat;
   background-size: contain;
@@ -46,10 +52,10 @@ const LogoSignet = styled.span<LogoProps>`
     `}
 `;
 
-export const Logo = ({ $white, $logoWidth = 144 }: LogoProps) => {
+export const Logo = ({ white, logoWidth = 144 }: LogoProps) => {
   return (
-    <LogoStyledContainer $logoWidth={$logoWidth} $white={$white} href="/">
-      <LogoSignet $logoWidth={$logoWidth} $white={$white} />
+    <LogoStyledContainer $logoWidth={logoWidth} $white={white} href="/">
+      <LogoSignet $logoWidth={logoWidth} $white={white} />
       <span>Inbudget</span>
     </LogoStyledContainer>
   );

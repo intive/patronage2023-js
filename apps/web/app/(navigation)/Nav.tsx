@@ -27,7 +27,7 @@ const AvatarStyled = styled(Avatar)`
 export default function Nav() {
   return (
     <NavBar>
-      <Logo $white />
+      <Logo white />
       <ActionWrapper>
         <Icon icon="notifications" color="white" />
         <AvatarStyled src="/avatar.svg" outlined />
