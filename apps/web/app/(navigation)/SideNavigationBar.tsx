@@ -9,6 +9,7 @@ import { IconStyled } from "./SideNavigationBarNavListData";
 import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
 import { SpanStyled } from "ui/NavList";
 import { IconType } from "ui/Icon";
+import styled from "styled-components";
 
 const iconNames = [
   "home",
@@ -87,8 +88,7 @@ export default function SideNav() {
     "https://inbudget-patronage-api-dev.azurewebsites.net/budgets/list";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMwMzAzMjcsImlhdCI6MTY4MzAyMzEyNywianRpIjoiMDE5NDMxZTItNTJmZC00MmFlLTgwNjMtZDgzMjhmODU5NDVhIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImEwNjFjYWRkLTE4Y2ItNDIwMS04ODUyLTFiN2EwNTdjMzgyYSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImEwNjFjYWRkLTE4Y2ItNDIwMS04ODUyLTFiN2EwNTdjMzgyYSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.CWdicyQPDJpnFqlBkc9YHJ3-FChct5HPYRP0vOttEpDcLCPkrgR72OgO4vMKT3FSUgl8Y3omayZKPxeRuI6K08tfWgwn4qWbs9tN7zm2e-QYXmvdjrQdqvosrgoYpkt7i53iuIoYQLmCc02Y8SWlzkoFtLS2bQsUe-7Sm0BKOiK_qtaYesRgefS3e8ZmaV2KZv2r2kOqKlpEDRq0h9mIidCI0CJFE_1Le2aj0iseTJrF0Awt9Z6BIO3RqKL9YtsEpvuomb9ftSmdIvzCa1wTiIC2zfzXbK2Rd11mlwjKWo833k18pGAc4II8aDEJaSFq3SQcUNEaNTGp99mV-11oMQ";
-
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMwNTI0MDQsImlhdCI6MTY4MzA0NTIwNCwianRpIjoiODRiOWZmZDMtNWEwNi00NWU1LWE0ZDctOTAwMDUxY2Q4NTZhIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjUwMjY5ZjM3LTcxOTYtNDNiMS05NTEwLTU2ZmI0MGIxZTZkNiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjUwMjY5ZjM3LTcxOTYtNDNiMS05NTEwLTU2ZmI0MGIxZTZkNiIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.YtSAIkGzMy6b09k6A_CkD9rRkv6cit-Ch-AA7BQj2nSBl-JLprcpzxkTVIq0zXalugQRZ0k756GvBVzOBhqpvr5sS4lncGcGK3IqdMUDv6_46TObTQ163gRoyzXJw8NKJthKy3ugawegj25dFDumaZnwBSkqOOAHIMIdF0otmsYijcTy6vO5cQSw9DHPACDCGnb-m0ZoltMB10EQdaaKKZxfnWWg5-2bTt1sMLpIHCQwxEr2n4LgCKtCTKMVxWq96z0x47d1RzuYZ-BQW_92HuvawmahHZC2ZNVhM6nB7lW2PXzresNpr0tLh1BaKbvj7Pmu2fL5pop2kpyBKhh1Hw";
   const getBudgetsList = async (url: string, searchValue: string) => {
     await fetch(url, {
       method: "POST",
@@ -118,6 +118,7 @@ export default function SideNav() {
 
   useEffect(() => {
     getBudgetsList(url, searchValue);
+    console.log("click click");
   }, [searchValue]);
 
   const resetIsNavListItemClicked = () => {
@@ -197,9 +198,15 @@ export default function SideNav() {
 
   return (
     <>
+      <StyledResponse>
+        {data.map((item) => (
+          <p key={item.name}>{item.name}</p>
+        ))}
+      </StyledResponse>
       <SideNavigationBar
         items={[
           {
+            data,
             href: "/budgets",
             icon: <Icon icon="wallet" iconSize={32} />,
             textValue: t(SideNav.budgetsItem.title),
@@ -231,3 +238,8 @@ export default function SideNav() {
     </>
   );
 }
+
+const StyledResponse = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
