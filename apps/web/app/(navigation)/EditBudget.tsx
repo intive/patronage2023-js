@@ -5,7 +5,7 @@ import { Form, Field } from "houseform";
 import { useState } from "react";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
-// import { Budget } from "lib/types";
+import { Budget } from "lib/types";
 import { Modal, IconPicker, Input, CustomDatePicker, Button } from "ui";
 import {
   SeparatorStyledTop,
@@ -32,17 +32,6 @@ import { IconType } from "ui/Icon";
 interface Currency {
   tag: string;
   locale: string;
-}
-
-interface Budget {
-  id: string;
-  name: string;
-  description: string;
-  icon: IconType;
-  startDate?: number;
-  endDate?: number;
-  limit: number;
-  currency: Currency;
 }
 
 interface EditBudgetProps {
@@ -197,7 +186,7 @@ export const EditBudget = ({
                               setValue(date);
                               setEditBudget({
                                 ...editBudget,
-                                startDate: date?.getTime(),
+                                startDate: date!.getTime(),
                               });
                             }}
                           />
@@ -245,7 +234,7 @@ export const EditBudget = ({
                               setValue(date);
                               setEditBudget({
                                 ...editBudget,
-                                endDate: date?.getTime(),
+                                endDate: date!.getTime(),
                               });
                             }}
                           />
