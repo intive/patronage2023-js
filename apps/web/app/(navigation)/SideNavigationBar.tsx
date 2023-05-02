@@ -111,10 +111,9 @@ export default function SideNav() {
     })
       .then((res) => res.json())
       .then((json) => {
-        setData(new Array(...json.items));
-      })
-      .then(() => console.log(data))
-      .catch((err) => console.error(err));
+        setData(json.items);
+        console.log(data);
+      });
   };
 
   useEffect(() => {
