@@ -57,7 +57,7 @@ export function Pagination({ data, itemsPerPage }: PaginationProps) {
       <Wrapper>
         {currentItems?.map((item) => {
           return (
-            <TransactionWrapper>Transaction {item}</TransactionWrapper>
+            <TransactionWrapper key={item}>Transaction {item}</TransactionWrapper>
           );
         })}
       </Wrapper>
@@ -70,7 +70,7 @@ export function Pagination({ data, itemsPerPage }: PaginationProps) {
           <IconStyled icon="chevron_left" color="#ccc" iconSize={15} />
         }
         onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
+        pageRangeDisplayed={5}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
         containerClassName="container"
