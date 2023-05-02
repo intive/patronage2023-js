@@ -60,9 +60,8 @@ export const TableWrapperStyled = styled.div`
     cursor: pointer;
   }
 
-  // center "Creator" and "Amount" headers
-  .ka-thead-cell#creator .ka-thead-cell-content,
-  .ka-thead-cell#amount .ka-thead-cell-content {
+  // center "Creator" header
+  .ka-thead-cell#creator .ka-thead-cell-content {
     justify-content: center;
   }
 
@@ -131,6 +130,6 @@ export const TableWrapperStyled = styled.div`
 
 export const StyledCurrencyAmount = styled(CurrencyAmount)`
   display: block;
-  text-align: right;
+  text-align: left;
   font-family: unset; // component adds Signika font
 `;
