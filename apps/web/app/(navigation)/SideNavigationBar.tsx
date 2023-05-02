@@ -70,6 +70,7 @@ export default function SideNav() {
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+
   const [data, setData] = useState<Array<BudgetType>>([]);
 
   type BudgetType = {
@@ -80,13 +81,15 @@ export default function SideNav() {
     };
   };
 
+  const [searchValue, setSearchValue] = useState("");
+
   const url =
     "https://inbudget-patronage-api-dev.azurewebsites.net/budgets/list";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODI5NTk2NTgsImlhdCI6MTY4Mjk1MjQ1OCwianRpIjoiMmFjNTU5YjAtMzhjMC00YmUzLThiM2UtMDk4NThkZTlhNmZlIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImQzYmFkODVhLWI0MjAtNGQ0YS1iYmFmLTc0OGJjNzVhNzlhMSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImQzYmFkODVhLWI0MjAtNGQ0YS1iYmFmLTc0OGJjNzVhNzlhMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.gWFxl3vVvpW6E_bSuwLsQNwfpTESvmxlt966J_wtVcvmHFOVMNk_RwfLZrL4el80TK9a4OywvKgYxdsedR3HngOMceB3y9Umraq9SbIG3VNxj0NrORHMlsoXUxkKm-6tzgu5mc8ZlznECnN8nCdkaoAcvVw--yLpc8N9ZNn0zRosswkYZukHHuinNxKvILhyjl5LAS65wNIjsJWtod7Njgkiov1yhQ0s6_yJKYSlr08MsKnJEtfARi2-yXIzZMSwHGtRP7FnJMhCZHqKIR5lFWVKky-c6PUh3A_Cxo7P2BmEzmrKvAkT38aMHWTHADhNLiUG30owXZYzjqLtbV2ajA";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMwMzAzMjcsImlhdCI6MTY4MzAyMzEyNywianRpIjoiMDE5NDMxZTItNTJmZC00MmFlLTgwNjMtZDgzMjhmODU5NDVhIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImEwNjFjYWRkLTE4Y2ItNDIwMS04ODUyLTFiN2EwNTdjMzgyYSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImEwNjFjYWRkLTE4Y2ItNDIwMS04ODUyLTFiN2EwNTdjMzgyYSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.CWdicyQPDJpnFqlBkc9YHJ3-FChct5HPYRP0vOttEpDcLCPkrgR72OgO4vMKT3FSUgl8Y3omayZKPxeRuI6K08tfWgwn4qWbs9tN7zm2e-QYXmvdjrQdqvosrgoYpkt7i53iuIoYQLmCc02Y8SWlzkoFtLS2bQsUe-7Sm0BKOiK_qtaYesRgefS3e8ZmaV2KZv2r2kOqKlpEDRq0h9mIidCI0CJFE_1Le2aj0iseTJrF0Awt9Z6BIO3RqKL9YtsEpvuomb9ftSmdIvzCa1wTiIC2zfzXbK2Rd11mlwjKWo833k18pGAc4II8aDEJaSFq3SQcUNEaNTGp99mV-11oMQ";
 
-  const getBudgetsList = async (url: string) => {
+  const getBudgetsList = async (url: string, searchValue: string) => {
     await fetch(url, {
       method: "POST",
       headers: {
@@ -95,9 +98,9 @@ export default function SideNav() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        pageSize: 5,
-        pageIndex: 3,
-        search: "",
+        pageSize: 15,
+        pageIndex: 1,
+        search: searchValue,
         sortDescriptors: [
           {
             columnName: "name",
@@ -107,15 +110,16 @@ export default function SideNav() {
       }),
     })
       .then((res) => res.json())
-      .then((json) => setData(json.items))
+      .then((json) => {
+        setData(new Array(...json.items));
+      })
+      .then(() => console.log(data))
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    getBudgetsList(url);
-  }, []);
-
-  console.log(data);
+    getBudgetsList(url, searchValue);
+  }, [searchValue]);
 
   const resetIsNavListItemClicked = () => {
     setIsNavItemClicked(false);
@@ -133,9 +137,6 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const [value, setValue] = useState("null");
-  console.log(value);
-
   const BudgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
@@ -144,28 +145,36 @@ export default function SideNav() {
     },
     searchInput: {
       placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
-      onChange: (event: any) => setValue(event.currentTarget.value),
-      onInputCleared: () => setValue(""),
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(event.currentTarget.value);
+        getBudgetsList(url, event.currentTarget.value);
+        console.log("przeladowane");
+      },
     },
     navigationList: (
       <NavList
-        contents={data.map((item) => {
-          return {
-            ComponentToRender: (
-              <>
-                <IconStyled
-                  icon={
-                    iconNames.includes(item.icon) ? item.icon : "notifications"
-                  }
-                  iconSize={24}
-                />
-                <SpanStyled>{item.name}</SpanStyled>
-              </>
-            ),
-            href: `/budgets/${item.id.value}`,
-            id: item.id.value,
-          };
-        })}
+        contents={
+          data &&
+          data.map((item) => {
+            return {
+              ComponentToRender: (
+                <>
+                  <IconStyled
+                    icon={
+                      iconNames.includes(item.icon)
+                        ? item.icon
+                        : "notifications"
+                    }
+                    iconSize={24}
+                  />
+                  <SpanStyled>{item.name}</SpanStyled>
+                </>
+              ),
+              href: `/budgets/${item.id.value}`,
+              id: item.id.value,
+            };
+          })
+        }
         onNavListItemClick={hideSubMenu}
       />
     ),

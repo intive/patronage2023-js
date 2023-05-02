@@ -11,7 +11,7 @@ export type SubMenuDataProps = {
   };
   searchInput?: {
     placeholder: string;
-    onChange?: (event: any) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     onInputCleared: () => void;
     value: string;
   };
