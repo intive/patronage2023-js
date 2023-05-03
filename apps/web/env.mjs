@@ -9,6 +9,6 @@ export const env = createEnv({
   // need to use [] because process.env works in next js
   //https://stackoverflow.com/a/76105098
   runtimeEnv: {
-    API_URL: process.env["NEXT_PUBLIC_API_URL"],
+    API_URL: process.env["API_URL"],
   },
 });
