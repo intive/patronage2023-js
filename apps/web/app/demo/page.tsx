@@ -158,11 +158,6 @@ export default function PaginationDemo() {
                 </li>
                 <li>
                   <RedH2Styled>
-                    {`- We can't replace the 3 dots or give them a specific behavior`}
-                  </RedH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
                     - Width size jumps when changing pages!
                   </RedH2Styled>
                 </li>
