@@ -1,6 +1,7 @@
 import NextAuth, { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "jsonwebtoken";
+import { env } from "env.mjs";
 
 type CredentialType = {
   email: string;
@@ -38,7 +39,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials as CredentialType;
         // @ts-ignore
         // eslint-disable-next-line turbo/no-undeclared-env-vars
-        const res = await fetch(process.env.API_URL, {
+        const res = await fetch(env.NEXT_PUBLIC_API_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
