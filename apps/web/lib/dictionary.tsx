@@ -338,6 +338,17 @@ const dictionary = {
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
   SettingsPage: { title: { en: "Settings page", pl: "Ustawienia" } },
   TeamPage: { title: { en: "Team page", pl: "Zespoły" } },
+
+  Pagination: {
+    pageText: { en: "Page", pl: "Strona" },
+    currentPageText: {
+      en: "is your current page",
+      pl: "to twoja bierząca strona",
+    },
+    next: { en: "Next page", pl: "Następna strona" },
+    previous: { en: "Previous page", pl: "Poprzednia strona" },
+    rowsPerPageText: { en: "Rows per page", pl: "Wierszy na stronie" },
+  },
 };
 
 export default dictionary;

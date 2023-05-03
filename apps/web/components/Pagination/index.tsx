@@ -1,185 +1,90 @@
 "use client";
 
+import { useTranslate } from "lib/hooks";
 import { useState } from "react";
-import styled, { css } from "styled-components";
+import ReactPaginate from "react-paginate";
 import { Icon } from "ui";
+import {
+  ContainerStyled,
+  PaginateContainerStyled,
+  RowsPerPageContainerStyled,
+} from "./Pagination.styled";
 import { RowsPerPageSelect } from "./RowsPerPageSelect";
 
-export type PaginationStatusType = {
+export type PaginationStateType = {
   rowsPerPage: number;
   currentPage: number;
 };
 
 type PaginationProps = {
-  currentPage: number;
-  currentPageSize: number;
   numberOfPages: number;
   pageSizeOptions: number[];
-  onChangePaginationStatus: (status: PaginationStatusType) => void;
+  onChangePaginationState: (status: PaginationStateType) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
-type NavigationButtonType = {
-  isRight: boolean;
-};
-
-type SetPageButtonType = {
-  isActive?: boolean;
-};
-
-const ContainerStyled = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 112px;
-  padding: 32px 56px 40px 56px;
-  flex-wrap: wrap;
-  gap: 32px;
-`;
-
-const RowsPerPageContainerStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-`;
-
-const ButtonsListStyled = styled.div`
-  display: flex;
-  gap: 8px;
-`;
-
-const NavigationButtonStyled = styled.button<NavigationButtonType>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  color: ${({ theme }) => theme.pagination.text};
-  border: 2px solid ${({ theme }) => theme.pagination.border};
-  border-radius: 4px;
-  cursor: pointer;
-
-  ${({ isRight }) =>
-    isRight &&
-    css`
-      transform: rotate(180deg);
-    `}
-
-  &:hover {
-    color: ${({ theme }) => theme.pagination.hover};
-    border-color: ${({ theme }) => theme.pagination.hover};
-    outline: none;
-  }
-
-  &:focus {
-    color: ${({ theme }) => theme.pagination.hover};
-    border-color: ${({ theme }) => theme.pagination.hover};
-    outline: none;
-  }
-
-  &:disabled {
-    color: ${({ theme }) => theme.pagination.border};
-    border-color: ${({ theme }) => theme.pagination.border};
-    cursor: not-allowed;
-  }
-`;
-
-const SetPageButtonStyled = styled.button<SetPageButtonType>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  color: ${({ isActive, theme }) =>
-    isActive ? theme.pagination.active : theme.pagination.text};
-  border: transparent;
-  background: transparent;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    border: 2px solid ${({ theme }) => theme.pagination.hover};
-    outline: none;
-  }
-
-  &:disabled {
-    border: none;
-    outline: none;
-    cursor: default;
-  }
-`;
-
 export const Pagination = ({
-  currentPage = 1,
-  currentPageSize,
   numberOfPages,
   pageSizeOptions,
-  onChangePaginationStatus,
+  onChangePaginationState,
 }: PaginationProps) => {
-  const [rowsValue, setRowsValue] = useState<string>(
-    currentPageSize.toString()
+  const [rowsPerPageValue, setRowsPerPageValue] = useState(
+    (pageSizeOptions[0] || "10").toString()
   );
+  const [currentPageValue, setCurrentPageValue] = useState(0);
+  const { t, dict } = useTranslate("Pagination");
 
-  const selectPage = (newPageNumber: number) => {
-    onChangePaginationStatus({
-      rowsPerPage: Number(rowsValue),
-      currentPage: newPageNumber,
+  const handleButtonClick = ({ selected }: { selected: number }) => {
+    onChangePaginationState({
+      rowsPerPage: Number(rowsPerPageValue),
+      currentPage: selected,
     });
+    setCurrentPageValue(selected);
   };
 
-  const isNavigationForwardDisabled = currentPage >= numberOfPages;
-  const isNavigationBackwardDisabled = currentPage === 1;
+  const handleComboBoxChange = (value: string) => {
+    onChangePaginationState({
+      rowsPerPage: Number(value),
+      currentPage: currentPageValue,
+    });
+    setRowsPerPageValue(value);
+  };
+
+  const navPreviousIcon = <Icon icon="navigate_before" />;
+  const navNextIcon = <Icon icon="navigate_next" />;
 
   return (
     <ContainerStyled>
       <RowsPerPageContainerStyled>
-        {"Rows per page"}
+        {t(dict.rowsPerPageText)}
         <RowsPerPageSelect
-          value={rowsValue}
-          id="rowsPerPage"
-          label="rowsPerPage"
-          onValueChange={(value) => {
-            setRowsValue(value);
-            onChangePaginationStatus({
-              rowsPerPage: Number(value),
-              currentPage,
-            });
-          }}
+          value={rowsPerPageValue}
+          id="rows-per-page"
+          label="select-rows-per-page"
+          onValueChange={handleComboBoxChange}
           pageSizeOptions={pageSizeOptions}
         />
       </RowsPerPageContainerStyled>
-      <ButtonsListStyled>
-        <NavigationButtonStyled
-          isRight={false}
-          disabled={isNavigationBackwardDisabled}>
-          <Icon icon="navigate_before"></Icon>
-        </NavigationButtonStyled>
-        {/* <SetPageButtonStyled isActive={true}>1</SetPageButtonStyled> */}
-        {/* <SetPageButtonStyled onClick={() => selectPage(3)}>
-          2
-        </SetPageButtonStyled>
-        <SetPageButtonStyled>3</SetPageButtonStyled>
-        <SetPageButtonStyled>4</SetPageButtonStyled>
-        <SetPageButtonStyled>5</SetPageButtonStyled> */}
-        {[...Array(numberOfPages)].map((_: undefined, i: number) => (
-          <SetPageButtonStyled
-            onClick={() => selectPage(i + 1)}
-            key={i}
-            isActive={i + 1 === currentPage}
-            disabled={i + 1 === currentPage}>
-            {i + 1}
-          </SetPageButtonStyled>
-        ))}
-        <NavigationButtonStyled
-          isRight={true}
-          onClick={() => selectPage(currentPage + 1)}
-          disabled={isNavigationForwardDisabled}>
-          <Icon icon="navigate_before"></Icon>
-        </NavigationButtonStyled>
-      </ButtonsListStyled>
+      <PaginateContainerStyled>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel={navNextIcon}
+          onPageChange={handleButtonClick}
+          pageRangeDisplayed={3}
+          pageCount={numberOfPages}
+          previousLabel={navPreviousIcon}
+          renderOnZeroPageCount={null}
+          breakClassName="break-me"
+          containerClassName="pagination"
+          activeClassName="active-item"
+          pageClassName="item"
+          pageLinkClassName="link"
+          disabledClassName="disabled-buttons"
+          previousClassName="next-previous-buttons"
+          nextClassName="next-previous-buttons"
+          previousLinkClassName="next-previous-links"
+          nextLinkClassName="next-previous-links"
+        />
+      </PaginateContainerStyled>
     </ContainerStyled>
   );
 };

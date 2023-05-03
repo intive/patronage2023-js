@@ -53,7 +53,8 @@ export type IconType =
   | "subscriptions"
   | "done"
   | "priority_high"
-  | "navigate_before";
+  | "navigate_before"
+  | "navigate_next";
 
 type styledIconProps = {
   color?: string;
