@@ -78,6 +78,7 @@ export function Pagination({ data, itemsPerPage }: PaginationProps) {
         nextClassName="next"
         previousLinkClassName="previous-link"
         nextLinkClassName="next-link"
+        disabledClassName="disabled"
         pageClassName="page"
         activeClassName="page-active"
         breakClassName="break"

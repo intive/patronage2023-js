@@ -28,6 +28,12 @@
   font-weight: 300;
 }
 
+.disabled {
+  color: #ececec;
+  border-color: #ececec;
+  cursor: not-allowed;
+}
+
 .page,
 .break {
   cursor: pointer;
