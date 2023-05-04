@@ -1,69 +1,7 @@
 import styled from "styled-components";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
-import { Icon, IconType } from "../../Icon";
-import { NavList } from "../..";
-import { SpanStyled } from "../../NavList";
-
-const iconNames = [
-  "home",
-  "add",
-  "cancel",
-  "bar_chart",
-  "settings",
-  "account_circle",
-  "check_box",
-  "edit",
-  "history",
-  "visibility",
-  "check_indeterminate_small",
-  "trending_up",
-  "search",
-  "filter_list",
-  "sort",
-  "delete",
-  "close",
-  "check_box_outline_blank",
-  "person_add",
-  "notifications",
-  "visibility_off",
-  "event",
-  "trending_down",
-  "arrow_drop_down",
-  "arrow_back",
-  "arrow_forward",
-  "chevron_left",
-  "chevron_right",
-  "radio_button_checked",
-  "error",
-  "schedule",
-  "check",
-  "area_chart",
-  "shopping_cart",
-  "drafts",
-  "more_vert",
-  "wallet",
-  "menu",
-  "drag_handle",
-  "radio_button_unchecked",
-  "help",
-  "arrow_drop_up",
-  "check_small",
-  "query_stats",
-  "savings",
-  "directions_car",
-  "payments",
-  "subscriptions",
-  "done",
-  "priority_high",
-];
-
-const IconStyled = styled(Icon)`
-  background: white;
-  padding: 4px;
-  border-radius: 8px;
-`;
 
 export type SubMenuDataProps = {
   title: string;
@@ -84,17 +22,9 @@ export type SubMenuDataProps = {
   };
 };
 
-type BudgetType = {
-  name: string;
-  icon: IconType;
-  id: {
-    value: string | number;
-  };
-};
-
 type SubMenuProps = {
   subMenuDataObject: SubMenuDataProps;
-  data?: any;
+  onInputChangeUpdateSubMenuData: (title: string) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
@@ -139,32 +69,15 @@ const Title = styled.span`
 
 export const SubMenu = ({
   subMenuDataObject: subMenuData,
-  children,
+  onInputChangeUpdateSubMenuData,
 }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
-  const navigationList2 = (
-    <NavList
-      contents={[...(children as BudgetType[])].map((item) => {
-        return {
-          ComponentToRender: (
-            <>
-              <IconStyled
-                icon={
-                  iconNames.includes(item.icon) ? item.icon : "notifications"
-                }
-                iconSize={24}
-              />
-              <SpanStyled>{item.name}</SpanStyled>
-            </>
-          ),
-          href: `/budgets/${item.id.value}`,
-          id: item.id.value,
-        };
-      })}
-      onNavListItemClick={() => {}}
-    />
-  );
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    searchInput?.onChange?.(e);
+    onInputChangeUpdateSubMenuData(title);
+  };
+
   return (
     <SubMenuStyled>
       <MainDiv>
@@ -178,14 +91,11 @@ export const SubMenu = ({
             type="text"
             placeholder={searchInput.placeholder}
             value={searchInput.value}
-            onChange={searchInput.onChange}
+            onChange={onInputChange}
             onInputCleared={searchInput.onInputCleared}
           />
         )}
-        {/* {[...(children as BudgetType[])].map((item) => (
-          <p key={item.name}>{item.name}</p>
-        ))} */}
-        {navigationList2}
+        {navigationList}
       </MainDiv>
 
       {button && (

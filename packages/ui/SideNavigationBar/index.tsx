@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
@@ -55,6 +55,11 @@ export const SideNavigationBar = ({
   const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
     useState<number>();
 
+  useEffect(() => {
+    if (subMenuData && activeSideNavBarItemIndex === 0)
+      setSubMenuData(items[activeSideNavBarItemIndex].subMenu);
+  }, [items]);
+
   const hideSubMenu = () => {
     setActiveSideNavBarItemIndex(undefined);
     setSubMenuData(undefined);
@@ -76,6 +81,14 @@ export const SideNavigationBar = ({
     setActiveSideNavBarItemIndex(index);
   };
 
+  const onInputChangeUpdateSubMenuData = (title: string) => {
+    // items.forEach((item) => {
+    //   if (title === item.subMenu?.title) {
+    //     setSubMenuData(item.subMenu);
+    //   }
+    // });
+  };
+
   return (
     <Wrapper>
       <SideNavigationBarStyled
@@ -85,7 +98,9 @@ export const SideNavigationBar = ({
           return subMenu ? (
             <SideNavigationBarButton
               key={id}
-              onClick={() => showSubMenu(subMenu, index)}
+              onClick={() => {
+                showSubMenu(subMenu, index);
+              }}
               icon={icon}
               textValue={textValue}
               activeFlag={
@@ -105,7 +120,11 @@ export const SideNavigationBar = ({
         })}
       </SideNavigationBarStyled>
       {!isNavListItemClicked && subMenuData && (
-        <SubMenu subMenuDataObject={subMenuData}>{data}</SubMenu>
+        <SubMenu
+          onInputChangeUpdateSubMenuData={onInputChangeUpdateSubMenuData}
+          subMenuDataObject={subMenuData}>
+          {data}
+        </SubMenu>
       )}
     </Wrapper>
   );
