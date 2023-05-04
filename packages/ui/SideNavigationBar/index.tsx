@@ -82,11 +82,11 @@ export const SideNavigationBar = ({
   };
 
   const onInputChangeUpdateSubMenuData = (title: string) => {
-    // items.forEach((item) => {
-    //   if (title === item.subMenu?.title) {
-    //     setSubMenuData(item.subMenu);
-    //   }
-    // });
+    items.forEach((item) => {
+      if (title === item.subMenu?.title) {
+        setSubMenuData(item.subMenu);
+      }
+    });
   };
 
   return (
