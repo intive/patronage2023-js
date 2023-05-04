@@ -39,7 +39,7 @@ export const authOptions: NextAuthOptions = {
         const { email, password } = credentials as CredentialType;
         // @ts-ignore
         // eslint-disable-next-line turbo/no-undeclared-env-vars
-        const res = await fetch(env.NEXT_PUBLIC_API_URL + "/user/sign-in", {
+        const res = await fetch(env.NEXT_PUBLIC_API_URL + "user/sign-in", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
