@@ -155,7 +155,7 @@ export default function SideNav() {
       <SideNavigationBar
         items={[
           {
-            data,
+            // data,
             href: "/budgets",
             icon: <Icon icon="wallet" iconSize={32} />,
             textValue: t(SideNav.budgetsItem.title),

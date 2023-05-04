@@ -82,11 +82,11 @@ export const SideNavigationBar = ({
   };
 
   const onInputChangeUpdateSubMenuData = (title: string) => {
-    items.forEach((item) => {
-      if (title === item.subMenu?.title) {
-        setSubMenuData(item.subMenu);
-      }
-    });
+    // items.forEach((item) => {
+    //   if (title === item.subMenu?.title) {
+    //     setSubMenuData(item.subMenu);
+    //   }
+    // });
   };
 
   return (
@@ -103,9 +103,7 @@ export const SideNavigationBar = ({
               }}
               icon={icon}
               textValue={textValue}
-              activeFlag={
-                !isNavListItemClicked && activeSideNavBarItemIndex === index
-              }
+              activeFlag={activeSideNavBarItemIndex === index}
             />
           ) : (
             <SideNavigationBarLink
