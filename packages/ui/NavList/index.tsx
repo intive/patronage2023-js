@@ -1,8 +1,8 @@
 "use client";
 import styled from "styled-components";
-import { NavItem } from "ui";
 import React, { ReactElement } from "react";
 import { usePathname } from "next/navigation";
+import { NavItem } from "./NavItem";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {

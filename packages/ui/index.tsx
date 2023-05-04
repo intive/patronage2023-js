@@ -1,4 +1,3 @@
-export { NavItem } from "./NavItem";
 export { NavList } from "./NavList";
 export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";
