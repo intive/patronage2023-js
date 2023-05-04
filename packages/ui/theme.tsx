@@ -35,6 +35,7 @@ const colors = {
 };
 
 export const theme = {
+  main: colors.Teal10,
   avatar: {
     outline: colors.BasicWhite,
   },
@@ -88,6 +89,10 @@ export const theme = {
     failed: {
       main: colors.Supporting4,
       background: colors.Supporting1,
+    },
+    reccuring: {
+      main: colors.Supporting5,
+      background: colors.Supporting2,
     },
   },
   errorMessage: {
@@ -234,7 +239,7 @@ export const theme = {
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
     sortIcon: colors.Neutral8,
-  }
+  },
 };
 
 export type ThemeType = typeof theme;

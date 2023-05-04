@@ -16,11 +16,13 @@ const AsideCard = styled(MainCard)`
   display: none;
   @media ${device.desktop} {
     display: flex;
+    flex-direction: column;
     align-self: flex-start;
-    width: 320px;
+    width: max-content;
     min-width: 250px;
     min-height: 220px;
     margin-left: 20px;
+    padding: 32px;
   }
 `;
 
