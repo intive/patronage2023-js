@@ -10,18 +10,18 @@ export default {
 } as ComponentMeta<typeof Logo>;
 
 type ParentProps = {
-  $white?: boolean;
-  $logoWidth?: number;
+  white?: boolean;
+  logoWidth?: number;
 };
 
 const Parent = styled.span<ParentProps>`
   display: inline-block;
-  background-color: ${({ $white }) => $white && "#1E4C40"};
-  width: ${({ $logoWidth }) => $logoWidth + "px"};
+  background-color: ${({ white }) => white && "#1E4C40"};
+  width: ${({ logoWidth }) => logoWidth + "px"};
 `;
 
 const Template: ComponentStory<typeof Logo> = ({ ...args }) => (
-  <Parent $white={args.$white} $logoWidth={args.$logoWidth}>
+  <Parent white={args.white} logoWidth={args.logoWidth}>
     <Logo {...args} />
   </Parent>
 );
@@ -30,16 +30,16 @@ export const Normal = Template.bind({});
 
 export const White = Template.bind({});
 White.args = {
-  $white: true,
+  white: true,
 };
 
 export const CustomWidth = Template.bind({});
 CustomWidth.args = {
-  $logoWidth: 250,
+  logoWidth: 250,
 };
 
 export const CustomWidthWhite = Template.bind({});
 CustomWidthWhite.args = {
-  $logoWidth: 250,
-  $white: true,
+  logoWidth: 250,
+  white: true,
 };
