@@ -1,4 +1,4 @@
-export { NavList } from "./NavList";
+export * from "./NavList";
 export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";
 export { Card } from "./Card";
