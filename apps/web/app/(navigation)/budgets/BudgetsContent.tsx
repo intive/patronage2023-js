@@ -53,10 +53,6 @@ export const BudgetsContent = () => {
     setBudgets(budgetsAfterEdit);
   };
 
-  /*
-  Create a "EditIcon" component (Figma)
-  */
-
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation

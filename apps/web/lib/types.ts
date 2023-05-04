@@ -35,8 +35,8 @@ export interface Budget {
   name: string;
   description: string;
   icon: IconType;
-  startDate: number;
-  endDate: number;
+  startDate: number | null;
+  endDate: number | null;
   limit: number;
   currency: Currency;
 }

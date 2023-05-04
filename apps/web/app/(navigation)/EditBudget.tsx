@@ -26,14 +26,6 @@ import {
 } from "./CreateNewBudget.styled";
 
 import { icons } from "./CreateNewBudget";
-
-import { IconType } from "ui/Icon";
-
-interface Currency {
-  tag: string;
-  locale: string;
-}
-
 interface EditBudgetProps {
   budget: Budget;
   handleHideEditBudgetModal: () => void;
@@ -54,6 +46,18 @@ export const EditBudget = ({
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
+
+  const onSelectStartDate = (date: Date | null) => {
+    date
+      ? setEditBudget({ ...editBudget, startDate: date.getTime() })
+      : setEditBudget({ ...editBudget, startDate: null });
+  };
+
+  const onSelectEndDate = (date: Date | null) => {
+    date
+      ? setEditBudget({ ...editBudget, endDate: date.getTime() })
+      : setEditBudget({ ...editBudget, endDate: null });
+  };
 
   return (
     <Modal header={t(dict.title)} onClose={handleHideEditBudgetModal}>
@@ -79,12 +83,13 @@ export const EditBudget = ({
             });
 
             handleBudgetsEdit(budgetsAfterEdit);
+            console.log(editBudget);
+            onClose();
           }}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                onClose();
               }}>
               <ContentStyled>
                 <Tabs.Content value="settings">
@@ -184,10 +189,7 @@ export const EditBudget = ({
                             }
                             onSelect={(date) => {
                               setValue(date);
-                              setEditBudget({
-                                ...editBudget,
-                                startDate: date!.getTime(),
-                              });
+                              onSelectStartDate(date);
                             }}
                           />
                           <DatePickerErrorStyled>
@@ -232,10 +234,7 @@ export const EditBudget = ({
                             }
                             onSelect={(date) => {
                               setValue(date);
-                              setEditBudget({
-                                ...editBudget,
-                                endDate: date!.getTime(),
-                              });
+                              onSelectEndDate(date);
                             }}
                           />
                           <DatePickerErrorStyled>

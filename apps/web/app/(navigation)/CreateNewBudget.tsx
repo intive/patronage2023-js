@@ -134,12 +134,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Form
           onSubmit={() => {
             console.log(newBudget);
+            onClose();
           }}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                onClose();
               }}>
               <ContentStyled>
                 <Tabs.Content value="settings">
