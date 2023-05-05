@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "lib/media-queries";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
@@ -63,6 +64,16 @@ export const TableWrapperStyled = styled.div`
   // center "Creator" header
   .ka-thead-cell#creator .ka-thead-cell-content {
     justify-content: center;
+  }
+
+  // hide creator column on mobile
+  tr.ka-thead-row th:nth-child(5),
+  tr.ka-row td:nth-child(5) {
+    display: none;
+
+    ${device.tablet} {
+      display: table-cell;
+    }
   }
 
   // group row styles

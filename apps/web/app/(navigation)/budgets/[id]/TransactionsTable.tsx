@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
@@ -11,14 +11,12 @@ import { Column } from "ka-table/models";
 import { Icon } from "ui/Icon";
 import { CategoryIcon } from "ui/CategoryIcon";
 import { Avatar } from "ui/Avatar";
-import { Chip } from "ui/Chip";
 import { TransactionDropdownMenu } from "ui/TransactionDropdownMenu";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
 
-import { useEffect, useState } from "react";
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
@@ -72,7 +70,7 @@ const columns = [
       verticalAlign: "middle",
       lineHeight: 0,
       paddingLeft: "8px",
-      paddingRight: "8px",
+      paddingRight: "8px"
     },
     width: "13%",
   },
