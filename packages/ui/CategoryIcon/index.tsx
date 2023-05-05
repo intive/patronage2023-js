@@ -1,18 +1,10 @@
 import styled from "styled-components";
 import { Icon } from "ui";
 import { IconType } from "ui/Icon/index";
-
-type categoryType = {
-  name: string;
-  icon: {
-    name: string;
-    foreground: string;
-    background: string;
-  };
-};
+import { CategoryType } from "../../../apps/web/lib/types"
 
 export type CategoryIconProps = {
-  category: categoryType;
+  category: CategoryType;
   small?: boolean;
   className?: string;
 };
