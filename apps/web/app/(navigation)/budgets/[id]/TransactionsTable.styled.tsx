@@ -2,13 +2,18 @@ import styled from "styled-components";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  margin-left: -48px;
+  margin-right: -48px;
 
   // table styles
   .ka-table {
-    width: 100%;
+    tr > :first-child {
+      padding-left: 48px;
+    }
+
+    tr > :last-child {
+      padding-right: 0;
+    }
   }
 
   .ka-empty-cell {
@@ -55,9 +60,9 @@ export const TableWrapperStyled = styled.div`
     cursor: pointer;
   }
 
-  // table body
-  tbody > tr:first-child > td {
-    padding-top: 16px;
+  // center "Creator" header
+  .ka-thead-cell#creator .ka-thead-cell-content {
+    justify-content: center;
   }
 
   // group row styles
@@ -67,6 +72,10 @@ export const TableWrapperStyled = styled.div`
 
   .ka-group-row {
     background-color: ${({ theme }) => theme.transactionsTable.background};
+
+    > td {
+      padding-top: 24px;
+    }
   }
 
   .ka-group-cell {
@@ -83,10 +92,20 @@ export const TableWrapperStyled = styled.div`
   // normal row styles
   .ka-row {
     border: none;
-    border-top: 1px solid ${({ theme }) => theme.transactionsTable.rowSeparator};
+
+    td {
+      border-top: 1px solid
+        ${({ theme }) => theme.transactionsTable.rowSeparator};
+    }
+
+    // no border on first and last empty columns
+    td:first-child,
+    td:last-child {
+      border-top: none;
+    }
   }
 
-  .ka-group-row + .ka-row {
+  .ka-group-row + .ka-row td {
     border-top: none;
   }
 
@@ -99,8 +118,7 @@ export const TableWrapperStyled = styled.div`
   }
 
   .ka-cell {
-    text-align: left;
-    padding-left: 0;
+    padding: 17px 8px 17px 0;
   }
 
   // avatar styles
@@ -112,6 +130,6 @@ export const TableWrapperStyled = styled.div`
 
 export const StyledCurrencyAmount = styled(CurrencyAmount)`
   display: block;
-  text-align: right;
-  font-family: unset; // component adds Signika font so I need to reset it
+  text-align: left;
+  font-family: unset; // component adds Signika font
 `;
