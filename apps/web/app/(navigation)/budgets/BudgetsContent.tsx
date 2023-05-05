@@ -19,9 +19,11 @@ const BudgetContentWrapperStyled = styled.div`
   gap: 32px;
 `;
 
-export const BudgetsContent = () => {
-  const id = usePathname()?.replace("/budgets/", "");
+interface BudgetsContentProps {
+  id: string;
+}
 
+export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const [budgets, setBudgets] = useState<Budget[]>([]);
 
   useEffect(() => {
