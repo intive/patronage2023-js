@@ -9,6 +9,7 @@ import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import TransactionTableController from "./[id]/TransactionTableController";
 
 interface BudgetsContentProps {
   id: string;
@@ -42,7 +43,8 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <TransactionsTable
+      <TransactionTableController
+        id={budget.id}
         budget={budget}
         setSorting={(column) => console.log(column)}
       />

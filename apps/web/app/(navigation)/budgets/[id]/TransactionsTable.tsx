@@ -105,23 +105,17 @@ const columns = [
 type TransactionsTableProps = {
   budget: Budget;
   setSorting: (column: string) => void;
+  transactions: Transaction[];
 };
 
 export const TransactionsTable = ({
   budget,
   setSorting,
+  transactions,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { tableDates } = dict;
-
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    fetch(`/budget/${budget.id}.json`)
-      .then((response) => response.json())
-      .then((result) => setTransactions(result.transactions));
-  }, [budget]);
 
   const getDayName = (timestamp: number, locale: string) => {
     dayjs.extend(isToday);
