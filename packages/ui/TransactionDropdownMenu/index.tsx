@@ -2,11 +2,11 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Icon } from "ui";
 import styled from "styled-components";
-import { ReactElement, ReactNode } from "react";
+import { ReactElement } from "react";
 
 //type for every item in DropdownMenu
 type DropdownMenuSingleItem = {
-  ComponentToRender?: ReactNode;
+  ComponentToRender?: ReactElement;
   id: string;
 };
 
@@ -82,7 +82,7 @@ export const TransactionDropdownMenu = ({
   ariaLabel,
 }: TransactionDropdownMenuProps) => {
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root modal={false}>
       <DropdownMenuTriggerStyled asChild>
         <button aria-label={ariaLabel}>
           <IconStyled icon="more_vert" />
