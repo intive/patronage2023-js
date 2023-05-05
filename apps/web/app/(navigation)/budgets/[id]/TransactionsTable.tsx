@@ -31,7 +31,7 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     style: {
-      // backgroundColor: "Wheat",
+      backgroundColor: "Wheat",
       verticalAlign: "middle",
       lineHeight: 0,
     },
@@ -42,24 +42,24 @@ const columns = [
     title: "Name",
     isSortable: true,
     dataType: DataType.String,
-    // style: { backgroundColor: "PaleTurquoise" },
-    width: "22%",
+    style: { backgroundColor: "PaleTurquoise" },
+    width: "31%",
   },
-  {
-    key: "status",
-    title: "Status",
-    isSortable: true,
-    dataType: DataType.String,
-    // style: { backgroundColor: "RosyBrown" },
-    width: "18%",
-  },
+  // {
+  //   key: "status",
+  //   title: "Status",
+  //   isSortable: true,
+  //   dataType: DataType.String,
+  //   // style: { backgroundColor: "RosyBrown" },
+  //   width: "18%",
+  // },
   {
     key: "amount",
     title: "Amount",
     isSortable: true,
     dataType: DataType.Number,
-    // style: { backgroundColor: "LightBlue" },
-    width: "23%",
+    style: { backgroundColor: "LightBlue" },
+    width: "32%",
   },
   {
     key: "creator",
@@ -67,7 +67,7 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     style: {
-      // backgroundColor: "Coral",
+      backgroundColor: "Coral",
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
@@ -79,7 +79,7 @@ const columns = [
   {
     key: "editColumn",
     style: {
-      // backgroundColor: "LightPink",
+      backgroundColor: "LightPink",
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
@@ -170,8 +170,8 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "category":
                   return <CategoryIcon category={props.value} small={false} />;
-                case "status":
-                  return <Chip type={props.value}>{props.value}</Chip>;
+                // case "status":
+                //   return <Chip type={props.value}>{props.value}</Chip>;
                 case "amount":
                   return (
                     <StyledCurrencyAmount
