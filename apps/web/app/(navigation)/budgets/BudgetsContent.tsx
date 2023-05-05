@@ -8,7 +8,7 @@ import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -20,7 +20,9 @@ const BudgetContentWrapperStyled = styled.div`
 `;
 
 export const BudgetsContent = () => {
-  const id = usePathname()?.replace("/budgets/", "");
+  const params = useParams();
+
+  const id = params?.id as string;
 
   const [budgets, setBudgets] = useState<Budget[]>([]);
 
@@ -37,7 +39,7 @@ export const BudgetsContent = () => {
     () => budgets.find((currentBudget) => currentBudget.id === id),
     [id, budgets]
   );
-
+  console.log(budget);
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
