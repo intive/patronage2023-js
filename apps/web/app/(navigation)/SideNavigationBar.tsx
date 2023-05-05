@@ -32,14 +32,19 @@ export default function SideNav() {
   };
 
   const [searchValue, setSearchValue] = useState("");
+  const [sortAscending, setSortAscending] = useState(true);
 
   const url =
     "https://inbudget-patronage-api-dev.azurewebsites.net/budgets/list";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMyNzgwNjUsImlhdCI6MTY4MzI3MDg2NCwianRpIjoiNzJkZTEwZGYtMDk0Yi00MjVjLTlmM2QtNDYyYTE0ZmJjYzZkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjI1Zjk5MmFkLWE4YzQtNGQ5Ni05MmYwLTVlNzVhYjIyNDhlOCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjI1Zjk5MmFkLWE4YzQtNGQ5Ni05MmYwLTVlNzVhYjIyNDhlOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.dZ3Zu0QaunwRWXbjZqIxwYxPTJMQWmNaQ59uQC30-Da0wwy3BJ3CFPI8vmFefZCNPbjojytWZ3-eBvxESh5DtPiaY6MbaV-adH3nJlsdwBwHIy49ThKgugoQTB1rZ0tPm-5zkh6X6DIMH4pR97PAgn7ajePLM8zukSd2oZCiltTBf5zO60p1fjrZ1dUM6KNk2hmVh9CLa46nUeIhAZn5G8CA6BmGYaO7zLGFVnOi9pQrZQS7tueMmuymqRPtk8gmzMgiJAn0Vw5aE2ijeIK_7xAD0PphqTexsB4b__CObRJb7eeJfKQavoaBfRio0NVgFGNR1RCuvbjwhNCKw2sc5g";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMyOTk1MzMsImlhdCI6MTY4MzI5MjMzMywianRpIjoiMjNlYTYwZGMtNjRjMy00YjQ2LWEyOWItZWZhODhjMDVlODMzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjdkNWE4OWQ0LWM3ZTAtNGI5ZS1hNzA1LTcxNzgxY2JjM2I2ZSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjdkNWE4OWQ0LWM3ZTAtNGI5ZS1hNzA1LTcxNzgxY2JjM2I2ZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.LmHOwKeY1uDPfWbCHt1Eqxa3lmWhOvJG1bDZDtwHD5qlZty81Vc8E99Aj-0tBRpTLAT8FCuU5RjLxwOBXVa6YD0HgwsxkT4ukOiHFbSnBezcDWOKtERyLERuEDmB7Totzv67u8GWf02cFjEpssYo2CX6xxLu2Z31uD4ys25TIp1TbzEPn-nvWKwzCP9Qq1JX_YS8eGTYQYpIITjuNxzAbsBzL6J5pWBeQLCwljEFt1Qm4afMr5z2nSx5w8evuwhWIuXFQTN44P5Tr__4SkacRRK64Vry3BQ46dkTFGt9MDX8GSvYXjsXOr92NLJ64Q4BYLTVMAG9-DOkgD1fQIYCHA";
 
-  const getBudgetsList = async (url: string, searchValue: string) => {
+  const getBudgetsList = async (
+    url: string,
+    searchValue: string,
+    sortAscending: boolean
+  ) => {
     await fetch(url, {
       method: "POST",
       headers: {
@@ -54,7 +59,7 @@ export default function SideNav() {
         sortDescriptors: [
           {
             columnName: "name",
-            sortAscending: true,
+            sortAscending: sortAscending,
           },
         ],
       }),
@@ -67,7 +72,7 @@ export default function SideNav() {
   };
 
   useEffect(() => {
-    getBudgetsList(url, searchValue);
+    getBudgetsList(url, searchValue, sortAscending);
     console.log("click click");
   }, [searchValue]);
 
@@ -90,14 +95,18 @@ export default function SideNav() {
   const BudgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
-      clickHandler: () => {},
-      icon: <Icon icon="filter_list" />,
+      clickHandler: () => {
+        setSortAscending(!sortAscending);
+        getBudgetsList(url, searchValue, sortAscending);
+      },
+      icon: "filter_list",
+      sortAscending: sortAscending,
     },
     searchInput: {
       placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
       onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.currentTarget.value);
-        getBudgetsList(url, event.currentTarget.value);
+        getBudgetsList(url, event.currentTarget.value, sortAscending);
         console.log("przeladowane");
       },
     },
@@ -146,6 +155,8 @@ export default function SideNav() {
       />
     ),
   };
+
+  console.log("sortAscending", sortAscending);
 
   return (
     <>
