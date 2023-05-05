@@ -2,16 +2,14 @@ import { TransactionsTable } from "./TransactionsTable";
 import { useEffect, useState } from "react";
 import categoryMap from "lib/category-map";
 import { env } from "env.mjs";
-import { Budget, Transaction } from "../../../../lib/types";
+import { Budget, Transaction } from "lib/types";
 
 const TransactionTableController = ({
   id,
   budget,
-  setSorting,
 }: {
   id: string;
   budget: Budget;
-  setSorting: (column: any) => void;
 }) => {
   //useSession
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -19,6 +17,7 @@ const TransactionTableController = ({
   //TODO define type od budgetData
   const [budgetData, setBudgetData] = useState<any>();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const setSorting = (column: string) => console.log(column);
 
   // fetch(env.NEXT_PUBLIC_API_URL + "/budgets/" + id + "/transactions", {
   //   body: JSON.stringify({
@@ -30,7 +29,9 @@ const TransactionTableController = ({
   //     "Content-Type": "application/json",
   //   },
   //   method: "POST",
-  // }).then((r) => setBudgetData(r));
+  // })
+  //   .then((r) => setBudgetData(r))
+  //   .catch((error) => console.log(error));
 
   useEffect(() => {
     fetch(`/budget/${id}.json`)

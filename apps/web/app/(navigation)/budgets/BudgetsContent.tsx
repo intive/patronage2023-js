@@ -3,12 +3,10 @@
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
 
-import { TransactionsTable } from "./[id]/TransactionsTable";
 import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { usePathname } from "next/navigation";
 import TransactionTableController from "./[id]/TransactionTableController";
 
 interface BudgetsContentProps {
@@ -43,11 +41,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <TransactionTableController
-        id={budget.id}
-        budget={budget}
-        setSorting={(column) => console.log(column)}
-      />
+      <TransactionTableController id={budget.id} budget={budget} />
     </BudgetContentWrapperStyled>
   );
 

@@ -18,7 +18,6 @@ import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
 
-import { useEffect, useState } from "react";
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
