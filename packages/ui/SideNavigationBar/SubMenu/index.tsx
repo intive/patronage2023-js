@@ -28,22 +28,23 @@ type SubMenuProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 80px;
-  height: 100%;
+  height: calc(100%);
   width: 288px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
+  margin-top: 68px;
 
   padding: 40px 16px 24px 16px;
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
   background-color: ${({ theme }) =>
     theme.sideNavigationBar.subMenu.background};
-  box-shadow: 3px 0 10px lightgray;
+  box-shadow: 0px 6px 20px -2px rgba(26, 26, 26, 0.14);
 `;
 
 const MainDiv = styled.div`
@@ -65,6 +66,12 @@ const Title = styled.span`
   font-size: 24px;
   color: ${({ theme }) => theme.sideNavigationBar.subMenu.title};
   line-height: 36px;
+`;
+
+const ButtonStyled = styled(Button)`
+  width: 256px;
+  position: fixed;
+  bottom: 25px;
 `;
 
 export const SubMenu = ({
@@ -99,9 +106,9 @@ export const SubMenu = ({
       </MainDiv>
 
       {button && (
-        <Button variant="secondary" onClick={() => button.clickHandler()}>
+        <ButtonStyled variant="secondary" onClick={() => button.clickHandler()}>
           {button.label}
-        </Button>
+        </ButtonStyled>
       )}
     </SubMenuStyled>
   );

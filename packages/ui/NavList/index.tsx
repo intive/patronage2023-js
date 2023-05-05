@@ -20,7 +20,8 @@ export type NavListProps = {
 const NavListStyled = styled.ul`
   list-style: none;
   width: 100%;
-  height: auto;
+  height: calc(100vh - 310px);
+  overflow-x: auto;
 `;
 
 //wrapper for text coming from ComponentToRender; currently imported in places where NavList is being used
@@ -38,7 +39,7 @@ export const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white !important;
+  background-color: blue !important;
   padding: 4px 7px;
   border-radius: 8px;
 `;
