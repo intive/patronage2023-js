@@ -22,6 +22,7 @@ const NavListStyled = styled.ul`
   width: 100%;
   height: calc(100vh - 310px);
   overflow-x: auto;
+  padding: 2px 15px 2px 2px;
 `;
 
 //wrapper for text coming from ComponentToRender; currently imported in places where NavList is being used
