@@ -8,7 +8,7 @@ import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
