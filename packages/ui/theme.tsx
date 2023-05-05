@@ -264,6 +264,10 @@ export const theme = {
       background: colors.Supporting12,
     },
   },
+  editIcon: {
+    main: colors.Neutral6,
+    background: colors.Neutral1,
+  },
 };
 
 export type ThemeType = typeof theme;

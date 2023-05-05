@@ -41,7 +41,6 @@ export const EditBudget = ({
 }: EditBudgetProps) => {
   const [editBudget, setEditBudget] = useState(budget);
   const [selectedIcon, setSelectedIcon] = useState(budget.icon);
-  const [defaultValueTabs, setDefaultValueTabs] = useState("settings");
   const { t, dict } = useTranslate("EditBudgetModal");
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
@@ -58,6 +57,8 @@ export const EditBudget = ({
       ? setEditBudget({ ...editBudget, endDate: date.getTime() })
       : setEditBudget({ ...editBudget, endDate: null });
   };
+
+  const defaultValueTabs = "settings";
 
   return (
     <Modal header={t(dict.title)} onClose={handleHideEditBudgetModal}>

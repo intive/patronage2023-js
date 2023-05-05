@@ -1,19 +1,24 @@
 import styled from "styled-components";
-import { Icon, IconType } from "../Icon";
+import { Icon } from "../Icon";
 
 interface EditIconInterface {
   onClick: () => void;
 }
 
-const EditIconStyled = styled.span`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+const EditIconStyled = styled.button<EditIconInterface>`
+  cursor: pointer;
+  border: none;
+  background-color: ${({ theme }) => theme.editIcon.background};
   height: 2.5em;
   width: 2.5em;
   border-radius: 8px;
-  background-color: #f7f7f7;
-  color: #7e7e7e;
+`;
+
+const Wrapper = styled.span`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ theme }) => theme.editIcon.main};
 
   &:hover {
     cursor: pointer;
@@ -23,7 +28,9 @@ const EditIconStyled = styled.span`
 export const EditIcon = ({ onClick }: EditIconInterface) => {
   return (
     <EditIconStyled onClick={onClick}>
-      <Icon icon="edit" />
+      <Wrapper>
+        <Icon icon="edit" />
+      </Wrapper>
     </EditIconStyled>
   );
 };
