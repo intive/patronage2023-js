@@ -21,8 +21,19 @@ const NavListStyled = styled.ul`
   list-style: none;
   width: 100%;
   height: calc(100vh - 310px);
-  overflow-x: auto;
-  padding: 2px 15px 2px 2px;
+  padding-right: 12px;
+  overflow-y: overlay;
+
+  &::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.textarea.disabled};
+    border-radius: 10px;
+    width: 6px;
+    margin-bottom: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.modal.closeButton};
+    border-radius: 10px;
+  }
 `;
 
 //wrapper for text coming from ComponentToRender; currently imported in places where NavList is being used

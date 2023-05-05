@@ -44,7 +44,7 @@ export default function SideNav() {
       method: "POST",
       headers: {
         accept: "*/*",
-        Authorization: "Bearer " + token,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -103,29 +103,29 @@ export default function SideNav() {
     },
     navigationList: (
       <NavList
-        // contents={BudgetsSubMenuNavListContents}
-        contents={
-          data &&
-          data.map((item) => {
-            return {
-              ComponentToRender: (
-                <>
-                  <IconStyled
-                    icon={
-                      iconNames.includes(item.icon)
-                        ? item.icon
-                        : "notifications"
-                    }
-                    iconSize={24}
-                  />
-                  <SpanStyled>{item.name}</SpanStyled>
-                </>
-              ),
-              href: `/budgets/${item.id.value}`,
-              id: item.id.value,
-            };
-          })
-        }
+        contents={BudgetsSubMenuNavListContents}
+        // contents={
+        //   data &&
+        //   data.map((item) => {
+        //     return {
+        //       ComponentToRender: (
+        //         <>
+        //           <IconStyled
+        //             icon={
+        //               iconNames.includes(item.icon)
+        //                 ? item.icon
+        //                 : "notifications"
+        //             }
+        //             iconSize={24}
+        //           />
+        //           <SpanStyled>{item.name}</SpanStyled>
+        //         </>
+        //       ),
+        //       href: `/budgets/${item.id.value}`,
+        //       id: item.id.value,
+        //     };
+        //   })
+        // }
         onNavListItemClick={hideSubMenu}
       />
     ),

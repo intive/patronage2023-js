@@ -31,20 +31,23 @@ const SubMenuStyled = styled.div`
   position: fixed;
   top: 0;
   left: 80px;
-  height: calc(100%);
+  height: 100%;
   width: 288px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
   margin-top: 68px;
-
-  padding: 40px 16px 24px 16px;
+  padding: 40px 4px 24px 16px;
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
   background-color: ${({ theme }) =>
     theme.sideNavigationBar.subMenu.background};
   box-shadow: 0px 6px 20px -2px rgba(26, 26, 26, 0.14);
+`;
+
+const SubMenuHeaderStyled = styled.div`
+  padding-right: 12px; // + padding above = 16 to handle scroll
 `;
 
 const MainDiv = styled.div`
@@ -88,20 +91,22 @@ export const SubMenu = ({
   return (
     <SubMenuStyled>
       <MainDiv>
-        <HeaderStyled>
-          <Title>{title}</Title>
-          {sort?.icon}
-        </HeaderStyled>
-        {searchInput && (
-          <SearchInput
-            name="searchInput"
-            type="text"
-            placeholder={searchInput.placeholder}
-            value={searchInput.value}
-            onChange={onInputChange}
-            onInputCleared={searchInput.onInputCleared}
-          />
-        )}
+        <SubMenuHeaderStyled>
+          <HeaderStyled>
+            <Title>{title}</Title>
+            {sort?.icon}
+          </HeaderStyled>
+          {searchInput && (
+            <SearchInput
+              name="searchInput"
+              type="text"
+              placeholder={searchInput.placeholder}
+              value={searchInput.value}
+              onChange={onInputChange}
+              onInputCleared={searchInput.onInputCleared}
+            />
+          )}
+        </SubMenuHeaderStyled>
         {navigationList}
       </MainDiv>
 

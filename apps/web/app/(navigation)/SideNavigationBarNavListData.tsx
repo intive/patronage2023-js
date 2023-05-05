@@ -16,6 +16,16 @@ export const BudgetsSubMenuNavListContents = [
     ComponentToRender: (
       <>
         <IconStyled icon="subscriptions" iconSize={24} />
+        <SpanStyled>Main Budget</SpanStyled>
+      </>
+    ),
+    href: "/budgets/71ee9a04-6b27-423a-9caa-7d6a92335dae",
+    id: 1,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="subscriptions" iconSize={24} />
         <SpanStyled>Subscriptions</SpanStyled>
       </>
     ),
@@ -31,6 +41,216 @@ export const BudgetsSubMenuNavListContents = [
     ),
     href: "/budgets/36cc0777-2874-4d0c-a389-91280e45e836",
     id: 3,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconStyled icon="payments" iconSize={24} />
+        <SpanStyled>Praca</SpanStyled>
+      </>
+    ),
+    href: "/budgets/b9d8ef2d-90df-4ee6-b34f-edfb3b90f2de",
+    id: 4,
   },
   {
     ComponentToRender: (

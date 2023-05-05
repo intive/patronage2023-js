@@ -62,9 +62,11 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
 
 export const NavItem = ({ active, href, children, onClick }: NavItemProps) => {
   return (
-    <NavItemStyled $active={active} href={href} onClick={onClick}>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
-      {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
-    </NavItemStyled>
+    <li>
+      <NavItemStyled $active={active} href={href} onClick={onClick}>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+        {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
+      </NavItemStyled>
+    </li>
   );
 };
