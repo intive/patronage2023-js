@@ -74,7 +74,7 @@ export default function SideNav() {
   useEffect(() => {
     getBudgetsList(url, searchValue, sortAscending);
     console.log("click click");
-  }, [searchValue]);
+  }, [searchValue, sortAscending]);
 
   const resetIsNavListItemClicked = () => {
     setIsNavItemClicked(false);
@@ -97,7 +97,6 @@ export default function SideNav() {
     sort: {
       clickHandler: () => {
         setSortAscending(!sortAscending);
-        getBudgetsList(url, searchValue, sortAscending);
       },
       icon: "filter_list",
       sortAscending: sortAscending,
