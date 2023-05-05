@@ -45,3 +45,16 @@ export interface BudgetTransaction {
   budgetID: string;
   transactions: Transaction[];
 }
+
+export type CategoryType = {
+  name: string;
+  icon: {
+    name: string;
+    foreground: string;
+    background: string;
+  };
+};
+
+export interface CategoryMap {
+  [category: string]: CategoryType | undefined;
+}
