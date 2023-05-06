@@ -114,24 +114,18 @@ const BudgetBasicInformationSuspense = () => {
       </TopSectionWrapper>
       <TileWrapper>
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={150} />
-          <InfoValueWrapper>
-            <SkeletonLoading height={20} width={150} />
-          </InfoValueWrapper>
+          <SkeletonLoading height={10} width={100} />
+          <SkeletonLoading height={20} width={150} />
         </InfoTileStyled>
 
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={75} />
-          <InfoValueWrapper>
-            <SkeletonLoading height={20} width={75} />
-          </InfoValueWrapper>
+          <SkeletonLoading height={10} width={50} />
+          <SkeletonLoading height={20} width={75} />
         </InfoTileStyled>
 
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={75} />
-          <InfoValueWrapper>
-            <SkeletonLoading height={20} width={75} />
-          </InfoValueWrapper>
+          <SkeletonLoading height={10} width={50} />
+          <SkeletonLoading height={20} width={75} />
         </InfoTileStyled>
       </TileWrapper>
     </BasicInfoWrapper>
