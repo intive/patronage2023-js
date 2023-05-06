@@ -17,6 +17,8 @@
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "react-query-devtools": "^2.6.3",
     "ui": "*",
     "zod": "^3.21.4"
   },
