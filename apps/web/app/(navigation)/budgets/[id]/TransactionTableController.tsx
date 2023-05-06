@@ -4,6 +4,7 @@ import categoryMap from "lib/category-map";
 import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
 import { Spinner } from "ui";
+import { useQuery } from "react-query";
 
 const TransactionTableController = ({
   id,
@@ -20,19 +21,22 @@ const TransactionTableController = ({
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const setSorting = (column: string) => console.log(column);
 
-  // fetch(env.NEXT_PUBLIC_API_URL + "/budgets/" + id + "/transactions", {
-  //   body: JSON.stringify({
-  //     pageSize: pagesPerPage,
-  //     pageIndex: currentPage,
-  //   }),
-  //   headers: {
-  //     Authorization: "Bearer " + Token,
-  //     "Content-Type": "application/json",
-  //   },
-  //   method: "POST",
-  // })
-  //   .then((r) => setBudgetData(r))
-  //   .catch((error) => console.log(error));
+  // const dataQuery = useQuery(
+  //   "TableData",
+  //   fetch(env.NEXT_PUBLIC_API_URL + "/budgets/" + id + "/transactions", {
+  //     body: JSON.stringify({
+  //       pageSize: pagesPerPage,
+  //       pageIndex: currentPage,
+  //     }),
+  //     headers: {
+  //       Authorization: "Bearer " + Token,
+  //       "Content-Type": "application/json",
+  //     },
+  //     method: "POST",
+  //   })
+  //     .then((r) => setBudgetData(r))
+  //     .catch((error) => console.log(error))
+  // );
 
   useEffect(() => {
     fetch(`/budget/${id}.json`)
@@ -40,8 +44,12 @@ const TransactionTableController = ({
       .then((result) => setTransactions(result.transactions));
   }, [id]);
 
-  if (isLoading) {
+  if (dataQuery.isLoading) {
     return <Spinner />;
+  }
+
+  if (dataQuery.error) {
+    return <h1>Error occurred</h1>;
   }
 
   return (
