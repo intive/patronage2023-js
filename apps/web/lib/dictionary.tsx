@@ -299,7 +299,7 @@ const dictionary = {
         pl: "Nazwa musi mieć conajmniej 3 znaki.",
       },
       max30characters: {
-        en: "Budget must not have more than 30 characters.",
+        en: "Budget name must not have more than 30 characters.",
         pl: "Nazwa nie może mieć więcej niż 30 znaków.",
       },
       max50characters: {
@@ -325,6 +325,66 @@ const dictionary = {
       dateBeforeStart: {
         en: "Must be after start date.",
         pl: "Podaj datę późniejszą.",
+      },
+    },
+  },
+  CreateNewTransactionModal: {
+    header: {
+      income: {
+        en: "New income",
+        pl: "Nowy przychód",
+      },
+      expense: {
+        en: "New expense",
+        pl: "Nowy wydatek",
+      },
+    },
+    details: {
+      en: "Details",
+      pl: "Szczegóły",
+    },
+    nameLabel: {
+      income: {
+        en: "Income name",
+        pl: "Nazwa przychodu",
+      },
+      expense: {
+        en: "Expense name",
+        pl: "Nazwa wydatku",
+      },
+    },
+    amountLabel: {
+      en: "Amount",
+      pl: "Kwota",
+    },
+    dateLabel: {
+      en: "Due date",
+      pl: "Termin",
+    },
+    button: {
+      en: "Save",
+      pl: "Zapisz",
+    },
+    errors: {
+      min3characters: {
+        en: "Name must have at least 3 characters.",
+        pl: "Nazwa musi zawierać co najmniej 3 znaki.",
+      },
+      max58characters: {
+        en: "Name must not have more than 58 characters.",
+        pl: "Nazwa nie może mieć więcej niż 58 znaków.",
+      },
+      graterThanZero: {
+        en: "Amount must be grater than 0.",
+        pl: "Kwota musi być większa od 0.",
+      },
+      notEmpty: {
+        en: "Please specify the amount.",
+        pl: "Podaj kwotę transakcji.",
+      },
+      selectDate: {
+        en: "Please select the date.",
+        pl: "Wybierz datę.",
       },
     },
   },

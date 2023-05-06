@@ -119,7 +119,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   }, [lang, currentLang]);
 
   return (
-    <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
+    <Modal
+      header={t(dict.title)}
+      onClose={() => onClose && onClose()}
+      fullHeight>
       <SeparatorStyledTop />
 
       <TabsStyled defaultValue={defaultValue}>

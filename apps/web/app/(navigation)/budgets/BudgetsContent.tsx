@@ -9,6 +9,7 @@ import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { CreateNewTransaction } from "./CreateNewTransaction";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -21,6 +22,11 @@ const BudgetContentWrapperStyled = styled.div`
 
 export const BudgetsContent = () => {
   const id = usePathname()?.replace("/budgets/", "");
+  const [
+    createNewTransactionModalVisible,
+    setCreateNewTransactionModalVisible,
+  ] = useState(false);
+  const [transactionType, setTransactionType] = useState("");
 
   const [budgets, setBudgets] = useState<Budget[]>([]);
 
@@ -38,9 +44,25 @@ export const BudgetsContent = () => {
     [id, budgets]
   );
 
+  const handleCreateNewExpense = () => {
+    setTransactionType("Expense");
+    setCreateNewTransactionModalVisible(true);
+  };
+
+  const handleCreateNewIncome = () => {
+    setTransactionType("Income");
+    setCreateNewTransactionModalVisible(true);
+  };
+
+  const closeNewTransactionModal = () => {
+    setCreateNewTransactionModalVisible(false);
+  };
+
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
+      <button onClick={handleCreateNewExpense}>Create new expense</button>
+      <button onClick={handleCreateNewIncome}>Create new income</button>
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
@@ -49,9 +71,17 @@ export const BudgetsContent = () => {
   );
 
   return (
-    <MultiCardLayout
-      main={mainCardContent ? mainCardContent : <></>}
-      aside={<DummyAsideCardContent />}
-    />
+    <>
+      <MultiCardLayout
+        main={mainCardContent ? mainCardContent : <></>}
+        aside={<DummyAsideCardContent />}
+      />
+      {createNewTransactionModalVisible && (
+        <CreateNewTransaction
+          type={transactionType}
+          onClose={closeNewTransactionModal}
+        />
+      )}
+    </>
   );
 };
