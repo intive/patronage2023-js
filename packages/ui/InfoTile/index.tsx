@@ -1,6 +1,7 @@
-"use client"
+"use client";
 
 import styled from "styled-components";
+import { SkeletonLoading } from "../SkeletonLoading";
 
 export const InfoTileStyled = styled.div`
   border: 1px solid ${({ theme }) => theme.infoTile.border};
@@ -28,15 +29,14 @@ export const StyledAddInfoSpan = styled.span`
 `;
 
 export type InfoTileProps = {
-  label: string;
-  dataToRender: React.ReactNode
-} & React.HTMLProps<HTMLDivElement>
+  label?: string;
+  dataToRender: React.ReactNode;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const InfoTile = ({ label, dataToRender }: InfoTileProps) => {
-
   return (
     <InfoTileStyled>
-      {label}
+      {label || <SkeletonLoading height={10} />}
       <InfoValueWrapper>{dataToRender}</InfoValueWrapper>
     </InfoTileStyled>
   );

@@ -2,10 +2,9 @@
 
 import styled from "styled-components";
 import { Budget } from "lib/types";
-import { InfoTile, BudgetIcon, CurrencyAmount } from "ui";
+import { InfoTile, BudgetIcon, CurrencyAmount, SkeletonLoading } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
-
 //STYLING
 const BasicInfoWrapper = styled.div`
   width: 100%;
@@ -60,9 +59,6 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { basicInformation } = dict;
-  const { startDate, endDate, limit, currency, name, icon, description } =
-    budget;
-  const { tag } = currency;
 
   //DATE formatting
   function convertTimestamp(timestamp: number) {
@@ -78,24 +74,47 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA to display for information tiles
   const dataRangeInfo = (
     <>
-      {convertTimestamp(startDate)} - {convertTimestamp(endDate)}
+      {budget ? (
+        <>
+          {convertTimestamp(budget.startDate)} -{" "}
+          {convertTimestamp(budget.endDate)}
+        </>
+      ) : (
+        <SkeletonLoading width={150} />
+      )}
     </>
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
+    <>
+      {budget ? (
+        <InfoTileAmount
+          amount={budget.limit}
+          currency={budget.currency}
+          hidePlus
+        />
+      ) : (
+        <SkeletonLoading width={75} />
+      )}
+    </>
   );
 
   const currencyInfo = (
     <>
-      <span>{tag}</span>
-      <StyledAddInfoSpan>
-        {t(
-          basicInformation.currencyNames[
-            tag as keyof typeof basicInformation.currencyNames
-          ]
-        )}
-      </StyledAddInfoSpan>
+      {budget ? (
+        <>
+          <span>{budget.currency}</span>
+          <StyledAddInfoSpan>
+            {t(
+              basicInformation.currencyNames[
+                budget.currency as keyof typeof basicInformation.currencyNames
+              ]
+            )}
+          </StyledAddInfoSpan>
+        </>
+      ) : (
+        <SkeletonLoading width={75} />
+      )}
     </>
   );
   //DATA for information tiles end
@@ -104,10 +123,26 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     <>
       <BasicInfoWrapper>
         <TopSectionWrapper>
-          <BudgetIconStyled icon={icon} />
+          {budget ? (
+            <BudgetIconStyled icon={budget.icon} />
+          ) : (
+            <SkeletonLoading circle={true} height={80} width={80} />
+          )}
           <div>
-            <StyledTitle>{name}</StyledTitle>
-            <StyledDescription>{description}</StyledDescription>
+            <StyledTitle>
+              {budget ? (
+                budget.name
+              ) : (
+                <SkeletonLoading width={150} height={25} />
+              )}
+            </StyledTitle>
+            <StyledDescription>
+              {budget ? (
+                budget.description
+              ) : (
+                <SkeletonLoading width={150} height={10} />
+              )}
+            </StyledDescription>
           </div>
         </TopSectionWrapper>
         <TileWrapper>
