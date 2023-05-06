@@ -6,7 +6,7 @@ import { Icon } from "ui";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useTranslate } from "../../../apps/web/lib/hooks";
 
-type CreateIncomeExpenseButtonProps = {
+export type CreateIncomeExpenseButtonProps = {
   openNewIncome: () => void;
   openNewExpense: () => void;
 };

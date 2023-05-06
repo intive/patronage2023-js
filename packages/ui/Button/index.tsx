@@ -1,9 +1,8 @@
 "use client";
 
 import styled, { css } from "styled-components";
-import { forwardRef } from 'react';
 
-export const Button = forwardRef(function Button({
+export const Button = ({
   variant = "primary",
   fullWidth = false,
   disabled = false,
@@ -11,10 +10,9 @@ export const Button = forwardRef(function Button({
   onClick,
   className,
   small = false,
-}: ButtonProps, ref) {
+}: ButtonProps) => {
   return (
     <ButtonStyled
-      ref={ref}
       variant={variant}
       onClick={onClick}
       fullWidth={fullWidth}
@@ -24,7 +22,7 @@ export const Button = forwardRef(function Button({
       {children}
     </ButtonStyled>
   );
-});
+};
 
 type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
@@ -32,7 +30,6 @@ type ButtonProps = {
   disabled?: boolean;
   onClick: Function;
   small?: boolean;
-  ref?: any;
 } & React.HTMLProps<HTMLButtonElement>;
 
 export const ButtonStyled = styled.button<ButtonProps>`
