@@ -1,5 +1,5 @@
 import { NextPageContext } from "next";
-import { BudgetsContent } from "../BudgetsContent";
+import { BudgetsContent } from "./BudgetsContent";
 
 interface PageProps {
   params: {
