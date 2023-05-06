@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import categoryMap from "lib/category-map";
 import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
+import { Spinner } from "ui";
 
 const TransactionTableController = ({
   id,
@@ -38,6 +39,10 @@ const TransactionTableController = ({
       .then((response) => response.json())
       .then((result) => setTransactions(result.transactions));
   }, [id]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
