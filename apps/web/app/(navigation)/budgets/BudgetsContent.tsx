@@ -9,6 +9,7 @@ import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { CreateIncomeExpenseButton } from "ui";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
+      <CreateIncomeExpenseButton openNewExpense={() => alert("New expense modal")} openNewIncome={() => alert("New income modal")}/>
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}

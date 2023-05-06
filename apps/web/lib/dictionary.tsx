@@ -345,6 +345,11 @@ const dictionary = {
       },
       dateFormats: { en: "en-GB", pl: "pl" },
     },
+    createButton: {
+      label: { en: "Create", pl: "Utwórz"},
+      newIncome: { en: "New income", pl: "Nowy dochód"},
+      newExpense: { en: "New expense", pl: "Nowy wydatek"},
+    },
     tableDates: {
       yesterday: { en: "Yesterday", pl: "Wczoraj" },
       today: { en: "Today", pl: "Dzisiaj" },
