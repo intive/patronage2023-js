@@ -17,6 +17,8 @@ export const PaginationElementsList = ({
 }: PaginationElementsListProps) => {
   const { t, dict } = useTranslate("Pagination");
 
+  const showBreakElement = currentPage < numberOfPages - 3;
+
   const ariaLabelContent = (pageNumber: number) => {
     if (pageNumber === -1) {
       return "Page input";
@@ -30,8 +32,11 @@ export const PaginationElementsList = ({
   };
 
   const leftSide = (): number[] => {
-    if (currentPage === generatedNumbers.length - 1) {
+    if (currentPage === generatedNumbers.length - 2) {
       return generatedNumbers.slice(currentPage - 3, currentPage);
+    }
+    if (currentPage === generatedNumbers.length - 1) {
+      return generatedNumbers.slice(currentPage - 4, currentPage - 1);
     }
     if (currentPage > 2) {
       return generatedNumbers.slice(currentPage - 2, currentPage + 1);
@@ -40,6 +45,9 @@ export const PaginationElementsList = ({
   };
 
   const rightSide = (): number[] => {
+    if (currentPage >= generatedNumbers.length - 3) {
+      return generatedNumbers.slice(generatedNumbers.length - 2);
+    }
     return generatedNumbers.slice(generatedNumbers.length - 1);
   };
 
@@ -87,15 +95,17 @@ export const PaginationElementsList = ({
         </li>
       ))}
 
-      <li>
-        <SetPageButtonStyled
-          onClick={onClickJumpAheadHandler}
-          isActive={false}
-          aria-current={false}
-          aria-label={"jump 3 pages ahead"}>
-          {"..."}
-        </SetPageButtonStyled>
-      </li>
+      {showBreakElement ? (
+        <li>
+          <SetPageButtonStyled
+            onClick={onClickJumpAheadHandler}
+            isActive={false}
+            aria-current={false}
+            aria-label={"jump 3 pages ahead"}>
+            {"..."}
+          </SetPageButtonStyled>
+        </li>
+      ) : null}
 
       {rightSide().map((pageNumber) => (
         <li key={`page-${pageNumber}`}>
