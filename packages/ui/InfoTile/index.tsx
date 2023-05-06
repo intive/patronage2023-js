@@ -1,7 +1,6 @@
 "use client";
 
 import styled from "styled-components";
-import { SkeletonLoading } from "../SkeletonLoading";
 
 export const InfoTileStyled = styled.div`
   border: 1px solid ${({ theme }) => theme.infoTile.border};
@@ -36,7 +35,7 @@ export type InfoTileProps = {
 export const InfoTile = ({ label, dataToRender }: InfoTileProps) => {
   return (
     <InfoTileStyled>
-      {label || <SkeletonLoading height={10} />}
+      {label}
       <InfoValueWrapper>{dataToRender}</InfoValueWrapper>
     </InfoTileStyled>
   );
