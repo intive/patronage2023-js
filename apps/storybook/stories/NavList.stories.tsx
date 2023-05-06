@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
-import { NavList } from "ui/NavList";
-import { Avatar } from "ui";
+import { Avatar, NavList, NavItemContents, SpanStyled } from "ui";
 import { dummyNavItemContents as dummyNavItemContentsWithIcon } from "../../web/app/NavListDemo";
-import { NavItemContents, SpanStyled } from "ui/NavList";
+
 import React from "react";
 
 //imported dummyNavItemContents to already have contents with icon.
