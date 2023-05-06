@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { ReactNode } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
+import { Icon } from "../../Icon";
 
 export type SubMenuDataProps = {
   title: string;
   sort?: {
     clickHandler: () => void;
-    icon: ReactNode;
+    icon: string;
+    sortAscending: boolean;
   };
   searchInput?: {
     placeholder: string;
@@ -77,6 +79,15 @@ const ButtonStyled = styled(Button)`
   bottom: 25px;
 `;
 
+const IconUpsideDown = styled(Icon)`
+  transform: rotate(180deg);
+  cursor: pointer;
+`;
+
+const IconWrapperStyled = styled.div`
+  cursor: pointer;
+`;
+
 export const SubMenu = ({
   subMenuDataObject: subMenuData,
   onInputChangeUpdateSubMenuData,
@@ -85,7 +96,12 @@ export const SubMenu = ({
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     searchInput?.onChange?.(e);
-    onInputChangeUpdateSubMenuData(title);
+    // onInputChangeUpdateSubMenuData(title);
+  };
+
+  const onIconClicked = () => {
+    sort?.clickHandler();
+    // onInputChangeUpdateSubMenuData(title);
   };
 
   return (
@@ -94,7 +110,13 @@ export const SubMenu = ({
         <SubMenuHeaderStyled>
           <HeaderStyled>
             <Title>{title}</Title>
-            {sort?.icon}
+            <IconWrapperStyled onClick={onIconClicked}>
+              {sort?.sortAscending ? (
+                <Icon icon="filter_list" />
+              ) : (
+                <IconUpsideDown icon="filter_list" />
+              )}
+            </IconWrapperStyled>
           </HeaderStyled>
           {searchInput && (
             <SearchInput

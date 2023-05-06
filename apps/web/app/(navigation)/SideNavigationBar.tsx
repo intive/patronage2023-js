@@ -32,14 +32,20 @@ export default function SideNav() {
   };
 
   const [searchValue, setSearchValue] = useState("");
+  const [sortAscending, setSortAscending] = useState(true);
 
   const url =
     "https://inbudget-patronage-api-dev.azurewebsites.net/budgets/list";
 
+  // const token = "dsf";
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMyNzgwNjUsImlhdCI6MTY4MzI3MDg2NCwianRpIjoiNzJkZTEwZGYtMDk0Yi00MjVjLTlmM2QtNDYyYTE0ZmJjYzZkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjI1Zjk5MmFkLWE4YzQtNGQ5Ni05MmYwLTVlNzVhYjIyNDhlOCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjI1Zjk5MmFkLWE4YzQtNGQ5Ni05MmYwLTVlNzVhYjIyNDhlOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.dZ3Zu0QaunwRWXbjZqIxwYxPTJMQWmNaQ59uQC30-Da0wwy3BJ3CFPI8vmFefZCNPbjojytWZ3-eBvxESh5DtPiaY6MbaV-adH3nJlsdwBwHIy49ThKgugoQTB1rZ0tPm-5zkh6X6DIMH4pR97PAgn7ajePLM8zukSd2oZCiltTBf5zO60p1fjrZ1dUM6KNk2hmVh9CLa46nUeIhAZn5G8CA6BmGYaO7zLGFVnOi9pQrZQS7tueMmuymqRPtk8gmzMgiJAn0Vw5aE2ijeIK_7xAD0PphqTexsB4b__CObRJb7eeJfKQavoaBfRio0NVgFGNR1RCuvbjwhNCKw2sc5g";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODMzNjUwODIsImlhdCI6MTY4MzM1Nzg4MiwianRpIjoiMzViYTkyZDgtODg5Zi00OGQzLThlZjYtYjFjMjg4YjZlODVmIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjNjNDE4ZjAwLTgzZTgtNDIzNy04MjU4LWIwMzJiN2U5ZDAyOCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjNjNDE4ZjAwLTgzZTgtNDIzNy04MjU4LWIwMzJiN2U5ZDAyOCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.w5yyaoebt-jz3sYTfro4RShcqkAikLDA3smH6BmLyoIk_hDUvSTsEyT6euF8yCckmtCP5kkNoHCsHr5dN2c4llXfOj4MHfuSXEANqK6WJdUYWNrQ-kKh_bR3alBHHGduYLNSnVTVN1dS_xI_KMtl0ShPSvG9ad4VTB3X0R8MPbuo6rqn5q6A9X7M0WyNCb99OJN8ViPwFacZM5SbBnKT2Y1ebXR3lT0RSQxFmKqFQe8DoEpIQjyKQDrh2VaAnAi9K6AQfPER57y7sn4Xdz1ZxTn_GFahwgLk8r4xry24Z_h4aM4Op5VRMuwNEAE8KB9DcJaCl77rqnY2GmiM0aQOrQ";
 
-  const getBudgetsList = async (url: string, searchValue: string) => {
+  const getBudgetsList = async (
+    url: string,
+    searchValue: string,
+    sortAscending: boolean
+  ) => {
     await fetch(url, {
       method: "POST",
       headers: {
@@ -54,22 +60,25 @@ export default function SideNav() {
         sortDescriptors: [
           {
             columnName: "name",
-            sortAscending: true,
+            sortAscending: sortAscending,
           },
         ],
       }),
     })
-      .then((res) => res.json())
-      .then((json) => {
-        setData(json.items);
-        console.log(data);
-      });
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => setData(data.items))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    getBudgetsList(url, searchValue);
+    getBudgetsList(url, searchValue, sortAscending);
     console.log("click click");
-  }, [searchValue]);
+  }, [searchValue, sortAscending]);
 
   const resetIsNavListItemClicked = () => {
     setIsNavItemClicked(false);
@@ -90,14 +99,17 @@ export default function SideNav() {
   const BudgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
-      clickHandler: () => {},
-      icon: <Icon icon="filter_list" />,
+      clickHandler: () => {
+        setSortAscending(!sortAscending);
+      },
+      icon: "filter_list",
+      sortAscending: sortAscending,
     },
     searchInput: {
       placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
       onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(event.currentTarget.value);
-        getBudgetsList(url, event.currentTarget.value);
+        getBudgetsList(url, event.currentTarget.value, sortAscending);
         console.log("przeladowane");
       },
     },
@@ -146,6 +158,8 @@ export default function SideNav() {
       />
     ),
   };
+
+  console.log("sortAscending", sortAscending);
 
   return (
     <>
