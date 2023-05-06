@@ -1,54 +1,22 @@
 "use client";
 
-import styled from "styled-components";
 import { Budget } from "lib/types";
-import { InfoTile, BudgetIcon, CurrencyAmount, SkeletonLoading } from "ui";
-import { StyledAddInfoSpan } from "ui/InfoTile";
+import { InfoTile, SkeletonLoading } from "ui";
+import {
+  InfoTileStyled,
+  InfoValueWrapper,
+  StyledAddInfoSpan,
+} from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
-//STYLING
-const BasicInfoWrapper = styled.div`
-  width: 100%;
-`;
-
-const TopSectionWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-`;
-
-const TileWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-`;
-
-const BudgetIconStyled = styled(BudgetIcon)`
-  height: 80px;
-  width: 80px;
-  font-size: 1.5em;
-`;
-
-const StyledTitle = styled.h1`
-  font-family: "Signika", sans-serif;
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 48px;
-  color: ${({ theme }) => theme.main};
-`;
-
-const StyledDescription = styled.span`
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  color: ${({ theme }) => theme.infoTile.label};
-`;
-
-const InfoTileAmount = styled(CurrencyAmount)`
-  color: ${({ theme }) => theme.infoTile.value};
-`;
-//STYLING end
+import {
+  BasicInfoWrapper,
+  BudgetIconStyled,
+  InfoTileAmount,
+  StyledDescription,
+  StyledTitle,
+  TileWrapper,
+  TopSectionWrapper,
+} from "./BudgetBasicInformation.styled";
 
 //TYPES
 type BudgetBasicInfoProps = {
@@ -58,7 +26,14 @@ type BudgetBasicInfoProps = {
 
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
+
+  if (!budget) {
+    return <BudgetBasicInformationSuspense />;
+  }
+
   const { basicInformation } = dict;
+  const { startDate, endDate, limit, currency, description, icon, name } =
+    budget;
 
   //DATE formatting
   function convertTimestamp(timestamp: number) {
@@ -74,92 +49,91 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA to display for information tiles
   const dataRangeInfo = (
     <>
-      {budget ? (
-        <>
-          {convertTimestamp(budget.startDate)} -{" "}
-          {convertTimestamp(budget.endDate)}
-        </>
-      ) : (
-        <SkeletonLoading width={150} />
-      )}
+      {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
     </>
   );
 
   const limitInfo = (
-    <>
-      {budget ? (
-        <InfoTileAmount
-          amount={budget.limit}
-          currency={budget.currency}
-          hidePlus
-        />
-      ) : (
-        <SkeletonLoading width={75} />
-      )}
-    </>
+    <InfoTileAmount amount={limit} currency={currency} hidePlus />
   );
 
   const currencyInfo = (
     <>
-      {budget ? (
-        <>
-          <span>{budget.currency}</span>
-          <StyledAddInfoSpan>
-            {t(
-              basicInformation.currencyNames[
-                budget.currency as keyof typeof basicInformation.currencyNames
-              ]
-            )}
-          </StyledAddInfoSpan>
-        </>
-      ) : (
-        <SkeletonLoading width={75} />
-      )}
+      <span>{currency}</span>
+      <StyledAddInfoSpan>
+        {t(
+          basicInformation.currencyNames[
+            currency as keyof typeof basicInformation.currencyNames
+          ]
+        )}
+      </StyledAddInfoSpan>
     </>
   );
   //DATA for information tiles end
 
   return (
-    <>
-      <BasicInfoWrapper>
-        <TopSectionWrapper>
-          {budget ? (
-            <BudgetIconStyled icon={budget.icon} />
-          ) : (
-            <SkeletonLoading circle={true} height={80} width={80} />
-          )}
-          <div>
-            <StyledTitle>
-              {budget ? (
-                budget.name
-              ) : (
-                <SkeletonLoading width={150} height={25} />
-              )}
-            </StyledTitle>
-            <StyledDescription>
-              {budget ? (
-                budget.description
-              ) : (
-                <SkeletonLoading width={150} height={10} />
-              )}
-            </StyledDescription>
-          </div>
-        </TopSectionWrapper>
-        <TileWrapper>
-          <InfoTile
-            label={t(basicInformation.labels.period)}
-            dataToRender={dataRangeInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.limit)}
-            dataToRender={limitInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.currency)}
-            dataToRender={currencyInfo}
-          />
-        </TileWrapper>
-      </BasicInfoWrapper>
-    </>
+    <BasicInfoWrapper>
+      <TopSectionWrapper>
+        <BudgetIconStyled icon={icon} />
+        <div>
+          <StyledTitle>{name}</StyledTitle>
+          <StyledDescription>{description}</StyledDescription>
+        </div>
+      </TopSectionWrapper>
+      <TileWrapper>
+        <InfoTile
+          label={t(basicInformation.labels.period)}
+          dataToRender={dataRangeInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.limit)}
+          dataToRender={limitInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.currency)}
+          dataToRender={currencyInfo}
+        />
+      </TileWrapper>
+    </BasicInfoWrapper>
   );
 }
+
+const BudgetBasicInformationSuspense = () => {
+  return (
+    <BasicInfoWrapper>
+      <TopSectionWrapper>
+        <SkeletonLoading circle height={80} width={80} />
+        <div>
+          <StyledTitle>
+            <SkeletonLoading height={25} width={150} />
+          </StyledTitle>
+          <StyledDescription>
+            <SkeletonLoading height={15} width={150} />
+          </StyledDescription>
+        </div>
+      </TopSectionWrapper>
+      <TileWrapper>
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={150} />
+          <InfoValueWrapper>
+            <SkeletonLoading height={20} width={150} />
+          </InfoValueWrapper>
+        </InfoTileStyled>
+
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={75} />
+          <InfoValueWrapper>
+            <SkeletonLoading height={20} width={75} />
+          </InfoValueWrapper>
+        </InfoTileStyled>
+
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={75} />
+          <InfoValueWrapper>
+            <SkeletonLoading height={20} width={75} />
+          </InfoValueWrapper>
+        </InfoTileStyled>
+      </TileWrapper>
+    </BasicInfoWrapper>
+  );
+};
