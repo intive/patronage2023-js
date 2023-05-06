@@ -1,10 +1,10 @@
 "use client";
 
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
-import MultiCardLayout from "../MultiCardLayout";
+import MultiCardLayout from "../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
-import { TransactionsTable } from "./[id]/TransactionsTable";
-import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
+import { TransactionsTable } from "./TransactionsTable";
+import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
 
