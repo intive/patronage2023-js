@@ -11,7 +11,7 @@ import {
 } from "./RowsPerPageSelect.styled";
 import { Icon } from "ui";
 
-export type RowsPerPageSelectProps = {
+type RowsPerPageSelectProps = {
   onValueChange?: (value: string) => void;
   value: string;
   id?: string;

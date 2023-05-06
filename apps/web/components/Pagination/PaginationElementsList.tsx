@@ -1,78 +1,75 @@
 "use client";
 import { useTranslate } from "lib/hooks";
-import { SetPageButtonStyled } from "./NewVersion.styled";
+import { PageButtonStyled } from "./Pagination.styled";
 
 type PaginationElementsListProps = {
   numberOfPages: number;
-  generatedNumbers: number[];
-  currentPage: number;
-  onCurrentPageUpdate: (value: number) => void;
+  generatedPageNumbers: number[];
+  pageIndex: number;
+  onPageIndexChange: (newPageIndex: number) => void;
 };
 
 export const PaginationElementsList = ({
   numberOfPages,
-  generatedNumbers,
-  currentPage,
-  onCurrentPageUpdate,
+  generatedPageNumbers,
+  pageIndex,
+  onPageIndexChange,
 }: PaginationElementsListProps) => {
   const { t, dict } = useTranslate("Pagination");
 
-  const showBreakElement = currentPage < numberOfPages - 3;
+  const showBreakElement = pageIndex < numberOfPages - 3;
 
   const ariaLabelContent = (pageNumber: number) => {
-    if (pageNumber === -1) {
-      return "Page input";
-    }
-    if (pageNumber === currentPage) {
-      return `${t(dict.pageText)} ${Number(pageNumber + 1)} ${t(
-        dict.currentPageText
+    if (pageNumber === pageIndex) {
+      return `${t(dict.pageAriaLabel)} ${Number(pageNumber + 1)} ${t(
+        dict.currentPageAriaLabel
       )}`;
     }
-    return `${t(dict.pageText)} ${Number(pageNumber + 1)}`;
+    return `${t(dict.pageAriaLabel)} ${Number(pageNumber + 1)}`;
   };
 
   const leftSide = (): number[] => {
-    if (currentPage === generatedNumbers.length - 2) {
-      return generatedNumbers.slice(currentPage - 3, currentPage);
+    if (pageIndex === generatedPageNumbers.length - 2) {
+      return generatedPageNumbers.slice(pageIndex - 3, pageIndex);
     }
-    if (currentPage === generatedNumbers.length - 1) {
-      return generatedNumbers.slice(currentPage - 4, currentPage - 1);
+    if (pageIndex === generatedPageNumbers.length - 1) {
+      return generatedPageNumbers.slice(pageIndex - 4, pageIndex - 1);
     }
-    if (currentPage > 2) {
-      return generatedNumbers.slice(currentPage - 2, currentPage + 1);
+    if (pageIndex > 2) {
+      return generatedPageNumbers.slice(pageIndex - 2, pageIndex + 1);
     }
-    return generatedNumbers.slice(0, 3);
+    return generatedPageNumbers.slice(0, 3);
   };
 
   const rightSide = (): number[] => {
-    if (currentPage >= generatedNumbers.length - 3) {
-      return generatedNumbers.slice(generatedNumbers.length - 2);
+    if (pageIndex >= generatedPageNumbers.length - 3) {
+      return generatedPageNumbers.slice(generatedPageNumbers.length - 2);
     }
-    return generatedNumbers.slice(generatedNumbers.length - 1);
+    return generatedPageNumbers.slice(generatedPageNumbers.length - 1);
   };
 
   const onClickJumpAheadHandler = () => {
-    if (currentPage + 3 > numberOfPages - 1) {
-      return onCurrentPageUpdate(numberOfPages - 1);
+    if (pageIndex + 3 > numberOfPages - 1) {
+      return onPageIndexChange(numberOfPages - 1);
     }
-    return onCurrentPageUpdate(currentPage + 3);
+    return onPageIndexChange(pageIndex + 3);
   };
 
   if (numberOfPages <= 5) {
     return (
       <>
-        {generatedNumbers.map((pageNumber) => (
+        {generatedPageNumbers.map((pageNumber) => (
           <li key={`page-${pageNumber}`}>
-            <SetPageButtonStyled
-              onClick={() => onCurrentPageUpdate(pageNumber)}
-              isActive={pageNumber === currentPage}
-              disabled={pageNumber === currentPage}
-              tabIndex={pageNumber === currentPage ? -1 : 0}
-              aria-current={pageNumber === currentPage ? "page" : false}
+            <PageButtonStyled
+              onClick={() => onPageIndexChange(pageNumber)}
+              isActive={pageNumber === pageIndex}
+              disabled={pageNumber === pageIndex}
+              tabIndex={pageNumber === pageIndex ? -1 : 0}
+              aria-current={pageNumber === pageIndex ? "page" : false}
               aria-label={ariaLabelContent(pageNumber)}
-              aria-disabled={pageNumber === currentPage}>
+              aria-disabled={pageNumber === pageIndex}>
               {pageNumber + 1}
-            </SetPageButtonStyled>
+            </PageButtonStyled>
           </li>
         ))}
       </>
@@ -82,43 +79,43 @@ export const PaginationElementsList = ({
     <>
       {leftSide().map((pageNumber) => (
         <li key={`page-${pageNumber}`}>
-          <SetPageButtonStyled
-            onClick={() => onCurrentPageUpdate(pageNumber)}
-            isActive={pageNumber === currentPage}
-            disabled={pageNumber === currentPage}
-            tabIndex={pageNumber === currentPage ? -1 : 0}
-            aria-current={pageNumber === currentPage ? "page" : false}
+          <PageButtonStyled
+            onClick={() => onPageIndexChange(pageNumber)}
+            isActive={pageNumber === pageIndex}
+            disabled={pageNumber === pageIndex}
+            tabIndex={pageNumber === pageIndex ? -1 : 0}
+            aria-current={pageNumber === pageIndex ? "page" : false}
             aria-label={ariaLabelContent(pageNumber)}
-            aria-disabled={pageNumber === currentPage}>
+            aria-disabled={pageNumber === pageIndex}>
             {pageNumber + 1}
-          </SetPageButtonStyled>
+          </PageButtonStyled>
         </li>
       ))}
 
       {showBreakElement ? (
         <li>
-          <SetPageButtonStyled
+          <PageButtonStyled
             onClick={onClickJumpAheadHandler}
             isActive={false}
             aria-current={false}
-            aria-label={"jump 3 pages ahead"}>
+            aria-label={t(dict.breakElementAriaLabel)}>
             {"..."}
-          </SetPageButtonStyled>
+          </PageButtonStyled>
         </li>
       ) : null}
 
       {rightSide().map((pageNumber) => (
         <li key={`page-${pageNumber}`}>
-          <SetPageButtonStyled
-            onClick={() => onCurrentPageUpdate(pageNumber)}
-            isActive={pageNumber === currentPage}
-            disabled={pageNumber === currentPage}
-            tabIndex={pageNumber === currentPage ? -1 : 0}
-            aria-current={pageNumber === currentPage ? "page" : false}
+          <PageButtonStyled
+            onClick={() => onPageIndexChange(pageNumber)}
+            isActive={pageNumber === pageIndex}
+            disabled={pageNumber === pageIndex}
+            tabIndex={pageNumber === pageIndex ? -1 : 0}
+            aria-current={pageNumber === pageIndex ? "page" : false}
             aria-label={ariaLabelContent(pageNumber)}
-            aria-disabled={pageNumber === currentPage}>
+            aria-disabled={pageNumber === pageIndex}>
             {pageNumber + 1}
-          </SetPageButtonStyled>
+          </PageButtonStyled>
         </li>
       ))}
     </>

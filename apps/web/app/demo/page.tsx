@@ -1,8 +1,5 @@
 "use client";
 import { Pagination } from "components";
-import { PaginationStateType } from "components/Pagination";
-import { PaginationTwo } from "components/Pagination/NewVersion";
-import { ShowItemsDemo } from "components/Pagination/ShowItemsDemo";
 import { useState } from "react";
 import styled from "styled-components";
 import { Card } from "ui";
@@ -17,9 +14,6 @@ const data = [
 ];
 
 const data2 = [...data];
-const data3 = [...data];
-const data4 = [...data];
-const data5 = [...data];
 
 const pageSizeOptions = [10, 15, 20, 30, 50];
 
@@ -74,122 +68,30 @@ const StyledWrapper = styled.div`
 
 export default function PaginationDemo() {
   const [currentState, setCurrentState] = useState({
-    currentPageOne: 0,
-    currentPageTwo: 0,
-    currentPageThree: 0,
-    currentPageFour: 0,
-    currentPageFive: 0,
-    rowsPerPageOne: pageSizeOptions[0],
-    rowsPerPageTwo: pageSizeOptions[0],
-    rowsPerPageThree: pageSizeOptions[0],
-    rowsPerPageFour: pageSizeOptions[0],
-    rowsPerPageFive: pageSizeOptions[0],
+    pageIndex: 0,
+    pageSize: pageSizeOptions[0],
   });
 
-  const onChangePaginationState = ({
-    rowsPerPage,
-    currentPage,
-  }: PaginationStateType) => {
-    console.log({ rowsPerPage, currentPage });
+  const onChangePageIndex = (newPageIndex: number) => {
+    setCurrentState((prev) => ({
+      ...prev,
+      pageIndex: newPageIndex,
+    }));
+    console.log(currentState);
   };
-
-  const onChangeSetState = (version: number) => {
-    return ({ rowsPerPage, currentPage }: PaginationStateType) => {
-      if (version === 1) {
-        setCurrentState((prev) => ({
-          ...prev,
-          rowsPerPageOne: rowsPerPage,
-          currentPageOne: currentPage,
-        }));
-      }
-      if (version === 2) {
-        setCurrentState((prev) => ({
-          ...prev,
-          rowsPerPageTwo: rowsPerPage,
-          currentPageTwo: currentPage,
-        }));
-      }
-      if (version === 3) {
-        setCurrentState((prev) => ({
-          ...prev,
-          rowsPerPageThree: rowsPerPage,
-          currentPageThree: currentPage,
-        }));
-      }
-      if (version === 4) {
-        setCurrentState((prev) => ({
-          ...prev,
-          rowsPerPageFour: rowsPerPage,
-          currentPageFour: currentPage,
-        }));
-      }
-      if (version === 5) {
-        setCurrentState((prev) => ({
-          ...prev,
-          rowsPerPageFive: rowsPerPage,
-          currentPageFive: currentPage,
-        }));
-      }
-      console.log(currentState);
-    };
+  const onChangePageSize = (newPageSize: number) => {
+    setCurrentState((prev) => ({
+      ...prev,
+      pageSize: newPageSize,
+      pageIndex: 0,
+    }));
+    console.log(currentState);
   };
 
   return (
     <StyledWrapper>
       <StyledInnerCard>
         <StyledCardWrapper>
-          <StyledCard>
-            <TextInfoStyled>
-              <h2
-                style={{
-                  marginBottom: "10px",
-                }}>{`Pagination from "react-paginate"`}</h2>
-              <ul>
-                <li>
-                  <GreenH2Styled>+ Easy to implement</GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>+ Less code</GreenH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    - Not enough settings for 3 dots adjustment
-                  </RedH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    - Width size jumps when changing pages!
-                  </RedH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    {`- If we want to use styled components for styling we have to refer to .classes`}
-                  </RedH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    {`- We can't set a specific current page`}
-                  </RedH2Styled>
-                </li>
-              </ul>
-            </TextInfoStyled>
-
-            <StyledCard>
-              <ShowItemsDemo
-                itemsPerPage={currentState.rowsPerPageOne}
-                data={data}
-                currentPage={currentState.currentPageOne}
-              />
-            </StyledCard>
-            <Pagination
-              pageSizeOptions={pageSizeOptions}
-              onChangePaginationState={onChangeSetState(1)}
-              numberOfPages={Math.ceil(
-                data.length / currentState.rowsPerPageOne
-              )}
-            />
-          </StyledCard>
-
           <StyledCard>
             <TextInfoStyled>
               <h2
@@ -219,150 +121,13 @@ export default function PaginationDemo() {
               </ul>
             </TextInfoStyled>
 
-            <StyledCard>
-              <ShowItemsDemo
-                itemsPerPage={currentState.rowsPerPageTwo}
-                data={data2}
-                currentPage={currentState.currentPageTwo}
-              />
-            </StyledCard>
-            <PaginationTwo
+            <Pagination
               pageSizeOptions={pageSizeOptions}
-              currentPage={currentState.currentPageTwo}
-              numberOfPages={Math.ceil(
-                data2.length / currentState.rowsPerPageTwo
-              )}
-              onChangePaginationState={onChangeSetState(2)}
-              tempVersionNumber={1}
-            />
-          </StyledCard>
-
-          <StyledCard>
-            <TextInfoStyled>
-              <h2
-                style={{
-                  marginBottom: "10px",
-                }}>{`My pagination with input field "v2"`}</h2>
-              <ul>
-                <li>
-                  <GreenH2Styled>+ No width size jumps</GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>
-                    + We can specify the specific page we want to go to
-                  </GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>
-                    + We can jump 2 pages backward by clicking the page button
-                    at the left edge
-                  </GreenH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    {`- Can't jump 2 or 3 pages forward by clicking a single element`}
-                  </RedH2Styled>
-                </li>
-              </ul>
-            </TextInfoStyled>
-            <StyledCard>
-              <ShowItemsDemo
-                itemsPerPage={currentState.rowsPerPageThree}
-                data={data3}
-                currentPage={currentState.currentPageThree}
-              />
-            </StyledCard>
-            <PaginationTwo
-              pageSizeOptions={pageSizeOptions}
-              currentPage={currentState.currentPageThree}
-              numberOfPages={Math.ceil(
-                data3.length / currentState.rowsPerPageThree
-              )}
-              onChangePaginationState={onChangeSetState(3)}
-              tempVersionNumber={2}
-            />
-          </StyledCard>
-
-          <StyledCard>
-            <TextInfoStyled>
-              <h2
-                style={{
-                  marginBottom: "10px",
-                }}>{`My pagination with input field "v3"`}</h2>
-              <ul>
-                <li>
-                  <GreenH2Styled>+ No width size jumps</GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>
-                    + We can specify the specific page we want to go to
-                  </GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>+ Compatible with Figma design</GreenH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    {`- Can't jump 2 or 3 pages forward or backward by clicking a single element`}
-                  </RedH2Styled>
-                </li>
-              </ul>
-            </TextInfoStyled>
-
-            <StyledCard>
-              <ShowItemsDemo
-                itemsPerPage={currentState.rowsPerPageFour}
-                data={data4}
-                currentPage={currentState.currentPageFour}
-              />
-            </StyledCard>
-            <PaginationTwo
-              pageSizeOptions={pageSizeOptions}
-              currentPage={currentState.currentPageFour}
-              numberOfPages={Math.ceil(
-                data4.length / currentState.rowsPerPageFour
-              )}
-              onChangePaginationState={onChangeSetState(4)}
-              tempVersionNumber={3}
-            />
-          </StyledCard>
-
-          <StyledCard>
-            <TextInfoStyled>
-              <h2
-                style={{
-                  marginBottom: "10px",
-                }}>{`My pagination with input field "v4"`}</h2>
-              <ul>
-                <li>
-                  <GreenH2Styled>{`+ Variation of "v3"`}</GreenH2Styled>
-                </li>
-                <li>
-                  <GreenH2Styled>{`+ Can jump 2 pages forward`}</GreenH2Styled>
-                </li>
-                <li>
-                  <RedH2Styled>
-                    {`- Can't jump 2 or 3 pages backward or to the last page by clicking a single element`}
-                  </RedH2Styled>
-                </li>
-              </ul>
-            </TextInfoStyled>
-
-            <StyledCard>
-              <ShowItemsDemo
-                itemsPerPage={currentState.rowsPerPageFive}
-                data={data5}
-                currentPage={currentState.currentPageFive}
-              />
-            </StyledCard>
-            <PaginationTwo
-              pageSizeOptions={pageSizeOptions}
-              currentPage={currentState.currentPageFive}
-              numberOfPages={Math.ceil(
-                data5.length / currentState.rowsPerPageFive
-              )}
-              onChangePaginationState={onChangeSetState(5)}
-              tempVersionNumber={4}
+              pageIndex={currentState.pageIndex}
+              numberOfPages={Math.ceil(data2.length / currentState.pageSize)}
+              currentPageSize={currentState.pageSize}
+              onChangePageIndex={onChangePageIndex}
+              onChangePageSize={onChangePageSize}
             />
           </StyledCard>
         </StyledCardWrapper>

@@ -1,90 +1,95 @@
 "use client";
 
 import { useTranslate } from "lib/hooks";
-import { useState } from "react";
-import ReactPaginate from "react-paginate";
 import { Icon } from "ui";
 import {
   ContainerStyled,
-  PaginateContainerStyled,
+  ListStyled,
+  NavigationButtonStyled,
   RowsPerPageContainerStyled,
 } from "./Pagination.styled";
+import { PaginationElementsList } from "./PaginationElementsList";
 import { RowsPerPageSelect } from "./RowsPerPageSelect";
 
-export type PaginationStateType = {
-  rowsPerPage: number;
-  currentPage: number;
-};
-
 type PaginationProps = {
+  pageIndex: number;
   numberOfPages: number;
   pageSizeOptions: number[];
-  onChangePaginationState: (status: PaginationStateType) => void;
+  currentPageSize: number;
+  onChangePageSize: (newPageSize: number) => void;
+  onChangePageIndex: (newPageIndex: number) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 export const Pagination = ({
+  pageIndex = 0,
   numberOfPages,
   pageSizeOptions,
-  onChangePaginationState,
+  currentPageSize,
+  onChangePageSize,
+  onChangePageIndex,
 }: PaginationProps) => {
-  const [rowsPerPageValue, setRowsPerPageValue] = useState(
-    (pageSizeOptions[0] || "10").toString()
-  );
-  const [currentPageValue, setCurrentPageValue] = useState(0);
   const { t, dict } = useTranslate("Pagination");
 
-  const handleButtonClick = ({ selected }: { selected: number }) => {
-    onChangePaginationState({
-      rowsPerPage: Number(rowsPerPageValue),
-      currentPage: selected,
-    });
-    setCurrentPageValue(selected);
+  const isNavigationForwardDisabled = pageIndex === numberOfPages - 1;
+  const isNavigationBackwardDisabled = pageIndex === 0;
+
+  // Creates array of numbers from 0 to $numberOfPages
+  const generatedPaginationNumbers = Array.from(
+    { length: numberOfPages },
+    (_, k) => k
+  );
+
+  const pageIndexOnChangeHandler = (newPageIndex: number) => {
+    if (newPageIndex >= 0 && newPageIndex < numberOfPages) {
+      onChangePageIndex(newPageIndex);
+    }
   };
 
-  const handleComboBoxChange = (value: string) => {
-    onChangePaginationState({
-      rowsPerPage: Number(value),
-      currentPage: currentPageValue,
-    });
-    setRowsPerPageValue(value);
+  const comboBoxOnChangeHandler = (newPageSize: string) => {
+    onChangePageSize(Number(newPageSize));
   };
-
-  const navPreviousIcon = <Icon icon="navigate_before" />;
-  const navNextIcon = <Icon icon="navigate_next" />;
 
   return (
     <ContainerStyled>
       <RowsPerPageContainerStyled>
         {t(dict.rowsPerPageText)}
         <RowsPerPageSelect
-          value={rowsPerPageValue}
+          value={currentPageSize.toString()}
           id="rows-per-page"
-          label="select-rows-per-page"
-          onValueChange={handleComboBoxChange}
+          label={t(dict.rowsPerPageSelectAriaLabel)}
+          onValueChange={comboBoxOnChangeHandler}
           pageSizeOptions={pageSizeOptions}
         />
       </RowsPerPageContainerStyled>
-      <PaginateContainerStyled>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel={navNextIcon}
-          onPageChange={handleButtonClick}
-          pageRangeDisplayed={3}
-          pageCount={numberOfPages}
-          previousLabel={navPreviousIcon}
-          renderOnZeroPageCount={null}
-          breakClassName="break-me"
-          containerClassName="pagination"
-          activeClassName="active-item"
-          pageClassName="item"
-          pageLinkClassName="link"
-          disabledClassName="disabled-buttons"
-          previousClassName="next-previous-buttons"
-          nextClassName="next-previous-buttons"
-          previousLinkClassName="next-previous-links"
-          nextLinkClassName="next-previous-links"
-        />
-      </PaginateContainerStyled>
+
+      <nav role="navigation" aria-label={t(dict.navigationTableAriaLabel)}>
+        <ListStyled>
+          <li>
+            <NavigationButtonStyled
+              onClick={() => pageIndexOnChangeHandler(pageIndex - 1)}
+              aria-disabled={isNavigationBackwardDisabled}
+              disabled={isNavigationBackwardDisabled}
+              aria-label={t(dict.previousPageAriaLabel)}>
+              <Icon icon="navigate_before" />
+            </NavigationButtonStyled>
+          </li>
+          <PaginationElementsList
+            numberOfPages={numberOfPages}
+            generatedPageNumbers={generatedPaginationNumbers}
+            pageIndex={pageIndex}
+            onPageIndexChange={pageIndexOnChangeHandler}
+          />
+          <li>
+            <NavigationButtonStyled
+              onClick={() => pageIndexOnChangeHandler(pageIndex + 1)}
+              aria-disabled={isNavigationForwardDisabled}
+              disabled={isNavigationForwardDisabled}
+              aria-label={t(dict.nextPageAriaLabel)}>
+              <Icon icon="navigate_next" />
+            </NavigationButtonStyled>
+          </li>
+        </ListStyled>
+      </nav>
     </ContainerStyled>
   );
 };
