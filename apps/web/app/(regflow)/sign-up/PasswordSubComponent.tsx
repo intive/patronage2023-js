@@ -62,6 +62,17 @@ export const PasswordSubComponent = ({
   const { t, dict } = useTranslate("SignUpPage");
   const { passwordComponent } = dict;
 
+  const validationSchema = z
+    .string()
+    .min(12, t(passwordComponent.inputErrors.longCheck))
+    .regex(/[A-Z]/, t(passwordComponent.inputErrors.missingUpperCase))
+    .regex(/[a-z]/, t(passwordComponent.inputErrors.missingLowerCase))
+    .regex(
+      /[!"#$%&'()+,-./:;<=>?@[\]*^_`{|}~]/,
+      t(passwordComponent.inputErrors.missingSpecialCharacter)
+    )
+    .regex(/^\S+$/, t(passwordComponent.inputErrors.spacesCheck));
+
   return (
     <FormWrapper>
       <div>
@@ -92,22 +103,7 @@ export const PasswordSubComponent = ({
               <Field
                 name="password"
                 initialValue={userInfo}
-                onSubmitValidate={z
-                  .string()
-                  .min(12, t(passwordComponent.inputErrors.longCheck))
-                  .regex(
-                    /[A-Z]/,
-                    t(passwordComponent.inputErrors.missingUpperCase)
-                  )
-                  .regex(
-                    /[a-z]/,
-                    t(passwordComponent.inputErrors.missingLowerCase)
-                  )
-                  .regex(
-                    /[!"#$%&'()+,-./:;<=>?@[\]*^_`{|}~]/,
-                    t(passwordComponent.inputErrors.missingSpecialCharacter)
-                  )
-                  .regex(/^\S+$/, t(passwordComponent.inputErrors.spacesCheck))}
+                onSubmitValidate={validationSchema}
                 onChangeValidate={z.string()}>
                 {({ value, setValue, errors, isValid }) => {
                   return (
