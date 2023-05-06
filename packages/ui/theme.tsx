@@ -23,6 +23,12 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting13: "#5A092F",
+  Supporting12: "#FDE7F1",
+  Supporting11: "#003150",
+  Supporting10: "#E0F3FF",
+  Supporting9: "#643400",
+  Supporting8: "#FFF3E5",
   Supporting7: "#49AD1F",
   Supporting6: "#3F80BD",
   Supporting5: "#B96232",
@@ -239,6 +245,24 @@ export const theme = {
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
     sortIcon: colors.Neutral8,
+  },
+  categoryIcons: {
+    homeSpendings: {
+      foreground: colors.Teal10,
+      background: colors.Teal1,
+    },
+    subscriptions: {
+      foreground: colors.Supporting9,
+      background: colors.Supporting8,
+    },
+    car: {
+      foreground: colors.Supporting11,
+      background: colors.Supporting10,
+    },
+    grocery: {
+      foreground: colors.Supporting13,
+      background: colors.Supporting12,
+    },
   },
 };
 
