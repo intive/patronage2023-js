@@ -76,17 +76,14 @@ export function BudgetBasicInformation({
   const { tag } = currency;
 
   //DATE formatting
-  function convertTimestamp(timestamp: number | null) {
-    const date = timestamp && new Date(timestamp);
+  function convertTimestamp(timestamp: number) {
+    const date = new Date(timestamp);
 
-    return (
-      date &&
-      date.toLocaleDateString(t(basicInformation.dateFormats), {
-        day: "numeric",
-        month: "short",
-        year: "2-digit",
-      })
-    );
+    return date.toLocaleDateString(t(basicInformation.dateFormats), {
+      day: "numeric",
+      month: "short",
+      year: "2-digit",
+    });
   }
 
   //DATA to display for information tiles

@@ -331,7 +331,7 @@ const dictionary = {
     tabs: {
       settings: {
         en: "Settings",
-        pl: "Ustawiena",
+        pl: "Ustawienia",
       },
       share: {
         en: "Share",
@@ -377,7 +377,7 @@ const dictionary = {
     errors: {
       min3characters: {
         en: "Budget name must have at least 3 characters.",
-        pl: "Nazwa musi mieć conajmniej 3 znaki.",
+        pl: "Nazwa musi zawierać co najmniej 3 znaki.",
       },
       max30characters: {
         en: "Budget must not have more than 30 characters.",

@@ -1,8 +1,7 @@
 "use client";
 
 import * as Tabs from "@radix-ui/react-tabs";
-import { Form, Field } from "houseform";
-import { useState } from "react";
+import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import { Budget } from "lib/types";
@@ -39,26 +38,37 @@ export const EditBudget = ({
   handleHideEditBudgetModal,
   handleBudgetsEdit,
 }: EditBudgetProps) => {
-  const [editBudget, setEditBudget] = useState(budget);
-  const [selectedIcon, setSelectedIcon] = useState(budget.icon);
   const { t, dict } = useTranslate("EditBudgetModal");
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
 
-  const onSelectStartDate = (date: Date | null) => {
-    date
-      ? setEditBudget({ ...editBudget, startDate: date.getTime() })
-      : setEditBudget({ ...editBudget, startDate: null });
-  };
-
-  const onSelectEndDate = (date: Date | null) => {
-    date
-      ? setEditBudget({ ...editBudget, endDate: date.getTime() })
-      : setEditBudget({ ...editBudget, endDate: null });
-  };
-
   const defaultValueTabs = "settings";
+
+  const getDateObject = (dateType: string) => {
+    if (dateType === "start-date") {
+      return budget.startDate ? new Date(budget.startDate) : null;
+    } else if (dateType === "end-date")
+      return budget.endDate ? new Date(budget.endDate) : null;
+  };
+
+  const getSelectedValue = (value: Date | null) =>
+    value ? new Date(value) : null;
+
+  const checkEndDateOnChangeValidate = (
+    val: Date | null,
+    form: FormInstance<any>
+  ) => {
+    const start = val! && val.getTime();
+    const end =
+      form.getFieldValue("start-date")!.value &&
+      form.getFieldValue("start-date")!.value.getTime();
+
+    if (start && end) {
+      if (start < end) return Promise.reject(t(dict.errors.dateBeforeStart));
+    }
+    return Promise.resolve(true);
+  };
 
   return (
     <Modal header={t(dict.title)} onClose={handleHideEditBudgetModal}>
@@ -73,18 +83,24 @@ export const EditBudget = ({
           </TabsTriggerStyled>
         </Tabs.List>
         <Form
-          onSubmit={async () => {
+          onSubmit={async (values) => {
+            const newBudgetFromValues: Budget = {
+              ...budget,
+              name: values["budget-name"],
+              description: values["description"],
+              icon: values["icon"],
+              startDate: values["start-date"].getTime(),
+              endDate: values["end-date"].getTime(),
+            };
             const budgetsResponse = await fetch("/budgets.json");
             const { budgets } = await budgetsResponse.json();
 
-            const budgetsAfterEdit = budgets.map((budget: Budget) => {
-              if (budget.id !== editBudget.id) return budget;
-
-              return editBudget;
-            });
+            const budgetsAfterEdit = budgets.map((budgetJSON: Budget) =>
+              budgetJSON.id === budget.id ? newBudgetFromValues : budgetJSON
+            );
 
             handleBudgetsEdit(budgetsAfterEdit);
-            console.log(editBudget);
+            console.log(newBudgetFromValues);
             onClose();
           }}>
           {({ submit }) => (
@@ -98,46 +114,41 @@ export const EditBudget = ({
                     {t(dict.paragraphs.details)}
                   </ParagraphStyled>
                   <IconPickerStyled>
-                    <IconPicker
-                      defaultIcon={selectedIcon}
-                      icons={icons}
-                      onSelect={(icon) => {
-                        setEditBudget({ ...editBudget, icon });
-                        setSelectedIcon(icon);
-                      }}
-                    />
+                    <Field name="icon" initialValue={budget.icon}>
+                      {({ value, setValue }) => (
+                        <IconPicker
+                          defaultIcon={value}
+                          icons={icons}
+                          onSelect={(icon) => setValue(icon)}
+                        />
+                      )}
+                    </Field>
                   </IconPickerStyled>
                   <InputWrapperFullStyled>
                     <Field
                       name="budget-name"
-                      initialValue={editBudget.name}
+                      initialValue={budget.name}
                       onSubmitValidate={checkNameOnSubmit}
                       onChangeValidate={checkNameOnChange}>
-                      {({ value, setValue, errors }) => {
-                        return (
-                          <Input
-                            name="budget-name"
-                            value={value}
-                            hasError={errors.length > 0}
-                            supportingLabel={errors.length ? errors : null}
-                            onChange={(e) => {
-                              setEditBudget({
-                                ...editBudget,
-                                name: e.currentTarget.value,
-                              });
-                              setValue(e.currentTarget.value);
-                            }}
-                            onInputCleared={() => setValue("")}
-                            label={t(dict.inputNames.budgetName)}>
-                            {editBudget.name}
-                          </Input>
-                        );
-                      }}
+                      {({ value, setValue, errors }) => (
+                        <Input
+                          name="budget-name"
+                          value={value}
+                          hasError={errors.length > 0}
+                          supportingLabel={errors.length ? errors : null}
+                          onChange={(e) => {
+                            setValue(e.currentTarget.value);
+                          }}
+                          onInputCleared={() => setValue("")}
+                          label={t(dict.inputNames.budgetName)}>
+                          {budget.name}
+                        </Input>
+                      )}
                     </Field>
                   </InputWrapperFullStyled>
                   <Field
                     name="description"
-                    initialValue={editBudget.description}
+                    initialValue={budget.description}
                     onSubmitValidate={checkDescription}
                     onChangeValidate={checkDescription}>
                     {({ value, setValue, errors }) => {
@@ -146,15 +157,11 @@ export const EditBudget = ({
                           <TextareaStyled
                             id="description"
                             name="description"
-                            placeholder={editBudget.description}
+                            placeholder={budget.description}
                             label={t(dict.inputNames.description)}
                             value={value}
                             hasError={errors.length > 0}
                             onChange={(e) => {
-                              setEditBudget({
-                                ...editBudget,
-                                description: e.currentTarget.value,
-                              });
                               setValue(e.currentTarget.value);
                             }}
                           />
@@ -171,26 +178,17 @@ export const EditBudget = ({
                   <InputWrapperFullFlex>
                     <Field
                       name="start-date"
-                      initialValue={
-                        editBudget.startDate
-                          ? new Date(editBudget.startDate)
-                          : null
-                      }
+                      initialValue={getDateObject("start-date")}
                       onSubmitValidate={checkDate}
                       onChangeValidate={checkDate}>
-                      {({ setValue, errors }) => (
+                      {({ value, setValue, errors }) => (
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.startDate)}
-                            selected={
-                              editBudget.startDate
-                                ? new Date(editBudget.startDate)
-                                : null
-                            }
+                            selected={getSelectedValue(value)}
                             onSelect={(date) => {
                               setValue(date);
-                              onSelectStartDate(date);
                             }}
                           />
                           <DatePickerErrorStyled>
@@ -205,37 +203,19 @@ export const EditBudget = ({
                     <Field
                       name="end-date"
                       listenTo={["start-date"]}
-                      initialValue={
-                        editBudget.endDate ? new Date(editBudget.endDate) : null
-                      }
+                      initialValue={getDateObject("end-date")}
                       onSubmitValidate={checkDate}
-                      onChangeValidate={(val, form) => {
-                        const start = val! && val.getTime();
-                        const end =
-                          form.getFieldValue("start-date")!.value &&
-                          form.getFieldValue("start-date")!.value.getTime();
-
-                        if (start && end) {
-                          if (start < end)
-                            return Promise.reject(
-                              t(dict.errors.dateBeforeStart)
-                            );
-                        }
-                        return Promise.resolve(true);
-                      }}>
-                      {({ setValue, errors }) => (
+                      onChangeValidate={(val, form) =>
+                        checkEndDateOnChangeValidate(val, form)
+                      }>
+                      {({ value, setValue, errors }) => (
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.endDate)}
-                            selected={
-                              editBudget.endDate
-                                ? new Date(editBudget.endDate)
-                                : null
-                            }
+                            selected={getSelectedValue(value)}
                             onSelect={(date) => {
                               setValue(date);
-                              onSelectEndDate(date);
                             }}
                           />
                           <DatePickerErrorStyled>
