@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
-import { useMutation } from "react-query";
+import { useSendBudget } from "./useSendBudget";
 import { ReactQueryDevtools } from "react-query-devtools";
 import {
   Button,
@@ -74,6 +74,7 @@ export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 //mocked currency
 export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
 
+
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
@@ -104,6 +105,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     },
   });
 
+
   const onSelectStartDate = (date: Date | null) => {
     date
       ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
@@ -121,25 +123,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     currentLang === "pl" && setLang("pl-PL");
   }, [lang, currentLang]);
 
-  const queryClient = new QueryClient();
 
-  const useSendPost = () =>
-    useMutation((post) =>
-      fetch(`${process.env.REACT_APP_SERVER_URL}/budgets`, {
-        body: JSON.stringify(post),
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }),
-      {
-        onSuccess: () => {},
-      }
-    );
+  const {mutate: sendBudget} = useSendBudget();
 
   return (
-    <QueryClientProvider client={queryClient}>
       <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
         <SeparatorStyledTop />
 
@@ -160,6 +147,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  sendBudget();
                 }}>
                 <ContentStyled>
                   <Tabs.Content value="settings">
@@ -385,6 +373,5 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           </Form>
         </TabsStyled>
       </Modal>
-    </QueryClientProvider>
   );
 };
