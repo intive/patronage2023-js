@@ -26,7 +26,6 @@ export type SubMenuDataProps = {
 
 type SubMenuProps = {
   subMenuDataObject: SubMenuDataProps;
-  onInputChangeUpdateSubMenuData: (title: string) => void;
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
@@ -62,6 +61,7 @@ const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 `;
 
 const Title = styled.span`
@@ -88,20 +88,15 @@ const IconWrapperStyled = styled.div`
   cursor: pointer;
 `;
 
-export const SubMenu = ({
-  subMenuDataObject: subMenuData,
-  onInputChangeUpdateSubMenuData,
-}: SubMenuProps) => {
+export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     searchInput?.onChange?.(e);
-    // onInputChangeUpdateSubMenuData(title);
   };
 
   const onIconClicked = () => {
     sort?.clickHandler();
-    // onInputChangeUpdateSubMenuData(title);
   };
 
   return (

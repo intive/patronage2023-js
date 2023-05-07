@@ -1,8 +1,10 @@
 "use client";
 import styled from "styled-components";
-import React, { ReactElement } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { NavItem } from "./NavItem";
+import { Spinner } from "./Spinner";
+import { Icon } from "../Icon";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
@@ -14,6 +16,8 @@ export type NavItemContents = {
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
 export type NavListProps = {
   contents: Array<NavItemContents>;
+  loading?: ReactNode;
+  error?: ReactNode;
   onNavListItemClick: () => void;
 } & React.HTMLProps<HTMLUListElement>;
 
@@ -51,27 +55,55 @@ export const IconWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: blue !important;
+  background-color: white !important;
   padding: 4px 7px;
   border-radius: 8px;
 `;
 
-export const NavList = ({ contents, onNavListItemClick }: NavListProps) => {
+const WrapperStyled = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: #515151;
+`;
+
+export const NavList = ({
+  contents,
+  onNavListItemClick,
+  loading,
+  error,
+}: NavListProps) => {
   const currentPage = usePathname() || "";
 
   return (
     <NavListStyled>
-      {contents.map((content) => {
-        return (
-          <NavItem
-            active={content.href === currentPage}
-            key={content.id}
-            href={content.href}
-            onClick={onNavListItemClick}>
-            {content.ComponentToRender}
-          </NavItem>
-        );
-      })}
+      {contents &&
+        contents.map((content) => {
+          return (
+            <NavItem
+              active={content.href === currentPage}
+              key={content.id}
+              href={content.href}
+              onClick={onNavListItemClick}>
+              {content.ComponentToRender}
+            </NavItem>
+          );
+        })}
+      {loading && (
+        <WrapperStyled>
+          <Spinner />
+          <p>Loading</p>
+        </WrapperStyled>
+      )}
+      {error && (
+        <WrapperStyled>
+          <Icon icon="error" iconSize={50} color="#AB322C" />
+          <p>Something went wrong.</p>
+        </WrapperStyled>
+      )}
     </NavListStyled>
   );
 };

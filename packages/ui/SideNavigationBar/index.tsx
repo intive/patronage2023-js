@@ -79,14 +79,6 @@ export const SideNavigationBar = ({
     setActiveSideNavBarItemIndex(index);
   };
 
-  const onInputChangeUpdateSubMenuData = (title: string) => {
-    // items.forEach((item) => {
-    //   if (title === item.subMenu?.title) {
-    //     setSubMenuData(item.subMenu);
-    //   }
-    // });
-  };
-
   return (
     <Wrapper>
       <SideNavigationBarStyled
@@ -116,10 +108,7 @@ export const SideNavigationBar = ({
         })}
       </SideNavigationBarStyled>
       {!isNavListItemClicked && subMenuData && (
-        <SubMenu
-          onInputChangeUpdateSubMenuData={onInputChangeUpdateSubMenuData}
-          subMenuDataObject={subMenuData}
-        />
+        <SubMenu subMenuDataObject={subMenuData} />
       )}
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { env } from "env.mjs";
 import { IconType } from "ui/Icon";
 
@@ -16,6 +16,8 @@ type BudgetType = {
 export type GetBudgetsListType = {
   pageSize: number;
   pageIndex: number;
+  searchValue: string;
+  sortAscending: boolean;
   axiosInstance: AxiosInstance;
 };
 
@@ -33,16 +35,18 @@ export const reqInstance = (token: string) =>
 export const getBudgetsList = async ({
   pageSize,
   pageIndex,
+  searchValue,
+  sortAscending,
   axiosInstance,
 }: GetBudgetsListType) => {
   const body = {
     pageSize: pageSize,
     pageIndex: pageIndex,
-    search: "",
+    search: searchValue,
     sortDescriptors: [
       {
         columnName: "name",
-        sortAscending: false,
+        sortAscending: sortAscending,
       },
     ],
   };
