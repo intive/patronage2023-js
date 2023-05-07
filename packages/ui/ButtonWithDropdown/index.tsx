@@ -4,11 +4,15 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "ui";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useTranslate } from "../../../apps/web/lib/hooks";
 
-export type CreateIncomeExpenseButtonProps = {
-  openNewIncome: () => void;
-  openNewExpense: () => void;
+export type ButtonWithDropdownProps = {
+  label: string;
+  items: ButtonWithDropdownItem[];
+};
+
+export type ButtonWithDropdownItem = {
+  label: string;
+  callback: () => void;
 };
 
 const StyledButton = styled.button`
@@ -71,17 +75,15 @@ export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   }
 `;
 
-export const CreateIncomeExpenseButton = ({ openNewIncome, openNewExpense }: CreateIncomeExpenseButtonProps) => {
+export const ButtonWithDropdown = ({ label, items }: ButtonWithDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, dict } = useTranslate("BudgetsPage");
-  const { createButton } = dict;
 
   return (
     <>
       <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenu.Trigger asChild>
           <StyledButton>
-            {t(createButton.label)}
+            { label }
             <Icon
               color="white"
               icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
@@ -91,14 +93,7 @@ export const CreateIncomeExpenseButton = ({ openNewIncome, openNewExpense }: Cre
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenuContentStyled align="start">
-            <DropdownMenuItemStyled
-              onClick={openNewIncome}>
-              {t(createButton.newIncome)}
-            </DropdownMenuItemStyled>
-            <DropdownMenuItemStyled
-              onClick={openNewExpense}>
-              {t(createButton.newExpense)}
-            </DropdownMenuItemStyled>
+            { items.map( item => <DropdownMenuItemStyled key={item.label} onClick={item.callback}>{item.label}</DropdownMenuItemStyled> )}
           </DropdownMenuContentStyled>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>

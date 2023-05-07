@@ -9,7 +9,18 @@ import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
-import { CreateIncomeExpenseButton } from "ui";
+import { ButtonWithDropdown } from "ui";
+
+const DUMMY_DROPDOWNITEMS = [
+  {
+    label: "New income",
+    callback: () => alert("New income modal"),
+  },
+  {
+    label: "New expense",
+    callback: () => alert("New expense modal"),
+  },
+];
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -42,7 +53,9 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <CreateIncomeExpenseButton openNewExpense={() => alert("New expense modal")} openNewIncome={() => alert("New income modal")}/>
+      <div style={{ border: "1px solid red", width: "100%"}}>
+        <ButtonWithDropdown label="Create" items={DUMMY_DROPDOWNITEMS} />
+      </div>
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
