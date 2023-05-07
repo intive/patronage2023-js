@@ -26,7 +26,6 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     style: {
-      backgroundColor: "Wheat",
       verticalAlign: "middle",
       lineHeight: 0,
       width: "26%",
@@ -37,14 +36,14 @@ const columns = [
     title: "Name",
     isSortable: true,
     dataType: DataType.String,
-    style: { backgroundColor: "PaleTurquoise", width: "30%" },
+    style: { width: "30%" },
   },
   {
     key: "amount",
     title: "Amount",
     isSortable: true,
     dataType: DataType.Number,
-    style: { backgroundColor: "LightBlue", width: "44%" },
+    style: { width: "44%" },
   },
   {
     key: "creator",
@@ -52,7 +51,6 @@ const columns = [
     isSortable: true,
     dataType: DataType.Object,
     style: {
-      backgroundColor: "Coral",
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
@@ -64,7 +62,6 @@ const columns = [
   {
     key: "editColumn",
     style: {
-      backgroundColor: "LightPink",
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
