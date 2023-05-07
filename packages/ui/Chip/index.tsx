@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 export type ChipProps = {
-  type: "completed" | "due" | "failed";
+  type: "Done" | "Due" | "Cancelled" | "Recurring";
 } & React.HTMLProps<HTMLSpanElement>;
 
 export const ChipStyled = styled.span<ChipProps>`
@@ -15,20 +15,25 @@ export const ChipStyled = styled.span<ChipProps>`
   padding: 4px 16px;
 
   ${({ type }) =>
-    (type === "completed" &&
+    (type === "Done" &&
       css`
         color: ${({ theme }) => theme.chip.completed.main};
         background: ${({ theme }) => theme.chip.completed.background};
       `) ||
-    (type === "due" &&
+    (type === "Due" &&
       css`
         color: ${({ theme }) => theme.chip.due.main};
         background: ${({ theme }) => theme.chip.due.background};
       `) ||
-    (type === "failed" &&
+    (type === "Cancelled" &&
       css`
         color: ${({ theme }) => theme.chip.failed.main};
         background: ${({ theme }) => theme.chip.failed.background};
+      `) ||
+    (type === "Recurring" &&
+      css`
+        color: ${({ theme }) => theme.chip.reccuring.main};
+        background: ${({ theme }) => theme.chip.reccuring.background};
       `)}
 `;
 

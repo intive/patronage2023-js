@@ -23,6 +23,12 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting13: "#5A092F",
+  Supporting12: "#FDE7F1",
+  Supporting11: "#003150",
+  Supporting10: "#E0F3FF",
+  Supporting9: "#643400",
+  Supporting8: "#FFF3E5",
   Supporting7: "#49AD1F",
   Supporting6: "#3F80BD",
   Supporting5: "#B96232",
@@ -35,6 +41,7 @@ const colors = {
 };
 
 export const theme = {
+  main: colors.Teal10,
   avatar: {
     outline: colors.BasicWhite,
   },
@@ -88,6 +95,10 @@ export const theme = {
     failed: {
       main: colors.Supporting4,
       background: colors.Supporting1,
+    },
+    reccuring: {
+      main: colors.Supporting5,
+      background: colors.Supporting2,
     },
   },
   errorMessage: {
@@ -231,6 +242,33 @@ export const theme = {
     text: colors.Neutral6,
     active: colors.Teal6,
     border: colors.Neutral2,
+  },
+  transactionsTable: {
+    background: colors.BasicWhite,
+    headRowBottomBorder: colors.Neutral2,
+    columnName: colors.Neutral8,
+    date: colors.Neutral6,
+    rowSeparator: colors.Neutral1,
+    cellText: colors.Neutral10,
+    sortIcon: colors.Neutral8,
+  },
+  categoryIcons: {
+    homeSpendings: {
+      foreground: colors.Teal10,
+      background: colors.Teal1,
+    },
+    subscriptions: {
+      foreground: colors.Supporting9,
+      background: colors.Supporting8,
+    },
+    car: {
+      foreground: colors.Supporting11,
+      background: colors.Supporting10,
+    },
+    grocery: {
+      foreground: colors.Supporting13,
+      background: colors.Supporting12,
+    },
   },
 };
 

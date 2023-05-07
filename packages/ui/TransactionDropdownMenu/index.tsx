@@ -82,7 +82,7 @@ export const TransactionDropdownMenu = ({
   ariaLabel,
 }: TransactionDropdownMenuProps) => {
   return (
-    <DropdownMenu.Root>
+    <DropdownMenu.Root modal={false}>
       <DropdownMenuTriggerStyled asChild>
         <button aria-label={ariaLabel}>
           <IconStyled icon="more_vert" />

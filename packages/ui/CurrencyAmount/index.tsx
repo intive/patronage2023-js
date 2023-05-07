@@ -10,9 +10,10 @@ type CurrencyAmountSpanProps = {
   amount: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
-type CurrencyAmountProps = {
+export type CurrencyAmountProps = {
   currencyOptions: CurrencyType;
   className?: string;
+  hidePlus?: boolean;
 } & CurrencyAmountSpanProps;
 
 const SpanStyled = styled.span<CurrencyAmountSpanProps>`
@@ -26,6 +27,7 @@ export const CurrencyAmount = ({
   amount,
   currencyOptions,
   className,
+  hidePlus,
 }: CurrencyAmountProps) => {
   const { tag, locale } = currencyOptions;
   const options = {
@@ -42,7 +44,7 @@ export const CurrencyAmount = ({
 
   return (
     <SpanStyled className={className} amount={amount}>
-      {`${positiveChar}${currencyAmountNumber}`}
+      {`${!hidePlus ? positiveChar : ""}${currencyAmountNumber}`}
     </SpanStyled>
   );
 };

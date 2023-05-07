@@ -1,3 +1,6 @@
+import { IconType } from "ui/Icon";
+import { CategoryType } from "ui/CategoryIcon";
+
 interface Currency {
   tag: string;
   locale: string;
@@ -18,7 +21,7 @@ interface Creator {
   name: string;
   avatar: string;
 }
-interface Transaction {
+export interface Transaction {
   id: string;
   date: number;
   amount: number;
@@ -32,7 +35,7 @@ export interface Budget {
   id: string;
   name: string;
   description: string;
-  icon: string;
+  icon: IconType;
   startDate: number;
   endDate: number;
   limit: number;
@@ -42,4 +45,8 @@ export interface Budget {
 export interface BudgetTransaction {
   budgetID: string;
   transactions: Transaction[];
+}
+
+export interface CategoryMap {
+  [category: string]: CategoryType | undefined;
 }
