@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { useMutation } from "react-query";
 import { ReactQueryDevtools } from "react-query-devtools";
 import {
   Button,
@@ -121,6 +122,21 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   }, [lang, currentLang]);
 
   const queryClient = new QueryClient();
+
+  const useSendPost = () =>
+    useMutation((post) =>
+      fetch(`${process.env.REACT_APP_SERVER_URL}/budgets`, {
+        body: JSON.stringify(post),
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
+      {
+        onSuccess: () => {},
+      }
+    );
 
   return (
     <QueryClientProvider client={queryClient}>
