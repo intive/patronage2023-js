@@ -10,12 +10,6 @@ interface Icon {
   foreground: string;
   background: string;
 }
-interface Category {
-  id: number;
-  name: string;
-  icon: Icon;
-}
-
 interface Creator {
   id: string;
   name: string;
@@ -25,7 +19,7 @@ export interface Transaction {
   id: string;
   date: number;
   amount: number;
-  category: Category;
+  category: CategoryType;
   description: string;
   status: string;
   creator: Creator;

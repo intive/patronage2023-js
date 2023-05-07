@@ -1,10 +1,9 @@
 import { TransactionsTable } from "./TransactionsTable";
 import { useEffect, useState } from "react";
-import categoryMap from "lib/category-map";
 import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
-import { Spinner } from "ui";
 import { useQuery } from "react-query";
+import categoryMap from "lib/category-map";
 
 type APIResponse = {
   items: Item[];
@@ -13,11 +12,11 @@ type APIResponse = {
 
 type Item = {
   transactionType: string;
-  transactionID: ID;
-  budgetID: ID;
+  transactionId: ID;
+  budgetId: ID;
   name: string;
   value: number;
-  budgetTransactionDate: Date;
+  budgetTransactionDate: string;
   categoryType: string;
 };
 
@@ -74,42 +73,40 @@ const TransactionTableController = ({
 
   const sampleId = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
   const Token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM0OTIwODYsImlhdCI6MTY4MzQ4NDg4NiwianRpIjoiYTkwMWQyZmQtNmE2Yy00OTdlLWI5Y2MtODZmMjU0NDVlZDIzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjI1ZTJhOGYzLWUzYzQtNGJjNi04YjgzLTQxZmE5ZmEyNjkyYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjI1ZTJhOGYzLWUzYzQtNGJjNi04YjgzLTQxZmE5ZmEyNjkyYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.esBl4Wy2WvWzKDOnvSCFD2snk53HE_o7DdhoSou59see0O9uF58WNglXxMgignNdf9PKyesZZLpwgSBM4MzWyAA7yeZwlbZK9Q33_XSoOCHcnnGM-6wLKHl1o2EgW0IR0PxMi56poFUFh5TOUSiv0IN21KT3BAIbv6NjBgN-g8TpDjwZuxrL7AC2YQpczX7Ju0agA9eOhTcwA5Iebn-ZUanNz-Mh1rXKv_nkIJakDFmzfzclQ34a8lVzXLH5xFVWbsISiINx9fBzhjL1eF33TR1LFKzAOIoto2KBqAMh6rkFMijoo3OPWEJCDtXp6SVgxHFjPvC9t8kl2i5PtDessg";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1MDA2OTYsImlhdCI6MTY4MzQ5MzQ5NiwianRpIjoiYjdhMGJlZDItY2Q1My00NmE4LWE4MmEtNGEwMDEyZTZjYzVkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjgwNTkxYjJiLTFiMjEtNGZhNi05ZTFlLWVmZWI4NWEzOTBkYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjgwNTkxYjJiLTFiMjEtNGZhNi05ZTFlLWVmZWI4NWEzOTBkYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.mxTGwhVxGSo-hwX3X7-j66xmrhSW7-QOI0MEE_mDz_T4DGr5jTeNTGOSF1pQPCmVPnZgoNSHQ2k4WDNCCUG4WhJ76OIwvt2_WMJeohD5jYZsbwSQrXtyD_Jmvr8yClGlLLrOPVnHZRU3x9t6haH3b-OhiwPEGITgV0f0AXU7wKpQMuLPDF3xzGKSIOMBa6TOHPlieXN7lB7w4aZayq5UCEzxff1zVNM8t7SzU46ge_xnJn2_wNiB9wnYC_Md2_NCUBfB4cCOOxLfRD9CsvLPzisjRWESiQi8dNrxIbYs5xIygaTNN0vVVD2pEs5bYS7R3k_azRo-DSkpAn0H5-hWPw";
 
   const fixFetchedData = (res: APIResponse) => {
-    const tempArray = [] as Transaction[];
-    res.items.forEach((item) => {
+    const tempArray = [] as any;
+    res.items.map((item) => {
       tempArray.push({
-        id: string;
-        date: number;
-        amount: number;
-        category: {
-          id: number;
-          name: string;
-          icon: {   name: string;
-            foreground: string;
-            background: string; }
-        };
-        description: string;
-        status: string;
+        id: item.transactionId.value,
+        date: Date.parse(item.budgetTransactionDate),
+        amount: item.value,
+        // @ts-ignore
+        category: categoryMap[item.categoryType]
+          ? // @ts-ignore
+            categoryMap[item.categoryType]
+          : categoryMap.HomeSpendings,
+        description: item.name,
+        status: "Done",
         creator: {
-          id: string;
-          name: string;
-          avatar: string;
-        };
+          id: "Anyid",
+          name: "Pepe",
+          avatar: "1.svg",
+        },
       });
     });
-    console.log(tempArray)
+    console.log(tempArray);
   };
   const fetchFunction = async (
-    id: string,
+    ids: string,
     token: string,
     itemsOnPage: number,
     pageNumber: number
   ) => {
     try {
       const fetchedData = await fetch(
-        env.NEXT_PUBLIC_API_URL + "/budgets/" + id + "/transactions",
+        env.NEXT_PUBLIC_API_URL + "/budgets/" + ids + "/transactions",
         {
           body: JSON.stringify({
             pageSize: itemsOnPage,
