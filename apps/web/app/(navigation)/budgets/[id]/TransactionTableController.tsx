@@ -76,6 +76,31 @@ const TransactionTableController = ({
   const Token =
     "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM0OTIwODYsImlhdCI6MTY4MzQ4NDg4NiwianRpIjoiYTkwMWQyZmQtNmE2Yy00OTdlLWI5Y2MtODZmMjU0NDVlZDIzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjI1ZTJhOGYzLWUzYzQtNGJjNi04YjgzLTQxZmE5ZmEyNjkyYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjI1ZTJhOGYzLWUzYzQtNGJjNi04YjgzLTQxZmE5ZmEyNjkyYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.esBl4Wy2WvWzKDOnvSCFD2snk53HE_o7DdhoSou59see0O9uF58WNglXxMgignNdf9PKyesZZLpwgSBM4MzWyAA7yeZwlbZK9Q33_XSoOCHcnnGM-6wLKHl1o2EgW0IR0PxMi56poFUFh5TOUSiv0IN21KT3BAIbv6NjBgN-g8TpDjwZuxrL7AC2YQpczX7Ju0agA9eOhTcwA5Iebn-ZUanNz-Mh1rXKv_nkIJakDFmzfzclQ34a8lVzXLH5xFVWbsISiINx9fBzhjL1eF33TR1LFKzAOIoto2KBqAMh6rkFMijoo3OPWEJCDtXp6SVgxHFjPvC9t8kl2i5PtDessg";
 
+  const fixFetchedData = (res: APIResponse) => {
+    const tempArray = [] as Transaction[];
+    res.items.forEach((item) => {
+      tempArray.push({
+        id: string;
+        date: number;
+        amount: number;
+        category: {
+          id: number;
+          name: string;
+          icon: {   name: string;
+            foreground: string;
+            background: string; }
+        };
+        description: string;
+        status: string;
+        creator: {
+          id: string;
+          name: string;
+          avatar: string;
+        };
+      });
+    });
+    console.log(tempArray)
+  };
   const fetchFunction = async (
     id: string,
     token: string,
@@ -98,14 +123,14 @@ const TransactionTableController = ({
         }
       );
       const parsedData = await fetchedData.json();
-      console.log(parsedData);
+      fixFetchedData(parsedData);
     } catch (error) {
       console.log(error);
     }
   };
 
   const dataQuery = useQuery({
-    queryKey: ["Datatable"],
+    queryKey: ["DataTable"],
     queryFn: () => fetchFunction(sampleId, Token, itemsPerPage, currentPage),
   });
 
