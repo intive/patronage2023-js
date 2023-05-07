@@ -3,32 +3,21 @@ import { device } from "lib/media-queries";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
-  margin-left: -48px;
-  margin-right: -48px;
-
   // table styles
   .ka-table {
-    tr > :first-child {
-      padding-left: 48px;
-    }
-
     tr > :last-child {
       padding-right: 0;
     }
   }
 
+  // hide empty cell added by group row
   .ka-empty-cell {
-    width: 1px;
+    display: none;
   }
 
   // header styles
   .ka-thead-background {
     background-color: ${({ theme }) => theme.transactionsTable.background};
-  }
-
-  .ka-thead-row {
-    border-bottom: 1px solid
-      ${({ theme }) => theme.transactionsTable.headRowBottomBorder};
   }
 
   .ka-thead-cell-height {
@@ -37,20 +26,48 @@ export const TableWrapperStyled = styled.div`
 
   .ka-thead-cell {
     border: none;
-    padding: 16px 16px 16px 0;
+    padding: 16px 5px 16px 0;
   }
 
   .ka-thead-cell-content {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     gap: 4px;
+    align-items: flex-start;
     color: ${({ theme }) => theme.transactionsTable.columnName};
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
+    font-size: 12px;
+    line-height: normal;
+
+    @media (min-width: 510px) {
+      flex-direction: row;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+    }
   }
 
+  // header row underline that overflows the table
+  .ka-thead {
+    position: relative;
+  }
+
+  .ka-thead::after {
+    content: " ";
+    position: absolute;
+    background: ${({ theme }) => theme.transactionsTable.headRowBottomBorder};
+    height: 1px;
+    bottom: 0;
+    left: -48px;
+    right: -48px;
+  }
+
+  .ka,
+  .ka-table-wrapper {
+    overflow: visible;
+  }
+
+  // sorting button
   button {
     display: inline-flex;
     justify-content: center;
@@ -76,7 +93,7 @@ export const TableWrapperStyled = styled.div`
     }
   }
 
-  // group row styles
+  // group row
   .ka-icon-group-arrow {
     display: none;
   }
@@ -108,12 +125,6 @@ export const TableWrapperStyled = styled.div`
       border-top: 1px solid
         ${({ theme }) => theme.transactionsTable.rowSeparator};
     }
-
-    // no border on first and last empty columns
-    td:first-child,
-    td:last-child {
-      border-top: none;
-    }
   }
 
   .ka-group-row + .ka-row td {
@@ -123,13 +134,21 @@ export const TableWrapperStyled = styled.div`
   // cell styles
   .ka-cell-text {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 150%;
     color: ${({ theme }) => theme.transactionsTable.cellText};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (min-width: 510px) {
+      font-size: 16px;
+      white-space: initial;
+    }
   }
 
   .ka-cell {
-    padding: 17px 8px 17px 0;
+    padding: 17px 5px 17px 0;
   }
 
   // avatar styles
@@ -143,4 +162,8 @@ export const StyledCurrencyAmount = styled(CurrencyAmount)`
   display: block;
   text-align: left;
   font-family: unset; // component adds Signika font
+  font-size: 12px;
+  @media (min-width: 510px) {
+    font-size: 14px;
+  }
 `;

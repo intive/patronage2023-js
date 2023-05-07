@@ -8,10 +8,7 @@ import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
-import { Icon } from "ui/Icon";
-import { CategoryIcon } from "ui/CategoryIcon";
-import { Avatar } from "ui/Avatar";
-import { TransactionDropdownMenu } from "ui/TransactionDropdownMenu";
+import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
@@ -32,32 +29,22 @@ const columns = [
       backgroundColor: "Wheat",
       verticalAlign: "middle",
       lineHeight: 0,
+      width: "26%",
     },
-    width: "19%",
   },
   {
     key: "description",
     title: "Name",
     isSortable: true,
     dataType: DataType.String,
-    style: { backgroundColor: "PaleTurquoise" },
-    width: "31%",
+    style: { backgroundColor: "PaleTurquoise", width: "30%" },
   },
-  // {
-  //   key: "status",
-  //   title: "Status",
-  //   isSortable: true,
-  //   dataType: DataType.String,
-  //   // style: { backgroundColor: "RosyBrown" },
-  //   width: "18%",
-  // },
   {
     key: "amount",
     title: "Amount",
     isSortable: true,
     dataType: DataType.Number,
-    style: { backgroundColor: "LightBlue" },
-    width: "32%",
+    style: { backgroundColor: "LightBlue", width: "44%" },
   },
   {
     key: "creator",
@@ -69,10 +56,10 @@ const columns = [
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
-      paddingLeft: "8px",
-      paddingRight: "8px"
+      paddingLeft: "5px",
+      paddingRight: "5px",
+      width: "100px",
     },
-    width: "13%",
   },
   {
     key: "editColumn",
@@ -81,22 +68,14 @@ const columns = [
       textAlign: "center",
       verticalAlign: "middle",
       lineHeight: 0,
-      paddingLeft: "8px",
-      paddingRight: "8px",
+      width: "28px",
     },
-    width: "5%",
   },
   {
     key: "date",
     title: "Date",
     isSortable: false,
     dataType: DataType.Number,
-  },
-  {
-    key: "empty",
-    title: "",
-    isSortable: false,
-    width: "48px",
   },
 ] as Column[];
 
@@ -167,9 +146,9 @@ export const TransactionsTable = ({
             content: (props) => {
               switch (props.column.key) {
                 case "category":
-                  return <CategoryIcon category={props.value} small={false} />;
-                // case "status":
-                //   return <Chip type={props.value}>{props.value}</Chip>;
+                  return (
+                    <CategoryIcon category={props.value} small={false} />
+                  );
                 case "amount":
                   return (
                     <StyledCurrencyAmount
@@ -204,25 +183,20 @@ export const TransactionsTable = ({
             },
           },
           headCellContent: {
-            content: ({ column }) => {
-              if (column.key === "empty") {
-                return null;
-              }
-              return (
-                <>
-                  <span>{column.title}</span>
-                  {column.key !== "editColumn" && (
-                    <button onClick={() => setSorting(column.key)}>
-                      <Icon
-                        icon="sort"
-                        iconSize={20}
-                        color={theme.transactionsTable.sortIcon}
-                      />
-                    </button>
-                  )}
-                </>
-              );
-            },
+            content: ({ column }) => (
+              <>
+                <span>{column.title}</span>
+                {column.key !== "editColumn" && (
+                  <button onClick={() => setSorting(column.key)}>
+                    <Icon
+                      icon="sort"
+                      iconSize={20}
+                      color={theme.transactionsTable.sortIcon}
+                    />
+                  </button>
+                )}
+              </>
+            ),
           },
         }}
       />
