@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { v1 as uuidv1 } from "uuid";
 
 import {
@@ -124,7 +124,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const url = "https://inbudget-patronage-api-dev.azurewebsites.net/budgets";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM0NzQ4ODAsImlhdCI6MTY4MzQ2NzY4MCwianRpIjoiNTI5NjhkNGUtMjQzMS00MDk3LWFiY2MtMTIwODNlNThhYzNhIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNhNjZmMzA3LWFhZWEtNDBjMi1hZTIzLWE4ZjU3N2Q0YzYwZCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImNhNjZmMzA3LWFhZWEtNDBjMi1hZTIzLWE4ZjU3N2Q0YzYwZCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.TUfpflJMMULqAytGLF_-NmuCMlwOh_4egnF7WdwPWlbqy6IRhW9_CFDUzMMleTT766vKaIzesMJbvWFTodki7Mnh9Be-l9cwrUMzhVwrMgweNSZzWiGWs4S54-dzzaXftvBhlcqBY4Ao9e4_ujdKNLcunWHpAm23PixKVmz7wfG8r4Gd6TRlKLfaxU7_PiDf_xK5ElFsH6Q92QYKY32m4iUyi_LIhkGcCvwsETFydCuXb9nOihJ6iVzqjZ7uiVcZ04ZemqMvp5DIhVAYeYqFqgLTQVgOf2nGQmTVyuB6EKAKeRo3SgmFxqbutDFHmbwtYQd88C0fleJZjoz4-78RfA";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM0ODYwNDksImlhdCI6MTY4MzQ3ODg0OSwianRpIjoiNDUyNWJhODMtOTFkOC00M2RmLWEwNzQtZmNkNmI4ZjUyNTk3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjFjNmJiMTY2LWU0NmYtNGYwZi05MDY0LWIwNDUwNGJjNjA5MSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjFjNmJiMTY2LWU0NmYtNGYwZi05MDY0LWIwNDUwNGJjNjA5MSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.fmneAdHBbRgCAVpoFqNcH-4JTpMgb2G6kTuG0ea2-DHPFSAC666Pc9PuO8nHQMcPh3WwloOzHGtbac2WD9QLK6gLuyX8opDCcV4jty8QF-D8sADRmxA2cVDhhZvprtJ5rUKWCQpvg8Cgat3h6-LiVJfcIsgqqQIH9FlHcqwE0Fr0kYLvudyTLV2_8XfGxoENhr6j02D2PiYaHm8BXp_eaAW2I7KFYsB6PcjUNKlDx9Klszh9NGSeJJzygNVyPu8twG_XW5ru-saRuCnyiCqh_mZvSbLxarI4TLAf6poIi5yNPabo6GFl5uqtCdlIyanVCSvJEyjmmNnfcy_Hgu1X7g";
+
+  const queryClient = useQueryClient()
 
   const useSendBudget = () =>
     useMutation(
@@ -153,7 +155,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           }),
         }),
       {
-        onSuccess: () => {},
+        onSuccess: () => {
+          queryClient.invalidateQueries()
+        },
+        onError: () => {
+          
+        }
       }
     );
 
