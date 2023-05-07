@@ -6,7 +6,8 @@ import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
-import 'ka-table/style.css';
+import "ka-table/style.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -16,6 +17,8 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
+
+const queryCLient = new QueryClient();
 
 export default function RootLayout({ children }: LayoutProps) {
   return (
@@ -31,13 +34,15 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <LanguageProvider>
-            <StyledComponentsThemeWrapper>
-              {children}
-            </StyledComponentsThemeWrapper>
-          </LanguageProvider>
-        </StyledComponentsRegistry>
+        <QueryClientProvider client={queryCLient}>
+          <StyledComponentsRegistry>
+            <LanguageProvider>
+              <StyledComponentsThemeWrapper>
+                {children}
+              </StyledComponentsThemeWrapper>
+            </LanguageProvider>
+          </StyledComponentsRegistry>
+        </QueryClientProvider>
       </body>
     </html>
   );
