@@ -70,7 +70,9 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
-        <BudgetIconStyled icon={icon in iconNames ? icon : "notifications"} />
+        <BudgetIconStyled
+          icon={iconNames.includes(icon) ? icon : "notifications"}
+        />
         <div>
           <StyledTitle>{name}</StyledTitle>
           <StyledDescription>{description}</StyledDescription>
