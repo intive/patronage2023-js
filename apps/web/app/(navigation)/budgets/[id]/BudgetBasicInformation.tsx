@@ -2,11 +2,7 @@
 
 import { Budget } from "lib/types";
 import { InfoTile, SkeletonLoading } from "ui";
-import {
-  InfoTileStyled,
-  InfoValueWrapper,
-  StyledAddInfoSpan,
-} from "ui/InfoTile";
+import { InfoTileStyled, StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 import {
   BasicInfoWrapper,
@@ -17,7 +13,7 @@ import {
   TileWrapper,
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
-
+import { iconNames } from "lib/iconValidation";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: Budget;
@@ -74,7 +70,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
-        <BudgetIconStyled icon={icon} />
+        <BudgetIconStyled icon={icon in iconNames ? icon : "notifications"} />
         <div>
           <StyledTitle>{name}</StyledTitle>
           <StyledDescription>{description}</StyledDescription>
