@@ -19,62 +19,7 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 
-const columns = [
-  {
-    key: "category",
-    title: "Category",
-    isSortable: true,
-    dataType: DataType.Object,
-    style: {
-      verticalAlign: "middle",
-      lineHeight: 0,
-      width: "26%",
-    },
-  },
-  {
-    key: "description",
-    title: "Name",
-    isSortable: true,
-    dataType: DataType.String,
-    style: { width: "30%" },
-  },
-  {
-    key: "amount",
-    title: "Amount",
-    isSortable: true,
-    dataType: DataType.Number,
-    style: { width: "44%" },
-  },
-  {
-    key: "creator",
-    title: "Creator",
-    isSortable: true,
-    dataType: DataType.Object,
-    style: {
-      textAlign: "center",
-      verticalAlign: "middle",
-      lineHeight: 0,
-      paddingLeft: "5px",
-      paddingRight: "5px",
-      width: "100px",
-    },
-  },
-  {
-    key: "editColumn",
-    style: {
-      textAlign: "center",
-      verticalAlign: "middle",
-      lineHeight: 0,
-      width: "28px",
-    },
-  },
-  {
-    key: "date",
-    title: "Date",
-    isSortable: false,
-    dataType: DataType.Number,
-  },
-] as Column[];
+
 
 type TransactionsTableProps = {
   budget: Budget;
@@ -87,7 +32,64 @@ export const TransactionsTable = ({
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
-  const { tableDates } = dict;
+  const { transactionsTable } = dict;
+
+  const columns = [
+    {
+      key: "category",
+      title: t(transactionsTable.tableColumnHeaders.category),
+      isSortable: true,
+      dataType: DataType.Object,
+      style: {
+        verticalAlign: "middle",
+        lineHeight: 0,
+        width: "26%",
+      },
+    },
+    {
+      key: "description",
+      title: t(transactionsTable.tableColumnHeaders.name),
+      isSortable: true,
+      dataType: DataType.String,
+      style: { width: "30%" },
+    },
+    {
+      key: "amount",
+      title: t(transactionsTable.tableColumnHeaders.amount),
+      isSortable: true,
+      dataType: DataType.Number,
+      style: { width: "44%" },
+    },
+    {
+      key: "creator",
+      title: t(transactionsTable.tableColumnHeaders.creator),
+      isSortable: true,
+      dataType: DataType.Object,
+      style: {
+        textAlign: "center",
+        verticalAlign: "middle",
+        lineHeight: 0,
+        paddingLeft: "5px",
+        paddingRight: "5px",
+        width: "100px",
+      },
+    },
+    {
+      key: "editColumn",
+      style: {
+        textAlign: "center",
+        verticalAlign: "middle",
+        lineHeight: 0,
+        width: "28px",
+      },
+    },
+    {
+      key: "date",
+      title: "Date",
+      isSortable: false,
+      dataType: DataType.Number,
+    },
+  ] as Column[];
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
@@ -106,9 +108,9 @@ export const TransactionsTable = ({
 
     let dayOfWeek = date.format("dddd");
     if (date.isToday()) {
-      dayOfWeek = t(tableDates.today);
+      dayOfWeek = t(transactionsTable.tableDates.today);
     } else if (date.isYesterday()) {
-      dayOfWeek = t(tableDates.yesterday);
+      dayOfWeek = t(transactionsTable.tableDates.yesterday);
     }
     return `${dayOfWeek}, ${formattedDate}`;
   };

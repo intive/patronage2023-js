@@ -345,9 +345,17 @@ const dictionary = {
       },
       dateFormats: { en: "en-GB", pl: "pl" },
     },
-    tableDates: {
-      yesterday: { en: "Yesterday", pl: "Wczoraj" },
-      today: { en: "Today", pl: "Dzisiaj" },
+    transactionsTable: {
+      tableDates: {
+        yesterday: { en: "Yesterday", pl: "Wczoraj" },
+        today: { en: "Today", pl: "Dzisiaj" },
+      },
+      tableColumnHeaders: {
+        category: { en: "Category", pl: "Kategoria" },
+        name: { en: "Name", pl: "Nazwa" },
+        amount: { en: "Amount", pl: "Kwota" },
+        creator: { en: "Creator", pl: "Twórca" },
+      },
     },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty" } },
