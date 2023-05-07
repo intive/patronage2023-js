@@ -4,6 +4,7 @@ import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
 import { useQuery } from "react-query";
 import categoryMap from "lib/category-map";
+import { Spinner } from "ui";
 
 type APIResponse = {
   items: Item[];
@@ -72,11 +73,10 @@ const TransactionTableController = ({
   const setSorting = (column: string) => console.log(column);
 
   const sampleId = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
-  const Token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1MDA2OTYsImlhdCI6MTY4MzQ5MzQ5NiwianRpIjoiYjdhMGJlZDItY2Q1My00NmE4LWE4MmEtNGEwMDEyZTZjYzVkIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjgwNTkxYjJiLTFiMjEtNGZhNi05ZTFlLWVmZWI4NWEzOTBkYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjgwNTkxYjJiLTFiMjEtNGZhNi05ZTFlLWVmZWI4NWEzOTBkYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.mxTGwhVxGSo-hwX3X7-j66xmrhSW7-QOI0MEE_mDz_T4DGr5jTeNTGOSF1pQPCmVPnZgoNSHQ2k4WDNCCUG4WhJ76OIwvt2_WMJeohD5jYZsbwSQrXtyD_Jmvr8yClGlLLrOPVnHZRU3x9t6haH3b-OhiwPEGITgV0f0AXU7wKpQMuLPDF3xzGKSIOMBa6TOHPlieXN7lB7w4aZayq5UCEzxff1zVNM8t7SzU46ge_xnJn2_wNiB9wnYC_Md2_NCUBfB4cCOOxLfRD9CsvLPzisjRWESiQi8dNrxIbYs5xIygaTNN0vVVD2pEs5bYS7R3k_azRo-DSkpAn0H5-hWPw";
+  const Token = "...";
 
   const fixFetchedData = (res: APIResponse) => {
-    const tempArray = [] as any;
+    const tempArray = [] as Transaction[];
     res.items.map((item) => {
       tempArray.push({
         id: item.transactionId.value,
@@ -96,7 +96,7 @@ const TransactionTableController = ({
         },
       });
     });
-    console.log(tempArray);
+    setTransactions(tempArray);
   };
   const fetchFunction = async (
     ids: string,
@@ -131,19 +131,19 @@ const TransactionTableController = ({
     queryFn: () => fetchFunction(sampleId, Token, itemsPerPage, currentPage),
   });
 
-  useEffect(() => {
-    fetch(`/budget/${id}.json`)
-      .then((response) => response.json())
-      .then((result) => setTransactions(result.transactions));
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`/budget/${id}.json`)
+  //     .then((response) => response.json())
+  //     .then((result) => setTransactions(result.transactions));
+  // }, [id]);
 
-  // if (dataQuery.isLoading) {
-  //   return <Spinner />;
-  // }
-  //
-  // if (dataQuery.error) {
-  //   return <h1>Error occurred</h1>;
-  // }
+  if (dataQuery.isLoading) {
+    return <Spinner />;
+  }
+
+  if (dataQuery.error) {
+    return <h1>Error occurred</h1>;
+  }
 
   return (
     <>
