@@ -75,6 +75,7 @@ export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
 export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
 
 
+
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
@@ -105,7 +106,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     },
   });
 
-
   const onSelectStartDate = (date: Date | null) => {
     date
       ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
@@ -124,7 +124,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   }, [lang, currentLang]);
 
 
+  
   const {mutate: sendBudget} = useSendBudget();
+  
 
   return (
       <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
@@ -142,12 +144,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           <Form
             onSubmit={() => {
               console.log(newBudget);
+              sendBudget();
             }}>
             {({ submit }) => (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  sendBudget();
+                  
                 }}>
                 <ContentStyled>
                   <Tabs.Content value="settings">
