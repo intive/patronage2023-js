@@ -346,15 +346,22 @@ const dictionary = {
       dateFormats: { en: "en-GB", pl: "pl" },
     },
     transactionsTable: {
-      tableDates: {
+      groupRowDays: {
         yesterday: { en: "Yesterday", pl: "Wczoraj" },
         today: { en: "Today", pl: "Dzisiaj" },
+        monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
+        tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
+        wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
+        thursday: { en: "Thursday", pl: "Czwartek", fr: "Jeudi" },
+        friday: { en: "Friday", pl: "Piątek", fr: "Vendredi" },
+        saturday: { en: "Saturday", pl: "Sobota", fr: "Samedi" },
+        sunday: { en: "Sunday", pl: "Niedziela", fr: "Dimanche" },
       },
       tableColumnHeaders: {
-        category: { en: "Category", pl: "Kategoria" },
-        name: { en: "Name", pl: "Nazwa" },
-        amount: { en: "Amount", pl: "Kwota" },
-        creator: { en: "Creator", pl: "Twórca" },
+        category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
+        name: { en: "Name", pl: "Nazwa", fr: "Nom" },
+        amount: { en: "Amount", pl: "Kwota", fr: "Montant" },
+        creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
       },
     },
   },

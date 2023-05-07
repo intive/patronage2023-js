@@ -19,8 +19,6 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 
-
-
 type TransactionsTableProps = {
   budget: Budget;
   setSorting: (column: string) => void;
@@ -99,7 +97,7 @@ export const TransactionsTable = ({
       .then((result) => setTransactions(result.transactions));
   }, [budget]);
 
-  const getDayName = (timestamp: number, locale: string) => {
+  const getDayName = (timestamp: number) => {
     dayjs.extend(isToday);
     dayjs.extend(isYesterday);
 
@@ -108,9 +106,15 @@ export const TransactionsTable = ({
 
     let dayOfWeek = date.format("dddd");
     if (date.isToday()) {
-      dayOfWeek = t(transactionsTable.tableDates.today);
+      dayOfWeek = t(transactionsTable.groupRowDays.today);
     } else if (date.isYesterday()) {
-      dayOfWeek = t(transactionsTable.tableDates.yesterday);
+      dayOfWeek = t(transactionsTable.groupRowDays.yesterday);
+    }
+
+    if (!(date.isToday() && date.isYesterday())) {
+      const lowerCaseDay =
+        dayOfWeek.toLowerCase() as keyof typeof transactionsTable.groupRowDays;
+      dayOfWeek = t(transactionsTable.groupRowDays[lowerCaseDay]);
     }
     return `${dayOfWeek}, ${formattedDate}`;
   };
@@ -145,9 +149,7 @@ export const TransactionsTable = ({
             content: (props) => {
               switch (props.column.key) {
                 case "category":
-                  return (
-                    <CategoryIcon category={props.value} small={false} />
-                  );
+                  return <CategoryIcon category={props.value} small={false} />;
                 case "amount":
                   return (
                     <StyledCurrencyAmount
@@ -177,7 +179,7 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "date":
                   const value = props.groupKey[props.groupIndex];
-                  return <>{getDayName(value, budget.currency.locale)}</>;
+                  return <>{getDayName(value)}</>;
               }
             },
           },
