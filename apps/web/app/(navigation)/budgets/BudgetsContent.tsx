@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
 import { ButtonWithDropdown } from "ui";
+import { device } from "lib/media-queries";
 
 const DUMMY_DROPDOWNITEMS = [
   {
@@ -28,7 +29,10 @@ const BudgetContentWrapperStyled = styled.div`
   justify-content: flex-start;
   align-items: center;
   align-self: flex-start;
-  gap: 32px;
+  gap: 16px;
+  ${device.tablet} {
+    gap: 32px;
+  }
 `;
 
 export const BudgetsContent = () => {
@@ -53,7 +57,7 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <div style={{ border: "1px solid red", width: "100%"}}>
+      <div style={{ width: "100%"}}>
         <ButtonWithDropdown label="Create" items={DUMMY_DROPDOWNITEMS} />
       </div>
       <TransactionsTable

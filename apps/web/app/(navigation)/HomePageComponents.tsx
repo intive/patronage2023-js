@@ -1,5 +1,6 @@
 "use client";
-import { device } from "lib/media";
+// import { device } from "lib/media";
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 import Link from "next/link";
 import { Card } from "ui";
@@ -19,7 +20,11 @@ export const CardStyled = styled(Card)`
   align-items: center;
   min-height: 100%;
   width: 100%;
-  padding: 32px 48px;
+  padding:24px;
+  ${device.tablet} {
+    padding: 32px 48px;
+  }
+  
 `;
 
 export const LinkStyled = styled(Link)`

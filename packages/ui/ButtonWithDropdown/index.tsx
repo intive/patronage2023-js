@@ -4,6 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "ui";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { device } from "../../../apps/web/lib/media-queries";
 
 export type ButtonWithDropdownProps = {
   label: string;
@@ -20,16 +21,21 @@ const StyledButton = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  
   border: 2px solid ${({ theme }) => theme.button.primary.main};
   border-radius: 8px;
   color: white;
   background-color: ${({ theme }) => theme.button.primary.main};
   font-weight: 600;
-  padding: 12px 14px 12px 24px;
-  font-size: 1em;
+  font-size: 0.9em;
   transition: all 0.2s;
   cursor: pointer;
+  padding: 5px 2px 5px 8px;
+  ${device.tablet}{
+    padding: 9px 12px 9px 22px;
+    font-size: 1em;
+    gap: 4px;
+  }
 
   &:hover {
     border: 2px solid ${({ theme }) => theme.button.primary.hover};
@@ -38,19 +44,26 @@ const StyledButton = styled.button`
 `;
 
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
-  width: 288px;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.card.border};
+  ${device.tablet} {
+    width: 288px;
+  }
 `;
 
 const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
-  padding: 16px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 14px;
   border: 1px solid transparent;
   cursor: pointer;
+
+  ${device.tablet} {
+    padding: 16px;
+    font-size: 16px;
+  }
 
   &:first-child {
     border-top-left-radius: 16px;
