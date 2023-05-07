@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
-import { Budget, Transaction } from "../../../../lib/types";
+import { Budget, Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
