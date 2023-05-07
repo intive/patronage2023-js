@@ -11,7 +11,6 @@ type SideNavigationBarItemProps = {
   textValue: string;
   subMenu?: SubMenuDataProps;
   id: number;
-  data?: any;
 };
 
 type SideNavigationBarProps = {
@@ -49,7 +48,6 @@ export const SideNavigationBar = ({
   isNavListItemClicked,
   resetIsNavListItemClicked,
 }: SideNavigationBarProps) => {
-  const { data } = items[0];
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
   const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
   const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
@@ -120,9 +118,8 @@ export const SideNavigationBar = ({
       {!isNavListItemClicked && subMenuData && (
         <SubMenu
           onInputChangeUpdateSubMenuData={onInputChangeUpdateSubMenuData}
-          subMenuDataObject={subMenuData}>
-          {data}
-        </SubMenu>
+          subMenuDataObject={subMenuData}
+        />
       )}
     </Wrapper>
   );

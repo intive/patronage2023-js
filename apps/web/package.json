@@ -14,6 +14,8 @@
     "dayjs": "^1.11.7",
     "houseform": "^1.10.5",
     "ka-table": "^8.0.1",
+    "@tanstack/react-query": "^4.29.5",
+    "axios": "^1.4.0",
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
