@@ -38,14 +38,15 @@ const StyledButton = styled.button`
 `;
 
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
-  box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.15);
+  width: 288px;
+  box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
+    0px 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.card.border};
 `;
 
-export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
-  width: 288px;
+const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   padding: 16px;
   font-size: 16px;
   border: 1px solid transparent;
