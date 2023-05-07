@@ -45,7 +45,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA to display for information tiles
   const dataRangeInfo = (
     <>
-      {convertTimestamp(budget.startDate)} - {convertTimestamp(budget.endDate)}
+      {convertTimestamp(startDate)} - {convertTimestamp(endDate)}
     </>
   );
 
