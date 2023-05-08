@@ -1,5 +1,4 @@
 "use client";
-// import { device } from "lib/media";
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import Link from "next/link";
