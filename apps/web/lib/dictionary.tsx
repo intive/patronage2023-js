@@ -480,7 +480,7 @@ const dictionary = {
     currentPageAriaLabel: {
       en: "is your current page",
       pl: "to twoja bieżąca strona",
-      fr: "est votre page actuelle",
+      fr: "votre page actuelle",
     },
     nextPageAriaLabel: {
       en: "Next page",
@@ -510,7 +510,7 @@ const dictionary = {
     rowsPerPageSelectAriaLabel: {
       en: "Selection of the number of transactions displayed on the page",
       pl: "Wybór liczby transakcji wyświetlanych na stronie",
-      fr: "Sélection du nombre de transactions affichées par page",
+      fr: "Sélection du nombre de transactions affichées sur la page",
     },
   },
 };
