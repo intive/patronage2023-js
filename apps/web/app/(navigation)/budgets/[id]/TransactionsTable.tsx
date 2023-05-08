@@ -41,7 +41,7 @@ export const TransactionsTable = ({
       style: {
         verticalAlign: "middle",
         lineHeight: 0,
-        width: "26%",
+        width: "27%",
       },
     },
     {
@@ -49,7 +49,7 @@ export const TransactionsTable = ({
       title: t(transactionsTable.tableColumnHeaders.name),
       isSortable: true,
       dataType: DataType.String,
-      style: { width: "30%" },
+      style: { width: "29%" },
     },
     {
       key: "amount",
