@@ -1,4 +1,3 @@
-import { NextPageContext } from "next";
 import { BudgetsContent } from "./BudgetsContent";
 
 interface PageProps {
@@ -6,7 +5,6 @@ interface PageProps {
     id: string;
   };
 }
-
 export default function BudgetsPage({ params }: PageProps) {
   return <BudgetsContent id={params.id} />;
 }

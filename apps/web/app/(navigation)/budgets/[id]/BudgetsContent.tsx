@@ -22,7 +22,7 @@ interface BudgetsContentProps {
   id: string;
 }
 
-export const BudgetsContent = () => {
+export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
   const id = "3e9ca5f0-5ef8-44bc-a8bc-175c826b39b5";
 
   const token =
