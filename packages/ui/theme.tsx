@@ -227,6 +227,9 @@ export const theme = {
     background: colors.BasicWhite,
     icon: colors.Neutral7,
     focusBackground: colors.Teal1,
+    border: colors.Neutral2,
+    neutral: colors.Neutral8,
+    error: colors.Supporting4,
   },
   budgetIcon: {
     main: colors.Teal10,

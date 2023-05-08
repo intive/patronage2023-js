@@ -1,11 +1,13 @@
 import * as Select from "@radix-ui/react-select";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const SelectRootStyled = styled(Select.Root)`
+export const SelectTriggerWrapperStyled = styled.div`
   position: relative;
 `;
 
-export const SelectTriggerStyled = styled(Select.Trigger)`
+export const SelectTriggerStyled = styled(Select.Trigger)<{
+  hasError: boolean;
+}>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -14,13 +16,20 @@ export const SelectTriggerStyled = styled(Select.Trigger)`
   margin-bottom: 18px;
   width: 100%;
   height: 56px;
-  color: ${({ theme }) => theme.input.neutral};
+  color: ${({ theme }) => theme.categorySelect.neutral};
   background-color: ${({ theme }) => theme.categorySelect.background};
-  border: solid 2px ${({ theme }) => theme.input.borderError};
+  border: solid 2px ${({ theme }) => theme.categorySelect.border};
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
   transition: border-color 200ms ease-out;
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      color: ${({ theme }) => theme.categorySelect.error};
+      border: solid 2px ${({ theme }) => theme.categorySelect.error};
+    `}
 
   :focus {
     transition: border-color 200ms ease-out;
@@ -49,8 +58,7 @@ export const SelectContentStyled = styled(Select.Content)`
 
 export const SelectItemStyled = styled(Select.Item)`
   outline-color: ${({ theme }) => theme.input.focus};
-  padding: 16px;
-  gap: 8px;
+  padding: 8px 16px;
 
   &:focus {
     color: ${({ theme }) => theme.input.main};
@@ -74,5 +82,17 @@ export const CategoryWrapperStyled = styled.div`
 
 export const CategoryNameStyled = styled.p`
   height: 100%;
-  padding: 16px;
+  padding: 0 16px;
+`;
+
+export const SupportingLabelStyled = styled.div<{ hasError: boolean }>`
+  position: absolute;
+  top: 56px;
+  color: ${({ hasError }) =>
+    hasError
+      ? ({ theme }) => theme.categorySelect.error
+      : ({ theme }) => theme.categorySelect.neutral};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0 10px;
 `;

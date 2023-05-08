@@ -1,10 +1,11 @@
 "use client";
 import { Field, Form } from "houseform";
 import { useState } from "react";
-import { Button, CustomDatePicker, Input, Modal, Separator } from "ui";
+import { Button, CustomDatePicker, Input, Modal } from "ui";
 import { z } from "zod";
 import {
   ButtonWrapperStyled,
+  ContentStyled,
   DatePickerErrorStyled,
   DatePickerWrapperStyled,
   FormWrapper,
@@ -85,8 +86,10 @@ export const CreateNewTransaction = ({
     }
   };
 
+  const fullHeight = window.innerHeight < 660;
+
   return (
-    <Modal onClose={onClose} header={getHeader(type)}>
+    <Modal onClose={onClose} header={getHeader(type)} fullHeight={fullHeight}>
       <FormWrapper>
         <Form onSubmit={handleSubmit}>
           {({ submit }) => (
@@ -94,12 +97,7 @@ export const CreateNewTransaction = ({
               onSubmit={(e) => {
                 e.preventDefault();
               }}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "8px",
-                }}>
+              <ContentStyled fullHeight={fullHeight}>
                 <ParagraphStyled>{t(dict.details)}</ParagraphStyled>
                 <Field
                   name="transaction-name"
@@ -133,16 +131,20 @@ export const CreateNewTransaction = ({
                   name="amount"
                   initialValue={newTransaction.value}
                   onSubmitValidate={z.union([
-                    z.string().nonempty({ message: t(dict.errors.notEmpty) }),
                     z
-                      .number()
-                      .positive({ message: t(dict.errors.graterThanZero) }),
+                      .string()
+                      .nonempty({ message: t(dict.errors.amountNotEmpty) }),
+                    z.number().positive({
+                      message: t(dict.errors.amountGraterThanZero),
+                    }),
                   ])}
                   onChangeValidate={z.union([
-                    z.string().nonempty({ message: t(dict.errors.notEmpty) }),
                     z
-                      .number()
-                      .positive({ message: t(dict.errors.graterThanZero) }),
+                      .string()
+                      .nonempty({ message: t(dict.errors.amountNotEmpty) }),
+                    z.number().positive({
+                      message: t(dict.errors.amountGraterThanZero),
+                    }),
                   ])}>
                   {({ value, setValue, errors }) => (
                     <Input
@@ -160,9 +162,18 @@ export const CreateNewTransaction = ({
                     />
                   )}
                 </Field>
-                <Field name="category">
-                  {({ setValue, onBlur }) => (
+                <Field
+                  name="category"
+                  initialValue={newTransaction.category}
+                  onSubmitValidate={z
+                    .string()
+                    .nonempty({ message: t(dict.errors.selectCategory) })}
+                  onChangeValidate={z
+                    .string()
+                    .nonempty({ message: t(dict.errors.selectCategory) })}>
+                  {({ setValue, errors }) => (
                     <CategorySelector
+                      errors={errors}
                       onValueChange={(newValue) => {
                         setValue(newValue);
                         setNewTransaction({
@@ -174,42 +185,40 @@ export const CreateNewTransaction = ({
                     />
                   )}
                 </Field>
-                <div style={{ width: "50%", marginBottom: "24px" }}>
-                  <Field
-                    name="date-start"
-                    initialValue={
-                      newTransaction.transactionDate
-                        ? new Date(newTransaction.transactionDate)
-                        : null
-                    }
-                    onSubmitValidate={z.date({
-                      invalid_type_error: t(dict.errors.selectDate),
-                    })}
-                    onChangeValidate={z.date({
-                      invalid_type_error: t(dict.errors.selectDate),
-                    })}>
-                    {({ setValue, errors }) => (
-                      <DatePickerWrapperStyled>
-                        <CustomDatePicker
-                          hasError={errors.length > 0}
-                          label={t(dict.dateLabel)}
-                          selected={
-                            newTransaction.transactionDate
-                              ? new Date(newTransaction.transactionDate)
-                              : null
-                          }
-                          onSelect={(date) => {
-                            setValue(date);
-                            onSelectDate(date);
-                          }}
-                        />
-                        <DatePickerErrorStyled>
-                          {errors[0]}
-                        </DatePickerErrorStyled>
-                      </DatePickerWrapperStyled>
-                    )}
-                  </Field>
-                </div>
+                <Field
+                  name="date-start"
+                  initialValue={
+                    newTransaction.transactionDate
+                      ? new Date(newTransaction.transactionDate)
+                      : null
+                  }
+                  onSubmitValidate={z.date({
+                    invalid_type_error: t(dict.errors.selectDate),
+                  })}
+                  onChangeValidate={z.date({
+                    invalid_type_error: t(dict.errors.selectDate),
+                  })}>
+                  {({ setValue, errors }) => (
+                    <DatePickerWrapperStyled>
+                      <CustomDatePicker
+                        hasError={errors.length > 0}
+                        label={t(dict.dateLabel)}
+                        selected={
+                          newTransaction.transactionDate
+                            ? new Date(newTransaction.transactionDate)
+                            : null
+                        }
+                        onSelect={(date) => {
+                          setValue(date);
+                          onSelectDate(date);
+                        }}
+                      />
+                      <DatePickerErrorStyled>{errors[0]}</DatePickerErrorStyled>
+                    </DatePickerWrapperStyled>
+                  )}
+                </Field>
+              </ContentStyled>
+              <div>
                 <SeparatorStyled />
                 <ButtonWrapperStyled>
                   <Button onClick={submit}>{t(dict.button)}</Button>

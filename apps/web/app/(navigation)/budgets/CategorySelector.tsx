@@ -7,8 +7,9 @@ import {
   SelectIconStyled,
   SelectItemStyled,
   SelectPortalStyled,
-  SelectRootStyled,
   SelectTriggerStyled,
+  SelectTriggerWrapperStyled,
+  SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
 import categoryMap from "../../../lib/category-map";
@@ -16,9 +17,9 @@ import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
 
 type CategorySelectorProps = {
-  supportingLabel?: React.ReactNode;
   onValueChange?: (value: string) => void;
   label?: string;
+  errors?: string[];
 };
 
 const getCategoriesItems = (categoryMap: CategoryMap) => {
@@ -46,29 +47,37 @@ const getCategoriesItems = (categoryMap: CategoryMap) => {
 };
 
 export const CategorySelector = ({
-  supportingLabel,
+  errors,
   onValueChange,
   label,
 }: CategorySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(errors?.length);
+  const hasErrors = errors ? errors.length > 0 : false;
+  console.log(hasErrors);
 
   return (
-    <SelectRootStyled
+    <Select.Root
       name="category"
       value={undefined}
       onValueChange={onValueChange}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTriggerStyled>
-        <Select.Value placeholder={label}></Select.Value>
-        <SelectIconStyled>
-          <Icon
-            icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-            iconSize={27}
-          />
-        </SelectIconStyled>
-      </SelectTriggerStyled>
+      <SelectTriggerWrapperStyled>
+        <SelectTriggerStyled hasError={hasErrors}>
+          <Select.Value placeholder={label}></Select.Value>
+          <SelectIconStyled>
+            <Icon
+              icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+              iconSize={27}
+            />
+          </SelectIconStyled>
+        </SelectTriggerStyled>
+        <SupportingLabelStyled hasError={hasErrors}>
+          {errors && errors[0]}
+        </SupportingLabelStyled>
+      </SelectTriggerWrapperStyled>
 
       <SelectPortalStyled>
         <SelectContentStyled position="popper">
@@ -82,6 +91,6 @@ export const CategorySelector = ({
           </Select.Viewport>
         </SelectContentStyled>
       </SelectPortalStyled>
-    </SelectRootStyled>
+    </Select.Root>
   );
 };

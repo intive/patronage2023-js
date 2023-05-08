@@ -428,7 +428,7 @@ const dictionary = {
     header: {
       income: {
         en: "New income",
-        pl: "Nowy przychód",
+        pl: "Nowy wpływ",
       },
       expense: {
         en: "New expense",
@@ -446,7 +446,7 @@ const dictionary = {
       },
       expense: {
         en: "Expense name",
-        pl: "Nazwa wydatku",
+        pl: "Nazwa wpływu",
       },
     },
     amountLabel: {
@@ -470,16 +470,20 @@ const dictionary = {
         en: "Name must not have more than 58 characters.",
         pl: "Nazwa nie może mieć więcej niż 58 znaków.",
       },
-      graterThanZero: {
+      amountGraterThanZero: {
         en: "Amount must be grater than 0.",
         pl: "Kwota musi być większa od 0.",
       },
-      notEmpty: {
+      amountNotEmpty: {
         en: "Please specify the amount.",
         pl: "Podaj kwotę transakcji.",
       },
+      selectCategory: {
+        en: "Please select a category.",
+        pl: "Wybierz kategorię.",
+      },
       selectDate: {
-        en: "Please select the date.",
+        en: "Please select a date.",
         pl: "Wybierz datę.",
       },
     },

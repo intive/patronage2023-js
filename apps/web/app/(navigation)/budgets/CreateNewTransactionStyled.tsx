@@ -4,6 +4,13 @@ import { Separator } from "ui";
 
 export const FormWrapper = styled.div`
   width: 320px;
+  height: calc(100% - 52px);
+
+  & form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
   ${device.tablet} {
     width: 464px;
@@ -12,8 +19,13 @@ export const FormWrapper = styled.div`
 
 export const SeparatorStyled = styled(Separator)`
   display: block;
-  width: calc(100% + calc(48px * 2));
-  margin-left: -48px;
+  width: calc(100% + calc(16px * 2));
+  margin-left: -16px;
+
+  ${device.tablet} {
+    width: calc(100% + calc(48px * 2));
+    margin-left: -48px;
+  }
 `;
 
 export const ButtonWrapperStyled = styled.div`
@@ -23,6 +35,8 @@ export const ButtonWrapperStyled = styled.div`
 
 export const DatePickerWrapperStyled = styled.div`
   position: relative;
+  width: 50%;
+  margin-bottom: 24px;
 `;
 
 export const DatePickerErrorStyled = styled.div`
@@ -41,4 +55,24 @@ export const ParagraphStyled = styled.p`
   padding-left: 3px;
   padding-top: 56px;
   color: #515151;
+`;
+
+export const ContentStyled = styled.div<{ fullHeight?: boolean }>`
+  display: grid;
+  overflow-y: auto;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  padding-right: ${({ fullHeight }) => fullHeight && "10px"};
+  gap: 8px;
+
+  &::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.textarea.Neutral2};
+    border-radius: 10px;
+    width: 6px;
+    margin-bottom: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.modal.closeButton};
+    border-radius: 10px;
+  }
 `;
