@@ -2,26 +2,13 @@
 
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
-
 import { TransactionsTable } from "./[id]/TransactionsTable";
 import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
-import { ButtonWithDropdown } from "ui";
 import { device } from "lib/media-queries";
-
-const DUMMY_DROPDOWNITEMS = [
-  {
-    label: "New income",
-    callback: () => alert("New income modal"),
-  },
-  {
-    label: "New expense",
-    callback: () => alert("New expense modal"),
-  },
-];
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -57,9 +44,6 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <div style={{ width: "100%"}}>
-        <ButtonWithDropdown label="Create" items={DUMMY_DROPDOWNITEMS} />
-      </div>
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
