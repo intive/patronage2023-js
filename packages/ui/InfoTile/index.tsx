@@ -1,16 +1,20 @@
 "use client";
 
 import styled from "styled-components";
+import { device } from "../../../apps/web/lib/media-queries";
 
 export const InfoTileStyled = styled.div`
   border: 1px solid ${({ theme }) => theme.infoTile.border};
   color: ${({ theme }) => theme.infoTile.label};
-  padding: 8px 32px 8px 16px;
+  padding: 8px 16px;
   border-radius: 8px;
   font-size: 12px;
-  line-height: 24px;
   display: flex;
   flex-direction: column;
+  ${device.tablet} {
+    line-height: 24px;
+    padding: 8px 32px 8px 16px;
+  }
 `;
 
 export const InfoValueWrapper = styled.div`
