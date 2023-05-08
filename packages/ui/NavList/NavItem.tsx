@@ -3,13 +3,14 @@
 import styled from "styled-components";
 import { Icon } from "ui";
 import Link from "next/link";
+import React from "react";
 
 //types of NavItem props
 export type NavItemProps = {
   active: boolean;
   href: string;
   onClick: () => void;
-} & React.HTMLProps<HTMLAnchorElement>;
+} & React.HTMLProps<HTMLLIElement>;
 
 type NavItemPropsTransient = Omit<NavItemProps, "active"> & {
   $active: boolean;
@@ -60,13 +61,19 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   }
 `;
 
-export const NavItem = ({ active, href, children, onClick }: NavItemProps) => {
-  return (
-    <li>
-      <NavItemStyled $active={active} href={href} onClick={onClick}>
-        <ChildrenWrapper>{children}</ChildrenWrapper>
-        {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
-      </NavItemStyled>
-    </li>
-  );
-};
+export const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
+  ({ active, href, children, onClick }, ref) => {
+    return (
+      <li ref={ref}>
+        <NavItemStyled $active={active} href={href} onClick={onClick}>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
+          {active && (
+            <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />
+          )}
+        </NavItemStyled>
+      </li>
+    );
+  }
+);
+
+NavItem.displayName = "NavItem";

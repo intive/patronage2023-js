@@ -2,7 +2,7 @@
 
 import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
 import {
@@ -13,7 +13,7 @@ import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
 
 import { iconNames } from "lib/consts";
 import { SpanStyled } from "ui/NavList";
-import { useMutation } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import {
   getBudgetsList,
   GetBudgetsListType,
@@ -33,31 +33,72 @@ export default function SideNav() {
   const debouncedSearch = useDebounce(searchValue, 500);
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1NjYxNTQsImlhdCI6MTY4MzU1ODk1NCwianRpIjoiMDJlZTAwMGYtZjU0ZS00NzdlLWEzNTMtNDVhNzI1ODRkMjhlIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjQ3MmU0ZDc1LTkyYmUtNDE4ZC1hMjUzLWFiMjNlMGU1ZThkMSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjQ3MmU0ZDc1LTkyYmUtNDE4ZC1hMjUzLWFiMjNlMGU1ZThkMSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.duyT0_bOrdWdVc-hyav6DfmqOZrn1PvEUbx0_vrUsRmrW_5ICaOcvakm7iGu6sDOlCnYl7DhTm6EREMfBhYMw235PnpdOVGuf_v7BOwk5wUJKqiEUA4EMUKJUf8a8SsxELxxgK0sPajvh3AiOnRtuBgCeM_aefGFfN1S8ajbXBqTLLDrOdGOEdGA6IBb7ieAxR4r-ylm4NzinTwGNdHKOx0IM4SO-CBSCYWjU3CS49qDoXGvxh7_FxeoQXUFInqJPNTABpjxTWNnseBDyima8yOpA8B8GAKLTmm-gPmbn2p2h7L6pRDW95SIUeOn7Yd9E-8DKWKuZHPaLSt1T663hA";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1ODg0NDksImlhdCI6MTY4MzU4MTI0OSwianRpIjoiNjA4MDdkNjQtNjJlOS00NDc4LWEzMmEtZjkyOWZiMDg5ZmQ3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjYwYWYzNzYyLThmYjgtNDBkYi05ZGQxLWY0OTI0YTQyYmQ1YyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjYwYWYzNzYyLThmYjgtNDBkYi05ZGQxLWY0OTI0YTQyYmQ1YyIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.b3An54xdGmmFi1yyCrW-kEksi3-6BtkRvdVrUCXKPdHlZqLsGtVnluGfiPWbBj7LTrOamBpeOiZrTX5sedXNJTXeHexoJ7yWhq91wNIz9p9eD5ZfT5uxOfld713iL8r-uXUSNu30UMr1wzh34Ep68FV4d5aFddprE-_3tE_BUDk2IeBVeNMEeI0Q_XPJxvNZu0EVrb2UW4KmPJdkX1hWZyeWtIXBmslJO9cUTNjZR2VWJSI5h1x0wLS3afsuuuohrnNwYBkkqTb7NLLKTb1xYoi3QVFRJ5gdLTBAPhEWXh03xHAqVSn9xiupuwugK3FaJF7kLgkcz_dn5oHzQSL-ew";
+  // const budgetsMutation = useMutation({
+  //   mutationFn: ({ pageSize, pageIndex, axiosInstance }: GetBudgetsListType) =>
+  //     getBudgetsList({
+  //       pageSize,
+  //       pageIndex,
+  //       searchValue,
+  //       sortAscending,
+  //       axiosInstance,
+  //     }),
+  // });
 
-  const budgetsMutation = useMutation({
-    mutationFn: ({ pageSize, pageIndex, axiosInstance }: GetBudgetsListType) =>
+  // useEffect(() => {
+  //   budgetsMutation.mutateAsync({
+  //     pageSize,
+  //     pageIndex,
+  //     searchValue,
+  //     sortAscending,
+  //     axiosInstance,
+  //   });
+  // }, [debouncedSearch, sortAscending]);
+
+  const pageSize = 13;
+  const pageIndex = 1;
+  const axiosInstance = reqInstance(token);
+
+  const {
+    fetchNextPage, //function
+    hasNextPage, // boolean
+    isFetchingNextPage, // boolean
+    data,
+    status,
+    error,
+  } = useInfiniteQuery(
+    ["budgets"],
+    ({ pageParam = 1 }) =>
       getBudgetsList({
         pageSize,
         pageIndex,
         searchValue,
         sortAscending,
         axiosInstance,
+        pageParam,
       }),
-  });
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.items.length ? allPages.length + 1 : undefined;
+      },
+    }
+  );
 
-  useEffect(() => {
-    const pageSize = 200;
-    const pageIndex = 1;
-    const axiosInstance = reqInstance(token);
-    budgetsMutation.mutateAsync({
-      pageSize,
-      pageIndex,
-      searchValue,
-      sortAscending,
-      axiosInstance,
-    });
-  }, [debouncedSearch, sortAscending]);
+  const intObserver = useRef<IntersectionObserver | null>(null);
+  const lastBudgetRef = useCallback(
+    (budget: any) => {
+      if (isFetchingNextPage) return;
+      if (intObserver.current) intObserver.current.disconnect();
+
+      intObserver.current = new IntersectionObserver((budgets) => {
+        if (budgets[0].isIntersecting && hasNextPage) {
+          fetchNextPage();
+        }
+      });
+      if (budget) intObserver.current.observe(budget);
+    },
+    [isFetchingNextPage, fetchNextPage, hasNextPage]
+  );
 
   const resetIsNavListItemClicked = () => {
     setIsNavItemClicked(false);
@@ -76,22 +117,28 @@ export default function SideNav() {
   };
 
   const successData =
-    budgetsMutation.isSuccess &&
-    budgetsMutation.data.items.map((item) => {
-      return {
-        ComponentToRender: (
-          <>
-            <IconStyled
-              icon={iconNames.includes(item.icon) ? item.icon : "help"}
-              iconSize={24}
-            />
-            <SpanStyled>{item.name}</SpanStyled>
-          </>
-        ),
-        href: `/budgets/${item.id.value}`,
-        id: item.id.value,
-      };
-    });
+    // budgetsMutation.isSuccess &&
+    // budgetsMutation.data.items.map((item) => {
+    data?.pages
+      .map((page) => {
+        return page.items.map((item) => {
+          return {
+            ComponentToRender: (
+              <>
+                <IconStyled
+                  icon={iconNames.includes(item.icon) ? item.icon : "help"}
+                  iconSize={24}
+                />
+                <SpanStyled>{item.name}</SpanStyled>
+              </>
+            ),
+            href: `/budgets/${item.id.value}`,
+            id: item.id.value,
+            ref: lastBudgetRef,
+          };
+        });
+      })
+      .flat();
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
@@ -112,8 +159,8 @@ export default function SideNav() {
       <NavList
         contents={successData ? successData : []}
         onNavListItemClick={hideSubMenu}
-        loading={budgetsMutation.isLoading}
-        error={budgetsMutation.isError}
+        loading={isFetchingNextPage}
+        error={status === "error"}
       />
     ),
     button: {
@@ -130,6 +177,7 @@ export default function SideNav() {
       <NavList
         contents={SettingsSubMenuNavListContents}
         onNavListItemClick={hideSubMenu}
+        ref={lastBudgetRef}
       />
     ),
   };

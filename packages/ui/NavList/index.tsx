@@ -11,6 +11,7 @@ export type NavItemContents = {
   ComponentToRender?: ReactElement;
   href: string;
   id: string | number;
+  ref: React.ForwardedRef<HTMLLIElement>;
 };
 
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
@@ -64,7 +65,7 @@ const WrapperStyled = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 15px;
   color: #515151;
@@ -84,6 +85,7 @@ export const NavList = ({
         contents.map((content) => {
           return (
             <NavItem
+              ref={content.ref}
               active={content.href === currentPage}
               key={content.id}
               href={content.href}
