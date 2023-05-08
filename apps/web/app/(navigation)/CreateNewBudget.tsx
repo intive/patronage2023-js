@@ -1,15 +1,13 @@
 "use client";
 
 import {
-  ReactChild,
-  ReactChildren,
-  ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { QueryClient, useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { v1 as uuidv1 } from "uuid";
+import { env } from "env.mjs";
 
 import {
   Button,
@@ -46,7 +44,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
 
 type NewBudget = {
-  onClose?: Function;
+  onClose: Function;
 };
 
 type currencyType = {
@@ -144,7 +142,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const useSendBudget = () =>
     useMutation(
       () =>
-        fetch(url, {
+        fetch(`${env.NEXT_PUBLIC_API_URL}/budgets`, {
           method: "POST",
           headers: {
             accept: "text/plain",
@@ -169,7 +167,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         }),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries();
+          queryClient.invalidateQueries("budgets");
         },
         onError: () => {},
       }
@@ -194,6 +192,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           onSubmit={() => {
             console.log(newBudget);
             sendBudget();
+            onClose();
           }}>
           {({ submit }) => (
             <form
