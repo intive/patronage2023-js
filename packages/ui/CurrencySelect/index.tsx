@@ -28,24 +28,18 @@ export type CurrencySelectComponentProps = {
 } & Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
 
-const currency = [
-  {
-    tag: "PLN",
-    label: "Polish Zloty",
-  },
-  {
-    tag: "GBP",
-    label: "British Pound",
-  },
-  {
-    tag: "EUR",
-    label: "Euro",
-  },
-  {
-    tag: "USD",
-    label: "United States Dollar",
-  },
-];
+  const currency = [
+    {
+      tag: "EUR",
+      label: "Euro",
+      id: "2",
+    },
+    {
+      tag: "USD",
+      label: "United States Dollar",
+      id: "1",
+    },
+  ];
 
 export const CurrencySelect = ({
   onValueChange,
