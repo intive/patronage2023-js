@@ -7,7 +7,7 @@ import { TransactionsTable } from "./TransactionsTable";
 import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
-
+import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +42,11 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
   });
   const mainCardContent = (
     <BudgetContentWrapperStyled>
-      <BudgetBasicInformation budget={budget} />
+      {budget ? (
+        <BudgetBasicInformation budget={budget} />
+      ) : (
+        <BudgetBasicInformationSuspense />
+      )}
       {/* no suspense for TransactionTable so we don't render it when there is no data */}
       {budget && (
         <TransactionsTable

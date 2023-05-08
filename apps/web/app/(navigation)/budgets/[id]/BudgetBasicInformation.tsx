@@ -23,10 +23,6 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
 
-  if (!budget) {
-    return <BudgetBasicInformationSuspense />;
-  }
-
   const { basicInformation } = dict;
   const { startDate, endDate, limit, currency, description, icon, name } =
     budget;
@@ -96,7 +92,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
 }
 
-const BudgetBasicInformationSuspense = () => {
+export const BudgetBasicInformationSuspense = () => {
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
