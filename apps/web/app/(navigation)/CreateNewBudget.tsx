@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { v1 as uuidv1 } from "uuid";
-import { env } from "env.mjs";
 
 import {
   Button,
@@ -169,9 +164,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         onSuccess: () => {
           queryClient.invalidateQueries("budgets");
         },
-        onError: () => {
-
-        },
+        onError: () => {},
       }
     );
 
