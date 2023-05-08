@@ -48,27 +48,26 @@ export const SideNavigationBar = ({
   resetIsNavListItemClicked,
 }: SideNavigationBarProps) => {
   const [subMenuId, setSubMenuId] = useState("");
-
-  useEffect(() => {
-    if (isNavListItemClicked) setSubMenuId("");
-  }, [isNavListItemClicked]);
+  const [isSubMenuShown, setIsSubMenuShown] = useState(false);
 
   const item = useMemo(
     () => items.find((item) => item.id === subMenuId),
     [items, subMenuId]
   );
-  const subMenuData = item ? item.subMenu : false;
+  const subMenuData = item ? item.subMenu : undefined;
 
   const hideSubMenu = () => {
     setSubMenuId("");
+    setIsSubMenuShown(false);
   };
 
   const showSubMenu = (id: string) => {
-    if (subMenuData && subMenuId === id) {
+    if (subMenuData && subMenuId === id && !isNavListItemClicked) {
       return hideSubMenu();
     }
     setSubMenuId(id);
     resetIsNavListItemClicked();
+    setIsSubMenuShown(true);
   };
 
   const handleLinkClick = () => {
@@ -90,7 +89,7 @@ export const SideNavigationBar = ({
               }}
               icon={icon}
               textValue={textValue}
-              activeFlag={!isNavListItemClicked && subMenuId === id}
+              activeFlag={subMenuId === id}
             />
           ) : (
             <SideNavigationBarLink
@@ -98,13 +97,13 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={!isNavListItemClicked && subMenuId === "link"}
+              activeFlag={subMenuId === "link"}
               onClick={() => handleLinkClick()}
             />
           );
         })}
       </SideNavigationBarStyled>
-      {!isNavListItemClicked && subMenuData ? (
+      {!isNavListItemClicked && isSubMenuShown && subMenuData ? (
         <SubMenu subMenuDataObject={subMenuData} />
       ) : null}
     </Wrapper>
