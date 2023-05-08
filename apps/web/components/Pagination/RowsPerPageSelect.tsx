@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Select from "@radix-ui/react-select";
 import {
   SelectContentStyled,
@@ -30,24 +30,6 @@ export const RowsPerPageSelect = ({
   pageSizeOptions,
 }: RowsPerPageSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      const body = document.body;
-      const bodyWidth = document.body.clientWidth;
-      if (bodyWidth > 768) {
-        body.style.right = "8.5px";
-      }
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    const body = document.body;
-    const bodyWidth = document.body.clientWidth;
-    if (bodyWidth > 768) {
-      body.style.right = "8.5px";
-    }
-  }, []);
 
   return (
     <Select.Root

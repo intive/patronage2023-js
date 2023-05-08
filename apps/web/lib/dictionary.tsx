@@ -472,25 +472,45 @@ const dictionary = {
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },
   Pagination: {
-    pageAriaLabel: { en: "Page", pl: "Strona" },
+    pageAriaLabel: {
+      en: "Page",
+      pl: "Strona",
+      fr: "Page",
+    },
     currentPageAriaLabel: {
       en: "is your current page",
-      pl: "to twoja bierząca strona",
+      pl: "to twoja bieżąca strona",
+      fr: "est votre page actuelle",
     },
-    nextPageAriaLabel: { en: "Next page", pl: "Następna strona" },
-    previousPageAriaLabel: { en: "Previous page", pl: "Poprzednia strona" },
-    rowsPerPageText: { en: "Rows per page", pl: "Wierszy na stronie" },
+    nextPageAriaLabel: {
+      en: "Next page",
+      pl: "Następna strona",
+      fr: "Page suivante",
+    },
+    previousPageAriaLabel: {
+      en: "Previous page",
+      pl: "Poprzednia strona",
+      fr: "Page précédente",
+    },
+    rowsPerPageText: {
+      en: "Rows per page",
+      pl: "Wierszy na stronie",
+      fr: "Lignes par page",
+    },
     breakElementAriaLabel: {
       en: "Jump 3 pages ahead",
       pl: "Skocz 3 strony do przodu",
+      fr: "Aller de 3 pages en avant",
     },
     navigationTableAriaLabel: {
       en: "Table navigation",
       pl: "Nawigacja po tabeli",
+      fr: "Navigation dans le tableau",
     },
     rowsPerPageSelectAriaLabel: {
       en: "Selection of the number of transactions displayed on the page",
       pl: "Wybór liczby transakcji wyświetlanych na stronie",
+      fr: "Sélection du nombre de transactions affichées par page",
     },
   },
 };
