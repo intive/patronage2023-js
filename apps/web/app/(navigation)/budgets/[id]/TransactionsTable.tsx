@@ -176,7 +176,7 @@ export const TransactionsTable = ({
                   return (
                     <StyledCurrencyAmount
                       amount={props.value}
-                      currencyOptions={budget.currency}
+                      currency={budget.currency}
                     />
                   );
                 case "creator":
@@ -201,7 +201,7 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "date":
                   const value = props.groupKey[props.groupIndex];
-                  return <>{getDayName(value, budget.currency.locale)}</>;
+                  return <>{getDayName(value, budget.currency)}</>;
               }
             },
           },
