@@ -347,8 +347,8 @@ const dictionary = {
     },
     transactionsTable: {
       groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "Wczoraj" },
-        today: { en: "Today", pl: "Dzisiaj" },
+        yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
+        today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
         monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
         tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
         wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
