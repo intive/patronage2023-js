@@ -462,13 +462,10 @@ const dictionary = {
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
     createButton: {
-      label: { en: "Create", pl: "Utwórz"},
-      newIncome: { en: "New income", pl: "Nowy wpływ"},
-      newExpense: { en: "New expense", pl: "Nowy wydatek"},
+      label: { en: "Create", pl: "Utwórz", fr: "Créer"},
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus"},
+      newExpense: { en: "New expense", pl: "Nowy wydatek", fr: "Nouvelle dépense"},
     },
-    tableDates: {
-      yesterday: { en: "Yesterday", pl: "Wczoraj" },
-      today: { en: "Today", pl: "Dzisiaj" },
     transactionsTable: {
       groupRowDays: {
         yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
