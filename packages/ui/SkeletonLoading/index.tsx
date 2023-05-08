@@ -16,7 +16,7 @@ export const SkeletonLoading = ({
       width={width}
       height={height}
       circle={circle}
-      baseColor="#adaeb3"
+      baseColor="#e5e5e5"
     />
   );
 };
