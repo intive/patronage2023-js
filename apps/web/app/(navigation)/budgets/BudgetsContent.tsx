@@ -2,13 +2,13 @@
 
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
-
 import { TransactionsTable } from "./[id]/TransactionsTable";
 import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { usePathname } from "next/navigation";
+import { device } from "lib/media-queries";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -16,7 +16,10 @@ const BudgetContentWrapperStyled = styled.div`
   justify-content: flex-start;
   align-items: center;
   align-self: flex-start;
-  gap: 32px;
+  gap: 16px;
+  ${device.tablet} {
+    gap: 32px;
+  }
 `;
 
 export const BudgetsContent = () => {
