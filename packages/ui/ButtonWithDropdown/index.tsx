@@ -21,7 +21,6 @@ const StyledButton = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  
   border: 2px solid ${({ theme }) => theme.button.primary.main};
   border-radius: 8px;
   color: white;
@@ -30,7 +29,7 @@ const StyledButton = styled.button`
   font-size: 0.9em;
   transition: all 0.2s;
   cursor: pointer;
-  padding: 5px 2px 5px 8px;
+  padding: 5px 3px 5px 12px;
   ${device.tablet}{
     padding: 9px 12px 9px 22px;
     font-size: 1em;
@@ -75,16 +74,15 @@ const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+    border-color: ${({ theme }) => theme.input.focus};
     background-color: ${({ theme }) =>
       theme.transactionDropdownMenu.activeBackground};
-    outline: 0;
+    outline: none;
   }
 
   &:hover {
     background-color: ${({ theme }) =>
       theme.transactionDropdownMenu.activeBackground};
-    outline: 0;
     border: 1px solid transparent;
   }
 `;
@@ -93,7 +91,6 @@ export const ButtonWithDropdown = ({ label, items }: ButtonWithDropdownProps) =>
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <>
       <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
         <DropdownMenu.Trigger asChild>
           <StyledButton>
@@ -111,6 +108,5 @@ export const ButtonWithDropdown = ({ label, items }: ButtonWithDropdownProps) =>
           </DropdownMenuContentStyled>
         </DropdownMenu.Portal>
       </DropdownMenu.Root>
-    </>
   );
 };

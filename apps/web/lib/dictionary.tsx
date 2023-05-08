@@ -347,7 +347,7 @@ const dictionary = {
     },
     createButton: {
       label: { en: "Create", pl: "Utwórz"},
-      newIncome: { en: "New income", pl: "Nowy dochód"},
+      newIncome: { en: "New income", pl: "Nowy wpływ"},
       newExpense: { en: "New expense", pl: "Nowy wydatek"},
     },
     tableDates: {

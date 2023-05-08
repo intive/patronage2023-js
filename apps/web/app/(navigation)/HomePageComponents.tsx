@@ -20,7 +20,7 @@ export const CardStyled = styled(Card)`
   align-items: center;
   min-height: 100%;
   width: 100%;
-  padding:24px;
+  padding:24px 10px;
   ${device.tablet} {
     padding: 32px 48px;
   }
