@@ -103,6 +103,12 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     sort?.clickHandler();
   };
 
+  const sortIcon = sort?.sortAscending ? (
+    <Icon icon="filter_list" />
+  ) : (
+    <IconUpsideDown icon="filter_list" />
+  );
+
   return (
     <SubMenuStyled>
       <MainDiv>
@@ -110,11 +116,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
           <HeaderStyled>
             <Title>{title}</Title>
             <IconWrapperStyled onClick={onIconClicked}>
-              {sort?.sortAscending ? (
-                <Icon icon="filter_list" />
-              ) : (
-                <IconUpsideDown icon="filter_list" />
-              )}
+              {sort?.icon && sortIcon}
             </IconWrapperStyled>
           </HeaderStyled>
           {searchInput && (
