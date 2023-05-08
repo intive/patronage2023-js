@@ -65,7 +65,7 @@ export default function SignInPage() {
   return (
     <Form
       onSubmit={async (values) => {
-        const result = await signIn("credentials", {
+        signIn("credentials", {
           email: values.email,
           password: values.password,
           redirect: false,

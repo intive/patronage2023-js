@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    session({ session, token, user }) {
+    session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
       return session;
     },
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {},
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password } = credentials as CredentialType;
         // @ts-ignore
         // eslint-disable-next-line turbo/no-undeclared-env-vars
