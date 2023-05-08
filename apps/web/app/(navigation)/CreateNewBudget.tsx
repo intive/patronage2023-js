@@ -135,14 +135,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const url = "https://inbudget-patronage-api-dev.azurewebsites.net/budgets";
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1NzkzOTYsImlhdCI6MTY4MzU3MjE5NiwianRpIjoiZGMzMjI4NGEtZDVkMC00YjkyLTkzMDctMzYxODY4NmYwZDRlIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjYwNWEzODk3LTY4YWEtNGNkZi1hOTA2LWI5YmY0MjAxYjhiZSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjYwNWEzODk3LTY4YWEtNGNkZi1hOTA2LWI5YmY0MjAxYjhiZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.uHtPwHT5nNX0LFLvXNdsqRq-lKBdYE3QpB5BLHwkDd3oKP4vzIa6Rx24fZaGuIUkF-pwtIAqgL3YABGElf8YiFRoY-mXYaUF5UTHSznVlC3m8TyApdcYyxTBsyJsRh0JGkGg78yl3A_G-qpd5F58WIL4Ovn6U_q4bjM-NqhgwWIlGAW6Rv4V5xNJQrmO1Vm0cHJT-kOWD7NLTiz5ZEitUzdOJm8EFxL67_Mcf_LZhbidWKd0SmHFyB__30RvyTUd4JUvf7lFuF-3UF6PCHTFEA63lnVn_dwNhh_1lgrXiJyPFbGss6goUgXaQ-kea1KR6f98aXo4grMVWncGAX2Jdg";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM1ODQ2NTgsImlhdCI6MTY4MzU3NzQ1OCwianRpIjoiOTliN2JkOTItNjRmNS00NDQwLTk4YmEtZDlhMjUxYWI1MTIzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjA2ZDliY2FhLTZjOTEtNDRlZS1hMTJiLTNiMDIzNWIxMDNjZSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjA2ZDliY2FhLTZjOTEtNDRlZS1hMTJiLTNiMDIzNWIxMDNjZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.N0qloqsbooU95-WjOsG2uDChJnz6TD6nBlT1inIeMIQXhulYBYhwJixFCGs2bgZqeAZ5JvwmQM9mE575DQ4bDSvcPvDFrG3ffg6qcMGDVaZq6invYE5xXcmCyAsoRSfmSsSupN8ASaD1ShVBR2_UelsIf8-4FsOMjHgKBHj7ZgoRDAdkLCRDiNmLwTn_KE27QOO6Pj8wOIhr6Vht5QUVtvNV0dKc0CApvxoFOZoBb_Ljr8WInC2aLUUQ_6RZI0JoOqSUNPWIRjMmMycfM3tTtl_esNfh-L8YcUv7-2_a_jGTPQGYf2iVG4yGGZ7gBgDPouYgJqD6C91PqQ6W1qcSjQ";
 
   const queryClient = useQueryClient();
 
   const useSendBudget = () =>
     useMutation(
       () =>
-        fetch(`${env.NEXT_PUBLIC_API_URL}/budgets`, {
+        fetch(url, {
           method: "POST",
           headers: {
             accept: "text/plain",
@@ -169,7 +169,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         onSuccess: () => {
           queryClient.invalidateQueries("budgets");
         },
-        onError: () => {},
+        onError: () => {
+
+        },
       }
     );
 
@@ -190,7 +192,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         </Tabs.List>
         <Form
           onSubmit={() => {
-            console.log(newBudget);
             sendBudget();
             onClose();
           }}>
