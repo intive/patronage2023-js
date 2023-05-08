@@ -19,11 +19,10 @@ export const CardStyled = styled(Card)`
   align-items: center;
   min-height: 100%;
   width: 100%;
-  padding:24px 10px;
+  padding: 14px 10px;
   ${device.tablet} {
     padding: 32px 48px;
   }
-  
 `;
 
 export const LinkStyled = styled(Link)`
@@ -33,7 +32,7 @@ export const LinkStyled = styled(Link)`
   color: #1e4c40;
   margin-top: 35px;
   padding: 10px;
-  @media ${device.desktop} {
+  ${device.desktop} {
     font-size: 2.3em;
   }
 `;
@@ -44,7 +43,7 @@ export const TypoStyled = styled.h1`
   color: #1e4c40;
   text-align: center;
   padding: 0 10px;
-  @media ${device.desktop} {
+  ${device.desktop} {
     font-size: 3.5em;
   }
 `;
