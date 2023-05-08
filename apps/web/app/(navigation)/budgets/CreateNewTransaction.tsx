@@ -12,6 +12,7 @@ import {
   SeparatorStyled,
 } from "./CreateNewTransactionStyled";
 import { useTranslate } from "lib/hooks";
+import { CategorySelector } from "./CategorySelector";
 
 type CreateNewTransactionProps = {
   type: string;
@@ -159,9 +160,18 @@ export const CreateNewTransaction = ({
                     />
                   )}
                 </Field>
-                <Field name="category" initialValue={""}>
-                  {({ value, setValue, onBlur }) => (
-                    <Input label={`Category`}></Input>
+                <Field name="category">
+                  {({ setValue, onBlur }) => (
+                    <CategorySelector
+                      onValueChange={(newValue) => {
+                        setValue(newValue);
+                        setNewTransaction({
+                          ...newTransaction,
+                          category: newValue,
+                        });
+                      }}
+                      label="Category"
+                    />
                   )}
                 </Field>
                 <div style={{ width: "50%", marginBottom: "24px" }}>

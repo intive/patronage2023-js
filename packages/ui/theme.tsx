@@ -223,6 +223,11 @@ export const theme = {
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
   },
+  categorySelect: {
+    background: colors.BasicWhite,
+    icon: colors.Neutral7,
+    focusBackground: colors.Teal1,
+  },
   budgetIcon: {
     main: colors.Teal10,
     background: colors.Neutral1,
