@@ -3,7 +3,7 @@ import {
   CardWrapperStyled,
   CardStyled as MainCard,
 } from "./HomePageComponents";
-import { device } from "lib/media";
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { ReactElement } from "react";
 
@@ -14,7 +14,7 @@ type MultiCardLayoutProps = {
 
 const AsideCard = styled(MainCard)`
   display: none;
-  @media ${device.desktop} {
+  ${device.desktop} {
     display: flex;
     flex-direction: column;
     align-self: flex-start;

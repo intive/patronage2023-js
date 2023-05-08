@@ -1,4 +1,5 @@
 import { IconType } from "ui/Icon";
+import { CategoryType } from "ui/CategoryIcon";
 
 interface Currency {
   tag: string;
@@ -44,4 +45,8 @@ export interface Budget {
 export interface BudgetTransaction {
   budgetID: string;
   transactions: Transaction[];
+}
+
+export interface CategoryMap {
+  [category: string]: CategoryType | undefined;
 }

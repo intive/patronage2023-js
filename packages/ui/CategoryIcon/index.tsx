@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { Icon } from "ui";
 import { IconType } from "ui/Icon/index";
 
-type categoryType = {
-  id: number;
+export type CategoryType = {
   name: string;
   icon: {
     name: string;
@@ -13,7 +12,7 @@ type categoryType = {
 };
 
 export type CategoryIconProps = {
-  category: categoryType;
+  category: CategoryType;
   small?: boolean;
   className?: string;
 };

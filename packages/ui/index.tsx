@@ -1,5 +1,4 @@
-export { NavItem } from "./NavItem";
-export { NavList } from "./NavList";
+export * from "./NavList";
 export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";
 export { Card } from "./Card";
@@ -25,3 +24,4 @@ export { CurrencySelect } from "./CurrencySelect";
 export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";
+export { ButtonWithDropdown } from "./ButtonWithDropdown";

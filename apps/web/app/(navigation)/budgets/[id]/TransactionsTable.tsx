@@ -1,80 +1,23 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
 import { Budget, Transaction } from "../../../../lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
-import { Icon } from "ui/Icon";
-import { CategoryIcon } from "ui/CategoryIcon";
-import { Avatar } from "ui/Avatar";
-import { Chip } from "ui/Chip";
-import { TransactionDropdownMenu } from "ui/TransactionDropdownMenu";
+import { Column } from "ka-table/models";
+import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
-import localizedFormat from "dayjs/plugin/localizedFormat";
-// import "dayjs/locale/pl";
-// import "dayjs/locale/en-GB";
-// import "dayjs/locale/en";
 
-import { useEffect, useState } from "react";
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
-import { Column } from "ka-table/models";
-
-const columns = [
-  {
-    key: "category",
-    title: "Category",
-    isSortable: true,
-    dataType: DataType.Object,
-    width: 120,
-  },
-  {
-    key: "description",
-    title: "Name",
-    isSortable: true,
-    dataType: DataType.String,
-    width: 170,
-  },
-  {
-    key: "status",
-    title: "Status",
-    isSortable: true,
-    dataType: DataType.String,
-  },
-  {
-    key: "amount",
-    title: "Amount",
-    isSortable: true,
-    dataType: DataType.Number,
-    width: 140,
-  },
-  {
-    key: "creator",
-    title: "Creator",
-    isSortable: true,
-    dataType: DataType.Object,
-    width: 80,
-    style: { textAlign: "center", verticalAlign: "middle", lineHeight: 0 },
-  },
-  {
-    key: "editColumn",
-    width: 30,
-  },
-  {
-    key: "date",
-    title: "Date",
-    isSortable: false,
-    dataType: DataType.Number,
-  },
-] as Column[];
 
 type TransactionsTableProps = {
   budget: Budget;
@@ -87,7 +30,64 @@ export const TransactionsTable = ({
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
-  const { tableDates } = dict;
+  const { transactionsTable } = dict;
+
+  const columns = [
+    {
+      key: "category",
+      title: t(transactionsTable.tableColumnHeaders.category),
+      isSortable: true,
+      dataType: DataType.Object,
+      style: {
+        verticalAlign: "middle",
+        lineHeight: 0,
+        width: "27%",
+      },
+    },
+    {
+      key: "description",
+      title: t(transactionsTable.tableColumnHeaders.name),
+      isSortable: true,
+      dataType: DataType.String,
+      style: { width: "29%" },
+    },
+    {
+      key: "amount",
+      title: t(transactionsTable.tableColumnHeaders.amount),
+      isSortable: true,
+      dataType: DataType.Number,
+      style: { width: "44%" },
+    },
+    {
+      key: "creator",
+      title: t(transactionsTable.tableColumnHeaders.creator),
+      isSortable: true,
+      dataType: DataType.Object,
+      style: {
+        textAlign: "center",
+        verticalAlign: "middle",
+        lineHeight: 0,
+        paddingLeft: "5px",
+        paddingRight: "5px",
+        width: "100px",
+      },
+    },
+    {
+      key: "editColumn",
+      style: {
+        textAlign: "center",
+        verticalAlign: "middle",
+        lineHeight: 0,
+        width: "28px",
+      },
+    },
+    {
+      key: "date",
+      title: "Date",
+      isSortable: false,
+      dataType: DataType.Number,
+    },
+  ] as Column[];
 
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
@@ -97,9 +97,8 @@ export const TransactionsTable = ({
       .then((result) => setTransactions(result.transactions));
   }, [budget]);
 
-  const getDayName = (timestamp: number, locale: string) => {
+  const getDayName = (timestamp: number) => {
     dayjs.extend(isToday);
-    // dayjs.extend(localizedFormat);
     dayjs.extend(isYesterday);
 
     const date = dayjs(timestamp);
@@ -107,24 +106,30 @@ export const TransactionsTable = ({
 
     let dayOfWeek = date.format("dddd");
     if (date.isToday()) {
-      dayOfWeek = t(tableDates.today);
+      dayOfWeek = t(transactionsTable.groupRowDays.today);
     } else if (date.isYesterday()) {
-      dayOfWeek = t(tableDates.yesterday);
+      dayOfWeek = t(transactionsTable.groupRowDays.yesterday);
+    }
+
+    if (!(date.isToday() && date.isYesterday())) {
+      const lowerCaseDay =
+        dayOfWeek.toLowerCase() as keyof typeof transactionsTable.groupRowDays;
+      dayOfWeek = t(transactionsTable.groupRowDays[lowerCaseDay]);
     }
     return `${dayOfWeek}, ${formattedDate}`;
   };
 
   const dropdownMenuItems = [
     {
-      ComponentToRender: "Edit",
+      ComponentToRender: <div>Edit</div>,
       id: "edit-budget",
     },
     {
-      ComponentToRender: "Clone",
+      ComponentToRender: <div>Clone</div>,
       id: "clone-budget",
     },
     {
-      ComponentToRender: "Remove",
+      ComponentToRender: <div>Remove</div>,
       id: "remove-budget",
     },
   ];
@@ -145,8 +150,6 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "category":
                   return <CategoryIcon category={props.value} small={false} />;
-                case "status":
-                  return <Chip type={props.value}>{props.value}</Chip>;
                 case "amount":
                   return (
                     <StyledCurrencyAmount
@@ -176,27 +179,25 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "date":
                   const value = props.groupKey[props.groupIndex];
-                  return <>{getDayName(value, budget.currency.locale)}</>;
+                  return <>{getDayName(value)}</>;
               }
             },
           },
           headCellContent: {
-            content: ({ column }) => {
-              return (
-                <>
-                  <span>{column.title}</span>
-                  {column.key !== "editColumn" && (
-                    <button onClick={() => setSorting(column.key)}>
-                      <Icon
-                        icon="sort"
-                        iconSize={20}
-                        color={theme.transactionsTable.sortIcon}
-                      />
-                    </button>
-                  )}
-                </>
-              );
-            },
+            content: ({ column }) => (
+              <>
+                <span>{column.title}</span>
+                {column.key !== "editColumn" && (
+                  <button onClick={() => setSorting(column.key)}>
+                    <Icon
+                      icon="sort"
+                      iconSize={20}
+                      color={theme.transactionsTable.sortIcon}
+                    />
+                  </button>
+                )}
+              </>
+            ),
           },
         }}
       />
