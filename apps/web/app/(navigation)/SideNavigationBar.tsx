@@ -104,8 +104,8 @@ export default function SideNav() {
     },
     searchInput: {
       placeholder: t(SideNav.budgetsItem.searchInputPlaceholder),
-      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(event.currentTarget.value);
+      onChange: (value: string) => {
+        setSearchValue(value);
       },
     },
     navigationList: (

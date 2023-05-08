@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
 import { Icon } from "../../Icon";
@@ -13,7 +13,7 @@ export type SubMenuDataProps = {
   };
   searchInput?: {
     placeholder: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (value: string) => void;
     onInputCleared?: () => void;
     value?: string;
   };
@@ -91,8 +91,12 @@ const IconWrapperStyled = styled.div`
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    searchInput?.onChange?.(e);
+  useEffect(() => {
+    return () => searchInput?.onChange?.("");
+  }, []);
+
+  const onInputChange = (value: string) => {
+    searchInput?.onChange?.(value);
   };
 
   const onIconClicked = () => {
@@ -119,7 +123,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
               type="text"
               placeholder={searchInput.placeholder}
               value={searchInput.value}
-              onChange={onInputChange}
+              onChange={(e) => onInputChange(e.currentTarget.value)}
               onInputCleared={searchInput.onInputCleared}
             />
           )}
