@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, ReactNode, useEffect } from "react";
+import { useState, ReactNode, useEffect, useMemo } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
@@ -10,7 +10,7 @@ type SideNavigationBarItemProps = {
   icon: ReactNode;
   textValue: string;
   subMenu?: SubMenuDataProps;
-  id: number;
+  id: string;
 };
 
 type SideNavigationBarProps = {
@@ -31,14 +31,13 @@ const Wrapper = styled.div`
 const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   display: inline-flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   position: fixed;
-  height: calc(100%);
-  padding: 40px 0 0 0;
+  height: 100%;
+  padding-top: 40px;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
-    !isNavListItemClicked && isSubMenuShown
+    !isNavListItemClicked && !isSubMenuShown
       ? theme.sideNavigationBar.background.activeColor
       : theme.sideNavigationBar.background.inactiveColor};
 `;
@@ -48,52 +47,50 @@ export const SideNavigationBar = ({
   isNavListItemClicked,
   resetIsNavListItemClicked,
 }: SideNavigationBarProps) => {
-  const [isSubMenuShown, setIsSubMenuShown] = useState(false);
-  const [subMenuData, setSubMenuData] = useState<SubMenuDataProps>();
-  const [activeSideNavBarItemIndex, setActiveSideNavBarItemIndex] =
-    useState<number>();
+  const [subMenuId, setSubMenuId] = useState("");
 
   useEffect(() => {
-    if (subMenuData && activeSideNavBarItemIndex === 0)
-      setSubMenuData(items[activeSideNavBarItemIndex].subMenu);
-  }, [items]);
+    if (isNavListItemClicked) setSubMenuId("");
+  }, [isNavListItemClicked]);
+
+  const item = useMemo(
+    () => items.find((item) => item.id === subMenuId),
+    [items, subMenuId]
+  );
+  const subMenuData = item ? item.subMenu : false;
 
   const hideSubMenu = () => {
-    setActiveSideNavBarItemIndex(undefined);
-    setSubMenuData(undefined);
-    setIsSubMenuShown(false);
+    setSubMenuId("");
   };
 
-  const showSubMenu = (subMenu: SubMenuDataProps, index: number) => {
-    if (!isNavListItemClicked && activeSideNavBarItemIndex === index) {
+  const showSubMenu = (id: string) => {
+    if (subMenuData && subMenuId === id) {
       return hideSubMenu();
     }
+    setSubMenuId(id);
     resetIsNavListItemClicked();
-    setActiveSideNavBarItemIndex(index);
-    setSubMenuData(subMenu);
-    setIsSubMenuShown(true);
   };
 
-  const handleLinkClick = (index: number) => {
+  const handleLinkClick = () => {
     hideSubMenu();
-    setActiveSideNavBarItemIndex(index);
+    setSubMenuId("link");
   };
 
   return (
     <Wrapper>
       <SideNavigationBarStyled
-        isSubMenuShown={isSubMenuShown}
+        isSubMenuShown={!subMenuData}
         isNavListItemClicked={isNavListItemClicked}>
-        {items.map(({ href, icon, textValue, subMenu, id }, index) => {
+        {items.map(({ href, icon, textValue, subMenu, id }) => {
           return subMenu ? (
             <SideNavigationBarButton
               key={id}
               onClick={() => {
-                showSubMenu(subMenu, index);
+                showSubMenu(id);
               }}
               icon={icon}
               textValue={textValue}
-              activeFlag={activeSideNavBarItemIndex === index}
+              activeFlag={!isNavListItemClicked && subMenuId === id}
             />
           ) : (
             <SideNavigationBarLink
@@ -101,15 +98,15 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={activeSideNavBarItemIndex === index}
-              onClick={() => handleLinkClick(index)}
+              activeFlag={!isNavListItemClicked && subMenuId === "link"}
+              onClick={() => handleLinkClick()}
             />
           );
         })}
       </SideNavigationBarStyled>
-      {!isNavListItemClicked && subMenuData && (
+      {!isNavListItemClicked && subMenuData ? (
         <SubMenu subMenuDataObject={subMenuData} />
-      )}
+      ) : null}
     </Wrapper>
   );
 };

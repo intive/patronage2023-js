@@ -2,15 +2,16 @@ import axios, { AxiosInstance } from "axios";
 import { env } from "env.mjs";
 import { IconType } from "ui/Icon";
 
-type ItemType = {
-  items: BudgetType[];
-};
 type BudgetType = {
   name: string;
   icon: IconType;
   id: {
     value: string | number;
   };
+};
+type ItemType = {
+  items: BudgetType[];
+  totalCount: number;
 };
 
 export type GetBudgetsListType = {
