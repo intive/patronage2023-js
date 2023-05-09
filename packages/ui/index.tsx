@@ -25,3 +25,4 @@ export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";
 export { EditIcon } from "./EditIcon";
+export { ButtonWithDropdown } from "./ButtonWithDropdown";
