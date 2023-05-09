@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { v1 as uuidv1 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 
 import {
   Button,
@@ -147,9 +147,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: `${uuidv1()}`,
+            id: `${uuidv4()}`,
             name: `${newBudget.name}`,
-            userId: `${uuidv1()}`,
+            userId: `${uuidv4()}`,
             limit: {
               value: `${newBudget.limit}`,
               currency: `${newBudget.currency.tag}`,
