@@ -33,7 +33,7 @@ export default function SideNav() {
     data,
     status,
     error,
-  } = useGetBudgets(debouncedSearch);
+  } = useGetBudgets(debouncedSearch, sortAscending);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
   const lastBudgetRef = useCallback(
