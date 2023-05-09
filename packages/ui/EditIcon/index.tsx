@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "../Icon";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 interface EditIconInterface {
   onClick: () => void;
@@ -20,7 +22,7 @@ export const EditIcon = ({ onClick }: EditIconInterface) => {
   const theme = useContext(ThemeContext);
   return (
     <EditIconStyled onClick={onClick}>
-        <Icon icon="edit" color={theme.editIcon.main}/>
+      <Icon icon="edit" color={theme.editIcon.main} />
     </EditIconStyled>
   );
 };
