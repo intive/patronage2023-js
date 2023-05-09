@@ -6,6 +6,7 @@ import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import StyledComponentsThemeWrapper from "ui/theme";
 import "ka-table/style.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export type LayoutProps = {
   children: React.ReactNode;
