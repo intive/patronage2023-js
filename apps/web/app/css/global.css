@@ -10,11 +10,9 @@ html {
   height: 100%;
 }
 
-body:has(div[data-radix-popper-content-wrapper]) {
+body:has(.radix-scroll) {
   @media only screen and (min-width: 768px) {
-    @media only screen and (min-height: 100vh) {
       overflow-y: scroll !important;
-    } 
   } 
 }
 

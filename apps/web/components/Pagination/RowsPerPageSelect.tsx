@@ -10,6 +10,7 @@ import {
   SelectTriggerStyled,
 } from "./RowsPerPageSelect.styled";
 import { Icon } from "ui";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type RowsPerPageSelectProps = {
   onValueChange?: (value: string) => void;
@@ -30,6 +31,7 @@ export const RowsPerPageSelect = ({
   pageSizeOptions,
 }: RowsPerPageSelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { hasScrollbar } = useHasScrollBar();
 
   return (
     <Select.Root
@@ -47,7 +49,7 @@ export const RowsPerPageSelect = ({
         </SelectIconStyled>
       </SelectTriggerStyled>
 
-      <SelectPortalStyled>
+      <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper">
           <Select.Viewport>
             {pageSizeOptions.map((rowsNumber) => (
