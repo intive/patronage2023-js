@@ -264,9 +264,13 @@ export const theme = {
       background: colors.Supporting12,
     },
   },
-  formfooter: {
+  formFooter: {
     text: "#3e4c59",
   },
+  trendChip:{
+    positiveValue: colors.Supporting7 ,
+    negativeValue: colors.Supporting4
+  }
 };
 
 export type ThemeType = typeof theme;
