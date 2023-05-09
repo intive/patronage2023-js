@@ -59,18 +59,18 @@ export const SettingsSubMenuNavListContents = [
     ComponentToRender: <span>Edit profile</span>,
     href: "/settings/edit-profile",
     id: 1,
-    ref: null,
+    ref: () => {},
   },
   {
     ComponentToRender: <span>Change password</span>,
     href: "/settings/change-password",
     id: 2,
-    ref: null,
+    ref: () => {},
   },
   {
     ComponentToRender: <span>Language</span>,
     href: "/settings/change-language",
     id: 3,
-    ref: null,
+    ref: () => {},
   },
 ];

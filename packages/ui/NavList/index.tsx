@@ -11,7 +11,7 @@ export type NavItemContents = {
   ComponentToRender?: ReactElement;
   href: string;
   id: string | number;
-  ref: React.ForwardedRef<HTMLLIElement>;
+  ref: (budget: HTMLLIElement) => void;
 };
 
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
@@ -71,13 +71,12 @@ const WrapperStyled = styled.div`
   color: #515151;
 `;
 
-export const NavList = forwardRef(({
+export const NavList = ({
   contents,
   onNavListItemClick,
   loading,
   error,
-}: NavListProps, ref) => {
-
+}: NavListProps) => {
   const currentPage = usePathname() || "";
   return (
     <NavListStyled>
@@ -108,4 +107,4 @@ export const NavList = forwardRef(({
       )}
     </NavListStyled>
   );
-})
+};

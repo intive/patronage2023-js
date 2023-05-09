@@ -41,7 +41,7 @@ export default function SideNav() {
 
   const intObserver = useRef<IntersectionObserver | null>(null);
   const lastBudgetRef = useCallback(
-    (budget: any) => {
+    (budget: HTMLLIElement) => {
       if (isFetchingNextPage) return;
       if (intObserver.current) intObserver.current.disconnect();
 
@@ -128,7 +128,6 @@ export default function SideNav() {
       <NavList
         contents={SettingsSubMenuNavListContents}
         onNavListItemClick={hideSubMenu}
-        ref={lastBudgetRef}
       />
     ),
   };
