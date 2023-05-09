@@ -1,4 +1,5 @@
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+"use client";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getBudgetsList, reqInstance } from "services/mutations";
 
 const token =

@@ -12,16 +12,19 @@ const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
     ComponentToRender: <SpanStyled>Bills</SpanStyled>,
     href: "/bills",
     id: 1,
+    ref: null,
   },
   {
     ComponentToRender: <SpanStyled>Subscriptions</SpanStyled>,
     href: "/subscriptions",
     id: 2,
+    ref: null,
   },
   {
     ComponentToRender: <SpanStyled>Savings</SpanStyled>,
     href: "/savings",
     id: 3,
+    ref: null,
   },
 ];
 
@@ -41,6 +44,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
       </>
     ),
     id: 1,
+    ref: null,
   },
   {
     href: "/user2",
@@ -51,6 +55,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
       </>
     ),
     id: 2,
+    ref: null,
   },
   {
     href: "/user3",
@@ -61,6 +66,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
       </>
     ),
     id: 3,
+    ref: null,
   },
 ];
 
