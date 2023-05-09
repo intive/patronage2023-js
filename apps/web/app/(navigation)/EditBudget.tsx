@@ -56,16 +56,14 @@ export const EditBudget = ({
     value ? new Date(value) : null;
 
   const checkEndDateOnChangeValidate = (
-    val: Date | null,
+    endDateValue: Date | null,
     form: FormInstance<any>
   ) => {
-    const start = val! && val.getTime();
-    const end =
-      form.getFieldValue("start-date")!.value &&
-      form.getFieldValue("start-date")!.value.getTime();
+    const endTimestamp = endDateValue?.getTime();
+    const startTimestamp = form.getFieldValue("start-date")!.value?.getTime();
 
-    if (start && end) {
-      if (start < end) return Promise.reject(t(dict.errors.dateBeforeStart));
+    if (endTimestamp && startTimestamp) {
+      if (startTimestamp > endTimestamp) return Promise.reject(t(dict.errors.dateBeforeStart));
     }
     return Promise.resolve(true);
   };
