@@ -37,6 +37,7 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type NewBudget = {
   onClose: Function;
@@ -81,6 +82,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { currentLang } = useContext(LanguageContext);
+  const { hasScrollbar } = useHasScrollBar();
 
   const {
     checkNameOnChange,
@@ -288,6 +290,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               currency: { ...newBudget.currency, tag: e },
                             });
                           }}
+                          hasScrollbar={hasScrollbar}
                         />
                       )}
                     </Field>

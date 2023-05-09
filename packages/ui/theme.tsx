@@ -237,6 +237,12 @@ export const theme = {
     active: colors.Teal8,
     hover: colors.Teal10,
   },
+  pagination: {
+    hover: colors.Teal7,
+    text: colors.Neutral6,
+    active: colors.Teal6,
+    border: colors.Neutral2,
+  },
   transactionsTable: {
     background: colors.BasicWhite,
     headRowBottomBorder: colors.Neutral2,

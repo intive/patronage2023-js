@@ -52,7 +52,9 @@ export type IconType =
   | "payments"
   | "subscriptions"
   | "done"
-  | "priority_high";
+  | "priority_high"
+  | "navigate_before"
+  | "navigate_next";
 
 type styledIconProps = {
   color?: string;
