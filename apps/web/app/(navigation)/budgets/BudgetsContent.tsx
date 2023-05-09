@@ -52,7 +52,6 @@ export const BudgetsContent = () => {
       .then((response) => response.json())
       .then((result) => {
         setBudgets(result.budgets);
-        console.log(result);
       });
   }, []);
 
@@ -89,7 +88,7 @@ export const BudgetsContent = () => {
             },
             {
               label: t(dict.createButton.newExpense),
-              callback: handleCreateNewIncome,
+              callback: handleCreateNewExpense,
             },
           ]}
         />

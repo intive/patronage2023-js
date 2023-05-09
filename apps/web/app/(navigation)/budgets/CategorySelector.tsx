@@ -52,9 +52,7 @@ export const CategorySelector = ({
   label,
 }: CategorySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(errors?.length);
   const hasErrors = errors ? errors.length > 0 : false;
-  console.log(hasErrors);
 
   return (
     <Select.Root
