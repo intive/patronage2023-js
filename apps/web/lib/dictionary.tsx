@@ -104,6 +104,16 @@ const dictionary = {
         },
       },
       submitButton: { en: "Log In", pl: "Zaloguj", fr: "Se connecter" },
+      footer: {
+        en: "Don't have an account?",
+        pl: "Nie posiadasz konta?",
+        fr: "N'avez-vous pas de compte ?",
+      },
+      footerLink: {
+        en: "Sign up",
+        pl: "Zarejestruj się",
+        fr: "Inscrivez-vous",
+      },
     },
   },
   SignUpPage: {
