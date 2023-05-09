@@ -16,11 +16,10 @@ type ItemType = {
 
 export type GetBudgetsListType = {
   pageSize: number;
-  pageIndex: number;
+  pageParam: number;
   searchValue: string;
   sortAscending: boolean;
   axiosInstance: AxiosInstance;
-  pageParam?: number;
 };
 
 export const reqInstance = (token: string) =>
@@ -35,16 +34,14 @@ export const reqInstance = (token: string) =>
 
 export const getBudgetsList = async ({
   pageSize,
-  pageIndex,
+  pageParam,
   searchValue,
   sortAscending,
   axiosInstance,
-  pageParam,
 }: GetBudgetsListType) => {
-  const scrollPage = pageParam ? pageParam : pageIndex;
   const body = {
     pageSize: pageSize,
-    pageIndex: scrollPage,
+    pageIndex: pageParam,
     search: searchValue,
     sortDescriptors: [
       {

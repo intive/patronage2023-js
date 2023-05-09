@@ -13,6 +13,7 @@ import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
 import { iconNames } from "lib/consts";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -26,14 +27,17 @@ export default function SideNav() {
   const [sortAscending, setSortAscending] = useState(true);
   const debouncedSearch = useDebounce(searchValue, 500);
 
+  const queryClient = useQueryClient();
+  const pageSize = 13;
+
   const {
-    fetchNextPage, //function
-    hasNextPage, // boolean
-    isFetchingNextPage, // boolean
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
     data,
     status,
     error,
-  } = useGetBudgets(debouncedSearch, sortAscending);
+  } = useGetBudgets(debouncedSearch, sortAscending, pageSize);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
   const lastBudgetRef = useCallback(
@@ -67,31 +71,30 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const successData = data?.pages
-    .map((page) => {
-      return page.items.map((item) => {
-        return {
-          ComponentToRender: (
-            <>
-              <IconStyled
-                icon={iconNames.includes(item.icon) ? item.icon : "help"}
-                iconSize={24}
-              />
-              <SpanStyled>{item.name}</SpanStyled>
-            </>
-          ),
-          href: `/budgets/${item.id.value}`,
-          id: item.id.value,
-          ref: lastBudgetRef,
-        };
-      });
-    })
-    .flat();
+  const successData = data?.pages.flatMap((page) => {
+    return page.items.map((item) => {
+      return {
+        ComponentToRender: (
+          <>
+            <IconStyled
+              icon={iconNames.includes(item.icon) ? item.icon : "help"}
+              iconSize={24}
+            />
+            <SpanStyled>{item.name}</SpanStyled>
+          </>
+        ),
+        href: `/budgets/${item.id.value}`,
+        id: item.id.value,
+        ref: lastBudgetRef,
+      };
+    });
+  });
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
       clickHandler: () => {
+        queryClient.clear();
         setSortAscending(!sortAscending);
       },
       icon: "filter_list",
