@@ -1,6 +1,6 @@
 "use client";
 import styled from "styled-components";
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, forwardRef } from "react";
 import { usePathname } from "next/navigation";
 import { NavItem } from "./NavItem";
 import { Spinner } from "./Spinner";
@@ -71,14 +71,14 @@ const WrapperStyled = styled.div`
   color: #515151;
 `;
 
-export const NavList = ({
+export const NavList = forwardRef(({
   contents,
   onNavListItemClick,
   loading,
   error,
-}: NavListProps) => {
-  const currentPage = usePathname() || "";
+}: NavListProps, ref) => {
 
+  const currentPage = usePathname() || "";
   return (
     <NavListStyled>
       {contents &&
@@ -108,4 +108,4 @@ export const NavList = ({
       )}
     </NavListStyled>
   );
-};
+})
