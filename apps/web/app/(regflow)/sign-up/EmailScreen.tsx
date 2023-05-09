@@ -1,7 +1,7 @@
 "use client";
 
 import { Field, Form } from "houseform";
-import { Button, Input, LinkComponent } from "ui";
+import { Button, Input, FormFooter } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
@@ -55,12 +55,11 @@ export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
           <Button onClick={submit} type="submit" fullWidth>
             {t(emailScreen.buttonNext)}
           </Button>
-          <FooterStyled>
-            {t(emailScreen.footer)}{" "}
-            <LinkComponent href="/sign-in">
-              {t(emailScreen.footerLink)}
-            </LinkComponent>
-          </FooterStyled>
+          <FormFooter
+            basicText={t(emailScreen.footer)}
+            linkText={t(emailScreen.footerLink)}
+            href="/sign-in"
+          />
         </FormWrapper>
       )}
     </Form>
