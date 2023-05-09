@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -123,13 +124,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     currentLang === "pl" && setLang("pl-PL");
   }, [lang, currentLang]);
 
-  // TRANSFORM TIMESTAMP TO ISO (+7200000 miliseconds, unix timestamp is in seconds, but Javascript counts in miliseconds, * 1000 not work)
   const startDateTimestamp = newBudget.dateStart;
   const endDateTimeStamp = newBudget.dateEnd;
   const budgetStartDate = new Date(startDateTimestamp).toISOString();
   const budgetEndDate = new Date(endDateTimeStamp).toISOString();
-
-  const url = "https://inbudget-patronage-api-dev.azurewebsites.net/budgets";
 
   const token =
     "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM2NzEyNDAsImlhdCI6MTY4MzY2NDA0MCwianRpIjoiOGNmYWZkMDMtYmNjMC00NDE0LTg1YjgtOGZkMGYzMGNjOTkzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNjZDlkN2U4LWEwNGEtNDZlMi05MWJlLWRiZjJiYzEyZmMzYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImNjZDlkN2U4LWEwNGEtNDZlMi05MWJlLWRiZjJiYzEyZmMzYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.zhzq_NVS1eBlhsVbz9xX1Mg024HRl6WKf-r7d9uQI1y7iEAbVeeY4jPptJ3qPE3hmVbeC5cL764qVk-wU44RuokmaZMZbN5dpESz3SRtl3XZhQhDtyCI4zaTCS-kpp8AWkzkKs2QHaO3OBOk7hGDjRqNlKbMDu1xeFwwWW7RhFiLH4BeHwAXRTv7T2G04rcghnuOQhk_owJd0ruR7oM3woWJsdxFJzcNvWxKt3nouAi42K2bFH2Bi05N6m_b9ESpcuwWE3MA1Xr-xQkCBLjiQkoVuYFLBudOhmPROnPrA8q6O0n_M3qlAezHTsXdOO9Uev6JR45Y3k3LnlBl2sg1kA";
@@ -139,7 +137,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const useSendBudget = () =>
     useMutation(
       () =>
-        fetch(url, {
+        fetch(`${env.NEXT_PUBLIC_API_URL}/budgets`, {
           method: "POST",
           headers: {
             accept: "text/plain",
