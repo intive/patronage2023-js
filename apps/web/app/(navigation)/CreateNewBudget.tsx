@@ -147,19 +147,19 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: `${uuidv4()}`,
-            name: `${newBudget.name}`,
-            userId: `${uuidv4()}`,
+            id: uuidv4(),
+            name: newBudget.name,
+            userId: uuidv4(),
             limit: {
-              value: `${newBudget.limit}`,
-              currency: `${newBudget.currency.tag}`,
+              value: newBudget.limit,
+              currency: newBudget.currency.tag,
             },
             period: {
-              startDate: `${budgetStartDate}`,
-              endDate: `${budgetEndDate}`,
+              startDate: budgetStartDate,
+              endDate: budgetEndDate,
             },
-            description: `${newBudget.description}`,
-            iconName: `${newBudget.icon}`,
+            description: newBudget.description,
+            iconName: newBudget.icon,
           }),
         }),
       {
