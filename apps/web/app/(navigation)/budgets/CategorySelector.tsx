@@ -17,7 +17,7 @@ import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
 
 type CategorySelectorProps = {
-  onValueChange?: (value: string) => void;
+  onValueChange: (value: string) => void;
   label?: string;
   errors?: string[];
 };

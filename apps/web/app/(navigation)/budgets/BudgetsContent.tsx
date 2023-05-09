@@ -10,6 +10,8 @@ import styled from "styled-components";
 import { usePathname } from "next/navigation";
 import { CreateNewTransaction } from "./CreateNewTransaction";
 import { device } from "lib/media-queries";
+import { ButtonWithDropdown, Separator } from "ui";
+import { useTranslate } from "lib/hooks";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -23,7 +25,19 @@ const BudgetContentWrapperStyled = styled.div`
   }
 `;
 
+const SeparatorStyled = styled(Separator)`
+  display: block;
+  width: 100%;
+`;
+
+const CreateButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+`;
+
 export const BudgetsContent = () => {
+  const { t, dict } = useTranslate("BudgetsPage");
   const id = usePathname()?.replace("/budgets/", "");
   const [
     createNewTransactionModalVisible,
@@ -64,8 +78,22 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <button onClick={handleCreateNewExpense}>Create new expense</button>
-      <button onClick={handleCreateNewIncome}>Create new income</button>
+      <SeparatorStyled />
+      <CreateButtonWrapper>
+        <ButtonWithDropdown
+          label={t(dict.createButton.label)}
+          items={[
+            {
+              label: t(dict.createButton.newIncome),
+              callback: handleCreateNewIncome,
+            },
+            {
+              label: t(dict.createButton.newExpense),
+              callback: handleCreateNewIncome,
+            },
+          ]}
+        />
+      </CreateButtonWrapper>
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}
@@ -83,6 +111,7 @@ export const BudgetsContent = () => {
         <CreateNewTransaction
           type={transactionType}
           onClose={closeNewTransactionModal}
+          budgetId={id}
         />
       )}
     </>

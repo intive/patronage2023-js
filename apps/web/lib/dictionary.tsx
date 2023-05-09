@@ -429,62 +429,81 @@ const dictionary = {
       income: {
         en: "New income",
         pl: "Nowy wpływ",
+        fr: "Nouveau revenu",
       },
       expense: {
         en: "New expense",
         pl: "Nowy wydatek",
+        fr: "Nouvelle dépense",
       },
     },
     details: {
       en: "Details",
       pl: "Szczegóły",
+      fr: "Détails",
     },
     nameLabel: {
       income: {
         en: "Income name",
         pl: "Nazwa przychodu",
+        fr: "Nom du revenu",
       },
       expense: {
         en: "Expense name",
         pl: "Nazwa wpływu",
+        fr: "Nom de la dépense",
       },
     },
     amountLabel: {
       en: "Amount",
       pl: "Kwota",
+      fr: "Le montant",
+    },
+    categoryLabel: {
+      en: "Category",
+      pl: "Kategoria",
+      fr: "Catégorie",
     },
     dateLabel: {
       en: "Due date",
       pl: "Termin",
+      fr: "Date d'échéance",
     },
     button: {
       en: "Save",
       pl: "Zapisz",
+      fr: "Sauvegarder",
     },
     errors: {
       min3characters: {
         en: "Name must have at least 3 characters.",
         pl: "Nazwa musi zawierać co najmniej 3 znaki.",
+        fr: "Le nom doit comporter au moins 3 caractères.",
       },
       max58characters: {
         en: "Name must not have more than 58 characters.",
         pl: "Nazwa nie może mieć więcej niż 58 znaków.",
+        fr: "Le nom ne doit pas comporter plus de 58 caractères.",
       },
       amountGraterThanZero: {
         en: "Amount must be grater than 0.",
         pl: "Kwota musi być większa od 0.",
+        fr: "Le montant doit être supérieur à 0.",
       },
       amountNotEmpty: {
         en: "Please specify the amount.",
         pl: "Podaj kwotę transakcji.",
+        fr: "Veuillez préciser le montant.",
       },
       selectCategory: {
         en: "Please select a category.",
         pl: "Wybierz kategorię.",
+        fr: "Veuillez sélectionner une catégorie.",
       },
       selectDate: {
         en: "Please select a date.",
         pl: "Wybierz datę.",
+        fr: "Veuillez sélectionner une date.",
       },
     },
   },
@@ -526,9 +545,13 @@ const dictionary = {
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
     createButton: {
-      label: { en: "Create", pl: "Utwórz", fr: "Créer"},
-      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus"},
-      newExpense: { en: "New expense", pl: "Nowy wydatek", fr: "Nouvelle dépense"},
+      label: { en: "Create", pl: "Utwórz", fr: "Créer" },
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus" },
+      newExpense: {
+        en: "New expense",
+        pl: "Nowy wydatek",
+        fr: "Nouvelle dépense",
+      },
     },
     transactionsTable: {
       groupRowDays: {

@@ -18,6 +18,7 @@ import { CategorySelector } from "./CategorySelector";
 type CreateNewTransactionProps = {
   type: string;
   onClose: () => void;
+  budgetId: string | undefined;
 };
 
 type TransactionType = {
@@ -32,10 +33,12 @@ type TransactionType = {
 export const CreateNewTransaction = ({
   type,
   onClose,
+  budgetId,
 }: CreateNewTransactionProps) => {
   const { t, dict } = useTranslate("CreateNewTransactionModal");
 
   const [newTransaction, setNewTransaction] = useState<TransactionType>({
+    // id: randomUUID,
     type: type,
     name: "",
     value: "",
@@ -181,7 +184,7 @@ export const CreateNewTransaction = ({
                           category: newValue,
                         });
                       }}
-                      label="Category"
+                      label={t(dict.categoryLabel)}
                     />
                   )}
                 </Field>
