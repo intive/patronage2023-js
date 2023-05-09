@@ -12,25 +12,15 @@ const EditIconStyled = styled.button<EditIconInterface>`
   height: 2.5em;
   width: 2.5em;
   border-radius: 8px;
-`;
-
-const Wrapper = styled.span`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  color: ${({ theme }) => theme.editIcon.main};
-
-  &:hover {
-    cursor: pointer;
-  }
+  flex-shrink: 0;
+  line-height: 0;
 `;
 
 export const EditIcon = ({ onClick }: EditIconInterface) => {
+  const theme = useContext(ThemeContext);
   return (
     <EditIconStyled onClick={onClick}>
-      <Wrapper>
-        <Icon icon="edit" />
-      </Wrapper>
+        <Icon icon="edit" color={theme.editIcon.main}/>
     </EditIconStyled>
   );
 };
