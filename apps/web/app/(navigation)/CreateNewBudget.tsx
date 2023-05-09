@@ -124,8 +124,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   }, [lang, currentLang]);
 
   // TRANSFORM TIMESTAMP TO ISO (+7200000 miliseconds, unix timestamp is in seconds, but Javascript counts in miliseconds, * 1000 not work)
-  const startDateTimestamp = newBudget.dateStart + 7200000;
-  const endDateTimeStamp = newBudget.dateEnd + 7200000;
+  const startDateTimestamp = newBudget.dateStart;
+  const endDateTimeStamp = newBudget.dateEnd;
   const budgetStartDate = new Date(startDateTimestamp).toISOString();
   const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
