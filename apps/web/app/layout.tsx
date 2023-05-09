@@ -4,9 +4,8 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "@next/font/google";
 import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
-import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
-import 'ka-table/style.css';
+import "ka-table/style.css";
 
 export type LayoutProps = {
   children: React.ReactNode;
