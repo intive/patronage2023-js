@@ -3,7 +3,7 @@
 import { Field, Form } from "houseform";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ErrorMessage, Button, Input, LinkComponent } from "ui";
+import { ErrorMessage, Button, Input, FormFooter } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
@@ -48,12 +48,6 @@ const ErrorSuportingMsg = styled.div`
   left: 10px;
   color: #b3261e;
   font-size: small;
-`;
-
-const FooterStyled = styled.div`
-  font-size: 16px;
-  line-height: 150%;
-  margin-top: 42px;
 `;
 
 export default function SignInPage() {
@@ -138,12 +132,11 @@ export default function SignInPage() {
             <Button onClick={submit} type="submit" fullWidth>
               {t(form.submitButton)}
             </Button>
-            <FooterStyled>
-              {t(form.footer)}{" "}
-              <LinkComponent href="/sign-up">
-                {t(form.footerLink)}
-              </LinkComponent>
-            </FooterStyled>
+            <FormFooter
+              basicText={t(form.footer)}
+              linkText={t(form.footerLink)}
+              href="/sign-up"
+            />
           </form>
         </FormWrapper>
       )}
