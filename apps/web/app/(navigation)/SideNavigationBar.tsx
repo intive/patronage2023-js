@@ -19,6 +19,7 @@ import {
   GetBudgetsListType,
   reqInstance,
 } from "services/mutations";
+import { useGetBudgets } from "lib/hooks/useGetBudgets";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -66,23 +67,7 @@ export default function SideNav() {
     data,
     status,
     error,
-  } = useInfiniteQuery(
-    ["budgets"],
-    ({ pageParam = 1 }) =>
-      getBudgetsList({
-        pageSize,
-        pageIndex,
-        searchValue,
-        sortAscending,
-        axiosInstance,
-        pageParam,
-      }),
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        return lastPage.items.length ? allPages.length + 1 : undefined;
-      },
-    }
-  );
+  } = useGetBudgets(debouncedSearch);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
   const lastBudgetRef = useCallback(
@@ -159,7 +144,7 @@ export default function SideNav() {
       <NavList
         contents={successData ? successData : []}
         onNavListItemClick={hideSubMenu}
-        loading={isFetchingNextPage}
+        loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
       />
     ),
