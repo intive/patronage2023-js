@@ -152,7 +152,7 @@ export const theme = {
       activeColor: colors.Teal10,
       inactiveColor: colors.Neutral8,
       activeBackground: colors.Teal1,
-      inactiveBackground: "transparent",
+      inactiveBackground: colors.BasicTransparent,
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
     },
@@ -263,6 +263,9 @@ export const theme = {
       foreground: colors.Supporting13,
       background: colors.Supporting12,
     },
+  },
+  formfooter: {
+    text: "#3e4c59",
   },
 };
 
