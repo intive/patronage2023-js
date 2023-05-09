@@ -1,12 +1,11 @@
 "use client";
-import { ReactElement } from "react";
 import styled from "styled-components";
 import { LinkComponent } from "ui";
 
 type FormFooterProps = {
   basicText: string;
   linkText: string;
-  href:string;
+  href: string;
 };
 
 const FormFooterStyled = styled.div`
@@ -23,7 +22,7 @@ const TextStyled = styled.span`
   color: ${({ theme }) => theme.formfooter.text};
 `;
 
-export const FormFooter = ({ basicText, linkText,href }: FormFooterProps) => {
+export const FormFooter = ({ basicText, linkText, href }: FormFooterProps) => {
   return (
     <FormFooterStyled>
       <TextStyled>{basicText}</TextStyled>
