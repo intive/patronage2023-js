@@ -6,8 +6,9 @@ import { LanguageProvider } from "lib/contexts";
 import { QueryClient, QueryClientProvider } from "react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
 import SessionProviderWrapper from "./SessionProviderWrapper";
-import "./css/global.css";
 import "ka-table/style.css";
+import "react-loading-skeleton/dist/skeleton.css";
+import "./css/global.css";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -34,8 +35,8 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          <SessionProviderWrapper>
+        <SessionProviderWrapper>
+          <QueryClientProvider client={queryClient}>
             <StyledComponentsRegistry>
               <LanguageProvider>
                 <StyledComponentsThemeWrapper>
@@ -43,8 +44,8 @@ export default function RootLayout({ children }: LayoutProps) {
                 </StyledComponentsThemeWrapper>
               </LanguageProvider>
             </StyledComponentsRegistry>
-          </SessionProviderWrapper>
-        </QueryClientProvider>
+          </QueryClientProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );

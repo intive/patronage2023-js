@@ -1,17 +1,12 @@
 "use client";
 import styled from "styled-components";
 
-type CurrencyType = {
-  tag: string;
-  locale: string;
-};
-
 type CurrencyAmountSpanProps = {
   amount: number;
 } & React.HTMLProps<HTMLSpanElement>;
 
 export type CurrencyAmountProps = {
-  currencyOptions: CurrencyType;
+  currency: string;
   className?: string;
   hidePlus?: boolean;
 } & CurrencyAmountSpanProps;
@@ -25,17 +20,16 @@ const SpanStyled = styled.span<CurrencyAmountSpanProps>`
 
 export const CurrencyAmount = ({
   amount,
-  currencyOptions,
+  currency,
   className,
   hidePlus,
 }: CurrencyAmountProps) => {
-  const { tag, locale } = currencyOptions;
   const options = {
     style: "currency",
-    currency: tag,
+    currency,
   } as Intl.NumberFormatOptions;
 
-  const currencyAmountNumber = new Intl.NumberFormat(locale, options)
+  const currencyAmountNumber = new Intl.NumberFormat(undefined, options)
     .format(amount)
     .replace(/^(\D+)/, "$1 ")
     .replace(/\s+/, " ")
