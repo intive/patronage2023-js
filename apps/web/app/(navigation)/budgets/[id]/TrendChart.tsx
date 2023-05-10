@@ -60,8 +60,8 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
     values.push(item.value);
   }
 
-  const minValue = Math.min(...values);
-  const maxValue = Math.max(...values);
+  // const minValue = Math.min(...values);
+  // const maxValue = Math.max(...values);
 
   return (
     <StyledWrapper>
@@ -98,8 +98,9 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
             scales: {
               y: {
                 display: false,
-                min: minValue,
-                max: maxValue,
+                bounds: "data",
+                // min: minValue,
+                // max: maxValue,
                 ticks: {
                   display: false,
                 },
@@ -109,6 +110,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
               },
               x: {
                 display: false,
+                bounds: "data",
                 ticks: {
                   display: false,
                 },

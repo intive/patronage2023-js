@@ -28,6 +28,7 @@ export const StyledBalanceChartWrapper = styled.div`
   canvas {
     height: auto !important; //override inline styles added to <canvas>
     max-width: 180px;
+    background-color: aquamarine;
   }
 `;
 
