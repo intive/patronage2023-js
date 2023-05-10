@@ -4,7 +4,6 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "@next/font/google";
 import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
-import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
 import SessionProviderWrapper from "./SessionProviderWrapper";
 import 'ka-table/style.css';

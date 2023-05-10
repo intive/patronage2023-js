@@ -3,7 +3,7 @@
 import { Field, Form } from "houseform";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ErrorMessage, Button, Input } from "ui";
+import { ErrorMessage, Button, Input, FormFooter } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
@@ -142,6 +142,11 @@ export default function SignInPage() {
             <Button onClick={submit} type="submit" fullWidth>
               {t(form.submitButton)}
             </Button>
+            <FormFooter
+              basicText={t(form.footer)}
+              linkText={t(form.footerLink)}
+              href="/sign-up"
+            />
           </form>
         </FormWrapper>
       )}
