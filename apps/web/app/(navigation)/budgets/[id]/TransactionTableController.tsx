@@ -2,7 +2,7 @@ import { TransactionsTable } from "./TransactionsTable";
 import { useState } from "react";
 import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
 import { Spinner } from "ui";
 import { useSession } from "next-auth/react";
@@ -27,10 +27,8 @@ type ID = {
 };
 
 const TransactionTableController = ({ budget }: { budget: Budget }) => {
-  //useSession
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
 
@@ -55,53 +53,41 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
         },
       });
     });
-    setTransactions(tempArray);
+    return tempArray;
   };
-  const fetchFunction = async (
-    ids: string,
-    token: string,
-    itemsOnPage: number,
-    pageNumber: number
-  ) => {
-    try {
-      const fetchedData = await fetch(
-        env.NEXT_PUBLIC_API_URL + "/budgets/" + ids + "/transactions",
+
+  const {
+    data: transactionsData,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ["datatable"],
+    queryFn: async () => {
+      return fetch(
+        env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
         {
           body: JSON.stringify({
-            pageSize: itemsOnPage,
-            pageIndex: pageNumber,
+            pageSize: itemsPerPage,
+            pageIndex: currentPage,
           }),
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: "Bearer " + session!.user.accessToken,
             "Content-Type": "application/json",
           },
           method: "POST",
         }
-      );
-      const parsedData = await fetchedData.json();
-      fixFetchedData(parsedData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const dataQuery = useQuery({
-    queryKey: ["datatable", budget, itemsPerPage, currentPage, session],
-    queryFn: () =>
-      fetchFunction(
-        budget.id,
-        session!.user.accessToken,
-        itemsPerPage,
-        currentPage
-      ),
-    enabled: !!session,
+      )
+        .then((res) => res.json())
+        .then((parsed) => fixFetchedData(parsed));
+    },
+    enabled: !!session && !!budget,
   });
 
-  if (dataQuery.isLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
-  if (dataQuery.error) {
+  if (isError) {
     return <h1>Error occurred</h1>;
   }
 
@@ -110,7 +96,7 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={transactions}
+        transactions={transactionsData}
       />
     </>
   );

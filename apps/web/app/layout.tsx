@@ -34,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient} contextSharing={true}>
+        <QueryClientProvider client={queryClient}>
           <SessionProviderWrapper>
             <StyledComponentsRegistry>
               <LanguageProvider>
