@@ -1,5 +1,10 @@
 import { mockDataChart } from "./mock-data-chart";
-import styled from "styled-components";
+import {
+  StyledWrapper,
+  StyledCurrencyAmount,
+  StyledTitle,
+  StyledBalanceChartWrapper,
+} from "./TrendChart.styled";
 
 import {
   Chart as ChartJS,
@@ -21,17 +26,7 @@ ChartJS.register(
   Filler
 );
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 80px;
-  width: 100%;
-
-  canvas {
-    max-width: 100%;
-  }
-`;
-
+// TODO: budgetID in prop!!!!
 export const TrendChart = () => {
   //TODO: SORTING !!!!!!!!!!!!!!!!!!
 
@@ -46,48 +41,59 @@ export const TrendChart = () => {
 
   return (
     <StyledWrapper>
-      <div>Total balance</div>
-      <Line
-        data={{
-          labels: dates,
-          datasets: [
-            {
-              data: values,
-              borderColor: "#92CE78", // TODO: line color for negative
-              borderWidth: 2,
-              fill: {
-                target: "origin",
-                above: "#92CE7855", // TODO: gradient???
-                below: "#E5707055",
+      <StyledTitle>Total balance</StyledTitle>
+      <StyledBalanceChartWrapper>
+        <StyledCurrencyAmount
+          amount={124054.96}
+          currencyOptions={{ tag: "USD", locale: "en-US" }}
+          hidePlus
+        />
+        <Line
+          className="trend-chart" // NEEDED ???
+          
+          data={{
+            labels: dates,
+            datasets: [
+              {
+                data: values,
+                borderColor: "#92CE78", // TODO: line color for negative !!!
+                borderWidth: 2,
+                fill: {
+                  target: "origin",
+                  above: "#92CE7855", // TODO: HOW gradient ???
+                  below: "#E5707055",
+                },
+                cubicInterpolationMode: "monotone",
+                pointStyle: false,
               },
-              cubicInterpolationMode: "monotone",
-              pointStyle: false,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              display: false,
-              ticks: {
+            ],
+          }}
+          options={{
+            aspectRatio: 3,
+            scales: {
+              y: {
                 display: false,
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  display: false,
+                },
+              
               },
-              grid: {
+              x: {
                 display: false,
-              }
-            },
-            x: {
-              display: false,
-              ticks: {
-                display: false,
+                ticks: {
+                  display: false,
+                },
+                grid: {
+                  display: false,
+                },
               },
-              grid: {
-                display: false,
-              }
             },
-          },
-        }}
-      />
+          }}
+        />
+      </StyledBalanceChartWrapper>
     </StyledWrapper>
   );
 };
