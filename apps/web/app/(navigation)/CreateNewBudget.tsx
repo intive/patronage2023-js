@@ -124,14 +124,21 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     currentLang === "pl" && setLang("pl-PL");
   }, [lang, currentLang]);
 
+  const { data: session } = useSession();
+
   const startDateTimestamp = newBudget.dateStart;
   const endDateTimeStamp = newBudget.dateEnd;
   const budgetStartDate = new Date(startDateTimestamp).toISOString();
   const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
-  const { data: session } = useSession();
-
+  // required for queryClient in onSuccess
   const queryClient = useQueryClient();
+
+  // const {isError} = useMutation({
+  //   onError(error, variables, context) {
+      
+  //   },
+  // });
 
   const useSendBudget = () =>
     useMutation(
@@ -146,7 +153,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           body: JSON.stringify({
             name: newBudget.name,
             limit: {
-              value: newBudget.limit,
+              // value: newBudget.limit,
               currency: newBudget.currency.tag,
             },
             period: {
@@ -161,7 +168,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         onSuccess: () => {
           queryClient.invalidateQueries(["budgets", { searchValue:"", sortAscending: true }]);
         },
-        onError: () => {},
+        // onError: (error) => {
+        //   return error;
+        // },
       }
     );
 
@@ -183,7 +192,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Form
           onSubmit={() => {
             sendBudget();
-            onClose();
+            // onClose();
           }}>
           {({ submit }) => (
             <form
