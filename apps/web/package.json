@@ -19,7 +19,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ui": "*",
-    "zod": "^3.21.4"
+    "zod": "^3.21.4",
+    "react-loading-skeleton": "^3.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
