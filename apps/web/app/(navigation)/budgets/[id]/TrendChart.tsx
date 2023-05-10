@@ -8,6 +8,7 @@ import {
   PointElement,
   CategoryScale,
   LinearScale,
+  Filler
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -16,18 +17,25 @@ ChartJS.register(
   LineElement,
   PointElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  Filler
 );
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 80px;
-  /* width: 100%; */
+  width: 100%;
+
+  canvas {
+    max-width: 100%;
+  }
 `;
 
 export const TrendChart = () => {
-  //TODO: SORTING !!!!!
+
+  //TODO: SORTING !!!!!!!!!!!!!!!!!!
+
   const dates = [];
   const values = [];
   for (let item of mockDataChart) {
@@ -46,6 +54,9 @@ export const TrendChart = () => {
           datasets: [
             {
               data: values,
+              borderColor: "#92CE78",
+              backgroundColor: "#92CE7899",
+              fill: true,
             },
           ],
         }}
