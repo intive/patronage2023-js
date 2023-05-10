@@ -21,7 +21,7 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType: string;
+  categoryType: "HomeSpendings" | "Subscriptions" | "Car" | "Grocery";
 };
 
 type ID = {
@@ -43,10 +43,8 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
-        // @ts-ignore
         category: categoryMap[item.categoryType]
-          ? // @ts-ignore
-            categoryMap[item.categoryType]
+          ? categoryMap[item.categoryType]
           : categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
