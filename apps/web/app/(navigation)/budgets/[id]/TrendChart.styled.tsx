@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
 export const StyledTitle = styled.div`
   font-size: 12px;
   line-height: 150%;
-  color: #7E7E7E;
+  color: ${({ theme }) => theme.trendChart.titleLeft};
 `;
 
 export const StyledBalanceChartWrapper = styled.div`
