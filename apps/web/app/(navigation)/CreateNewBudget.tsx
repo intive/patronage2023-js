@@ -3,7 +3,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
-import { v4 as uuidv4 } from "uuid";
 
 import {
   Button,
@@ -130,9 +129,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
   const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM2NzEyNDAsImlhdCI6MTY4MzY2NDA0MCwianRpIjoiOGNmYWZkMDMtYmNjMC00NDE0LTg1YjgtOGZkMGYzMGNjOTkzIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImNjZDlkN2U4LWEwNGEtNDZlMi05MWJlLWRiZjJiYzEyZmMzYiIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImNjZDlkN2U4LWEwNGEtNDZlMi05MWJlLWRiZjJiYzEyZmMzYiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.zhzq_NVS1eBlhsVbz9xX1Mg024HRl6WKf-r7d9uQI1y7iEAbVeeY4jPptJ3qPE3hmVbeC5cL764qVk-wU44RuokmaZMZbN5dpESz3SRtl3XZhQhDtyCI4zaTCS-kpp8AWkzkKs2QHaO3OBOk7hGDjRqNlKbMDu1xeFwwWW7RhFiLH4BeHwAXRTv7T2G04rcghnuOQhk_owJd0ruR7oM3woWJsdxFJzcNvWxKt3nouAi42K2bFH2Bi05N6m_b9ESpcuwWE3MA1Xr-xQkCBLjiQkoVuYFLBudOhmPROnPrA8q6O0n_M3qlAezHTsXdOO9Uev6JR45Y3k3LnlBl2sg1kA";
+    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM3MDI5NDYsImlhdCI6MTY4MzY5NTc0NSwianRpIjoiNTcwZGEzMDYtOWU5My00NGRmLTk0ZWQtZmNiOGFhZmYwODE2IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiODIwNjNmMmUtOWQ5YS00YjM4LWEyMmUtNTU3MmNlZTlkZGY0IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjE0MTcxN2NmLTA0MjgtNGViNS04MjE3LWZhYTcyNGI5ZDY3YSIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjE0MTcxN2NmLTA0MjgtNGViNS04MjE3LWZhYTcyNGI5ZDY3YSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYW1lIjoic211dG5hIHphYmEiLCJhdmF0YXIiOiIxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoic211dG5hcnphYmFAcG5nLnBsIiwiZ2l2ZW5fbmFtZSI6InNtdXRuYSIsImZhbWlseV9uYW1lIjoiemFiYSIsImVtYWlsIjoic211dG5hcnphYmFAcG5nLnBsIn0.QZCM5CPoORXv8NhBYDIkvfarp3AMSO5BLiMuN0TGzWTwn0Wk-UXDUVyIDjyTaNyhtfW53OoFphqjK8xSmchqG8UmCeuHcNRdtcx10jg8DRaT0bub3Xvg6dnGS7D_2eVWvvntsPxcjq3kai-DAJKOIf7LX1PhQbkO1c3_fbUOzFfT5l9AgveMJ8mm-SVWuBVgTM3FKjrk9fWgrghgBgdV0vtGYXJjI9rWdExngTtnr1GHKnNaGMuTxH84Se6L4uaAty7HzbHpJqAiVVOK_3IVT_OcDzYOfIsamzH9XaLS8jgq_5vUOA0_trn8nogz7qxr1b2IrQ_2EKS5_es6zui7hg";
 
   const queryClient = useQueryClient();
+
+  const randomUUID = self.crypto.randomUUID();
 
   const useSendBudget = () =>
     useMutation(
@@ -145,9 +146,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: uuidv4(),
+            id: randomUUID,
             name: newBudget.name,
-            userId: uuidv4(),
+            userId: randomUUID,
             limit: {
               value: newBudget.limit,
               currency: newBudget.currency.tag,
