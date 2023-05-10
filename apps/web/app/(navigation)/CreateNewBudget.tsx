@@ -133,8 +133,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const queryClient = useQueryClient();
 
-  const randomUUID = self.crypto.randomUUID();
-
   const useSendBudget = () =>
     useMutation(
       () =>
@@ -146,9 +144,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: randomUUID,
             name: newBudget.name,
-            userId: randomUUID,
             limit: {
               value: newBudget.limit,
               currency: newBudget.currency.tag,
