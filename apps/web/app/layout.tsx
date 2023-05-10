@@ -5,7 +5,8 @@ import { Inter } from "@next/font/google";
 import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
 import StyledComponentsThemeWrapper from "ui/theme";
-import "ka-table/style.css";
+import SessionProviderWrapper from "./SessionProviderWrapper";
+import 'ka-table/style.css';
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -30,13 +31,15 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <StyledComponentsRegistry>
-          <LanguageProvider>
-            <StyledComponentsThemeWrapper>
-              {children}
-            </StyledComponentsThemeWrapper>
-          </LanguageProvider>
-        </StyledComponentsRegistry>
+        <SessionProviderWrapper>
+          <StyledComponentsRegistry>
+            <LanguageProvider>
+              <StyledComponentsThemeWrapper>
+                {children}
+              </StyledComponentsThemeWrapper>
+            </LanguageProvider>
+          </StyledComponentsRegistry>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
