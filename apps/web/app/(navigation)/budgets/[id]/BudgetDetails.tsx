@@ -16,20 +16,22 @@ const DetailsWrapperStyled = styled.div`
   border: 2px solid #f7f7f7;
   border-radius: 16px;
   display: flex;
-  justify-content: center;
   padding: 24px 32px;
 `;
 
 const BudgetDetails = ({ budget }: Props) => {
   const { data: session } = useSession();
 
-  const { id, currency, startDate, endDate } = budget;
+  const { id } = budget;
+
+  const startDate = "2020-03-01";
+  const endDate = "2024-01-01";
 
   const { data: statistics } = useQuery({
-    queryKey: ["statistics", id],
+    queryKey: ["mainStatistics"],
     queryFn: async () => {
       return fetch(
-        `${env.NEXT_PUBLIC_API_URL}/budgets/${id}/statistics?startDate=${startDate}&endDate=${endDate}`,
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startDate}&endDate=${endDate}`,
         {
           headers: {
             accept: "*/*",
@@ -42,12 +44,11 @@ const BudgetDetails = ({ budget }: Props) => {
     enabled: !!session,
   });
 
-  console.log(statistics);
-
   return (
     <DetailsWrapperStyled>
+      {/* statistics do lewego */}
       <div>lewy</div>
-      <BudgetStatistics />
+      <BudgetStatistics budget={budget} />
     </DetailsWrapperStyled>
   );
 };
