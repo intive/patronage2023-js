@@ -8,7 +8,7 @@ import {
   PointElement,
   CategoryScale,
   LinearScale,
-  Filler
+  Filler,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -33,7 +33,6 @@ const StyledWrapper = styled.div`
 `;
 
 export const TrendChart = () => {
-
   //TODO: SORTING !!!!!!!!!!!!!!!!!!
 
   const dates = [];
@@ -54,11 +53,31 @@ export const TrendChart = () => {
           datasets: [
             {
               data: values,
-              borderColor: "#92CE78",
-              backgroundColor: "#92CE7899",
-              fill: true,
+              borderColor: "#92CE78", // TODO: line color for negative
+              borderWidth: 2,
+              fill: {
+                target: "origin",
+                above: "#92CE7855", // TODO: gradient???
+                below: "#E5707055",
+              },
+              cubicInterpolationMode: "monotone",
+              pointStyle: false,
             },
           ],
+        }}
+        options={{
+          scales: {
+            y: {
+              ticks: {
+                display: false,
+              },
+            },
+            x: {
+              ticks: {
+                display: false,
+              },
+            },
+          },
         }}
       />
     </StyledWrapper>
