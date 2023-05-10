@@ -11,6 +11,8 @@ import { iconNames } from "lib/consts";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
+import { reqInstance } from "services/mutations";
+import { useSession } from "next-auth/react";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -27,10 +29,15 @@ export default function SideNav() {
   const queryClient = useQueryClient();
   const pageSize = 13;
 
+  const { data: sessionData } = useSession();
+
+  const axiosInstance = reqInstance(sessionData?.user.accessToken);
+
   const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status } =
-    useGetBudgets(debouncedSearch, sortAscending, pageSize);
+    useGetBudgets(debouncedSearch, sortAscending, pageSize, axiosInstance);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
+
   const lastBudgetRef = useCallback(
     (budget: HTMLLIElement) => {
       if (isFetchingNextPage) return;

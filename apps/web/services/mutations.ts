@@ -22,7 +22,7 @@ export type GetBudgetsListType = {
   axiosInstance: AxiosInstance;
 };
 
-export const reqInstance = (token: string) =>
+export const reqInstance = (token: string | undefined) =>
   axios.create({
     baseURL: env.NEXT_PUBLIC_API_URL,
     headers: {
