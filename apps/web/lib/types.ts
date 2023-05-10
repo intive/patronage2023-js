@@ -38,6 +38,13 @@ export interface Budget {
   currency: string;
 }
 
+export interface BudgetGeneralInfo {
+  id: string;
+  currency: string;
+  startDate: number;
+  endDate: number;
+}
+
 export interface BudgetTransaction {
   budgetID: string;
   transactions: Transaction[];
