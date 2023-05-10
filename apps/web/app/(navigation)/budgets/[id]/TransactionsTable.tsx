@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
-import { Budget, Transaction } from "lib/types";
+import { Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
@@ -20,13 +20,13 @@ import {
 } from "./TransactionsTable.styled";
 
 type TransactionsTableProps = {
-  budget: Budget;
+  currency: string;
   setSorting: (column: string) => void;
   transactions: Transaction[];
 };
 
 export const TransactionsTable = ({
-  budget,
+  currency,
   setSorting,
   transactions,
 }: TransactionsTableProps) => {
@@ -148,7 +148,7 @@ export const TransactionsTable = ({
                   return (
                     <StyledCurrencyAmount
                       amount={props.value}
-                      currency={budget.currency}
+                      currency={currency}
                     />
                   );
                 case "creator":

@@ -30,6 +30,7 @@ export interface Budget {
   endDate: number;
   limit: number;
   currency: string;
+  userID: string;
 }
 
 export interface BudgetTransaction {

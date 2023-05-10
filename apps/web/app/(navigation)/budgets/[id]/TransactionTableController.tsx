@@ -1,10 +1,11 @@
 import { TransactionsTable } from "./TransactionsTable";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
 import { useQuery } from "react-query";
 import categoryMap from "lib/category-map";
 import { Spinner } from "ui";
+import { useSession } from "next-auth/react";
 
 type APIResponse = {
   items: Item[];
@@ -25,49 +26,13 @@ type ID = {
   value: string;
 };
 
-// {
-//   "items": [
-//   {
-//     "transactionType": "Income",
-//     "transactionId": {
-//       "value": "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5"
-//     },
-//     "budgetId": {
-//       "value": "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5"
-//     },
-//     "name": "Wypłata",
-//     "value": 5000,
-//     "budgetTransactionDate": "2023-05-01T07:33:18.485",
-//     "categoryType": "HomeSpendings"
-//   },
-//   {
-//     "transactionType": "Income",
-//     "transactionId": {
-//       "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
-//     },
-//     "budgetId": {
-//       "value": "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5"
-//     },
-//     "name": "string",
-//     "value": 1,
-//     "budgetTransactionDate": "2023-06-20T14:15:47.392",
-//     "categoryType": "HomeSpendings"
-//   }
-// ],
-//   "totalCount": 2
-// }
-
 const TransactionTableController = ({ budget }: { budget: Budget }) => {
   //useSession
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
-  //TODO define type od budgetData
-  const [budgetData, setBudgetData] = useState<any>();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const setSorting = (column: string) => console.log(column);
-
-  const sampleId = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
-  const Token = "...";
+  const { data: session } = useSession();
 
   const fixFetchedData = (res: APIResponse) => {
     const tempArray = [] as Transaction[];
@@ -84,9 +49,9 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
         description: item.name,
         status: "Done",
         creator: {
-          id: "Anyid",
-          name: "Pepe",
-          avatar: "1.svg",
+          id: budget.userID,
+          name: session!.user.name,
+          avatar: `${session!.user.image}.svg`,
         },
       });
     });
@@ -121,15 +86,16 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
   };
 
   const dataQuery = useQuery({
-    queryKey: ["DataTable"],
-    queryFn: () => fetchFunction(sampleId, Token, itemsPerPage, currentPage),
+    queryKey: ["datatable", budget, itemsPerPage, currentPage, session],
+    queryFn: () =>
+      fetchFunction(
+        budget.id,
+        session!.user.accessToken,
+        itemsPerPage,
+        currentPage
+      ),
+    enabled: !!session,
   });
-
-  // useEffect(() => {
-  //   fetch(`/budget/${id}.json`)
-  //     .then((response) => response.json())
-  //     .then((result) => setTransactions(result.transactions));
-  // }, [id]);
 
   if (dataQuery.isLoading) {
     return <Spinner />;
@@ -142,7 +108,7 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
   return (
     <>
       <TransactionsTable
-        budget={budget}
+        currency={budget.currency}
         setSorting={setSorting}
         transactions={transactions}
       />
