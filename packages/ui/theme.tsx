@@ -152,7 +152,7 @@ export const theme = {
       activeColor: colors.Teal10,
       inactiveColor: colors.Neutral8,
       activeBackground: colors.Teal1,
-      inactiveBackground: "transparent",
+      inactiveBackground: colors.BasicTransparent,
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
     },
@@ -240,6 +240,12 @@ export const theme = {
     active: colors.Teal8,
     hover: colors.Teal10,
   },
+  pagination: {
+    hover: colors.Teal7,
+    text: colors.Neutral6,
+    active: colors.Teal6,
+    border: colors.Neutral2,
+  },
   transactionsTable: {
     background: colors.BasicWhite,
     headRowBottomBorder: colors.Neutral2,
@@ -266,6 +272,9 @@ export const theme = {
       foreground: colors.Supporting13,
       background: colors.Supporting12,
     },
+  },
+  formfooter: {
+    text: "#3e4c59",
   },
 };
 

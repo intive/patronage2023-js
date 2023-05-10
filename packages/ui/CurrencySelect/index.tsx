@@ -25,6 +25,7 @@ export type CurrencySelectComponentProps = {
   value: string;
   id?: string;
   label?: string;
+  hasScrollbar?: boolean;
 } & Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
 
@@ -52,6 +53,7 @@ export const CurrencySelect = ({
   value,
   id,
   label,
+  hasScrollbar,
 }: CurrencySelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -74,7 +76,7 @@ export const CurrencySelect = ({
         </SelectIcon>
       </SelectTrigger>
 
-      <SelectPortal>
+      <SelectPortal className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContent position="popper">
           <Select.Viewport>
             {currency.map((currency) => (
