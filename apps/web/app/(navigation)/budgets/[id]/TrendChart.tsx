@@ -28,15 +28,16 @@ ChartJS.register(
 
 // TODO: budgetID in prop!!!!
 export const TrendChart = () => {
-  //TODO: SORTING !!!!!!!!!!!!!!!!!!
-
+  const sortedData = mockDataChart.sort((a, b) => {
+    const aTimestap = new Date(a.datePoint).getTime();
+    const bTimestap = new Date(b.datePoint).getTime();
+    return aTimestap - bTimestap;
+  });
   const dates = [];
   const values = [];
-  for (let item of mockDataChart) {
-    const date = item.datePoint;
-    dates.push(date);
-    const value = item.value;
-    values.push(value);
+  for (let item of sortedData) {
+    dates.push(item.datePoint);
+    values.push(item.value);
   }
 
   return (
@@ -50,7 +51,6 @@ export const TrendChart = () => {
         />
         <Line
           className="trend-chart" // NEEDED ???
-          
           data={{
             labels: dates,
             datasets: [
@@ -79,7 +79,6 @@ export const TrendChart = () => {
                 grid: {
                   display: false,
                 },
-              
               },
               x: {
                 display: false,
