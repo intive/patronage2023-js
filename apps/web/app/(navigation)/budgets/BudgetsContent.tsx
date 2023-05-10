@@ -11,6 +11,8 @@ import styled from "styled-components";
 import { usePathname } from "next/navigation";
 import { device } from "lib/media-queries";
 
+import { mockDataChart } from "./[id]/mock-data-chart";
+
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -45,7 +47,7 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <TrendChart />
+      <TrendChart statistics={mockDataChart.statistics} currency={budget.currency} />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}

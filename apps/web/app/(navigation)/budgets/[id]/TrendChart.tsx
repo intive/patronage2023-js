@@ -1,4 +1,4 @@
-import { mockDataChart } from "./mock-data-chart";
+import { Currency } from "lib/types";
 import {
   StyledWrapper,
   StyledCurrencyAmount,
@@ -26,9 +26,20 @@ ChartJS.register(
   Filler
 );
 
-// TODO: budgetID in prop!!!!
-export const TrendChart = () => {
-  const sortedData = mockDataChart.sort((a, b) => {
+type TrendChartProps = {
+  statistics: {
+    items: Array<{
+      value: number;
+      datePoint: string;
+    }>;
+    trendValue: number;
+    totalBudgetValue: number;
+  };
+  currency: Currency;
+};
+
+export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
+  const sortedData = statistics.items.sort((a, b) => {
     const aTimestap = new Date(a.datePoint).getTime();
     const bTimestap = new Date(b.datePoint).getTime();
     return aTimestap - bTimestap;
@@ -45,12 +56,11 @@ export const TrendChart = () => {
       <StyledTitle>Total balance</StyledTitle>
       <StyledBalanceChartWrapper>
         <StyledCurrencyAmount
-          amount={124054.96}
-          currencyOptions={{ tag: "USD", locale: "en-US" }}
+          amount={statistics.totalBudgetValue}
+          currencyOptions={currency}
           hidePlus
         />
         <Line
-          className="trend-chart" // NEEDED ???
           data={{
             labels: dates,
             datasets: [
@@ -93,6 +103,7 @@ export const TrendChart = () => {
           }}
         />
       </StyledBalanceChartWrapper>
+      <div>trendChip</div> {/* to be changed for trend chip once it is merged*/}
     </StyledWrapper>
   );
 };

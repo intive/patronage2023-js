@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { CurrencyAmount } from "ui";
 
 export const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 100%;
 `;
 
