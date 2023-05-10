@@ -439,7 +439,7 @@ const dictionary = {
       income: {
         en: "New income",
         pl: "Nowy wpływ",
-        fr: "Nouveau revenu",
+        fr: "Nouvelle recette",
       },
       expense: {
         en: "New expense",
@@ -456,7 +456,7 @@ const dictionary = {
       income: {
         en: "Income name",
         pl: "Nazwa przychodu",
-        fr: "Nom du revenu",
+        fr: "Nom de la recette",
       },
       expense: {
         en: "Expense name",
@@ -482,18 +482,18 @@ const dictionary = {
     button: {
       en: "Save",
       pl: "Zapisz",
-      fr: "Sauvegarder",
+      fr: "Enregistrer",
     },
     errors: {
       min3characters: {
         en: "Name must have at least 3 characters.",
         pl: "Nazwa musi zawierać co najmniej 3 znaki.",
-        fr: "Le nom doit comporter au moins 3 caractères.",
+        fr: "Le nom doit contenir au moins 3 caractères.",
       },
       max58characters: {
         en: "Name must not have more than 58 characters.",
         pl: "Nazwa nie może mieć więcej niż 58 znaków.",
-        fr: "Le nom ne doit pas comporter plus de 58 caractères.",
+        fr: "Le nom ne peut pas dépasser 58 caractères.",
       },
       amountGraterThanZero: {
         en: "Amount must be grater than 0.",
@@ -556,7 +556,7 @@ const dictionary = {
     },
     createButton: {
       label: { en: "Create", pl: "Utwórz", fr: "Créer" },
-      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus" },
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouvelle recette" },
       newExpense: {
         en: "New expense",
         pl: "Nowy wydatek",
