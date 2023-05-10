@@ -159,7 +159,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         }),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries();
+          queryClient.invalidateQueries(["budgets", { searchValue:"", sortAscending: true }]);
         },
         onError: () => {},
       }
