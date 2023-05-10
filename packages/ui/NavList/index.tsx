@@ -101,7 +101,7 @@ export const NavList = ({
   ));
 
   const noDataError = !(loading || error) && (
-    <NoDatErrorWrapper>{text!.noData}</NoDatErrorWrapper>
+    <NoDatErrorWrapper>{text && text!.noData}</NoDatErrorWrapper>
   );
 
   return (
@@ -110,13 +110,13 @@ export const NavList = ({
       {loading && (
         <WrapperStyled>
           <Spinner />
-          <p>{text!.loading}</p>
+          <p>{text && text!.loading}</p>
         </WrapperStyled>
       )}
       {error && (
         <WrapperStyled>
           <Icon icon="error" iconSize={50} color={`${theme.navList.error}`} />
-          <p>{text!.error}</p>
+          <p>{text && text!.error}</p>
         </WrapperStyled>
       )}
     </NavListStyled>
