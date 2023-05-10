@@ -154,7 +154,7 @@ export const TransactionsTable = ({
                   return (
                     <StyledCurrencyAmount
                       amount={props.value}
-                      currencyOptions={budget.currency}
+                      currency={budget.currency}
                     />
                   );
                 case "creator":
