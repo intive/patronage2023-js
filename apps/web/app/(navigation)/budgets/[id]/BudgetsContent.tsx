@@ -31,7 +31,7 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
   const { data: budget } = useQuery({
     queryKey: ["budgets", id],
     queryFn: async () => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${id}`, {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${id}`, {
         headers: {
           accept: "*/*",
           "Content-Type": "application/json",
