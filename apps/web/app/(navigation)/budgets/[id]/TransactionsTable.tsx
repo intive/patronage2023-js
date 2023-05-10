@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
@@ -14,7 +14,6 @@ import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
 
-import { useEffect, useState } from "react";
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
@@ -23,11 +22,13 @@ import {
 type TransactionsTableProps = {
   budget: Budget;
   setSorting: (column: string) => void;
+  transactions: Transaction[];
 };
 
 export const TransactionsTable = ({
   budget,
   setSorting,
+  transactions,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -89,14 +90,6 @@ export const TransactionsTable = ({
       dataType: DataType.Number,
     },
   ] as Column[];
-
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    fetch(`/budget/${budget.id}.json`)
-      .then((response) => response.json())
-      .then((result) => setTransactions(result.transactions));
-  }, [budget]);
 
   const getDayName = (timestamp: number) => {
     dayjs.extend(isToday);

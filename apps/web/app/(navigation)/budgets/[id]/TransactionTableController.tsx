@@ -57,13 +57,7 @@ type ID = {
 //   "totalCount": 2
 // }
 
-const TransactionTableController = ({
-  id,
-  budget,
-}: {
-  id: string;
-  budget: Budget;
-}) => {
+const TransactionTableController = ({ budget }: { budget: Budget }) => {
   //useSession
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);

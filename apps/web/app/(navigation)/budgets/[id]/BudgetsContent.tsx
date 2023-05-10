@@ -3,12 +3,12 @@
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
-import { TransactionsTable } from "./TransactionsTable";
 import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
 import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
 import { useSession } from "next-auth/react";
+import TransactionTableController from "./TransactionTableController";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@ interface BudgetsContentProps {
 }
 
 export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "3e9ca5f0-5ef8-44bc-a8bc-175c826b39b5";
+  const id = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
 
   const { data: session } = useSession();
   const { data: budget } = useQuery({
@@ -48,12 +48,7 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
         <BudgetBasicInformationSuspense />
       )}
       {/* no suspense for TransactionTable so we don't render it when there is no data */}
-      {budget && (
-        <TransactionsTable
-          budget={budget}
-          setSorting={(column) => console.log(column)}
-        />
-      )}
+      {budget && <TransactionTableController budget={budget} />}
     </BudgetContentWrapperStyled>
   );
 
