@@ -54,14 +54,12 @@ export const ParagraphStyled = styled.p`
   margin-bottom: 24px;
   padding-left: 3px;
   padding-top: 56px;
-  color: #515151;
+  color: ${({ theme }) => theme.createNewTransaction.paragraph};
 `;
 
 export const ContentStyled = styled.div<{ fullHeight?: boolean }>`
   display: grid;
   overflow-y: auto;
-  grid-row-start: 1;
-  grid-row-end: 2;
   padding-right: ${({ fullHeight }) => fullHeight && "10px"};
   gap: 8px;
 

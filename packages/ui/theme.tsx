@@ -245,6 +245,9 @@ export const theme = {
     active: colors.Teal8,
     hover: colors.Teal10,
   },
+  createNewTransaction: {
+    paragraph: colors.Neutral8,
+  },
   pagination: {
     hover: colors.Teal7,
     text: colors.Neutral6,

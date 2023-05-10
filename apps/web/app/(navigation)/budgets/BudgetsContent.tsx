@@ -110,7 +110,7 @@ export const BudgetsContent = () => {
         <CreateNewTransaction
           type={transactionType}
           onClose={closeNewTransactionModal}
-          budgetId={id}
+          // budgetId={id}
         />
       )}
     </>

@@ -12,7 +12,7 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-import categoryMap from "../../../lib/category-map";
+import categoryMap from "lib/category-map";
 import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
 
@@ -22,30 +22,6 @@ type CategorySelectorProps = {
   errors?: string[];
 };
 
-const getCategoriesItems = (categoryMap: CategoryMap) => {
-  const categories = Object.keys(categoryMap);
-
-  return categories.map((category) => (
-    <SelectItemStyled value={category} key={category}>
-      <Select.ItemText>
-        <CategoryWrapperStyled>
-          {categoryMap[category] && (
-            <CategoryIcon
-              small
-              category={categoryMap[category] as CategoryType}
-            />
-          )}
-          {categoryMap[category]?.name && (
-            <CategoryNameStyled>
-              {categoryMap[category]?.name}
-            </CategoryNameStyled>
-          )}
-        </CategoryWrapperStyled>
-      </Select.ItemText>
-    </SelectItemStyled>
-  ));
-};
-
 export const CategorySelector = ({
   errors,
   onValueChange,
@@ -53,6 +29,30 @@ export const CategorySelector = ({
 }: CategorySelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasErrors = errors ? errors.length > 0 : false;
+
+  const getCategoriesItems = (categoryMap: CategoryMap) => {
+    const categories = Object.keys(categoryMap);
+
+    return categories.map((category) => (
+      <SelectItemStyled value={category} key={category}>
+        <Select.ItemText>
+          <CategoryWrapperStyled>
+            {categoryMap[category] && (
+              <CategoryIcon
+                small
+                category={categoryMap[category] as CategoryType}
+              />
+            )}
+            {categoryMap[category]?.name && (
+              <CategoryNameStyled>
+                {categoryMap[category]?.name}
+              </CategoryNameStyled>
+            )}
+          </CategoryWrapperStyled>
+        </Select.ItemText>
+      </SelectItemStyled>
+    ));
+  };
 
   return (
     <Select.Root
@@ -64,7 +64,7 @@ export const CategorySelector = ({
       }}>
       <SelectTriggerWrapperStyled>
         <SelectTriggerStyled $hasError={hasErrors}>
-          <Select.Value placeholder={label}></Select.Value>
+          <Select.Value placeholder={label} />
           <SelectIconStyled>
             <Icon
               icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
@@ -79,14 +79,7 @@ export const CategorySelector = ({
 
       <SelectPortalStyled>
         <SelectContentStyled position="popper">
-          <Select.Viewport>
-            {getCategoriesItems(categoryMap)}
-            {/* {categories.map((category) => (
-              <SelectItem value={category} key={category}>
-                <Select.ItemText>{category}</Select.ItemText>
-              </SelectItem>
-            ))} */}
-          </Select.Viewport>
+          <Select.Viewport>{getCategoriesItems(categoryMap)}</Select.Viewport>
         </SelectContentStyled>
       </SelectPortalStyled>
     </Select.Root>

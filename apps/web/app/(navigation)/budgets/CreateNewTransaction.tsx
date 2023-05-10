@@ -1,6 +1,5 @@
 "use client";
 import { Field, Form } from "houseform";
-import { useState } from "react";
 import { Button, CustomDatePicker, Input, Modal } from "ui";
 import { z } from "zod";
 import {
@@ -16,12 +15,12 @@ import { useTranslate } from "lib/hooks";
 import { CategorySelector } from "./CategorySelector";
 import { useMutation, useQueryClient } from "react-query";
 import { env } from "env.mjs";
-import { v4 as uuidv4 } from "uuid";
+import { useSession } from "next-auth/react";
 
 type CreateNewTransactionProps = {
   type: string;
   onClose: () => void;
-  budgetId: string | undefined;
+  budgetId?: string | undefined;
 };
 
 type TransactionType = {
@@ -35,17 +34,15 @@ type TransactionType = {
 
 export const CreateNewTransaction = ({
   type,
-  // budgetId,
+  // budgetId for user: jkowalski@gmail.com password: Password123!
+  budgetId = "7e6ca5f0-5ef8-44bc-a8bc-175c826b39b4",
   onClose,
 }: CreateNewTransactionProps) => {
   const { t, dict } = useTranslate("CreateNewTransactionModal");
+  const { data } = useSession();
 
-  const budgetId = "7e6ca5f0-5ef8-44bc-a8bc-175c826b39b4";
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budgetId}/transaction`;
-  const token =
-    "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJha0lYQnV6SHhGb1RINkgxRFNhTkRiVlk4MnBMWXRNdFdVMkRPTjNHTXNnIn0.eyJleHAiOjE2ODM3MzA1MzQsImlhdCI6MTY4MzcyMzMzNCwianRpIjoiM2I5ZjM5NzItNTRlNS00NDc2LWEwNGMtYTJiNWEzYWM4MmU3IiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay1pbmJ1ZGdldC1wYXRyb25hZ2UyMDIzLmF6dXJld2Vic2l0ZXMubmV0L3JlYWxtcy9pbmJ1ZGdldC1yZWFsbS1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZTE3MjUyYmEtMjc5ZS00NWM3LWJhMWItNjcwMDNkZWI2YzAzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiaW5idWRnZXQtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6IjU5Yzc3MzkxLTZiYTMtNDU1Yy1hNDIzLWZiZDljMzBmOWQwNCIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiLyoiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1pbmJ1ZGdldC1yZWFsbS1kZXYiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjU5Yzc3MzkxLTZiYTMtNDU1Yy1hNDIzLWZiZDljMzBmOWQwNCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IkphbiBLb3dhbHNraSIsImF2YXRhciI6ImF2YXRhciIsInByZWZlcnJlZF91c2VybmFtZSI6Imprb3dhbHNraUBnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiSmFuIiwiZmFtaWx5X25hbWUiOiJLb3dhbHNraSIsImVtYWlsIjoiamtvd2Fsc2tpQGdtYWlsLmNvbSJ9.gRd_uxVHX3kZVLLbrsK1Pie_QnnLWKkYSRjKZMbKqOw1rAjb0oUt6OfN8mU4FMgB71S8kyK5QRbhyRQqt18Xa3bDSDu_T66yj-nCy8GyC_GPy9zI-sjJtt1fMtym9E_Xfj355YQQ9jGXyaCpT8Fiwh1wtrYmjRN3DDBkyKvmTovBkL2_eq89w_nTaDMbOW_xJqdJeSbTic55Iq1US1_zbC8VeEXfR2EHd_yRcSB-dA-hC_ritcqS97DHdlzwo4Ztu5ATgP847y0pSp90NSFAt6KTDNdn5JAOMrm7I4mIw3fd_xAAld_FRYfmZBSZZDUUlRU3ZudJ9eRkyRrb4PJsrw";
-
-  // userid = 59c77391-6ba3-455c-a423-fbd9c30f9d04
+  const token = data?.user.accessToken;
 
   const queryClient = useQueryClient();
 
@@ -60,16 +57,16 @@ export const CreateNewTransaction = ({
         },
         body: JSON.stringify(newTransaction),
       });
-      console.log(result);
+      console.log(result.then((Response) => Response.json()));
       return result;
+    },
+    {
+      onSuccess: () => {
+        // queryClient.invalidateQueries(["transactions"]);
+        onClose();
+      },
+      onError: (error) => console.error(error),
     }
-    // {
-    //   onSuccess: () => {
-    //     queryClient.invalidateQueries(["transactions"]);
-    //     onClose();
-    //   },
-    //   onError: () => console.error(),
-    // }
   );
 
   const convertAmount = (amount: string) => {
@@ -84,10 +81,16 @@ export const CreateNewTransaction = ({
     return date ? date.toISOString() : "";
   };
 
-  const handleSubmit = (newTransaction: TransactionType) => {
-    console.log(newTransaction);
-
-    // onClose();
+  const handleSubmit = (values: Record<string, any>) => {
+    const newTransaction: TransactionType = {
+      id: crypto.randomUUID(),
+      type,
+      name: values["transaction-name"],
+      value: convertAmount(values["transaction-amount"]),
+      category: values["category"],
+      transactionDate: convertDate(values["date"]),
+    };
+    newTransactionMutation.mutate(newTransaction);
   };
 
   const getHeader = (type: string) => {
@@ -116,19 +119,20 @@ export const CreateNewTransaction = ({
     <Modal onClose={onClose} header={getHeader(type)} fullHeight={fullHeight}>
       <FormWrapper>
         <Form
-          onSubmit={(values) => {
-            const newTransaction: TransactionType = {
-              id: crypto.randomUUID(),
-              type,
-              name: values["transaction-name"],
-              value: convertAmount(values["transaction-amount"]),
-              category: values["category"],
-              transactionDate: convertDate(values["date"]),
-            };
-            newTransactionMutation.mutate(newTransaction);
+          onSubmit={
+            (values) => handleSubmit(values)
+            // const newTransaction: TransactionType = {
+            //   id: crypto.randomUUID(),
+            //   type,
+            //   name: values["transaction-name"],
+            //   value: convertAmount(values["transaction-amount"]),
+            //   category: values["category"],
+            //   transactionDate: convertDate(values["date"]),
+            // };
+            // newTransactionMutation.mutate(newTransaction);
 
             // handleSubmit(newTransaction);
-          }}>
+          }>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
