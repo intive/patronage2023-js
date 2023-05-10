@@ -436,6 +436,11 @@ const dictionary = {
   },
   BudgetsPage: {
     title: { en: "Budgets page", pl: "Budżety", fr: "Budgets" },
+    tableError: {
+      en: "An error occured, close this window to try again",
+      pl: "Wystąpił błąd, zamknij to okno, aby spróbować ponownie",
+      fr: "Une erreur s'est produite, veuillez fermer cette fenêtre pour réessayer",
+    },
     dropdownButtonAriaLabel: {
       en: "More options",
       pl: "Więcej opcji",

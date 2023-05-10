@@ -4,8 +4,10 @@ import { env } from "env.mjs";
 import { Budget, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
-import { Spinner } from "ui";
+import { ErrorMessage, Spinner } from "ui";
 import { useSession } from "next-auth/react";
+import { Pagination } from "components";
+import { useTranslate } from "lib/hooks";
 
 type APIResponse = {
   items: Item[];
@@ -29,6 +31,8 @@ type ID = {
 const TransactionTableController = ({ budget }: { budget: Budget }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
 
@@ -53,6 +57,7 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
         },
       });
     });
+    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
     return tempArray;
   };
 
@@ -60,8 +65,10 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
     data: transactionsData,
     isError,
     isLoading,
+    refetch,
+    error,
   } = useQuery({
-    queryKey: ["datatable"],
+    queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
     queryFn: async () => {
       return fetch(
         env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
@@ -77,8 +84,13 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
           method: "POST",
         }
       )
-        .then((res) => res.json())
-        .then((parsed) => fixFetchedData(parsed));
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw new Error(`${res.status}`);
+        })
+        .then((json) => fixFetchedData(json));
     },
     enabled: !!session && !!budget,
   });
@@ -88,7 +100,12 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
   }
 
   if (isError) {
-    return <h1>Error occurred</h1>;
+    return (
+      <ErrorMessage
+        onClose={refetch}
+        message={`${t(dict.tableError)} ${error}`}
+      />
+    );
   }
 
   return (
@@ -97,6 +114,17 @@ const TransactionTableController = ({ budget }: { budget: Budget }) => {
         currency={budget.currency}
         setSorting={setSorting}
         transactions={transactionsData}
+      />
+      <Pagination
+        pageIndex={currentPage - 1}
+        numberOfPages={totalPages}
+        pageSizeOptions={[5, 10, 25]}
+        currentPageSize={itemsPerPage}
+        onChangePageSize={(val) => {
+          setItemsPerPage(val);
+          setCurrentPage(1);
+        }}
+        onChangePageIndex={(val) => setCurrentPage(val + 1)}
       />
     </>
   );
