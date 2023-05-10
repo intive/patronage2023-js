@@ -483,7 +483,7 @@ const dictionary = {
     charts: {
       titleLeft: {
         en: "Total balance",
-        pl: "Balans",
+        pl: "Bilans",
         fr: "Solde total",
       },
     },

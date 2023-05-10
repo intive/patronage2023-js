@@ -50,14 +50,3 @@ export interface BudgetTransaction {
 export interface CategoryMap {
   [category: string]: CategoryType | undefined;
 }
-export interface BudgetStatistics {
-  statistics: {
-    items: Array<{
-      value: number;
-      datePoint: string;
-    }>;
-    trendValue: number;
-    totalBudgetValue: number;
-  };
-  currency: string;
-}

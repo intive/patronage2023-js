@@ -1,4 +1,6 @@
 import { useTranslate } from "lib/hooks";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 import { Currency } from "lib/types";
 import {
@@ -41,6 +43,7 @@ type TrendChartProps = {
 };
 
 export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
+  const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { charts } = dict;
 
@@ -72,12 +75,12 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
             datasets: [
               {
                 data: values,
-                borderColor: "#92CE78", // TODO: line color for negative !!!
+                borderColor: theme.trendChart.positiveLine, // TODO: line color for negative ???
                 borderWidth: 2,
                 fill: {
                   target: "origin",
-                  above: "#92CE7855", // TODO: HOW gradient ???
-                  below: "#E5707055",
+                  above: theme.trendChart.positiveFill, // TODO: gradient ???
+                  below: theme.trendChart.negativeFill,
                 },
                 cubicInterpolationMode: "monotone",
                 pointStyle: false,

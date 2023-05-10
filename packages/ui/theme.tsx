@@ -23,6 +23,10 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting17: "#E5707055",
+  Supporting16: "#92CE7855",
+  Supporting15: "#E57070",
+  Supporting14: "#92CE78",
   Supporting13: "#5A092F",
   Supporting12: "#FDE7F1",
   Supporting11: "#003150",
@@ -273,6 +277,12 @@ export const theme = {
   formfooter: {
     text: "#3e4c59",
   },
+  trendChart: {
+    positiveLine: colors.Supporting14,
+    negativeLine: colors.Supporting15,
+    positiveFill: colors.Supporting16,
+    negativeFill: colors.Supporting17,
+  }
 };
 
 export type ThemeType = typeof theme;
