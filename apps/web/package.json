@@ -17,7 +17,9 @@
     "next": "^13.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
     "ui": "*",
+    "uuid": "^9.0.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -25,6 +27,7 @@
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
+    "@types/uuid": "^9.0.1",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
     "tsconfig": "*",

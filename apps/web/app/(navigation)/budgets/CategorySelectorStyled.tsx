@@ -6,7 +6,7 @@ export const SelectTriggerWrapperStyled = styled.div`
 `;
 
 export const SelectTriggerStyled = styled(Select.Trigger)<{
-  hasError: boolean;
+  $hasError: boolean;
 }>`
   position: relative;
   display: flex;
@@ -24,8 +24,8 @@ export const SelectTriggerStyled = styled(Select.Trigger)<{
   cursor: pointer;
   transition: border-color 200ms ease-out;
 
-  ${({ hasError }) =>
-    hasError &&
+  ${({ $hasError }) =>
+    $hasError &&
     css`
       color: ${({ theme }) => theme.categorySelect.error};
       border: solid 2px ${({ theme }) => theme.categorySelect.error};

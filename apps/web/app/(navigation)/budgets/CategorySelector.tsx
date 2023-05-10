@@ -63,7 +63,7 @@ export const CategorySelector = ({
         setIsOpen(!isOpen);
       }}>
       <SelectTriggerWrapperStyled>
-        <SelectTriggerStyled hasError={hasErrors}>
+        <SelectTriggerStyled $hasError={hasErrors}>
           <Select.Value placeholder={label}></Select.Value>
           <SelectIconStyled>
             <Icon
