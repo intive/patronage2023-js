@@ -1,9 +1,10 @@
 "use client";
 
 import { Budget } from "lib/types";
-import { InfoTile, SkeletonLoading } from "ui";
+import { InfoTile } from "ui";
 import { InfoTileStyled, StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
+import Skeleton from "react-loading-skeleton";
 import {
   BasicInfoWrapper,
   BudgetIconStyled,
@@ -96,30 +97,30 @@ export const BudgetBasicInformationSuspense = () => {
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
-        <SkeletonLoading circle height={80} width={80} />
+        <Skeleton circle height={80} width={80} />
         <div>
           <StyledTitle>
-            <SkeletonLoading height={25} width={150} />
+            <Skeleton height={25} width={150} />
           </StyledTitle>
           <StyledDescription>
-            <SkeletonLoading height={15} width={150} />
+            <Skeleton height={15} width={150} />
           </StyledDescription>
         </div>
       </TopSectionWrapper>
       <TileWrapper>
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={100} />
-          <SkeletonLoading height={20} width={150} />
+          <Skeleton height={10} width={100} />
+          <Skeleton height={20} width={150} />
         </InfoTileStyled>
 
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={50} />
-          <SkeletonLoading height={20} width={75} />
+          <Skeleton height={10} width={50} />
+          <Skeleton height={20} width={75} />
         </InfoTileStyled>
 
         <InfoTileStyled>
-          <SkeletonLoading height={10} width={50} />
-          <SkeletonLoading height={20} width={75} />
+          <Skeleton height={10} width={50} />
+          <Skeleton height={20} width={75} />
         </InfoTileStyled>
       </TileWrapper>
     </BasicInfoWrapper>
