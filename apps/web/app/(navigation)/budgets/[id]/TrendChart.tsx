@@ -68,14 +68,22 @@ export const TrendChart = () => {
         options={{
           scales: {
             y: {
+              display: false,
               ticks: {
                 display: false,
               },
+              grid: {
+                display: false,
+              }
             },
             x: {
+              display: false,
               ticks: {
                 display: false,
               },
+              grid: {
+                display: false,
+              }
             },
           },
         }}
