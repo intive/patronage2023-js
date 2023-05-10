@@ -480,6 +480,13 @@ const dictionary = {
         fr: "Nouvelle dépense",
       },
     },
+    charts: {
+      titleLeft: {
+        en: "Total balance",
+        pl: "Balans",
+        fr: "Solde total",
+      },
+    },
     transactionsTable: {
       groupRowDays: {
         yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },

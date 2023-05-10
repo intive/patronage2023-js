@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { usePathname } from "next/navigation";
 import { device } from "lib/media-queries";
 
-import { mockDataChart } from "./[id]/mock-data-chart";
+import { mockDataChart } from "./[id]/trend-chart-mock-data";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useContext } from "react";
 import { CurrencyAmount } from "ui";
 
 export const StyledWrapper = styled.div`

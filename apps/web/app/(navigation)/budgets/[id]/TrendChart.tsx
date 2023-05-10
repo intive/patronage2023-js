@@ -1,3 +1,5 @@
+import { useTranslate } from "lib/hooks";
+
 import { Currency } from "lib/types";
 import {
   StyledWrapper,
@@ -39,11 +41,15 @@ type TrendChartProps = {
 };
 
 export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
+  const { t, dict } = useTranslate("BudgetsPage");
+  const { charts } = dict;
+
   const sortedData = statistics.items.sort((a, b) => {
     const aTimestap = new Date(a.datePoint).getTime();
     const bTimestap = new Date(b.datePoint).getTime();
     return aTimestap - bTimestap;
   });
+
   const dates = [];
   const values = [];
   for (let item of sortedData) {
@@ -53,7 +59,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
 
   return (
     <StyledWrapper>
-      <StyledTitle>Total balance</StyledTitle>
+      <StyledTitle>{t(charts.titleLeft)}</StyledTitle>
       <StyledBalanceChartWrapper>
         <StyledCurrencyAmount
           amount={statistics.totalBudgetValue}
