@@ -282,7 +282,9 @@ export const theme = {
     negativeLine: colors.Supporting15,
     positiveFill: colors.Supporting16,
     negativeFill: colors.Supporting17,
-  }
+    titleLeft: colors.Neutral6,
+    currencyAmount: colors.Neutral8,
+  },
 };
 
 export type ThemeType = typeof theme;

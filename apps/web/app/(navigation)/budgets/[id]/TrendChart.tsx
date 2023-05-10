@@ -60,6 +60,9 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
     values.push(item.value);
   }
 
+  const minValue = Math.min(...values);
+  const maxValue = Math.max(...values);
+
   return (
     <StyledWrapper>
       <StyledTitle>{t(charts.titleLeft)}</StyledTitle>
@@ -89,9 +92,14 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
           }}
           options={{
             aspectRatio: 3,
+            layout: {
+              padding: 0,
+            },
             scales: {
               y: {
                 display: false,
+                min: minValue,
+                max: maxValue,
                 ticks: {
                   display: false,
                 },

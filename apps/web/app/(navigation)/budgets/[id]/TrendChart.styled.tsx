@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useContext } from "react";
 import { CurrencyAmount } from "ui";
 
 export const StyledWrapper = styled.div`
@@ -11,6 +10,7 @@ export const StyledWrapper = styled.div`
 export const StyledTitle = styled.div`
   font-size: 12px;
   line-height: 150%;
+  color: #7E7E7E;
 `;
 
 export const StyledBalanceChartWrapper = styled.div`
@@ -35,5 +35,5 @@ export const StyledCurrencyAmount = styled(CurrencyAmount)`
   font-size: 32px;
   line-height: 150%;
   font-weight: 600;
-  color: #515151; // ADD THEME
+  color:  ${({ theme }) => theme.trendChart.currencyAmount};
 `;
