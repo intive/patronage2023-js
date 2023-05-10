@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { LanguageProvider } from "lib/contexts";
 import { QueryClient, QueryClientProvider } from "react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 import "./css/global.css";
 import "ka-table/style.css";
 
@@ -34,13 +35,15 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
-          <StyledComponentsRegistry>
-            <LanguageProvider>
-              <StyledComponentsThemeWrapper>
-                {children}
-              </StyledComponentsThemeWrapper>
-            </LanguageProvider>
-          </StyledComponentsRegistry>
+          <SessionProviderWrapper>
+            <StyledComponentsRegistry>
+              <LanguageProvider>
+                <StyledComponentsThemeWrapper>
+                  {children}
+                </StyledComponentsThemeWrapper>
+              </LanguageProvider>
+            </StyledComponentsRegistry>
+          </SessionProviderWrapper>
         </QueryClientProvider>
       </body>
     </html>
