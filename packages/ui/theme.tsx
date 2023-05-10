@@ -273,10 +273,16 @@ export const theme = {
   formFooter: {
     text: "#3e4c59",
   },
-  trendChip:{
-    positiveValue: colors.Supporting7 ,
-    negativeValue: colors.Supporting4
-  }
+  trendChip: {
+    positiveValue: {
+      color: colors.Supporting7,
+      border: "rgba(73,173,31,0.5)",
+    },
+    negativeValue: {
+      color: "#d41111",
+      border: "rgba(212,17,17,0.5)",
+    },
+  },
 };
 
 export type ThemeType = typeof theme;

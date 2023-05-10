@@ -10,7 +10,7 @@ export default {
 
 //imitation of parent component for proper display on storybook
 const TrendChipWrapper = styled.div`
-  width: 80px;
+  width: 5%;
 `;
 
 const Template: ComponentStory<typeof TrendChip> = ({ ...args }) => (
