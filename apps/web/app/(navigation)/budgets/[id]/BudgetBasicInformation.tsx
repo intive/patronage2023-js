@@ -1,80 +1,19 @@
 "use client";
 
-import styled from "styled-components";
 import { Budget } from "lib/types";
-import { InfoTile, BudgetIcon, CurrencyAmount } from "ui";
-import { StyledAddInfoSpan } from "ui/InfoTile";
+import { InfoTile, SkeletonLoading } from "ui";
+import { InfoTileStyled, StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
-import { device } from "lib/media-queries";
-
-//STYLING
-const BasicInfoWrapper = styled.div`
-  width: 100%;
-`;
-
-const TopSectionWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 16px;
-  ${device.tablet} {
-    margin-bottom: 32px;
-    align-items: center;
-    gap: 16px;
-  }
-  
-`;
-
-const TileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  ${device.tablet} {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-`;
-
-const BudgetIconStyled = styled(BudgetIcon)`
-  height: 40px;
-  width: 40px;
-  font-size: .9em;
-  flex-shrink: 0;
-  ${device.tablet} {
-    height: 80px;
-    width: 80px;
-    font-size: 1.5em;
-  }
-`;
-
-const StyledTitle = styled.h1`
-  font-family: "Signika", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 28px;
-  color: ${({ theme }) => theme.main};
-  ${device.tablet} {
-    font-size: 32px;
-    line-height: 48px;
-  }
-`;
-
-const StyledDescription = styled.span`
-  font-size: 12px;
-  color: ${({ theme }) => theme.infoTile.label};
-  ${device.tablet} {
-    font-size: 14px;
-    line-height: 20px;
-  }
-`;
-
-const InfoTileAmount = styled(CurrencyAmount)`
-  color: ${({ theme }) => theme.infoTile.value};
-`;
-//STYLING end
-
+import {
+  BasicInfoWrapper,
+  BudgetIconStyled,
+  InfoTileAmount,
+  StyledDescription,
+  StyledTitle,
+  TileWrapper,
+  TopSectionWrapper,
+} from "./BudgetBasicInformation.styled";
+import { iconNames } from "lib/iconValidation";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: Budget;
@@ -83,10 +22,10 @@ type BudgetBasicInfoProps = {
 
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
+
   const { basicInformation } = dict;
-  const { startDate, endDate, limit, currency, name, icon, description } =
+  const { startDate, endDate, limit, currency, description, icon, name } =
     budget;
-  const { tag } = currency;
 
   //DATE formatting
   function convertTimestamp(timestamp: number) {
@@ -107,16 +46,16 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
+    <InfoTileAmount amount={limit} currency={currency} hidePlus />
   );
 
   const currencyInfo = (
     <>
-      <span>{tag}</span>
+      <span>{currency}</span>
       <StyledAddInfoSpan>
         {t(
           basicInformation.currencyNames[
-            tag as keyof typeof basicInformation.currencyNames
+            currency as keyof typeof basicInformation.currencyNames
           ]
         )}
       </StyledAddInfoSpan>
@@ -125,30 +64,64 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA for information tiles end
 
   return (
-    <>
-      <BasicInfoWrapper>
-        <TopSectionWrapper>
-          <BudgetIconStyled icon={icon} />
-          <div>
-            <StyledTitle>{name}</StyledTitle>
-            <StyledDescription>{description}</StyledDescription>
-          </div>
-        </TopSectionWrapper>
-        <TileWrapper>
-          <InfoTile
-            label={t(basicInformation.labels.period)}
-            dataToRender={dataRangeInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.limit)}
-            dataToRender={limitInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.currency)}
-            dataToRender={currencyInfo}
-          />
-        </TileWrapper>
-      </BasicInfoWrapper>
-    </>
+    <BasicInfoWrapper>
+      <TopSectionWrapper>
+        <BudgetIconStyled
+          icon={iconNames.includes(icon) ? icon : "notifications"}
+        />
+        <div>
+          <StyledTitle>{name}</StyledTitle>
+          <StyledDescription>{description}</StyledDescription>
+        </div>
+      </TopSectionWrapper>
+      <TileWrapper>
+        <InfoTile
+          label={t(basicInformation.labels.period)}
+          dataToRender={dataRangeInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.limit)}
+          dataToRender={limitInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.currency)}
+          dataToRender={currencyInfo}
+        />
+      </TileWrapper>
+    </BasicInfoWrapper>
   );
 }
+
+export const BudgetBasicInformationSuspense = () => {
+  return (
+    <BasicInfoWrapper>
+      <TopSectionWrapper>
+        <SkeletonLoading circle height={80} width={80} />
+        <div>
+          <StyledTitle>
+            <SkeletonLoading height={25} width={150} />
+          </StyledTitle>
+          <StyledDescription>
+            <SkeletonLoading height={15} width={150} />
+          </StyledDescription>
+        </div>
+      </TopSectionWrapper>
+      <TileWrapper>
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={100} />
+          <SkeletonLoading height={20} width={150} />
+        </InfoTileStyled>
+
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={50} />
+          <SkeletonLoading height={20} width={75} />
+        </InfoTileStyled>
+
+        <InfoTileStyled>
+          <SkeletonLoading height={10} width={50} />
+          <SkeletonLoading height={20} width={75} />
+        </InfoTileStyled>
+      </TileWrapper>
+    </BasicInfoWrapper>
+  );
+};

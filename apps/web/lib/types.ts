@@ -1,10 +1,6 @@
 import { IconType } from "ui/Icon";
 import { CategoryType } from "ui/CategoryIcon";
 
-interface Currency {
-  tag: string;
-  locale: string;
-}
 interface Icon {
   name: string;
   foreground: string;
@@ -39,7 +35,7 @@ export interface Budget {
   startDate: number;
   endDate: number;
   limit: number;
-  currency: Currency;
+  currency: string;
 }
 
 export interface BudgetTransaction {
