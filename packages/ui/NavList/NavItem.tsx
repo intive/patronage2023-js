@@ -51,13 +51,16 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   cursor: pointer;
   text-decoration: none;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: ${({ theme }) =>
       theme.navList.navItem.hoverAndFocusBackground};
   }
+
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline};
+    outline: 0;
+    background-color: ${({ theme }) =>
+      theme.navList.navItem.hoverAndFocusBackground};
+    border: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline};
   }
 `;
 
