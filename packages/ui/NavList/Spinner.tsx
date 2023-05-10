@@ -6,7 +6,7 @@ const StyledSpinner = styled.svg`
   height: 50px;
 
   & .path {
-    stroke: #9e9e9e;
+    stroke: ${({ theme }) => theme.navList.spinner};
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }

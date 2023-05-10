@@ -13,6 +13,23 @@ const dictionary = {
           pl: "Dodaj nowy budżet",
           fr: "Ajouter un nouveau budget",
         },
+        infos: {
+          loading: {
+            en: "Loading",
+            pl: "Ładowanie",
+            fr: "",
+          },
+          error: {
+            en: "Something went wrong",
+            pl: "Coś poszło nie tak",
+            fr: "Quelque chose a mal tourné",
+          },
+          text: {
+            en: "There are no any budgets saved. Please create one by using a button below.",
+            pl: "Nie masz zapisanych budżetów. Stwórz jakiś korzystając z przycisku poniżej.",
+            fr: "",
+          },
+        },
       },
       reportsItem: {
         title: { en: "Reports", pl: "Raporty", fr: "Rapports" },
@@ -462,9 +479,13 @@ const dictionary = {
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
     createButton: {
-      label: { en: "Create", pl: "Utwórz", fr: "Créer"},
-      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus"},
-      newExpense: { en: "New expense", pl: "Nowy wydatek", fr: "Nouvelle dépense"},
+      label: { en: "Create", pl: "Utwórz", fr: "Créer" },
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus" },
+      newExpense: {
+        en: "New expense",
+        pl: "Nowy wydatek",
+        fr: "Nouvelle dépense",
+      },
     },
     transactionsTable: {
       groupRowDays: {

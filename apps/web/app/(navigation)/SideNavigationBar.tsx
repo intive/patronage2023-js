@@ -5,10 +5,7 @@ import { useDebounce } from "lib/hooks/useDebounce";
 import { useCallback, useRef, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
-import {
-  BudgetsSubMenuNavListContents, // for testing
-  IconStyled,
-} from "./SideNavigationBarNavListData";
+import { IconStyled } from "./SideNavigationBarNavListData";
 import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
 import { iconNames } from "lib/consts";
 import { SpanStyled } from "ui/NavList";
@@ -30,14 +27,8 @@ export default function SideNav() {
   const queryClient = useQueryClient();
   const pageSize = 13;
 
-  const {
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    data,
-    status,
-    error,
-  } = useGetBudgets(debouncedSearch, sortAscending, pageSize);
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status } =
+    useGetBudgets(debouncedSearch, sortAscending, pageSize);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
   const lastBudgetRef = useCallback(
@@ -54,6 +45,12 @@ export default function SideNav() {
     },
     [isFetchingNextPage, fetchNextPage, hasNextPage]
   );
+
+  const text = {
+    noData: t(dict.SideNav.budgetsItem.infos.text),
+    loading: t(dict.SideNav.budgetsItem.infos.loading),
+    error: t(dict.SideNav.budgetsItem.infos.error),
+  };
 
   const resetIsNavListItemClicked = () => {
     setIsNavItemClicked(false);
@@ -112,6 +109,7 @@ export default function SideNav() {
         onNavListItemClick={hideSubMenu}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
+        text={text}
       />
     ),
     button: {

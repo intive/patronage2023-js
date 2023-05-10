@@ -1,10 +1,11 @@
 "use client";
 import styled from "styled-components";
-import React, { ReactElement, ReactNode, forwardRef } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { NavItem } from "./NavItem";
 import { Spinner } from "./Spinner";
 import { Icon } from "../Icon";
+import { theme } from "../theme";
 
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
@@ -19,6 +20,7 @@ export type NavListProps = {
   contents: Array<NavItemContents>;
   loading?: ReactNode;
   error?: ReactNode;
+  text?: { noData?: string; loading?: string; error?: string };
   onNavListItemClick: () => void;
 } & React.HTMLProps<HTMLUListElement>;
 
@@ -68,7 +70,14 @@ const WrapperStyled = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
-  color: #515151;
+  color: ${({ theme }) => theme.navList.infoText};
+`;
+
+const NoDatErrorWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  text-align: center;
 `;
 
 export const NavList = ({
@@ -76,33 +85,38 @@ export const NavList = ({
   onNavListItemClick,
   loading,
   error,
+  text,
 }: NavListProps) => {
   const currentPage = usePathname() || "";
+
+  const dataToDisplay = contents.map((content) => (
+    <NavItem
+      ref={content.ref}
+      active={content.href === currentPage}
+      key={content.id}
+      href={content.href}
+      onClick={onNavListItemClick}>
+      {content.ComponentToRender}
+    </NavItem>
+  ));
+
+  const noDataError = !(loading || error) && (
+    <NoDatErrorWrapper>{text!.noData}</NoDatErrorWrapper>
+  );
+
   return (
     <NavListStyled>
-      {contents &&
-        contents.map((content) => {
-          return (
-            <NavItem
-              ref={content.ref}
-              active={content.href === currentPage}
-              key={content.id}
-              href={content.href}
-              onClick={onNavListItemClick}>
-              {content.ComponentToRender}
-            </NavItem>
-          );
-        })}
+      {contents.length !== 0 ? dataToDisplay : noDataError}
       {loading && (
         <WrapperStyled>
           <Spinner />
-          <p>Loading</p>
+          <p>{text!.loading}</p>
         </WrapperStyled>
       )}
       {error && (
         <WrapperStyled>
-          <Icon icon="error" iconSize={50} color="#AB322C" />
-          <p>Something went wrong.</p>
+          <Icon icon="error" iconSize={50} color={`${theme.navList.error}`} />
+          <p>{text!.error}</p>
         </WrapperStyled>
       )}
     </NavListStyled>

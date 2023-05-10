@@ -11,6 +11,7 @@ export const IconStyled = styled(Icon)`
   border-radius: 8px;
 `;
 
+// old deprecated data
 export const BudgetsSubMenuNavListContents = [
   {
     ComponentToRender: (
