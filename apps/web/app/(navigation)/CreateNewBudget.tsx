@@ -134,12 +134,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
 
-  // const {isError} = useMutation({
-  //   onError(error, variables, context) {
-      
-  //   },
-  // });
-
   const useSendBudget = () =>
     useMutation(
       () =>
@@ -153,7 +147,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           body: JSON.stringify({
             name: newBudget.name,
             limit: {
-              // value: newBudget.limit,
+              value: newBudget.limit,
               currency: newBudget.currency.tag,
             },
             period: {
@@ -166,11 +160,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         }),
       {
         onSuccess: () => {
-          queryClient.invalidateQueries(["budgets", { searchValue:"", sortAscending: true }]);
+          onClose();
+          queryClient.invalidateQueries([
+            "budgets",
+            { searchValue: "", sortAscending: true },
+          ]);
         },
-        // onError: (error) => {
-        //   return error;
-        // },
       }
     );
 
@@ -192,7 +187,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Form
           onSubmit={() => {
             sendBudget();
-            // onClose();
           }}>
           {({ submit }) => (
             <form
