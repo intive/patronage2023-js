@@ -3,13 +3,15 @@
 import { Field, Form } from "houseform";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ErrorMessage, Button, Input } from "ui";
+import { ErrorMessage, Button, Input, FormFooter } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
 import { device } from "lib/media-queries";
+import { signIn } from "next-auth/react";
 
 const FormWrapper = styled.div`
+  position: relative;
   height: 542px;
   width: 312px;
   display: flex;
@@ -62,12 +64,20 @@ export default function SignInPage() {
 
   return (
     <Form
-      onSubmit={(values) => {
-        values.email === "smutnarzaba@png.pl" && values.password === "frytki123"
-          ? router.push("/home")
-          : setErrMsg(t(form.errorMessage));
+      onSubmit={async (values) => {
+        signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          redirect: false,
+        }).then((res) => {
+          if (res!.ok) {
+            router.push("/");
+          } else {
+            setErrMsg(t(form.errorMessage));
+          }
+        });
       }}>
-      {({ submit, errors }) => (
+      {({ submit }) => (
         <FormWrapper>
           <form
             onSubmit={(e) => {
@@ -132,6 +142,11 @@ export default function SignInPage() {
             <Button onClick={submit} type="submit" fullWidth>
               {t(form.submitButton)}
             </Button>
+            <FormFooter
+              basicText={t(form.footer)}
+              linkText={t(form.footerLink)}
+              href="/sign-up"
+            />
           </form>
         </FormWrapper>
       )}

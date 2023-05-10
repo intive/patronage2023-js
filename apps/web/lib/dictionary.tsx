@@ -104,6 +104,16 @@ const dictionary = {
         },
       },
       submitButton: { en: "Log In", pl: "Zaloguj", fr: "Se connecter" },
+      footer: {
+        en: "Don't have an account?",
+        pl: "Nie posiadasz konta?",
+        fr: "N'avez-vous pas de compte ?",
+      },
+      footerLink: {
+        en: "Sign up",
+        pl: "Zarejestruj się",
+        fr: "Inscrivez-vous",
+      },
     },
   },
   SignUpPage: {
@@ -461,9 +471,33 @@ const dictionary = {
       },
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
-    tableDates: {
-      yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
-      today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
+    createButton: {
+      label: { en: "Create", pl: "Utwórz", fr: "Créer" },
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus" },
+      newExpense: {
+        en: "New expense",
+        pl: "Nowy wydatek",
+        fr: "Nouvelle dépense",
+      },
+    },
+    transactionsTable: {
+      groupRowDays: {
+        yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
+        today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
+        monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
+        tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
+        wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
+        thursday: { en: "Thursday", pl: "Czwartek", fr: "Jeudi" },
+        friday: { en: "Friday", pl: "Piątek", fr: "Vendredi" },
+        saturday: { en: "Saturday", pl: "Sobota", fr: "Samedi" },
+        sunday: { en: "Sunday", pl: "Niedziela", fr: "Dimanche" },
+      },
+      tableColumnHeaders: {
+        category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
+        name: { en: "Name", pl: "Nazwa", fr: "Nom" },
+        amount: { en: "Amount", pl: "Kwota", fr: "Montant" },
+        creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
+      },
     },
   },
   ReportsPage: { title: { en: "Reports page", pl: "Raporty", fr: "Rapports" } },
@@ -471,6 +505,48 @@ const dictionary = {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },
+  Pagination: {
+    pageAriaLabel: {
+      en: "Page",
+      pl: "Strona",
+      fr: "Page",
+    },
+    currentPageAriaLabel: {
+      en: "is your current page",
+      pl: "to twoja bieżąca strona",
+      fr: "votre page actuelle",
+    },
+    nextPageAriaLabel: {
+      en: "Next page",
+      pl: "Następna strona",
+      fr: "Page suivante",
+    },
+    previousPageAriaLabel: {
+      en: "Previous page",
+      pl: "Poprzednia strona",
+      fr: "Page précédente",
+    },
+    rowsPerPageText: {
+      en: "Rows per page",
+      pl: "Wierszy na stronie",
+      fr: "Lignes par page",
+    },
+    breakElementAriaLabel: {
+      en: "Jump 3 pages ahead",
+      pl: "Skocz 3 strony do przodu",
+      fr: "Aller de 3 pages en avant",
+    },
+    navigationTableAriaLabel: {
+      en: "Table navigation",
+      pl: "Nawigacja po tabeli",
+      fr: "Navigation dans le tableau",
+    },
+    rowsPerPageSelectAriaLabel: {
+      en: "Selection of the number of transactions displayed on the page",
+      pl: "Wybór liczby transakcji wyświetlanych na stronie",
+      fr: "Sélection du nombre de transactions affichées sur la page",
+    },
+  },
 };
 
 export default dictionary;

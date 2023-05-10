@@ -1,5 +1,10 @@
-import { BudgetsContent } from "../BudgetsContent";
+import { BudgetsContent } from "./BudgetsContent";
 
-export default function BudgetsPage({ params }: { params: { id: string } }) {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+export default function BudgetsPage({ params }: PageProps) {
   return <BudgetsContent id={params.id} />;
 }

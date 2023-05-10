@@ -4,11 +4,11 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "@next/font/google";
 import "./css/global.css";
 import { LanguageProvider } from "lib/contexts";
-import "./css/global.css";
 import StyledComponentsThemeWrapper from "ui/theme";
 import "ka-table/style.css";
-import { QueryClient, QueryClientProvider } from "react-query";
-
+import "react-loading-skeleton/dist/skeleton.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import SessionProviderWrapper from "./SessionProviderWrapper";
 export type LayoutProps = {
   children: React.ReactNode;
 };
@@ -34,15 +34,17 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          <StyledComponentsRegistry>
-            <LanguageProvider>
-              <StyledComponentsThemeWrapper>
-                {children}
-              </StyledComponentsThemeWrapper>
-            </LanguageProvider>
-          </StyledComponentsRegistry>
-        </QueryClientProvider>
+        <SessionProviderWrapper>
+          <QueryClientProvider client={queryClient}>
+            <StyledComponentsRegistry>
+              <LanguageProvider>
+                <StyledComponentsThemeWrapper>
+                  {children}
+                </StyledComponentsThemeWrapper>
+              </LanguageProvider>
+            </StyledComponentsRegistry>
+          </QueryClientProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
