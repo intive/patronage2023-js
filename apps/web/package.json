@@ -16,6 +16,8 @@
     "houseform": "^1.10.5",
     "ka-table": "^8.0.1",
     "next": "^13.4.1",
+    "jsonwebtoken": "^9.0.0",
+    "next-auth": "^4.22.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "ui": "*",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
