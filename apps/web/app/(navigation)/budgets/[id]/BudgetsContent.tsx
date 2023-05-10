@@ -9,6 +9,10 @@ import styled from "styled-components";
 import { env } from "env.mjs";
 import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
 import { useSession } from "next-auth/react";
+import { useTranslate } from "lib/hooks";
+import { useState } from "react";
+import { ButtonWithDropdown, Separator } from "ui";
+import { CreateNewTransaction } from "./CreateNewTransaction";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,6 +22,16 @@ const BudgetContentWrapperStyled = styled.div`
   gap: 32px;
   width: 100%;
 `;
+const SeparatorStyled = styled(Separator)`
+  display: block;
+  width: 100%;
+`;
+
+const CreateButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+`;
 
 interface BudgetsContentProps {
   id: string;
@@ -25,6 +39,13 @@ interface BudgetsContentProps {
 
 export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
   const id = "3e9ca5f0-5ef8-44bc-a8bc-175c826b39b5";
+
+  const { t, dict } = useTranslate("BudgetsPage");
+  const [
+    createNewTransactionModalVisible,
+    setCreateNewTransactionModalVisible,
+  ] = useState(false);
+  const [transactionType, setTransactionType] = useState("");
 
   const { data: session } = useSession();
   const { data: budget } = useQuery({
@@ -40,6 +61,16 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
     },
     enabled: !!session,
   });
+
+  const handleCreateNewTransaction = (transactionType: string) => {
+    setTransactionType(transactionType);
+    setCreateNewTransactionModalVisible(true);
+  };
+
+  const closeNewTransactionModal = () => {
+    setCreateNewTransactionModalVisible(false);
+  };
+
   const mainCardContent = (
     <BudgetContentWrapperStyled>
       {budget ? (
@@ -47,6 +78,22 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
       ) : (
         <BudgetBasicInformationSuspense />
       )}
+      <SeparatorStyled />
+      <CreateButtonWrapper>
+        <ButtonWithDropdown
+          label={t(dict.createButton.label)}
+          items={[
+            {
+              label: t(dict.createButton.newIncome),
+              callback: () => handleCreateNewTransaction("Income"),
+            },
+            {
+              label: t(dict.createButton.newExpense),
+              callback: () => handleCreateNewTransaction("Expense"),
+            },
+          ]}
+        />
+      </CreateButtonWrapper>
       {/* no suspense for TransactionTable so we don't render it when there is no data */}
       {budget && (
         <TransactionsTable
@@ -58,6 +105,18 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
   );
 
   return (
-    <MultiCardLayout main={mainCardContent} aside={<DummyAsideCardContent />} />
+    <>
+      <MultiCardLayout
+        main={mainCardContent}
+        aside={<DummyAsideCardContent />}
+      />
+      {createNewTransactionModalVisible && (
+        <CreateNewTransaction
+          type={transactionType}
+          onClose={closeNewTransactionModal}
+          budgetId={budget.id}
+        />
+      )}
+    </>
   );
 };

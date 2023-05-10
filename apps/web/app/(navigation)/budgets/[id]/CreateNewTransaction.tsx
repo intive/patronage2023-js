@@ -13,7 +13,7 @@ import {
 } from "./CreateNewTransactionStyled";
 import { useTranslate } from "lib/hooks";
 import { CategorySelector } from "./CategorySelector";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 
@@ -34,8 +34,7 @@ type TransactionType = {
 
 export const CreateNewTransaction = ({
   type,
-  // budgetId for user: jkowalski@gmail.com password: Password123!
-  budgetId = "7e6ca5f0-5ef8-44bc-a8bc-175c826b39b4",
+  budgetId,
   onClose,
 }: CreateNewTransactionProps) => {
   const { t, dict } = useTranslate("CreateNewTransactionModal");
@@ -44,7 +43,7 @@ export const CreateNewTransaction = ({
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budgetId}/transaction`;
   const token = data?.user.accessToken;
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   const newTransactionMutation = useMutation(
     (newTransaction: TransactionType) => {
@@ -65,7 +64,7 @@ export const CreateNewTransaction = ({
         // queryClient.invalidateQueries(["transactions"]);
         onClose();
       },
-      onError: (error) => console.error(error),
+      // onError: (error) => console.error(error),
     }
   );
 
@@ -118,21 +117,7 @@ export const CreateNewTransaction = ({
   return (
     <Modal onClose={onClose} header={getHeader(type)} fullHeight={fullHeight}>
       <FormWrapper>
-        <Form
-          onSubmit={
-            (values) => handleSubmit(values)
-            // const newTransaction: TransactionType = {
-            //   id: crypto.randomUUID(),
-            //   type,
-            //   name: values["transaction-name"],
-            //   value: convertAmount(values["transaction-amount"]),
-            //   category: values["category"],
-            //   transactionDate: convertDate(values["date"]),
-            // };
-            // newTransactionMutation.mutate(newTransaction);
-
-            // handleSubmit(newTransaction);
-          }>
+        <Form onSubmit={(values) => handleSubmit(values)}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {

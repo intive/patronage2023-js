@@ -3,7 +3,7 @@
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
 import { LanguageProvider } from "lib/contexts";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
 import SessionProviderWrapper from "./SessionProviderWrapper";
 import "ka-table/style.css";
