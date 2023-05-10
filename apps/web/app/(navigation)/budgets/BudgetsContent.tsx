@@ -4,6 +4,7 @@ import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
 import { TransactionsTable } from "./[id]/TransactionsTable";
 import { BudgetBasicInformation } from "./[id]/BudgetBasicInformation";
+import { TrendChart } from "./[id]/TrendChart";
 import { Budget } from "lib/types";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
@@ -44,6 +45,7 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
+      <TrendChart />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}

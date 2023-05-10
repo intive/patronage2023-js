@@ -11,11 +11,13 @@
   "dependencies": {
     "@next/font": "^13.3.0",
     "@t3-oss/env-nextjs": "^0.2.2",
+    "chart.js": "^4.3.0",
     "dayjs": "^1.11.7",
     "houseform": "^1.10.5",
     "ka-table": "^8.0.1",
     "next": "^13.1.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "ui": "*",
     "zod": "^3.21.4"
