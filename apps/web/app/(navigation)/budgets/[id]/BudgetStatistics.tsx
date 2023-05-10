@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { CurrencyAmount } from "ui";
 interface Props {
   budget: BudgetGeneralInfo;
-  value:number
 }
 
 const DetailsWrapperStyled = styled.div`
@@ -12,14 +11,10 @@ const DetailsWrapperStyled = styled.div`
   flex-direction: column;
 `;
 
-
-
-
 const BudgetStatistics = ({ budget }: Props) => {
   return (
     <DetailsWrapperStyled>
       <div></div>
-      <CurrencyAmount amount={budget.}>
     </DetailsWrapperStyled>
   );
 };
