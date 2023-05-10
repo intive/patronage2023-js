@@ -69,15 +69,5 @@ export const authOptions: NextAuthOptions = {
     signOut: "/sign-in/",
     error: "/sign-in/",
   },
-  jwt: {
-    async encode({ token, secret }) {
-      // @ts-ignore
-      return jwt.sign(token, secret);
-    },
-    async decode({ token, secret }) {
-      // @ts-ignore
-      return jwt.verify(token, secret);
-    },
-  },
 };
 export default NextAuth(authOptions);

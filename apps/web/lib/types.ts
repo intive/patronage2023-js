@@ -37,7 +37,6 @@ export interface Budget {
   limit: number;
   currency: string;
 }
-
 export interface BudgetGeneralInfo {
   id: string;
   currency: string;
