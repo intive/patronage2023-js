@@ -1,12 +1,15 @@
 import React from "react";
 
 import styled from "styled-components";
-import BudgetStatistics from "./BudgetStatistics";
+import BudgetStatistics, {
+  BudgetStatisticsSuspenseMain,
+} from "./BudgetStatistics";
 import { type BudgetGeneralInfo } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-
+import { BudgetStatisticsSuspense } from "./BudgetStatistics";
+import Skeleton from "react-loading-skeleton";
 interface Props {
   budget: BudgetGeneralInfo;
 }
@@ -17,6 +20,14 @@ const DetailsWrapperStyled = styled.div`
   border-radius: 16px;
   display: flex;
   padding: 24px 32px;
+  gap: 48px;
+`;
+
+const TotalWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-inline: 48px;
+  gap: 8px;
 `;
 
 const BudgetDetails = ({ budget }: Props) => {
@@ -51,3 +62,23 @@ const BudgetDetails = ({ budget }: Props) => {
 };
 
 export default BudgetDetails;
+
+const TotalDetailsSuspense = () => {
+  return (
+    <TotalWrapperStyled>
+      <Skeleton height={10} width={100} />
+      <Skeleton height={30} width={250} />
+      <Skeleton height={20} width={50} />
+    </TotalWrapperStyled>
+  );
+};
+
+export const BudgetDetailsSuspense = () => {
+  return (
+    <DetailsWrapperStyled>
+      <TotalDetailsSuspense />
+      <Skeleton width={500} height={100} />
+      <BudgetStatisticsSuspenseMain />
+    </DetailsWrapperStyled>
+  );
+};

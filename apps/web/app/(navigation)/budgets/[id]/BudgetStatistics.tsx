@@ -17,6 +17,12 @@ const DetailsWrapperStyled = styled.div`
   flex-direction: column;
   border-left: 1px solid #e1e1e1;
   padding-inline: 48px;
+  gap: 8px;
+`;
+const DetailsWrapperSuspense = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const CurrencyAmountStyled = styled(CurrencyAmount)`
@@ -84,7 +90,7 @@ const BudgetStatistics = ({ budget }: Props) => {
   return (
     <DetailsWrapperStyled>
       {isLoading ? (
-        <>Loading...</>
+        <BudgetStatisticsSuspense />
       ) : (
         <>
           <QueryDropdown
@@ -121,4 +127,22 @@ const BudgetStatistics = ({ budget }: Props) => {
 
 export default BudgetStatistics;
 
-const BudgetStatisticsSuspense = () => {};
+const BudgetStatisticsSuspense = () => {
+  return (
+    <DetailsWrapperSuspense>
+      <Skeleton height={10} width={100} />
+      <Skeleton height={30} width={150} />
+      <Skeleton height={20} width={50} />
+    </DetailsWrapperSuspense>
+  );
+};
+
+export const BudgetStatisticsSuspenseMain = () => {
+  return (
+    <DetailsWrapperStyled>
+      <Skeleton height={10} width={100} />
+      <Skeleton height={30} width={150} />
+      <Skeleton height={20} width={50} />
+    </DetailsWrapperStyled>
+  );
+};

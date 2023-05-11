@@ -7,7 +7,7 @@ import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
 import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
-import BudgetDetails from "./BudgetDetails";
+import BudgetDetails, { BudgetDetailsSuspense } from "./BudgetDetails";
 import { useSession } from "next-auth/react";
 
 const BudgetContentWrapperStyled = styled.div`
@@ -51,7 +51,7 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
         <BudgetBasicInformationSuspense />
       )}
 
-      {budget ? <BudgetDetails budget={budget} /> : "loading"}
+      {budget ? <BudgetDetails budget={budget} /> : <BudgetDetailsSuspense />}
     </BudgetContentWrapperStyled>
   );
 
