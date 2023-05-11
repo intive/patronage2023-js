@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { CurrencyAmount } from "ui";
+import { device } from "lib/media-queries";
 
 export const DetailsWrapperStyled = styled.div`
   width: 100%;
@@ -15,15 +16,21 @@ export const StatisticsWrapperStyled = styled.div`
   flex-direction: column;
   border-left: 1px solid
     ${({ theme }) => theme.budgetContent.budgetStatistics.border};
-  padding-inline: 48px;
   gap: 8px;
+  padding-inline: 20px;
+  ${device.tablet} {
+    padding-inline: 48px;
+  }
 `;
 
 export const CurrencyAmountStyled = styled(CurrencyAmount)`
-  font-size: 32px;
+  font-size: 20px;
   line-height: 150%;
   font-weight: 600;
   color: ${({ theme }) => theme.budgetContent.budgetStatistics.currency};
+  ${device.tablet} {
+    font-size: 32px;
+  }
 `;
 
 export const TitleStyled = styled.span`
