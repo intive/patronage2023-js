@@ -3,5 +3,5 @@ import { useTheme } from "styled-components";
 
 export const Spinner = () => {
   const theme = useTheme();
-  return <SyncLoader color={theme.primary} />;
+  return <SyncLoader color={theme.primary as any} />;
 };
