@@ -515,6 +515,11 @@ const dictionary = {
         pl: "Wybierz datę.",
         fr: "Veuillez sélectionner une date.",
       },
+      dateNotInStartEndRange: {
+        en: "The date must be within the budget period",
+        pl: "Data musi się mieścić w okresie trwania budżetu",
+        fr: "La date doit être comprise dans la période budgétaire",
+      },
     },
   },
   BudgetsPage: {

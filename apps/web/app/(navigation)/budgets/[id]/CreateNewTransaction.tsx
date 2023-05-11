@@ -20,7 +20,7 @@ import { useSession } from "next-auth/react";
 type CreateNewTransactionProps = {
   type: string;
   onClose: () => void;
-  budgetId?: string | undefined;
+  budget: any;
 };
 
 type TransactionType = {
@@ -34,13 +34,13 @@ type TransactionType = {
 
 export const CreateNewTransaction = ({
   type,
-  budgetId,
+  budget,
   onClose,
 }: CreateNewTransactionProps) => {
   const { t, dict } = useTranslate("CreateNewTransactionModal");
   const { data } = useSession();
 
-  const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budgetId}/transaction`;
+  const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/transaction`;
   const token = data?.user.accessToken;
 
   // const queryClient = useQueryClient();
@@ -111,6 +111,9 @@ export const CreateNewTransaction = ({
       return "";
     }
   };
+
+  const startDate = new Date(budget.startDate);
+  const endDate = new Date(budget.endDate);
 
   const fullHeight = window.innerHeight < 660;
 
@@ -204,10 +207,12 @@ export const CreateNewTransaction = ({
                 </Field>
                 <Field
                   name="date"
-                  // TODO add validation -> date in budget period
-                  onSubmitValidate={z.date({
-                    invalid_type_error: t(dict.errors.selectDate),
-                  })}
+                  onSubmitValidate={z.date().refine(
+                    (date) => {
+                      return date >= startDate && date <= endDate;
+                    },
+                    { message: t(dict.errors.dateNotInStartEndRange) }
+                  )}
                   onChangeValidate={z.date({
                     invalid_type_error: t(dict.errors.selectDate),
                   })}>

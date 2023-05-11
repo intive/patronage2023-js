@@ -38,7 +38,8 @@ interface BudgetsContentProps {
 }
 
 export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "3e9ca5f0-5ef8-44bc-a8bc-175c826b39b5";
+  const id = "35754d56-9f8f-4ee3-be61-939919505f96";
+  //          3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5
 
   const { t, dict } = useTranslate("BudgetsPage");
   const [
@@ -81,6 +82,7 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
       <SeparatorStyled />
       <CreateButtonWrapper>
         <ButtonWithDropdown
+          disabled={!budget}
           label={t(dict.createButton.label)}
           items={[
             {
@@ -114,7 +116,7 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
         <CreateNewTransaction
           type={transactionType}
           onClose={closeNewTransactionModal}
-          budgetId={budget.id}
+          budget={budget}
         />
       )}
     </>
