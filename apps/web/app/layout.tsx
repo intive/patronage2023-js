@@ -9,6 +9,7 @@ import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SessionProviderWrapper from "./SessionProviderWrapper";
+
 export type LayoutProps = {
   children: React.ReactNode;
 };

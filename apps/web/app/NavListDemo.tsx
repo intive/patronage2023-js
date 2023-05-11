@@ -20,6 +20,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
     ),
     href: "/bills",
     id: 1,
+    ref: () => {},
   },
   {
     ComponentToRender: (
@@ -32,6 +33,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
     ),
     href: "/subscriptions",
     id: 2,
+    ref: () => {},
   },
   {
     ComponentToRender: (
@@ -44,6 +46,7 @@ export const dummyNavItemContents: Array<NavItemContents> = [
     ),
     href: "/savings",
     id: 3,
+    ref: () => {},
   },
 ];
 
