@@ -22,7 +22,13 @@ export type NavListProps = {
   contents: Array<NavItemContents>;
   loading?: ReactNode;
   error?: ReactNode;
-  text?: { noData?: string; loading?: string; error?: string };
+  text?: {
+    noData?: string;
+    loading?: string;
+    error?: string;
+    noDataInBudgets?: string;
+  };
+  isSearchEmpty?: boolean;
   onNavListItemClick: () => void;
 } & React.HTMLProps<HTMLUListElement>;
 
@@ -88,6 +94,7 @@ export const NavList = ({
   loading,
   error,
   text,
+  isSearchEmpty,
 }: NavListProps) => {
   const currentPage = usePathname() || "";
 
@@ -110,9 +117,15 @@ export const NavList = ({
     <EmptyDataWrapper>{text && text!.noData}</EmptyDataWrapper>
   );
 
+  const emptyDataFromDatabase = !(loading || error) && (
+    <EmptyDataWrapper>{text && text!.noDataInBudgets}</EmptyDataWrapper>
+  );
+
   return (
     <NavListStyled>
-      {contents.length !== 0 ? dataToDisplay : emptyData}
+      {contents.length === 0 && isSearchEmpty ? emptyDataFromDatabase : null}
+      {contents.length === 0 && !isSearchEmpty ? emptyData : null}
+      {contents.length !== 0 ? dataToDisplay : null}
       {loading && contents.length === 0 ? suspenseDataToDisplay : null}
       {loading && (
         <WrapperStyled>

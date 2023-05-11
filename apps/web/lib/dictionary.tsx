@@ -27,7 +27,12 @@ const dictionary = {
           text: {
             en: "There are no budgets with specified name.",
             pl: "Nie ma budżetów o wskazanej nazwie.",
-            fr: "Il n'y a aucun budget avec le nom spécifié",
+            fr: "Il n'y a aucun budget avec le nom spécifié.",
+          },
+          noDataInBudgets: {
+            en: "You have not created any budgets yet.",
+            pl: "Nie stworzyłeś jeszcze żadnych budżetów.",
+            fr: "Vous n'avez pas encore créé de budget.",
           },
         },
       },

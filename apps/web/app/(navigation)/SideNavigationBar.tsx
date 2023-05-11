@@ -49,6 +49,7 @@ export default function SideNav() {
 
   const text = {
     noData: t(dict.SideNav.budgetsItem.infos.text),
+    noDataInBudgets: t(dict.SideNav.budgetsItem.infos.noDataInBudgets),
     loading: t(dict.SideNav.budgetsItem.infos.loading),
     error: t(dict.SideNav.budgetsItem.infos.error),
   };
@@ -111,6 +112,7 @@ export default function SideNav() {
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
         text={text}
+        isSearchEmpty={!!!searchValue}
       />
     ),
     button: {
