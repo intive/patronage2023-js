@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import { DetailsWrapperStyled } from "./BudgetDetails.styled";
+import { TrendChart } from "./TrendChart";
 interface Props {
   budget: BudgetGeneralInfo;
 }
@@ -13,7 +14,7 @@ interface Props {
 const BudgetDetails = ({ budget }: Props) => {
   const { data: session } = useSession();
 
-  const { id, startDate, endDate } = budget;
+  const { id, currency, startDate, endDate } = budget;
 
   const { data: statistics } = useQuery({
     queryKey: ["mainStatistics"],
@@ -31,11 +32,10 @@ const BudgetDetails = ({ budget }: Props) => {
     },
     enabled: !!session,
   });
-  console.log("statystyki główne", statistics);
+
   return (
     <DetailsWrapperStyled>
-      {/* statistics do lewego */}
-      <div>lewy</div>
+      <TrendChart currency={currency} statistics={statistics} />
       <BudgetStatistics budget={budget} />
     </DetailsWrapperStyled>
   );

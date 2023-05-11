@@ -12,10 +12,7 @@ import {
 } from "./BudgetSuspense";
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
-import { TrendChart } from "./TrendChart";
-import { mockDataChart } from "./trend-chart-mock-data";
 import { FixCurrencyObject } from "lib/currencyValidation";
-import { TransactionsTable } from "./TransactionsTable";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -55,6 +52,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       ) : (
         <BudgetBasicInformationSuspense />
       )}
+
       {budget ? (
         <BudgetDetails budget={FixCurrencyObject(budget)} />
       ) : (

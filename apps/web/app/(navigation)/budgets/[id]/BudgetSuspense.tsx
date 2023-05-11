@@ -12,6 +12,7 @@ import {
   DetailsWrapperStyled,
   DetailsWrapperSuspense,
   StatisticsWrapperStyled,
+  SuspensedChart,
   TotalWrapperStyled,
 } from "./BudgetDetails.styled";
 
@@ -53,7 +54,7 @@ const TotalDetailsSuspense = () => {
   return (
     <TotalWrapperStyled>
       <Skeleton height={10} width={100} />
-      <Skeleton height={30} width={250} />
+      <Skeleton height={30} width={150} />
       <Skeleton height={20} width={50} />
     </TotalWrapperStyled>
   );
@@ -83,7 +84,9 @@ export const BudgetDetailsSuspense = () => {
   return (
     <DetailsWrapperStyled>
       <TotalDetailsSuspense />
-      <Skeleton height={100} />
+      <SuspensedChart>
+        <Skeleton height={100} />
+      </SuspensedChart>
       <BudgetStatisticsSuspenseMain />
     </DetailsWrapperStyled>
   );

@@ -16,6 +16,10 @@ export const DetailsWrapperStyled = styled.div`
   }
 `;
 
+export const SuspensedChart = styled.div`
+  flex: 1;
+`;
+
 export const StatisticsWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,6 +31,7 @@ export const StatisticsWrapperStyled = styled.div`
     padding-inline: 48px;
     border-left: 1px solid
       ${({ theme }) => theme.budgetContent.budgetStatistics.border};
+    border-top: none;
   }
 `;
 
@@ -50,7 +55,7 @@ export const TitleStyled = styled.span`
 export const TotalWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
-  padding-inline: 48px;
+
   gap: 8px;
 `;
 

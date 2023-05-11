@@ -39,7 +39,10 @@ type TrendChartProps = {
     trendValue: number;
     totalBudgetValue: number;
   };
-  currency: string;
+  currency: {
+    tag: string;
+    locale: string;
+  };
 };
 
 export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
@@ -47,11 +50,15 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const { charts } = dict;
 
-  const sortedData = statistics.items.sort((a, b) => {
+  const sortedData = statistics?.items.sort((a, b) => {
     const aTimestap = new Date(a.datePoint).getTime();
     const bTimestap = new Date(b.datePoint).getTime();
     return aTimestap - bTimestap;
   });
+
+  if (!sortedData) {
+    return null;
+  }
 
   const dates = [];
   const values = [];
@@ -66,7 +73,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
       <StyledBalanceChartWrapper>
         <StyledCurrencyAmount
           amount={statistics.totalBudgetValue}
-          currency={currency}
+          currencyOptions={currency}
           hidePlus
         />
         <Line
@@ -117,7 +124,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
           }}
         />
       </StyledBalanceChartWrapper>
-      <TrendChip value={statistics.trendValue}/>
+      <TrendChip value={statistics.trendValue} />
     </StyledWrapper>
   );
 };

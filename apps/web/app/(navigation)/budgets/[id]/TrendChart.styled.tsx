@@ -5,7 +5,6 @@ import { device } from "lib/media-queries";
 export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: aliceblue;
   width: 100%;
 `;
 
