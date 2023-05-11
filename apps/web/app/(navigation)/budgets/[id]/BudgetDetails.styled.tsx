@@ -9,17 +9,24 @@ export const DetailsWrapperStyled = styled.div`
   display: flex;
   padding: 24px 32px;
   gap: 48px;
+  flex-direction: column;
+
+  ${device.tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const StatisticsWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
-  border-left: 1px solid
+  border-top: 1px solid
     ${({ theme }) => theme.budgetContent.budgetStatistics.border};
   gap: 8px;
   padding-inline: 20px;
   ${device.tablet} {
     padding-inline: 48px;
+    border-left: 1px solid
+      ${({ theme }) => theme.budgetContent.budgetStatistics.border};
   }
 `;
 

@@ -19,7 +19,7 @@ export const BudgetBasicInformationSuspense = () => {
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
-        <Skeleton circle height={80} width={80} />
+        <Skeleton circle height={40} width={40} />
         <div>
           <StyledTitle>
             <Skeleton height={25} width={150} />
@@ -83,7 +83,7 @@ export const BudgetDetailsSuspense = () => {
   return (
     <DetailsWrapperStyled>
       <TotalDetailsSuspense />
-      <Skeleton width={500} height={100} />
+      <Skeleton height={100} />
       <BudgetStatisticsSuspenseMain />
     </DetailsWrapperStyled>
   );
