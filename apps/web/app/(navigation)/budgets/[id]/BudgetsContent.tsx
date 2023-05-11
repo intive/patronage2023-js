@@ -23,12 +23,29 @@ const BudgetContentWrapperStyled = styled.div`
   gap: 32px;
   width: 100%;
 `;
+const SeparatorStyled = styled(Separator)`
+  display: block;
+  width: 100%;
+`;
+
+const CreateButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+`;
 
 interface BudgetsContentProps {
   id: string;
 }
 
 export const BudgetsContent = ({ id }: BudgetsContentProps) => {
+  const { t, dict } = useTranslate("BudgetsPage");
+  const [
+    createNewTransactionModalVisible,
+    setCreateNewTransactionModalVisible,
+  ] = useState(false);
+  const [transactionType, setTransactionType] = useState("");
+
   const { data: session } = useSession();
 
   const { data: budget } = useQuery({
@@ -62,6 +79,18 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   );
 
   return (
-    <MultiCardLayout main={mainCardContent} aside={<DummyAsideCardContent />} />
+    <>
+      <MultiCardLayout
+        main={mainCardContent}
+        aside={<DummyAsideCardContent />}
+      />
+      {createNewTransactionModalVisible && (
+        <CreateNewTransaction
+          type={transactionType}
+          onClose={closeNewTransactionModal}
+          budget={budget}
+        />
+      )}
+    </>
   );
 };

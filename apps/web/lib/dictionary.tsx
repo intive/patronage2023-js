@@ -420,7 +420,7 @@ const dictionary = {
         fr: "Le nom doit contenir au moins 3 caractères.",
       },
       max30characters: {
-        en: "Budget must not have more than 30 characters.",
+        en: "Budget name must not have more than 30 characters.",
         pl: "Nazwa nie może mieć więcej niż 30 znaków.",
         fr: "Le nom ne peut pas dépasser 30 caractères.",
       },
@@ -453,6 +453,94 @@ const dictionary = {
         en: "Must be after start date.",
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
+      },
+    },
+  },
+  CreateNewTransactionModal: {
+    header: {
+      income: {
+        en: "New income",
+        pl: "Nowy wpływ",
+        fr: "Nouvelle recette",
+      },
+      expense: {
+        en: "New expense",
+        pl: "Nowy wydatek",
+        fr: "Nouvelle dépense",
+      },
+    },
+    details: {
+      en: "Details",
+      pl: "Szczegóły",
+      fr: "Détails",
+    },
+    nameLabel: {
+      income: {
+        en: "Income name",
+        pl: "Nazwa przychodu",
+        fr: "Nom de la recette",
+      },
+      expense: {
+        en: "Expense name",
+        pl: "Nazwa wpływu",
+        fr: "Nom de la dépense",
+      },
+    },
+    amountLabel: {
+      en: "Amount",
+      pl: "Kwota",
+      fr: "Le montant",
+    },
+    categoryLabel: {
+      en: "Category",
+      pl: "Kategoria",
+      fr: "Catégorie",
+    },
+    dateLabel: {
+      en: "Due date",
+      pl: "Termin",
+      fr: "Date d'échéance",
+    },
+    button: {
+      en: "Save",
+      pl: "Zapisz",
+      fr: "Enregistrer",
+    },
+    errors: {
+      min3characters: {
+        en: "Name must have at least 3 characters.",
+        pl: "Nazwa musi zawierać co najmniej 3 znaki.",
+        fr: "Le nom doit contenir au moins 3 caractères.",
+      },
+      max58characters: {
+        en: "Name must not have more than 58 characters.",
+        pl: "Nazwa nie może mieć więcej niż 58 znaków.",
+        fr: "Le nom ne peut pas dépasser 58 caractères.",
+      },
+      amountGraterThanZero: {
+        en: "Amount must be grater than 0.",
+        pl: "Kwota musi być większa od 0.",
+        fr: "Le montant doit être supérieur à 0.",
+      },
+      amountNotEmpty: {
+        en: "Please specify the amount.",
+        pl: "Podaj kwotę transakcji.",
+        fr: "Veuillez préciser le montant.",
+      },
+      selectCategory: {
+        en: "Please select a category.",
+        pl: "Wybierz kategorię.",
+        fr: "Veuillez sélectionner une catégorie.",
+      },
+      selectDate: {
+        en: "Please select a date.",
+        pl: "Wybierz datę.",
+        fr: "Veuillez sélectionner une date.",
+      },
+      dateNotInStartEndRange: {
+        en: "The date must be within the budget period",
+        pl: "Data musi się mieścić w okresie trwania budżetu",
+        fr: "La date doit être comprise dans la période budgétaire",
       },
     },
   },
@@ -495,7 +583,7 @@ const dictionary = {
     },
     createButton: {
       label: { en: "Create", pl: "Utwórz", fr: "Créer" },
-      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouveaux revenus" },
+      newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouvelle recette" },
       newExpense: {
         en: "New expense",
         pl: "Nowy wydatek",

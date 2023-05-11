@@ -6,18 +6,25 @@ type ModalProps = {
   onClose: () => void;
   children: ReactNode;
   header?: string;
+  fullHeight?: boolean;
+};
+
+type CardExtended = {
+  fullHeight?: boolean;
 };
 
 const ModalStyled = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 100%;
+  padding: 8px;
   z-index: 100;
   overflow: auto;
-  width: 100%;
 `;
 
 const BackgroundStyled = styled.div`
@@ -27,21 +34,17 @@ const BackgroundStyled = styled.div`
   opacity: 0.4;
 `;
 
-const CardStyled = styled(Card)`
+const CardStyled = styled(Card)<CardExtended>`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding: 24px 16px;
   z-index: 1;
-  height: calc(100% - 48px);
-  max-height: 922px;
+  height: ${({ fullHeight }) =>
+    fullHeight ? "calc(100% - 48px)" : "fit-content"};
 
   @media (min-width: 768px) {
-    padding: 24px;
-  }
-
-  @media (min-width: 1024px) {
     padding: 32px 48px;
   }
 `;
@@ -51,11 +54,11 @@ const HeaderWrapperStyled = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  min-height: 24px;
+  min-height: 36px;
   margin-bottom: 16px;
 
-  @media (min-witdh: 1024px) {
-      margin-bottom: 32px;
+  @media (min-width: 1024px) {
+    margin-bottom: 32px;
   }
 `;
 
@@ -65,6 +68,9 @@ const HeaderStyled = styled.h3`
   margin-bottom: 0;
   color: ${({ theme }) => theme.modal.header};
   font-family: "Signika", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
 
   @media (min-width: 768px) {
     margin-right: 48px;
@@ -73,14 +79,14 @@ const HeaderStyled = styled.h3`
   @media (min-width: 1024px) {
     margin-right: 72px;
     font-size: 24px;
-    margin-bottom: 32px;
   }
 `;
 
 const CloseButtonStyled = styled.button`
   position: absolute;
-  top: 0;
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0;
   color: ${({ theme }) => theme.modal.closeButton};
   background-color: transparent;
@@ -88,7 +94,12 @@ const CloseButtonStyled = styled.button`
   cursor: pointer;
 `;
 
-export const Modal = ({ onClose, children, header }: ModalProps) => {
+export const Modal = ({
+  onClose,
+  children,
+  header,
+  fullHeight,
+}: ModalProps) => {
   const closeButtonReference = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
@@ -108,7 +119,7 @@ export const Modal = ({ onClose, children, header }: ModalProps) => {
   return (
     <ModalStyled>
       <BackgroundStyled onClick={onClose} />
-      <CardStyled>
+      <CardStyled fullHeight={fullHeight}>
         <HeaderWrapperStyled>
           <HeaderStyled>{header}</HeaderStyled>
           <CloseButtonStyled onClick={onClose} ref={closeButtonReference}>

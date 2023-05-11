@@ -230,6 +230,14 @@ export const theme = {
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
   },
+  categorySelect: {
+    background: colors.BasicWhite,
+    icon: colors.Neutral7,
+    focusBackground: colors.Teal1,
+    border: colors.Neutral2,
+    neutral: colors.Neutral8,
+    error: colors.Supporting4,
+  },
   budgetIcon: {
     main: colors.Teal10,
     background: colors.Neutral1,
@@ -243,6 +251,9 @@ export const theme = {
     inactive: colors.Neutral6,
     active: colors.Teal8,
     hover: colors.Teal10,
+  },
+  createNewTransaction: {
+    paragraph: colors.Neutral8,
   },
   pagination: {
     hover: colors.Teal7,
