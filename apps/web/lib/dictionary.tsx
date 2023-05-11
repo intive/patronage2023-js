@@ -522,7 +522,16 @@ const dictionary = {
       },
     },
   },
-  ReportsPage: { title: { en: "Reports page", pl: "Raporty", fr: "Rapports" } },
+  ReportsPage: {
+    title: { en: "Reports page", pl: "Raporty", fr: "Rapports" },
+    trendChip: {
+      text: {
+        en: "Your budget's percentage growth is ",
+        pl: "Wzrost procentowy twojego budżetu wynosi ",
+        fr: "Le pourcentage de croissance de votre budget est de ",
+      },
+    },
+  },
   SettingsPage: {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },
   },
