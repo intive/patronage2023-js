@@ -61,7 +61,7 @@ export const CreateNewTransaction = ({
     },
     {
       onSuccess: () => {
-        // queryClient.invalidateQueries(["transactions"]);
+        // queryClient.invalidateQueries(["datatable"]);
         onClose();
       },
       // onError: (error) => console.error(error),
