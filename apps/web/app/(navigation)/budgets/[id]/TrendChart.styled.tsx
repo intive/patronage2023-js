@@ -11,6 +11,7 @@ export const StyledWrapper = styled.div`
 export const StyledTitle = styled.div`
   font-size: 12px;
   line-height: 150%;
+  margin-bottom: 16px;
   color: ${({ theme }) => theme.trendChart.titleLeft};
 `;
 
@@ -18,6 +19,7 @@ export const StyledBalanceChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 10px;
 
   canvas {
     height: auto !important; //override inline styles added to <canvas>
@@ -25,7 +27,7 @@ export const StyledBalanceChartWrapper = styled.div`
     max-height: 80px;
   }
 
-  ${device.tablet} {
+  @media screen and (min-width: 1200px) {
     flex-direction: row;
     justify-content: space-between;
     gap: 6%;

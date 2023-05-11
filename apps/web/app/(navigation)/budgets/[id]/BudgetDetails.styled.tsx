@@ -13,6 +13,16 @@ export const DetailsWrapperStyled = styled.div`
 
   ${device.tablet} {
     flex-direction: row;
+
+    > :first-child {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    > :first-child {
+      width: 63%;
+    }
   }
 `;
 
@@ -26,9 +36,10 @@ export const StatisticsWrapperStyled = styled.div`
   border-top: 1px solid
     ${({ theme }) => theme.budgetContent.budgetStatistics.border};
   gap: 8px;
-  padding-inline: 20px;
+  padding-top: 24px;
   ${device.tablet} {
-    padding-inline: 48px;
+    padding-top: 0;
+    padding-left: 48px;
     border-left: 1px solid
       ${({ theme }) => theme.budgetContent.budgetStatistics.border};
     border-top: none;
@@ -36,13 +47,13 @@ export const StatisticsWrapperStyled = styled.div`
 `;
 
 export const CurrencyAmountStyled = styled(CurrencyAmount)`
-  font-size: 20px;
+  font-size: 32px;
   line-height: 150%;
   font-weight: 600;
   color: ${({ theme }) => theme.budgetContent.budgetStatistics.currency};
-  ${device.tablet} {
+  /* ${device.tablet} {
     font-size: 32px;
-  }
+  } */
 `;
 
 export const TitleStyled = styled.span`
