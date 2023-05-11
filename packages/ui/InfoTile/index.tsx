@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styled from "styled-components";
 import { device } from "../../../apps/web/lib/media-queries";
@@ -32,12 +32,11 @@ export const StyledAddInfoSpan = styled.span`
 `;
 
 export type InfoTileProps = {
-  label: string;
-  dataToRender: React.ReactNode
-} & React.HTMLProps<HTMLDivElement>
+  label?: string;
+  dataToRender: React.ReactNode;
+} & React.HTMLProps<HTMLDivElement>;
 
 export const InfoTile = ({ label, dataToRender }: InfoTileProps) => {
-
   return (
     <InfoTileStyled>
       {label}

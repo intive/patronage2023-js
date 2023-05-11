@@ -39,7 +39,7 @@ type TrendChartProps = {
     trendValue: number;
     totalBudgetValue: number;
   };
-  currency: Currency;
+  currency: string;
 };
 
 export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
@@ -60,16 +60,13 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
     values.push(item.value);
   }
 
-  // const minValue = Math.min(...values);
-  // const maxValue = Math.max(...values);
-
   return (
     <StyledWrapper>
       <StyledTitle>{t(charts.titleLeft)}</StyledTitle>
       <StyledBalanceChartWrapper>
         <StyledCurrencyAmount
           amount={statistics.totalBudgetValue}
-          currencyOptions={currency}
+          currency={currency}
           hidePlus
         />
         <Line
@@ -99,8 +96,6 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
               y: {
                 display: false,
                 bounds: "data",
-                // min: minValue,
-                // max: maxValue,
                 ticks: {
                   display: false,
                 },

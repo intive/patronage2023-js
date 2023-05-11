@@ -24,5 +24,7 @@ export { CurrencySelect } from "./CurrencySelect";
 export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";
+export { SkeletonLoading } from "./SkeletonLoading";
 export { ButtonWithDropdown } from "./ButtonWithDropdown";
 export { FormFooter } from "./FormFooter";
+export { TrendChip } from "./TrendChip";
