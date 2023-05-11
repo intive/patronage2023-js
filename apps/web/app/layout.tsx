@@ -35,8 +35,8 @@ export default function RootLayout({ children }: LayoutProps) {
         />
       </head>
       <body className={inter.className}>
-        <SessionProviderWrapper>
-          <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <SessionProviderWrapper>
             <StyledComponentsRegistry>
               <LanguageProvider>
                 <StyledComponentsThemeWrapper>
@@ -44,8 +44,8 @@ export default function RootLayout({ children }: LayoutProps) {
                 </StyledComponentsThemeWrapper>
               </LanguageProvider>
             </StyledComponentsRegistry>
-          </QueryClientProvider>
-        </SessionProviderWrapper>
+          </SessionProviderWrapper>
+        </QueryClientProvider>
       </body>
     </html>
   );

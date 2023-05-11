@@ -156,6 +156,9 @@ export const theme = {
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
     },
+    infoText: colors.Neutral8,
+    spinner: colors.Neutral5,
+    error: colors.Supporting4,
   },
   avatarSelector: {
     active: colors.Teal6,

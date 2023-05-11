@@ -37,10 +37,7 @@ interface BudgetsContentProps {
   id: string;
 }
 
-export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "35754d56-9f8f-4ee3-be61-939919505f96";
-  //          3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5
-
+export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const [
     createNewTransactionModalVisible,

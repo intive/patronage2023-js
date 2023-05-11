@@ -1,6 +1,10 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
+import { useSession } from "next-auth/react";
+
 import {
   Button,
   CurrencySelect,
@@ -37,7 +41,7 @@ import { LanguageContext } from "lib/contexts";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type NewBudget = {
-  onClose?: Function;
+  onClose: Function;
 };
 
 type currencyType = {
@@ -50,8 +54,8 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  dateStart: number | null;
-  dateEnd: number | null;
+  dateStart: any;
+  dateEnd: any;
   currency: currencyType;
 };
 
@@ -120,6 +124,53 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     currentLang === "pl" && setLang("pl-PL");
   }, [lang, currentLang]);
 
+  const { data: session } = useSession();
+
+  const startDateTimestamp = newBudget.dateStart;
+  const endDateTimeStamp = newBudget.dateEnd;
+  const budgetStartDate = new Date(startDateTimestamp).toISOString();
+  const budgetEndDate = new Date(endDateTimeStamp).toISOString();
+
+  // required for queryClient in onSuccess
+  const queryClient = useQueryClient();
+
+  const useSendBudget = () =>
+    useMutation(
+      () =>
+        fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
+          method: "POST",
+          headers: {
+            accept: "text/plain",
+            Authorization: "Bearer " + session!.user.accessToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: newBudget.name,
+            limit: {
+              value: newBudget.limit,
+              currency: newBudget.currency.tag,
+            },
+            period: {
+              startDate: budgetStartDate,
+              endDate: budgetEndDate,
+            },
+            description: newBudget.description,
+            iconName: newBudget.icon,
+          }),
+        }),
+      {
+        onSuccess: () => {
+          onClose();
+          queryClient.invalidateQueries([
+            "budgets",
+            { searchValue: "", sortAscending: true },
+          ]);
+        },
+      }
+    );
+
+  const { mutate: sendBudget } = useSendBudget();
+
   return (
     <Modal
       header={t(dict.title)}
@@ -138,7 +189,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         </Tabs.List>
         <Form
           onSubmit={() => {
-            console.log(newBudget);
+            sendBudget();
           }}>
           {({ submit }) => (
             <form
