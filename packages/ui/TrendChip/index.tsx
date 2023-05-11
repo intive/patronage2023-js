@@ -52,7 +52,7 @@ export const TrendChip = ({ value, ariaLabel }: TrendChipProps) => {
   return (
     <TrendChipStyled role="status" value={value} aria-label={ariaLabel}>
       <Icon icon={iconName()} iconSize={15} />
-      <span>{Math.abs(value)}%</span>
+      <span>{Math.abs(Math.round(value))}%</span>
     </TrendChipStyled>
   );
 };

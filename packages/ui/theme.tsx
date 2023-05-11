@@ -23,6 +23,10 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting17: "#E5707055",
+  Supporting16: "#92CE7855",
+  Supporting15: "#E57070",
+  Supporting14: "#92CE78",
   Supporting13: "#5A092F",
   Supporting12: "#FDE7F1",
   Supporting11: "#003150",
@@ -226,6 +230,14 @@ export const theme = {
     tag: colors.Neutral8,
     tagFocus: colors.Teal8,
   },
+  categorySelect: {
+    background: colors.BasicWhite,
+    icon: colors.Neutral7,
+    focusBackground: colors.Teal1,
+    border: colors.Neutral2,
+    neutral: colors.Neutral8,
+    error: colors.Supporting4,
+  },
   budgetIcon: {
     main: colors.Teal10,
     background: colors.Neutral1,
@@ -239,6 +251,9 @@ export const theme = {
     inactive: colors.Neutral6,
     active: colors.Teal8,
     hover: colors.Teal10,
+  },
+  createNewTransaction: {
+    paragraph: colors.Neutral8,
   },
   pagination: {
     hover: colors.Teal7,
@@ -288,6 +303,22 @@ export const theme = {
     zeroValue: {
       color: colors.Neutral6,
       border: colors.Neutral2,
+    },
+  },
+  trendChart: {
+    positiveLine: colors.Supporting14,
+    negativeLine: colors.Supporting15,
+    positiveFill: colors.Supporting16,
+    negativeFill: colors.Supporting17,
+    titleLeft: colors.Neutral6,
+    currencyAmount: colors.Neutral8,
+  },
+  budgetContent: {
+    budgetDetails: colors.Neutral1,
+    budgetStatistics: {
+      border: colors.Neutral2,
+      currency: colors.Neutral8,
+      title: colors.Neutral6,
     },
   },
 };

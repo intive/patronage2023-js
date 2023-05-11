@@ -1,9 +1,10 @@
 "use client";
 
-import { Budget } from "lib/types";
-import { InfoTile, SkeletonLoading } from "ui";
-import { InfoTileStyled, StyledAddInfoSpan } from "ui/InfoTile";
+import { BudgetFixed } from "lib/types";
+import { InfoTile } from "ui";
+import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
+
 import {
   BasicInfoWrapper,
   BudgetIconStyled,
@@ -16,7 +17,7 @@ import {
 import { iconNames } from "lib/iconValidation";
 //TYPES
 type BudgetBasicInfoProps = {
-  budget: Budget;
+  budget: BudgetFixed;
 };
 //TYPES end
 
@@ -26,7 +27,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { basicInformation } = dict;
   const { startDate, endDate, limit, currency, description, icon, name } =
     budget;
-
   //DATE formatting
   function convertTimestamp(timestamp: number) {
     const date = new Date(timestamp);
@@ -46,16 +46,16 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={limit} currency={currency} hidePlus />
+    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
   );
 
   const currencyInfo = (
     <>
-      <span>{currency}</span>
+      <span>{currency.tag}</span>
       <StyledAddInfoSpan>
         {t(
           basicInformation.currencyNames[
-            currency as keyof typeof basicInformation.currencyNames
+            currency.tag as keyof typeof basicInformation.currencyNames
           ]
         )}
       </StyledAddInfoSpan>
@@ -91,37 +91,3 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     </BasicInfoWrapper>
   );
 }
-
-export const BudgetBasicInformationSuspense = () => {
-  return (
-    <BasicInfoWrapper>
-      <TopSectionWrapper>
-        <SkeletonLoading circle height={80} width={80} />
-        <div>
-          <StyledTitle>
-            <SkeletonLoading height={25} width={150} />
-          </StyledTitle>
-          <StyledDescription>
-            <SkeletonLoading height={15} width={150} />
-          </StyledDescription>
-        </div>
-      </TopSectionWrapper>
-      <TileWrapper>
-        <InfoTileStyled>
-          <SkeletonLoading height={10} width={100} />
-          <SkeletonLoading height={20} width={150} />
-        </InfoTileStyled>
-
-        <InfoTileStyled>
-          <SkeletonLoading height={10} width={50} />
-          <SkeletonLoading height={20} width={75} />
-        </InfoTileStyled>
-
-        <InfoTileStyled>
-          <SkeletonLoading height={10} width={50} />
-          <SkeletonLoading height={20} width={75} />
-        </InfoTileStyled>
-      </TileWrapper>
-    </BasicInfoWrapper>
-  );
-};

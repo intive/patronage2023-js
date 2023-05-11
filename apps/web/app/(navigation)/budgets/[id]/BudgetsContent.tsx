@@ -3,12 +3,21 @@
 import { DummyAsideCardContent } from "app/DummyAsideCardContent";
 import MultiCardLayout from "../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
-import { TransactionsTable } from "./TransactionsTable";
 import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
-import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
+import {
+  BudgetBasicInformationSuspense,
+  BudgetDetailsSuspense,
+} from "./BudgetSuspense";
+import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
+import { FixCurrencyObject } from "lib/currencyValidation";
+import { ButtonWithDropdown, Separator } from "ui";
+import { useTranslate } from "lib/hooks";
+import { useState } from "react";
+import { CreateNewTransaction } from "./CreateNewTransaction";
+import TransactionTableController from "./TransactionTableController";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,15 +27,38 @@ const BudgetContentWrapperStyled = styled.div`
   gap: 32px;
   width: 100%;
 `;
+const SeparatorStyled = styled(Separator)`
+  display: block;
+  width: 100%;
+`;
+
+const CreateButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+`;
 
 interface BudgetsContentProps {
   id: string;
 }
 
 export const BudgetsContent = ({ id }: BudgetsContentProps) => {
+  const { t, dict } = useTranslate("BudgetsPage");
+  const [
+    createNewTransactionModalVisible,
+    setCreateNewTransactionModalVisible,
+  ] = useState(false);
+  const [transactionType, setTransactionType] = useState("");
+
   const { data: session } = useSession();
+
+  const handleCreateNewTransaction = (transactionType: string) => {
+    setTransactionType(transactionType);
+    setCreateNewTransactionModalVisible(true);
+  };
+
   const { data: budget } = useQuery({
-    queryKey: ["budgets", id],
+    queryKey: ["budgets"],
     queryFn: async () => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${id}`, {
         headers: {
@@ -38,24 +70,55 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
     },
     enabled: !!session,
   });
+
   const mainCardContent = (
     <BudgetContentWrapperStyled>
       {budget ? (
-        <BudgetBasicInformation budget={budget} />
+        <BudgetBasicInformation budget={FixCurrencyObject(budget)} />
       ) : (
         <BudgetBasicInformationSuspense />
       )}
-      {/* no suspense for TransactionTable so we don't render it when there is no data */}
-      {budget && (
-        <TransactionsTable
-          budget={budget}
-          setSorting={(column) => console.log(column)}
+      <SeparatorStyled />
+      <CreateButtonWrapper>
+        <ButtonWithDropdown
+          disabled={!budget}
+          label={t(dict.createButton.label)}
+          items={[
+            {
+              label: t(dict.createButton.newIncome),
+              callback: () => handleCreateNewTransaction("Income"),
+            },
+            {
+              label: t(dict.createButton.newExpense),
+              callback: () => handleCreateNewTransaction("Expense"),
+            },
+          ]}
         />
+      </CreateButtonWrapper>
+      {budget ? (
+        <BudgetDetails budget={FixCurrencyObject(budget)} />
+      ) : (
+        <BudgetDetailsSuspense />
+      )}
+      {budget && (
+        <TransactionTableController budget={FixCurrencyObject(budget)} />
       )}
     </BudgetContentWrapperStyled>
   );
 
   return (
-    <MultiCardLayout main={mainCardContent} aside={<DummyAsideCardContent />} />
+    <>
+      <MultiCardLayout
+        main={mainCardContent}
+        aside={<DummyAsideCardContent />}
+      />
+      {createNewTransactionModalVisible && (
+        <CreateNewTransaction
+          type={transactionType}
+          onClose={() => setCreateNewTransactionModalVisible(false)}
+          budget={budget}
+        />
+      )}
+    </>
   );
 };

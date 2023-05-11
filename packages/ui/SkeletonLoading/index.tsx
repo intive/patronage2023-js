@@ -1,22 +1,5 @@
-import Skeleton from "react-loading-skeleton";
+import Skeleton, { SkeletonProps } from "react-loading-skeleton";
 
-interface SkeletonLoadingProps {
-  width?: number;
-  height?: number;
-  circle?: boolean;
-}
-
-export const SkeletonLoading = ({
-  width,
-  height,
-  circle,
-}: SkeletonLoadingProps) => {
-  return (
-    <Skeleton
-      width={width}
-      height={height}
-      circle={circle}
-      baseColor="#e5e5e5"
-    />
-  );
+export const SkeletonLoading = (props: SkeletonProps) => {
+  return <Skeleton {...props} />;
 };

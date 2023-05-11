@@ -172,7 +172,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { mutate: sendBudget } = useSendBudget();
 
   return (
-    <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
+    <Modal
+      header={t(dict.title)}
+      onClose={() => onClose && onClose()}
+      fullHeight>
       <SeparatorStyledTop />
 
       <TabsStyled defaultValue={defaultValue}>
