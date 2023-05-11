@@ -1,16 +1,21 @@
 import styled from "styled-components";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
+import { Icon } from "../../Icon";
 
 export type SubMenuDataProps = {
   title: string;
   sort?: {
     clickHandler: () => void;
-    icon: ReactNode;
+    icon: string;
+    sortAscending: boolean;
   };
   searchInput?: {
     placeholder: string;
+    onChange?: (value: string) => void;
+    onInputCleared?: () => void;
+    value?: string;
   };
   navigationList?: ReactNode;
   button?: {
@@ -24,7 +29,7 @@ type SubMenuProps = {
 } & React.HTMLProps<HTMLDivElement>;
 
 const SubMenuStyled = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 80px;
   height: 100%;
@@ -33,13 +38,17 @@ const SubMenuStyled = styled.div`
   flex-direction: column;
   justify-content: space-between;
   z-index: 2;
-
-  padding: 40px 16px 24px 16px;
+  margin-top: 68px;
+  padding: 40px 4px 24px 16px;
   border-left: 1px solid
     ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
   background-color: ${({ theme }) =>
     theme.sideNavigationBar.subMenu.background};
-  box-shadow: 3px 0 10px lightgray;
+  box-shadow: 0px 6px 20px -2px rgba(26, 26, 26, 0.14);
+`;
+
+const SubMenuHeaderStyled = styled.div`
+  padding-right: 12px; // + padding above = 16 to handle scroll
 `;
 
 const MainDiv = styled.div`
@@ -52,6 +61,7 @@ const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 `;
 
 const Title = styled.span`
@@ -63,34 +73,70 @@ const Title = styled.span`
   line-height: 36px;
 `;
 
+const ButtonStyled = styled(Button)`
+  width: 256px;
+  position: fixed;
+  bottom: 25px;
+`;
+
+const IconUpsideDown = styled(Icon)`
+  transform: rotate(180deg);
+  cursor: pointer;
+`;
+
+const IconWrapperStyled = styled.div`
+  cursor: pointer;
+`;
+
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
-  const [value, setValue] = useState("");
+  useEffect(() => {
+    return () => searchInput?.onChange?.("");
+  }, []);
+
+  const onInputChange = (value: string) => {
+    searchInput?.onChange?.(value);
+  };
+
+  const onIconClicked = () => {
+    sort?.clickHandler();
+  };
+
+  const sortIcon = sort?.sortAscending ? (
+    <Icon icon="filter_list" />
+  ) : (
+    <IconUpsideDown icon="filter_list" />
+  );
+
   return (
     <SubMenuStyled>
       <MainDiv>
-        <HeaderStyled>
-          <Title>{title}</Title>
-          {sort?.icon}
-        </HeaderStyled>
-        {searchInput && (
-          <SearchInput
-            name="searchInput"
-            type="text"
-            placeholder={searchInput.placeholder}
-            value={value}
-            onChange={(event) => setValue(event.currentTarget.value)}
-            onInputCleared={() => setValue("")}
-          />
-        )}
+        <SubMenuHeaderStyled>
+          <HeaderStyled>
+            <Title>{title}</Title>
+            <IconWrapperStyled onClick={onIconClicked}>
+              {sort?.icon && sortIcon}
+            </IconWrapperStyled>
+          </HeaderStyled>
+          {searchInput && (
+            <SearchInput
+              name="searchInput"
+              type="text"
+              placeholder={searchInput.placeholder}
+              value={searchInput.value}
+              onChange={(e) => onInputChange(e.currentTarget.value)}
+              onInputCleared={searchInput.onInputCleared}
+            />
+          )}
+        </SubMenuHeaderStyled>
         {navigationList}
       </MainDiv>
 
       {button && (
-        <Button variant="secondary" onClick={() => button.clickHandler()}>
+        <ButtonStyled variant="secondary" onClick={() => button.clickHandler()}>
           {button.label}
-        </Button>
+        </ButtonStyled>
       )}
     </SubMenuStyled>
   );

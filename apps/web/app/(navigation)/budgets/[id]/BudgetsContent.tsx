@@ -26,9 +26,7 @@ interface BudgetsContentProps {
   id: string;
 }
 
-export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "35754d56-9f8f-4ee3-be61-939919505f96";
-
+export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const { data: session } = useSession();
   const { data: budget } = useQuery({
     queryKey: ["budgets", id],

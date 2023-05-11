@@ -6,7 +6,7 @@ import { useRef } from "react";
 type SearchInputProps = {
   placeholder: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onInputCleared?: () => void;
+  onInputCleared?: Function;
 } & React.HTMLProps<HTMLInputElement>;
 
 const Wrapper = styled.div`
@@ -59,6 +59,7 @@ export const SearchInput = ({
         type={type}
         value={value}
         onChange={onChange}
+        // onInputCleared={onInputCleared}
       />
       <StyledIconSearch>
         <Icon icon="search" />
