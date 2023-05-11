@@ -40,7 +40,7 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   gap: 10px;
   position: relative;
   height: auto;
-  padding: 17px 0px 17px 0px;
+  padding: 17px 2px 17px 2px;
   color: ${({ activeFlag }) =>
     activeFlag
       ? ({ theme }) => theme.sideNavigationBar.sideNavigationBarItem.main

@@ -13,6 +13,28 @@ const dictionary = {
           pl: "Dodaj nowy budżet",
           fr: "Ajouter un nouveau budget",
         },
+        infos: {
+          loading: {
+            en: "Loading...",
+            pl: "Ładowanie...",
+            fr: "Chargement ...",
+          },
+          error: {
+            en: "Something went wrong",
+            pl: "Coś poszło nie tak",
+            fr: "Quelque chose a mal tourné",
+          },
+          text: {
+            en: "There are no budgets with specified name.",
+            pl: "Nie ma budżetów o wskazanej nazwie.",
+            fr: "Il n'y a aucun budget avec le nom spécifié",
+          },
+          noDataInBudgets: {
+            en: "You have not created any budgets yet.",
+            pl: "Nie stworzyłeś jeszcze żadnych budżetów.",
+            fr: "Vous n'avez pas encore créé de budget.",
+          },
+        },
       },
       reportsItem: {
         title: { en: "Reports", pl: "Raporty", fr: "Rapports" },

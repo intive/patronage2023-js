@@ -15,9 +15,12 @@ const Main = styled.main`
   justify-content: space-between;
   flex-grow: 1;
   background-color: #e5e5e5;
+  padding-top: 68px;
 `;
 const Content = styled.div`
   flex-grow: 1;
+  width: 100%;
+  padding-left: 85px;
 `;
 export default function NavigationLayout({ children }: LayoutProps) {
   return (
