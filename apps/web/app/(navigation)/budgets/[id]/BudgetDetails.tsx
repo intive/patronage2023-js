@@ -1,31 +1,14 @@
 import React from "react";
-
 import styled from "styled-components";
 import BudgetStatistics from "./BudgetStatistics";
 import { type BudgetGeneralInfo } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-
+import { DetailsWrapperStyled } from "./BudgetDetails.styled";
 interface Props {
   budget: BudgetGeneralInfo;
 }
-
-const DetailsWrapperStyled = styled.div`
-  width: 100%;
-  border: 2px solid #f7f7f7;
-  border-radius: 16px;
-  display: flex;
-  padding: 24px 32px;
-  gap: 48px;
-`;
-
-// const TotalWrapperStyled = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   padding-inline: 48px;
-//   gap: 8px;
-// `;
 
 const BudgetDetails = ({ budget }: Props) => {
   const { data: session } = useSession();

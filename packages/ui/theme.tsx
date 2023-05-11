@@ -287,6 +287,14 @@ export const theme = {
       border: colors.Neutral2,
     },
   },
+  budgetContent: {
+    budgetDetails: colors.Neutral1,
+    budgetStatistics: {
+      border: colors.Neutral2,
+      currency: colors.Neutral8,
+      title: colors.Neutral6,
+    },
+  },
 };
 
 export type ThemeType = typeof theme;

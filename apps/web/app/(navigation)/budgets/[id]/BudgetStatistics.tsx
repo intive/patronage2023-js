@@ -8,32 +8,15 @@ import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 import { BudgetStatisticsSuspense } from "./BudgetSuspense";
+import {
+  CurrencyAmountStyled,
+  StatisticsWrapperStyled,
+  TitleStyled,
+} from "./BudgetDetails.styled";
 
 interface Props {
   budget: BudgetGeneralInfo;
 }
-
-const DetailsWrapperStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid #e1e1e1;
-  padding-inline: 48px;
-  gap: 8px;
-`;
-
-const CurrencyAmountStyled = styled(CurrencyAmount)`
-  font-size: 32px;
-  line-height: 150%;
-  font-weight: 600;
-  color: #515151; // ADD THEME
-`;
-
-const TitleStyled = styled.span`
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  line-height: 24px;
-  color: #7e7e7e;
-`;
 
 const BudgetStatistics = ({ budget }: Props) => {
   const [range, setRange] = useState("month");
@@ -84,7 +67,7 @@ const BudgetStatistics = ({ budget }: Props) => {
     enabled: !!session,
   });
   return (
-    <DetailsWrapperStyled>
+    <StatisticsWrapperStyled>
       {isLoading ? (
         <BudgetStatisticsSuspense />
       ) : (
@@ -117,7 +100,7 @@ const BudgetStatistics = ({ budget }: Props) => {
           <TrendChip value={statistics?.trendValue} />
         </>
       )}
-    </DetailsWrapperStyled>
+    </StatisticsWrapperStyled>
   );
 };
 

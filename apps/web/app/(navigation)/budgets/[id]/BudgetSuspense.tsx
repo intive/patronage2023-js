@@ -8,35 +8,12 @@ import {
 } from "./BudgetBasicInformation.styled";
 import { InfoTileStyled } from "ui/InfoTile";
 import styled from "styled-components";
-
-const DetailsWrapperStyled = styled.div`
-  width: 100%;
-  border: 2px solid #f7f7f7;
-  border-radius: 16px;
-  display: flex;
-  padding: 24px 32px;
-  gap: 48px;
-`;
-const StatisticsWrapperStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-left: 1px solid #e1e1e1;
-  padding-inline: 48px;
-  gap: 8px;
-`;
-
-const TotalWrapperStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-inline: 48px;
-  gap: 8px;
-`;
-
-const DetailsWrapperSuspense = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
+import {
+  DetailsWrapperStyled,
+  DetailsWrapperSuspense,
+  StatisticsWrapperStyled,
+  TotalWrapperStyled,
+} from "./BudgetDetails.styled";
 
 export const BudgetBasicInformationSuspense = () => {
   return (
