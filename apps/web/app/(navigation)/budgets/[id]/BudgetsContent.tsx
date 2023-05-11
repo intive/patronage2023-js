@@ -55,18 +55,10 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       ) : (
         <BudgetBasicInformationSuspense />
       )}
-      {budget && (
-        <TrendChart
-          statistics={mockDataChart.statistics}
-          currency={budget.currency}
-        />
-      )}
-      {/* no suspense for TransactionTable so we don't render it when there is no data */}
-      {budget && (
-        <TransactionsTable
-          budget={budget}
-          setSorting={(column) => console.log(column)}
-        />
+      {budget ? (
+        <BudgetDetails budget={FixCurrencyObject(budget)} />
+      ) : (
+        <BudgetDetailsSuspense />
       )}
     </BudgetContentWrapperStyled>
   );
