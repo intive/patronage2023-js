@@ -10,7 +10,9 @@ const NavBar = styled.nav`
   margin: 0;
   padding: 15px 15px;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 10;
+  position: fixed;
+  width: 100%;
 `;
 
 const ActionWrapper = styled.div`

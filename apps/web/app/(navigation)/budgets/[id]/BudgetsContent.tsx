@@ -12,7 +12,10 @@ import {
 } from "./BudgetSuspense";
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
+import { TrendChart } from "./TrendChart";
+import { mockDataChart } from "./trend-chart-mock-data";
 import { FixCurrencyObject } from "lib/currencyValidation";
+import { TransactionsTable } from "./TransactionsTable";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -28,9 +31,7 @@ interface BudgetsContentProps {
   id: string;
 }
 
-export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
-
+export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const { data: session } = useSession();
 
   const { data: budget } = useQuery({
@@ -54,11 +55,18 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
       ) : (
         <BudgetBasicInformationSuspense />
       )}
-
-      {budget ? (
-        <BudgetDetails budget={FixCurrencyObject(budget)} />
-      ) : (
-        <BudgetDetailsSuspense />
+      {budget && (
+        <TrendChart
+          statistics={mockDataChart.statistics}
+          currency={budget.currency}
+        />
+      )}
+      {/* no suspense for TransactionTable so we don't render it when there is no data */}
+      {budget && (
+        <TransactionsTable
+          budget={budget}
+          setSorting={(column) => console.log(column)}
+        />
       )}
     </BudgetContentWrapperStyled>
   );

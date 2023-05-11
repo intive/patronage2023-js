@@ -1,6 +1,10 @@
 import { IconType } from "ui/Icon";
 import { CategoryType } from "ui/CategoryIcon";
 
+export interface Currency {
+  tag: string;
+  locale: string;
+}
 interface Icon {
   name: string;
   foreground: string;

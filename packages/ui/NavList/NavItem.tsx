@@ -3,13 +3,15 @@
 import styled from "styled-components";
 import { Icon } from "ui";
 import Link from "next/link";
+import React from "react";
+import { theme } from "../theme";
 
 //types of NavItem props
 export type NavItemProps = {
   active: boolean;
   href: string;
   onClick: () => void;
-} & React.HTMLProps<HTMLAnchorElement>;
+} & React.HTMLProps<HTMLLIElement>;
 
 type NavItemPropsTransient = Omit<NavItemProps, "active"> & {
   $active: boolean;
@@ -50,21 +52,36 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   cursor: pointer;
   text-decoration: none;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: ${({ theme }) =>
       theme.navList.navItem.hoverAndFocusBackground};
   }
+
   &:focus {
-    outline: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline};
+    outline: 0;
+    background-color: ${({ theme }) =>
+      theme.navList.navItem.hoverAndFocusBackground};
+    border: 1px solid ${({ theme }) => theme.navList.navItem.focusOutline};
   }
 `;
 
-export const NavItem = ({ active, href, children, onClick }: NavItemProps) => {
-  return (
-    <NavItemStyled $active={active} href={href} onClick={onClick}>
-      <ChildrenWrapper>{children}</ChildrenWrapper>
-      {active && <Icon icon="chevron_right" color="#1E4C40" iconSize={18} />}
-    </NavItemStyled>
-  );
-};
+export const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
+  ({ active, href, children, onClick }, ref) => {
+    return (
+      <li ref={ref}>
+        <NavItemStyled $active={active} href={href} onClick={onClick}>
+          <ChildrenWrapper>{children}</ChildrenWrapper>
+          {active && (
+            <Icon
+              icon="chevron_right"
+              color={`${theme.navList.navItem.activeColor}`}
+              iconSize={27}
+            />
+          )}
+        </NavItemStyled>
+      </li>
+    );
+  }
+);
+
+NavItem.displayName = "NavItem";
