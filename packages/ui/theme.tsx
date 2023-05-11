@@ -282,6 +282,10 @@ export const theme = {
       color: "#d41111",
       border: "rgba(212,17,17,0.5)",
     },
+    zeroValue: {
+      color: colors.Neutral6,
+      border: colors.Neutral2,
+    },
   },
 };
 
