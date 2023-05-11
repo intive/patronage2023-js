@@ -103,7 +103,7 @@ export const NavList = ({
   ));
 
   const suspenseDataToDisplay = [...Array(suspenseItemsCount)].map((item) => (
-    <NavItemSuspense key={`${item}-sus`} />
+    <NavItemSuspense key={`${item | (Math.random() * 10000)}-sus`} />
   ));
 
   const noDataError = !(loading || error) && (
