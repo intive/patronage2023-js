@@ -281,8 +281,22 @@ export const theme = {
       background: colors.Supporting12,
     },
   },
-  formfooter: {
+  formFooter: {
     text: "#3e4c59",
+  },
+  trendChip: {
+    positiveValue: {
+      color: colors.Supporting7,
+      border: "rgba(73,173,31,0.5)",
+    },
+    negativeValue: {
+      color: "#d41111",
+      border: "rgba(212,17,17,0.5)",
+    },
+    zeroValue: {
+      color: colors.Neutral6,
+      border: colors.Neutral2,
+    },
   },
 };
 
