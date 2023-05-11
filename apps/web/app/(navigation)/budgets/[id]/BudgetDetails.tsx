@@ -8,7 +8,6 @@ import { type BudgetGeneralInfo } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import { BudgetStatisticsSuspense } from "./BudgetStatistics";
 import Skeleton from "react-loading-skeleton";
 interface Props {
   budget: BudgetGeneralInfo;

@@ -60,6 +60,7 @@ const QueryDropdown = ({ label, items }: Props) => {
     cursor: pointer;
     display: flex;
     color: #7e7e7e;
+    width: fit-content;
   `;
 
   return (

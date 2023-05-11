@@ -1,7 +1,7 @@
 import { type BudgetGeneralInfo } from "lib/types";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { CurrencyAmount } from "ui";
+import { CurrencyAmount, TrendChip } from "ui";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -118,7 +118,7 @@ const BudgetStatistics = ({ budget }: Props) => {
             amount={statistics?.periodValue}
             hidePlus
           />
-          <div>chip</div>
+          <TrendChip value={statistics?.trendValue} />
         </>
       )}
     </DetailsWrapperStyled>
