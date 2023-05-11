@@ -20,7 +20,7 @@ interface Props {
 
 const BudgetStatistics = ({ budget }: Props) => {
   const [range, setRange] = useState("month");
-  const { id, currency } = budget;
+  const { id, currency, endDate } = budget;
 
   const [startRange, endRange, title] = useMemo(() => {
     let start = dayjs();
@@ -44,7 +44,7 @@ const BudgetStatistics = ({ budget }: Props) => {
         title = "Budget this month";
         break;
     }
-
+    // todo add check for earlier end
     return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD"), title];
   }, [range]);
 
