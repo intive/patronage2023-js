@@ -13,6 +13,10 @@ import {
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
 import { FixCurrencyObject } from "lib/currencyValidation";
+import { ButtonWithDropdown, Separator } from "ui";
+import { useTranslate } from "lib/hooks";
+import { useState } from "react";
+import { CreateNewTransaction } from "./CreateNewTransaction";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -48,6 +52,11 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
 
   const { data: session } = useSession();
 
+  const handleCreateNewTransaction = (transactionType: string) => {
+    setTransactionType(transactionType);
+    setCreateNewTransactionModalVisible(true);
+  };
+
   const { data: budget } = useQuery({
     queryKey: ["budgets"],
     queryFn: async () => {
@@ -69,7 +78,23 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       ) : (
         <BudgetBasicInformationSuspense />
       )}
-
+      <SeparatorStyled />
+      <CreateButtonWrapper>
+        <ButtonWithDropdown
+          disabled={!budget}
+          label={t(dict.createButton.label)}
+          items={[
+            {
+              label: t(dict.createButton.newIncome),
+              callback: () => handleCreateNewTransaction("Income"),
+            },
+            {
+              label: t(dict.createButton.newExpense),
+              callback: () => handleCreateNewTransaction("Expense"),
+            },
+          ]}
+        />
+      </CreateButtonWrapper>
       {budget ? (
         <BudgetDetails budget={FixCurrencyObject(budget)} />
       ) : (
@@ -87,7 +112,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       {createNewTransactionModalVisible && (
         <CreateNewTransaction
           type={transactionType}
-          onClose={closeNewTransactionModal}
+          onClose={() => setCreateNewTransactionModalVisible(false)}
           budget={budget}
         />
       )}
