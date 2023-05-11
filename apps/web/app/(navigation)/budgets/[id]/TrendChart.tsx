@@ -18,6 +18,7 @@ import {
   CategoryScale,
   LinearScale,
   Filler,
+  ChartArea,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -42,6 +43,56 @@ type TrendChartProps = {
   currency: string;
 };
 
+// code to generete color for line - red or green based on value
+let width = 0,
+  height = 0,
+  gradient: any;
+function getGradient(
+  ctx: CanvasRenderingContext2D,
+  chartArea: ChartArea,
+  min: number,
+  max: number
+) {
+  const chartWidth = chartArea.right - chartArea.left;
+  const chartHeight = chartArea.bottom - chartArea.top;
+
+  const green = "#92CE78";
+  const red = "#E57070";
+  // all values are > 0
+  if (min > 0) {
+    return green;
+  }
+
+  // all values < 0
+  if (max < 0) {
+    return red;
+  }
+
+  if (min === 0 && max === 0) {
+    return green;
+  }
+
+  if (!gradient || width !== chartWidth || height !== chartHeight) {
+    // Create the gradient because this is either the first render
+    // or the size of the chart has changed
+    width = chartWidth;
+    height = chartHeight;
+    console.log(ctx, chartArea);
+
+    // 0.5 is in the middle of the chart
+    const minWithMax = max + Math.abs(min);
+    const zeroPoint = Math.abs(min) / minWithMax;
+
+    gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+
+    gradient.addColorStop(0, red);
+    gradient.addColorStop(zeroPoint - 0.00001, red);
+    gradient.addColorStop(zeroPoint, green);
+    gradient.addColorStop(1, green);
+  }
+  return gradient;
+}
+
 export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -60,6 +111,9 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
     values.push(item.value);
   }
 
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+
   return (
     <StyledWrapper>
       <StyledTitle>{t(charts.titleLeft)}</StyledTitle>
@@ -75,7 +129,15 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
             datasets: [
               {
                 data: values,
-                borderColor: theme.trendChart.positiveLine, // TODO: line color for negative ???
+                borderColor: function (context) {
+                  const chart = context.chart;
+                  const { ctx, chartArea } = chart;
+
+                  if (!chartArea) {
+                    return;
+                  }
+                  return getGradient(ctx, chartArea, min, max);
+                },
                 borderWidth: 2,
                 fill: {
                   target: "origin",
@@ -117,7 +179,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
           }}
         />
       </StyledBalanceChartWrapper>
-      <TrendChip value={statistics.trendValue}/>
+      <TrendChip value={statistics.trendValue} />
     </StyledWrapper>
   );
 };
