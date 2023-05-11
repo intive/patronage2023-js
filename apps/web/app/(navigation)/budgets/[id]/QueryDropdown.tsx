@@ -59,8 +59,6 @@ const QueryDropdown = ({ label, items }: Props) => {
     border: none;
     cursor: pointer;
     display: flex;
-    justify-items: center;
-    justify-content: center;
     color: #7e7e7e;
   `;
 
