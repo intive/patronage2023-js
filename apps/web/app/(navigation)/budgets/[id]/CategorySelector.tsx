@@ -15,6 +15,7 @@ import { CategoryIcon, Icon } from "ui";
 import categoryMap from "lib/category-map";
 import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type CategorySelectorProps = {
   onValueChange: (value: string) => void;
@@ -27,6 +28,7 @@ export const CategorySelector = ({
   onValueChange,
   label,
 }: CategorySelectorProps) => {
+  const { hasScrollbar } = useHasScrollBar();
   const [isOpen, setIsOpen] = useState(false);
   const hasErrors = errors ? errors.length > 0 : false;
 
@@ -77,7 +79,7 @@ export const CategorySelector = ({
         </SupportingLabelStyled>
       </SelectTriggerWrapperStyled>
 
-      <SelectPortalStyled>
+      <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper">
           <Select.Viewport>{getCategoriesItems(categoryMap)}</Select.Viewport>
         </SelectContentStyled>
