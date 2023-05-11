@@ -7,7 +7,7 @@ import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
 import { IconStyled } from "./SideNavigationBarNavListData";
 import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
-import { iconNames } from "lib/consts";
+import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
