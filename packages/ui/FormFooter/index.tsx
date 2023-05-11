@@ -19,7 +19,7 @@ const FormFooterStyled = styled.div`
 `;
 
 const TextStyled = styled.span`
-  color: ${({ theme }) => theme.formfooter.text};
+  color: ${({ theme }) => theme.formFooter.text};
 `;
 
 export const FormFooter = ({ basicText, linkText, href }: FormFooterProps) => {

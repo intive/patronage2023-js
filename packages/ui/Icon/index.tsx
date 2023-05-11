@@ -54,7 +54,8 @@ export type IconType =
   | "done"
   | "priority_high"
   | "navigate_before"
-  | "navigate_next";
+  | "navigate_next"
+  | "trending_flat";
 
 type styledIconProps = {
   color?: string;
