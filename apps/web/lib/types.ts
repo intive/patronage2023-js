@@ -37,9 +37,27 @@ export interface Budget {
   limit: number;
   currency: string;
 }
+
+export interface BudgetFixed {
+  id: string;
+  name: string;
+  description: string;
+  icon: IconType;
+  startDate: number;
+  endDate: number;
+  limit: number;
+  currency: {
+    tag: string;
+    locale: string;
+  };
+}
+
 export interface BudgetGeneralInfo {
   id: string;
-  currency: string;
+  currency: {
+    tag: string;
+    locale: string;
+  };
   startDate: number;
   endDate: number;
 }

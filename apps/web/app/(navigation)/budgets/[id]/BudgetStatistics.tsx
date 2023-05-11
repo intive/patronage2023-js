@@ -8,6 +8,7 @@ import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 import { BudgetStatisticsSuspense } from "./BudgetSuspense";
+
 interface Props {
   budget: BudgetGeneralInfo;
 }
@@ -109,7 +110,7 @@ const BudgetStatistics = ({ budget }: Props) => {
             ]}
           />
           <CurrencyAmountStyled
-            currency={currency}
+            currencyOptions={currency}
             amount={statistics?.periodValue}
             hidePlus
           />
