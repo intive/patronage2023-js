@@ -6,7 +6,9 @@ import { NavItem } from "./NavItem";
 import { Spinner } from "./Spinner";
 import { Icon } from "../Icon";
 import { theme } from "../theme";
+import { NavItemSuspense } from "./NavItemSuspense";
 
+const suspenseItemsCount = 9;
 //types of NavItemContents to mark that NavList will receive array full of objects of type below
 export type NavItemContents = {
   ComponentToRender?: ReactElement;
@@ -100,6 +102,10 @@ export const NavList = ({
     </NavItem>
   ));
 
+  const suspenseDataToDisplay = [...Array(suspenseItemsCount)].map((item) => (
+    <NavItemSuspense key={`${item}-sus`} />
+  ));
+
   const noDataError = !(loading || error) && (
     <NoDatErrorWrapper>{text && text!.noData}</NoDatErrorWrapper>
   );
@@ -107,6 +113,7 @@ export const NavList = ({
   return (
     <NavListStyled>
       {contents.length !== 0 ? dataToDisplay : noDataError}
+      {loading && contents.length === 0 ? suspenseDataToDisplay : null}
       {loading && (
         <WrapperStyled>
           <Spinner />
