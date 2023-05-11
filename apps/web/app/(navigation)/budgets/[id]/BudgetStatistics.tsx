@@ -1,11 +1,13 @@
 import { type BudgetGeneralInfo } from "lib/types";
-import React from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { ButtonWithDropdown, CurrencyAmount } from "ui";
+import { CurrencyAmount } from "ui";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
-import { env } from "process";
+import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
+import dayjs from "dayjs";
+import Skeleton from "react-loading-skeleton";
 interface Props {
   budget: BudgetGeneralInfo;
 }
@@ -15,10 +17,6 @@ const DetailsWrapperStyled = styled.div`
   flex-direction: column;
   border-left: 1px solid #e1e1e1;
   padding-inline: 48px;
-`;
-
-const TopWrapperStyled = styled.div`
-  display: flex;
 `;
 
 const CurrencyAmountStyled = styled(CurrencyAmount)`
@@ -36,15 +34,42 @@ const TitleStyled = styled.span`
 `;
 
 const BudgetStatistics = ({ budget }: Props) => {
-  const { id, currency, startDate, endDate } = budget;
+  const [range, setRange] = useState("month");
+  const { id, currency } = budget;
+
+  const [startRange, endRange, title] = useMemo(() => {
+    let start = dayjs();
+    let end = dayjs();
+    let title = "";
+    switch (range) {
+      case "thisMonth":
+        start = start.startOf("month");
+        title = "Budget this month";
+        break;
+      case "2weeks":
+        start = start.subtract(14, "days");
+        title = "Budget of two weeks";
+        break;
+      case "7days":
+        start = start.subtract(7, "days");
+        title = "Budget of seven days";
+        break;
+      default:
+        start = start.startOf("month");
+        title = "Budget this month";
+        break;
+    }
+
+    return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD"), title];
+  }, [range]);
 
   const { data: session } = useSession();
 
-  const { data: statistics } = useQuery({
-    queryKey: ["rangedStatistics"],
+  const { data: statistics, isLoading } = useQuery({
+    queryKey: ["rangedStatistics", startRange, endRange],
     queryFn: async () => {
       return fetch(
-        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startDate}&endDate=${endDate}`,
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`,
         {
           headers: {
             accept: "*/*",
@@ -56,33 +81,44 @@ const BudgetStatistics = ({ budget }: Props) => {
     },
     enabled: !!session,
   });
-  console.log(statistics);
   return (
     <DetailsWrapperStyled>
-      <QueryDropdown
-        label={<TitleStyled>Budget this month</TitleStyled>}
-        items={[
-          {
-            id: "1",
-            label: "This month",
-            onClick: () => {},
-          },
-          {
-            id: "2",
-            label: "2 weeks",
-            onClick: () => {},
-          },
-          {
-            id: "3",
-            label: "7 days",
-            onClick: () => {},
-          },
-        ]}
-      />
-      <CurrencyAmountStyled currency={currency} amount={100} hidePlus />
-      <div>chip</div>
+      {isLoading ? (
+        <>Loading...</>
+      ) : (
+        <>
+          <QueryDropdown
+            label={<TitleStyled>{title}</TitleStyled>}
+            items={[
+              {
+                id: "thisMonth",
+                label: "This month",
+                onClick: () => setRange("thisMonth"),
+              },
+              {
+                id: "2weeks",
+                label: "2 weeks",
+                onClick: () => setRange("2weeks"),
+              },
+              {
+                id: "7days",
+                label: "7 days",
+                onClick: () => setRange("7days"),
+              },
+            ]}
+          />
+          <CurrencyAmountStyled
+            currency={currency}
+            amount={statistics?.periodValue}
+            hidePlus
+          />
+          <div>chip</div>
+        </>
+      )}
     </DetailsWrapperStyled>
   );
 };
 
 export default BudgetStatistics;
+
+const BudgetStatisticsSuspense = () => {};
