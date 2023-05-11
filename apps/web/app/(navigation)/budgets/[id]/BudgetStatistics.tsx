@@ -1,7 +1,6 @@
 import { type BudgetGeneralInfo } from "lib/types";
 import React, { useMemo, useState } from "react";
-import styled from "styled-components";
-import { CurrencyAmount, TrendChip } from "ui";
+import { TrendChip } from "ui";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
