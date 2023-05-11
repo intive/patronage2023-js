@@ -9,6 +9,9 @@ import styled from "styled-components";
 import { env } from "env.mjs";
 import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
 import { useSession } from "next-auth/react";
+import { TrendChart } from "./TrendChart";
+import { mockDataChart } from "./trend-chart-mock-data";
+
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,7 +27,7 @@ interface BudgetsContentProps {
 }
 
 export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const id = "3e9ca5f0-5ef8-44bc-a8bc-175c826b39b5";
+  const id = "35754d56-9f8f-4ee3-be61-939919505f96";
 
   const { data: session } = useSession();
   const { data: budget } = useQuery({
@@ -46,6 +49,12 @@ export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
         <BudgetBasicInformation budget={budget} />
       ) : (
         <BudgetBasicInformationSuspense />
+      )}
+      {budget && (
+        <TrendChart
+          statistics={mockDataChart.statistics}
+          currency={budget.currency}
+        />
       )}
       {/* no suspense for TransactionTable so we don't render it when there is no data */}
       {budget && (

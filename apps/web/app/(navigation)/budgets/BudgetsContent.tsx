@@ -47,7 +47,10 @@ export const BudgetsContent = () => {
   const mainCardContent = budget && (
     <BudgetContentWrapperStyled>
       <BudgetBasicInformation budget={budget} />
-      <TrendChart statistics={mockDataChart.statistics} currency={budget.currency} />
+      <TrendChart
+        statistics={mockDataChart.statistics}
+        currency={budget.currency}
+      />
       <TransactionsTable
         budget={budget}
         setSorting={(column) => console.log(column)}

@@ -1,8 +1,8 @@
 import { useTranslate } from "lib/hooks";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
+import { TrendChip } from "ui";
 
-import { Currency } from "lib/types";
 import {
   StyledWrapper,
   StyledCurrencyAmount,
@@ -117,7 +117,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
           }}
         />
       </StyledBalanceChartWrapper>
-      <div>trendChip</div> {/* to be changed for trend chip once it is merged*/}
+      <TrendChip value={statistics.trendValue}/>
     </StyledWrapper>
   );
 };
