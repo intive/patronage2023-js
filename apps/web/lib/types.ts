@@ -45,6 +45,7 @@ export interface BudgetFixed {
   startDate: number;
   endDate: number;
   limit: number;
+  userID: string;
   currency: {
     tag: string;
     locale: string;

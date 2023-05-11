@@ -100,7 +100,9 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       ) : (
         <BudgetDetailsSuspense />
       )}
-      {budget && <TransactionTableController budget={budget} />}
+      {budget && (
+        <TransactionTableController budget={FixCurrencyObject(budget)} />
+      )}
     </BudgetContentWrapperStyled>
   );
 

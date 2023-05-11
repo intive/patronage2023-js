@@ -29,7 +29,10 @@ import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 import { IDataRowProps } from "ka-table/props";
 
 type TransactionsTableProps = {
-  currency: string;
+  currency: {
+    tag: string;
+    locale: string;
+  };
   setSorting: (column: string) => void;
   transactions: Transaction[];
 };
@@ -170,7 +173,7 @@ export const TransactionsTable = ({
                   return (
                     <StyledCurrencyAmount
                       amount={props.value}
-                      currency={currency}
+                      currencyOptions={currency}
                     />
                   );
                 case "creator":

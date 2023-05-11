@@ -1,7 +1,7 @@
 import { TransactionsTable } from "./TransactionsTable";
 import { useState } from "react";
 import { env } from "env.mjs";
-import { Budget, Transaction } from "lib/types";
+import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
 import { ErrorMessage, Spinner } from "ui";
@@ -29,7 +29,7 @@ type ID = {
   value: string;
 };
 
-const TransactionTableController = ({ budget }: { budget: Budget }) => {
+const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
