@@ -6,8 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { BudgetBasicInformation } from "./BudgetBasicInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
-import { BudgetBasicInformationSuspense } from "./BudgetBasicInformation";
-import BudgetDetails, { BudgetDetailsSuspense } from "./BudgetDetails";
+import {
+  BudgetBasicInformationSuspense,
+  BudgetDetailsSuspense,
+} from "./BudgetSuspense";
+import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
 
 const BudgetContentWrapperStyled = styled.div`

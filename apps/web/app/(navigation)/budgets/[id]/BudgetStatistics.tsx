@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
-import Skeleton from "react-loading-skeleton";
+import { BudgetStatisticsSuspense } from "./BudgetSuspense";
 interface Props {
   budget: BudgetGeneralInfo;
 }
@@ -17,11 +17,6 @@ const DetailsWrapperStyled = styled.div`
   flex-direction: column;
   border-left: 1px solid #e1e1e1;
   padding-inline: 48px;
-  gap: 8px;
-`;
-const DetailsWrapperSuspense = styled.div`
-  display: flex;
-  flex-direction: column;
   gap: 8px;
 `;
 
@@ -126,23 +121,3 @@ const BudgetStatistics = ({ budget }: Props) => {
 };
 
 export default BudgetStatistics;
-
-const BudgetStatisticsSuspense = () => {
-  return (
-    <DetailsWrapperSuspense>
-      <Skeleton height={10} width={100} />
-      <Skeleton height={30} width={150} />
-      <Skeleton height={20} width={50} />
-    </DetailsWrapperSuspense>
-  );
-};
-
-export const BudgetStatisticsSuspenseMain = () => {
-  return (
-    <DetailsWrapperStyled>
-      <Skeleton height={10} width={100} />
-      <Skeleton height={30} width={150} />
-      <Skeleton height={20} width={50} />
-    </DetailsWrapperStyled>
-  );
-};
