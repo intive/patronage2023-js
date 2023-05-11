@@ -12,7 +12,7 @@ import {
 } from "./BudgetSuspense";
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
-import { Budget } from "lib/types";
+import { FixCurrencyObject } from "lib/currencyValidation";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -29,25 +29,6 @@ interface BudgetsContentProps {
 }
 
 export const BudgetsContent = ({ id: _ }: BudgetsContentProps) => {
-  const FixCurrencyObject = (budget: Budget) => {
-    const strToLocale = (tag: string) => {
-      const localObj = {
-        USD: "en-US",
-        GBP: "en-GB",
-        EUR: "de-DE",
-        PLN: "pl-PL",
-      };
-      return {
-        tag,
-        locale: localObj[tag as keyof typeof localObj],
-      };
-    };
-    return {
-      ...budget,
-      currency: strToLocale(budget.currency),
-    };
-  };
-
   const id = "3e6ca5f0-5ef8-44bc-a8bc-175c826b39b5";
 
   const { data: session } = useSession();
