@@ -22,10 +22,7 @@ const DetailsWrapperStyled = styled.div`
 const BudgetDetails = ({ budget }: Props) => {
   const { data: session } = useSession();
 
-  const { id } = budget;
-
-  const startDate = "2020-03-01";
-  const endDate = "2024-01-01";
+  const { id, startDate, endDate } = budget;
 
   const { data: statistics } = useQuery({
     queryKey: ["mainStatistics"],
@@ -43,7 +40,7 @@ const BudgetDetails = ({ budget }: Props) => {
     },
     enabled: !!session,
   });
-
+  console.log("statystyki główne", statistics);
   return (
     <DetailsWrapperStyled>
       {/* statistics do lewego */}
