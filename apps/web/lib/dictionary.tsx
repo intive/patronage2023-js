@@ -15,9 +15,9 @@ const dictionary = {
         },
         infos: {
           loading: {
-            en: "Loading",
-            pl: "Ładowanie",
-            fr: "",
+            en: "Loading...",
+            pl: "Ładowanie...",
+            fr: "Chargement ...",
           },
           error: {
             en: "Something went wrong",
@@ -25,9 +25,9 @@ const dictionary = {
             fr: "Quelque chose a mal tourné",
           },
           text: {
-            en: "There are no any budgets saved. Please create one by using a button below.",
-            pl: "Nie masz zapisanych budżetów. Stwórz jakiś korzystając z przycisku poniżej.",
-            fr: "",
+            en: "There are no budgets with specified name.",
+            pl: "Nie ma budżetów o wskazanej nazwie.",
+            fr: "Il n'y a aucun budget avec le nom spécifié",
           },
         },
       },

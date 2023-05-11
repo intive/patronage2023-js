@@ -75,7 +75,7 @@ const WrapperStyled = styled.div`
   color: ${({ theme }) => theme.navList.infoText};
 `;
 
-const NoDatErrorWrapper = styled.div`
+const EmptyDataWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 50px;
@@ -106,13 +106,13 @@ export const NavList = ({
     <NavItemSuspense key={`${item | (Math.random() * 10000)}-sus`} />
   ));
 
-  const noDataError = !(loading || error) && (
-    <NoDatErrorWrapper>{text && text!.noData}</NoDatErrorWrapper>
+  const emptyData = !(loading || error) && (
+    <EmptyDataWrapper>{text && text!.noData}</EmptyDataWrapper>
   );
 
   return (
     <NavListStyled>
-      {contents.length !== 0 ? dataToDisplay : noDataError}
+      {contents.length !== 0 ? dataToDisplay : emptyData}
       {loading && contents.length === 0 ? suspenseDataToDisplay : null}
       {loading && (
         <WrapperStyled>
