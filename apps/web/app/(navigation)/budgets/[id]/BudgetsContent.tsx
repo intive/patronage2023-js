@@ -17,7 +17,7 @@ import { ButtonWithDropdown, Separator } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
 import { CreateNewTransaction } from "./CreateNewTransaction";
-
+import TransactionTableController from "./TransactionTableController";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -100,6 +100,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
       ) : (
         <BudgetDetailsSuspense />
       )}
+      {budget && <TransactionTableController budget={budget} />}
     </BudgetContentWrapperStyled>
   );
 
