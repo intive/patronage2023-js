@@ -4,7 +4,7 @@ import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
-import { ErrorMessage, Spinner } from "ui";
+import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
@@ -38,9 +38,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { data: session } = useSession();
 
   const fixFetchedData = (res: APIResponse) => {
-    const tempArray = [] as Transaction[];
-    res.items.map((item) => {
-      tempArray.push({
+    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
+    return res.items.map(
+      (item): Transaction => ({
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
@@ -54,10 +54,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           name: session!.user.name,
           avatar: `${session!.user.image}.svg`,
         },
-      });
-    });
-    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
-    return tempArray;
+      })
+    );
   };
 
   const {
