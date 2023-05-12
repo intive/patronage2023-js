@@ -21,7 +21,6 @@ import { useState } from "react";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
-  handleShowEditBudgetModal: () => void;
 };
 //TYPES end
 
