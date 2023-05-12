@@ -10,6 +10,28 @@ html {
   height: 100%;
 }
 
+body:has(.radix-scroll) {
+  @media only screen and (min-width: 768px) {
+      overflow-y: scroll !important;
+  } 
+}
+
 body * {
   font-family: unset;
+}
+
+.skeleton-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.flex-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap:10px;
 }

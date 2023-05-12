@@ -25,33 +25,29 @@ export type CurrencySelectComponentProps = {
   value: string;
   id?: string;
   label?: string;
+  hasScrollbar?: boolean;
 } & Select.SelectTriggerProps &
   React.HTMLProps<HTMLElement>;
 
-const currency = [
-  {
-    tag: "PLN",
-    label: "Polish Zloty",
-  },
-  {
-    tag: "GBP",
-    label: "British Pound",
-  },
-  {
-    tag: "EUR",
-    label: "Euro",
-  },
-  {
-    tag: "USD",
-    label: "United States Dollar",
-  },
-];
+  const currency = [
+    {
+      tag: "EUR",
+      label: "Euro",
+      id: "2",
+    },
+    {
+      tag: "USD",
+      label: "United States Dollar",
+      id: "1",
+    },
+  ];
 
 export const CurrencySelect = ({
   onValueChange,
   value,
   id,
   label,
+  hasScrollbar,
 }: CurrencySelectComponentProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -74,7 +70,7 @@ export const CurrencySelect = ({
         </SelectIcon>
       </SelectTrigger>
 
-      <SelectPortal>
+      <SelectPortal className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContent position="popper">
           <Select.Viewport>
             {currency.map((currency) => (

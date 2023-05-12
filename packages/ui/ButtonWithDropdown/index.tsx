@@ -9,6 +9,7 @@ import { device } from "../../../apps/web/lib/media-queries";
 export type ButtonWithDropdownProps = {
   label: string;
   items: ButtonWithDropdownItem[];
+  disabled?: boolean;
 };
 
 export type ButtonWithDropdownItem = {
@@ -30,7 +31,7 @@ const StyledButton = styled.button`
   transition: all 0.2s;
   cursor: pointer;
   padding: 5px 3px 5px 12px;
-  ${device.tablet}{
+  ${device.tablet} {
     padding: 9px 12px 9px 22px;
     font-size: 1em;
     gap: 4px;
@@ -39,6 +40,12 @@ const StyledButton = styled.button`
   &:hover {
     border: 2px solid ${({ theme }) => theme.button.primary.hover};
     background-color: ${({ theme }) => theme.button.primary.hover};
+  }
+
+  &:disabled {
+    border: 2px solid ${({ theme }) => theme.button.primary.disabled};
+    background-color: ${({ theme }) => theme.button.primary.disabled};
+    cursor: not-allowed;
   }
 `;
 
@@ -87,26 +94,34 @@ const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   }
 `;
 
-export const ButtonWithDropdown = ({ label, items }: ButtonWithDropdownProps) => {
+export const ButtonWithDropdown = ({
+  label,
+  items,
+  disabled,
+}: ButtonWithDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-      <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
-        <DropdownMenu.Trigger asChild>
-          <StyledButton>
-            { label }
-            <Icon
-              color="white"
-              icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-              iconSize={30}
-            />
-          </StyledButton>
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Portal>
-          <DropdownMenuContentStyled align="start">
-            { items.map( item => <DropdownMenuItemStyled key={item.label} onClick={item.callback}>{item.label}</DropdownMenuItemStyled> )}
-          </DropdownMenuContentStyled>
-        </DropdownMenu.Portal>
-      </DropdownMenu.Root>
+    <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
+      <DropdownMenu.Trigger asChild>
+        <StyledButton disabled={disabled}>
+          {label}
+          <Icon
+            color="white"
+            icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+            iconSize={30}
+          />
+        </StyledButton>
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Portal>
+        <DropdownMenuContentStyled align="start">
+          {items.map((item) => (
+            <DropdownMenuItemStyled key={item.label} onClick={item.callback}>
+              {item.label}
+            </DropdownMenuItemStyled>
+          ))}
+        </DropdownMenuContentStyled>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   );
 };
