@@ -1,7 +1,7 @@
 "use client";
 
 import { BudgetFixed } from "lib/types";
-import { InfoTile } from "ui";
+import { EditIcon, InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
@@ -15,6 +15,9 @@ import {
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
+import styled from "styled-components";
+import { EditBudget } from "app/(navigation)/EditBudget";
+import { useState } from "react";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -22,10 +25,7 @@ type BudgetBasicInfoProps = {
 };
 //TYPES end
 
-export function BudgetBasicInformation({
-  budget,
-  handleShowEditBudgetModal,
-}: BudgetBasicInfoProps) {
+export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
 
   const { basicInformation } = dict;
@@ -41,6 +41,13 @@ export function BudgetBasicInformation({
       year: "2-digit",
     });
   }
+
+  const TitleEditButton = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  `;
 
   //DATA to display for information tiles
   const dataRangeInfo = (
@@ -67,35 +74,50 @@ export function BudgetBasicInformation({
   );
   //DATA for information tiles end
 
-  return (
-    <BasicInfoWrapper>
-      <TopSectionWrapper>
-        <BudgetIconStyled
-          icon={iconNames.includes(icon) ? icon : "notifications"}
-        />
-        <div>
-          <TitleEditButton>
-            <StyledTitle>{name}</StyledTitle>
-            <EditIcon onClick={handleShowEditBudgetModal} />
-          </TitleEditButton>
+  const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
 
-          <StyledDescription>{description}</StyledDescription>
-        </div>
-      </TopSectionWrapper>
-      <TileWrapper>
-        <InfoTile
-          label={t(basicInformation.labels.period)}
-          dataToRender={dataRangeInfo}
-        />
-        <InfoTile
-          label={t(basicInformation.labels.limit)}
-          dataToRender={limitInfo}
-        />
-        <InfoTile
-          label={t(basicInformation.labels.currency)}
-          dataToRender={currencyInfo}
-        />
-      </TileWrapper>
-    </BasicInfoWrapper>
+  const openModal = () => {
+    setIsEditBudgetModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsEditBudgetModalOpen(false);
+  };
+
+  return (
+    <>
+      <BasicInfoWrapper>
+        <TopSectionWrapper>
+          <BudgetIconStyled
+            icon={iconNames.includes(icon) ? icon : "notifications"}
+          />
+          <div>
+            <TitleEditButton>
+              <StyledTitle>{name}</StyledTitle>
+              <EditIcon onClick={() => openModal()} />
+            </TitleEditButton>
+
+            <StyledDescription>{description}</StyledDescription>
+          </div>
+        </TopSectionWrapper>
+        <TileWrapper>
+          <InfoTile
+            label={t(basicInformation.labels.period)}
+            dataToRender={dataRangeInfo}
+          />
+          <InfoTile
+            label={t(basicInformation.labels.limit)}
+            dataToRender={limitInfo}
+          />
+          <InfoTile
+            label={t(basicInformation.labels.currency)}
+            dataToRender={currencyInfo}
+          />
+        </TileWrapper>
+      </BasicInfoWrapper>
+      {isEditBudgetModalOpen && (
+        <EditBudget budget={budget} onClose={() => closeModal()} />
+      )}
+    </>
   );
 }

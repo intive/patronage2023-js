@@ -288,6 +288,10 @@ export const theme = {
       background: colors.Supporting12,
     },
   },
+  editIcon: {
+    main: colors.Neutral6,
+    background: colors.Neutral1,
+  },
   formFooter: {
     text: "#3e4c59",
   },
