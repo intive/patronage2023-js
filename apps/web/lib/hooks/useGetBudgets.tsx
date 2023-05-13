@@ -3,8 +3,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { getBudgetsList, reqInstance } from "services/mutations";
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const useGetBudgets = (
   searchValue: string,
   sortAscending: boolean,
@@ -16,7 +14,6 @@ export const useGetBudgets = (
   return useInfiniteQuery({
     queryKey: ["budgets", { searchValue, sortAscending }],
     queryFn: async ({ pageParam = 1 }) => {
-      await sleep(600);
       return getBudgetsList({
         pageSize,
         pageParam,
