@@ -14,15 +14,15 @@ export const TransactionsTableSuspense = () => {
   //   width: 100%;
   // `;
 
-  const HeadersWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 30%;
-  `;
+  // const HeadersWrapper = styled.div`
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   width: 100%;
+  //   height: 30%;
+  // `;
 
-  const ContentWrapper = styled.div`
+  const ContentWrapper = styled.span`
     display: flex;
     flex-direction: column;
     justify-content: space-around;

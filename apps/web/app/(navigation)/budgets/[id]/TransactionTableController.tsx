@@ -111,7 +111,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         currency={budget.currency}
         setSorting={setSorting}
         transactions={transactionsData? transactionsData : [] as Transaction[]}
-        isLoading={isLoading}
+        isLoading={true}
       />
       <Pagination
         pageIndex={currentPage - 1}

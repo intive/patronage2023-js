@@ -7,7 +7,7 @@ import { useTranslate } from "lib/hooks";
 import { Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
-import { Column } from "ka-table/models";
+import { ChildComponents, Column } from "ka-table/models";
 import defaultOptions from "ka-table/defaultOptions";
 import {
   Icon,
@@ -27,7 +27,7 @@ import {
 } from "./TransactionsTable.styled";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 import { IDataRowProps } from "ka-table/props";
-import { group } from "console";
+import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 
 type TransactionsTableProps = {
   currency: {
@@ -159,9 +159,9 @@ export const TransactionsTable = ({
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
-        loading={{
-          enabled: isLoading,
-        }}
+        // loading={{
+        //   enabled: isLoading,
+        // }}
         groups={[{ columnKey: "date" }]}
         noData={{
           text: "No Data Found",
@@ -221,15 +221,31 @@ export const TransactionsTable = ({
               </>
             ),
           },
-          loading: {
-            content: (props) => {
+          //covers the whole table
+          // loading: {
+          //   content: (props) => {
+          //     console.log(JSON.stringify(props));
+
+          //     return <TransactionsTableSuspense />;
+          //   },
+          // }, works on 218px
+          tableBody:{
+              content: (props) => {
               console.log(JSON.stringify(props));
 
-              return props.enabled && <TransactionsTableSuspense />;
+              return isLoading && <TransactionsTableSuspense />;
             },
-          },
-          // tableBody:{content:(props)=>{ return (isLoading &&  <TransactionsTableSuspense />)}}
+          }
+              
+          //   }, works on 218px with 3 dots 
+          // tableBody:{ content:(props)=>{
+          //   console.log(props.loading)
+          //   if(props.loading){
+          //     return <TransactionsTableSuspense />
+          //   }
+          // }},
           
+       
         }}
       />
     </TableWrapperStyled>
