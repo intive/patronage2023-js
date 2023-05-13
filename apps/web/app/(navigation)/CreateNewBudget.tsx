@@ -59,6 +59,10 @@ type newBudgetType = {
   currency: currencyType;
 };
 
+type createBudgetBEProps = {
+  status: number;
+}
+
 const icons: IconType[] = [
   "savings",
   "directions_car",
@@ -128,6 +132,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
 
+
+
   const useSendBudget = () =>
     useMutation(
       () =>
@@ -152,14 +158,25 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             iconName: newBudget.icon,
           }),
         }),
-      {
-        onSuccess: () => {
-          onClose();
-          queryClient.invalidateQueries([
-            "budgets",
-            { searchValue: "", sortAscending: true },
-          ]);
-        },
+      { 
+        onSuccess: (data: createBudgetBEProps) => {
+          switch(data.status) {
+            case 201:
+              onClose();
+              queryClient.invalidateQueries([
+                "budgets",
+                { searchValue: "", sortAscending: true },
+              ]);
+              break;
+            case 500:
+              console.log("Error: 500");
+              break;
+            default:
+              alert("Ops, something went wrong");
+              return;
+          }
+          
+        }
       }
     );
 
