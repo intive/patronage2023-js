@@ -11,6 +11,7 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
+import { Budget, BudgetFixed } from "lib/types";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -71,7 +72,7 @@ export default function SideNav() {
   };
 
   const successData = data?.pages.flatMap((page) => {
-    return page.items.map((item) => {
+    return page.items.map((item: any) => {
       return {
         ComponentToRender: (
           <>
