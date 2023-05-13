@@ -92,9 +92,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     enabled: !!session && !!budget,
   });
 
-  if (isLoading) {
-    return <TransactionsTableSuspense />;
-  }
+  // if (isLoading) {
+  //   return <TransactionsTableSuspense />;
+  // }
 
   if (isError) {
     return (
@@ -110,7 +110,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={transactionsData}
+        transactions={transactionsData? transactionsData : [] as Transaction[]}
+        isLoading={isLoading}
       />
       <Pagination
         pageIndex={currentPage - 1}

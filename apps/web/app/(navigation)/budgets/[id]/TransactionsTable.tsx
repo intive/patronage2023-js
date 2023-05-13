@@ -27,6 +27,7 @@ import {
 } from "./TransactionsTable.styled";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 import { IDataRowProps } from "ka-table/props";
+import { group } from "console";
 
 type TransactionsTableProps = {
   currency: {
@@ -35,12 +36,14 @@ type TransactionsTableProps = {
   };
   setSorting: (column: string) => void;
   transactions: Transaction[];
+  isLoading: boolean;
 };
 
 export const TransactionsTable = ({
   currency,
   setSorting,
   transactions,
+  isLoading,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -156,9 +159,9 @@ export const TransactionsTable = ({
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
-        // loading={{
-        //   // enabled: isLoading,
-        // }}
+        loading={{
+          enabled: isLoading,
+        }}
         groups={[{ columnKey: "date" }]}
         noData={{
           text: "No Data Found",
@@ -218,20 +221,15 @@ export const TransactionsTable = ({
               </>
             ),
           },
-          // loading: {
-          //   content: (props) => {
-          //     console.log(JSON.stringify(props));
+          loading: {
+            content: (props) => {
+              console.log(JSON.stringify(props));
 
-          //     return <TransactionsTableSuspense />;
-          //   },
-          // },
-          // tableBody:{
-          //   content:(props)=>{
-          //     if (isLoading){
-          //       return <TransactionsTableSuspense/>
-          //     }
-          //   }
-          // }
+              return props.enabled && <TransactionsTableSuspense />;
+            },
+          },
+          // tableBody:{content:(props)=>{ return (isLoading &&  <TransactionsTableSuspense />)}}
+          
         }}
       />
     </TableWrapperStyled>

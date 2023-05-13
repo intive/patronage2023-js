@@ -83,6 +83,13 @@ export const TableWrapperStyled = styled.div`
     justify-content: center;
   }
 
+
+//styles for position of table suspension
+  .ka-loading {
+    position: absolute;
+    left: 0;
+    top: 60px;}
+
   // hide creator column on mobile
   tr.ka-thead-row th:nth-child(5),
   tr.ka-row td:nth-child(5) {
