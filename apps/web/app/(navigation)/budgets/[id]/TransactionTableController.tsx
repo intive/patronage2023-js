@@ -115,7 +115,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <Pagination
         pageIndex={currentPage - 1}
         numberOfPages={totalPages}
-        pageSizeOptions={[5, 10, 25]}
+        pageSizeOptions={[5, 10, 50]}
         currentPageSize={itemsPerPage}
         onChangePageSize={(val) => {
           setItemsPerPage(val);
