@@ -54,8 +54,8 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  dateStart: any;
-  dateEnd: any;
+  dateStart: string;
+  dateEnd: string;
   currency: currencyType;
 };
 
@@ -99,8 +99,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     limit: "",
     description: "",
     icon: selectedIcon,
-    dateStart: null,
-    dateEnd: null,
+    dateStart: "",
+    dateEnd: "",
     currency: {
       tag: "USD",
       locale: lang,
@@ -109,14 +109,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const onSelectStartDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
-      : setNewBudget({ ...newBudget, dateStart: null });
+      ? setNewBudget({ ...newBudget, dateStart: date.toISOString() })
+      : setNewBudget({ ...newBudget, dateStart: "" });
   };
-
   const onSelectEndDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
-      : setNewBudget({ ...newBudget, dateEnd: null });
+      ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
+      : setNewBudget({ ...newBudget, dateEnd: "" });
   };
 
   useEffect(() => {
@@ -125,11 +124,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   }, [lang, currentLang]);
 
   const { data: session } = useSession();
-
-  const startDateTimestamp = newBudget.dateStart;
-  const endDateTimeStamp = newBudget.dateEnd;
-  const budgetStartDate = new Date(startDateTimestamp).toISOString();
-  const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
@@ -151,8 +145,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               currency: newBudget.currency.tag,
             },
             period: {
-              startDate: budgetStartDate,
-              endDate: budgetEndDate,
+              startDate: newBudget.dateStart,
+              endDate: newBudget.dateEnd,
             },
             description: newBudget.description,
             iconName: newBudget.icon,
