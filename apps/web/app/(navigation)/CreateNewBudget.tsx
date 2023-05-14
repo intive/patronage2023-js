@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
+import { ErrorMessage } from "ui";
 
 import {
   Button,
@@ -16,6 +17,7 @@ import {
 import { IconType } from "ui/Icon";
 import {
   TabsStyled,
+  ErrorMessageWrapper,
   TabsTriggerStyled,
   ParagraphStyled,
   InputWrapperHalfStyled,
@@ -61,7 +63,7 @@ type newBudgetType = {
 
 type createBudgetBEProps = {
   status: number;
-}
+};
 
 const icons: IconType[] = [
   "savings",
@@ -84,6 +86,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
   const [lang, setLang] = useState<string>("en-US");
+  const [errorMsg, isErrorMsg] = useState(false);
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { currentLang } = useContext(LanguageContext);
@@ -125,14 +128,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   useEffect(() => {
     currentLang === "en" && setLang("en-US");
     currentLang === "pl" && setLang("pl-PL");
+    currentLang === "pl" && setLang("fr-FR");
   }, [lang, currentLang]);
 
   const { data: session } = useSession();
 
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
-
-
 
   const useSendBudget = () =>
     useMutation(
@@ -158,9 +160,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             iconName: newBudget.icon,
           }),
         }),
-      { 
+      {
         onSuccess: (data: createBudgetBEProps) => {
-          switch(data.status) {
+          switch (data.status) {
             case 201:
               onClose();
               queryClient.invalidateQueries([
@@ -169,18 +171,21 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               ]);
               break;
             case 500:
-              console.log("Error: 500");
+              isErrorMsg(true);
               break;
             default:
-              alert("Ops, something went wrong");
+              alert(t(dict.errors.errorDefault));
               return;
           }
-          
-        }
+        },
       }
     );
 
   const { mutate: sendBudget } = useSendBudget();
+
+  const closeErrorMessage = () => {
+    isErrorMsg(false);
+  };
 
   return (
     <Modal
@@ -198,6 +203,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
+        <ErrorMessageWrapper>
+          {errorMsg && (
+            <ErrorMessage
+              message={t(dict.errors.error500)}
+              onClose={closeErrorMessage}
+            />
+          )}
+        </ErrorMessageWrapper>
+
         <Form
           onSubmit={() => {
             sendBudget();

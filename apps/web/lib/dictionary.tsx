@@ -454,6 +454,16 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error500: {
+        en: "Ops, something went wrong",
+        pl: "Ups, coś poszło nie tak",
+        fr: "Oups, quelque chose s'est mal passé",
+      },
+      errorDefault: {
+        en: "Unexpected error!",
+        pl: "Nieoczekiwany błąd!",
+        fr: "Erreur inattendue!",
+      }
     },
   },
   CreateNewTransactionModal: {

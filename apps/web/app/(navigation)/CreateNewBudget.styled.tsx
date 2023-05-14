@@ -146,6 +146,13 @@ export const TabsStyled = styled(Tabs.Root)`
   }
 `;
 
+export const ErrorMessageWrapper = styled.div`
+  position: fixed;
+  z-index: 100;
+  margin-top: 10px;
+  width: 460px;
+`;
+
 export const ContentStyled = styled.div`
   display: grid;
   overflow-y: scroll;
