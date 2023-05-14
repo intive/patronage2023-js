@@ -1,3 +1,4 @@
+"use client";
 import { type BudgetGeneralInfo } from "lib/types";
 import React, { useMemo, useState } from "react";
 import { TrendChip } from "ui";
@@ -12,41 +13,62 @@ import {
   StatisticsWrapperStyled,
   TitleStyled,
 } from "./BudgetDetails.styled";
+import { useTranslate } from "lib/hooks";
 
 interface Props {
   budget: BudgetGeneralInfo;
 }
 
 const BudgetStatistics = ({ budget }: Props) => {
-  const [range, setRange] = useState("month");
+  const [range, setRange] = useState("week");
   const { id, currency, endDate } = budget;
+  const { dict, t } = useTranslate("BudgetStatistics");
+  const { queryButtonLabels, title: translatedTitle } = dict;
 
-  const [startRange, endRange, title] = useMemo(() => {
-    let start = dayjs();
-    let end = dayjs();
+  const title = useMemo(() => {
     let title = "";
     switch (range) {
-      case "thisMonth":
-        start = start.startOf("month");
-        title = "Budget this month";
+      case "week":
+        title = t(translatedTitle.week);
         break;
-      case "2weeks":
-        start = start.subtract(14, "days");
-        title = "Budget of two weeks";
+      case "month":
+        title = t(translatedTitle.month);
         break;
-      case "7days":
-        start = start.subtract(7, "days");
-        title = "Budget of seven days";
+      case "quarter":
+        title = t(translatedTitle.quarter);
         break;
       default:
-        start = start.startOf("month");
-        title = "Budget this month";
+        title = t(translatedTitle.week);
         break;
     }
-    // todo add check for earlier end
-    return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD"), title];
-  }, [range]);
+    return title;
+  }, [range, t, translatedTitle]);
 
+  const [startRange, endRange] = useMemo(() => {
+    let start = dayjs();
+    let end = dayjs();
+    switch (range) {
+      case "week":
+        //-1 in case of checking weekly budget on sunday
+        start = start.subtract(1, "day").startOf("week");
+        break;
+      case "month":
+        start = start.startOf("month");
+        break;
+      case "quarter":
+        start = start.subtract(3, "months");
+        break;
+      default:
+        start = start.startOf("week");
+        break;
+    }
+    if (dayjs(endDate).isBefore(end)) {
+      end = dayjs(endDate);
+    }
+    return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD")];
+  }, [range, endDate]);
+
+  console.log(startRange, endRange);
   const { data: session } = useSession();
 
   const { data: statistics, isLoading } = useQuery({
@@ -75,19 +97,19 @@ const BudgetStatistics = ({ budget }: Props) => {
             label={<TitleStyled>{title}</TitleStyled>}
             items={[
               {
-                id: "thisMonth",
-                label: "This month",
-                onClick: () => setRange("thisMonth"),
+                id: "week",
+                label: t(queryButtonLabels.week),
+                onClick: () => setRange("week"),
               },
               {
-                id: "2weeks",
-                label: "2 weeks",
-                onClick: () => setRange("2weeks"),
+                id: "month",
+                label: t(queryButtonLabels.month),
+                onClick: () => setRange("month"),
               },
               {
-                id: "7days",
-                label: "7 days",
-                onClick: () => setRange("7days"),
+                id: "quarter",
+                label: t(queryButtonLabels.quarter),
+                onClick: () => setRange("quarter"),
               },
             ]}
           />
