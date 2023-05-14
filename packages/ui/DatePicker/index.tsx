@@ -40,6 +40,7 @@ export const CustomDatePicker = ({
   return (
     <DatePickerStyled hasError={hasError} label={label}>
       <DatePicker
+        dateFormat="dd/MM/yyyy"
         id={label}
         locale={datePickerLanguageConfig[currentLang]}
         popperPlacement="top"

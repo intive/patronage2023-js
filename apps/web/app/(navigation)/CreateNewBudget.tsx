@@ -1,6 +1,10 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
+import { useSession } from "next-auth/react";
+
 import {
   Button,
   CurrencySelect,
@@ -34,6 +38,7 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { LanguageContext } from "lib/contexts";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type NewBudget = {
   onClose: Function;
@@ -49,8 +54,8 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  startDate: number | null;
-  endDate: number | null;
+  dateStart: any;
+  dateEnd: any;
   currency: currencyType;
 };
 
@@ -78,6 +83,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { currentLang } = useContext(LanguageContext);
+  const { hasScrollbar } = useHasScrollBar();
 
   const {
     checkNameOnChange,
@@ -93,8 +99,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     limit: "",
     description: "",
     icon: selectedIcon,
-    startDate: null,
-    endDate: null,
+    dateStart: null,
+    dateEnd: null,
     currency: {
       tag: "USD",
       locale: lang,
@@ -103,14 +109,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const onSelectStartDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, startDate: date.getTime() })
-      : setNewBudget({ ...newBudget, startDate: null });
+      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
+      : setNewBudget({ ...newBudget, dateStart: null });
   };
 
   const onSelectEndDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, endDate: date.getTime() })
-      : setNewBudget({ ...newBudget, endDate: null });
+      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
+      : setNewBudget({ ...newBudget, dateEnd: null });
   };
 
   useEffect(() => {
@@ -118,8 +124,58 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     currentLang === "pl" && setLang("pl-PL");
   }, [lang, currentLang]);
 
+  const { data: session } = useSession();
+
+  const startDateTimestamp = newBudget.dateStart;
+  const endDateTimeStamp = newBudget.dateEnd;
+  const budgetStartDate = new Date(startDateTimestamp).toISOString();
+  const budgetEndDate = new Date(endDateTimeStamp).toISOString();
+
+  // required for queryClient in onSuccess
+  const queryClient = useQueryClient();
+
+  const useSendBudget = () =>
+    useMutation(
+      () =>
+        fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
+          method: "POST",
+          headers: {
+            accept: "text/plain",
+            Authorization: "Bearer " + session!.user.accessToken,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: newBudget.name,
+            limit: {
+              value: newBudget.limit,
+              currency: newBudget.currency.tag,
+            },
+            period: {
+              startDate: budgetStartDate,
+              endDate: budgetEndDate,
+            },
+            description: newBudget.description,
+            iconName: newBudget.icon,
+          }),
+        }),
+      {
+        onSuccess: () => {
+          onClose();
+          queryClient.invalidateQueries([
+            "budgets",
+            { searchValue: "", sortAscending: true },
+          ]);
+        },
+      }
+    );
+
+  const { mutate: sendBudget } = useSendBudget();
+
   return (
-    <Modal header={t(dict.title)} onClose={() => onClose && onClose()}>
+    <Modal
+      header={t(dict.title)}
+      onClose={() => onClose && onClose()}
+      fullHeight>
       <SeparatorStyledTop />
 
       <TabsStyled defaultValue={defaultValue}>
@@ -133,8 +189,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         </Tabs.List>
         <Form
           onSubmit={() => {
-            console.log(newBudget);
-            onClose();
+            sendBudget();
           }}>
           {({ submit }) => (
             <form
@@ -236,6 +291,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               currency: { ...newBudget.currency, tag: e },
                             });
                           }}
+                          hasScrollbar={hasScrollbar}
                         />
                       )}
                     </Field>
@@ -275,8 +331,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     <Field
                       name="start-date"
                       initialValue={
-                        newBudget.startDate
-                          ? new Date(newBudget.startDate)
+                        newBudget.dateStart
+                          ? new Date(newBudget.dateStart)
                           : null
                       }
                       onSubmitValidate={checkDate}
@@ -287,8 +343,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.startDate)}
                             selected={
-                              newBudget.startDate
-                                ? new Date(newBudget.startDate)
+                              newBudget.dateStart
+                                ? new Date(newBudget.dateStart)
                                 : null
                             }
                             onSelect={(date) => {
@@ -309,7 +365,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       name="end-date"
                       listenTo={["start-date"]}
                       initialValue={
-                        newBudget.endDate ? new Date(newBudget.endDate) : null
+                        newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
                       }
                       onSubmitValidate={checkDate}
                       onChangeValidate={(val, form) => {
@@ -332,8 +388,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.endDate)}
                             selected={
-                              newBudget.endDate
-                                ? new Date(newBudget.endDate)
+                              newBudget.dateEnd
+                                ? new Date(newBudget.dateStart)
                                 : null
                             }
                             onSelect={(date) => {

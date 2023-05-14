@@ -4,7 +4,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
-import { Budget } from "lib/types";
+import { BudgetFixed } from "lib/types";
 import { Modal, IconPicker, Input, CustomDatePicker, Button } from "ui";
 import {
   SeparatorStyledTop,
@@ -26,18 +26,11 @@ import {
 
 import { icons } from "./CreateNewBudget";
 interface EditBudgetProps {
-  budget: Budget;
-  handleHideEditBudgetModal: () => void;
+  budget: BudgetFixed;
   onClose: () => void;
-  handleBudgetsEdit: (budgetsAfterEdit: Budget[]) => void;
 }
 
-export const EditBudget = ({
-  budget,
-  onClose,
-  handleHideEditBudgetModal,
-  handleBudgetsEdit,
-}: EditBudgetProps) => {
+export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
@@ -63,13 +56,14 @@ export const EditBudget = ({
     const startTimestamp = form.getFieldValue("start-date")!.value?.getTime();
 
     if (endTimestamp && startTimestamp) {
-      if (startTimestamp > endTimestamp) return Promise.reject(t(dict.errors.dateBeforeStart));
+      if (startTimestamp > endTimestamp)
+        return Promise.reject(t(dict.errors.dateBeforeStart));
     }
     return Promise.resolve(true);
   };
 
   return (
-    <Modal header={t(dict.title)} onClose={handleHideEditBudgetModal}>
+    <Modal header={t(dict.title)} onClose={() => onClose()} fullHeight>
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValueTabs}>
         <Tabs.List>
@@ -82,7 +76,7 @@ export const EditBudget = ({
         </Tabs.List>
         <Form
           onSubmit={async (values) => {
-            const newBudgetFromValues: Budget = {
+            const newBudgetFromValues: BudgetFixed = {
               ...budget,
               name: values["budget-name"],
               description: values["description"],
@@ -90,21 +84,14 @@ export const EditBudget = ({
               startDate: values["start-date"].getTime(),
               endDate: values["end-date"].getTime(),
             };
-            const budgetsResponse = await fetch("/budgets.json");
-            const { budgets } = await budgetsResponse.json();
 
-            const budgetsAfterEdit = budgets.map((budgetJSON: Budget) =>
-              budgetJSON.id === budget.id ? newBudgetFromValues : budgetJSON
-            );
-
-            handleBudgetsEdit(budgetsAfterEdit);
             console.log(newBudgetFromValues);
-            onClose();
           }}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                submit();
               }}>
               <ContentStyled>
                 <Tabs.Content value="settings">

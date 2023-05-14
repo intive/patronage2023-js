@@ -1,104 +1,35 @@
 "use client";
 
-import styled from "styled-components";
-import { Budget } from "lib/types";
-import { InfoTile, BudgetIcon, CurrencyAmount, EditIcon } from "ui";
+import { BudgetFixed } from "lib/types";
+import { EditIcon, InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
-import { device } from "lib/media-queries";
 
-//STYLING
-const BasicInfoWrapper = styled.div`
-  width: 100%;
-`;
-
-const TopSectionWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 16px;
-  ${device.tablet} {
-    margin-bottom: 32px;
-    align-items: center;
-    gap: 16px;
-  }
-  
-`;
-
-const TileWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  ${device.tablet} {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-`;
-
-const BudgetIconStyled = styled(BudgetIcon)`
-  height: 40px;
-  width: 40px;
-  font-size: .9em;
-  flex-shrink: 0;
-  ${device.tablet} {
-    height: 80px;
-    width: 80px;
-    font-size: 1.5em;
-  }
-`;
-
-const StyledTitle = styled.span`
-  font-family: "Signika", sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 28px;
-  color: ${({ theme }) => theme.main};
-  ${device.tablet} {
-    font-size: 32px;
-    line-height: 48px;
-  }
-`;
-
-const StyledDescription = styled.span`
-  font-size: 12px;
-  color: ${({ theme }) => theme.infoTile.label};
-  ${device.tablet} {
-    font-size: 14px;
-    line-height: 20px;
-  }
-`;
-
-const InfoTileAmount = styled(CurrencyAmount)`
-  color: ${({ theme }) => theme.infoTile.value};
-`;
-
-const TitleEditButton = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-`;
-//STYLING end
-
+import {
+  BasicInfoWrapper,
+  BudgetIconStyled,
+  InfoTileAmount,
+  StyledDescription,
+  StyledTitle,
+  TileWrapper,
+  TopSectionWrapper,
+} from "./BudgetBasicInformation.styled";
+import { iconNames } from "lib/iconValidation";
+import styled from "styled-components";
+import { EditBudget } from "app/(navigation)/EditBudget";
+import { useState } from "react";
 //TYPES
 type BudgetBasicInfoProps = {
-  budget: Budget;
-  handleShowEditBudgetModal: () => void;
+  budget: BudgetFixed;
 };
 //TYPES end
 
-export function BudgetBasicInformation({
-  budget,
-  handleShowEditBudgetModal,
-}: BudgetBasicInfoProps) {
+export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
-  const { basicInformation } = dict;
-  const { startDate, endDate, limit, currency, name, icon, description } =
-    budget;
-  const { tag } = currency;
 
+  const { basicInformation } = dict;
+  const { startDate, endDate, limit, currency, description, icon, name } =
+    budget;
   //DATE formatting
   function convertTimestamp(timestamp: number) {
     const date = new Date(timestamp);
@@ -109,6 +40,13 @@ export function BudgetBasicInformation({
       year: "2-digit",
     });
   }
+
+  const TitleEditButton = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  `;
 
   //DATA to display for information tiles
   const dataRangeInfo = (
@@ -123,11 +61,11 @@ export function BudgetBasicInformation({
 
   const currencyInfo = (
     <>
-      <span>{tag}</span>
+      <span>{currency.tag}</span>
       <StyledAddInfoSpan>
         {t(
           basicInformation.currencyNames[
-            tag as keyof typeof basicInformation.currencyNames
+            currency.tag as keyof typeof basicInformation.currencyNames
           ]
         )}
       </StyledAddInfoSpan>
@@ -135,15 +73,27 @@ export function BudgetBasicInformation({
   );
   //DATA for information tiles end
 
+  const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsEditBudgetModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsEditBudgetModalOpen(false);
+  };
+
   return (
     <>
       <BasicInfoWrapper>
         <TopSectionWrapper>
-          <BudgetIconStyled icon={icon} />
+          <BudgetIconStyled
+            icon={iconNames.includes(icon) ? icon : "notifications"}
+          />
           <div>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
-              <EditIcon onClick={handleShowEditBudgetModal} />
+              <EditIcon onClick={() => openModal()} />
             </TitleEditButton>
 
             <StyledDescription>{description}</StyledDescription>
@@ -164,6 +114,9 @@ export function BudgetBasicInformation({
           />
         </TileWrapper>
       </BasicInfoWrapper>
+      {isEditBudgetModalOpen && (
+        <EditBudget budget={budget} onClose={() => closeModal()} />
+      )}
     </>
   );
 }
