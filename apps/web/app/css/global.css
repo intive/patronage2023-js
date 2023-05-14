@@ -12,19 +12,12 @@ html {
 
 body:has(.radix-scroll) {
   @media only screen and (min-width: 768px) {
-      overflow-y: scroll !important;
-  } 
+    overflow-y: scroll !important;
+  }
 }
 
 body * {
   font-family: unset;
-}
-
-/* .skeleton-header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
 
 .flex-content-wrapper {
@@ -33,19 +26,24 @@ body * {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap:10px;
-  overflow:hidden;
-} */
+  gap: 10px;
+  overflow: hidden;
+}
 
-.wrapper-content-div{
+.wrapper-content-div {
   width: 100%;
-  z-index:0;
+  z-index: 0;
 }
 
-.wrapper-content-div span{
- height:40px;
+.wrapper-content-div span {
+  height: 40px;
 }
 
-.ka-thead{
-  border-bottom: 8px solid white;
+.loading-tbody {
+  position: relative;
+  z-index: 1;
+}
+
+.loading-cell {
+  padding: 5px 5px 5px 0;
 }

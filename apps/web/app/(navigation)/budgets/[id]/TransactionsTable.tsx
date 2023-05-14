@@ -26,7 +26,7 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
-import { IDataRowProps } from "ka-table/props";
+import { IDataRowProps, ITableBodyProps } from "ka-table/props";
 import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 
 type TransactionsTableProps = {
@@ -143,25 +143,12 @@ export const TransactionsTable = ({
     },
   ];
 
-  // const DataRow: React.FC<IDataRowProps> = ({ rowData, columns }) => {
-  //   return (
-  //     <td className={defaultOptions.css.cell} colSpan={columns.length}>
-  //       <div>
-  //         <SkeletonLoading count={1} />
-  //       </div>
-  //     </td>
-  //   );
-  // };
-
   return (
     <TableWrapperStyled>
       <Table
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
-        // loading={{
-        //   enabled: isLoading,
-        // }}
         groups={[{ columnKey: "date" }]}
         noData={{
           text: "No Data Found",
@@ -221,31 +208,18 @@ export const TransactionsTable = ({
               </>
             ),
           },
-          //covers the whole table
-          // loading: {
-          //   content: (props) => {
-          //     console.log(JSON.stringify(props));
-
-          //     return <TransactionsTableSuspense />;
-          //   },
-          // }, works on 218px
-          tableBody:{
-              content: (props) => {
-              console.log(JSON.stringify(props));
-
-              return isLoading && <TransactionsTableSuspense />;
+          tableBody: {
+            content: (props) => {
+              return (
+                isLoading && (
+                  <TransactionsTableSuspense rowsNumber={5} {...props} />
+                )
+              );
             },
-          }
-              
-          //   }, works on 218px with 3 dots 
-          // tableBody:{ content:(props)=>{
-          //   console.log(props.loading)
-          //   if(props.loading){
-          //     return <TransactionsTableSuspense />
-          //   }
-          // }},
-          
-       
+            elementAttributes: () => ({
+              className: isLoading ? "loading-tbody" : undefined,
+            }),
+          },
         }}
       />
     </TableWrapperStyled>
