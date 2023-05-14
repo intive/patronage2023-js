@@ -20,7 +20,7 @@ body * {
   font-family: unset;
 }
 
-.skeleton-header-wrapper {
+/* .skeleton-header-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,7 @@ body * {
   width: 100%;
   gap:10px;
   overflow:hidden;
-}
+} */
 
 .wrapper-content-div{
   width: 100%;
@@ -44,4 +44,8 @@ body * {
 
 .wrapper-content-div span{
  height:40px;
+}
+
+.ka-thead{
+  border-bottom: 8px solid white;
 }
