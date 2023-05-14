@@ -91,6 +91,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                submit();
               }}>
               <ContentStyled>
                 <Tabs.Content value="settings">
