@@ -98,16 +98,19 @@ export const NavList = ({
 }: NavListProps) => {
   const currentPage = usePathname() || "";
 
-  const dataToDisplay = contents.map((content) => (
-    <NavItem
-      ref={content.ref}
-      active={content.href === currentPage}
-      key={content.id}
-      href={content.href}
-      onClick={onNavListItemClick}>
-      {content.ComponentToRender}
-    </NavItem>
-  ));
+  const dataToDisplay = contents.map(
+    (content) =>
+      content && (
+        <NavItem
+          ref={content.ref}
+          active={content.href === currentPage}
+          key={content.id}
+          href={content.href}
+          onClick={onNavListItemClick}>
+          {content.ComponentToRender}
+        </NavItem>
+      )
+  );
 
   const suspenseDataToDisplay = [...Array(suspenseItemsCount)].map((item) => (
     <NavItemSuspense key={`${item | (Math.random() * 10000)}-sus`} />

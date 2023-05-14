@@ -23,7 +23,9 @@ export const useGetBudgets = (
       });
     },
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.items.length ? allPages.length + 1 : undefined;
+      return lastPage && lastPage.items!.length
+        ? allPages.length + 1
+        : undefined;
     },
     enabled: !!sessionData,
   });
