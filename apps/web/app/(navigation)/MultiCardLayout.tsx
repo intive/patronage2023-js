@@ -23,6 +23,8 @@ const AsideCard = styled(Card)`
     min-width: 288px;
     margin-left: 31px;
     padding: 32px;
+    position: sticky;
+    top: 94px;
   }
 `;
 

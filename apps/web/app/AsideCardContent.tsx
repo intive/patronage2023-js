@@ -1,9 +1,8 @@
 "use client";
 import styled from "styled-components";
 import { LinkComponent } from "ui";
-import { CheckboxList } from "./CheckboxList";
+import { CategoryFilterForm } from "components";
 
-//creating imitation of RightCard content
 const CardHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
@@ -23,8 +22,6 @@ const CardSettingsLink = styled(LinkComponent)`
   text-decoration: none;
 `;
 
-//it stands for component that will be passed into MultiCardLayout in AsideCard
-//did not yet applied dictionary because it's a dummy component only for initial presentation
 export const AsideCardContent = () => {
   return (
     <>
@@ -32,7 +29,7 @@ export const AsideCardContent = () => {
         <CardTitleStyled>Categories</CardTitleStyled>
         <CardSettingsLink href={"/"}>Manage</CardSettingsLink>
       </CardHeaderStyled>
-      <CheckboxList />
+      <CategoryFilterForm />
     </>
   );
 };
