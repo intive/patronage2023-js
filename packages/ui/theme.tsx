@@ -51,6 +51,7 @@ export const theme = {
   },
   background: {
     background: colors.Teal10,
+    loggedIn: colors.Neutral1
   },
   button: {
     primary: {
@@ -132,7 +133,7 @@ export const theme = {
   sideNavigationBar: {
     background: {
       activeColor: colors.BasicWhite,
-      inactiveColor: "#e5e5e5",
+      inactiveColor: colors.Neutral1,
     },
     sideNavigationBarItem: {
       main: colors.Teal10,
