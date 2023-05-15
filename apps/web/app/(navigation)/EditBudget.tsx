@@ -45,9 +45,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       return budget.endDate ? new Date(budget.endDate) : null;
   };
 
-  const getSelectedValue = (value: Date | null) =>
-    value ? new Date(value) : null;
-
   const checkEndDateOnChangeValidate = (
     endDateValue: Date | null,
     form: FormInstance<any>
@@ -170,7 +167,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           <CustomDatePicker
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.startDate)}
-                            selected={getSelectedValue(value)}
+                            selected={value}
                             onSelect={(date) => {
                               setValue(date);
                             }}
@@ -197,7 +194,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           <CustomDatePicker
                             hasError={errors.length > 0}
                             label={t(dict.inputNames.endDate)}
-                            selected={getSelectedValue(value)}
+                            selected={value}
                             onSelect={(date) => {
                               setValue(date);
                             }}
