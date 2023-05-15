@@ -12,10 +12,10 @@ import {
   StyledDescription,
   StyledTitle,
   TileWrapper,
+  TitleEditButton,
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
-import styled from "styled-components";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { useState } from "react";
 import { RemoveBudget } from "./RemoveBudget";
@@ -41,13 +41,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       year: "2-digit",
     });
   }
-
-  const TitleEditButton = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-  `;
 
   //DATA to display for information tiles
   const dataRangeInfo = (

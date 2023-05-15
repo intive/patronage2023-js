@@ -1,8 +1,16 @@
 import styled from "styled-components";
 import { BudgetIcon, CurrencyAmount } from "ui";
 import { device } from "lib/media-queries";
+
 export const BasicInfoWrapper = styled.div`
   width: 100%;
+`;
+
+export const TitleEditButton = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const TopSectionWrapper = styled.div`
