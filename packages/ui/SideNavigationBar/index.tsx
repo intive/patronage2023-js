@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, ReactNode, useEffect, useMemo } from "react";
+import React, { useState, ReactNode, useMemo } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
@@ -70,11 +70,11 @@ export const SideNavigationBar = ({
     setIsSubMenuShown(true);
   };
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (id: string) => {
     hideSubMenu();
-    setSubMenuId("link");
+    setSubMenuId(id);
   };
-
+  console.log(subMenuId);
   return (
     <Wrapper>
       <SideNavigationBarStyled
@@ -97,8 +97,8 @@ export const SideNavigationBar = ({
               href={href}
               icon={icon}
               textValue={textValue}
-              activeFlag={subMenuId === "link"}
-              onClick={() => handleLinkClick()}
+              activeFlag={subMenuId === id}
+              onClick={() => handleLinkClick(id)}
             />
           );
         })}
