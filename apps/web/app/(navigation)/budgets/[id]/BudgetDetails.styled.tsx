@@ -35,7 +35,6 @@ export const StatisticsWrapperStyled = styled.div`
   flex-direction: column;
   border-top: 1px solid
     ${({ theme }) => theme.budgetContent.budgetStatistics.border};
-  gap: 8px;
   padding-top: 24px;
   ${device.tablet} {
     padding-top: 0;
@@ -50,23 +49,20 @@ export const CurrencyAmountStyled = styled(CurrencyAmount)`
   font-size: 32px;
   line-height: 150%;
   font-weight: 600;
+  margin-bottom: 42px;
   color: ${({ theme }) => theme.budgetContent.budgetStatistics.currency};
-  /* ${device.tablet} {
-    font-size: 32px;
-  } */
 `;
 
 export const TitleStyled = styled.span`
-  font-family: "Inter", sans-serif;
   font-size: 12px;
   line-height: 24px;
+  margin-bottom: 16px;
   color: ${({ theme }) => theme.budgetContent.budgetStatistics.title};
 `;
 
 export const TotalWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
-
   gap: 8px;
 `;
 

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { CurrencyAmount } from "ui";
-import { device } from "lib/media-queries";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -13,6 +12,7 @@ export const StyledWrapper = styled.div`
 
 export const StyledTitle = styled.div`
   margin-bottom: 16px;
+  line-height: 24px;
 `;
 
 export const StyledChartPlaceholder = styled.div`
@@ -36,7 +36,6 @@ export const StyledBalanceChartWrapper = styled.div`
     height: auto !important; //override inline styles added to <canvas>
     max-width: 240px;
     max-height: 80px;
-    background-color: aliceblue;
   }
 
   @media screen and (min-width: 1200px) {

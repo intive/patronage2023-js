@@ -121,7 +121,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
   }
 
   const renderChart = () => {
-    if (!statistics.items.length) {
+    if (statistics.items.length < 2) {
       return (
         <StyledChartPlaceholder>
           {t(charts.trendChartPlaceholder)}
