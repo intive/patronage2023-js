@@ -109,7 +109,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
       );
 
       gradient.addColorStop(0, negativeValueColor);
-      gradient.addColorStop(zeroPoint - 0.00001, negativeValueColor);
+      gradient.addColorStop(Math.max(0, zeroPoint - 0.0000001), negativeValueColor);
       gradient.addColorStop(zeroPoint, positiveValueColor);
       gradient.addColorStop(1, positiveValueColor);
     }
