@@ -42,6 +42,9 @@ const dictionary = {
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia", fr: "Paramètres" },
       },
+      usersItem: {
+        title: { en: "Users", pl: "Użytkownicy", fr: "Utilisateurs" },
+      },
       teamsItem: {
         title: { en: "Teams", pl: "Zespoły", fr: "Équipes" },
         searchInputPlaceholder: {
