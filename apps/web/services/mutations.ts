@@ -29,7 +29,7 @@ export const getBudgetsList = async ({
   searchValue,
   sortAscending,
   token,
-}: GetBudgetsListType) => {
+}: GetBudgetsListType): Promise<ItemType> => {
   const options = {
     method: "POST",
     headers: {

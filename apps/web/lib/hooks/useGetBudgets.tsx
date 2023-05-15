@@ -1,7 +1,7 @@
 "use client";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { getBudgetsList } from "services/mutations";
+import { ItemType, getBudgetsList } from "services/mutations";
 
 export const useGetBudgets = (
   searchValue: string,
@@ -13,7 +13,7 @@ export const useGetBudgets = (
 
   return useInfiniteQuery({
     queryKey: ["budgets", { searchValue, sortAscending }],
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 1 }): Promise<ItemType> => {
       return getBudgetsList({
         pageSize,
         pageParam,

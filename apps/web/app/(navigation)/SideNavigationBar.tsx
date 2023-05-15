@@ -11,19 +11,8 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { IconType } from "ui/Icon";
-
-interface Item {
-  id: {
-    value: string;
-  };
-  icon: IconType;
-  name: string;
-}
-
-interface InifityScrollResponse {
-  items: Item[];
-}
+import { BudgetFixed } from "lib/types";
+import { ItemType } from "services/mutations";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -85,7 +74,7 @@ export default function SideNav() {
 
   const successData =
     data?.pages?.flatMap(
-      ({ items }: InifityScrollResponse) =>
+      ({ items }: ItemType) =>
         items &&
         items.map(({ icon, name, id }) => ({
           ComponentToRender: (
@@ -121,7 +110,7 @@ export default function SideNav() {
     },
     navigationList: (
       <NavList
-        contents={successData ? successData : []}
+        contents={successData}
         onNavListItemClick={hideSubMenu}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
