@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo, Avatar } from "ui";
+import { Icon, Logo, Avatar, Flag } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -26,11 +26,15 @@ const AvatarStyled = styled(Avatar)`
   height: 2.1em;
   width: 2.1em;
 `;
+
 export default function Nav() {
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
+        <Flag src="/flags/pl.svg" />
+        <Flag src="/flags/fr.svg" />
+        <Flag src="/flags/gb.svg" />
         <Icon icon="notifications" color="white" />
         <AvatarStyled src="/avatar.svg" outlined />
       </ActionWrapper>
