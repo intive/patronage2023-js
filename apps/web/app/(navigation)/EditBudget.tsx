@@ -52,11 +52,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     endDateValue: Date | null,
     form: FormInstance<any>
   ) => {
-    const endTimestamp = endDateValue?.getTime();
-    const startTimestamp = form.getFieldValue("start-date")!.value?.getTime();
+    const startDateValue = form.getFieldValue("start-date")!.value;
 
-    if (endTimestamp && startTimestamp) {
-      if (startTimestamp > endTimestamp)
+    if (startDateValue && endDateValue) {
+      if (startDateValue > endDateValue)
         return Promise.reject(t(dict.errors.dateBeforeStart));
     }
     return Promise.resolve(true);
@@ -81,8 +80,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
               name: values["budget-name"],
               description: values["description"],
               icon: values["icon"],
-              startDate: values["start-date"].getTime(),
-              endDate: values["end-date"].getTime(),
+              startDate: values["start-date"].toISOString(),
+              endDate: values["end-date"].toISOString(),
             };
 
             console.log(newBudgetFromValues);
