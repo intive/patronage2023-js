@@ -25,7 +25,7 @@ export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export { CategoryIcon } from "./CategoryIcon";
 export { SkeletonLoading } from "./SkeletonLoading";
-export { EditIcon } from "./EditIcon";
+export { NavBudgetIcon } from "./NavBudgetIcon";
 export { ButtonWithDropdown } from "./ButtonWithDropdown";
 export { FormFooter } from "./FormFooter";
 export { Spinner } from "./Spinner";

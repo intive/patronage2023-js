@@ -1,7 +1,7 @@
 "use client";
 
 import { BudgetFixed } from "lib/types";
-import { EditIcon, InfoTile } from "ui";
+import { NavBudgetIcon, InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
@@ -97,8 +97,11 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <div>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
-              <EditIcon onClick={() => openModal()} />
-              <button onClick={() => setDeleteModalVisibility(true)}>Delete</button>
+              <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
+              <NavBudgetIcon
+                onClick={() => setDeleteModalVisibility(true)}
+                icon={"delete"}
+              />
             </TitleEditButton>
 
             <StyledDescription>{description}</StyledDescription>
