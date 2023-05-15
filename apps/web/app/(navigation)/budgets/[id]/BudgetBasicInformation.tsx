@@ -15,6 +15,8 @@ import {
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
+import { useState } from "react";
+import { RemoveBudget } from "./RemoveBudget";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -63,6 +65,9 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
   //DATA for information tiles end
 
+  const [deleteModalVisibility, setDeleteModalVisibility] =
+    useState<boolean>(false);
+
   return (
     <BasicInfoWrapper>
       <TopSectionWrapper>
@@ -73,7 +78,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <StyledTitle>{name}</StyledTitle>
           <StyledDescription>{description}</StyledDescription>
         </div>
-        <button>Delete</button>
+        <button onClick={() => setDeleteModalVisibility(true)}>Delete</button>
       </TopSectionWrapper>
       <TileWrapper>
         <InfoTile
@@ -89,6 +94,12 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           dataToRender={currencyInfo}
         />
       </TileWrapper>
+      {deleteModalVisibility && (
+        <RemoveBudget
+          budget={budget}
+          onClose={() => setDeleteModalVisibility(false)}
+        />
+      )}
     </BasicInfoWrapper>
   );
 }
