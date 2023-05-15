@@ -73,6 +73,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <StyledTitle>{name}</StyledTitle>
           <StyledDescription>{description}</StyledDescription>
         </div>
+        <button>Delete</button>
       </TopSectionWrapper>
       <TileWrapper>
         <InfoTile
