@@ -12,6 +12,8 @@ import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { BudgetFixed } from "lib/types";
+import { ItemType } from "services/mutations";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -73,24 +75,25 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const successData = data?.pages.flatMap((page) => {
-    return page.items.map((item) => {
-      return {
-        ComponentToRender: (
-          <>
-            <IconStyled
-              icon={iconNames.includes(item.icon) ? item.icon : "help"}
-              iconSize={24}
-            />
-            <SpanStyled>{item.name}</SpanStyled>
-          </>
-        ),
-        href: `/budgets/${item.id.value}`,
-        id: item.id.value,
-        ref: lastBudgetRef,
-      };
-    });
-  });
+  const successData =
+    data?.pages?.flatMap(
+      ({ items }: ItemType) =>
+        items &&
+        items.map(({ icon, name, id }) => ({
+          ComponentToRender: (
+            <>
+              <IconStyled
+                icon={iconNames.includes(icon) ? icon : "help"}
+                iconSize={24}
+              />
+              <SpanStyled>{name}</SpanStyled>
+            </>
+          ),
+          href: `/budgets/${id.value}`,
+          id: id.value,
+          ref: lastBudgetRef,
+        }))
+    ) ?? [];
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
@@ -110,7 +113,7 @@ export default function SideNav() {
     },
     navigationList: (
       <NavList
-        contents={successData ? successData : []}
+        contents={successData}
         onNavListItemClick={hideSubMenu}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
