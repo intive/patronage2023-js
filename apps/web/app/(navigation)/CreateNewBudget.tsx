@@ -389,7 +389,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             label={t(dict.inputNames.endDate)}
                             selected={
                               newBudget.dateEnd
-                                ? new Date(newBudget.dateStart)
+                                ? new Date(newBudget.dateEnd)
                                 : null
                             }
                             onSelect={(date) => {
