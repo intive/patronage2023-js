@@ -312,6 +312,7 @@ export const theme = {
     negativeFill: colors.Supporting17,
     titleLeft: colors.Neutral6,
     currencyAmount: colors.Neutral8,
+    placeholder: colors.Neutral1,
   },
   budgetContent: {
     budgetDetails: colors.Neutral1,

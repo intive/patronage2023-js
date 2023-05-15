@@ -6,13 +6,24 @@ export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  font-size: 12px;
+  line-height: 150%;
+  color: ${({ theme }) => theme.trendChart.titleLeft};
 `;
 
 export const StyledTitle = styled.div`
-  font-size: 12px;
-  line-height: 150%;
   margin-bottom: 16px;
-  color: ${({ theme }) => theme.trendChart.titleLeft};
+`;
+
+export const StyledChartPlaceholder = styled.div`
+  aspect-ratio: 3;
+  text-align: center;
+  background-color: ${({ theme }) => theme.trendChart.placeholder};
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 `;
 
 export const StyledBalanceChartWrapper = styled.div`
@@ -25,6 +36,7 @@ export const StyledBalanceChartWrapper = styled.div`
     height: auto !important; //override inline styles added to <canvas>
     max-width: 240px;
     max-height: 80px;
+    background-color: aliceblue;
   }
 
   @media screen and (min-width: 1200px) {

@@ -601,6 +601,11 @@ const dictionary = {
         pl: "Bilans",
         fr: "Solde total",
       },
+      trendChartPlaceholder: {
+        en: "Add transactions to render chart",
+        pl: "Dodaj transakcje żeby wyświetlić wykres",
+        fr: "Ajoutez un transaction pour afficher le diagramme",
+      },
     },
     transactionsTable: {
       groupRowDays: {

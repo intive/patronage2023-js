@@ -8,6 +8,7 @@ import {
   StyledCurrencyAmount,
   StyledTitle,
   StyledBalanceChartWrapper,
+  StyledChartPlaceholder,
 } from "./TrendChart.styled";
 
 import {
@@ -109,12 +110,82 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
       );
 
       gradient.addColorStop(0, negativeValueColor);
-      gradient.addColorStop(Math.max(0, zeroPoint - 0.0000001), negativeValueColor);
+      gradient.addColorStop(
+        Math.max(0, zeroPoint - 0.0000001),
+        negativeValueColor
+      );
       gradient.addColorStop(zeroPoint, positiveValueColor);
       gradient.addColorStop(1, positiveValueColor);
     }
     return gradient;
   }
+
+  const renderChart = () => {
+    if (!statistics.items.length) {
+      return (
+        <StyledChartPlaceholder>
+          {t(charts.trendChartPlaceholder)}
+        </StyledChartPlaceholder>
+      );
+    }
+    return (
+      <Line
+        data={{
+          labels: dates,
+          datasets: [
+            {
+              data: values,
+              borderColor: function (context) {
+                const chart = context.chart;
+                const { ctx, chartArea } = chart;
+
+                if (!chartArea) {
+                  return;
+                }
+                return getGradient(ctx, chartArea, minValue, maxValue);
+              },
+              borderWidth: 2,
+              fill: {
+                target: "origin",
+                above: theme.trendChart.positiveFill,
+                below: theme.trendChart.negativeFill,
+              },
+              cubicInterpolationMode: "monotone",
+              pointStyle: false,
+            },
+          ],
+        }}
+        options={{
+          aspectRatio: 3,
+          layout: {
+            padding: 0,
+          },
+          scales: {
+            y: {
+              display: false,
+              bounds: "data",
+              ticks: {
+                display: false,
+              },
+              grid: {
+                display: false,
+              },
+            },
+            x: {
+              display: false,
+              bounds: "data",
+              ticks: {
+                display: false,
+              },
+              grid: {
+                display: false,
+              },
+            },
+          },
+        }}
+      />
+    );
+  };
 
   return (
     <StyledWrapper>
@@ -125,61 +196,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
           currencyOptions={currency}
           hidePlus
         />
-        <Line
-          data={{
-            labels: dates,
-            datasets: [
-              {
-                data: values,
-                borderColor: function (context) {
-                  const chart = context.chart;
-                  const { ctx, chartArea } = chart;
-
-                  if (!chartArea) {
-                    return;
-                  }
-                  return getGradient(ctx, chartArea, minValue, maxValue);
-                },
-                borderWidth: 2,
-                fill: {
-                  target: "origin",
-                  above: theme.trendChart.positiveFill, // TODO: gradient ???
-                  below: theme.trendChart.negativeFill,
-                },
-                cubicInterpolationMode: "monotone",
-                pointStyle: false,
-              },
-            ],
-          }}
-          options={{
-            aspectRatio: 3,
-            layout: {
-              padding: 0,
-            },
-            scales: {
-              y: {
-                display: false,
-                bounds: "data",
-                ticks: {
-                  display: false,
-                },
-                grid: {
-                  display: false,
-                },
-              },
-              x: {
-                display: false,
-                bounds: "data",
-                ticks: {
-                  display: false,
-                },
-                grid: {
-                  display: false,
-                },
-              },
-            },
-          }}
-        />
+        {renderChart()}
       </StyledBalanceChartWrapper>
       <TrendChip value={statistics.trendValue} />
     </StyledWrapper>
