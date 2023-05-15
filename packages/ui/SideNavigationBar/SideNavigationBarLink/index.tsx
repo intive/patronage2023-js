@@ -20,6 +20,7 @@ type SpanProps = {
 
 const ListItemStyled = styled.li`
   list-style: none;
+  width: 100%;
 `;
 
 const LinkStyled = styled(Link)`
