@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
+export const TableButtonsAndSearchWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+`;
+
 export const TableWrapperStyled = styled.div`
   // table styles
   .ka-table {

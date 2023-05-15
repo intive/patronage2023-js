@@ -22,9 +22,11 @@ import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
 
 import {
+  TableButtonsAndSearchWrapper,
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+import { SearchInput } from "ui/Input/SearchInput";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 import { IDataRowProps } from "ka-table/props";
 
@@ -152,6 +154,9 @@ export const TransactionsTable = ({
 
   return (
     <TableWrapperStyled>
+      <TableButtonsAndSearchWrapper>
+         <SearchInput placeholder="Search by Name" />
+      </TableButtonsAndSearchWrapper>
       <Table
         columns={columns}
         rowKeyField={"id"}
