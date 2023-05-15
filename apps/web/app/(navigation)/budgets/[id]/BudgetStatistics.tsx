@@ -25,26 +25,15 @@ const BudgetStatistics = ({ budget }: Props) => {
   const { dict, t } = useTranslate("BudgetStatistics");
   const { queryButtonLabels, title: translatedTitle } = dict;
 
-  const title = useMemo(() => {
-    let title = "";
-    switch (range) {
-      case "week":
-        title = t(translatedTitle.week);
-        break;
-      case "month":
-        title = t(translatedTitle.month);
-        break;
-      case "quarter":
-        title = t(translatedTitle.quarter);
-        break;
-      default:
-        title = t(translatedTitle.week);
-        break;
-    }
-    return title;
-  }, [range, t, translatedTitle]);
+  const TitleMap = {
+    week: t(translatedTitle.week),
+    month: t(translatedTitle.month),
+    quarter: t(translatedTitle.quarter),
+  } as const;
 
-  const [startRange, endRange] = useMemo(() => {
+  const title = TitleMap[range as keyof typeof TitleMap];
+
+  const getRange = () => {
     let start = dayjs();
     let end = dayjs();
     switch (range) {
@@ -66,7 +55,9 @@ const BudgetStatistics = ({ budget }: Props) => {
       end = dayjs(endDate);
     }
     return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD")];
-  }, [range, endDate]);
+  };
+
+  const [startRange, endRange] = getRange();
 
   const { data: session } = useSession();
 
