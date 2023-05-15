@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import BudgetStatistics from "./BudgetStatistics";
 import { type BudgetGeneralInfo } from "lib/types";
 import { useQuery } from "@tanstack/react-query";

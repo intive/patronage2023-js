@@ -99,8 +99,8 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
       width = chartWidth;
       height = chartHeight;
 
-      const minWithMax = maxValue + Math.abs(minValue);
-      const zeroPoint = Math.abs(minValue) / minWithMax;
+      const maxDifference = maxValue + Math.abs(minValue);
+      const zeroPoint = Math.abs(minValue) / maxDifference;
 
       gradient = ctx.createLinearGradient(
         0,
