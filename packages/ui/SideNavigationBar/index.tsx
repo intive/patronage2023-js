@@ -74,7 +74,6 @@ export const SideNavigationBar = ({
     hideSubMenu();
     setSubMenuId(id);
   };
-  console.log(subMenuId);
   return (
     <Wrapper>
       <SideNavigationBarStyled
