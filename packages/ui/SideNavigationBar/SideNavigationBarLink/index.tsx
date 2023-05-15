@@ -38,6 +38,7 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 10px;
   position: relative;
   height: auto;
