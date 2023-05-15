@@ -12,11 +12,15 @@ type decodedData = {
   name: string;
   avatar: string;
   sub: string;
+  realm_access: {
+    roles: string[];
+  };
 };
 
 interface DefaultUser extends User {
   accessToken: string;
   refreshToken: string;
+  role: string;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -24,11 +28,13 @@ export const authOptions: NextAuthOptions = {
     jwt({ token, account, user }) {
       if (account) {
         token.accessToken = (user as DefaultUser).accessToken;
+        token.role = (user as DefaultUser).role;
       }
       return token;
     },
     session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
+      session.user.role = token.role as string;
       return session;
     },
   },
@@ -49,11 +55,16 @@ export const authOptions: NextAuthOptions = {
 
         if (res.ok) {
           const { accessToken, refreshToken } = await res.json();
-          const { sub, name, avatar } = jwt.decode(accessToken) as decodedData;
+
+          const { sub, name, avatar, realm_access } = jwt.decode(
+            accessToken
+          ) as decodedData;
+
           return {
             id: sub,
             accessToken,
             refreshToken,
+            role: realm_access.roles.includes("admin") ? "ADMIN" : "USER",
             name,
             image: avatar,
           };
