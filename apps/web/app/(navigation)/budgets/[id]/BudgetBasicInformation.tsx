@@ -1,7 +1,7 @@
 "use client";
 
 import { BudgetFixed } from "lib/types";
-import { InfoTile } from "ui";
+import { EditIcon, InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
@@ -15,6 +15,8 @@ import {
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
+import styled from "styled-components";
+import { EditBudget } from "app/(navigation)/EditBudget";
 import { useState } from "react";
 import { RemoveBudget } from "./RemoveBudget";
 //TYPES
@@ -39,6 +41,13 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       year: "2-digit",
     });
   }
+
+  const TitleEditButton = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  `;
 
   //DATA to display for information tiles
   const dataRangeInfo = (
@@ -65,41 +74,60 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
   //DATA for information tiles end
 
+  const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsEditBudgetModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsEditBudgetModalOpen(false);
+  };
+
   const [deleteModalVisibility, setDeleteModalVisibility] =
     useState<boolean>(false);
 
   return (
-    <BasicInfoWrapper>
-      <TopSectionWrapper>
-        <BudgetIconStyled
-          icon={iconNames.includes(icon) ? icon : "notifications"}
-        />
-        <div>
-          <StyledTitle>{name}</StyledTitle>
-          <StyledDescription>{description}</StyledDescription>
-        </div>
-        <button onClick={() => setDeleteModalVisibility(true)}>Delete</button>
-      </TopSectionWrapper>
-      <TileWrapper>
-        <InfoTile
-          label={t(basicInformation.labels.period)}
-          dataToRender={dataRangeInfo}
-        />
-        <InfoTile
-          label={t(basicInformation.labels.limit)}
-          dataToRender={limitInfo}
-        />
-        <InfoTile
-          label={t(basicInformation.labels.currency)}
-          dataToRender={currencyInfo}
-        />
-      </TileWrapper>
+    <>
+      <BasicInfoWrapper>
+        <TopSectionWrapper>
+          <BudgetIconStyled
+            icon={iconNames.includes(icon) ? icon : "notifications"}
+          />
+          <div>
+            <TitleEditButton>
+              <StyledTitle>{name}</StyledTitle>
+              <EditIcon onClick={() => openModal()} />
+              <button onClick={() => setDeleteModalVisibility(true)}>Delete</button>
+            </TitleEditButton>
+
+            <StyledDescription>{description}</StyledDescription>
+          </div>
+        </TopSectionWrapper>
+        <TileWrapper>
+          <InfoTile
+            label={t(basicInformation.labels.period)}
+            dataToRender={dataRangeInfo}
+          />
+          <InfoTile
+            label={t(basicInformation.labels.limit)}
+            dataToRender={limitInfo}
+          />
+          <InfoTile
+            label={t(basicInformation.labels.currency)}
+            dataToRender={currencyInfo}
+          />
+        </TileWrapper>
+      </BasicInfoWrapper>
+      {isEditBudgetModalOpen && (
+        <EditBudget budget={budget} onClose={() => closeModal()} />
+      )}
       {deleteModalVisibility && (
         <RemoveBudget
           budget={budget}
           onClose={() => setDeleteModalVisibility(false)}
         />
       )}
-    </BasicInfoWrapper>
+    </>
   );
 }
