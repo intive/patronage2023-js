@@ -136,13 +136,17 @@ export const TabsStyled = styled(Tabs.Root)`
   width: 311px;
   min-height: calc(100% - 48px);
   & form {
-    height: calc(100% - 38px);
+    height: calc(100% - 64px);
     display: grid;
-    grid-template-rows: auto 78px [end];
+    grid-template-rows: auto 64px [end];
   }
   ${device.tablet} {
     width: 464px;
-    min-height: calc(100% - 64px);
+  }
+  ${device.desktop} {
+    form {
+      height: calc(100% - 80px);
+    }
   }
 `;
 

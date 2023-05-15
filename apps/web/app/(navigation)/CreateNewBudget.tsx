@@ -61,11 +61,7 @@ type newBudgetType = {
   currency: currencyType;
 };
 
-type createBudgetBEProps = {
-  status: number;
-};
-
-const icons: IconType[] = [
+export const icons: IconType[] = [
   "savings",
   "directions_car",
   "payments",
@@ -354,7 +350,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   </ParagraphStyled>
                   <InputWrapperFullFlex>
                     <Field
-                      name="date-start"
+                      name="start-date"
                       initialValue={
                         newBudget.dateStart
                           ? new Date(newBudget.dateStart)
@@ -366,7 +362,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
-                            label={t(dict.inputNames.dateStart)}
+                            label={t(dict.inputNames.startDate)}
                             selected={
                               newBudget.dateStart
                                 ? new Date(newBudget.dateStart)
@@ -387,8 +383,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       {t(dict.paragraphs.wordIt)}
                     </div>
                     <Field
-                      name="date-end"
-                      listenTo={["date-start"]}
+                      name="end-date"
+                      listenTo={["start-date"]}
                       initialValue={
                         newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
                       }
@@ -396,8 +392,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={(val, form) => {
                         const start = val! && val.getTime();
                         const end =
-                          form.getFieldValue("date-start")!.value &&
-                          form.getFieldValue("date-start")!.value.getTime();
+                          form.getFieldValue("start-date")!.value &&
+                          form.getFieldValue("start-date")!.value.getTime();
 
                         if (start && end) {
                           if (start < end)
@@ -411,7 +407,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <DatePickerWrapperStyled>
                           <CustomDatePicker
                             hasError={errors.length > 0}
-                            label={t(dict.inputNames.dateEnd)}
+                            label={t(dict.inputNames.endDate)}
                             selected={
                               newBudget.dateEnd
                                 ? new Date(newBudget.dateEnd)
