@@ -13,7 +13,7 @@ import {
 } from "./CreateNewTransactionStyled";
 import { useTranslate } from "lib/hooks";
 import { CategorySelector } from "./CategorySelector";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 
@@ -42,8 +42,6 @@ export const CreateNewTransaction = ({
 
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/transaction`;
   const token = data?.user.accessToken;
-
-  // const queryClient = useQueryClient();
 
   const newTransactionMutation = useMutation(
     (newTransaction: TransactionType) => {
