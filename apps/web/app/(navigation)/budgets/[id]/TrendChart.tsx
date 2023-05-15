@@ -80,7 +80,6 @@ function getGradient(
     // or the size of the chart has changed
     width = chartWidth;
     height = chartHeight;
-    console.log(ctx, chartArea);
 
     // 0.5 is in the middle of the chart
     const minWithMax = max + Math.abs(min);

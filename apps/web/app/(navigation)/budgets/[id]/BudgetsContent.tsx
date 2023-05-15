@@ -85,10 +85,12 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
           label={t(dict.createButton.label)}
           items={[
             {
+              id: "Income",
               label: t(dict.createButton.newIncome),
               callback: () => handleCreateNewTransaction("Income"),
             },
             {
+              id: "Expense",
               label: t(dict.createButton.newExpense),
               callback: () => handleCreateNewTransaction("Expense"),
             },

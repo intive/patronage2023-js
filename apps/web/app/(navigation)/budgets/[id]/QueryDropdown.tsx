@@ -2,10 +2,11 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { Icon } from "ui";
+import { ButtonWithDropdownItem } from "ui/ButtonWithDropdown";
 
 interface Props {
   label: React.ReactNode;
-  items: { id: string; label: string; onClick: () => void }[];
+  items: ButtonWithDropdownItem[];
 }
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
@@ -74,7 +75,7 @@ const QueryDropdown = ({ label, items }: Props) => {
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="center">
           {items.map((item) => (
-            <DropdownMenuItemStyled key={item.id} onClick={item.onClick}>
+            <DropdownMenuItemStyled key={item.id} onClick={item.callback}>
               {item.label}
             </DropdownMenuItemStyled>
           ))}

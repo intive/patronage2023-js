@@ -98,17 +98,17 @@ const BudgetStatistics = ({ budget }: Props) => {
               {
                 id: "week",
                 label: t(queryButtonLabels.week),
-                onClick: () => setRange("week"),
+                callback: () => setRange("week"),
               },
               {
                 id: "month",
                 label: t(queryButtonLabels.month),
-                onClick: () => setRange("month"),
+                callback: () => setRange("month"),
               },
               {
                 id: "quarter",
                 label: t(queryButtonLabels.quarter),
-                onClick: () => setRange("quarter"),
+                callback: () => setRange("quarter"),
               },
             ]}
           />
