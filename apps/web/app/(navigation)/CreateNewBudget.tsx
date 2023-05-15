@@ -61,6 +61,10 @@ type newBudgetType = {
   currency: currencyType;
 };
 
+type createBudgetBEProps = {
+  status: number;
+};
+
 export const icons: IconType[] = [
   "savings",
   "directions_car",
