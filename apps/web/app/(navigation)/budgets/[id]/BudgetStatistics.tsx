@@ -68,11 +68,10 @@ const BudgetStatistics = ({ budget }: Props) => {
     return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD")];
   }, [range, endDate]);
 
-  console.log(startRange, endRange);
   const { data: session } = useSession();
 
   const { data: statistics, isLoading } = useQuery({
-    queryKey: ["rangedStatistics", startRange, endRange],
+    queryKey: ["rangedStatistics", startRange, endRange, budget.id],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`,
