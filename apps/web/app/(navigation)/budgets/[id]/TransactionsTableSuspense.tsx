@@ -2,12 +2,7 @@ import { SkeletonLoading } from "ui";
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
 import { ITableBodyProps } from "ka-table/props";
-
-const SingleSkeletonWrapperContent = ({
-  children,
-}: PropsWithChildren<unknown>) => {
-  return <div className="wrapper-content-div">{children}</div>;
-};
+import "../../../css/transactionsTableSuspense.css";
 
 interface TransactionsTableSuspenseProps extends ITableBodyProps {
   rowsNumber: number;
@@ -22,16 +17,13 @@ const GradientTrStyled = styled.tr`
   height: 100%;
 `;
 
-const spawnRows = (props: TransactionsTableSuspenseProps) => {
-  const rowsArray = [];
-
-  for (let i = 0; i < props.rowsNumber; i++) {
-    rowsArray.push(<DataRow {...props} />);
-  }
-
-  return rowsArray;
+const SingleSkeletonWrapperContent = ({
+  children,
+}: PropsWithChildren<unknown>) => {
+  return <div className="wrapper-content-div">{children}</div>;
 };
 
+//to create single tr (thanks to tr, rows are properly displayed in table body)
 const DataRow: React.FC<ITableBodyProps> = ({ columns }) => {
   return (
     <tr>
@@ -47,6 +39,18 @@ const DataRow: React.FC<ITableBodyProps> = ({ columns }) => {
       </td>
     </tr>
   );
+};
+
+//function for creating array full of <DataRow/> components
+const spawnRows = (props: TransactionsTableSuspenseProps) => {
+  const rowsArray = [];
+  let id = 1;
+
+  for (let i = 0; i < props.rowsNumber; i++) {
+    rowsArray.push(<DataRow {...props} key={id++} />);
+  }
+
+  return rowsArray;
 };
 
 export const TransactionsTableSuspense = (

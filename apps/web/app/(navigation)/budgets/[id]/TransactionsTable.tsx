@@ -1,21 +1,15 @@
 "use client";
 
-import { useContext, useId } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
 import { Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
-import { ChildComponents, Column } from "ka-table/models";
-import defaultOptions from "ka-table/defaultOptions";
-import {
-  Icon,
-  Avatar,
-  TransactionDropdownMenu,
-  CategoryIcon,
-  SkeletonLoading,
-} from "ui";
+import { Column } from "ka-table/models";
+
+import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
@@ -26,8 +20,6 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
-import { IDataRowProps, ITableBodyProps } from "ka-table/props";
-import { SERVER_PROPS_ID } from "next/dist/shared/lib/constants";
 
 type TransactionsTableProps = {
   currency: {

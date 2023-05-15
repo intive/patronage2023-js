@@ -8,7 +8,6 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-// import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 
 type APIResponse = {
   items: Item[];
