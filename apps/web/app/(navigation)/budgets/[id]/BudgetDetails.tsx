@@ -17,7 +17,7 @@ const BudgetDetails = ({ budget }: Props) => {
   const { id, currency, startDate, endDate } = budget;
 
   const { data: statistics } = useQuery({
-    queryKey: ["mainStatistics"],
+    queryKey: ["mainStatistics", budget.id],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startDate}&endDate=${endDate}`,

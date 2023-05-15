@@ -783,6 +783,42 @@ const dictionary = {
       fr: "Sélection du nombre de transactions affichées sur la page",
     },
   },
+  BudgetStatistics: {
+    queryButtonLabels: {
+      week: {
+        en: "This week",
+        pl: "Ten Tydzień",
+        fr: "Cette semaine",
+      },
+      month: {
+        en: "This month",
+        pl: "Ten miesiąc",
+        fr: "Ce mois-ci",
+      },
+      quarter: {
+        en: "Within 3 months",
+        pl: "W ciągu 3 miesiący",
+        fr: "Dans les 3 mois",
+      },
+    },
+    title: {
+      week: {
+        en: "Budget this week",
+        pl: "Budżet w tym tygodniu",
+        fr: "Budget cette semaine",
+      },
+      month: {
+        en: "Budget this month",
+        pl: "Budżet w tym miesiącu",
+        fr: "Budget ce mois-ci",
+      },
+      quarter: {
+        en: "Budget within 3 months",
+        pl: "Budżet z ostatnich 3 miesięcy",
+        fr: "Budget sous 3 mois",
+      },
+    },
+  },
 };
 
 export default dictionary;
