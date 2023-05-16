@@ -2,7 +2,7 @@ import { SkeletonLoading } from "ui";
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
 import { ITableBodyProps } from "ka-table/props";
-import "../../../css/transactionsTableSuspense.css";
+import "css/transactionsTableSuspense.css";
 
 interface TransactionsTableSuspenseProps extends ITableBodyProps {
   rowsNumber: number;
