@@ -9,6 +9,8 @@ import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
+import { useAtomValue } from "jotai";
+import { categoryFilterAtom } from "store";
 
 type APIResponse = {
   items: Item[];
@@ -57,6 +59,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       })
     );
   };
+
+  const categoryFilterState = useAtomValue(categoryFilterAtom);
+  console.log("transactions ", categoryFilterState);
 
   const {
     data: transactionsData,

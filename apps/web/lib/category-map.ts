@@ -39,4 +39,6 @@ const categoryMap = {
   },
 };
 
+export type CategoryMapType = typeof categoryMap;
+
 export default categoryMap;

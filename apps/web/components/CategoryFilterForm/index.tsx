@@ -3,6 +3,9 @@ import { Field, Form } from "houseform";
 import categoryMap from "lib/category-map";
 import styled from "styled-components";
 import { CategoryIcon, Checkbox } from "ui";
+import { categoryFilterAtom } from "store";
+import { useSetAtom } from "jotai";
+import { CategoryFilterType } from "lib/types";
 
 const FormStyled = styled.form`
   width: 100%;
@@ -37,11 +40,13 @@ const CategoryIconStyled = styled(CategoryIcon)`
 `;
 
 export const CategoryFilterForm = () => {
-  const categories = Object.values(categoryMap);
+  const setCategoryFilter = useSetAtom(categoryFilterAtom);
+  const categoryEntries = Object.entries(categoryMap);
+
   return (
     <Form
-      onSubmit={(values) => {
-        console.log(values);
+      onSubmit={(values: CategoryFilterType) => {
+        setCategoryFilter(values);
       }}>
       {({ submit }) => (
         <FormStyled
@@ -49,11 +54,11 @@ export const CategoryFilterForm = () => {
             submit();
           }}>
           <CheckboxListStyled>
-            {categories.map((category) => {
+            {categoryEntries.map(([categoryKey, category]) => {
               const { id, name } = category;
               return (
                 <Field
-                  name={name}
+                  name={categoryKey}
                   initialValue={false}
                   key={`aside-checkbox-list-field-${id}`}>
                   {({ value, setValue }) => (
