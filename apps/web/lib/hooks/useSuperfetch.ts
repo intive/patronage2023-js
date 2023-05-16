@@ -1,9 +1,13 @@
 import { useSession } from "next-auth/react";
 
+interface SuperOptions extends Omit<Omit<RequestInit, "headers">, "body"> {
+  body: object;
+}
+
 export default function useSuperfetch(
   url: string,
-  //disable ts suggestion for headers since we are setting them up manually
-  options?: Omit<RequestInit, "headers">
+  //disable ts suggestion for headers since we are setting them up manually and allow body to be object
+  options?: SuperOptions
 ) {
   const { data: session } = useSession();
 
