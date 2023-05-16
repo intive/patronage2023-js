@@ -14,7 +14,7 @@ export default function useSuperfetch(
   const superfetch = () => {
     const headers: HeadersInit = {
       "Content-Type": "application/json",
-      accept: "*/*",
+      accept: "application/json",
       Authorization: "Bearer " + session?.user.accessToken,
     };
 
@@ -27,7 +27,6 @@ export default function useSuperfetch(
         if (res.ok) {
           return res.json();
         }
-        //todo throw error based on status
       })
       .catch((error) => {
         throw new Error(`${error}`);
