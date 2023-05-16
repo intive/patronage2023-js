@@ -80,7 +80,8 @@ export const IconPicker = ({
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIconSelectorVisible(false));
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     setIconSelectorVisible(!iconSelectorVisible);
   };
 
@@ -93,13 +94,13 @@ export const IconPicker = ({
   const handleCloseIconSelector = () => setIconSelectorVisible(false);
 
   return (
-    <IconPickerStyled ref={ref} onClick={handleEditButtonClick}>
+    <IconPickerStyled ref={ref} onClick={ e => handleEditButtonClick(e)}>
       {currentIcon ? (
         <BudgetIcon icon={currentIcon} />
       ) : (
         <BudgetIcon>{children}</BudgetIcon>
       )}
-      <EditButtonStyled onClick={handleEditButtonClick}>
+      <EditButtonStyled onClick={ e => handleEditButtonClick(e)}>
         <Icon icon="edit" iconSize={12} />
       </EditButtonStyled>
       {iconSelectorVisible && (

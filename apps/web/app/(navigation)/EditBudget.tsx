@@ -24,12 +24,10 @@ import {
   ButtonWrapperStyled,
 } from "./CreateNewBudget.styled";
 import { useSession } from "next-auth/react";
-import { useMutation, QueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
-
-const queryClient = new QueryClient();
-
 import { icons } from "./CreateNewBudget";
+
 interface EditBudgetProps {
   budget: BudgetFixed;
   onClose: () => void;
@@ -50,6 +48,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   //BE integration
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
   const sendEditedBudgetMutation = useMutation({
     mutationFn: (edited: editedBudgetBEProps) => {
@@ -63,32 +62,33 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         body: JSON.stringify(edited)
       })
       },
-      onSettled: (data) => {
-        console.log(data!.status)
-        switch(data!.status) {
-          case 201: 
-            alert("All good");
-            break;
-          case 400: 
-            alert("Oops, wrong data");
-            break;
-          case 401: 
-            alert("Unauthorized");
-            break;
-          default: 
-            alert("Oops, something went wrong")
-            return;
-        }
+      onError: (error) => {
+        alert(error);
+        return;
       },
+      // onSettled: (data) => {
+      //   switch(data!.status) {
+      //     case 201: 
+      //       // alert("Budget details changed");
+      //       console.log("Budget details changed");
+      //       break;
+      //     case 400: 
+      //       alert("Wrong data");
+      //       break;
+      //     case 401: 
+      //       alert("Unauthorized");
+      //       break;
+      //     default: 
+      //       alert("Oops, something went wrong")
+      //       return;
+      //   }
+      // },
       onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['budgets', { searchValue:"", sortAscending: true }] });
+        console.log("Success", queryClient);
+        queryClient.invalidateQueries({ queryKey: ['budgets'] });
         onClose();
       },
-      onError: (error) => {
-        alert(error)
-      },
   });
-
   //BE integration end
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
@@ -129,7 +129,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
           </TabsTriggerStyled>
         </Tabs.List>
         <Form
-          onSubmit={async (values) => {
+          onSubmit={(values) => {
             const editedBudget: editedBudgetBEProps = {
               name: values["budget-name"],
               description: values["description"],
@@ -140,8 +140,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
               },
             }
 
-            console.log(editedBudget);
-            sendEditedBudgetMutation.mutate(editedBudget)
+            sendEditedBudgetMutation.mutate(editedBudget);
+            
           }}>
           {({ submit }) => (
             <form
