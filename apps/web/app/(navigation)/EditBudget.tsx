@@ -23,15 +23,73 @@ import {
   SeparatorStyled,
   ButtonWrapperStyled,
 } from "./CreateNewBudget.styled";
+import { useSession } from "next-auth/react";
+import { useMutation, QueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
+
+const queryClient = new QueryClient();
 
 import { icons } from "./CreateNewBudget";
 interface EditBudgetProps {
   budget: BudgetFixed;
   onClose: () => void;
-}
+};
+
+interface editedBudgetBEProps {
+  name: string,
+  description: string,
+  iconName: string,
+  period: {
+    startDate: string,
+    endDate: string,
+  }
+};
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
+
+  //BE integration
+  const { data: session } = useSession();
+
+  const sendEditedBudgetMutation = useMutation({
+    mutationFn: (edited: editedBudgetBEProps) => {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
+        method: 'PUT',
+        headers: {
+          accept: 'text/plain',
+          'Content-Type': 'application/json',
+          Authorization: "Bearer " + session?.user.accessToken,
+        },
+        body: JSON.stringify(edited)
+      })
+      },
+      onSettled: (data) => {
+        console.log(data!.status)
+        switch(data!.status) {
+          case 201: 
+            alert("All good");
+            break;
+          case 400: 
+            alert("Oops, wrong data");
+            break;
+          case 401: 
+            alert("Unauthorized");
+            break;
+          default: 
+            alert("Oops, something went wrong")
+            return;
+        }
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['budgets', { searchValue:"", sortAscending: true }] });
+        onClose();
+      },
+      onError: (error) => {
+        alert(error)
+      },
+  });
+
+  //BE integration end
 
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
@@ -72,16 +130,18 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         </Tabs.List>
         <Form
           onSubmit={async (values) => {
-            const newBudgetFromValues: BudgetFixed = {
-              ...budget,
+            const editedBudget: editedBudgetBEProps = {
               name: values["budget-name"],
               description: values["description"],
-              icon: values["icon"],
-              startDate: values["start-date"].toISOString(),
-              endDate: values["end-date"].toISOString(),
-            };
+              iconName: values["icon"],
+              period: {
+                startDate: values["start-date"].toISOString(),
+                endDate: values["end-date"].toISOString(),
+              },
+            }
 
-            console.log(newBudgetFromValues);
+            console.log(editedBudget);
+            sendEditedBudgetMutation.mutate(editedBudget)
           }}>
           {({ submit }) => (
             <form
