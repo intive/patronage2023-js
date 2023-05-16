@@ -9,7 +9,7 @@ export const ContainerStyled = styled.section`
   gap: 32px;
   width: 100%;
   height: auto;
-  padding: 32px 56px 40px 56px;
+  padding-top: 32px;
 `;
 
 export const RowsPerPageContainerStyled = styled.div`
