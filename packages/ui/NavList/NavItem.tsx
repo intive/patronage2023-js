@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { Icon } from "ui";
 import Link from "next/link";
-import React from "react";
+import { forwardRef } from "react";
 import { theme } from "../theme";
 
 //types of NavItem props
@@ -65,23 +65,21 @@ export const NavItemStyled = styled(Link)<NavItemPropsTransient>`
   }
 `;
 
-export const NavItem = React.forwardRef<HTMLLIElement, NavItemProps>(
-  ({ active, href, children, onClick }, ref) => {
-    return (
-      <li ref={ref}>
-        <NavItemStyled $active={active} href={href} onClick={onClick}>
-          <ChildrenWrapper>{children}</ChildrenWrapper>
-          {active && (
-            <Icon
-              icon="chevron_right"
-              color={`${theme.navList.navItem.activeColor}`}
-              iconSize={27}
-            />
-          )}
-        </NavItemStyled>
-      </li>
-    );
-  }
+export const NavItem = forwardRef<HTMLLIElement, NavItemProps>(
+  ({ active, href, children, onClick }, ref) => (
+    <li ref={ref}>
+      <NavItemStyled $active={active} href={href} onClick={onClick}>
+        <ChildrenWrapper>{children}</ChildrenWrapper>
+        {active && (
+          <Icon
+            icon="chevron_right"
+            color={`${theme.navList.navItem.activeColor}`}
+            iconSize={27}
+          />
+        )}
+      </NavItemStyled>
+    </li>
+  )
 );
 
 NavItem.displayName = "NavItem";

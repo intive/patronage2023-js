@@ -1,4 +1,3 @@
-import axios, { AxiosInstance } from "axios";
 import { env } from "env.mjs";
 import { IconType } from "ui/Icon";
 
@@ -9,7 +8,7 @@ type BudgetType = {
     value: string | number;
   };
 };
-type ItemType = {
+export type ItemType = {
   items: BudgetType[];
   totalCount: number;
 };
@@ -19,36 +18,37 @@ export type GetBudgetsListType = {
   pageParam: number;
   searchValue: string;
   sortAscending: boolean;
-  axiosInstance: AxiosInstance;
+  token: string | undefined;
 };
 
-export const reqInstance = (token: string | undefined) =>
-  axios.create({
-    baseURL: env.NEXT_PUBLIC_API_URL,
-    headers: {
-      accept: "*/*",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+const URL = env.NEXT_PUBLIC_API_URL + "budgets/list";
 
 export const getBudgetsList = async ({
   pageSize,
   pageParam,
   searchValue,
   sortAscending,
-  axiosInstance,
-}: GetBudgetsListType) => {
-  const body = {
-    pageSize: pageSize,
-    pageIndex: pageParam,
-    search: searchValue,
-    sortDescriptors: [
-      {
-        columnName: "name",
-        sortAscending: sortAscending,
-      },
-    ],
+  token,
+}: GetBudgetsListType): Promise<ItemType> => {
+  const options = {
+    method: "POST",
+    headers: {
+      accept: "*/*",
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      pageSize: pageSize,
+      pageIndex: pageParam,
+      search: searchValue,
+      sortDescriptors: [
+        {
+          columnName: "name",
+          sortAscending: sortAscending,
+        },
+      ],
+    }),
   };
-  return (await axiosInstance.post<ItemType>("/budgets/list", body)).data;
+
+  return fetch(URL, options).then((res) => res.ok && res.json());
 };
