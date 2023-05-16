@@ -14,6 +14,7 @@ import {
 } from "./BudgetDetails.styled";
 import { StyledTrendChip } from "./TrendChart.styled";
 import { useTranslate } from "lib/hooks";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 interface Props {
   budget: BudgetGeneralInfo;
@@ -59,23 +60,15 @@ const BudgetStatistics = ({ budget }: Props) => {
 
   const [startRange, endRange] = getRange();
 
-  const { data: session } = useSession();
+  const fetch = useSuperfetch(
+    `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`
+  );
 
   const { data: statistics, isLoading } = useQuery({
     queryKey: ["rangedStatistics", startRange, endRange, budget.id],
     queryFn: async () => {
-      return fetch(
-        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`,
-        {
-          headers: {
-            accept: "*/*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + session?.user.accessToken,
-          },
-        }
-      ).then((res) => res.json());
+      return fetch().catch((err) => console.error(err));
     },
-    enabled: !!session,
   });
   return (
     <StatisticsWrapperStyled>
