@@ -8,7 +8,6 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 
 type APIResponse = {
   items: Item[];
@@ -92,10 +91,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     enabled: !!session && !!budget,
   });
 
-  if (isLoading) {
-    return <TransactionsTableSuspense />;
-  }
-
   if (isError) {
     return (
       <ErrorMessage
@@ -111,6 +106,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         currency={budget.currency}
         setSorting={setSorting}
         transactions={transactionsData}
+        isLoading={isLoading}
       />
       <Pagination
         pageIndex={currentPage - 1}

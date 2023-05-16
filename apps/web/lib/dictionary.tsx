@@ -405,12 +405,12 @@ const dictionary = {
         pl: "Opis",
         fr: "Description",
       },
-      dateStart: {
+      startDate: {
         en: "Start date",
         pl: "Data początkowa",
         fr: "Date de début",
       },
-      dateEnd: {
+      endDate: {
         en: "End date",
         pl: "Data końcowa",
         fr: "Date de fin",
@@ -424,6 +424,111 @@ const dictionary = {
       },
       max30characters: {
         en: "Budget name must not have more than 30 characters.",
+        pl: "Nazwa nie może mieć więcej niż 30 znaków.",
+        fr: "Le nom ne peut pas dépasser 30 caractères.",
+      },
+      max50characters: {
+        en: "Character limit of 50 reached.",
+        pl: "Limit znaków osiągnięty (50).",
+        fr: "Limite de caractères a été atteint (50).",
+      },
+      nameTaken: {
+        en: "Name is taken, please choose another.",
+        pl: "Nazwa zajęta. Proszę wybierz inną.",
+        fr: "Le nom est déjà pris, veuillez en choisir un autre.",
+      },
+      moreThanZero: {
+        en: "Must be grater than 0.",
+        pl: "Powinien być większy niż 0.",
+        fr: "Il doit être supérieur à 0.",
+      },
+      specifyBudgetLimit: {
+        en: "Please specify budget limit.",
+        pl: "Podaj limit budżetu.",
+        fr: "Veuillez spécifier la limite du budget.",
+      },
+      cantBeEmpty: {
+        en: "Not selected.",
+        pl: "Nie wybrano.",
+        fr: "Non séléctionné.",
+      },
+      dateBeforeStart: {
+        en: "Must be after start date.",
+        pl: "Podaj datę późniejszą.",
+        fr: "Entrez une date ultérieure.",
+      },
+    },
+  },
+  EditBudgetModal: {
+    title: {
+      en: "Edit budget",
+      pl: "Edytuj budżet",
+      fr: "Éditer budget",
+    },
+    tabs: {
+      settings: {
+        en: "Settings",
+        pl: "Ustawienia",
+        fr: "Paramètres",
+      },
+      share: {
+        en: "Share",
+        pl: "Udostępnij",
+        fr: "Partager",
+      },
+    },
+    paragraphs: {
+      details: {
+        en: "Details",
+        pl: "Szczegóły",
+        fr: "Détails",
+      },
+      budgetPeriod: {
+        en: "Budget period",
+        pl: "Data ważności budżetu",
+        fr: "Date d'expiration du budget",
+      },
+      wordIt: {
+        en: "to",
+        pl: "do",
+        fr: "à",
+      },
+    },
+    button: {
+      en: "Save",
+      pl: "Zapisz",
+      fr: "Enregistrer",
+    },
+    inputNames: {
+      budgetName: {
+        en: "Budget name",
+        pl: "Nazwa budżetu",
+        fr: "Nom du budget",
+      },
+      description: {
+        en: "Description",
+        pl: "Opis",
+        fr: "Description",
+      },
+      startDate: {
+        en: "Start date",
+        pl: "Data początkowa",
+        fr: "Date de début",
+      },
+      endDate: {
+        en: "End date",
+        pl: "Data końcowa",
+        fr: "Date de fin",
+      },
+    },
+    errors: {
+      min3characters: {
+        en: "Budget name must have at least 3 characters.",
+        pl: "Nazwa musi zawierać co najmniej 3 znaki.",
+        fr: "Le nom doit contenir au moins 3 caractères.",
+      },
+      max30characters: {
+        en: "Budget must not have more than 30 characters.",
         pl: "Nazwa nie może mieć więcej niż 30 znaków.",
         fr: "Le nom ne peut pas dépasser 30 caractères.",
       },

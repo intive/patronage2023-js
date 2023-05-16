@@ -1,91 +1,66 @@
 import { SkeletonLoading } from "ui";
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
+import { ITableBodyProps } from "ka-table/props";
+import "css/transactionsTableSuspense.css";
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  gap: 20px;
-  flex-basis: 100%;
-  width: 100%;
-`;
+interface TransactionsTableSuspenseProps extends ITableBodyProps {
+  rowsNumber: number;
+}
 
-const HeadersWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 30%;
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  width: 100%;
-  flex-basis: 70%;
-  gap: 10px;
-  position: relative;
-`;
-
-const Gradient = styled.div`
-  background: linear-gradient(to bottom, transparent, white);
-  z-index: 1;
+const GradientTrStyled = styled.tr`
   position: absolute;
   left: 0;
   bottom: 0;
+  background: linear-gradient(to bottom, transparent, white);
   width: 100%;
   height: 100%;
 `;
-export const TransactionsTableSuspense = () => {
-  const SingleSkeletonWrapperHeader = ({
-    children,
-  }: PropsWithChildren<unknown>) => {
-    return (
-      <div
-        style={{
-          flexBasis: "15%",
-        }}>
-        {children}
-      </div>
-    );
-  };
 
-  const SingleSkeletonWrapperContent = ({
-    children,
-  }: PropsWithChildren<unknown>) => {
-    return (
-      <div
-        style={{
-          width: "100%",
-          zIndex: 0,
-        }}>
-        {children}
-      </div>
-    );
-  };
+const SingleSkeletonWrapperContent = ({
+  children,
+}: PropsWithChildren<unknown>) => {
+  return <div className="wrapper-content-div">{children}</div>;
+};
 
+//to create single tr (thanks to tr, rows are properly displayed in table body)
+//thanks to <ITableBodyProps> we have access to `columns` prop for colSpan
+const DataRow = ({ columns }: ITableBodyProps) => {
   return (
-    <MainWrapper>
-      <HeadersWrapper>
-        <SkeletonLoading
-          count={4}
-          containerClassName="skeleton-header-wrapper"
-          wrapper={SingleSkeletonWrapperHeader}
-        />
-      </HeadersWrapper>
-      <ContentWrapper>
-        <Gradient />
-        <SkeletonLoading
-          count={4}
-          containerClassName="flex-content-wrapper"
-          wrapper={SingleSkeletonWrapperContent}
-        />
-      </ContentWrapper>
-    </MainWrapper>
+    <tr>
+      <td className={"loading-cell"} colSpan={columns.length}>
+        <div>
+          <SkeletonLoading
+            height={50}
+            count={1}
+            containerClassName="flex-content-wrapper"
+            wrapper={SingleSkeletonWrapperContent}
+          />
+        </div>
+      </td>
+    </tr>
+  );
+};
+
+//function for creating array full of <DataRow/> components
+const spawnRows = (props: TransactionsTableSuspenseProps) => {
+  const rowsArray = [];
+  let id = 1;
+
+  for (let i = 0; i < props.rowsNumber; i++) {
+    rowsArray.push(<DataRow {...props} key={id++} />);
+  }
+
+  return rowsArray;
+};
+
+export const TransactionsTableSuspense = (
+  props: TransactionsTableSuspenseProps
+) => {
+  return (
+    <>
+      {spawnRows(props)}
+      <GradientTrStyled />
+    </>
   );
 };
