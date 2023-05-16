@@ -23,10 +23,11 @@ export default function useSuperfetch(
       body: JSON.stringify(options?.body),
       headers,
     })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
         }
+        //todo throw error based on status
       })
       .catch((error) => {
         throw new Error(`${error}`);
