@@ -18,12 +18,14 @@ type SpanProps = {
 
 const ListItemStyled = styled.li`
   list-style: none;
+  width: 100%;
 `;
 
 const ButtonStyled = styled.button`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.button.simple.background};
+    width: 100%;
 `;
 
 const Wrapper = styled.div<WrapperProps>`
@@ -34,7 +36,8 @@ const Wrapper = styled.div<WrapperProps>`
   gap: 10px;
   position: relative;
   height: auto;
-  padding: 17px 1px 17px 1px;
+  width: 100%;
+  padding: 17px 0px 17px 0px;
   color: ${({ activeFlag, theme }) =>
     activeFlag
       ? theme.sideNavigationBar.sideNavigationBarItem.main

@@ -20,7 +20,7 @@ const Main = styled.main`
 const Content = styled.div`
   flex-grow: 1;
   width: 100%;
-  padding-left: 85px;
+  padding-left: 94px;
 `;
 export default function NavigationLayout({ children }: LayoutProps) {
   return (

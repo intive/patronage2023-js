@@ -31,7 +31,7 @@ type SubMenuProps = {
 const SubMenuStyled = styled.div`
   position: fixed;
   top: 0;
-  left: 80px;
+  left: 94px;
   height: 100%;
   width: 288px;
   display: flex;

@@ -11,7 +11,7 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { BudgetFixed } from "lib/types";
+
 import { ItemType } from "services/mutations";
 
 export default function SideNav() {
