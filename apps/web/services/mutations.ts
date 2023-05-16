@@ -1,7 +1,7 @@
 import { env } from "env.mjs";
 import { IconType } from "ui/Icon";
 
-type BudgetType = {
+export type BudgetType = {
   name: string;
   icon: IconType;
   id: {

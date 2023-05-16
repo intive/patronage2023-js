@@ -11,8 +11,9 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { BudgetFixed } from "lib/types";
-import { ItemType } from "services/mutations";
+import { ItemType } from "services/mutations"
+
+import {Favorite} from "./Favorite"
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -84,6 +85,7 @@ export default function SideNav() {
                 iconSize={24}
               />
               <SpanStyled>{name}</SpanStyled>
+              <Favorite isFav={false} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
             </>
           ),
           href: `/budgets/${id.value}`,
