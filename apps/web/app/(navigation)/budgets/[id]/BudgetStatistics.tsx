@@ -70,6 +70,7 @@ const BudgetStatistics = ({ budget }: Props) => {
       return fetch().catch((err) => console.error(err));
     },
   });
+
   return (
     <StatisticsWrapperStyled>
       {isLoading ? (
@@ -98,10 +99,10 @@ const BudgetStatistics = ({ budget }: Props) => {
           />
           <CurrencyAmountStyled
             currencyOptions={currency}
-            amount={statistics?.periodValue}
+            amount={statistics?.data.periodValue}
             hidePlus
           />
-          <StyledTrendChip value={statistics?.trendValue} />
+          <StyledTrendChip value={statistics?.data.trendValue} />
         </>
       )}
     </StatisticsWrapperStyled>
