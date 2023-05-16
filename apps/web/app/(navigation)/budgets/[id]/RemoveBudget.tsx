@@ -68,7 +68,6 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
               </Button>
             </ButtonWrapper>
           )}
-
           {toggleErrorBox && (
             <ErrorMessage
               message={`${toggleErrorBox}`}
