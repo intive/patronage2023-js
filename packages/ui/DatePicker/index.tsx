@@ -11,6 +11,7 @@ import { Input } from "../Input";
 
 import en from "date-fns/locale/en-US";
 import pl from "date-fns/locale/pl";
+import fr from "date-fns/locale/fr";
 
 type CustomDatePickerProps = {
   onSelect: (date: Date | null) => void;
@@ -26,6 +27,7 @@ type DatePickerLanguageConfigType = {
 const datePickerLanguageConfig: DatePickerLanguageConfigType = {
   en: en,
   pl: pl,
+  fr: fr,
   default: en,
 };
 
@@ -78,4 +80,3 @@ export const CustomDatePicker = ({
     </DatePickerStyled>
   );
 };
-//test

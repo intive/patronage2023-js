@@ -1,7 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo, Avatar, Flag } from "ui";
+import { Icon, Logo, Avatar } from "ui";
+import { LanguageChanger } from "./LanguageChanger";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -32,9 +33,7 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <Flag src="/flags/pl.svg" />
-        <Flag src="/flags/fr.svg" />
-        <Flag src="/flags/gb.svg" />
+        <LanguageChanger />
         <Icon icon="notifications" color="white" />
         <AvatarStyled src="/avatar.svg" outlined />
       </ActionWrapper>
