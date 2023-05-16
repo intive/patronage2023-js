@@ -12,42 +12,50 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-import categoryMap from "lib/category-map";
-import { CategoryMap } from "lib/types";
+// import categoryMap from "lib/category-map";
+// import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+// import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type CategorySelectorProps = {
   onValueChange: (value: string) => void;
   label?: string;
   errors?: string[];
+  categoryMap: Object;
+  hasScrollbar?: boolean;
 };
 
 export const CategorySelector = ({
   errors,
   onValueChange,
   label,
+  categoryMap,
+  hasScrollbar,
 }: CategorySelectorProps) => {
-  const { hasScrollbar } = useHasScrollBar();
   const [isOpen, setIsOpen] = useState(false);
   const hasErrors = errors ? errors.length > 0 : false;
+  type CategoryMapType = typeof categoryMap;
 
-  const getCategoriesItems = (categoryMap: CategoryMap) => {
+  const getCategoriesItems = (categoryMap: CategoryMapType) => {
     const categories = Object.keys(categoryMap);
 
     return categories.map((category) => (
       <SelectItemStyled value={category} key={category}>
         <Select.ItemText>
           <CategoryWrapperStyled>
-            {categoryMap[category] && (
+            {categoryMap[category as keyof CategoryMapType] && (
               <CategoryIcon
                 small
-                category={categoryMap[category] as CategoryType}
+                category={
+                  categoryMap[
+                    category as keyof CategoryMapType
+                  ] as unknown as CategoryType
+                }
               />
             )}
-            {categoryMap[category]?.name && (
+            {categoryMap[category as keyof CategoryMapType]?.name && (
               <CategoryNameStyled>
-                {categoryMap[category]?.name}
+                {categoryMap[category as keyof CategoryMapType]?.name}
               </CategoryNameStyled>
             )}
           </CategoryWrapperStyled>
@@ -80,6 +88,8 @@ export const CategorySelector = ({
       </SelectTriggerWrapperStyled>
 
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
+        {/* {" "} */}
+        {/* className={hasScrollbar ? "radix-scroll" : ""} */}
         <SelectContentStyled position="popper">
           <Select.Viewport>{getCategoriesItems(categoryMap)}</Select.Viewport>
         </SelectContentStyled>

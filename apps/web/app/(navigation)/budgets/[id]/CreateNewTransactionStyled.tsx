@@ -29,7 +29,6 @@ export const SeparatorStyled = styled(Separator)`
 `;
 
 export const ButtonWrapperStyled = styled.div`
-  display: block;
   margin-top: 24px;
 `;
 
