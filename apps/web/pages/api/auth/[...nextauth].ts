@@ -2,6 +2,7 @@ import NextAuth, { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import jwt from "jsonwebtoken";
 import { env } from "env.mjs";
+import { UserRole } from "lib/types";
 
 type CredentialType = {
   email: string;
@@ -20,7 +21,7 @@ type decodedData = {
 interface DefaultUser extends User {
   accessToken: string;
   refreshToken: string;
-  role: string;
+  role: UserRole;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -34,7 +35,7 @@ export const authOptions: NextAuthOptions = {
     },
     session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
-      session.user.role = token.role as string;
+      session.user.role = token.role;
       return session;
     },
   },
