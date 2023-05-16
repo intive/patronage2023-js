@@ -24,7 +24,7 @@ export const Button = ({
   );
 };
 
-type ButtonProps = {
+export type ButtonProps = {
   variant?: "primary" | "secondary" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;

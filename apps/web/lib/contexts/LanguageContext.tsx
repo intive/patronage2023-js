@@ -10,6 +10,7 @@ import {
 export enum languages {
   en = "en",
   pl = "pl",
+  fr = "fr",
 }
 
 interface LanguageContextInterface {

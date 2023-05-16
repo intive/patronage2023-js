@@ -1,18 +1,40 @@
-import { LanguageContext } from "lib/contexts";
+import { LanguageContext, languages } from "lib/contexts";
 import { useContext } from "react";
-import { Flag } from "ui";
+import styled from "styled-components";
+import { Flag, Button } from "ui";
 
 export const LanguageChanger = () => {
-  const { currentLang, setLang } = useContext(LanguageContext);
+  const { currentLang, setLang } = useContext(LanguageContext); // will I neede it?
 
-  console.log(currentLang);
+  const setLanguage = (lang: languages) => {
+    localStorage.setItem("lang", lang);
+    window.location.reload();
+  };
+
+  const ButtonStyled = styled(Button)`
+    img:last-child {
+      margin: -10px;
+    }
+  `;
 
   return (
-    // change theese to dropdown menu
+    // change theese buttons to dropdown menu // types not added
     <>
-      <Flag src="/flags/pl.svg" />
-      <Flag src="/flags/fr.svg" />
-      <Flag src="/flags/gb.svg" />
+      <ButtonStyled
+        variant={"secondary"}
+        onClick={() => setLanguage(languages.pl)}>
+        <Flag src="/flags/pl.svg" />
+      </ButtonStyled>
+      <ButtonStyled
+        variant={"secondary"}
+        onClick={() => setLanguage(languages.fr)}>
+        <Flag src="/flags/fr.svg" />
+      </ButtonStyled>
+      <ButtonStyled
+        variant={"secondary"}
+        onClick={() => setLanguage(languages.en)}>
+        <Flag src="/flags/gb.svg" />
+      </ButtonStyled>
     </>
   );
 };
