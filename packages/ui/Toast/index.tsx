@@ -1,9 +1,15 @@
 import * as ToastRUI from "@radix-ui/react-toast";
 import { ReactNode } from "react";
 import styled from "styled-components";
+import { Icon } from "../Icon";
 
 type ToastWrapper = {
   children: ReactNode;
+};
+
+type ToastProps = {
+  message: string;
+  variant: "confirm" | "error";
 };
 
 const StyledViewport = styled(ToastRUI.Viewport)`
@@ -11,11 +17,37 @@ const StyledViewport = styled(ToastRUI.Viewport)`
   top: 10px;
   left: 50%;
   transform: translate(-50%);
-  display: flex;
   width: 300px;
   list-style: none;
   z-index: 2147483647;
   outline: none;
+`;
+
+const StyledRoot = styled(ToastRUI.Root)`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: ${({ theme }) => theme.errorMessage.background};
+  color: ${({ theme }) => theme.errorMessage.main};
+  border: 2px solid ${({ theme }) => theme.errorMessage.main};
+  border-radius: 8px;
+
+  @media (min-width: 768px) {
+    padding: 24px;
+  }
+`;
+
+const StyledCloseButton = styled(ToastRUI.Close)`
+  border: none;
+  color: inherit;
+  cursor: pointer;
+`;
+
+const StyledDescription = styled(ToastRUI.Description)`
+  gap: 10px;
+  display: flex;
+  align-items: center;
 `;
 
 export const ToastWrapper = ({ children }: ToastWrapper) => {
@@ -31,12 +63,16 @@ export const ToastWrapper = ({ children }: ToastWrapper) => {
   );
 };
 
-export const Toast = () => {
+export const Toast = ({ message, variant }: ToastProps) => {
   return (
-    <ToastRUI.Root open={true}>
-      <ToastRUI.Title>Title</ToastRUI.Title>
-      <ToastRUI.Description>Description</ToastRUI.Description>
-      <ToastRUI.Close>X</ToastRUI.Close>
-    </ToastRUI.Root>
+    <StyledRoot open={true}>
+      <StyledDescription>
+        <Icon icon={"error"} size={20} />
+        {message}
+      </StyledDescription>
+      <StyledCloseButton>
+        <Icon icon="close" iconSize={20} />
+      </StyledCloseButton>
+    </StyledRoot>
   );
 };

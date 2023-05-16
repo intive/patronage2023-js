@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
 import { Toast } from "ui";
+import { Simulate } from "react-dom/test-utils";
+import error = Simulate.error;
 
 interface RemoveBudgetProps {
   budget: BudgetFixed;
@@ -54,12 +56,12 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
       setToggleErrorBox(error);
     },
   });
-
+  //TODO remove this Toast
   return (
     <>
       <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
         <>
-          <Toast />
+          <Toast message={"Test"} variant={"error"} />
           {!toggleErrorBox && (
             <ButtonWrapper>
               <Button onClick={() => deleteBudget.mutate(budget.id)}>
