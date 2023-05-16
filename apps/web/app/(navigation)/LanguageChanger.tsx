@@ -2,7 +2,7 @@ import { languages } from "lib/contexts";
 import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
-import { ContentStyled } from "./LanguageChangerStyled";
+import { ContentStyled, SelectTriggerStyled } from "./LanguageChangerStyled";
 import { useState } from "react";
 
 export const LanguageChanger = () => {
@@ -15,18 +15,9 @@ export const LanguageChanger = () => {
   };
 
   const items = [
-    {
-      flagSrc: "/flags/pl.svg",
-      languageName: "Polish",
-    },
-    {
-      flagSrc: "/flags/en.svg",
-      languageName: "English",
-    },
-    {
-      flagSrc: "/flags/fr.svg",
-      languageName: "French",
-    },
+    { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polish" },
+    { lang: "en", flagSrc: "/flags/en.svg", languageName: "English" },
+    { lang: "fr", flagSrc: "/flags/fr.svg", languageName: "French" },
   ];
 
   return (
@@ -35,51 +26,22 @@ export const LanguageChanger = () => {
       onValueChange={(lang) => {
         changeLanguage(lang as languages);
       }}>
-      <Select.Trigger>
+      <SelectTriggerStyled>
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
-      </Select.Trigger>
+      </SelectTriggerStyled>
 
       <Select.Portal>
-        <ContentStyled position="popper" sideOffset={5}>
+        <ContentStyled position="popper" align="start" sideOffset={5}>
           <Select.Viewport>
-            <Select.Item value={"fr"} onClick={() => changeLanguage("fr")}>
-              <Flag src="/flags/fr.svg" />
-              <Select.ItemText>French</Select.ItemText>
-            </Select.Item>
-            <Select.Item value={"pl"} onClick={() => changeLanguage("pl")}>
-              Polish
-              <Select.ItemText> fdgdg</Select.ItemText>
-            </Select.Item>
-
-            <Select.Separator />
+            {items.map((item) => (
+              <Select.Item value={item.lang} key={item.lang}>
+                <Flag src={item.flagSrc} />
+                <Select.ItemText>{item.languageName}</Select.ItemText>
+              </Select.Item>
+            ))}
           </Select.Viewport>
-          <Select.ScrollDownButton />
-          <Select.Arrow />
         </ContentStyled>
       </Select.Portal>
     </Select.Root>
-    // <Select.Root value={language}>
-    //   <Select.Trigger asChild>
-    //     <Select.Value placeholder="test" />
-    //   </Select.Trigger>
-
-    //   <Select.Portal>
-    //     <Select.Content position="popper">
-    //       <Select.Viewport>
-    //         <Select.Group>
-    //           {items.map((item) => (
-    //             <Select.Item
-    //               onClick={item.onClick}
-    //               key={item.languageName}
-    //               value={item.languageName}>
-    //               <Flag src={item.flagSrc} />
-    //               <Select.ItemText>{item.languageName}</Select.ItemText>
-    //             </Select.Item>
-    //           ))}
-    //         </Select.Group>
-    //       </Select.Viewport>
-    //     </Select.Content>
-    //   </Select.Portal>
-    // </Select.Root>
   );
 };

@@ -5,8 +5,9 @@ type FlagProps = {
 };
 
 const ImgStyled = styled.img`
-  width: 1.5rem;
+  width: 2.3rem;
   height: 1.5rem;
+  border-radius: 4px;
 `;
 
 export const Flag = ({ src }: FlagProps) => {
