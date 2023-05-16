@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
+import { Toast } from "ui";
 
 interface RemoveBudgetProps {
   budget: BudgetFixed;
@@ -58,6 +59,7 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
     <>
       <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
         <>
+          <Toast />
           {!toggleErrorBox && (
             <ButtonWrapper>
               <Button onClick={() => deleteBudget.mutate(budget.id)}>
