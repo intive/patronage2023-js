@@ -3,15 +3,20 @@ import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
 import { ContentStyled, SelectTriggerStyled } from "./LanguageChangerStyled";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const LanguageChanger = () => {
-  const [language, setLanguage] = useState(localStorage.getItem("lang"));
+  const [language, setLanguage] = useState<string | null>("");
+
+  useEffect(() => {
+    const lang = localStorage.getItem("lang");
+    setLanguage(lang && localStorage.getItem("lang"));
+  }, []);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang);
-    localStorage.setItem("lang", lang);
-    window.location.reload();
+    window.localStorage.setItem("lang", lang);
+    // window.location.reload();
   };
 
   const items = [
