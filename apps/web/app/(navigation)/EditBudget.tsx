@@ -66,27 +66,23 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         alert(error);
         return;
       },
-      // onSettled: (data) => {
-      //   switch(data!.status) {
-      //     case 201: 
-      //       // alert("Budget details changed");
-      //       console.log("Budget details changed");
-      //       break;
-      //     case 400: 
-      //       alert("Wrong data");
-      //       break;
-      //     case 401: 
-      //       alert("Unauthorized");
-      //       break;
-      //     default: 
-      //       alert("Oops, something went wrong")
-      //       return;
-      //   }
-      // },
-      onSuccess: () => {
-        console.log("Success", queryClient);
-        queryClient.invalidateQueries({ queryKey: ['budgets'] });
-        onClose();
+      onSettled: (data) => {
+        switch(data!.status) {
+          case 201: 
+            console.log("Success");
+            queryClient.invalidateQueries({ queryKey: ['budgets'] });
+            onClose();
+            break;
+          case 400: 
+            alert("Wrong data");
+            break;
+          case 401: 
+            alert("Unauthorized");
+            break;
+          default: 
+            alert("Oops, something went wrong")
+            return;
+        }
       },
   });
   //BE integration end
