@@ -35,8 +35,7 @@ export const StyledBalanceChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* margin-bottom: 10px; */
-
+  
   canvas {
     height: auto !important; //override inline styles added to <canvas>
     max-width: 240px;

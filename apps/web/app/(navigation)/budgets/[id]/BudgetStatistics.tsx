@@ -1,7 +1,6 @@
 "use client";
 import { type BudgetGeneralInfo } from "lib/types";
 import React, { useState } from "react";
-import { TrendChip } from "ui";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
