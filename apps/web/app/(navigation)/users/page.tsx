@@ -14,6 +14,13 @@ const TitleStyled = styled.h1`
 
 export default function UsersPage() {
   const mainCardContent = <TitleStyled>Users</TitleStyled>;
-
-  return <MultiCardLayout main={mainCardContent} />;
+  const data = "Some user info";
+  const shown = true;
+  //conditionally render aside if needed e.g. pass user info to it etc.
+  return (
+    <MultiCardLayout
+      main={mainCardContent}
+      aside={shown ? <>{data}</> : <></>}
+    />
+  );
 }
