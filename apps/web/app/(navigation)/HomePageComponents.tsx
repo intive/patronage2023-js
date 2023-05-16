@@ -9,7 +9,7 @@ export const CardWrapperStyled = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  background-color: #e5e5e5;
+  background-color: ${({ theme }) => theme.background.loggedIn};
   padding: 25px 25px 25px 0px;
 `;
 
@@ -29,7 +29,7 @@ export const LinkStyled = styled(Link)`
   font-family: "Signika", sans-serif;
   font-size: 1.3em;
   font-weight: 600;
-  color: #1e4c40;
+  color: ${({ theme }) => theme.nav.main};
   margin-top: 35px;
   padding: 10px;
   ${device.desktop} {
@@ -40,7 +40,7 @@ export const LinkStyled = styled(Link)`
 export const TypoStyled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 2.8em;
-  color: #1e4c40;
+  color: ${({ theme }) => theme.nav.main};
   text-align: center;
   padding: 0 10px;
   ${device.desktop} {

@@ -1,7 +1,6 @@
 "use client";
 import { type BudgetGeneralInfo } from "lib/types";
-import React, { useMemo, useState } from "react";
-import { TrendChip } from "ui";
+import React, { useState } from "react";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -13,6 +12,7 @@ import {
   StatisticsWrapperStyled,
   TitleStyled,
 } from "./BudgetDetails.styled";
+import { StyledTrendChip } from "./TrendChart.styled";
 import { useTranslate } from "lib/hooks";
 
 interface Props {
@@ -108,7 +108,7 @@ const BudgetStatistics = ({ budget }: Props) => {
             amount={statistics?.periodValue}
             hidePlus
           />
-          <TrendChip value={statistics?.trendValue} />
+          <StyledTrendChip value={statistics?.trendValue} />
         </>
       )}
     </StatisticsWrapperStyled>
