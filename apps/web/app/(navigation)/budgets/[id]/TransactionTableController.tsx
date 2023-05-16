@@ -8,6 +8,7 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type APIResponse = {
   items: Item[];
@@ -57,6 +58,17 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     );
   };
 
+  const fetch = useSuperfetch(
+    `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
+    {
+      method: "POST",
+      body: {
+        pageSize: itemsPerPage,
+        pageIndex: currentPage,
+      },
+    }
+  );
+
   const {
     data: transactionsData,
     isError,
@@ -66,29 +78,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
     queryFn: async () => {
-      return fetch(
-        env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
-        {
-          body: JSON.stringify({
-            pageSize: itemsPerPage,
-            pageIndex: currentPage,
-          }),
-          headers: {
-            Authorization: "Bearer " + session!.user.accessToken,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-        }
-      )
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error(`${res.status}`);
-        })
-        .then((json) => fixFetchedData(json));
+      return fetch()
+        .then((json) => fixFetchedData(json))
+        .catch((err) => console.error(err));
     },
-    enabled: !!session && !!budget,
   });
 
   if (isError) {
@@ -105,7 +98,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={transactionsData}
+        transactions={transactionsData as Transaction[]}
         isLoading={isLoading}
       />
       <Pagination
