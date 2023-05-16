@@ -32,6 +32,7 @@ const StyledRoot = styled(ToastRUI.Root)`
   color: ${({ theme }) => theme.errorMessage.main};
   border: 2px solid ${({ theme }) => theme.errorMessage.main};
   border-radius: 8px;
+  box-shadow: 8px 8px 30px -11px rgba(30, 76, 64, 1);
 
   @media (min-width: 768px) {
     padding: 24px;
@@ -67,7 +68,11 @@ export const Toast = ({ message, variant }: ToastProps) => {
   return (
     <StyledRoot open={true}>
       <StyledDescription>
-        <Icon icon={"error"} size={20} />
+        {variant === "confirm" ? (
+          <Icon icon={"check"} size={20} />
+        ) : (
+          <Icon icon={"error"} size={20} />
+        )}
         {message}
       </StyledDescription>
       <StyledCloseButton>

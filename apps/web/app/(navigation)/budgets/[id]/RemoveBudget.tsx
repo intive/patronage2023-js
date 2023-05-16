@@ -61,7 +61,7 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
     <>
       <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
         <>
-          <Toast message={"Test"} variant={"error"} />
+          <Toast message={"Test"} variant={"confirm"} />
           {!toggleErrorBox && (
             <ButtonWrapper>
               <Button onClick={() => deleteBudget.mutate(budget.id)}>
