@@ -79,7 +79,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
     queryFn: async () => {
       return fetch()
-        .then((json) => fixFetchedData(json))
+        .then((res) => fixFetchedData(res.data))
         .catch((err) => console.error(err));
     },
   });

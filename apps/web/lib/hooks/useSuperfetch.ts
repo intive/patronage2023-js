@@ -23,10 +23,11 @@ export default function useSuperfetch(
       body: JSON.stringify(options?.body),
       headers,
     })
-      .then((res) => {
+      .then(async (res) => {
         if (res.ok) {
-          return res.json();
+          return { data: await res.json(), status: res.status };
         }
+        return { data: null, status: res.status };
       })
       .catch((error) => {
         throw new Error(`${error}`);
