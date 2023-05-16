@@ -25,6 +25,15 @@ type CreateNewTransactionProps = {
   budget: Budget;
 };
 
+type TransactionType = {
+  type: string;
+  id: string;
+  name: string;
+  value: number | string;
+  category: string;
+  transactionDate: string | null;
+};
+
 export const CreateNewTransaction = ({
   type,
   budget,
@@ -40,7 +49,7 @@ export const CreateNewTransaction = ({
   // const queryClient = useQueryClient();
 
   const newTransactionMutation = useMutation(
-    (newTransaction: Transaction) => {
+    (newTransaction: TransactionType) => {
       const result = fetch(url, {
         method: "POST",
         headers: {
@@ -75,7 +84,7 @@ export const CreateNewTransaction = ({
   };
 
   const handleSubmit = (values: Record<string, any>) => {
-    const newTransaction: Transaction = {
+    const newTransaction: TransactionType = {
       id: crypto.randomUUID(),
       type,
       name: values.transactionName,

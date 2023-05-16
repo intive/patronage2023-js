@@ -13,12 +13,13 @@ interface Creator {
 }
 
 export interface Transaction {
-  type: string;
   id: string;
-  name: string;
-  value: number;
-  category: string;
-  transactionDate: string;
+  date: number;
+  amount: number;
+  category: CategoryType;
+  description: string;
+  status: string;
+  creator: Creator;
 }
 
 export interface Budget {
