@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { CurrencyAmount } from "ui";
+import { CurrencyAmount, TrendChip } from "ui";
+import { device } from "lib/media-queries";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -15,22 +16,26 @@ export const StyledTitle = styled.div`
   line-height: 24px;
 `;
 
-export const StyledChartPlaceholder = styled.div`
+export const StyledChartPlaceholder = styled.svg`
   aspect-ratio: 3;
   text-align: center;
-  background-color: ${({ theme }) => theme.trendChart.placeholder};
+  background-color: ${({ theme }) => theme.trendChart.placeholderBackground};
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 5px;
+  margin-bottom: 32px;
+  ${device.tablet} {
+    margin-bottom: 16px;
+  }
 `;
 
 export const StyledBalanceChartWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 
   canvas {
     height: auto !important; //override inline styles added to <canvas>
@@ -60,4 +65,8 @@ export const StyledCurrencyAmount = styled(CurrencyAmount)`
   line-height: 150%;
   font-weight: 600;
   color: ${({ theme }) => theme.trendChart.currencyAmount};
+`;
+
+export const StyledTrendChip = styled(TrendChip)`
+  margin-top: auto;
 `;

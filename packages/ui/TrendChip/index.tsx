@@ -38,7 +38,7 @@ export const TrendChipStyled = styled.div<TrendChipProps>`
     }};
 `;
 
-export const TrendChip = ({ value, ariaLabel }: TrendChipProps) => {
+export const TrendChip = ({ value, ariaLabel, className }: TrendChipProps) => {
   const iconName = (): IconType => {
     if (value === 0) return "trending_flat";
     if (value < 0) return "trending_down";
@@ -50,7 +50,11 @@ export const TrendChip = ({ value, ariaLabel }: TrendChipProps) => {
   //with that, we can use the dictionnary and pass proper value dynamically
 
   return (
-    <TrendChipStyled role="status" value={value} aria-label={ariaLabel}>
+    <TrendChipStyled
+      className={className}
+      role="status"
+      value={value}
+      aria-label={ariaLabel}>
       <Icon icon={iconName()} iconSize={15} />
       <span>{Math.abs(Math.round(value))}%</span>
     </TrendChipStyled>

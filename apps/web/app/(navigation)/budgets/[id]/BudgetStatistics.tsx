@@ -13,6 +13,7 @@ import {
   StatisticsWrapperStyled,
   TitleStyled,
 } from "./BudgetDetails.styled";
+import { StyledTrendChip } from "./TrendChart.styled";
 import { useTranslate } from "lib/hooks";
 
 interface Props {
@@ -108,7 +109,7 @@ const BudgetStatistics = ({ budget }: Props) => {
             amount={statistics?.periodValue}
             hidePlus
           />
-          <TrendChip value={statistics?.trendValue} />
+          <StyledTrendChip value={statistics?.trendValue} />
         </>
       )}
     </StatisticsWrapperStyled>

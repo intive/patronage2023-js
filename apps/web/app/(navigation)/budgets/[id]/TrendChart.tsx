@@ -1,7 +1,6 @@
 import { useTranslate } from "lib/hooks";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
-import { TrendChip } from "ui";
 
 import {
   StyledWrapper,
@@ -9,6 +8,7 @@ import {
   StyledTitle,
   StyledBalanceChartWrapper,
   StyledChartPlaceholder,
+  StyledTrendChip
 } from "./TrendChart.styled";
 
 import {
@@ -110,10 +110,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
       );
 
       gradient.addColorStop(0, negativeValueColor);
-      gradient.addColorStop(
-        Math.max(0, zeroPoint - 0.0000001),
-        negativeValueColor
-      );
+      gradient.addColorStop(zeroPoint, negativeValueColor);
       gradient.addColorStop(zeroPoint, positiveValueColor);
       gradient.addColorStop(1, positiveValueColor);
     }
@@ -123,8 +120,19 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
   const renderChart = () => {
     if (statistics.items.length < 2) {
       return (
-        <StyledChartPlaceholder>
-          {t(charts.trendChartPlaceholder)}
+        <StyledChartPlaceholder
+          height="auto"
+          viewBox="0 0 240 80"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0 38.898C6.8 33.19 20.4 6.413 34 10.352c13.6 3.939 20.4 45.36 34 48.24 13.6 2.88 20.4-31.062 34-33.841 13.6-2.779 20.4 20.109 34 19.948 13.6-.16 20.4-22.34 34-20.752 13.6 1.588 20.4 21.087 34 28.691 13.6 7.605 27.2 7.465 34 9.33"
+            fill={theme.trendChart.placeholderChartFill}
+          />
+          <path
+            d="M0 38.898C6.8 33.19 20.4 6.413 34 10.352c13.6 3.939 20.4 45.36 34 48.24 13.6 2.88 20.4-31.062 34-33.841 13.6-2.779 20.4 20.109 34 19.948 13.6-.16 20.4-22.34 34-20.752 13.6 1.588 20.4 21.087 34 28.691 13.6 7.605 27.2 7.465 34 9.33"
+            fill="none"
+            stroke={theme.trendChart.placeholderChartLine}
+          />
         </StyledChartPlaceholder>
       );
     }
@@ -198,7 +206,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
         />
         {renderChart()}
       </StyledBalanceChartWrapper>
-      <TrendChip value={statistics.trendValue} />
+      <StyledTrendChip value={statistics.trendValue} />
     </StyledWrapper>
   );
 };

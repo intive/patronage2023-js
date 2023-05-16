@@ -8,7 +8,7 @@ export const DetailsWrapperStyled = styled.div`
   border-radius: 16px;
   display: flex;
   padding: 24px 32px;
-  gap: 48px;
+  gap: 24px;
   flex-direction: column;
 
   ${device.tablet} {
@@ -49,7 +49,7 @@ export const CurrencyAmountStyled = styled(CurrencyAmount)`
   font-size: 32px;
   line-height: 150%;
   font-weight: 600;
-  margin-bottom: 42px;
+  margin-bottom: 24px;
   color: ${({ theme }) => theme.budgetContent.budgetStatistics.currency};
 `;
 
