@@ -24,7 +24,8 @@ const SingleSkeletonWrapperContent = ({
 };
 
 //to create single tr (thanks to tr, rows are properly displayed in table body)
-const DataRow: React.FC<ITableBodyProps> = ({ columns }) => {
+//thanks to <ITableBodyProps> we have access to `columns` prop for colSpan
+const DataRow = ({ columns }: ITableBodyProps) => {
   return (
     <tr>
       <td className={"loading-cell"} colSpan={columns.length}>

@@ -27,14 +27,14 @@ type TransactionsTableProps = {
     locale: string;
   };
   setSorting: (column: string) => void;
-  transactions: Transaction[];
+  transactions: Transaction[] | undefined;
   isLoading: boolean;
 };
 
 export const TransactionsTable = ({
   currency,
   setSorting,
-  transactions,
+  transactions = [],
   isLoading,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);

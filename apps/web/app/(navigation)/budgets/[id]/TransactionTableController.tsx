@@ -105,9 +105,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={
-          transactionsData ? transactionsData : ([] as Transaction[])
-        }
+        transactions={transactionsData}
         isLoading={isLoading}
       />
       <Pagination
