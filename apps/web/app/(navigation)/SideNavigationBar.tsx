@@ -11,10 +11,15 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { BudgetFixed } from "lib/types";
+import { ItemType } from "services/mutations";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
+
+  const { data: session } = useSession();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
@@ -70,24 +75,25 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const successData = data?.pages.flatMap((page) => {
-    return page.items.map((item) => {
-      return {
-        ComponentToRender: (
-          <>
-            <IconStyled
-              icon={iconNames.includes(item.icon) ? item.icon : "help"}
-              iconSize={24}
-            />
-            <SpanStyled>{item.name}</SpanStyled>
-          </>
-        ),
-        href: `/budgets/${item.id.value}`,
-        id: item.id.value,
-        ref: lastBudgetRef,
-      };
-    });
-  });
+  const successData =
+    data?.pages?.flatMap(
+      ({ items }: ItemType) =>
+        items &&
+        items.map(({ icon, name, id }) => ({
+          ComponentToRender: (
+            <>
+              <IconStyled
+                icon={iconNames.includes(icon) ? icon : "help"}
+                iconSize={24}
+              />
+              <SpanStyled>{name}</SpanStyled>
+            </>
+          ),
+          href: `/budgets/${id.value}`,
+          id: id.value,
+          ref: lastBudgetRef,
+        }))
+    ) ?? [];
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
@@ -107,7 +113,7 @@ export default function SideNav() {
     },
     navigationList: (
       <NavList
-        contents={successData ? successData : []}
+        contents={successData}
         onNavListItemClick={hideSubMenu}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
@@ -133,31 +139,50 @@ export default function SideNav() {
     ),
   };
 
+  //edit navbarItems below
+  const NavbarItems = [
+    {
+      href: "/budgets",
+      icon: <Icon icon="wallet" iconSize={32} />,
+      textValue: t(SideNav.budgetsItem.title),
+      subMenu: budgetsSubMenuData,
+      id: "1",
+    },
+    {
+      href: "/reports",
+      icon: <Icon icon="query_stats" iconSize={32} />,
+      textValue: t(SideNav.reportsItem.title),
+      id: "2",
+    },
+    {
+      href: "/settings",
+      icon: <Icon icon="settings" iconSize={32} />,
+      textValue: t(SideNav.settingsItem.title),
+      subMenu: settingsSubMenuData,
+      id: "3",
+    },
+  ];
+
+  const renderNavbar = () => {
+    //add items for admin
+    if (session?.user.role === "ADMIN") {
+      return [
+        ...NavbarItems,
+        {
+          href: "/users",
+          icon: <Icon icon="account_circle" iconSize={32} />,
+          textValue: t(SideNav.usersItem.title),
+          id: "4",
+        },
+      ];
+    }
+    return NavbarItems;
+  };
+
   return (
     <>
       <SideNavigationBar
-        items={[
-          {
-            href: "/budgets",
-            icon: <Icon icon="wallet" iconSize={32} />,
-            textValue: t(SideNav.budgetsItem.title),
-            subMenu: budgetsSubMenuData,
-            id: "1",
-          },
-          {
-            href: "/reports",
-            icon: <Icon icon="query_stats" iconSize={32} />,
-            textValue: t(SideNav.reportsItem.title),
-            id: "2",
-          },
-          {
-            href: "/settings",
-            icon: <Icon icon="settings" iconSize={32} />,
-            textValue: t(SideNav.settingsItem.title),
-            subMenu: settingsSubMenuData,
-            id: "3",
-          },
-        ]}
+        items={renderNavbar()}
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
       />

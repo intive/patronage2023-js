@@ -1,6 +1,6 @@
+"use client";
 import { type BudgetGeneralInfo } from "lib/types";
-import React, { useMemo, useState } from "react";
-import { TrendChip } from "ui";
+import React, { useState } from "react";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -12,45 +12,57 @@ import {
   StatisticsWrapperStyled,
   TitleStyled,
 } from "./BudgetDetails.styled";
+import { StyledTrendChip } from "./TrendChart.styled";
+import { useTranslate } from "lib/hooks";
 
 interface Props {
   budget: BudgetGeneralInfo;
 }
 
 const BudgetStatistics = ({ budget }: Props) => {
-  const [range, setRange] = useState("month");
+  const [range, setRange] = useState("week");
   const { id, currency, endDate } = budget;
+  const { dict, t } = useTranslate("BudgetStatistics");
+  const { queryButtonLabels, title: translatedTitle } = dict;
 
-  const [startRange, endRange, title] = useMemo(() => {
+  const TitleMap = {
+    week: t(translatedTitle.week),
+    month: t(translatedTitle.month),
+    quarter: t(translatedTitle.quarter),
+  } as const;
+
+  const title = TitleMap[range as keyof typeof TitleMap];
+
+  const getRange = () => {
     let start = dayjs();
     let end = dayjs();
-    let title = "";
     switch (range) {
-      case "thisMonth":
+      case "week":
+        //-1 in case of checking weekly budget on sunday
+        start = start.subtract(1, "day").startOf("week");
+        break;
+      case "month":
         start = start.startOf("month");
-        title = "Budget this month";
         break;
-      case "2weeks":
-        start = start.subtract(14, "days");
-        title = "Budget of two weeks";
-        break;
-      case "7days":
-        start = start.subtract(7, "days");
-        title = "Budget of seven days";
+      case "quarter":
+        start = start.subtract(3, "months");
         break;
       default:
-        start = start.startOf("month");
-        title = "Budget this month";
+        start = start.startOf("week");
         break;
     }
-    // todo add check for earlier end
-    return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD"), title];
-  }, [range]);
+    if (dayjs(endDate).isBefore(end)) {
+      end = dayjs(endDate);
+    }
+    return [start.format("YYYY-MM-DD"), end.format("YYYY-MM-DD")];
+  };
+
+  const [startRange, endRange] = getRange();
 
   const { data: session } = useSession();
 
   const { data: statistics, isLoading } = useQuery({
-    queryKey: ["rangedStatistics", startRange, endRange],
+    queryKey: ["rangedStatistics", startRange, endRange, budget.id],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`,
@@ -75,19 +87,19 @@ const BudgetStatistics = ({ budget }: Props) => {
             label={<TitleStyled>{title}</TitleStyled>}
             items={[
               {
-                id: "thisMonth",
-                label: "This month",
-                onClick: () => setRange("thisMonth"),
+                id: "week",
+                label: t(queryButtonLabels.week),
+                callback: () => setRange("week"),
               },
               {
-                id: "2weeks",
-                label: "2 weeks",
-                onClick: () => setRange("2weeks"),
+                id: "month",
+                label: t(queryButtonLabels.month),
+                callback: () => setRange("month"),
               },
               {
-                id: "7days",
-                label: "7 days",
-                onClick: () => setRange("7days"),
+                id: "quarter",
+                label: t(queryButtonLabels.quarter),
+                callback: () => setRange("quarter"),
               },
             ]}
           />
@@ -96,7 +108,7 @@ const BudgetStatistics = ({ budget }: Props) => {
             amount={statistics?.periodValue}
             hidePlus
           />
-          <TrendChip value={statistics?.trendValue} />
+          <StyledTrendChip value={statistics?.trendValue} />
         </>
       )}
     </StatisticsWrapperStyled>

@@ -75,3 +75,6 @@ export interface CategoryMap {
 export type CategoryFilterType = {
   [category in keyof CategoryMapType]: boolean;
 };
+export interface UserRole {
+  role: "ADMIN" | "USER";
+}

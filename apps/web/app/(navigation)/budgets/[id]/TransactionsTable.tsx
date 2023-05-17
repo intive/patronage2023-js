@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useId } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 
@@ -8,14 +8,8 @@ import { Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
-import defaultOptions from "ka-table/defaultOptions";
-import {
-  Icon,
-  Avatar,
-  TransactionDropdownMenu,
-  CategoryIcon,
-  SkeletonLoading,
-} from "ui";
+
+import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
@@ -26,7 +20,6 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
-import { IDataRowProps } from "ka-table/props";
 
 type TransactionsTableProps = {
   currency: {
@@ -34,13 +27,15 @@ type TransactionsTableProps = {
     locale: string;
   };
   setSorting: (column: string) => void;
-  transactions: Transaction[];
+  transactions: Transaction[] | undefined;
+  isLoading: boolean;
 };
 
 export const TransactionsTable = ({
   currency,
   setSorting,
-  transactions,
+  transactions = [],
+  isLoading,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -140,25 +135,12 @@ export const TransactionsTable = ({
     },
   ];
 
-  // const DataRow: React.FC<IDataRowProps> = ({ rowData, columns }) => {
-  //   return (
-  //     <td className={defaultOptions.css.cell} colSpan={columns.length}>
-  //       <div>
-  //         <SkeletonLoading count={1} />
-  //       </div>
-  //     </td>
-  //   );
-  // };
-
   return (
     <TableWrapperStyled>
       <Table
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
-        // loading={{
-        //   // enabled: isLoading,
-        // }}
         groups={[{ columnKey: "date" }]}
         noData={{
           text: "No Data Found",
@@ -218,20 +200,18 @@ export const TransactionsTable = ({
               </>
             ),
           },
-          // loading: {
-          //   content: (props) => {
-          //     console.log(JSON.stringify(props));
-
-          //     return <TransactionsTableSuspense />;
-          //   },
-          // },
-          // tableBody:{
-          //   content:(props)=>{
-          //     if (isLoading){
-          //       return <TransactionsTableSuspense/>
-          //     }
-          //   }
-          // }
+          tableBody: {
+            content: (props) => {
+              return (
+                isLoading && (
+                  <TransactionsTableSuspense rowsNumber={5} {...props} />
+                )
+              );
+            },
+            elementAttributes: () => ({
+              className: isLoading ? "loading-tbody" : undefined,
+            }),
+          },
         }}
       />
     </TableWrapperStyled>
