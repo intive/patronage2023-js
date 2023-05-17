@@ -1,5 +1,5 @@
 import { TransactionsTable } from "./TransactionsTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
@@ -8,7 +8,6 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 
@@ -38,6 +37,11 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
+  const categoryFilterState = useAtomValue(categoryFilterAtom);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
@@ -60,14 +64,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     );
   };
 
-  const categoryFilterState = useAtomValue(categoryFilterAtom);
-  console.log(
-    "transactions ",
-    Object.entries(categoryFilterState)
-      .filter(([_, value]) => value)
-      .map(([key, _]) => key)
-  );
-
   const {
     data: transactionsData,
     isError,
@@ -75,7 +71,14 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
+    queryKey: [
+      "datatable",
+      itemsPerPage,
+      currentPage,
+      budget,
+      session,
+      categoryFilterState,
+    ],
     queryFn: async () => {
       return fetch(
         env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
@@ -83,6 +86,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: JSON.stringify({
             pageSize: itemsPerPage,
             pageIndex: currentPage,
+            transactionType: null,
+            categoryTypes: categoryFilterState,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,

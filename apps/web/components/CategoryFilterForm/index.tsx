@@ -6,6 +6,7 @@ import { CategoryIcon, Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
 import { useSetAtom } from "jotai";
 import { CategoryFilterType } from "lib/types";
+import { useQueryClient } from "@tanstack/react-query";
 
 const FormStyled = styled.form`
   width: 100%;
@@ -42,11 +43,17 @@ const CategoryIconStyled = styled(CategoryIcon)`
 export const CategoryFilterForm = () => {
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
   const categoryEntries = Object.entries(categoryMap);
+  const queryClient = useQueryClient();
 
   return (
     <Form
       onSubmit={(values: CategoryFilterType) => {
-        setCategoryFilter(values);
+        const categoryFilterState: string[] = Object.entries(values)
+          .filter(([_, isChecked]) => isChecked)
+          .map(([categoryKeyName, _]) => categoryKeyName);
+
+        queryClient.invalidateQueries(["datatable"]);
+        setCategoryFilter(categoryFilterState);
       }}>
       {({ submit }) => (
         <FormStyled
