@@ -12,10 +12,7 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-// import categoryMap from "lib/category-map";
-// import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
-// import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type CategorySelectorProps = {
   onValueChange: (value: string) => void;
@@ -83,13 +80,11 @@ export const CategorySelector = ({
           </SelectIconStyled>
         </SelectTriggerStyled>
         <SupportingLabelStyled hasError={hasErrors}>
-          {errors && errors[0]}
+          {errors && errors.length > 0 && errors[0]}
         </SupportingLabelStyled>
       </SelectTriggerWrapperStyled>
 
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
-        {/* {" "} */}
-        {/* className={hasScrollbar ? "radix-scroll" : ""} */}
         <SelectContentStyled position="popper">
           <Select.Viewport>{getCategoriesItems(categoryMap)}</Select.Viewport>
         </SelectContentStyled>
