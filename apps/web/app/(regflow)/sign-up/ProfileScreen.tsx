@@ -2,8 +2,6 @@
 
 import { useTranslate } from "lib/hooks";
 import { Form, Field } from "houseform";
-import { device } from "lib/media-queries";
-import styled from "styled-components";
 import { z } from "zod";
 import { Input, Button, AvatarSelector, Separator } from "ui";
 import { useState } from "react";
