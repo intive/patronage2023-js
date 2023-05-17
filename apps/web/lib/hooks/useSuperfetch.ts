@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 
-interface SuperOptions extends Omit<Omit<RequestInit, "headers">, "body"> {
+interface SuperOptions extends Omit<RequestInit, "headers"|"body"> {
   body: object;
 }
 
