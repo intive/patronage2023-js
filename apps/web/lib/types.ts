@@ -67,3 +67,7 @@ export interface BudgetTransaction {
 export interface CategoryMap {
   [category: string]: CategoryType | undefined;
 }
+
+export interface UserRole {
+  role: "ADMIN" | "USER";
+}
