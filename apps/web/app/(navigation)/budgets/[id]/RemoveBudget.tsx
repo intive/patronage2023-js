@@ -1,5 +1,5 @@
 import { BudgetFixed } from "lib/types";
-import { Button, ErrorMessage, Modal } from "ui";
+import { Button, Modal } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -56,23 +56,21 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   });
   return (
     <>
+      <Toast
+        message={"Test"}
+        variant={"error"}
+        open={toggleErrorBox}
+        onOpenChange={setToggleErrorBox}
+      />
       <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
-        <>
-          <Toast
-            message={"Test"}
-            variant={"error"}
-            open={toggleErrorBox}
-            onOpenChange={setToggleErrorBox}
-          />
-          <ButtonWrapper>
-            <Button onClick={() => deleteBudget.mutate(budget.id)}>
-              {t(dict.removeBudgetModal.confirmButton)}
-            </Button>
-            <Button onClick={onClose} variant={"secondary"}>
-              {t(dict.removeBudgetModal.abortButton)}
-            </Button>
-          </ButtonWrapper>
-        </>
+        <ButtonWrapper>
+          <Button onClick={() => deleteBudget.mutate(budget.id)}>
+            {t(dict.removeBudgetModal.confirmButton)}
+          </Button>
+          <Button onClick={onClose} variant={"secondary"}>
+            {t(dict.removeBudgetModal.abortButton)}
+          </Button>
+        </ButtonWrapper>
       </Modal>
     </>
   );
