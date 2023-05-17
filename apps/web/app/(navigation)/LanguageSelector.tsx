@@ -2,7 +2,7 @@ import { languages } from "lib/contexts";
 import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
-import { ContentStyled, SelectTriggerStyled } from "./LanguageChangerStyled";
+import { ContentStyled, SelectTriggerStyled } from "./LanguageSelectorStyled";
 import { useState, useEffect } from "react";
 
 export const LanguageChanger = () => {
