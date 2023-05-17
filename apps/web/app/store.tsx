@@ -6,14 +6,4 @@ export enum languages {
   fr = "fr",
 }
 
-const initLanguage = () => {
-  const localLang = localStorage.getItem("lang");
-  const defaultLanguage =
-    localLang && Object.values<string>(languages).includes(localLang)
-      ? (localLang as languages)
-      : languages.en;
-
-  return defaultLanguage;
-};
-
-export const languageAtom = atom<languages>(initLanguage());
+export const languageAtom = atom<languages>("en" as languages);

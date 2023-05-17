@@ -2,23 +2,29 @@ import { languages } from "lib/contexts";
 import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
-import { ContentStyled, SelectTriggerStyled } from "./LanguageSelectorStyled";
+import {
+  SelectContentStyled,
+  SelectPortalStyled,
+  SelectTriggerStyled,
+} from "./LanguageSelectorStyled";
 import { useEffect } from "react";
-import { useAtom } from "jotai";
 import { languageAtom } from "app/store";
+import { useSetAtom, useAtomValue } from "jotai";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 export const LanguageSelector = () => {
-  const [language, setLanguage] = useAtom(languageAtom);
+  const { hasScrollbar } = useHasScrollBar();
+  const setLanguage = useSetAtom(languageAtom);
+  const language = useAtomValue(languageAtom);
 
   useEffect(() => {
     const lang = localStorage.getItem("lang");
     lang && setLanguage((localStorage.getItem("lang") as languages) || "en");
-  }, [language]);
+  }, [setLanguage, language]);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang as languages);
-    window.localStorage.setItem("lang", lang);
-    // window.location.reload();
+    localStorage.setItem("lang", lang);
   };
 
   const items = [
@@ -37,8 +43,8 @@ export const LanguageSelector = () => {
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
       </SelectTriggerStyled>
 
-      <Select.Portal>
-        <ContentStyled position="popper" align="start" sideOffset={5}>
+      <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
+        <SelectContentStyled align="start" sideOffset={5}>
           <Select.Viewport>
             {items.map((item) => (
               <Select.Item value={item.lang} key={item.lang}>
@@ -47,8 +53,8 @@ export const LanguageSelector = () => {
               </Select.Item>
             ))}
           </Select.Viewport>
-        </ContentStyled>
-      </Select.Portal>
+        </SelectContentStyled>
+      </SelectPortalStyled>
     </Select.Root>
   );
 };

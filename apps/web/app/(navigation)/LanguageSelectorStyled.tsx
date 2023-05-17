@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import * as Select from "@radix-ui/react-select";
 
-export const ContentStyled = styled(Select.Content)`
+export const SelectContentStyled = styled(Select.Content)`
+  overflow: hidden;
   color: black;
   background-color: white;
   z-index: 40000;
@@ -16,4 +17,8 @@ export const SelectTriggerStyled = styled(Select.Trigger)`
   background-color: unset;
   border: 0;
   padding: 0;
+`;
+
+export const SelectPortalStyled = styled(Select.Portal)`
+  position: relative;
 `;
