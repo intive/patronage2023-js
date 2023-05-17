@@ -168,3 +168,9 @@ export const ContentStyled = styled.div`
     border-radius: 10px;
   }
 `;
+
+export const ErrorMessageWrapper = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: 150px;
+`;

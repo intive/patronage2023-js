@@ -22,11 +22,14 @@ import {
   DatePickerWrapperStyled,
   SeparatorStyled,
   ButtonWrapperStyled,
+  ErrorMessageWrapper,
 } from "./CreateNewBudget.styled";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { icons } from "./CreateNewBudget";
+import { useState } from "react";
+import { ErrorMessage } from "ui";
 
 interface EditBudgetProps {
   budget: BudgetFixed;
@@ -45,6 +48,7 @@ interface editedBudgetBEProps {
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
+  const [ errMsg, setErrMsg ] = useState("");
 
   //BE integration
   const { data: session } = useSession();
@@ -55,7 +59,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
         method: 'PUT',
         headers: {
-          accept: 'text/plain',
+          accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: "Bearer " + session?.user.accessToken,
         },
@@ -74,13 +78,13 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             onClose();
             break;
           case 400: 
-            alert("Wrong data");
+            setErrMsg("Wrong data");
             break;
           case 401: 
-            alert("Unauthorized");
+            setErrMsg("Unauthorized access");
             break;
           default: 
-            alert("Oops, something went wrong")
+            setErrMsg("Oops, something went wrong")
             return;
         }
       },
@@ -114,6 +118,11 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   return (
     <Modal header={t(dict.title)} onClose={() => onClose && onClose()} fullHeight>
+      {( errMsg.length > 0 )
+      && 
+      <ErrorMessageWrapper>
+        <ErrorMessage message={errMsg} onClose={ () => setErrMsg("")}/>
+      </ErrorMessageWrapper>}
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValueTabs}>
         <Tabs.List>
