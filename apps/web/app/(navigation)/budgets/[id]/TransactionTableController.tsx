@@ -61,7 +61,12 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   };
 
   const categoryFilterState = useAtomValue(categoryFilterAtom);
-  console.log("transactions ", categoryFilterState);
+  console.log(
+    "transactions ",
+    Object.entries(categoryFilterState)
+      .filter(([_, value]) => value)
+      .map(([key, _]) => key)
+  );
 
   const {
     data: transactionsData,
