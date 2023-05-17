@@ -29,7 +29,7 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
 
   const deleteBudget = useMutation({
     mutationFn: (id: string) => {
-      return fetch(env.NEXT_PUBLIC_API_URL + "/budgetss/" + id, {
+      return fetch(env.NEXT_PUBLIC_API_URL + "/budgets/" + id, {
         headers: {
           Authorization: "Bearer " + session!.user.accessToken,
         },
