@@ -12,7 +12,6 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-import { CategoryType } from "ui/CategoryIcon";
 
 type CategorySelectorProps = {
   onValueChange: (value: string) => void;
@@ -34,26 +33,14 @@ export const CategorySelector = ({
   type CategoryMapType = typeof categoryMap;
 
   const getCategoriesItems = (categoryMap: CategoryMapType) => {
-    const categories = Object.keys(categoryMap);
-
-    return categories.map((category) => (
-      <SelectItemStyled value={category} key={category}>
+    const categoryEntries = Object.entries(categoryMap);
+    return categoryEntries.map(([categoryKey, category]) => (
+      <SelectItemStyled value={categoryKey} key={categoryKey}>
         <Select.ItemText>
           <CategoryWrapperStyled>
-            {categoryMap[category as keyof CategoryMapType] && (
-              <CategoryIcon
-                small
-                category={
-                  categoryMap[
-                    category as keyof CategoryMapType
-                  ] as unknown as CategoryType
-                }
-              />
-            )}
-            {categoryMap[category as keyof CategoryMapType]?.name && (
-              <CategoryNameStyled>
-                {categoryMap[category as keyof CategoryMapType]?.name}
-              </CategoryNameStyled>
+            {category && <CategoryIcon small category={category} />}
+            {category?.name && (
+              <CategoryNameStyled>{category?.name}</CategoryNameStyled>
             )}
           </CategoryWrapperStyled>
         </Select.ItemText>

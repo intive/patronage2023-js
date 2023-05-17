@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Separator } from "ui";
 
 export const FormWrapper = styled.div`
+  position: relative;
   width: 320px;
   height: calc(100% - 52px);
 
@@ -15,6 +16,13 @@ export const FormWrapper = styled.div`
   ${device.tablet} {
     width: 464px;
   }
+`;
+
+export const ErrorWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 `;
 
 export const SeparatorStyled = styled(Separator)`

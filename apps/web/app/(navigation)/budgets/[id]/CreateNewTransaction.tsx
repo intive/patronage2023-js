@@ -1,12 +1,20 @@
 "use client";
 import { Field, Form } from "houseform";
-import { Button, CustomDatePicker, Input, Modal, CategorySelector } from "ui";
+import {
+  Button,
+  CustomDatePicker,
+  Input,
+  Modal,
+  CategorySelector,
+  ErrorMessage,
+} from "ui";
 import { z } from "zod";
 import {
   ButtonWrapperStyled,
   ContentStyled,
   DatePickerErrorStyled,
   DatePickerWrapperStyled,
+  ErrorWrapper,
   FormWrapper,
   ParagraphStyled,
   SeparatorStyled,
@@ -18,6 +26,7 @@ import { useSession } from "next-auth/react";
 import categoryMap from "lib/category-map";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Budget } from "lib/types";
+import { useState } from "react";
 
 type CreateNewTransactionProps = {
   type: string;
@@ -34,6 +43,10 @@ type TransactionType = {
   transactionDate: string | null;
 };
 
+type createTransactionBEProps = {
+  status: number;
+};
+
 export const CreateNewTransaction = ({
   type,
   budget,
@@ -42,6 +55,10 @@ export const CreateNewTransaction = ({
   const { t, dict } = useTranslate("CreateNewTransactionModal");
   const { data } = useSession();
   const { hasScrollbar } = useHasScrollBar();
+  const [errorMsg, setErrorMsg] = useState("");
+  console.log(errorMsg);
+
+  const handleCloseErrorMsg = () => setErrorMsg("");
 
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/transaction`;
   const token = data?.user.accessToken;
@@ -63,9 +80,24 @@ export const CreateNewTransaction = ({
       return result;
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["datatable"]);
-        onClose();
+      onSuccess: (data: createTransactionBEProps) => {
+        switch (data.status) {
+          case 201:
+            queryClient.invalidateQueries(["datatable"]);
+            queryClient.invalidateQueries(["mainStatistics"]);
+            queryClient.invalidateQueries(["rangedStatistics"]);
+            onClose();
+            break;
+          case 400:
+            setErrorMsg(t(dict.responseErrors[400]));
+            break;
+          case 401:
+            setErrorMsg(t(dict.responseErrors[401]));
+            break;
+          default:
+            setErrorMsg(t(dict.responseErrors.default));
+            return;
+        }
       },
       onError: (error) => console.error(error),
     }
@@ -109,6 +141,11 @@ export const CreateNewTransaction = ({
   return (
     <Modal onClose={onClose} header={header} fullHeight={fullHeight}>
       <FormWrapper>
+        {errorMsg !== "" && (
+          <ErrorWrapper>
+            <ErrorMessage message={errorMsg} onClose={handleCloseErrorMsg} />
+          </ErrorWrapper>
+        )}
         <Form onSubmit={(values) => handleSubmit(values)}>
           {({ submit }) => (
             <form
