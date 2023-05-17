@@ -331,6 +331,9 @@ export const theme = {
       title: colors.Neutral6,
     },
   },
+  asideCard: {
+    title: colors.Neutral8,
+  },
 };
 
 export type ThemeType = typeof theme;

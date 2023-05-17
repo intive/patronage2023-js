@@ -822,6 +822,20 @@ const dictionary = {
       },
     },
   },
+  AsideCard: {
+    categories: {
+      title: {
+        en: "Categories",
+        pl: "Kategorie",
+        fr: "Catégories",
+      },
+      settings: {
+        en: "Manage",
+        pl: "Zarządzaj",
+        fr: "Gestion",
+      },
+    },
+  },
 };
 
 export default dictionary;

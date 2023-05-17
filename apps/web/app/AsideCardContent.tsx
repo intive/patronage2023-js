@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { LinkComponent } from "ui";
 import { CategoryFilterForm } from "components";
+import { useTranslate } from "lib/hooks";
 
 const CardHeaderStyled = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const CardHeaderStyled = styled.div`
 const CardTitleStyled = styled.h3`
   font-size: 0.875em;
   font-weight: 600;
-  color: #7e7e7e; // Neutrals/Gray/6
+  color: ${({ theme }) => theme.asideCard.title};
 `;
 
 const CardSettingsLink = styled(LinkComponent)`
@@ -23,11 +24,14 @@ const CardSettingsLink = styled(LinkComponent)`
 `;
 
 export const AsideCardContent = () => {
+  const { t, dict } = useTranslate("AsideCard");
   return (
     <>
       <CardHeaderStyled>
-        <CardTitleStyled>Categories</CardTitleStyled>
-        <CardSettingsLink href={"/"}>Manage</CardSettingsLink>
+        <CardTitleStyled>{t(dict.categories.title)}</CardTitleStyled>
+        <CardSettingsLink href={"/"}>
+          {t(dict.categories.settings)}
+        </CardSettingsLink>
       </CardHeaderStyled>
       <CategoryFilterForm />
     </>
