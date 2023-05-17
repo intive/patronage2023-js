@@ -15,6 +15,12 @@ export const LanguageSelector = () => {
     lang && setLanguage((localStorage.getItem("lang") as languages) || "en");
   }, [language]);
 
+  const changeLanguage = (lang: string) => {
+    setLanguage(lang as languages);
+    window.localStorage.setItem("lang", lang);
+    // window.location.reload();
+  };
+
   const items = [
     { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polish" },
     { lang: "en", flagSrc: "/flags/en.svg", languageName: "English" },
@@ -25,7 +31,7 @@ export const LanguageSelector = () => {
     <Select.Root
       value={(language as languages) || "en"}
       onValueChange={(lang) => {
-        setLanguage(lang as languages);
+        changeLanguage(lang as languages);
       }}>
       <SelectTriggerStyled>
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
