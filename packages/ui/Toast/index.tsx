@@ -1,93 +1,64 @@
-import * as ToastRUI from "@radix-ui/react-toast";
-import { Dispatch, ReactNode, SetStateAction } from "react";
-import styled from "styled-components";
-import { Icon } from "../Icon";
+import { atom, useAtom } from "jotai";
+import { Icon, IconType } from "../Icon";
+import {
+  ToastProvider,
+  StyledCloseButton,
+  StyledDescription,
+  StyledRoot,
+  StyledViewport,
+  StylingDiv,
+  ToastVariant,
+} from "./Toast.styles";
 
-type ToastWrapper = {
-  children: ReactNode;
+type ToastAtom = ToastVariant & { message: string };
+
+const initialToast = { variant: "confirm", message: "" } as ToastAtom;
+
+// primitive atom for current toast state
+const toastAtom = atom(initialToast);
+
+// writable atom for toast message and variant
+const showToastAtom = atom(null, (_, set, update: ToastAtom) =>
+  set(toastAtom, { message: update.message, variant: update.variant })
+);
+
+// custom hook for showing the atom, public
+export const useToast = () => {
+  const [, showToast] = useAtom(showToastAtom);
+
+  return showToast;
 };
 
-type StyledToastProps = {
-  variant: "confirm" | "error";
-};
+const iconMap = {
+  confirm: "check",
+  error: "error",
+} as Record<string, IconType>;
 
-type ToastProps = {
-  message: string;
-  open: boolean;
-  onOpenChange: Dispatch<SetStateAction<boolean>>;
-} & StyledToastProps;
+// 'tis where the toasts be
+export const ToastHoast = () => {
+  const [{ message, variant }, setToast] = useAtom(toastAtom);
 
-const StyledViewport = styled(ToastRUI.Viewport)`
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translate(-50%);
-  width: 300px;
-  list-style: none;
-  z-index: 2147483647;
-  outline: none;
-`;
-
-const StyledRoot = styled(ToastRUI.Root)`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 8px 8px 30px -11px rgba(30, 76, 64, 1);
-
-  @media (min-width: 768px) {
-    padding: 24px;
-  }
-`;
-
-const StylingDiv = styled.div<StyledToastProps>`
-  background-color: ${({ theme, variant }) => theme.toast[variant].background};
-  color: ${({ theme, variant }) => theme.toast[variant].main};
-  border: 2px solid ${({ theme, variant }) => theme.toast[variant].main};
-`;
-
-const StyledCloseButton = styled(ToastRUI.Close)`
-  border: none;
-  color: inherit;
-  cursor: pointer;
-`;
-
-const StyledDescription = styled(ToastRUI.Description)`
-  gap: 10px;
-  display: flex;
-  align-items: center;
-`;
-
-export const ToastWrapper = ({ children }: ToastWrapper) => {
   return (
-    <ToastRUI.Provider
+    <ToastProvider
       duration={5000}
       label={"Notification window"}
       swipeDirection={"up"}
       swipeThreshold={30}>
-      {children}
+      <StyledRoot
+        open={!!message}
+        onOpenChange={() => setToast(initialToast)}
+        asChild>
+        <StylingDiv variant={variant}>
+          <StyledDescription>
+            <Icon icon={iconMap[variant]} size={20} />
+            {message}
+          </StyledDescription>
+          <StyledCloseButton>
+            <Icon icon="close" iconSize={20} />
+          </StyledCloseButton>
+        </StylingDiv>
+      </StyledRoot>
       <StyledViewport />
-    </ToastRUI.Provider>
-  );
-};
-
-export const Toast = ({ message, variant, open, onOpenChange }: ToastProps) => {
-  return (
-    <StyledRoot open={open} onOpenChange={onOpenChange} asChild>
-      <StylingDiv variant={variant}>
-        <StyledDescription>
-          {variant === "confirm" ? (
-            <Icon icon={"check"} size={20} />
-          ) : (
-            <Icon icon={"error"} size={20} />
-          )}
-          {message}
-        </StyledDescription>
-        <StyledCloseButton>
-          <Icon icon="close" iconSize={20} />
-        </StyledCloseButton>
-      </StylingDiv>
-    </StyledRoot>
+    </ToastProvider>
   );
 };

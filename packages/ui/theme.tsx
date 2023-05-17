@@ -64,6 +64,11 @@ export const theme = {
       hover: colors.Teal7,
       disabled: colors.Neutral3,
     },
+    danger: {
+      main: colors.Supporting4,
+      hover: colors.Supporting4,
+      disabled: colors.Supporting4,
+    },
     simple: {
       main: colors.Teal6,
       background: colors.BasicTransparent,

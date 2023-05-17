@@ -30,4 +30,4 @@ export { ButtonWithDropdown } from "./ButtonWithDropdown";
 export { FormFooter } from "./FormFooter";
 export { Spinner } from "./Spinner";
 export { TrendChip } from "./TrendChip";
-export { Toast } from "./Toast";
+export * from "./Toast";

@@ -693,9 +693,9 @@ const dictionary = {
     },
     removeBudgetModal: {
       header: {
-        en: "Would you like to delete this budget?",
-        pl: "Czy chcesz usunąć ten budżet?",
-        fr: "Souhaitez-vous supprimer ce budget?",
+        en: "Are you sure you want to delete the budget:",
+        pl: "Czy na pewno chcesz usunąć ten budżet:",
+        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
       },
       confirmButton: {
         en: "Confirm",

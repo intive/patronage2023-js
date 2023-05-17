@@ -9,7 +9,6 @@ import SessionProviderWrapper from "./SessionProviderWrapper";
 import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./css/global.css";
-import { ToastWrapper } from "ui/Toast";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -41,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps) {
             <StyledComponentsRegistry>
               <LanguageProvider>
                 <StyledComponentsThemeWrapper>
-                  <ToastWrapper>{children}</ToastWrapper>
+                  {children}
                 </StyledComponentsThemeWrapper>
               </LanguageProvider>
             </StyledComponentsRegistry>

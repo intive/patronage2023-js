@@ -1,5 +1,5 @@
 import { BudgetFixed } from "lib/types";
-import { Button, Modal } from "ui";
+import { Button, Modal, useToast } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
-import { Toast } from "ui";
 
 interface RemoveBudgetProps {
   budget: BudgetFixed;
@@ -26,6 +25,8 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const { replace } = useRouter();
+
+  const showToast = useToast();
 
   const deleteBudget = useMutation({
     mutationFn: (id: string) => {
@@ -56,19 +57,27 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   });
   return (
     <>
-      <Toast
-        message={"Test"}
-        variant={"error"}
-        open={toggleErrorBox}
-        onOpenChange={setToggleErrorBox}
-      />
-      <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
+      <Modal
+        onClose={onClose}
+        header={`${t(dict.removeBudgetModal.header)} "${budget.name}"?`}>
         <ButtonWrapper>
-          <Button onClick={() => deleteBudget.mutate(budget.id)}>
+          <Button
+            variant={"danger"}
+            onClick={() => deleteBudget.mutate(budget.id)}>
             {t(dict.removeBudgetModal.confirmButton)}
           </Button>
           <Button onClick={onClose} variant={"secondary"}>
             {t(dict.removeBudgetModal.abortButton)}
+          </Button>
+          <Button
+            onClick={() =>
+              showToast({
+                variant: "error",
+                message: "Opps, something went kaboom",
+              })
+            }
+            variant={"simple"}>
+            Show error toast
           </Button>
         </ButtonWrapper>
       </Modal>
