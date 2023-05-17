@@ -4,7 +4,7 @@ import * as Select from "@radix-ui/react-select";
 import { Flag } from "ui";
 import {
   SelectContentStyled,
-  SelectPortalStyled,
+  SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
 import { useEffect } from "react";
@@ -28,9 +28,9 @@ export const LanguageSelector = () => {
   };
 
   const items = [
-    { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polish" },
+    { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polski" },
     { lang: "en", flagSrc: "/flags/en.svg", languageName: "English" },
-    { lang: "fr", flagSrc: "/flags/fr.svg", languageName: "French" },
+    { lang: "fr", flagSrc: "/flags/fr.svg", languageName: "Français" },
   ];
 
   return (
@@ -43,18 +43,18 @@ export const LanguageSelector = () => {
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
       </SelectTriggerStyled>
 
-      <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
-        <SelectContentStyled align="start" sideOffset={5}>
+      <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
+        <SelectContentStyled position="popper" align="center" sideOffset={5}>
           <Select.Viewport>
             {items.map((item) => (
-              <Select.Item value={item.lang} key={item.lang}>
+              <SelectItemStyled value={item.lang} key={item.lang}>
                 <Flag src={item.flagSrc} />
                 <Select.ItemText>{item.languageName}</Select.ItemText>
-              </Select.Item>
+              </SelectItemStyled>
             ))}
           </Select.Viewport>
         </SelectContentStyled>
-      </SelectPortalStyled>
+      </Select.Portal>
     </Select.Root>
   );
 };
