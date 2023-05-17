@@ -3,21 +3,17 @@ import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
 import { ContentStyled, SelectTriggerStyled } from "./LanguageSelectorStyled";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useAtom } from "jotai";
+import { languageAtom } from "app/store";
 
-export const LanguageChanger = () => {
-  const [language, setLanguage] = useState<string | null>("");
+export const LanguageSelector = () => {
+  const [language, setLanguage] = useAtom(languageAtom);
 
   useEffect(() => {
     const lang = localStorage.getItem("lang");
-    setLanguage(lang && localStorage.getItem("lang"));
-  }, []);
-
-  const changeLanguage = (lang: string) => {
-    setLanguage(lang);
-    window.localStorage.setItem("lang", lang);
-    // window.location.reload();
-  };
+    lang && setLanguage((localStorage.getItem("lang") as languages) || "en");
+  }, [language]);
 
   const items = [
     { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polish" },
@@ -29,7 +25,7 @@ export const LanguageChanger = () => {
     <Select.Root
       value={(language as languages) || "en"}
       onValueChange={(lang) => {
-        changeLanguage(lang as languages);
+        setLanguage(lang as languages);
       }}>
       <SelectTriggerStyled>
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>

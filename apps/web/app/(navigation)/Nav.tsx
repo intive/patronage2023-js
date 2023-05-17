@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Icon, Logo, Avatar } from "ui";
-import { LanguageChanger } from "./LanguageChanger";
+import { LanguageSelector } from "./LanguageSelector";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -33,7 +33,7 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <LanguageChanger />
+        <LanguageSelector />
         <Icon icon="notifications" color="white" />
         <AvatarStyled src="/avatar.svg" outlined />
       </ActionWrapper>
