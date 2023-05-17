@@ -20,6 +20,7 @@ type SpanProps = {
 
 const ListItemStyled = styled.li`
   list-style: none;
+  width: 100%;
 `;
 
 const LinkStyled = styled(Link)`
@@ -37,6 +38,7 @@ const Wrapper = styled.div<SideNavigationBarLinkState>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   gap: 10px;
   position: relative;
   height: auto;

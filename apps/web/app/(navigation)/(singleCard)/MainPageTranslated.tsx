@@ -6,15 +6,14 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "ui";
 import styled from "styled-components";
 
+const ContentWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 export const MainPageTranslated = () => {
   const { dict, t } = useTranslate("MainPage");
   const { data } = useSession();
-
-  const ContentWrapperStyled = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  `;
 
   return (
     <ContentWrapperStyled>
@@ -28,7 +27,8 @@ export const MainPageTranslated = () => {
           <p>
             User: {data.user.name}, <br /> Avatar: {data.user.image}, <br />{" "}
             AccessToken:
-            {data.user.accessToken.substring(0, 30)}...
+            {data.user.accessToken.substring(0, 30)}... <br />
+            Role: <u>{data.user.role}</u>
           </p>
         </>
       ) : (

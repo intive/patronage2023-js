@@ -8,7 +8,7 @@ import StyledComponentsThemeWrapper from "ui/theme";
 import SessionProviderWrapper from "./SessionProviderWrapper";
 import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
-import "./css/global.css";
+import "../css/global.css";
 
 export type LayoutProps = {
   children: React.ReactNode;

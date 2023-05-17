@@ -11,12 +11,15 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-
+import { useSession } from "next-auth/react";
+import { BudgetFixed } from "lib/types";
 import { ItemType } from "services/mutations";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
+
+  const { data: session } = useSession();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
@@ -136,31 +139,50 @@ export default function SideNav() {
     ),
   };
 
+  //edit navbarItems below
+  const NavbarItems = [
+    {
+      href: "/budgets",
+      icon: <Icon icon="wallet" iconSize={32} />,
+      textValue: t(SideNav.budgetsItem.title),
+      subMenu: budgetsSubMenuData,
+      id: "1",
+    },
+    {
+      href: "/reports",
+      icon: <Icon icon="query_stats" iconSize={32} />,
+      textValue: t(SideNav.reportsItem.title),
+      id: "2",
+    },
+    {
+      href: "/settings",
+      icon: <Icon icon="settings" iconSize={32} />,
+      textValue: t(SideNav.settingsItem.title),
+      subMenu: settingsSubMenuData,
+      id: "3",
+    },
+  ];
+
+  const renderNavbar = () => {
+    //add items for admin
+    if (session?.user.role === "ADMIN") {
+      return [
+        ...NavbarItems,
+        {
+          href: "/users",
+          icon: <Icon icon="account_circle" iconSize={32} />,
+          textValue: t(SideNav.usersItem.title),
+          id: "4",
+        },
+      ];
+    }
+    return NavbarItems;
+  };
+
   return (
     <>
       <SideNavigationBar
-        items={[
-          {
-            href: "/budgets",
-            icon: <Icon icon="wallet" iconSize={32} />,
-            textValue: t(SideNav.budgetsItem.title),
-            subMenu: budgetsSubMenuData,
-            id: "1",
-          },
-          {
-            href: "/reports",
-            icon: <Icon icon="query_stats" iconSize={32} />,
-            textValue: t(SideNav.reportsItem.title),
-            id: "2",
-          },
-          {
-            href: "/settings",
-            icon: <Icon icon="settings" iconSize={32} />,
-            textValue: t(SideNav.settingsItem.title),
-            subMenu: settingsSubMenuData,
-            id: "3",
-          },
-        ]}
+        items={renderNavbar()}
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
       />

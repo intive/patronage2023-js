@@ -14,7 +14,7 @@ const Main = styled.main`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
-  background-color: #e5e5e5;
+  background-color:  ${({ theme }) => theme.background.loggedIn};
   padding-top: 68px;
 `;
 const Content = styled.div`
