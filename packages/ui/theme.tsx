@@ -109,6 +109,10 @@ export const theme = {
     main: colors.Supporting4,
     background: colors.Supporting1,
   },
+  toast: {
+    confirm: { main: colors.Supporting7, background: colors.Supporting1 },
+    error: { main: colors.Supporting4, background: colors.Supporting1 },
+  },
   input: {
     main: colors.Teal8,
     error: colors.Supporting4,

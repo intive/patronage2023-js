@@ -8,8 +8,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
 import { Toast } from "ui";
-import { Simulate } from "react-dom/test-utils";
-import error = Simulate.error;
 
 interface RemoveBudgetProps {
   budget: BudgetFixed;
@@ -24,14 +22,14 @@ const ButtonWrapper = styled.div`
 
 export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
-  const [toggleErrorBox, setToggleErrorBox] = useState<string | unknown>("");
+  const [toggleErrorBox, setToggleErrorBox] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const { replace } = useRouter();
 
   const deleteBudget = useMutation({
     mutationFn: (id: string) => {
-      return fetch(env.NEXT_PUBLIC_API_URL + "/budgets/" + id, {
+      return fetch(env.NEXT_PUBLIC_API_URL + "/budgetss/" + id, {
         headers: {
           Authorization: "Bearer " + session!.user.accessToken,
         },
@@ -53,34 +51,27 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
       replace("/");
     },
     onError: (error) => {
-      setToggleErrorBox(error);
+      setToggleErrorBox(true);
     },
   });
-  //TODO remove this Toast
   return (
     <>
       <Modal onClose={onClose} header={t(dict.removeBudgetModal.header)}>
         <>
-          <Toast message={"Test"} variant={"confirm"} />
-          {!toggleErrorBox && (
-            <ButtonWrapper>
-              <Button onClick={() => deleteBudget.mutate(budget.id)}>
-                {t(dict.removeBudgetModal.confirmButton)}
-              </Button>
-              <Button onClick={onClose} variant={"secondary"}>
-                {t(dict.removeBudgetModal.abortButton)}
-              </Button>
-            </ButtonWrapper>
-          )}
-          {toggleErrorBox && (
-            <ErrorMessage
-              message={`${toggleErrorBox}`}
-              onClose={() => {
-                setToggleErrorBox("");
-                onClose();
-              }}
-            />
-          )}
+          <Toast
+            message={"Test"}
+            variant={"error"}
+            open={toggleErrorBox}
+            onOpenChange={setToggleErrorBox}
+          />
+          <ButtonWrapper>
+            <Button onClick={() => deleteBudget.mutate(budget.id)}>
+              {t(dict.removeBudgetModal.confirmButton)}
+            </Button>
+            <Button onClick={onClose} variant={"secondary"}>
+              {t(dict.removeBudgetModal.abortButton)}
+            </Button>
+          </ButtonWrapper>
         </>
       </Modal>
     </>

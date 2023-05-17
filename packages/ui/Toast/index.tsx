@@ -1,5 +1,5 @@
 import * as ToastRUI from "@radix-ui/react-toast";
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import styled from "styled-components";
 import { Icon } from "../Icon";
 
@@ -7,10 +7,15 @@ type ToastWrapper = {
   children: ReactNode;
 };
 
-type ToastProps = {
-  message: string;
+type StyledToastProps = {
   variant: "confirm" | "error";
 };
+
+type ToastProps = {
+  message: string;
+  open: boolean;
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
+} & StyledToastProps;
 
 const StyledViewport = styled(ToastRUI.Viewport)`
   position: fixed;
@@ -28,15 +33,18 @@ const StyledRoot = styled(ToastRUI.Root)`
   justify-content: space-between;
   align-items: flex-start;
   padding: 10px;
-  background-color: ${({ theme }) => theme.errorMessage.background};
-  color: ${({ theme }) => theme.errorMessage.main};
-  border: 2px solid ${({ theme }) => theme.errorMessage.main};
   border-radius: 8px;
   box-shadow: 8px 8px 30px -11px rgba(30, 76, 64, 1);
 
   @media (min-width: 768px) {
     padding: 24px;
   }
+`;
+
+const StylingDiv = styled.div<StyledToastProps>`
+  background-color: ${({ theme, variant }) => theme.toast[variant].background};
+  color: ${({ theme, variant }) => theme.toast[variant].main};
+  border: 2px solid ${({ theme, variant }) => theme.toast[variant].main};
 `;
 
 const StyledCloseButton = styled(ToastRUI.Close)`
@@ -64,20 +72,22 @@ export const ToastWrapper = ({ children }: ToastWrapper) => {
   );
 };
 
-export const Toast = ({ message, variant }: ToastProps) => {
+export const Toast = ({ message, variant, open, onOpenChange }: ToastProps) => {
   return (
-    <StyledRoot open={true}>
-      <StyledDescription>
-        {variant === "confirm" ? (
-          <Icon icon={"check"} size={20} />
-        ) : (
-          <Icon icon={"error"} size={20} />
-        )}
-        {message}
-      </StyledDescription>
-      <StyledCloseButton>
-        <Icon icon="close" iconSize={20} />
-      </StyledCloseButton>
+    <StyledRoot open={open} onOpenChange={onOpenChange} asChild>
+      <StylingDiv variant={variant}>
+        <StyledDescription>
+          {variant === "confirm" ? (
+            <Icon icon={"check"} size={20} />
+          ) : (
+            <Icon icon={"error"} size={20} />
+          )}
+          {message}
+        </StyledDescription>
+        <StyledCloseButton>
+          <Icon icon="close" iconSize={20} />
+        </StyledCloseButton>
+      </StylingDiv>
     </StyledRoot>
   );
 };
