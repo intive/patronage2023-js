@@ -17,7 +17,7 @@ import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import categoryMap from "lib/category-map";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Budget, Transaction } from "lib/types";
+import { Budget } from "lib/types";
 
 type CreateNewTransactionProps = {
   type: string;
@@ -67,7 +67,7 @@ export const CreateNewTransaction = ({
         queryClient.invalidateQueries(["datatable"]);
         onClose();
       },
-      // onError: (error) => console.error(error),
+      onError: (error) => console.error(error),
     }
   );
 
