@@ -25,6 +25,8 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting19: "#F7C948",
+  Supporting18: "#FFF3C4",
   Supporting17: "#E5707055",
   Supporting16: "#92CE7855",
   Supporting15: "#E57070",
@@ -289,6 +291,14 @@ export const theme = {
     grocery: {
       foreground: colors.Supporting13,
       background: colors.Supporting12,
+    },
+    salary: {
+      foreground: colors.Teal10,
+      background: colors.Teal3,
+    },
+    refund: {
+      foreground: colors.Supporting19,
+      background: colors.Supporting18,
     },
   },
   editIcon: {

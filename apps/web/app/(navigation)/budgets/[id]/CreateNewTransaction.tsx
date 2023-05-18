@@ -23,7 +23,7 @@ import { useTranslate } from "lib/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import { useCategoryMap } from "lib/category-map";
+import { useCategoryMap } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Budget } from "lib/types";
 import { useState } from "react";

@@ -1,5 +1,4 @@
 import { theme } from "ui/theme";
-import { useTranslate } from "./hooks";
 
 const { categoryIcons } = theme;
 
@@ -38,32 +37,22 @@ const categoryMap = {
       ...categoryIcons.grocery,
     },
   },
-};
-
-export const useCategoryMap = () => {
-  const { t, dict } = useTranslate("CategoryMap");
-
-  const { HomeSpendings, Subscriptions, Car, Grocery } = categoryMap;
-
-  const translatedCategoryMap = {
-    HomeSpendings: {
-      ...HomeSpendings,
-      name: t(dict.homeSpendings),
+  Salary: {
+    id: 5,
+    name: "Salary",
+    icon: {
+      name: "payments",
+      ...categoryIcons.salary,
     },
-    Subscriptions: {
-      ...Subscriptions,
-      name: t(dict.subscriptions),
+  },
+  Refund: {
+    id: 6,
+    name: "Refund",
+    icon: {
+      name: "currency_exchange",
+      ...categoryIcons.refund,
     },
-    Car: {
-      ...Car,
-      name: t(dict.car),
-    },
-    Grocery: {
-      ...Grocery,
-      name: t(dict.grocery),
-    },
-  };
-  return { ...translatedCategoryMap };
+  },
 };
 
 export type CategoryMapType = typeof categoryMap;

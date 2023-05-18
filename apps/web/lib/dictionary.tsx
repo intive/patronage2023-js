@@ -872,7 +872,17 @@ const dictionary = {
     grocery: {
       en: "Grocery",
       pl: "Zakupy spożywcze",
-      fr: "épicerie",
+      fr: "Épicerie",
+    },
+    salary: {
+      en: "Salary",
+      pl: "Pensja",
+      fr: "Salaire",
+    },
+    refund: {
+      en: "Refund",
+      pl: "Zwrot kosztów",
+      fr: "Remboursement",
     },
   },
 };

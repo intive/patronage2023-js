@@ -1,6 +1,6 @@
 "use client";
 import { Field, Form } from "houseform";
-import { useCategoryMap } from "lib/category-map";
+import { useCategoryMap } from "lib/hooks";
 import styled from "styled-components";
 import { CategoryIcon, Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
