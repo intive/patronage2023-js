@@ -33,8 +33,8 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     position: relative;
     text-align: center;
 
-    ${device.tablet} {
-      padding: 8px 24px;
+    ${device.desktop} {
+      padding: 8px 16px;
     }
 
     ${({ secondary }) =>
