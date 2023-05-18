@@ -42,6 +42,9 @@ const dictionary = {
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia", fr: "Paramètres" },
       },
+      usersItem: {
+        title: { en: "Users", pl: "Użytkownicy", fr: "Utilisateurs" },
+      },
       teamsItem: {
         title: { en: "Teams", pl: "Zespoły", fr: "Équipes" },
         searchInputPlaceholder: {
@@ -646,6 +649,23 @@ const dictionary = {
         en: "The date must be within the budget period",
         pl: "Data musi się mieścić w okresie trwania budżetu",
         fr: "La date doit être comprise dans la période budgétaire",
+      },
+    },
+    responseErrors: {
+      400: {
+        en: "400: Incorrect data. Please try again.",
+        pl: "400: Nieprawidłowe dane. Spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Veuillez réessayer.",
+      },
+      401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: Usager non autorisé",
+      },
+      default: {
+        en: "Adding transaction failed. Please try again.",
+        pl: "Dodawanie transakcji nie powiodło się. Spróbuj ponownie.",
+        fr: "L'ajout de la transaction a échoué. Veuillez réessayer.",
       },
     },
   },

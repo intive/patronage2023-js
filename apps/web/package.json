@@ -15,7 +15,6 @@
     "chart.js": "^4.3.0",
     "dayjs": "^1.11.7",
     "houseform": "^1.10.5",
-    "jotai": "^2.1.0",
     "jsonwebtoken": "^9.0.0",
     "ka-table": "^8.0.1",
     "next": "^13.4.1",

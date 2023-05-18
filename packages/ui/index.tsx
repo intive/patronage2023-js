@@ -31,3 +31,4 @@ export { FormFooter } from "./FormFooter";
 export { Spinner } from "./Spinner";
 export { TrendChip } from "./TrendChip";
 export * from "./Toast";
+export { CategorySelector } from "./CategorySelector";

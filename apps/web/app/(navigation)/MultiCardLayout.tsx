@@ -9,12 +9,15 @@ import { ReactElement } from "react";
 
 type MultiCardLayoutProps = {
   main: ReactElement;
-  aside: ReactElement;
+  aside?: ReactElement;
 };
 
 const AsideCard = styled(MainCard)`
   display: none;
   ${device.desktop} {
+    &:empty {
+      visibility: hidden;
+    }
     display: flex;
     flex-direction: column;
     align-self: flex-start;
