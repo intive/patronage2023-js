@@ -30,37 +30,13 @@ const Template: ComponentStory<typeof AvatarSelector> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   avatars: [
-    {
-      src: "/avatars/1.svg",
-      id: "1",
-    },
-    {
-      src: "/avatars/2.svg",
-      id: "2",
-    },
-    {
-      src: "/avatars/3.svg",
-      id: "3",
-    },
-    {
-      src: "/avatars/4.svg",
-      id: "4",
-    },
-    {
-      src: "/avatars/5.svg",
-      id: "5",
-    },
-    {
-      src: "/avatars/6.svg",
-      id: "6",
-    },
-    {
-      src: "/avatars/7.svg",
-      id: "7",
-    },
-    {
-      src: "/avatars/8.svg",
-      id: "8",
-    },
-  ],
+    "/avatars/1.svg",
+    "/avatars/2.svg",
+    "/avatars/3.svg",
+    "/avatars/4.svg",
+    "/avatars/5.svg",
+    "/avatars/6.svg",
+    "/avatars/7.svg",
+    "/avatars/8.svg",
+  ]
 };

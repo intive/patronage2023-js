@@ -29,7 +29,7 @@ export const ProfileScreen = ({
 }: ProfileScreenProps) => {
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
-  const [selectedAvatar, setSelectedAvatar] = useState("1");
+  const [selectedAvatar, setSelectedAvatar] = useState("/avatars/1.svg");
 
   return (
     <Form
@@ -53,38 +53,14 @@ export const ProfileScreen = ({
           <Separator />
           <AvatarSelector
             avatars={[
-              {
-                id: "1",
-                src: "/avatars/1.svg",
-              },
-              {
-                id: "2",
-                src: "/avatars/2.svg",
-              },
-              {
-                id: "3",
-                src: "/avatars/3.svg",
-              },
-              {
-                id: "4",
-                src: "/avatars/4.svg",
-              },
-              {
-                id: "5",
-                src: "/avatars/5.svg",
-              },
-              {
-                id: "6",
-                src: "/avatars/6.svg",
-              },
-              {
-                id: "7",
-                src: "/avatars/7.svg",
-              },
-              {
-                id: "8",
-                src: "/avatars/8.svg",
-              },
+              "/avatars/1.svg",
+              "/avatars/2.svg",
+              "/avatars/3.svg",
+              "/avatars/4.svg",
+              "/avatars/5.svg",
+              "/avatars/6.svg",
+              "/avatars/7.svg",
+              "/avatars/8.svg",
             ]}
             selectedAvatar={selectedAvatar}
             onSelect={setSelectedAvatar}
