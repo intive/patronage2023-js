@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import { Icon, Logo, Avatar } from "ui";
+import { useSession } from "next-auth/react";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -27,12 +28,13 @@ const AvatarStyled = styled(Avatar)`
   width: 2.1em;
 `;
 export default function Nav() {
+  const { data } = useSession();
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
         <Icon icon="notifications" color="white" />
-        <AvatarStyled src="/avatar.svg" outlined />
+        { data && <AvatarStyled src={data.user.image} outlined /> }
       </ActionWrapper>
     </NavBar>
   );

@@ -53,15 +53,16 @@ export const SignUp = () => {
 
   const validateProfile = (profileInfo: userObject["profile"]) => {
     //set profile info to user
-    const nextUser = { ...user, profile: profileInfo };
+    const newUser = { ...user, profile: profileInfo };
+    setUser(newUser);
+
     const backendUser = {
-      avatar: nextUser.profile.avatar,
-      firstName: nextUser.profile.firstName,
-      lastName: nextUser.profile.lastName,
-      password: nextUser.password,
-      email: nextUser.email,
+      avatar: newUser.profile.avatar,
+      firstName: newUser.profile.firstName,
+      lastName: newUser.profile.lastName,
+      password: newUser.password,
+      email: newUser.email,
     };
-    setUser(nextUser);
 
     // @ts-ignore
     // eslint-disable-next-line turbo/no-undeclared-env-vars
