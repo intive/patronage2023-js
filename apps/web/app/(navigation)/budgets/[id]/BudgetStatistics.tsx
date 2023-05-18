@@ -60,14 +60,14 @@ const BudgetStatistics = ({ budget }: Props) => {
 
   const [startRange, endRange] = getRange();
 
-  const fetch = useSuperfetch(
-    `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`
-  );
+  const fetch = useSuperfetch();
 
   const { data: statistics, isLoading } = useQuery({
     queryKey: ["rangedStatistics", startRange, endRange, budget.id],
     queryFn: async () => {
-      return fetch().catch((err) => console.error(err));
+      return fetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`
+      ).catch((err) => console.error(err));
     },
   });
 

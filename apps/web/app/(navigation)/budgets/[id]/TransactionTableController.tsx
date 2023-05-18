@@ -58,16 +58,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     );
   };
 
-  const fetch = useSuperfetch(
-    `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
-    {
-      method: "POST",
-      body: {
-        pageSize: itemsPerPage,
-        pageIndex: currentPage,
-      },
-    }
-  );
+  const fetch = useSuperfetch();
 
   const {
     data: transactionsData,
@@ -78,7 +69,16 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
     queryFn: async () => {
-      return fetch()
+      return fetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
+        {
+          method: "POST",
+          body: {
+            pageSize: itemsPerPage,
+            pageIndex: currentPage,
+          },
+        }
+      )
         .then((res) => fixFetchedData(res.data))
         .catch((err) => console.error(err));
     },
