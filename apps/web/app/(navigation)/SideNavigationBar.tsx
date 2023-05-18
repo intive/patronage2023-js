@@ -77,7 +77,7 @@ export default function SideNav() {
     data?.pages?.flatMap(
       ({ items }: ItemType) =>
         items &&
-        items.map(({ icon, name, id }) => ({
+        items.map(({ icon, name, id, isFavourite }) => ({
           ComponentToRender: (
             <>
               <IconStyled
@@ -85,7 +85,7 @@ export default function SideNav() {
                 iconSize={24}
               />
               <SpanStyled>{name}</SpanStyled>
-              <Favorite isFav={false} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
+              <Favorite isFav={isFavourite} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
             </>
           ),
           href: `/budgets/${id.value}`,

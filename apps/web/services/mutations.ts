@@ -7,6 +7,7 @@ export type BudgetType = {
   id: {
     value: string | number;
   };
+  isFavourite: boolean;
 };
 export type ItemType = {
   items: BudgetType[];
