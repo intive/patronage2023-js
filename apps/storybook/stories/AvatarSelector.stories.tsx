@@ -38,5 +38,5 @@ Default.args = {
     "/avatars/6.svg",
     "/avatars/7.svg",
     "/avatars/8.svg",
-  ]
+  ],
 };

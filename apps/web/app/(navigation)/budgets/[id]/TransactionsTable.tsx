@@ -162,14 +162,10 @@ export const TransactionsTable = ({
                   );
                 case "creator":
                   return (
-                    data &&
-                    <Avatar
-                      className="avatar"
-                      src={data.user.image}
-                    />
+                    data && <Avatar className="avatar" src={data.user.image} />
                   );
                 case "editColumn":
-                  return (          
+                  return (
                     <TransactionDropdownMenu
                       items={dropdownMenuItems}
                       side="right"

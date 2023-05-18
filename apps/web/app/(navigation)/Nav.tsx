@@ -34,7 +34,7 @@ export default function Nav() {
       <Logo white />
       <ActionWrapper>
         <Icon icon="notifications" color="white" />
-        { data && <AvatarStyled src={data.user.image} outlined /> }
+        {data && <AvatarStyled src={data.user.image} outlined />}
       </ActionWrapper>
     </NavBar>
   );
