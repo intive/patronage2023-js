@@ -31,6 +31,19 @@ const users = [
     "createdVia": "Email"
   },
   {
+    "id": "82eb6757-b858-45eb-9c79-5d29a4485290",
+    "email": "rockybalboa@gmail.com",
+    "firstName": "Rocky",
+    "lastName": "Balboa",
+    "attributes": {
+      "avatar": [
+        "6"
+      ]
+    },
+    "createdTimestamp": 1684424205921,
+    "createdVia": "Email"
+  },
+  {
     "id": "7a914ca8-79eb-4596-9555-48f3723d20d7",
     "email": "barand@o2.pl",
     "firstName": "Damian",
@@ -109,12 +122,116 @@ const users = [
     "createdVia": "Email"
   },
   {
+    "id": "a3028ea5-6f66-4c77-a4a6-c9a4fe638397",
+    "email": "jkowalskiooooooooo@gmail.com",
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684418990932,
+    "createdVia": "Email"
+  },
+  {
+    "id": "76b71554-c0d7-44b2-8ffb-872a3481b754",
+    "email": "mariankowalski@gmail.com",
+    "firstName": "Marian",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684419366551,
+    "createdVia": "Email"
+  },
+  {
+    "id": "437a1199-61a0-4ae8-9023-c33371c1c980",
+    "email": "pepe@gmail.com",
+    "firstName": "Pepe",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "8"
+      ]
+    },
+    "createdTimestamp": 1684423994687,
+    "createdVia": "Email"
+  },
+  {
+    "id": "f6b98249-72a8-4e77-96c5-9a145434d5d9",
+    "email": "ricokowalski25@gmail.com",
+    "firstName": "Ricardo",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684421916131,
+    "createdVia": "Email"
+  },
+  {
+    "id": "5255f678-f8f6-4e55-b92a-993f3d3e56f3",
+    "email": "ricokowalski@gmail.com",
+    "firstName": "Rico",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684420046205,
+    "createdVia": "Email"
+  },
+  {
+    "id": "6ee384e6-7795-438b-b9b0-729f5d3402e5",
+    "email": "wesolypepe@gmail.com",
+    "firstName": "Pepe",
+    "lastName": "Kowalski",
+    "attributes": {
+      "avatar": [
+        "4"
+      ]
+    },
+    "createdTimestamp": 1684423888440,
+    "createdVia": "Email"
+  },
+  {
     "id": "10472f37-7d20-408e-ad84-ea6c2d4a26ef",
     "email": "andrzej.nowak@gmail.com",
     "firstName": "Andrzej",
     "lastName": "Nowak",
     "attributes": null,
     "createdTimestamp": 1683028135538,
+    "createdVia": "Email"
+  },
+  {
+    "id": "d30c0a05-b315-4ae7-a7f6-05e41f1d632b",
+    "email": "michalrico@gmail.com",
+    "firstName": "michal",
+    "lastName": "rico",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684422443921,
+    "createdVia": "Email"
+  },
+  {
+    "id": "89ab744d-a254-4a02-a3fc-010f30aaaba7",
+    "email": "ricardo@ricardo.com",
+    "firstName": "ricardo",
+    "lastName": "rico",
+    "attributes": {
+      "avatar": [
+        "/avatars/3.svg"
+      ]
+    },
+    "createdTimestamp": 1684425935335,
     "createdVia": "Email"
   },
   {
@@ -141,6 +258,32 @@ const users = [
       ]
     },
     "createdTimestamp": 1683892113764,
+    "createdVia": "Email"
+  },
+  {
+    "id": "95a824fb-1723-43f0-8e6b-782a4dca046a",
+    "email": "marcintest@gmail.com",
+    "firstName": "Marcin",
+    "lastName": "Test",
+    "attributes": {
+      "avatar": [
+        "/avatars/2.svg"
+      ]
+    },
+    "createdTimestamp": 1684426420312,
+    "createdVia": "Email"
+  },
+  {
+    "id": "c5a6908c-c7c3-4d6e-a944-12398355ca31",
+    "email": "olawyporkiewicz@gmail.com",
+    "firstName": "Ola",
+    "lastName": "Wy",
+    "attributes": {
+      "avatar": [
+        "1"
+      ]
+    },
+    "createdTimestamp": 1684419047909,
     "createdVia": "Email"
   },
   {

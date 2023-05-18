@@ -3,7 +3,6 @@ import { device } from "lib/media-queries";
 import { CurrencyAmount } from "ui/CurrencyAmount";
 
 export const TableWrapperStyled = styled.div`
-border: 1px solid red;
   // table styles
   .ka-table {
     tr > :last-child {

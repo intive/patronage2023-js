@@ -8,6 +8,7 @@ import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 
 import { Icon, Avatar } from "ui";
+import { z } from 'zod';
 
 import {
   UsersListStyled,
@@ -89,7 +90,12 @@ export const UsersList = ({
               // console.log(props.rowData)
               switch (props.column.key) {
                 case "avatar":
-                  return <Avatar src={props.rowData.attributes ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
+                  if (!props.rowData.attributes) return <Avatar src="/unsetAvatar.svg" />
+                  const text = props.rowData.attributes.avatar[0];
+                  const schema = z.string().startsWith("/avatars/").endsWith(".svg");
+                  const result = schema.safeParse(text)
+                  console.log(text, result)
+                  return <Avatar src={result.success ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
                 case "email":
                   return <EmailStyled>{props.rowData.email}</EmailStyled>;
                 case "createdTimestamp":
