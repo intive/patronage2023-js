@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { device } from "lib/media-queries";
-import { CurrencyAmount } from "ui/CurrencyAmount";
 
-export const TableWrapperStyled = styled.div`
-border: 1px solid red;
+export const UsersListStyled = styled.div`
   // table styles
   .ka-table {
     tr > :last-child {
@@ -85,8 +83,10 @@ border: 1px solid red;
   }
 
   // hide creator column on mobile
-  tr.ka-thead-row th:nth-child(5),
-  tr.ka-row td:nth-child(5) {
+  tr.ka-thead-row th:first-child,
+  tr.ka-row td:first-child,
+  tr.ka-thead-row th:last-child,
+  tr.ka-row td:last-child {
     display: none;
 
     ${device.tablet} {
@@ -151,20 +151,18 @@ border: 1px solid red;
   .ka-cell {
     padding: 17px 5px 17px 0;
   }
-
-  // avatar styles
-  .avatar {
-    width: 24px;
-    height: 24px;
-  }
 `;
 
-export const StyledCurrencyAmount = styled(CurrencyAmount)`
-  display: block;
-  text-align: left;
-  font-family: unset; // component adds Signika font
-  font-size: 12px;
-  @media (min-width: 510px) {
-    font-size: 14px;
-  }
-`;
+
+export const EmailStyled = styled.div`
+    font-size: 12px;
+    color: ${({ theme }) => theme.transactionsTable.cellText};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (min-width: 510px) {
+      font-size: 14px;
+      white-space: initial;
+    }
+`

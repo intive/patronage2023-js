@@ -1,0 +1,134 @@
+"use client";
+
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { useTranslate } from "lib/hooks";
+import { Table } from "ka-table";
+import { DataType } from "ka-table/enums";
+import { Column } from "ka-table/models";
+
+import { Icon, Avatar } from "ui";
+
+import {
+  UsersListStyled,
+  EmailStyled
+} from "./UsersList.styled";
+import { TransactionsTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
+
+type User = {
+
+};
+
+type UsersListProps = {
+  setSorting: (column: string) => void;
+  users: User[] | undefined;
+  isLoading: boolean;
+};
+
+export const UsersList = ({
+  setSorting,
+  users = [],
+  isLoading,
+}: UsersListProps) => {
+  const theme = useContext(ThemeContext);
+  // const { t, dict } = useTranslate("BudgetsPage");
+  // const { transactionsTable } = dict;
+
+  const columns = [
+    {
+      key: "avatar",
+      isSortable: false,
+      dataType: DataType.Object,
+      style: {
+        fontSize: "2.5em",
+        width: "15%",
+      },
+    },
+    {
+      key: "firstName",
+      title: "First name",
+      isSortable: true,
+      dataType: DataType.String,
+      style: { width: "33%" },
+    },
+    {
+      key: "lastName",
+      title: "Last name",
+      isSortable: true,
+      dataType: DataType.String,
+      style: { width: "33%" },
+    },
+    {
+      key: "email",
+      title: "Email",
+      isSortable: true,
+      dataType: DataType.String,
+      style: { width: "33%" },
+    },
+    {
+      key: "createdTimestamp",
+      title: "Date created",
+      isSortable: true,
+      dataType: DataType.Number,
+      style: { width: "20%" },
+    },
+  ] as Column[];
+
+  return (
+    <UsersListStyled>
+      <Table
+        columns={columns}
+        rowKeyField={"id"}
+        data={users}
+        noData={{
+          text: "No Data Found",
+        }}
+        childComponents={{
+          cell: {
+            content: (props) => {
+              // console.log(props.rowData)
+              switch (props.column.key) {
+                case "avatar":
+                  return <Avatar src={props.rowData.attributes ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
+                case "email":
+                  return <EmailStyled>{props.rowData.email}</EmailStyled>;
+                case "createdTimestamp":
+                  const date = new Date(props.rowData.createdTimestamp);
+                  const dateString = `${date.getFullYear()}-${((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)}-${(date.getDate() < 10 ? '0' : '') + date.getDate()}`;
+                  return dateString
+              }
+            },
+          },
+          headCellContent: {
+            content: ({ column }) => (
+              <>
+                <span>{column.title}</span>
+                {column.key !== "avatar" && (
+                  <button onClick={() => setSorting(column.key)}>
+                    <Icon
+                      icon="sort"
+                      iconSize={20}
+                      color={theme.transactionsTable.sortIcon}
+                    />
+                  </button>
+                )}
+              </>
+            ),
+          },
+          tableBody: {
+            content: (props) => {
+              return (
+                isLoading && (
+                  <TransactionsTableSuspense rowsNumber={5} {...props} />
+                )
+              );
+            },
+            elementAttributes: () => ({
+              className: isLoading ? "loading-tbody" : undefined,
+            }),
+          },
+        }}
+      />
+    </UsersListStyled>
+  );
+};
