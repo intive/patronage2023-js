@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Separator } from "ui";
 
 export const FormWrapper = styled.div`
+  position: relative;
   width: 320px;
   height: calc(100% - 52px);
 
@@ -17,6 +18,13 @@ export const FormWrapper = styled.div`
   }
 `;
 
+export const ErrorWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+`;
+
 export const SeparatorStyled = styled(Separator)`
   display: block;
   width: calc(100% + calc(16px * 2));
@@ -29,7 +37,6 @@ export const SeparatorStyled = styled(Separator)`
 `;
 
 export const ButtonWrapperStyled = styled.div`
-  display: block;
   margin-top: 24px;
 `;
 

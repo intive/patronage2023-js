@@ -5,16 +5,13 @@ export interface Currency {
   tag: string;
   locale: string;
 }
-interface Icon {
-  name: string;
-  foreground: string;
-  background: string;
-}
+
 interface Creator {
   id: string;
   name: string;
   avatar: string;
 }
+
 export interface Transaction {
   id: string;
   date: number;
@@ -30,8 +27,8 @@ export interface Budget {
   name: string;
   description: string;
   icon: IconType;
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
   limit: number;
   currency: string;
   userID: string;
@@ -42,8 +39,8 @@ export interface BudgetFixed {
   name: string;
   description: string;
   icon: IconType;
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
   limit: number;
   userID: string;
   currency: {
@@ -58,8 +55,8 @@ export interface BudgetGeneralInfo {
     tag: string;
     locale: string;
   };
-  startDate: number;
-  endDate: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface BudgetTransaction {
@@ -69,4 +66,8 @@ export interface BudgetTransaction {
 
 export interface CategoryMap {
   [category: string]: CategoryType | undefined;
+}
+
+export interface UserRole {
+  role: "ADMIN" | "USER";
 }

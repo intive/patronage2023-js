@@ -12,43 +12,35 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-import categoryMap from "lib/category-map";
-import { CategoryMap } from "lib/types";
-import { CategoryType } from "ui/CategoryIcon";
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 type CategorySelectorProps = {
   onValueChange: (value: string) => void;
   label?: string;
   errors?: string[];
+  categoryMap: Object;
+  hasScrollbar?: boolean;
 };
 
 export const CategorySelector = ({
   errors,
   onValueChange,
   label,
+  categoryMap,
+  hasScrollbar,
 }: CategorySelectorProps) => {
-  const { hasScrollbar } = useHasScrollBar();
   const [isOpen, setIsOpen] = useState(false);
   const hasErrors = errors ? errors.length > 0 : false;
+  type CategoryMapType = typeof categoryMap;
 
-  const getCategoriesItems = (categoryMap: CategoryMap) => {
-    const categories = Object.keys(categoryMap);
-
-    return categories.map((category) => (
-      <SelectItemStyled value={category} key={category}>
+  const getCategoriesItems = (categoryMap: CategoryMapType) => {
+    const categoryEntries = Object.entries(categoryMap);
+    return categoryEntries.map(([categoryKey, category]) => (
+      <SelectItemStyled value={categoryKey} key={categoryKey}>
         <Select.ItemText>
           <CategoryWrapperStyled>
-            {categoryMap[category] && (
-              <CategoryIcon
-                small
-                category={categoryMap[category] as CategoryType}
-              />
-            )}
-            {categoryMap[category]?.name && (
-              <CategoryNameStyled>
-                {categoryMap[category]?.name}
-              </CategoryNameStyled>
+            {category && <CategoryIcon small category={category} />}
+            {category?.name && (
+              <CategoryNameStyled>{category?.name}</CategoryNameStyled>
             )}
           </CategoryWrapperStyled>
         </Select.ItemText>
@@ -75,7 +67,7 @@ export const CategorySelector = ({
           </SelectIconStyled>
         </SelectTriggerStyled>
         <SupportingLabelStyled hasError={hasErrors}>
-          {errors && errors[0]}
+          {errors && errors.length > 0 && errors[0]}
         </SupportingLabelStyled>
       </SelectTriggerWrapperStyled>
 
