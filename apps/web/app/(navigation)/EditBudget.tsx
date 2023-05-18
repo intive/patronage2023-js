@@ -73,7 +73,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       onSettled: (data) => {
         switch(data!.status) {
           case 201: 
-            console.log("Success");
             queryClient.invalidateQueries({ queryKey: ['budgets'] });
             onClose();
             break;

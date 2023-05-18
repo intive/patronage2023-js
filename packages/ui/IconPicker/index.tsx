@@ -94,13 +94,13 @@ export const IconPicker = ({
   const handleCloseIconSelector = () => setIconSelectorVisible(false);
 
   return (
-    <IconPickerStyled ref={ref} onClick={ e => handleEditButtonClick(e)}>
+    <IconPickerStyled ref={ref} onClick={handleEditButtonClick}>
       {currentIcon ? (
         <BudgetIcon icon={currentIcon} />
       ) : (
         <BudgetIcon>{children}</BudgetIcon>
       )}
-      <EditButtonStyled onClick={ e => handleEditButtonClick(e)}>
+      <EditButtonStyled onClick={handleEditButtonClick}>
         <Icon icon="edit" iconSize={12} />
       </EditButtonStyled>
       {iconSelectorVisible && (
