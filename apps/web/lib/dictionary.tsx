@@ -712,7 +712,7 @@ const dictionary = {
     },
     buttonGroupLabels: {
       all: { en: "View all", pl: "Wszystkie", fr: "Voir tout" },
-      income: { en: "Income", pl: "Wpływy", fr: "Les recettes" },
+      income: { en: "Incomes", pl: "Wpływy", fr: "Les recettes" },
       expenses: { en: "Expenses", pl: "Wydatki", fr: "Les dépenses" },
     },
     transactionsTable: {

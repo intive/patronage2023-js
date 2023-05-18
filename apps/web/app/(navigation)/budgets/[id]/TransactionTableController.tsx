@@ -113,6 +113,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         setTransactionTypeFilterState(null);
       },
       id: "all",
+      defaultChecked: true,
     },
     {
       component: t(dict.buttonGroupLabels.income),

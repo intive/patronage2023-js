@@ -130,13 +130,13 @@ export const ButtonGroup = ({ options, secondary }: GroupProps) => {
         return (
           <Fragment key={id}>
             <input
-              type={"radio"}
-              id={`button-${index}`}
+              type="radio"
+              id={`button-${id}`}
               onClick={onSelect}
-              name={"button-group"}
+              name="button-group"
               defaultChecked={defaultChecked}
             />
-            <label htmlFor={`button-${index}`}>{component}</label>
+            <label htmlFor={`button-${id}`}>{component}</label>
           </Fragment>
         );
       })}
