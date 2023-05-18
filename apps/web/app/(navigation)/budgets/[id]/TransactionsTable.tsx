@@ -3,7 +3,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
-import { useSession } from "next-auth/react";
 
 import { Transaction } from "lib/types";
 import { Table } from "ka-table";
@@ -38,7 +37,6 @@ export const TransactionsTable = ({
   transactions = [],
   isLoading,
 }: TransactionsTableProps) => {
-  const { data } = useSession();
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { transactionsTable } = dict;
@@ -162,7 +160,7 @@ export const TransactionsTable = ({
                   );
                 case "creator":
                   return (
-                    data && <Avatar className="avatar" src={data.user.image} />
+                    <Avatar className="avatar" src={props.value.avatar} />
                   );
                 case "editColumn":
                   return (
