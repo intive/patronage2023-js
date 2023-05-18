@@ -53,7 +53,7 @@ export const IconSelector = ({
 
     document.addEventListener("keydown", handleEscapeKey);
     return () => document.removeEventListener("keydown", handleEscapeKey);
-  }, []);
+  }, [onClose]);
 
   return (
     <IconsSelectorStyled>

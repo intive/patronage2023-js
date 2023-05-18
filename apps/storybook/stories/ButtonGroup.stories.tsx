@@ -24,8 +24,7 @@ const FixedWidth: ComponentStory<typeof ButtonGroup> = (args) => (
     <div
       style={{
         width: "300px",
-      }}
-    >
+      }}>
       <ButtonGroup {...args} />
     </div>
   </>
@@ -41,8 +40,7 @@ const FullHeight: ComponentStory<typeof ButtonGroup> = (args) => (
       style={{
         height: "100px",
         width: "200px",
-      }}
-    >
+      }}>
       <ButtonGroup {...args} />
     </div>
   </>

@@ -13,6 +13,8 @@ const colors = {
   Teal3: "#A3EAC9",
   Teal2: "#D0F5E3",
   Teal1: "#F1FBF6",
+  Neutral12: "#cdcbcb",
+  Neutral11: "#b1b1b11a",
   Neutral10: "#222222",
   Neutral9: "#3B3B3B",
   Neutral8: "#515151",
@@ -51,6 +53,7 @@ export const theme = {
   },
   background: {
     background: colors.Teal10,
+    loggedIn: colors.Neutral1,
   },
   button: {
     primary: {
@@ -132,7 +135,7 @@ export const theme = {
   sideNavigationBar: {
     background: {
       activeColor: colors.BasicWhite,
-      inactiveColor: "#e5e5e5",
+      inactiveColor: colors.Neutral1,
     },
     sideNavigationBarItem: {
       main: colors.Teal10,
@@ -316,6 +319,9 @@ export const theme = {
     negativeFill: colors.Supporting17,
     titleLeft: colors.Neutral6,
     currencyAmount: colors.Neutral8,
+    placeholderBackground: colors.Neutral1,
+    placeholderChartFill: colors.Neutral11,
+    placeholderChartLine: colors.Neutral12,
   },
   budgetContent: {
     budgetDetails: colors.Neutral1,

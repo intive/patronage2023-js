@@ -4,19 +4,23 @@ import { CurrencySelect } from "ui";
 import styled from "styled-components";
 
 export default {
-    title: "Currency Select",
-    component: CurrencySelect,
+  title: "Currency Select",
+  component: CurrencySelect,
 } as ComponentMeta<typeof CurrencySelect>;
 
-const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({...args }) => (
-    <Wrapper><CurrencySelect {...args}/></Wrapper>
+const CurrencySelectTemplate: ComponentStory<typeof CurrencySelect> = ({
+  ...args
+}) => (
+  <Wrapper>
+    <CurrencySelect {...args} />
+  </Wrapper>
 );
 
 export const Select = CurrencySelectTemplate.bind({});
 Select.args = {
-    label: "Currency",
+  label: "Currency",
 };
 
 const Wrapper = styled.div`
-  width: 210px;  
+  width: 210px;
 `;
