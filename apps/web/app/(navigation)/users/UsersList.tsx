@@ -87,15 +87,15 @@ export const UsersList = ({
         childComponents={{
           cell: {
             content: (props) => {
-              // console.log(props.rowData)
               switch (props.column.key) {
                 case "avatar":
                   if (!props.rowData.attributes) return <Avatar src="/unsetAvatar.svg" />
                   const text = props.rowData.attributes.avatar[0];
-                  const schema = z.string().startsWith("/avatars/").endsWith(".svg");
-                  const result = schema.safeParse(text)
-                  console.log(text, result)
-                  return <Avatar src={result.success ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
+                  const schemaPath = z.string().startsWith("/avatars/").endsWith(".svg");
+                  const schemaUrl = z.string().url();
+                  const isPath = schemaPath.safeParse(text);
+                  const isUrl = schemaUrl.safeParse(text);
+                  return <Avatar src={isPath.success || isUrl.success ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
                 case "email":
                   return <EmailStyled>{props.rowData.email}</EmailStyled>;
                 case "createdTimestamp":

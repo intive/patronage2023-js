@@ -280,7 +280,7 @@ const users = [
     "lastName": "Wy",
     "attributes": {
       "avatar": [
-        "1"
+        "https://play-lh.googleusercontent.com/UjaAdTYsArv7zAJbqGWjQw2ftuOtnAlvokffC3TQQ2K12mwk0YdXUF2wZBTBA2kDZIk=w240-h480-rw"
       ]
     },
     "createdTimestamp": 1684419047909,
@@ -293,7 +293,7 @@ const users = [
     "lastName": "zaba",
     "attributes": {
       "avatar": [
-        "/avatars/1.svg"
+        "https://media.npr.org/assets/img/2017/09/12/macaca_nigra_self-portrait-3e0070aa19a7fe36e802253048411a38f14a79f8-s1100-c50.jpg"
       ]
     },
     "createdTimestamp": 1681833214367,
