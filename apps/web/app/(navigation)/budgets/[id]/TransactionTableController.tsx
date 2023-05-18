@@ -12,7 +12,6 @@ import {
   ButtonGroupWrapper,
   FilterSearchWrapper,
 } from "./TransactionsFilterSearchStyled";
-import { SearchInput } from "ui/Input/SearchInput";
 
 type APIResponse = {
   items: Item[];
