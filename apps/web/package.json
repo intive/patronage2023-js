@@ -27,8 +27,7 @@
     "react-loading-skeleton": "^3.3.1",
     "react-query": "^3.39.3",
     "ui": "*",
-    "zod": "^3.21.4",
-    "zustand": "^4.3.8"
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

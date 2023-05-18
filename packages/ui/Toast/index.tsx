@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { atom, useAtom } from "jotai";
 import { Icon, IconType } from "../Icon";
 import {
   ToastProvider,
@@ -10,12 +10,10 @@ import {
   ToastVariant,
 } from "./Toast.styles";
 
-type Toast = ToastVariant & { message: string };
+type ToastAtom = ToastVariant & { message: string };
 
-const initialToast = { variant: "confirm", message: "" } as Toast;
+const initialToast = { variant: "confirm", message: "" } as ToastAtom;
 
-/*** jotai 
- * 
 // primitive atom for current toast state
 const toastAtom = atom(initialToast);
 
@@ -24,27 +22,9 @@ const showToastAtom = atom(null, (_, set, update: ToastAtom) =>
   set(toastAtom, { message: update.message, variant: update.variant })
 );
 
-// public custom hook for showing the toast
+// custom hook for showing the atom, public
 export const useToast = () => {
   const [, showToast] = useAtom(showToastAtom);
-
-  return showToast;
-};
-
-***/
-
-type ToastStore = { toast: Toast; showToast: (update: Toast) => void };
-
-// store is private
-const useToastStore = create<ToastStore>((set) => ({
-  toast: initialToast,
-  showToast: (update) =>
-    set({ toast: { message: update.message, variant: update.variant } }),
-}));
-
-// public custom hook for showing the toast
-export const useToast = () => {
-  const showToast = useToastStore((toast) => toast.showToast);
 
   return showToast;
 };
@@ -56,14 +36,7 @@ const iconMap = {
 
 // 'tis where the toasts be
 export const ToastHoast = () => {
-  // jotai
-  // const [{ message, variant }, showToast] = useAtom(toastAtom);
-
-  // zustand
-  const {
-    toast: { message, variant },
-    showToast,
-  } = useToastStore();
+  const [{ message, variant }, setToast] = useAtom(toastAtom);
 
   return (
     <ToastProvider
@@ -73,7 +46,7 @@ export const ToastHoast = () => {
       swipeThreshold={30}>
       <StyledRoot
         open={!!message}
-        onOpenChange={() => showToast(initialToast)}
+        onOpenChange={() => setToast(initialToast)}
         asChild>
         <StylingDiv variant={variant}>
           <StyledDescription>
