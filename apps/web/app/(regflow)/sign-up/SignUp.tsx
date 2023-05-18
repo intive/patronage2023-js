@@ -61,7 +61,6 @@ export const SignUp = () => {
       password: nextUser.password,
       email: nextUser.email,
     };
-    console.log(nextUser);
     setUser(nextUser);
 
     // @ts-ignore
@@ -72,13 +71,15 @@ export const SignUp = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(backendUser),
-    }).then(result => {
-      setResult(result.status);
-      setCurrentStep(currentStep + 1);
-    }).catch(() => {
-      setResult(400);
-      setCurrentStep(currentStep + 1);
-    });
+    })
+      .then((result) => {
+        setResult(result.status);
+        setCurrentStep(currentStep + 1);
+      })
+      .catch(() => {
+        setResult(400);
+        setCurrentStep(currentStep + 1);
+      });
   };
 
   return (
