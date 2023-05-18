@@ -4,14 +4,12 @@ import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
-import { ButtonGroup, ErrorMessage } from "ui";
+import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-import {
-  ButtonGroupWrapper,
-  FilterSearchWrapper,
-} from "./TransactionsFilterSearchStyled";
+import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
+import { TransactionTypeFilter } from "./TransactionTypeFilter";
 
 type APIResponse = {
   items: Item[];
@@ -36,7 +34,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [transactionTypeFilterState, setTransactionTypeFilterState] = useState<
+  const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
   >(null);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -77,7 +75,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       currentPage,
       budget,
       session,
-      transactionTypeFilterState,
+      transactionType,
     ],
     queryFn: async () => {
       return fetch(
@@ -86,7 +84,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: JSON.stringify({
             pageSize: itemsPerPage,
             pageIndex: currentPage,
-            transactionType: transactionTypeFilterState,
+            transactionType: transactionType,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
@@ -106,32 +104,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     enabled: !!session && !!budget,
   });
 
-  const buttonGroupOptions = [
-    {
-      component: t(dict.buttonGroupLabels.all),
-      onSelect: () => {
-        setTransactionTypeFilterState(null);
-      },
-      id: "all",
-      defaultChecked: true,
-    },
-    {
-      component: t(dict.buttonGroupLabels.income),
-      onSelect: () => {
-        setTransactionTypeFilterState("Income");
-      },
-      id: "income",
-    },
-    {
-      component: t(dict.buttonGroupLabels.expenses),
-      onSelect: () => {
-        setTransactionTypeFilterState("Expense");
-      },
-      id: "expenses",
-    },
-  ];
-
-  useEffect(() => setCurrentPage(1), [transactionTypeFilterState]);
+  useEffect(() => setCurrentPage(1), [transactionType]);
 
   if (isError) {
     return (
@@ -145,9 +118,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   return (
     <>
       <FilterSearchWrapper>
-        <ButtonGroupWrapper>
-          <ButtonGroup options={buttonGroupOptions} secondary />
-        </ButtonGroupWrapper>
+        <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
