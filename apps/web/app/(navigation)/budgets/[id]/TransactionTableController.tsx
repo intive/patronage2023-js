@@ -148,7 +148,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         <ButtonGroupWrapper>
           <ButtonGroup options={buttonGroupOptions} secondary />
         </ButtonGroupWrapper>
-        <SearchInput placeholder="Search by name" />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
