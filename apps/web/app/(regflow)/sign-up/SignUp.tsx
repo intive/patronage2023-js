@@ -2,10 +2,11 @@
 
 import { EmailScreen } from "./EmailScreen";
 import { FlowController } from "./FlowController";
-import { PasswordSubComponent } from "./PasswordSubComponent";
+import { PasswordSubComponent } from "./PasswordScreen";
 import { ProfileScreen } from "./ProfileScreen";
 import { SuccessErrorScreen } from "./SuccessErrorScreen";
 import { useState } from "react";
+import { env } from "env.mjs";
 
 interface userObject {
   email: string;
@@ -52,26 +53,32 @@ export const SignUp = () => {
 
   const validateProfile = (profileInfo: userObject["profile"]) => {
     //set profile info to user
-    setUser({ ...user, profile: profileInfo });
+    const nextUser = { ...user, profile: profileInfo };
+    const backendUser = {
+      avatar: nextUser.profile.avatar,
+      firstName: nextUser.profile.firstName,
+      lastName: nextUser.profile.lastName,
+      password: nextUser.password,
+      email: nextUser.email,
+    };
+    console.log(nextUser);
+    setUser(nextUser);
 
-    //useState might not be updated here, so we use fetch with passed profileInfo directly
-    //   fetch("http://strzelam_w_backend:5000", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: user.email,
-    //       password: hashedPassword,
-    //       profile: profileInfo,
-    //     }),
-    //   }).then((res) => {
-    //     setResult(res.status);
-    //   });
-    // };
-
-    setResult(user.email === "smutnarzaba@png.pl" ? 400 : 200); //mocked result
-    setCurrentStep(currentStep + 1);
+    // @ts-ignore
+    // eslint-disable-next-line turbo/no-undeclared-env-vars
+    fetch(env.NEXT_PUBLIC_API_URL + "user/sign-up", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(backendUser),
+    }).then(result => {
+      setResult(result.status);
+      setCurrentStep(currentStep + 1);
+    }).catch(() => {
+      setResult(400);
+      setCurrentStep(currentStep + 1);
+    });
   };
 
   return (
