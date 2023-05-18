@@ -1,6 +1,6 @@
 "use client";
 import { Field, Form } from "houseform";
-import categoryMap from "lib/category-map";
+import { useCategoryMap } from "lib/category-map";
 import styled from "styled-components";
 import { CategoryIcon, Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
@@ -42,6 +42,7 @@ const CategoryIconStyled = styled(CategoryIcon)`
 
 export const CategoryFilterForm = () => {
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
+  const categoryMap = useCategoryMap();
   const categoryEntries = Object.entries(categoryMap);
   const queryClient = useQueryClient();
 

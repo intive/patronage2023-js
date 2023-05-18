@@ -836,6 +836,28 @@ const dictionary = {
       },
     },
   },
+  CategoryMap: {
+    homeSpendings: {
+      en: "Home spendings",
+      pl: "Wydatki domowe",
+      fr: "Dépenses à domicile",
+    },
+    subscriptions: {
+      en: "Subscriptions",
+      pl: "Subskrypcje",
+      fr: "Abonnements",
+    },
+    car: {
+      en: "Car",
+      pl: "Samochód",
+      fr: "Automobile",
+    },
+    grocery: {
+      en: "Grocery",
+      pl: "Zakupy spożywcze",
+      fr: "épicerie",
+    },
+  },
 };
 
 export default dictionary;

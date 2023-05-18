@@ -12,7 +12,7 @@ import {
   SupportingLabelStyled,
 } from "./CategorySelectorStyled";
 import { CategoryIcon, Icon } from "ui";
-import categoryMap from "lib/category-map";
+import { useCategoryMap } from "lib/category-map";
 import { CategoryMap } from "lib/types";
 import { CategoryType } from "ui/CategoryIcon";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
@@ -31,6 +31,8 @@ export const CategorySelector = ({
   const { hasScrollbar } = useHasScrollBar();
   const [isOpen, setIsOpen] = useState(false);
   const hasErrors = errors ? errors.length > 0 : false;
+
+  const categoryMapData = useCategoryMap();
 
   const getCategoriesItems = (categoryMap: CategoryMap) => {
     const categories = Object.keys(categoryMap);
@@ -81,7 +83,9 @@ export const CategorySelector = ({
 
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper">
-          <Select.Viewport>{getCategoriesItems(categoryMap)}</Select.Viewport>
+          <Select.Viewport>
+            {getCategoriesItems(categoryMapData)}
+          </Select.Viewport>
         </SelectContentStyled>
       </SelectPortalStyled>
     </Select.Root>
