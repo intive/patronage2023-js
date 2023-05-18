@@ -457,10 +457,15 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
-      error500: {
-        en: "Ops, something went wrong",
-        pl: "Ups, coś poszło nie tak",
-        fr: "Oups, quelque chose s'est mal passé",
+      error400: {
+        en: "Ops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose s'est mal passé.",
+      },
+      error401: {
+        en: "No authorization!",
+        pl: "Brak autoryzacji!",
+        fr: "Absence d'autorisation!"
       },
       errorDefault: {
         en: "Unexpected error!",
