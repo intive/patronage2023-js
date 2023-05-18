@@ -25,7 +25,6 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const { replace } = useRouter();
-
   const showToast = useToast();
 
   const deleteBudget = useMutation({
@@ -50,9 +49,18 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
         ])
         .then((r) => console.log(r));
       replace("/");
+      showToast({
+        variant: "confirm",
+        message: t(dict.removeBudgetModal.confirmMessage),
+      });
     },
     onError: (error) => {
       setToggleErrorBox(true);
+      onClose();
+      showToast({
+        variant: "error",
+        message: t(dict.removeBudgetModal.errorMessage),
+      });
     },
   });
   return (
@@ -68,16 +76,6 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
           </Button>
           <Button onClick={onClose} variant={"secondary"}>
             {t(dict.removeBudgetModal.abortButton)}
-          </Button>
-          <Button
-            onClick={() =>
-              showToast({
-                variant: "error",
-                message: "Opps, something went kaboom",
-              })
-            }
-            variant={"simple"}>
-            Show error toast
           </Button>
         </ButtonWrapper>
       </Modal>

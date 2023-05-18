@@ -727,6 +727,16 @@ const dictionary = {
         pl: "Anuluj",
         fr: "Annuler",
       },
+      errorMessage: {
+        en: "Ops, something went wrong",
+        pl: "Ups, coś poszło nie tak",
+        fr: "Oups, quelque chose s'est mal passé",
+      },
+      confirmMessage: {
+        en: "Budget was successfully removed",
+        pl: "Budżet został pomyślnie usunięty",
+        fr: "Le budget a bien été supprimé",
+      },
     },
     createButton: {
       label: { en: "Create", pl: "Utwórz", fr: "Créer" },
