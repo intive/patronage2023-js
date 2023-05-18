@@ -5,7 +5,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import styled from "styled-components";
 
 interface RemoveBudgetProps {
@@ -21,7 +20,6 @@ const ButtonWrapper = styled.div`
 
 export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
-  const [toggleErrorBox, setToggleErrorBox] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const { replace } = useRouter();
@@ -55,7 +53,6 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
       });
     },
     onError: (error) => {
-      setToggleErrorBox(true);
       onClose();
       showToast({
         variant: "error",
