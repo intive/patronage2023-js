@@ -2,6 +2,7 @@
 
 import { Fragment, ReactNode } from "react";
 import styled, { css } from "styled-components";
+import { device } from "web/lib/media-queries";
 
 interface InputProps {
   component: ReactNode;
@@ -14,27 +15,6 @@ type GroupProps = {
   options: InputProps[];
   secondary?: boolean;
 } & React.HTMLProps<HTMLDivElement>;
-
-export const ButtonGroup = ({ options, secondary }: GroupProps) => {
-  return (
-    <ButtonGroupStyled options={options} secondary={secondary}>
-      {options.map(({ component, onSelect, defaultChecked, id }, index) => {
-        return (
-          <Fragment key={id}>
-            <input
-              type={"radio"}
-              id={`button-${index}`}
-              onClick={onSelect}
-              name={"button-group"}
-              defaultChecked={defaultChecked}
-            />
-            <label htmlFor={`button-${index}`}>{component}</label>
-          </Fragment>
-        );
-      })}
-    </ButtonGroupStyled>
-  );
-};
 
 const ButtonGroupStyled = styled.div<GroupProps>`
   display: flex;
@@ -49,8 +29,13 @@ const ButtonGroupStyled = styled.div<GroupProps>`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    padding: 8px 24px;
+    padding: 8px 8px;
     position: relative;
+    text-align: center;
+
+    ${device.desktop} {
+      padding: 8px 16px;
+    }
 
     ${({ secondary }) =>
       secondary
@@ -137,3 +122,24 @@ const ButtonGroupStyled = styled.div<GroupProps>`
           `}
   }
 `;
+
+export const ButtonGroup = ({ options, secondary }: GroupProps) => {
+  return (
+    <ButtonGroupStyled options={options} secondary={secondary}>
+      {options.map(({ component, onSelect, defaultChecked, id }, index) => {
+        return (
+          <Fragment key={id}>
+            <input
+              type="radio"
+              id={`button-${id}`}
+              onClick={onSelect}
+              name="button-group"
+              defaultChecked={defaultChecked}
+            />
+            <label htmlFor={`button-${id}`}>{component}</label>
+          </Fragment>
+        );
+      })}
+    </ButtonGroupStyled>
+  );
+};

@@ -1,0 +1,27 @@
+.flex-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.wrapper-content-div {
+  width: 100%;
+  z-index: 0;
+}
+
+.wrapper-content-div span {
+  height: 40px;
+}
+
+.loading-tbody {
+  position: relative;
+  z-index: 1;
+}
+
+.loading-cell {
+  padding: 5px 5px 5px 0;
+}
