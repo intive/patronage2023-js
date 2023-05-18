@@ -1,44 +1,18 @@
 "use client";
 import { Field, Form } from "houseform";
 import { useCategoryMap } from "lib/hooks";
-import styled from "styled-components";
-import { CategoryIcon, Checkbox } from "ui";
+import { Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
 import { useSetAtom } from "jotai";
 import { CategoryFilterType } from "lib/types";
 import { useQueryClient } from "@tanstack/react-query";
-
-const FormStyled = styled.form`
-  width: 100%;
-  height: 100%;
-`;
-
-const CheckboxListStyled = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  width: 100%;
-  gap: 8px;
-  padding: 8px 0;
-  list-style: none;
-`;
-
-const CategoryTitleStyled = styled.span`
-  font-size: 0.875em;
-`;
-
-const CheckboxLabelContentStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-`;
-
-const CategoryIconStyled = styled(CategoryIcon)`
-  width: 32px;
-  height: 32px;
-`;
+import {
+  CategoryIconStyled,
+  CategoryTitleStyled,
+  CheckboxLabelContentStyled,
+  CheckboxListStyled,
+  FormStyled,
+} from "./CategoryFilterForm.styled";
 
 export const CategoryFilterForm = () => {
   const setCategoryFilter = useSetAtom(categoryFilterAtom);

@@ -86,7 +86,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: JSON.stringify({
             pageSize: itemsPerPage,
             pageIndex: currentPage,
-            transactionType: null,
             categoryTypes: categoryFilterState,
           }),
           headers: {
