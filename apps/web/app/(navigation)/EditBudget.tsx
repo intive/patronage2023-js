@@ -49,6 +49,8 @@ interface editedBudgetBEProps {
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
   const [ errMsg, setErrMsg ] = useState("");
+  const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
+    useValidateBudgetModal("AddNewBudgetModal");
 
   //BE integration
   const { data: session } = useSession();
@@ -89,9 +91,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       },
   });
   //BE integration end
-
-  const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
-    useValidateBudgetModal("AddNewBudgetModal");
 
   const defaultValueTabs = "settings";
 
