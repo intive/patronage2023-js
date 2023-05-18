@@ -31,13 +31,13 @@ export const SelectTrigger = styled(Select.Trigger)<SelectTriggerProps>`
 `;
 
 export const StyledLabel = styled.label`
-    position: absolute;
-    margin-top: -24px;
-    font-size: 12px;
-    font-weight: 600;
-    background-color: ${({ theme }) => theme.input.labelBackground};
-    padding-left: 4px;
-    padding-right: 4px;
+  position: absolute;
+  margin-top: -24px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: ${({ theme }) => theme.input.labelBackground};
+  padding-left: 4px;
+  padding-right: 4px;
 `;
 
 export const SelectIcon = styled(Select.Icon)`
@@ -62,7 +62,7 @@ export const SelectItem = styled(Select.Item)`
   outline-color: ${({ theme }) => theme.input.focus};
   padding: 16px;
   gap: 8px;
-  
+
   &:focus {
     color: ${({ theme }) => theme.input.main};
     background-color: ${({ theme }) => theme.currencySelect.focusBackground};
@@ -72,7 +72,7 @@ export const SelectItem = styled(Select.Item)`
     &:last-child {
       border-radius: 0 0 1em 1em;
     }
-    &:hover{
+    &:hover {
       outline: transparent;
     }
   }

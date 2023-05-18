@@ -8,7 +8,7 @@ import {
   StyledTitle,
   StyledBalanceChartWrapper,
   StyledChartPlaceholder,
-  StyledTrendChip
+  StyledTrendChip,
 } from "./TrendChart.styled";
 
 import {
