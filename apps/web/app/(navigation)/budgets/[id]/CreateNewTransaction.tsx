@@ -63,7 +63,7 @@ export const CreateNewTransaction = ({
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/transaction`;
   const token = data?.user.accessToken;
 
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const newTransactionMutation = useMutation(
     (newTransaction: TransactionType) => {
