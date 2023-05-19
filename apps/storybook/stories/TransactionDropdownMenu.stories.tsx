@@ -73,6 +73,6 @@ const Template: ComponentStory<typeof TransactionDropdownMenu> = ({
 
 export const Basic = Template.bind({});
 Basic.args = {
-  items: 'Default',
+  items: "Default",
   side: "right",
 };
