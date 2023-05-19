@@ -64,8 +64,6 @@ export const SignUp = () => {
       email: newUser.email,
     };
 
-    // @ts-ignore
-    // eslint-disable-next-line turbo/no-undeclared-env-vars
     fetch(env.NEXT_PUBLIC_API_URL + "user/sign-up", {
       method: "POST",
       headers: {
