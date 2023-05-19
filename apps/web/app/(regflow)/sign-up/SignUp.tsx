@@ -41,7 +41,7 @@ export const SignUp = () => {
         email: user.email,
       };
 
-      return fetch(env.NEXT_PUBLIC_API_URL + "user/sign-up", {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}user/sign-up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
