@@ -7,6 +7,7 @@ import { ProfileScreen } from "./ProfileScreen";
 import { SuccessErrorScreen } from "./SuccessErrorScreen";
 import { useState } from "react";
 import { env } from "env.mjs";
+import { useMutation } from "@tanstack/react-query";
 
 interface userObject {
   email: string;
@@ -20,7 +21,6 @@ interface userObject {
 
 export const SignUp = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [result, setResult] = useState<number | null>(null); // 200, 400
   const [user, setUser] = useState<userObject>({
     email: "",
     password: "",
@@ -28,6 +28,34 @@ export const SignUp = () => {
       firstName: "",
       lastName: "",
       avatar: "",
+    },
+  });
+
+  const signUpMutation = useMutation({
+    mutationFn: (user: userObject) => {
+      const backendUser = {
+        avatar: user.profile.avatar,
+        firstName: user.profile.firstName,
+        lastName: user.profile.lastName,
+        password: user.password,
+        email: user.email,
+      };
+
+      return fetch(env.NEXT_PUBLIC_API_URL + "user/sign-up", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(backendUser),
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response;
+      });
+    },
+    onSettled: () => {
+      setCurrentStep(currentStep + 1);
     },
   });
 
@@ -55,30 +83,7 @@ export const SignUp = () => {
     //set profile info to user
     const newUser = { ...user, profile: profileInfo };
     setUser(newUser);
-
-    const backendUser = {
-      avatar: newUser.profile.avatar,
-      firstName: newUser.profile.firstName,
-      lastName: newUser.profile.lastName,
-      password: newUser.password,
-      email: newUser.email,
-    };
-
-    fetch(env.NEXT_PUBLIC_API_URL + "user/sign-up", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(backendUser),
-    })
-      .then((result) => {
-        setResult(result.status);
-        setCurrentStep(currentStep + 1);
-      })
-      .catch(() => {
-        setResult(400);
-        setCurrentStep(currentStep + 1);
-      });
+    signUpMutation.mutate(newUser);
   };
 
   return (
@@ -114,7 +119,7 @@ export const SignUp = () => {
           props: {
             loginHref: "/sign-in",
             onBackToStart: goToBeginning,
-            success: result === 200,
+            success: signUpMutation.isSuccess,
           },
         },
       ]}
