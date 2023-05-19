@@ -4,6 +4,14 @@ interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body: object;
 }
 
+class SuperError extends Error {
+  status: number;
+  constructor(message: string, status: number) {
+    super(message);
+    this.status = status;
+  }
+}
+
 export default function useSuperfetch() {
   const { data: session } = useSession();
 
@@ -25,12 +33,13 @@ export default function useSuperfetch() {
     })
       .then(async (res) => {
         if (res.ok) {
-          return { data: await res.json(), status: res.status };
+          const data = await res.json();
+          return { ...data, httpStatus: res.status };
         }
-        return { data: null, status: res.status };
+        throw new SuperError("An error has occurred.", res.status);
       })
-      .catch((error) => {
-        throw new Error(`${error}`);
+      .catch(() => {
+        throw new SuperError("Something went wrong", 500);
       });
   };
 

@@ -67,7 +67,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
+    queryKey: ["datatable", itemsPerPage, currentPage, budget],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
@@ -76,10 +76,11 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
+            search: "",
           },
         }
       )
-        .then((res) => fixFetchedData(res.data))
+        .then((res) => fixFetchedData(res))
         .catch((err) => console.error(err));
     },
   });

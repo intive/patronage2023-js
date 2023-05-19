@@ -99,10 +99,10 @@ const BudgetStatistics = ({ budget }: Props) => {
           />
           <CurrencyAmountStyled
             currencyOptions={currency}
-            amount={statistics?.data.periodValue}
+            amount={statistics?.periodValue}
             hidePlus
           />
-          <StyledTrendChip value={statistics?.data.trendValue} />
+          <StyledTrendChip value={statistics?.trendValue} />
         </>
       )}
     </StatisticsWrapperStyled>
