@@ -143,7 +143,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           method: "POST",
           headers: {
             accept: "text/plain",
-            // Authorization: "Bearer " + session!.user.accessToken,
+            Authorization: "Bearer " + session!.user.accessToken,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
