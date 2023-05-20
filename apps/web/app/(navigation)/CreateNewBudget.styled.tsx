@@ -153,7 +153,7 @@ export const TabsStyled = styled(Tabs.Root)`
 export const ErrorMessageWrapper = styled.div`
   position: absolute;
   z-index: 100;
-  margin-top: 40px;
+  margin-top: -28px;
   width: 460px;
 `;
 
