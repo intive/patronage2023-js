@@ -1,11 +1,11 @@
 "use client";
 
-import { useContext } from "react";
+import { useAtomValue } from "jotai";
+import { languageAtom } from "../../../apps/web/app/store";
 
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";
 import "react-datepicker/dist/react-datepicker.css";
-import { LanguageContext } from "../../../apps/web/lib/contexts/LanguageContext";
 
 import { Input } from "../Input";
 
@@ -37,7 +37,7 @@ export const CustomDatePicker = ({
   hasError,
   label,
 }: CustomDatePickerProps) => {
-  const { currentLang } = useContext(LanguageContext);
+  const currentLang = useAtomValue(languageAtom);
 
   return (
     <DatePickerStyled hasError={hasError} label={label}>

@@ -2,7 +2,6 @@
 /* eslint-disable @next/next/no-head-element */
 import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
-import { LanguageProvider } from "lib/contexts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
 import SessionProviderWrapper from "./SessionProviderWrapper";
@@ -38,11 +37,9 @@ export default function RootLayout({ children }: LayoutProps) {
         <QueryClientProvider client={queryClient}>
           <SessionProviderWrapper>
             <StyledComponentsRegistry>
-              <LanguageProvider>
-                <StyledComponentsThemeWrapper>
-                  {children}
-                </StyledComponentsThemeWrapper>
-              </LanguageProvider>
+              <StyledComponentsThemeWrapper>
+                {children}
+              </StyledComponentsThemeWrapper>
             </StyledComponentsRegistry>
           </SessionProviderWrapper>
         </QueryClientProvider>

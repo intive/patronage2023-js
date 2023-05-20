@@ -1,4 +1,3 @@
-import { languages } from "lib/contexts";
 import * as Select from "@radix-ui/react-select";
 
 import { Flag } from "ui";
@@ -8,7 +7,7 @@ import {
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
 import { useEffect } from "react";
-import { languageAtom } from "app/store";
+import { languageAtom, languages } from "app/store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
