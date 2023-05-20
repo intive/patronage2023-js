@@ -59,7 +59,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   };
 
   return (
-    <Modal header={t(dict.title)} onClose={() => onClose && onClose()} fullHeight>
+    <Modal
+      header={t(dict.title)}
+      onClose={() => onClose && onClose()}
+      fullHeight>
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValueTabs}>
         <Tabs.List>

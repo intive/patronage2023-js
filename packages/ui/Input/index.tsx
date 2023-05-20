@@ -21,94 +21,101 @@ export type InputProps = {
 } & StyledErrorProps &
   React.HTMLProps<HTMLInputElement>;
 
-export const Input = forwardRef(({
-  label,
-  hasError = false,
-  name,
-  id,
-  supportingLabel,
-  type,
-  value,
-  onChange,
-  onFocus,
-  onBlur,
-  onInputCleared,
-}: InputProps, ref) => {
-  const theme = useContext(ThemeContext);
-  const [typeOverride, setTypeOverride] = useState("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
+export const Input = forwardRef(
+  (
+    {
+      label,
+      hasError = false,
+      name,
+      id,
+      supportingLabel,
+      type,
+      value,
+      onChange,
+      onFocus,
+      onBlur,
+      onInputCleared,
+    }: InputProps,
+    ref
+  ) => {
+    const theme = useContext(ThemeContext);
+    const [typeOverride, setTypeOverride] = useState("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const getButton = () => {
-    if (type === "password") {
-      return (
-        <StyledIcon
-          onClick={(event) => {
-            event.preventDefault();
-            inputRef.current?.focus();
-            setTypeOverride(typeOverride ? "" : "text");
-          }}>
-          <Icon
-            icon={typeOverride ? "visibility_off" : "visibility"}
-            color={hasError ? theme.input.error : theme.input.main}
-            iconSize={23}
-          />
-        </StyledIcon>
-      );
-    }
-    if (hasError) {
-      return (
-        <StyledIcon disabled>
-          <Icon icon="error" filled color={theme.input.error} iconSize={20} />
-        </StyledIcon>
-      );
-    }
-    if (value && onInputCleared) {
-      return (
-        <StyledIcon
-          onClick={(event) => {
-            event.preventDefault();
-            inputRef.current?.focus();
-            onInputCleared();
-          }}>
-          <Icon icon="cancel" color={theme.input.main} iconSize={20} />
-        </StyledIcon>
-      );
-    }
-    return null;
-  };
+    const getButton = () => {
+      if (type === "password") {
+        return (
+          <StyledIcon
+            onClick={(event) => {
+              event.preventDefault();
+              inputRef.current?.focus();
+              setTypeOverride(typeOverride ? "" : "text");
+            }}>
+            <Icon
+              icon={typeOverride ? "visibility_off" : "visibility"}
+              color={hasError ? theme.input.error : theme.input.main}
+              iconSize={23}
+            />
+          </StyledIcon>
+        );
+      }
+      if (hasError) {
+        return (
+          <StyledIcon disabled>
+            <Icon icon="error" filled color={theme.input.error} iconSize={20} />
+          </StyledIcon>
+        );
+      }
+      if (value && onInputCleared) {
+        return (
+          <StyledIcon
+            onClick={(event) => {
+              event.preventDefault();
+              inputRef.current?.focus();
+              onInputCleared();
+            }}>
+            <Icon icon="cancel" color={theme.input.main} iconSize={20} />
+          </StyledIcon>
+        );
+      }
+      return null;
+    };
 
-  const errorId =
-    hasError && supportingLabel ? `${id || name}-error-message` : undefined;
+    const errorId =
+      hasError && supportingLabel ? `${id || name}-error-message` : undefined;
 
-  return (
-    <Wrapper>
-      <StyledInput
-        ref={inputRef}
-        placeholder=" "
-        hasError={hasError}
-        name={name}
-        id={id || name}
-        type={typeOverride || type}
-        value={value}
-        onChange={onChange}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        hasSupportingLabel={Boolean(supportingLabel)}
-        aria-invalid={hasError ? "true" : undefined}
-        aria-errormessage={errorId}
-      />
-      <StyledLabel hasError={hasError} htmlFor={id || name}>
-        {label}
-      </StyledLabel>
-      {getButton()}
-      {supportingLabel && (
-        <StyledSupportingLabel hasError={hasError} id={errorId}>
-          {supportingLabel}
-        </StyledSupportingLabel>
-      )}
-    </Wrapper>
-  );
-});
+    return (
+      <Wrapper>
+        <StyledInput
+          ref={inputRef}
+          placeholder=" "
+          hasError={hasError}
+          name={name}
+          id={id || name}
+          type={typeOverride || type}
+          value={value}
+          onChange={onChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          hasSupportingLabel={Boolean(supportingLabel)}
+          aria-invalid={hasError ? "true" : undefined}
+          aria-errormessage={errorId}
+        />
+        <StyledLabel hasError={hasError} htmlFor={id || name}>
+          {label}
+        </StyledLabel>
+        {getButton()}
+        {supportingLabel && (
+          <StyledSupportingLabel hasError={hasError} id={errorId}>
+            {supportingLabel}
+          </StyledSupportingLabel>
+        )}
+      </Wrapper>
+    );
+  }
+);
+
+Input.displayName = "Input";
 
 const Wrapper = styled.div`
   position: relative;

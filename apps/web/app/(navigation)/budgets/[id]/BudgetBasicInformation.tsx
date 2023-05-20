@@ -37,8 +37,8 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { startDate, endDate, limit, currency, description, icon, name } =
     budget;
   //DATE formatting
-  function convertTimestamp(timestamp: number) {
-    const date = new Date(timestamp);
+  function convertDate(dateString: string) {
+    const date = new Date(dateString);
 
     return date.toLocaleDateString(t(basicInformation.dateFormats), {
       day: "numeric",
@@ -50,7 +50,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   //DATA to display for information tiles
   const dataRangeInfo = (
     <>
-      {convertTimestamp(startDate)} - {convertTimestamp(endDate)}
+      {convertDate(startDate)} - {convertDate(endDate)}
     </>
   );
 

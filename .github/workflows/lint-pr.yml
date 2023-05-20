@@ -1,0 +1,36 @@
+name: "Style"
+
+on:
+  push:
+    branches: [main]
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    name: Lint
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run linting rules and tests
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run lint
+
+  prettier:
+    runs-on: ubuntu-latest
+
+    name: Prettier
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run linting rules and tests
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: npm run prettier
