@@ -86,7 +86,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
   const [lang, setLang] = useState<string>("en-US");
-  const [errorMsg, isErrorMsg] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { currentLang } = useContext(LanguageContext);
@@ -128,7 +128,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   useEffect(() => {
     currentLang === "en" && setLang("en-US");
     currentLang === "pl" && setLang("pl-PL");
-    currentLang === "pl" && setLang("fr-FR");
+    currentLang === "fr" && setLang("fr-FR");
   }, [lang, currentLang]);
 
   const { data: session } = useSession();
@@ -170,8 +170,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 { searchValue: "", sortAscending: true },
               ]);
               break;
-            case 500:
-              isErrorMsg(true);
+            case 400:
+              setErrorMsg(t(dict.errors.error400));
+              break;
+            case 401:
+              setErrorMsg(t(dict.errors.error401));
               break;
             default:
               alert(t(dict.errors.errorDefault));
@@ -184,14 +187,24 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { mutate: sendBudget } = useSendBudget();
 
   const closeErrorMessage = () => {
-    isErrorMsg(false);
+    setErrorMsg("");
   };
+
+
 
   return (
     <Modal
       header={t(dict.title)}
       onClose={() => onClose && onClose()}
       fullHeight>
+        <ErrorMessageWrapper>
+          {errorMsg && (
+            <ErrorMessage
+              message={errorMsg}
+              onClose={closeErrorMessage}
+            />
+          )}
+        </ErrorMessageWrapper>
       <SeparatorStyledTop />
 
       <TabsStyled defaultValue={defaultValue}>
@@ -203,14 +216,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
-        <ErrorMessageWrapper>
-          {errorMsg && (
-            <ErrorMessage
-              message={t(dict.errors.error500)}
-              onClose={closeErrorMessage}
-            />
-          )}
-        </ErrorMessageWrapper>
 
         <Form
           onSubmit={() => {
