@@ -93,7 +93,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
 
   useEffect(() => {
     return () => searchInput?.onChange?.("");
-  }, []);
+  }, [searchInput]);
 
   const onInputChange = (value: string) => {
     searchInput?.onChange?.(value);

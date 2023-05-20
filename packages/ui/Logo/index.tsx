@@ -18,8 +18,7 @@ type LogoProps = {
 type InnerProps = {
   $white?: boolean;
   $logoWidth?: number;
-}
-
+};
 
 const LogoStyledContainer = styled(Link)<InnerProps>`
   display: flex;
@@ -41,7 +40,8 @@ const LogoStyledContainer = styled(Link)<InnerProps>`
 `;
 
 const LogoSignet = styled.span<InnerProps>`
-  background-image: url(${({ $white }) => $white ? logoVersions.white : logoVersions.color});
+  background-image: url(${({ $white }) =>
+    $white ? logoVersions.white : logoVersions.color});
   background-repeat: no-repeat;
   background-size: contain;
   height: 100%;
