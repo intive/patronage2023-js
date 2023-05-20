@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { Icon } from "../Icon";
+import { Icon, IconType } from "../Icon";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-interface EditIconInterface {
+interface NavBudgetIcon {
   onClick: () => void;
+  icon: IconType;
+  className?: string;
 }
 
-const EditIconStyled = styled.button<EditIconInterface>`
+const NavBudgetIconStyled = styled.button<NavBudgetIcon>`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.editIcon.background};
@@ -18,11 +20,11 @@ const EditIconStyled = styled.button<EditIconInterface>`
   line-height: 0;
 `;
 
-export const EditIcon = ({ onClick }: EditIconInterface) => {
+export const NavBudgetIcon = ({ onClick, icon, className }: NavBudgetIcon) => {
   const theme = useContext(ThemeContext);
   return (
-    <EditIconStyled onClick={onClick}>
-      <Icon icon="edit" color={theme.editIcon.main} />
-    </EditIconStyled>
+    <NavBudgetIconStyled onClick={onClick} icon={icon} className={className}>
+      <Icon icon={icon} color={theme.editIcon.main} />
+    </NavBudgetIconStyled>
   );
 };

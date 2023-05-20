@@ -1,7 +1,7 @@
 "use client";
 
 import { BudgetFixed } from "lib/types";
-import { EditIcon, InfoTile } from "ui";
+import { NavBudgetIcon, InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
 
@@ -12,12 +12,13 @@ import {
   StyledDescription,
   StyledTitle,
   TileWrapper,
+  TitleEditButton,
   TopSectionWrapper,
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
-import styled from "styled-components";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { useState } from "react";
+import { RemoveBudget } from "./RemoveBudget";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -40,13 +41,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       year: "2-digit",
     });
   }
-
-  const TitleEditButton = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-  `;
 
   //DATA to display for information tiles
   const dataRangeInfo = (
@@ -83,6 +77,8 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     setIsEditBudgetModalOpen(false);
   };
 
+  const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
+
   return (
     <>
       <BasicInfoWrapper>
@@ -93,7 +89,11 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <div>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
-              <EditIcon onClick={() => openModal()} />
+              <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
+              <NavBudgetIcon
+                onClick={() => setDeleteModalVisibility(true)}
+                icon={"delete"}
+              />
             </TitleEditButton>
 
             <StyledDescription>{description}</StyledDescription>
@@ -116,6 +116,12 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       </BasicInfoWrapper>
       {isEditBudgetModalOpen && (
         <EditBudget budget={budget} onClose={() => closeModal()} />
+      )}
+      {deleteModalVisibility && (
+        <RemoveBudget
+          budget={budget}
+          onClose={() => setDeleteModalVisibility(false)}
+        />
       )}
     </>
   );
