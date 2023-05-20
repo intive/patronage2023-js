@@ -25,6 +25,8 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting19: "#368B4F",
+  Supporting18: "#ECF7EE",
   Supporting17: "#E5707055",
   Supporting16: "#92CE7855",
   Supporting15: "#E57070",
@@ -118,7 +120,7 @@ export const theme = {
     background: colors.Supporting1,
   },
   toast: {
-    confirm: { main: colors.Supporting7, background: colors.Supporting1 },
+    confirm: { main: colors.Supporting19, background: colors.Supporting18 },
     error: { main: colors.Supporting4, background: colors.Supporting1 },
   },
   input: {

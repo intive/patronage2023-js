@@ -77,8 +77,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     setIsEditBudgetModalOpen(false);
   };
 
-  const [deleteModalVisibility, setDeleteModalVisibility] =
-    useState<boolean>(false);
+  const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
 
   return (
     <>
