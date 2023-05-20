@@ -149,7 +149,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
           body: JSON.stringify({
             name: newBudget.name,
             limit: {
-              value: newBudget.limit,
+              // value: newBudget.limit,
               currency: newBudget.currency.tag,
             },
             period: {
