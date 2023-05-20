@@ -43,13 +43,15 @@ const validate = () => {
   if (res.length) {
     const errorMsg =
       `${`The following ${
-        res.length > 1 ? "keys are" : "key is"
+        res.length > 1 ? `${clc.yellow("keys")} are` : `${clc.yellow("key")} is`
       } causing build to fail ❌`}` +
       `\n\n${res
         .map(
           (parent) =>
             `• ${parent.trace.map((val, idx) =>
-              idx === parent.trace.length - 1 ? clc.yellow(val) : `${val} => `
+              idx === parent.trace.length - 1
+                ? clc.yellow(val)
+                : `${clc.blueBright(val)} => `
             )} is ${clc.red.underline("missing")} [${parent.missing.join(
               " "
             )}] ${parent.missing.length > 1 ? "keys" : "key"} \n`
@@ -58,7 +60,7 @@ const validate = () => {
 
     throw new Error(errorMsg);
   } else {
-    console.log("All clear ✅");
+    console.log(`${clc.greenBright("All clear")} ✅`);
   }
 };
 
