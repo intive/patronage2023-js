@@ -27,7 +27,6 @@ export const CategoryFilterForm = () => {
           .filter(([_, isChecked]) => isChecked)
           .map(([categoryKeyName, _]) => categoryKeyName);
 
-        queryClient.invalidateQueries(["datatable"]);
         setCategoryFilter(categoryFilterState);
       }}>
       {({ submit }) => (
