@@ -1,6 +1,6 @@
 "use client";
 
-import { Logo } from "ui";
+import { Logo, ToastHoast } from "ui";
 import { useTranslate } from "lib/hooks";
 
 import { usePathname } from "next/navigation";
@@ -59,6 +59,7 @@ export default function RegFlowLayout({ children }: LayoutProps) {
 
   return (
     <BackgroundFlex>
+      <ToastHoast />
       <ContentStyled>
         <SectionStyled>
           <TypoStyled>
