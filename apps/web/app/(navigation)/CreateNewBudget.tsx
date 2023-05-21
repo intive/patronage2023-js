@@ -196,14 +196,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       onClose={() => onClose && onClose()}
       fullHeight>
       <SeparatorStyledTop />
-
+      <ErrorMessageWrapper>
+        {errorMsg && (
+          <ErrorMessage message={errorMsg} onClose={closeErrorMessage} />
+        )}
+      </ErrorMessageWrapper>
       <TabsStyled defaultValue={defaultValue}>
         <Tabs.List>
-          <ErrorMessageWrapper>
-            {errorMsg && (
-              <ErrorMessage message={errorMsg} onClose={closeErrorMessage} />
-            )}
-          </ErrorMessageWrapper>
           <TabsTriggerStyled value="settings">
             {t(dict.tabs.settings)}
           </TabsTriggerStyled>

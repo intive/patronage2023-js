@@ -153,8 +153,12 @@ export const TabsStyled = styled(Tabs.Root)`
 export const ErrorMessageWrapper = styled.div`
   position: absolute;
   z-index: 100;
-  margin-top: -28px;
-  width: 460px;
+  margin-top: 55px;
+  margin-left: -6px;
+  width: 315px;
+  ${device.tablet} {
+    width: 460px;
+  }
 `;
 
 export const ContentStyled = styled.div`
