@@ -11,6 +11,7 @@ import { useTranslate } from "lib/hooks";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { SearchInput } from "ui/Input/SearchInput";
+import { useDebounce } from "lib/hooks/useDebounce";
 
 type APIResponse = {
   items: Item[];
@@ -38,7 +39,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
   >(null);
-  const [searchByName, setSearchByName] = useState("");
+  const [searchTransactionByName, setSearchTransactionByName] = useState("");
+  const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
@@ -78,6 +80,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       budget,
       session,
       transactionType,
+      debouncedSearch,
     ],
     queryFn: async () => {
       return fetch(
@@ -87,7 +90,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
             transactionType: transactionType,
-            search:searchByName,
+            search: debouncedSearch,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
@@ -122,7 +125,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     <>
       <FilterSearchWrapper>
         <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
-         <SearchInput placeholder="Search by Name" />
+        <SearchInput
+          placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
+          onChange={(e) => setSearchTransactionByName(e.currentTarget.value)}
+        />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
