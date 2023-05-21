@@ -18,7 +18,7 @@ const CardTitleStyled = styled.h3`
   color: ${({ theme }) => theme.asideCard.title};
 `;
 
-const CardSettingsLink = styled(LinkComponent)`
+const CardSettingsButton = styled(LinkComponent)`
   font-size: 0.875em;
   text-decoration: none;
 `;
@@ -29,9 +29,9 @@ export const AsideCardContent = () => {
     <>
       <CardHeaderStyled>
         <CardTitleStyled>{t(dict.categories.title)}</CardTitleStyled>
-        <CardSettingsLink href={"/"}>
+        <CardSettingsButton onClick={() => {}}>
           {t(dict.categories.settings)}
-        </CardSettingsLink>
+        </CardSettingsButton>
       </CardHeaderStyled>
       <CategoryFilter />
     </>
