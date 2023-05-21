@@ -91,10 +91,6 @@ const IconWrapperStyled = styled.div`
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const { title, sort, searchInput, navigationList, button } = subMenuData;
 
-  useEffect(() => {
-    return () => searchInput?.onChange?.("");
-  }, [searchInput]);
-
   const onInputChange = (value: string) => {
     searchInput?.onChange?.(value);
   };
