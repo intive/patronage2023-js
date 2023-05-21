@@ -27,9 +27,24 @@ export const LanguageSelector = () => {
   };
 
   const items = [
-    { lang: "pl", flagSrc: "/flags/pl.svg", languageName: "Polski" },
-    { lang: "en", flagSrc: "/flags/en.svg", languageName: "English" },
-    { lang: "fr", flagSrc: "/flags/fr.svg", languageName: "Français" },
+    {
+      lang: "pl",
+      flagSrc: "/flags/pl.svg",
+      languageName: "Polski",
+      alt: "Flag of Poland",
+    },
+    {
+      lang: "en",
+      flagSrc: "/flags/en.svg",
+      languageName: "English",
+      alt: "Flag of UK",
+    },
+    {
+      lang: "fr",
+      flagSrc: "/flags/fr.svg",
+      languageName: "Français",
+      alt: "Flag of France",
+    },
   ];
 
   return (
@@ -39,7 +54,14 @@ export const LanguageSelector = () => {
         changeLanguage(lang);
       }}>
       <SelectTriggerStyled>
-        <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
+        <Select.Value>
+          {
+            <Flag
+              src={`/flags/${language}.svg`}
+              alt={`Flag - ${language.toUpperCase()}`}
+            />
+          }
+        </Select.Value>
       </SelectTriggerStyled>
 
       <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
@@ -47,7 +69,7 @@ export const LanguageSelector = () => {
           <Select.Viewport>
             {items.map((item) => (
               <SelectItemStyled value={item.lang} key={item.lang}>
-                <Flag src={item.flagSrc} />
+                <Flag src={item.flagSrc} alt={item.alt} />
                 <Select.ItemText>{item.languageName}</Select.ItemText>
               </SelectItemStyled>
             ))}

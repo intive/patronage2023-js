@@ -140,19 +140,16 @@ export default function SideNav() {
       ComponentToRender: <span>Edit profile</span>,
       href: "/settings/edit-profile",
       id: 1,
-      ref: () => {},
     },
     {
       ComponentToRender: <span>Change password</span>,
       href: "/settings/change-password",
       id: 2,
-      ref: () => {},
     },
     {
       ComponentToRender: <span>Language</span>,
       href: "/settings/change-language",
       id: 3,
-      ref: () => {},
     },
   ];
 

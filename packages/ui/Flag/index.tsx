@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 type FlagProps = {
   src: string;
+  alt: string;
 };
 
 const ImgStyled = styled.img`
@@ -12,6 +13,6 @@ const ImgStyled = styled.img`
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
 `;
 
-export const Flag = ({ src }: FlagProps) => {
-  return <ImgStyled src={src} alt="" />;
+export const Flag = ({ src, alt }: FlagProps) => {
+  return <ImgStyled src={src} alt={alt} />;
 };
