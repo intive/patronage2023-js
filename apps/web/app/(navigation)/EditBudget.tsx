@@ -68,8 +68,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         body: JSON.stringify(edited)
       })
       },
-      onError: (error) => {
-        alert(error);
+      onError: () => {
+        setErrMsg(t(dict.errors.errorDefault));
         return;
       },
       onSettled: (data) => {
@@ -79,13 +79,13 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             onClose();
             break;
           case 400: 
-            setErrMsg("Wrong data");
+            setErrMsg(t(dict.errors.error400));
             break;
           case 401: 
-            setErrMsg("Unauthorized access");
+            setErrMsg(t(dict.errors.error401));
             break;
           default: 
-            setErrMsg("Oops, something went wrong")
+            setErrMsg(t(dict.errors.errorDefault))
             return;
         }
       },

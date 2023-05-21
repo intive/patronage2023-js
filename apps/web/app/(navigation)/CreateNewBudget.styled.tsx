@@ -171,6 +171,11 @@ export const ContentStyled = styled.div`
 
 export const ErrorMessageWrapper = styled.div`
   position: absolute;
-  z-index: 2;
-  top: 150px;
+  z-index: 234;
+  top: 125px;
+  width: 315px;
+  ${device.tablet} {
+    top: 120px;
+    width: 465px;
+  }
 `;
