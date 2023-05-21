@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { LinkComponent } from "ui";
-import { CategoryFilterForm } from "components";
+import { CategoryFilter } from "components";
 import { useTranslate } from "lib/hooks";
 
 const CardHeaderStyled = styled.div`
@@ -33,7 +33,7 @@ export const AsideCardContent = () => {
           {t(dict.categories.settings)}
         </CardSettingsLink>
       </CardHeaderStyled>
-      <CategoryFilterForm />
+      <CategoryFilter />
     </>
   );
 };
