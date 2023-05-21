@@ -612,12 +612,12 @@ const dictionary = {
     nameLabel: {
       income: {
         en: "Income name",
-        pl: "Nazwa przychodu",
+        pl: "Nazwa wpływu",
         fr: "Nom de la recette",
       },
       expense: {
         en: "Expense name",
-        pl: "Nazwa wpływu",
+        pl: "Nazwa wydatku",
         fr: "Nom de la dépense",
       },
     },
