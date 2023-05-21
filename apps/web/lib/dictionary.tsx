@@ -651,6 +651,23 @@ const dictionary = {
         fr: "La date doit être comprise dans la période budgétaire",
       },
     },
+    responseErrors: {
+      400: {
+        en: "400: Incorrect data. Please try again.",
+        pl: "400: Nieprawidłowe dane. Spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Veuillez réessayer.",
+      },
+      401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: Usager non autorisé",
+      },
+      default: {
+        en: "Adding transaction failed. Please try again.",
+        pl: "Dodawanie transakcji nie powiodło się. Spróbuj ponownie.",
+        fr: "L'ajout de la transaction a échoué. Veuillez réessayer.",
+      },
+    },
   },
   BudgetsPage: {
     title: { en: "Budgets page", pl: "Budżety", fr: "Budgets" },
@@ -694,6 +711,33 @@ const dictionary = {
       },
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
+    removeBudgetModal: {
+      header: {
+        en: "Are you sure you want to delete the budget:",
+        pl: "Czy na pewno chcesz usunąć ten budżet:",
+        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
+      },
+      confirmButton: {
+        en: "Confirm",
+        pl: "Potwierdź",
+        fr: "Confirmer",
+      },
+      abortButton: {
+        en: "Cancel",
+        pl: "Anuluj",
+        fr: "Annuler",
+      },
+      errorMessage: {
+        en: "Ops, something went wrong",
+        pl: "Ups, coś poszło nie tak",
+        fr: "Oups, quelque chose s'est mal passé",
+      },
+      confirmMessage: {
+        en: "Budget was successfully removed",
+        pl: "Budżet został pomyślnie usunięty",
+        fr: "Le budget a bien été supprimé",
+      },
+    },
     createButton: {
       label: { en: "Create", pl: "Utwórz", fr: "Créer" },
       newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouvelle recette" },
@@ -709,6 +753,11 @@ const dictionary = {
         pl: "Bilans",
         fr: "Solde total",
       },
+    },
+    buttonGroupLabels: {
+      all: { en: "View all", pl: "Wszystkie", fr: "Voir tout" },
+      income: { en: "Incomes", pl: "Wpływy", fr: "Les recettes" },
+      expenses: { en: "Expenses", pl: "Wydatki", fr: "Les dépenses" },
     },
     transactionsTable: {
       groupRowDays: {
