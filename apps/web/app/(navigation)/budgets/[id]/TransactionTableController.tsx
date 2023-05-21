@@ -10,6 +10,7 @@ import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
+import { SearchInput } from "ui/Input/SearchInput";
 
 type APIResponse = {
   items: Item[];
@@ -37,6 +38,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
   >(null);
+  const [searchByName, setSearchByName] = useState("");
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
@@ -85,6 +87,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
             transactionType: transactionType,
+            search:searchByName,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
@@ -119,6 +122,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     <>
       <FilterSearchWrapper>
         <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
+         <SearchInput placeholder="Search by Name" />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
