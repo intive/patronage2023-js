@@ -8,6 +8,9 @@ import SessionProviderWrapper from "./SessionProviderWrapper";
 import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../css/global.css";
+import { useEffect } from "react";
+import { useSetAtom } from "jotai";
+import { languageAtom, languages } from "./store";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -21,6 +24,13 @@ const inter = Inter({
 const queryClient = new QueryClient();
 
 export default function RootLayout({ children }: LayoutProps) {
+  const setLanguage = useSetAtom(languageAtom);
+
+  useEffect(() => {
+    const lang = localStorage.getItem("lang") as languages;
+    setLanguage(lang ? (lang as languages) : ("en" as languages));
+  }, [setLanguage]);
+
   return (
     <html lang="en">
       <head>

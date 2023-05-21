@@ -6,7 +6,6 @@ import {
   SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
-import { useEffect } from "react";
 import { languageAtom, languages } from "app/store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
@@ -15,11 +14,6 @@ export const LanguageSelector = () => {
   const { hasScrollbar } = useHasScrollBar();
   const setLanguage = useSetAtom(languageAtom);
   const language = useAtomValue(languageAtom);
-
-  useEffect(() => {
-    const lang = localStorage.getItem("lang") as languages;
-    setLanguage(lang ? (lang as languages) : ("en" as languages));
-  }, [setLanguage]);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang as languages);

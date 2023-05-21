@@ -137,17 +137,23 @@ export default function SideNav() {
   // edit settingSubmenu items below
   const settingsSubmenuItems = [
     {
-      ComponentToRender: <span>Edit profile</span>,
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.editProfile)}</span>
+      ),
       href: "/settings/edit-profile",
       id: 1,
     },
     {
-      ComponentToRender: <span>Change password</span>,
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.changePassword)}</span>
+      ),
       href: "/settings/change-password",
       id: 2,
     },
     {
-      ComponentToRender: <span>Language</span>,
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.language)}</span>
+      ),
       href: "/settings/change-language",
       id: 3,
     },
