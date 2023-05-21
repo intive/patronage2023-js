@@ -1,7 +1,7 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo, Avatar } from "ui";
+import { Logo, Avatar } from "ui";
 import { useSession } from "next-auth/react";
 
 const NavBar = styled.nav`
@@ -19,7 +19,7 @@ const NavBar = styled.nav`
 const ActionWrapper = styled.div`
   display: flex;
   min-width: 150px;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 `;
 
@@ -33,12 +33,7 @@ export default function Nav() {
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        {data && (
-          <>
-            <Icon icon="notifications" color="white" />
-            <AvatarStyled src={data.user.image} outlined />
-          </>
-        )}
+        {data && <AvatarStyled src={data.user.image} outlined />}
       </ActionWrapper>
     </NavBar>
   );
