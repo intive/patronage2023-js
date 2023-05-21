@@ -10,6 +10,8 @@ import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
 import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
+import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
+import { TransactionTypeFilter } from "./TransactionTypeFilter";
 
 type APIResponse = {
   items: Item[];
@@ -34,6 +36,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [transactionType, setTransactionType] = useState<
+    "Income" | "Expense" | null
+  >(null);
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
@@ -78,6 +83,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       budget,
       session,
       categoryFilterState,
+      transactionType,
     ],
     queryFn: async () => {
       return fetch(
@@ -88,6 +94,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
             search: "",
+            transactionType: transactionType,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
@@ -107,6 +114,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     enabled: !!session && !!budget,
   });
 
+  useEffect(() => setCurrentPage(1), [transactionType]);
+
   if (isError) {
     return (
       <ErrorMessage
@@ -118,6 +127,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
 
   return (
     <>
+      <FilterSearchWrapper>
+        <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
+      </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}

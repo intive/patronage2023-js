@@ -1,6 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { ButtonWithDropdown, ButtonWithDropdownProps } from "ui/ButtonWithDropdown";
+import {
+  ButtonWithDropdown,
+  ButtonWithDropdownProps,
+} from "ui/ButtonWithDropdown";
 
 const DUMMY_DROPDOWNITEMS = [
   {
@@ -18,12 +21,14 @@ export default {
   component: ButtonWithDropdown,
 } as ComponentMeta<typeof ButtonWithDropdown>;
 
-const Template: ComponentStory<typeof ButtonWithDropdown> = ({ ...args }: ButtonWithDropdownProps) => (
-    <ButtonWithDropdown {...args}></ButtonWithDropdown>
+const Template: ComponentStory<typeof ButtonWithDropdown> = ({
+  ...args
+}: ButtonWithDropdownProps) => (
+  <ButtonWithDropdown {...args}></ButtonWithDropdown>
 );
 
-export const CreateButtonWithDropdown = Template.bind({})
+export const CreateButtonWithDropdown = Template.bind({});
 CreateButtonWithDropdown.args = {
   label: "Create",
-  items: DUMMY_DROPDOWNITEMS
-  };
+  items: DUMMY_DROPDOWNITEMS,
+};
