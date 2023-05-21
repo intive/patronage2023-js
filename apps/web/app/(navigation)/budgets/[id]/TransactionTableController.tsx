@@ -85,6 +85,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
             transactionType: transactionType,
+            search: "",
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,

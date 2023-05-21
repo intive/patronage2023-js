@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { Table } from "ka-table";
@@ -17,7 +17,13 @@ import {
 import { TransactionsTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
 
 type User = {
-
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  createdTimestamp: number;
+  createdVia: string;
+  avatar: string;
 };
 
 type UsersListProps = {
@@ -26,7 +32,7 @@ type UsersListProps = {
   isLoading: boolean;
 };
 
-export const UsersList = ({
+export const UsersListTable = ({
   setSorting,
   users = [],
   isLoading,
@@ -46,15 +52,15 @@ export const UsersList = ({
       },
     },
     {
-      key: "firstName",
-      title: "First name",
+      key: "lastName",
+      title: "Last name",
       isSortable: true,
       dataType: DataType.String,
       style: { width: "33%" },
     },
     {
-      key: "lastName",
-      title: "Last name",
+      key: "firstName",
+      title: "First name",
       isSortable: true,
       dataType: DataType.String,
       style: { width: "33%" },
@@ -89,13 +95,13 @@ export const UsersList = ({
             content: (props) => {
               switch (props.column.key) {
                 case "avatar":
-                  if (!props.rowData.attributes) return <Avatar src="/unsetAvatar.svg" />
-                  const text = props.rowData.attributes.avatar[0];
+                  if (!props.rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
+                  const text = props.rowData.avatar;
                   const schemaPath = z.string().startsWith("/avatars/").endsWith(".svg");
                   const schemaUrl = z.string().url();
                   const isPath = schemaPath.safeParse(text);
                   const isUrl = schemaUrl.safeParse(text);
-                  return <Avatar src={isPath.success || isUrl.success ? props.rowData.attributes.avatar[0] : "/unsetAvatar.svg"} />;
+                  return <Avatar src={isPath.success || isUrl.success ? props.rowData.avatar : "/unsetAvatar.svg"} />;
                 case "email":
                   return <EmailStyled>{props.rowData.email}</EmailStyled>;
                 case "createdTimestamp":
