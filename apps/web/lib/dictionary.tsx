@@ -11,7 +11,7 @@ const dictionary = {
         buttonLabel: {
           en: "Add new budget",
           pl: "Dodaj nowy budżet",
-          fr: "Ajouter un nouveau budget",
+          fr: "Créer un nouveau budget",
         },
         infos: {
           loading: {
