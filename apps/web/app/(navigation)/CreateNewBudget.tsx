@@ -284,7 +284,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <CurrencySelect
                           value={value}
                           id="currency"
-                          label="Currency"
+                          label={t(dict.inputNames.currency)}
                           supportingLabel={errors[0]}
                           onValueChange={(e) => {
                             setValue(e);

@@ -6,15 +6,16 @@ export const SelectTriggerStyled = styled(Select.Trigger)`
   cursor: pointer;
   border: 0;
   padding: 0;
+  line-height: 0;
 `;
 
 export const SelectContentStyled = styled(Select.Content)`
   overflow: hidden;
-  color: black;
-  background-color: white;
+  color: ${({ theme }) => theme.datePicker.neutral10};
+  background-color: ${({ theme }) => theme.card.background};
   z-index: 40000;
   border-radius: 16px;
-  border: 1px solid #e1e1e1;
+  border: 1px solid ${({ theme }) => theme.card.border};
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
 `;
@@ -23,14 +24,14 @@ export const SelectItemStyled = styled(Select.Item)`
   cursor: pointer;
   padding: 15px 20px;
   display: flex;
-  border: 2px solid white;
+  border: 2px solid ${({ theme }) => theme.card.background};
   align-items: center;
   gap: 10px;
 
   :hover {
     background-color: ${({ theme }) => theme.currencySelect.focusBackground};
     outline: 0;
-    border: 2px solid white;
+    border: 2px solid ${({ theme }) => theme.card.background};
   }
 
   :focus {
@@ -38,7 +39,7 @@ export const SelectItemStyled = styled(Select.Item)`
     border: 2px solid ${({ theme }) => theme.input.focus};
     background-color: ${({ theme }) => theme.currencySelect.focusBackground};
     :hover {
-      border: 2px solid white;
+      border: 2px solid ${({ theme }) => theme.card.background};
     }
   }
   :first-of-type:focus {

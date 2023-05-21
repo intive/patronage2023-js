@@ -41,6 +41,23 @@ const dictionary = {
       },
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia", fr: "Paramètres" },
+        settingsItems: {
+          editProfile: {
+            en: "Edit profile",
+            pl: "Edytuj profil",
+            fr: "Editer le profil",
+          },
+          changePassword: {
+            en: "Change password",
+            pl: "Zmień hasło",
+            fr: "Changer le mot de passe",
+          },
+          language: {
+            en: "Language",
+            pl: "Język",
+            fr: "Langue",
+          },
+        },
       },
       usersItem: {
         title: { en: "Users", pl: "Użytkownicy", fr: "Utilisateurs" },
@@ -103,6 +120,16 @@ const dictionary = {
       en: "Create my free account!",
       pl: "Utwórz bezpłatne konto!",
       fr: "Créer un compte gratuit !",
+    },
+    signIn: {
+      en: "Sign in",
+      pl: "Zaloguj",
+      fr: "Se connecter",
+    },
+    logOut: {
+      en: "Log out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
     },
   },
   SignInPage: {

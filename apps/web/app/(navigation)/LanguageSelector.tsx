@@ -17,9 +17,9 @@ export const LanguageSelector = () => {
   const language = useAtomValue(languageAtom);
 
   useEffect(() => {
-    const lang = localStorage.getItem("lang");
-    lang && setLanguage((localStorage.getItem("lang") as languages) || "en");
-  }, [setLanguage, language]);
+    const lang = localStorage.getItem("lang") as languages;
+    setLanguage(lang ? (lang as languages) : ("en" as languages));
+  }, [setLanguage]);
 
   const changeLanguage = (lang: string) => {
     setLanguage(lang as languages);
@@ -34,9 +34,9 @@ export const LanguageSelector = () => {
 
   return (
     <Select.Root
-      value={(language as languages) || "en"}
+      value={language || "en"}
       onValueChange={(lang) => {
-        changeLanguage(lang as languages);
+        changeLanguage(lang);
       }}>
       <SelectTriggerStyled>
         <Select.Value>{<Flag src={`/flags/${language}.svg`} />}</Select.Value>
