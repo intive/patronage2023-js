@@ -726,6 +726,33 @@ const dictionary = {
       },
       dateFormats: { en: "en-GB", pl: "pl", fr: "fr-FR" },
     },
+    removeBudgetModal: {
+      header: {
+        en: "Are you sure you want to delete the budget:",
+        pl: "Czy na pewno chcesz usunąć ten budżet:",
+        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
+      },
+      confirmButton: {
+        en: "Confirm",
+        pl: "Potwierdź",
+        fr: "Confirmer",
+      },
+      abortButton: {
+        en: "Cancel",
+        pl: "Anuluj",
+        fr: "Annuler",
+      },
+      errorMessage: {
+        en: "Ops, something went wrong",
+        pl: "Ups, coś poszło nie tak",
+        fr: "Oups, quelque chose s'est mal passé",
+      },
+      confirmMessage: {
+        en: "Budget was successfully removed",
+        pl: "Budżet został pomyślnie usunięty",
+        fr: "Le budget a bien été supprimé",
+      },
+    },
     createButton: {
       label: { en: "Create", pl: "Utwórz", fr: "Créer" },
       newIncome: { en: "New income", pl: "Nowy wpływ", fr: "Nouvelle recette" },
