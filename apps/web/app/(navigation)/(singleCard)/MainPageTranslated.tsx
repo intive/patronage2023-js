@@ -10,6 +10,7 @@ const ContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1em;
 `;
 export const MainPageTranslated = () => {
   const { dict, t } = useTranslate("MainPage");

@@ -24,8 +24,8 @@ export const Button = ({
   );
 };
 
-export type ButtonProps = {
-  variant?: "primary" | "secondary" | "simple";
+type ButtonProps = {
+  variant?: "primary" | "secondary" | "danger" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
   onClick: Function;
@@ -63,6 +63,25 @@ export const ButtonStyled = styled.button<ButtonProps>`
     margin-top: -8px;
     margin-bottom: -8px;
   }
+
+  ${({ variant }) =>
+    variant === "danger" &&
+    css`
+      border: 2px solid ${({ theme }) => theme.button.danger.main};
+      color: white;
+      background-color: ${({ theme }) => theme.button.danger.main};
+      &:hover {
+        border: 2px solid ${({ theme }) => theme.button.danger.hover};
+        background-color: ${({ theme }) => theme.button.danger.hover};
+        opacity: 0.8;
+      }
+      &:disabled {
+        border: 2px solid ${({ theme }) => theme.button.danger.disabled};
+        background-color: ${({ theme }) => theme.button.danger.disabled};
+        opacity: 0.8;
+        cursor: not-allowed;
+      }
+    `}
 
   ${({ variant }) =>
     variant === "secondary" &&
