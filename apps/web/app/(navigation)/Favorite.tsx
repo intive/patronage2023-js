@@ -40,14 +40,13 @@ export const Favorite = ({
   //in use state it will be what will come from prop... I think not, because true or false will come from each of items from fetch. When add to fav/remove from fav, fetch will fire, what will cause change of props, render component and actual data.
   //initial state is what will come from prop
   const [isFavorite, setIsFavorite] = useState(isFav);
-  ariaLabel =
-    isFavorite === false ? "Add to favorites" : "Remove from favorites";
+  ariaLabel = isFavorite ? "Remove from favorites" : "Add to favorites";
   const active = currentPage === activeHref;
 
   //function for modify isFav
-  const favBudgetsHandler = async (fav: boolean) => {
+  const changeFavHandler = async (isFav: boolean) => {
     const response = await fetch(
-      `https://inbudget-patronage-api-dev.azurewebsites.net/budgets/${budgetId}/favourite?isFavourite=${fav}`,
+      `https://inbudget-patronage-api-dev.azurewebsites.net/budgets/${budgetId}/favourite?isFavourite=${isFav}`,
       {
         method: "PUT",
         headers: {
@@ -59,7 +58,8 @@ export const Favorite = ({
     );
 
     // const data = await response.json() (no body yet)
-    //if response.ok - change state
+    //so the state will change on the previous one 
+    //if !response.ok =>  setIsFavorite((prevState) => prevState);
     console.log(response);
   };
 
@@ -71,25 +71,10 @@ export const Favorite = ({
 
     setIsFavorite((prevState) => !prevState);
 
-    if (isFavorite === false) {
-      const chosenBudget = budgets.find(
-        (budget) => budget.id.value === budgetId
-      );
-
-      favBudgetsHandler(true);
-      console.log(`✨ You added to favorites: ${JSON.stringify(chosenBudget)}`);
-      ariaLabel = "Remove from favorites";
-    } else {
-      const deletedBudget = budgets.find(
-        (budget) => budget.id.value === budgetId
-      );
-
-      favBudgetsHandler(false);
-      console.log(
-        `💥 You removed from favorites: ${JSON.stringify(deletedBudget)}`
-      );
-      ariaLabel = "Add to favorites";
-    }
+    changeFavHandler(isFavorite);
+    // console.log(`✨ You added to favorites: ${JSON.stringify(chosenBudget)}`);
+   
+    // console.log( `💥 You removed from favorites: ${JSON.stringify(deletedBudget)}`)
   };
 
   //filled isFav = if true, filled, if false, outlined
