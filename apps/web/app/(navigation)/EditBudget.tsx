@@ -83,8 +83,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
               startDate: values["start-date"].toISOString(),
               endDate: values["end-date"].toISOString(),
             };
-
-            console.log(newBudgetFromValues);
           }}>
           {({ submit }) => (
             <form
