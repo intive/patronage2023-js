@@ -7,7 +7,7 @@ import categoryMap from "lib/category-map";
 import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
-import { useTranslate } from "lib/hooks";
+import { useLocalStorage, useTranslate } from "lib/hooks";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 
@@ -31,6 +31,7 @@ type ID = {
 };
 
 const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
+  const [getPageSizeValue, setPageSizeValue] = useLocalStorage("pageSize", "6");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -42,7 +43,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { data: session } = useSession();
 
   const fixFetchedData = (res: APIResponse) => {
-    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
+    setTotalPages(Math.ceil(res.totalCount / parseFloat(getPageSizeValue)));
     return res.items.map(
       (item): Transaction => ({
         id: item.transactionId.value,
@@ -71,7 +72,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: [
       "datatable",
-      itemsPerPage,
+      parseFloat(getPageSizeValue),
       currentPage,
       budget,
       session,
@@ -82,7 +83,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
         {
           body: JSON.stringify({
-            pageSize: itemsPerPage,
+            pageSize: parseFloat(getPageSizeValue),
             pageIndex: currentPage,
             transactionType: transactionType,
             search: "",
@@ -131,9 +132,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         pageIndex={currentPage - 1}
         numberOfPages={totalPages}
         pageSizeOptions={[5, 10, 25]}
-        currentPageSize={itemsPerPage}
+        currentPageSize={parseFloat(getPageSizeValue)}
         onChangePageSize={(val) => {
-          setItemsPerPage(val);
+          setPageSizeValue(val);
           setCurrentPage(1);
         }}
         onChangePageIndex={(val) => setCurrentPage(val + 1)}
