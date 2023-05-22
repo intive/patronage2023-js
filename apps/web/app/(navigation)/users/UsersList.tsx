@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { Table } from "ka-table";
@@ -38,8 +38,8 @@ export const UsersListTable = ({
   isLoading,
 }: UsersListProps) => {
   const theme = useContext(ThemeContext);
-  // const { t, dict } = useTranslate("BudgetsPage");
-  // const { transactionsTable } = dict;
+  const { t, dict } = useTranslate("UsersPage");
+  const { usersTable } = dict;
 
   const columns = [
     {
@@ -53,28 +53,28 @@ export const UsersListTable = ({
     },
     {
       key: "lastName",
-      title: "Last name",
+      title: t(usersTable.lastName),
       isSortable: true,
       dataType: DataType.String,
       style: { width: "33%" },
     },
     {
       key: "firstName",
-      title: "First name",
+      title: t(usersTable.firstName),
       isSortable: true,
       dataType: DataType.String,
       style: { width: "33%" },
     },
     {
       key: "email",
-      title: "Email",
+      title: t(usersTable.email),
       isSortable: true,
       dataType: DataType.String,
       style: { width: "33%" },
     },
     {
       key: "createdTimestamp",
-      title: "Date created",
+      title: t(usersTable.dateCreated),
       isSortable: true,
       dataType: DataType.Number,
       style: { width: "20%" },
@@ -95,9 +95,13 @@ export const UsersListTable = ({
             content: (props) => {
               switch (props.column.key) {
                 case "avatar":
+                  //set default avatar if missing data
                   if (!props.rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
+
                   const text = props.rowData.avatar;
+                  //check if avatar string is one from public folder
                   const schemaPath = z.string().startsWith("/avatars/").endsWith(".svg");
+                  //check if avatar url is valid url
                   const schemaUrl = z.string().url();
                   const isPath = schemaPath.safeParse(text);
                   const isUrl = schemaUrl.safeParse(text);

@@ -871,6 +871,35 @@ const dictionary = {
       },
     },
   },
+  UsersPage: {
+    title: {
+      en: "Users",
+      pl: "Użytkownicy",
+      fr: "Utilisateurs",
+    },
+    usersTable: {
+      firstName: {
+        en: "First name",
+        pl: "Imię",
+        fr: "Nom",
+      },
+      lastName: {
+        en: "Last name",
+        pl: "Nazwisko",
+        fr: "Prénom",
+      },
+      email: {
+        en: "Email",
+        pl: "Email",
+        fr: "Email",
+      },
+      dateCreated: {
+        en: "Date created",
+        pl: "Utworzono",
+        fr: "Date créée",
+      },
+    },
+  },
 };
 
 export default dictionary;

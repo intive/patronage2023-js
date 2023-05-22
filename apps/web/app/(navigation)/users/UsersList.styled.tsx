@@ -173,5 +173,6 @@ export const InputWrapper = styled.div`
   @media (min-width: 510px) {
     width: 240px;
     align-self: flex-end;
+    margin-bottom: 10px;
     }
 `;

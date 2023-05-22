@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import MultiCardLayout from "../MultiCardLayout";
 import UsersTableController from "./UsersTableController";
+import { useTranslate } from "lib/hooks";
 
 
 const PageWrapper = styled.div`
@@ -21,11 +22,13 @@ const TitleStyled = styled.h1`
 `;
 
 export default function UsersPage() {
+  const { t, dict } = useTranslate("UsersPage");
+  const { title } = dict;
 
   const mainCardContent = (
     <>
       <PageWrapper>
-        <TitleStyled>Users</TitleStyled>
+        <TitleStyled>{t(title)}</TitleStyled>
         <UsersTableController />
       </PageWrapper>
     </>

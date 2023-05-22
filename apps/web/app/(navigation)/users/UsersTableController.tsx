@@ -8,6 +8,7 @@ import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
 import { SearchInput } from "ui/Input/SearchInput";
 import { InputWrapper } from "./UsersList.styled";
+import { useDebounce } from "lib/hooks/useDebounce";
 
 type APIResponse = {
   items: UserListItem[];
@@ -29,9 +30,9 @@ const UsersTableController = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [searchValue, setSearchValue] = useState<string>("");
-  const [ascending, setAscending] = useState({
+  const [sortParams, setSortParams] = useState({
     actualColumn: "lastName",
-    fields: {
+    ascending: {
       "lastName": true,
       "firstName": false,
       "email": false,
@@ -41,6 +42,7 @@ const UsersTableController = () => {
 
   const { t, dict } = useTranslate("BudgetsPage");
   const { data: session } = useSession();
+  const debouncedSearch = useDebounce(searchValue, 500);
 
   useEffect(() => setCurrentPage(1), [searchValue]);
 
@@ -50,12 +52,12 @@ const UsersTableController = () => {
   }
 
   const setSorting = (column: string) => {
-    setAscending(prev => {
+    setSortParams(prev => {
       return {
         actualColumn: column,
-        fields: {
-          ...prev.fields,
-          [column]: !prev.fields[column as keyof typeof prev.fields]
+        ascending: {
+          ...prev.ascending,
+          [column]: !prev.ascending[column as keyof typeof prev.ascending]
         }
       }
     })
@@ -68,17 +70,17 @@ const UsersTableController = () => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["user", itemsPerPage, currentPage, ascending, searchValue],
+    queryKey: ["user", itemsPerPage, currentPage, sortParams, debouncedSearch],
     queryFn: async () => {
-      return fetch(env.NEXT_PUBLIC_API_URL + "/user/list", {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}user/list`, {
         body: JSON.stringify({
           pageSize: itemsPerPage,
           pageIndex: currentPage,
           search: searchValue,
           sortDescriptors: [
             {
-              columnName: ascending.actualColumn,
-              sortAscending: ascending.fields[ascending.actualColumn as keyof typeof ascending.fields],
+              columnName: sortParams.actualColumn,
+              sortAscending: sortParams.ascending[sortParams.actualColumn as keyof typeof sortParams.ascending],
             },
           ],
         }),
