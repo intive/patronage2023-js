@@ -1,9 +1,5 @@
 import { atom } from "jotai";
 
-export enum languages {
-  en = "en",
-  pl = "pl",
-  fr = "fr",
-}
+export type Language = "en" | "pl" | "fr";
 
-export const languageAtom = atom<languages>("en" as languages);
+export const languageAtom = atom<Language>("en");

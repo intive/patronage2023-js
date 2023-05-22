@@ -6,7 +6,7 @@ import {
   SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
-import { languageAtom, languages } from "app/store";
+import { Language, languageAtom } from "app/store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
@@ -15,8 +15,8 @@ export const LanguageSelector = () => {
   const setLanguage = useSetAtom(languageAtom);
   const language = useAtomValue(languageAtom);
 
-  const changeLanguage = (lang: string) => {
-    setLanguage(lang as languages);
+  const changeLanguage = (lang: Language) => {
+    setLanguage(lang);
     localStorage.setItem("lang", lang);
   };
 
@@ -44,7 +44,7 @@ export const LanguageSelector = () => {
   return (
     <Select.Root
       value={language || "en"}
-      onValueChange={(lang) => {
+      onValueChange={(lang: Language) => {
         changeLanguage(lang);
       }}>
       <SelectTriggerStyled>
