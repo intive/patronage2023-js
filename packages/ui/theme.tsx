@@ -25,6 +25,8 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting21: "#D1A11F",
+  Supporting20: "#FFF7E0",
   Supporting19: "#368B4F",
   Supporting18: "#ECF7EE",
   Supporting17: "#E5707055",
@@ -301,6 +303,14 @@ export const theme = {
       foreground: colors.Supporting13,
       background: colors.Supporting12,
     },
+    salary: {
+      foreground: colors.Teal10,
+      background: colors.Teal3,
+    },
+    refund: {
+      foreground: colors.Supporting21,
+      background: colors.Supporting20,
+    },
   },
   editIcon: {
     main: colors.Neutral6,
@@ -341,6 +351,9 @@ export const theme = {
       currency: colors.Neutral8,
       title: colors.Neutral6,
     },
+  },
+  asideCard: {
+    title: colors.Neutral8,
   },
 };
 

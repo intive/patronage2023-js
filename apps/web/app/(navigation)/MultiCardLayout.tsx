@@ -6,13 +6,14 @@ import {
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { ReactElement } from "react";
+import { Card } from "ui";
 
 type MultiCardLayoutProps = {
   main: ReactElement;
   aside?: ReactElement;
 };
 
-const AsideCard = styled(MainCard)`
+const AsideCard = styled(Card)`
   display: none;
   ${device.desktop} {
     &:empty {
@@ -22,10 +23,11 @@ const AsideCard = styled(MainCard)`
     flex-direction: column;
     align-self: flex-start;
     width: max-content;
-    min-width: 250px;
-    min-height: 220px;
-    margin-left: 20px;
+    min-width: 288px;
+    margin-left: 31px;
     padding: 32px;
+    position: sticky;
+    top: 94px;
   }
 `;
 
