@@ -2,47 +2,33 @@
 import { useCategoryMap } from "lib/hooks";
 import { Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
-import { useSetAtom } from "jotai";
-import { CategoryFilterType } from "lib/types";
+import { useAtom } from "jotai";
 import {
   CategoryIconStyled,
   CategoryTitleStyled,
   CheckboxLabelContentStyled,
   CheckboxListStyled,
 } from "./CategoryFilter.styled";
-import { useState } from "react";
 
 export const CategoryFilter = () => {
   const categoryMap = useCategoryMap();
-  const setCategoryFilterAtom = useSetAtom(categoryFilterAtom);
+  const [categoryFilterAtomState, setCategoryFilterAtom] =
+    useAtom(categoryFilterAtom);
   const categoryEntries = Object.entries(categoryMap);
-
-  const categoryFilterInit: CategoryFilterType = Object.keys(
-    categoryMap
-  ).reduce(
-    (acc, category): CategoryFilterType => ({
-      ...acc,
-      [category]: false,
-    }),
-    {} as CategoryFilterType
-  );
-
-  const [categoryFilterInner, setCategoryFilterInner] =
-    useState<CategoryFilterType>(categoryFilterInit);
 
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
-    const newFilterState = {
-      ...categoryFilterInner,
-      [name as keyof CategoryFilterType]: checked,
-    };
 
-    const categoryFilterState: string[] = Object.entries(newFilterState)
-      .filter(([_, isChecked]) => isChecked)
-      .map(([categoryKeyName, _]) => categoryKeyName);
-
-    setCategoryFilterAtom(categoryFilterState);
-    setCategoryFilterInner(newFilterState);
+    if (checked) {
+      setCategoryFilterAtom([...categoryFilterAtomState, name]);
+    } else {
+      const newState = [
+        ...categoryFilterAtomState.filter(
+          (category) => !category.includes(name)
+        ),
+      ];
+      setCategoryFilterAtom(newState);
+    }
   };
 
   return (
