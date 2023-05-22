@@ -44,6 +44,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseFloat(getPageSizeValue);
+
   useEffect(() => {
     setCurrentPage(1);
   }, [categoryFilterState]);
