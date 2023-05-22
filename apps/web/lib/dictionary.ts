@@ -562,6 +562,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Wrong data.",
+        pl: "Niewłaściwe dane.",
+        fr: "Données erronées",
+      },
+      error401: {
+        en: "No authorization!",
+        pl: "Brak autoryzacji!",
+        fr: "Absence d'autorisation!"
+      },
+      errorDefault: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose s'est mal passé.",
+      }
     },
   },
   CreateNewTransactionModal: {
