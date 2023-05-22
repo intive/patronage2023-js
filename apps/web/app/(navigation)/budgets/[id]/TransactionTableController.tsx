@@ -8,6 +8,8 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useLocalStorage, useTranslate } from "lib/hooks";
+import { useAtomValue } from "jotai";
+import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 
@@ -40,6 +42,11 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
+  const categoryFilterState = useAtomValue(categoryFilterAtom);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / parseFloat(getPageSizeValue)));
@@ -75,6 +82,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       currentPage,
       budget,
       session,
+      categoryFilterState,
       transactionType,
     ],
     queryFn: async () => {
@@ -84,8 +92,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: JSON.stringify({
             pageSize: parseFloat(getPageSizeValue),
             pageIndex: currentPage,
-            transactionType: transactionType,
+            categoryTypes: categoryFilterState,
             search: "",
+            transactionType: transactionType,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,

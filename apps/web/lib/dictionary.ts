@@ -871,6 +871,52 @@ const dictionary = {
       },
     },
   },
+  AsideCard: {
+    categories: {
+      title: {
+        en: "Categories",
+        pl: "Kategorie",
+        fr: "Catégories",
+      },
+      settings: {
+        en: "Manage",
+        pl: "Zarządzaj",
+        fr: "Gestion",
+      },
+    },
+  },
+  CategoryMap: {
+    homeSpendings: {
+      en: "Home spendings",
+      pl: "Wydatki domowe",
+      fr: "Dépenses à domicile",
+    },
+    subscriptions: {
+      en: "Subscriptions",
+      pl: "Subskrypcje",
+      fr: "Abonnements",
+    },
+    car: {
+      en: "Car",
+      pl: "Samochód",
+      fr: "Automobile",
+    },
+    grocery: {
+      en: "Grocery",
+      pl: "Zakupy spożywcze",
+      fr: "Épicerie",
+    },
+    salary: {
+      en: "Salary",
+      pl: "Wynagrodzenie",
+      fr: "Salaire",
+    },
+    refund: {
+      en: "Refund",
+      pl: "Zwrot kosztów",
+      fr: "Remboursement",
+    },
+  },
 };
 
 export default dictionary;
