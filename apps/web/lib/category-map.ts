@@ -37,6 +37,24 @@ const categoryMap = {
       ...categoryIcons.grocery,
     },
   },
+  Salary: {
+    id: 5,
+    name: "Salary",
+    icon: {
+      name: "payments",
+      ...categoryIcons.salary,
+    },
+  },
+  Refund: {
+    id: 6,
+    name: "Refund",
+    icon: {
+      name: "currency_exchange",
+      ...categoryIcons.refund,
+    },
+  },
 };
+
+export type CategoryMapType = typeof categoryMap;
 
 export default categoryMap;

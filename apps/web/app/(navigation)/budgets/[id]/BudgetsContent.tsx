@@ -1,6 +1,6 @@
 "use client";
 
-import { DummyAsideCardContent } from "app/DummyAsideCardContent";
+import { AsideCardContent } from "app/AsideCardContent";
 import MultiCardLayout from "../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
 import { BudgetBasicInformation } from "./BudgetBasicInformation";
@@ -110,10 +110,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
 
   return (
     <>
-      <MultiCardLayout
-        main={mainCardContent}
-        aside={<DummyAsideCardContent />}
-      />
+      <MultiCardLayout main={mainCardContent} aside={<AsideCardContent />} />
       {createNewTransactionModalVisible && (
         <CreateNewTransaction
           type={transactionType}
