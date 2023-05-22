@@ -34,21 +34,21 @@ import { ErrorMessage } from "ui";
 interface EditBudgetProps {
   budget: BudgetFixed;
   onClose: () => void;
-};
+}
 
 interface EditedBudgetBEProps {
-  name: string,
-  description: string,
-  iconName: string,
+  name: string;
+  description: string;
+  iconName: string;
   period: {
-    startDate: string,
-    endDate: string,
-  }
-};
+    startDate: string;
+    endDate: string;
+  };
+}
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
-  const [ errMsg, setErrMsg ] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
 
@@ -59,36 +59,36 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const sendEditedBudgetMutation = useMutation({
     mutationFn: (edited: EditedBudgetBEProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json',
+          accept: "application/json",
+          "Content-Type": "application/json",
           Authorization: "Bearer " + session?.user.accessToken,
         },
-        body: JSON.stringify(edited)
-      })
-      },
-      onError: () => {
-        setErrMsg(t(dict.errors.errorDefault));
-        return;
-      },
-      onSettled: (data) => {
-        switch(data!.status) {
-          case 201: 
-            queryClient.invalidateQueries({ queryKey: ['budgets'] });
-            onClose();
-            break;
-          case 400: 
-            setErrMsg(t(dict.errors.error400));
-            break;
-          case 401: 
-            setErrMsg(t(dict.errors.error401));
-            break;
-          default: 
-            setErrMsg(t(dict.errors.errorDefault))
-            return;
-        }
-      },
+        body: JSON.stringify(edited),
+      });
+    },
+    onError: () => {
+      setErrMsg(t(dict.errors.errorDefault));
+      return;
+    },
+    onSettled: (data) => {
+      switch (data!.status) {
+        case 201:
+          queryClient.invalidateQueries({ queryKey: ["budgets"] });
+          onClose();
+          break;
+        case 400:
+          setErrMsg(t(dict.errors.error400));
+          break;
+        case 401:
+          setErrMsg(t(dict.errors.error401));
+          break;
+        default:
+          setErrMsg(t(dict.errors.errorDefault));
+          return;
+      }
+    },
   });
   //BE integration end
 
@@ -115,12 +115,15 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   };
 
   return (
-    <Modal header={t(dict.title)} onClose={() => onClose && onClose()} fullHeight>
-      {( errMsg.length > 0 )
-      && 
-      <ErrorMessageWrapper>
-        <ErrorMessage message={errMsg} onClose={ () => setErrMsg("")}/>
-      </ErrorMessageWrapper>}
+    <Modal
+      header={t(dict.title)}
+      onClose={() => onClose && onClose()}
+      fullHeight>
+      {errMsg.length > 0 && (
+        <ErrorMessageWrapper>
+          <ErrorMessage message={errMsg} onClose={() => setErrMsg("")} />
+        </ErrorMessageWrapper>
+      )}
       <SeparatorStyledTop />
       <TabsStyled defaultValue={defaultValueTabs}>
         <Tabs.List>
@@ -141,10 +144,9 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                 startDate: values["start-date"].toISOString(),
                 endDate: values["end-date"].toISOString(),
               },
-            }
+            };
 
             sendEditedBudgetMutation.mutate(editedBudget);
-            
           }}>
           {({ submit }) => (
             <form
