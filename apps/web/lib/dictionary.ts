@@ -458,20 +458,20 @@ const dictionary = {
         fr: "Entrez une date ultérieure.",
       },
       error400: {
-        en: "Ops, something went wrong.",
+        en: "Oops, something went wrong",
         pl: "Ups, coś poszło nie tak.",
-        fr: "Oups, quelque chose s'est mal passé.",
+        fr: "Oups, quelque chose a mal tourné.",
       },
       error401: {
-        en: "No authorization!",
-        pl: "Brak autoryzacji!",
-        fr: "Absence d'autorisation!"
+        en: "Please log in or register to continue.",
+        pl: "Zaloguj się lub zarejestruj, aby kontynuować.",
+        fr: "Veuillez vous connecter ou vous inscrire pour continuer.",
       },
       errorDefault: {
-        en: "Unexpected error!",
-        pl: "Nieoczekiwany błąd!",
-        fr: "Erreur inattendue!",
-      }
+        en: "An unexpected error occurred.",
+        pl: "Wystąpił nieoczekiwany błąd.",
+        fr: "Une erreur inattendue est apparue.",
+      },
     },
   },
   EditBudgetModal: {
@@ -585,13 +585,13 @@ const dictionary = {
       error401: {
         en: "No authorization!",
         pl: "Brak autoryzacji!",
-        fr: "Absence d'autorisation!"
+        fr: "Absence d'autorisation!",
       },
       errorDefault: {
         en: "Oops, something went wrong.",
         pl: "Ups, coś poszło nie tak.",
         fr: "Oups, quelque chose s'est mal passé.",
-      }
+      },
     },
   },
   CreateNewTransactionModal: {
