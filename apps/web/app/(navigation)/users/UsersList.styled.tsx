@@ -166,3 +166,12 @@ export const EmailStyled = styled.div`
       white-space: initial;
     }
 `
+
+export const InputWrapper = styled.div`
+  width: 220px;
+  align-self: center;
+  @media (min-width: 510px) {
+    width: 240px;
+    align-self: flex-end;
+    }
+`;

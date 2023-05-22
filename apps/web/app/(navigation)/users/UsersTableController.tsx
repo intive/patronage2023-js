@@ -1,13 +1,13 @@
 import { UsersListTable } from "./UsersList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { env } from "env.mjs";
 import { useQuery } from "@tanstack/react-query";
 import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-// import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
-// import { TransactionTypeFilter } from "./TransactionTypeFilter";
+import { SearchInput } from "ui/Input/SearchInput";
+import { InputWrapper } from "./UsersList.styled";
 
 type APIResponse = {
   items: UserListItem[];
@@ -28,6 +28,7 @@ const UsersTableController = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [searchValue, setSearchValue] = useState<string>("");
   const [ascending, setAscending] = useState({
     actualColumn: "lastName",
     fields: {
@@ -40,6 +41,8 @@ const UsersTableController = () => {
 
   const { t, dict } = useTranslate("BudgetsPage");
   const { data: session } = useSession();
+
+  useEffect(() => setCurrentPage(1), [searchValue]);
 
   const dataForTable = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
@@ -65,13 +68,13 @@ const UsersTableController = () => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["user", itemsPerPage, currentPage, ascending],
+    queryKey: ["user", itemsPerPage, currentPage, ascending, searchValue],
     queryFn: async () => {
       return fetch(env.NEXT_PUBLIC_API_URL + "/user/list", {
         body: JSON.stringify({
           pageSize: itemsPerPage,
           pageIndex: currentPage,
-          search: "",
+          search: searchValue,
           sortDescriptors: [
             {
               columnName: ascending.actualColumn,
@@ -103,13 +106,13 @@ const UsersTableController = () => {
         message={`${t(dict.tableError)} ${error}`}
       />
     );
-  }
+  };
 
   return (
     <>
-      {/* <FilterSearchWrapper>
-        <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
-      </FilterSearchWrapper> */}
+      <InputWrapper>
+        <SearchInput placeholder="" onChange={(e) => setSearchValue(e.currentTarget.value) } />
+      </InputWrapper>
       <UsersListTable
         setSorting={setSorting}
         users={users}
