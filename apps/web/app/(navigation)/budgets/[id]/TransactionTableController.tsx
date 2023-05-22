@@ -1,10 +1,11 @@
-import { TransactionsTable } from "./TransactionsTable";
 import { useEffect, useState } from "react";
 import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
+import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
+import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
@@ -12,8 +13,7 @@ import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
-import { SearchInput } from "ui/Input/SearchInput";
-import { useDebounce } from "lib/hooks/useDebounce";
+import { TransactionsTable } from "./TransactionsTable";
 
 type APIResponse = {
   items: Item[];
@@ -98,7 +98,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
-            search: "",
             transactionType: transactionType,
             search: debouncedSearch,
           }),
@@ -137,7 +136,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
         <SearchInput
           placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
-          onChange={(e) => setSearchTransactionByName(e.currentTarget.value)}
+          onChange={(e) => {
+            setSearchTransactionByName(e.currentTarget.value);
+            setCurrentPage(1);
+          }}
         />
       </FilterSearchWrapper>
       <TransactionsTable
