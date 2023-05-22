@@ -36,7 +36,7 @@ interface EditBudgetProps {
   onClose: () => void;
 };
 
-interface editedBudgetBEProps {
+interface EditedBudgetBEProps {
   name: string,
   description: string,
   iconName: string,
@@ -57,7 +57,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const queryClient = useQueryClient();
 
   const sendEditedBudgetMutation = useMutation({
-    mutationFn: (edited: editedBudgetBEProps) => {
+    mutationFn: (edited: EditedBudgetBEProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
         method: 'PUT',
         headers: {
@@ -133,7 +133,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         </Tabs.List>
         <Form
           onSubmit={(values) => {
-            const editedBudget: editedBudgetBEProps = {
+            const editedBudget: EditedBudgetBEProps = {
               name: values["budget-name"],
               description: values["description"],
               iconName: values["icon"],
