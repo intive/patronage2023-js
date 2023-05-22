@@ -33,7 +33,6 @@ type ID = {
 const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [getPageSizeValue, setPageSizeValue] = useLocalStorage("pageSize", "6");
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
