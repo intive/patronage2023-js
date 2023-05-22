@@ -19,6 +19,7 @@ import { iconNames } from "lib/iconValidation";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { useState } from "react";
 import { RemoveBudget } from "./RemoveBudget";
+import PeopleInBudget from "./PeopleInBudget";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -86,7 +87,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetIconStyled
             icon={iconNames.includes(icon) ? icon : "notifications"}
           />
-          <div>
+          <div style={{ flex: 1}}>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
               <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
@@ -94,8 +95,8 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
               />
+              <PeopleInBudget budget={budget} />
             </TitleEditButton>
-
             <StyledDescription>{description}</StyledDescription>
           </div>
         </TopSectionWrapper>

@@ -22,6 +22,13 @@ export interface Transaction {
   creator: Creator;
 }
 
+interface BudgetUser {
+  id: string;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface Budget {
   id: string;
   name: string;
@@ -32,6 +39,7 @@ export interface Budget {
   limit: number;
   currency: string;
   userID: string;
+  budgetUsers: BudgetUser[];
 }
 
 export interface BudgetFixed {
@@ -43,6 +51,7 @@ export interface BudgetFixed {
   endDate: string;
   limit: number;
   userID: string;
+  budgetUsers: BudgetUser[];
   currency: {
     tag: string;
     locale: string;
