@@ -908,7 +908,7 @@ const dictionary = {
     },
     salary: {
       en: "Salary",
-      pl: "Pensja",
+      pl: "Wynagrodzenie",
       fr: "Salaire",
     },
     refund: {
