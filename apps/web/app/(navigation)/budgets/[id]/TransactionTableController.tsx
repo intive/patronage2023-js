@@ -43,13 +43,13 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
-
+  const pageSize = parseFloat(getPageSizeValue);
   useEffect(() => {
     setCurrentPage(1);
   }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
-    setTotalPages(Math.ceil(res.totalCount / parseFloat(getPageSizeValue)));
+    setTotalPages(Math.ceil(res.totalCount / pageSize));
     return res.items.map(
       (item): Transaction => ({
         id: item.transactionId.value,
@@ -78,7 +78,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: [
       "datatable",
-      parseFloat(getPageSizeValue),
+      pageSize,
       currentPage,
       budget,
       session,
@@ -90,7 +90,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
         {
           body: JSON.stringify({
-            pageSize: parseFloat(getPageSizeValue),
+            pageSize: pageSize,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
             search: "",
@@ -140,7 +140,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         pageIndex={currentPage - 1}
         numberOfPages={totalPages}
         pageSizeOptions={[5, 10, 25]}
-        currentPageSize={parseFloat(getPageSizeValue)}
+        currentPageSize={pageSize}
         onChangePageSize={(val) => {
           setPageSizeValue(val);
           setCurrentPage(1);
