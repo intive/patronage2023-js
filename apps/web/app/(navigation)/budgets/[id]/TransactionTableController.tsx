@@ -95,7 +95,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             categoryTypes: categoryFilterState,
             search: "",
             transactionType: transactionType,
-            search: "",
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
