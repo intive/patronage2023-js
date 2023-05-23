@@ -29,6 +29,7 @@ const Wrapper = styled.div`
 `;
 
 const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
+  width: 94px;
   display: inline-flex;
   flex-direction: column;
   align-items: center;

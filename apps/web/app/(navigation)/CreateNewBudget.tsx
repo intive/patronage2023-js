@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
@@ -39,8 +39,10 @@ import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
-import { LanguageContext } from "lib/contexts";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+
+import { useAtomValue } from "jotai";
+import { languageAtom } from "store";
 
 type NewBudget = {
   onClose: Function;
@@ -89,7 +91,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
-  const { currentLang } = useContext(LanguageContext);
+  const currentLang = useAtomValue(languageAtom);
   const { hasScrollbar } = useHasScrollBar();
 
   const {
@@ -306,7 +308,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <CurrencySelect
                           value={value}
                           id="currency"
-                          label="Currency"
+                          label={t(dict.inputNames.currency)}
                           supportingLabel={errors[0]}
                           onValueChange={(e) => {
                             setValue(e);
