@@ -14,7 +14,7 @@ export type NavItemContents = {
   ComponentToRender?: ReactElement;
   href: string;
   id: string | number;
-  ref: (budget: HTMLLIElement) => void;
+  ref?: (budget: HTMLLIElement) => void;
 };
 
 //types of NavList props - NavList will receive props `contents` that will be an Array full of objects of NavItemContents type
