@@ -1,5 +1,3 @@
-import { Tooltip } from "@radix-ui/react-tooltip";
-
 export * from "./NavList";
 export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";

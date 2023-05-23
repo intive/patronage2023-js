@@ -1,5 +1,3 @@
-"use client";
-
 import styled from "styled-components";
 import { BudgetFixed, BudgetUser } from "lib/types";
 import { useSession } from "next-auth/react";
