@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { BudgetFixed } from "lib/types";
+import { BudgetFixed, BudgetUser } from "lib/types";
 import { useSession } from "next-auth/react";
 import { Avatar } from "ui";
-import { number } from "zod";
 
 type PeopleInBudgetProps = {
   budget: BudgetFixed;
@@ -50,11 +49,15 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
   );
 
   let shortUserList = peopleWithoutLoggedUser;
-  let remainingUsers = 0;
+  let remainingUsers: BudgetUser[] = [];
   if (peopleWithoutLoggedUser.length > 4) {
     shortUserList = peopleWithoutLoggedUser.slice(0, 3);
-    remainingUsers = peopleWithoutLoggedUser.length - shortUserList.length;
+    remainingUsers = peopleWithoutLoggedUser.slice(3);
   }
+
+  const remainingUserNames = remainingUsers
+    .map((user) => `${user.firstName} ${user.lastName}`)
+    .join(", ");
 
   return (
     <StyledWrapper>
@@ -67,9 +70,9 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
           title={`${user.firstName} ${user.lastName}`}
         />
       ))}
-      {remainingUsers && (
-        <StyledCounter>
-          <span>{remainingUsers}</span>
+      {remainingUsers.length && (
+        <StyledCounter title={remainingUserNames}>
+          <span>{remainingUsers.length}</span>
         </StyledCounter>
       )}
     </StyledWrapper>
