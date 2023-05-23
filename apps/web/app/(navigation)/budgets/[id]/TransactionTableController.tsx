@@ -93,7 +93,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
-            search: "",
             transactionType: transactionType,
             search: ""
           }),
