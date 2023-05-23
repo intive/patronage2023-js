@@ -156,5 +156,5 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     </>
   );
 };
-
+// prettier
 export default TransactionTableController;
