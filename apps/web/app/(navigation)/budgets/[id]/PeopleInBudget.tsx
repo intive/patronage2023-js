@@ -80,7 +80,7 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
           />
         </Tooltip>
       ))}
-      {remainingUsers.length && (
+      {remainingUsers.length > 0 && (
         <Tooltip text={remainingUserNames} position="bottom">
           <StyledCounter>
             <span>{remainingUsers.length}</span>
