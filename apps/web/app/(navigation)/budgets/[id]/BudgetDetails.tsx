@@ -32,7 +32,7 @@ const BudgetDetails = ({ budget }: Props) => {
     enabled: !!session,
   });
 
-  if (!statistics?.item){
+  if (!statistics?.items){
     return null
   }
 
