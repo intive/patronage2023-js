@@ -25,12 +25,6 @@ type BudgetBasicInfoProps = {
 };
 //TYPES end
 
-const TitleEditButton = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-`;
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
 
