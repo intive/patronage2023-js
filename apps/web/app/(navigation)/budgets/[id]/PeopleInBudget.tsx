@@ -38,6 +38,10 @@ const StyledCounter = styled.div`
   }
 `;
 
+const StyledUser = styled.div`
+  padding: 3px;
+`;
+
 const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
   const { data: session } = useSession();
 
@@ -55,13 +59,19 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
 
   console.log(remainingUsers);
 
-  const remainingUserNames = remainingUsers
-    .map((user) => <div key={user.id}>{user.firstName} {user.lastName}</div>)
+  const remainingUserNames = remainingUsers.map((user) => (
+    <StyledUser key={user.id}>
+      {user.firstName} {user.lastName}
+    </StyledUser>
+  ));
 
   return (
     <StyledWrapper>
       {shortUserList.map((user) => (
-        <Tooltip key={user.id} text={`${user.firstName} ${user.lastName}`} position="bottom">
+        <Tooltip
+          key={user.id}
+          text={`${user.firstName} ${user.lastName}`}
+          position="bottom">
           <Avatar
             src={user.avatar}
             username={`${user.firstName} ${user.lastName}`}
