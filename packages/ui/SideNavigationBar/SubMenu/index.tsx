@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ReactNode, useEffect } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
+import { ButtonStyled } from "../../Button";
 import { Icon } from "../../Icon";
 
 export type SubMenuDataProps = {
@@ -22,6 +23,14 @@ export type SubMenuDataProps = {
     clickHandler: () => void;
     label: string;
   };
+  exportButton?: {
+    clickHandler: () => void;
+    label: string;
+  };
+  importButton?: {
+    clickHandler: () => void;
+    label: string;
+  };
 };
 
 type SubMenuProps = {
@@ -36,7 +45,6 @@ const SubMenuStyled = styled.div`
   width: 288px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   z-index: 2;
   margin-top: 68px;
   padding: 40px 4px 24px 16px;
@@ -48,6 +56,9 @@ const SubMenuStyled = styled.div`
 `;
 
 const SubMenuHeaderStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding-right: 12px; // + padding above = 16 to handle scroll
 `;
 
@@ -55,13 +66,13 @@ const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 100%;
 `;
 
 const HeaderStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
 `;
 
 const Title = styled.span`
@@ -73,10 +84,29 @@ const Title = styled.span`
   line-height: 36px;
 `;
 
-const ButtonStyled = styled(Button)`
+const ButtonStyledS = styled(Button)`
   width: 256px;
   position: fixed;
   bottom: 25px;
+`;
+
+const ButtonGroupStyled = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+`;
+
+// const CsvButtonStyled = styled(ButtonStyled)`
+//   font-size: 0.875em;
+//   padding: 6px;
+//   line-height: 1.25em;
+// `;
+
+const ButtonContentStyled = styled.div`
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  gap: 4px;
 `;
 
 const IconUpsideDown = styled(Icon)`
@@ -88,8 +118,36 @@ const IconWrapperStyled = styled.div`
   cursor: pointer;
 `;
 
+const InputLabelStyled = styled.label`
+  font-size: 0.875em;
+  padding: 6px;
+  line-height: 1.25em;
+  input[type="file"] {
+    display: none;
+  }
+  cursor: pointer;
+`;
+
+const LinkStyled = styled.a`
+  font-size: 0.875em;
+  padding: 6px;
+  line-height: 1.25em;
+  outline: 0;
+  text-decoration: none;
+  color: ${({ theme }) => theme.main};
+  cursor: pointer;
+`;
+
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
-  const { title, sort, searchInput, navigationList, button } = subMenuData;
+  const {
+    title,
+    sort,
+    searchInput,
+    navigationList,
+    button,
+    exportButton,
+    importButton,
+  } = subMenuData;
 
   useEffect(() => {
     return () => searchInput?.onChange?.("");
@@ -119,6 +177,40 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
               {sort?.icon && sortIcon}
             </IconWrapperStyled>
           </HeaderStyled>
+          <ButtonGroupStyled>
+            <ButtonStyled
+              variant="secondary"
+              onClick={() => exportButton?.clickHandler()}
+              as={InputLabelStyled}
+              htmlFor="export-input">
+              <ButtonContentStyled>
+                <input
+                  type="file"
+                  id="export-input"
+                  name="export-csv"
+                  accept=".csv"
+                  onChange={(e) => {
+                    //e.target.value = '';
+                    console.log("run func to submit and export file");
+                  }}
+                />
+                <Icon icon="file_download" size={12} />
+                <span>{exportButton?.label}</span>
+              </ButtonContentStyled>
+            </ButtonStyled>
+            <ButtonStyled
+              variant="secondary"
+              onClick={() => importButton?.clickHandler()}
+              as={LinkStyled}
+              href="/avatars/3.svg"
+              download
+              title="csvv">
+              <ButtonContentStyled>
+                <Icon icon="file_upload" size={12} />
+                <span> {importButton?.label}</span>
+              </ButtonContentStyled>
+            </ButtonStyled>
+          </ButtonGroupStyled>
           {searchInput && (
             <SearchInput
               name="searchInput"
@@ -134,9 +226,11 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
       </MainDiv>
 
       {button && (
-        <ButtonStyled variant="secondary" onClick={() => button.clickHandler()}>
+        <ButtonStyledS
+          variant="secondary"
+          onClick={() => button.clickHandler()}>
           {button.label}
-        </ButtonStyled>
+        </ButtonStyledS>
       )}
     </SubMenuStyled>
   );

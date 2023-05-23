@@ -3,7 +3,7 @@
 import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { useCallback, useRef, useState } from "react";
-import { SideNavigationBar, Icon, NavList } from "ui";
+import { SideNavigationBar, Icon, NavList, useToast } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
 import { IconStyled } from "./SideNavigationBarNavListData";
 import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
@@ -22,10 +22,13 @@ export default function SideNav() {
 
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
+  const showToast = useToast();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+
+  const [isImportModalVisible, setIsImportModalVisible] = useState(false);
 
   const [searchValue, setSearchValue] = useState("");
   const [sortAscending, setSortAscending] = useState(true);
@@ -133,6 +136,24 @@ export default function SideNav() {
         openModal();
       },
       label: t(SideNav.budgetsItem.buttonLabel),
+    },
+    exportButton: {
+      clickHandler: () => {
+        showToast({
+          variant: "confirm",
+          message: "Heehe dobrze",
+        });
+      },
+      label: "Export",
+    },
+    importButton: {
+      clickHandler: () => {
+        showToast({
+          variant: "error",
+          message: "Heehe źle",
+        });
+      },
+      label: "Import",
     },
   };
 

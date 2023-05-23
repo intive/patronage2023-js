@@ -35,7 +35,7 @@ export type NavListProps = {
 const NavListStyled = styled.ul`
   list-style: none;
   width: 100%;
-  height: calc(100vh - 310px);
+  height: calc(100% - 310px);
   padding-right: 12px;
   overflow-y: overlay;
 
