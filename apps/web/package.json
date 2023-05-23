@@ -13,6 +13,7 @@
     "@tanstack/react-query": "^4.29.5",
     "chart.js": "^4.3.0",
     "dayjs": "^1.11.7",
+    "jotai": "^2.1.0",
     "houseform": "^1.9.0",
     "jotai": "^2.1.0",
     "jsonwebtoken": "^9.0.0",
