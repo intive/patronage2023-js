@@ -32,6 +32,10 @@ const BudgetDetails = ({ budget }: Props) => {
     enabled: !!session,
   });
 
+  if (!statistics?.items){
+    return null
+  }
+
   return (
     <DetailsWrapperStyled>
       <TrendChart currency={currency} statistics={statistics} />

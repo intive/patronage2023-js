@@ -36,6 +36,7 @@ export const StylingDiv = styled.div<ToastVariant>`
 `;
 
 export const StyledCloseButton = styled(ToastRUI.Close)`
+  background-color: inherit;
   border: none;
   color: inherit;
   cursor: pointer;

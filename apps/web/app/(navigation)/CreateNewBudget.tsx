@@ -161,10 +161,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       {
         onSuccess: () => {
           onClose();
-          queryClient.invalidateQueries([
-            "budgets",
-            { searchValue: "", sortAscending: true },
-          ]);
+          queryClient.invalidateQueries(["budgetsList"]);
         },
       }
     );
