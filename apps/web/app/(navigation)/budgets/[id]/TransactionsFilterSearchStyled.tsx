@@ -10,6 +10,11 @@ export const ButtonGroupWrapper = styled.div`
     width: 380px;
     height: 40px;
   }
+
+  ${device.desktop} {
+    width: 430px;
+    height: 40px;
+  }
 `;
 
 export const FilterSearchWrapper = styled.div`
