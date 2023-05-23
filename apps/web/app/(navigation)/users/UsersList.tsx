@@ -12,7 +12,7 @@ import {
   UsersListStyled,
   EmailStyled
 } from "./UsersList.styled";
-import { TransactionsTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
+import { TransactionsTableSuspense as UserTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
 
 type User = {
   id: string;
@@ -108,7 +108,7 @@ export const UsersListTable = ({
                   return <EmailStyled>{rowData.email}</EmailStyled>;
                 case "createdTimestamp":
                   const date = new Date(rowData.createdTimestamp);
-                  const dateString = `${date.getFullYear()}-${((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)}-${(date.getDate() < 10 ? '0' : '') + date.getDate()}`;
+                  const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                   return dateString
               }
             },
@@ -133,7 +133,7 @@ export const UsersListTable = ({
             content: (props) => {
               return (
                 isLoading && (
-                  <TransactionsTableSuspense rowsNumber={5} {...props} />
+                  <UserTableSuspense rowsNumber={5} {...props} />
                 )
               );
             },

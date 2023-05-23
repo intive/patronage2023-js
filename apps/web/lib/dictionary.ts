@@ -575,7 +575,7 @@ const dictionary = {
       errorDefault: {
         en: "Oops, something went wrong.",
         pl: "Ups, coś poszło nie tak.",
-        fr: "Oups, quelque chose s'est mal passé.",
+        fr: "Oups, quelque chose a mal tourné.",
       },
     },
   },
