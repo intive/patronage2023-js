@@ -11,7 +11,7 @@ type TooltipProps = {
 };
 
 const StyledTooltipContent = styled(RadixTooltip.Content)`
-  background-color: white;
+  background-color: ${({ theme }) => theme.tooltip.backgroundColor};
   padding: 10px;
   border-radius: 16px;
   font-size: 12px;

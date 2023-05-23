@@ -23,9 +23,9 @@ const StyledWrapper = styled.div`
 
 const StyledCounter = styled.div`
   border: 2px solid ${({ theme }) => theme.avatar.outline};
-  background-color: #7e7e7e;
-  color: white;
-  border: 2px solid #ffffff;
+  background-color: ${({ theme }) => theme.avatar.aggregator};
+  color: ${({ theme }) => theme.avatar.outline};
+  border: 2px solid ${({ theme }) => theme.avatar.outline};
   border-radius: 50%;
   width: 1em;
   height: 1em;

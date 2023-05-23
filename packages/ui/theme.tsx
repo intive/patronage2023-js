@@ -52,6 +52,10 @@ export const theme = {
   main: colors.Teal10,
   avatar: {
     outline: colors.BasicWhite,
+    aggregator: colors.Neutral6,
+  },
+  tooltip: {
+    backgroundColor: colors.BasicWhite,
   },
   background: {
     background: colors.Teal10,
