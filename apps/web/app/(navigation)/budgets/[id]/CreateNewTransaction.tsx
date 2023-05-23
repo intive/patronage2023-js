@@ -1,26 +1,37 @@
 "use client";
 import { Field, Form } from "houseform";
-import { Button, CustomDatePicker, Input, Modal } from "ui";
+import {
+  Button,
+  CustomDatePicker,
+  Input,
+  Modal,
+  CategorySelector,
+  ErrorMessage,
+} from "ui";
 import { z } from "zod";
 import {
   ButtonWrapperStyled,
   ContentStyled,
   DatePickerErrorStyled,
   DatePickerWrapperStyled,
+  ErrorWrapper,
   FormWrapper,
   ParagraphStyled,
   SeparatorStyled,
 } from "./CreateNewTransactionStyled";
 import { useTranslate } from "lib/hooks";
-import { CategorySelector } from "./CategorySelector";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
+import { useCategoryMap } from "lib/hooks";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { Budget } from "lib/types";
+import { useState } from "react";
 
 type CreateNewTransactionProps = {
   type: string;
   onClose: () => void;
-  budget: any;
+  budget: Budget;
 };
 
 type TransactionType = {
@@ -32,6 +43,10 @@ type TransactionType = {
   transactionDate: string | null;
 };
 
+type createTransactionBEProps = {
+  status: number;
+};
+
 export const CreateNewTransaction = ({
   type,
   budget,
@@ -39,11 +54,17 @@ export const CreateNewTransaction = ({
 }: CreateNewTransactionProps) => {
   const { t, dict } = useTranslate("CreateNewTransactionModal");
   const { data } = useSession();
+  const { hasScrollbar } = useHasScrollBar();
+  const categoryMap = useCategoryMap();
+  const [errorMsg, setErrorMsg] = useState("");
+  console.log(errorMsg);
+
+  const handleCloseErrorMsg = () => setErrorMsg("");
 
   const url = `${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/transaction`;
   const token = data?.user.accessToken;
 
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const newTransactionMutation = useMutation(
     (newTransaction: TransactionType) => {
@@ -60,19 +81,34 @@ export const CreateNewTransaction = ({
       return result;
     },
     {
-      onSuccess: () => {
-        // queryClient.invalidateQueries(["datatable"]);
-        onClose();
+      onSuccess: (data: createTransactionBEProps) => {
+        switch (data.status) {
+          case 201:
+            queryClient.invalidateQueries(["datatable"]);
+            queryClient.invalidateQueries(["mainStatistics"]);
+            queryClient.invalidateQueries(["rangedStatistics"]);
+            onClose();
+            break;
+          case 400:
+            setErrorMsg(t(dict.responseErrors[400]));
+            break;
+          case 401:
+            setErrorMsg(t(dict.responseErrors[401]));
+            break;
+          default:
+            setErrorMsg(t(dict.responseErrors.default));
+            return;
+        }
       },
-      // onError: (error) => console.error(error),
+      onError: (error) => console.error(error),
     }
   );
 
-  const convertAmount = (amount: string) => {
+  const convertAmount = (amount: number) => {
     if (type === "Expense") {
-      return -1 * parseFloat(amount);
+      return -1 * amount;
     } else {
-      return parseFloat(amount);
+      return amount;
     }
   };
 
@@ -84,42 +120,33 @@ export const CreateNewTransaction = ({
     const newTransaction: TransactionType = {
       id: crypto.randomUUID(),
       type,
-      name: values["transaction-name"],
-      value: convertAmount(values["transaction-amount"]),
-      category: values["category"],
-      transactionDate: convertDate(values["date"]),
+      name: values.transactionName,
+      value: convertAmount(values.transactionAmount),
+      category: values.category,
+      transactionDate: convertDate(values.date),
     };
     newTransactionMutation.mutate(newTransaction);
   };
 
-  const getHeader = (type: string) => {
-    if (type === "Income") {
-      return t(dict.header.income);
-    } else if (type === "Expense") {
-      return t(dict.header.expense);
-    } else {
-      return "";
-    }
-  };
-
-  const getNameLabel = (type: string) => {
-    if (type === "Income") {
-      return t(dict.nameLabel.income);
-    } else if (type === "Expense") {
-      return t(dict.nameLabel.expense);
-    } else {
-      return "";
-    }
-  };
-
+  const name = t(
+    type === "Income" ? dict.nameLabel.income : dict.nameLabel.expense
+  );
+  const header = t(
+    type === "Income" ? dict.header.income : dict.header.expense
+  );
   const startDate = new Date(budget.startDate);
   const endDate = new Date(budget.endDate);
 
   const fullHeight = window.innerHeight < 660;
 
   return (
-    <Modal onClose={onClose} header={getHeader(type)} fullHeight={fullHeight}>
+    <Modal onClose={onClose} header={header} fullHeight={fullHeight}>
       <FormWrapper>
+        {errorMsg !== "" && (
+          <ErrorWrapper>
+            <ErrorMessage message={errorMsg} onClose={handleCloseErrorMsg} />
+          </ErrorWrapper>
+        )}
         <Form onSubmit={(values) => handleSubmit(values)}>
           {({ submit }) => (
             <form
@@ -129,7 +156,7 @@ export const CreateNewTransaction = ({
               <ContentStyled fullHeight={fullHeight}>
                 <ParagraphStyled>{t(dict.details)}</ParagraphStyled>
                 <Field
-                  name="transaction-name"
+                  name="transactionName"
                   initialValue={""}
                   onSubmitValidate={z
                     .string()
@@ -140,9 +167,9 @@ export const CreateNewTransaction = ({
                     .max(58, t(dict.errors.max58characters))}>
                   {({ value, setValue, errors }) => (
                     <Input
-                      name="transaction-name"
+                      name="transactionName"
                       value={value}
-                      label={getNameLabel(type)}
+                      label={name}
                       hasError={errors.length > 0}
                       supportingLabel={errors.length ? errors : null}
                       onChange={(e) => {
@@ -153,33 +180,32 @@ export const CreateNewTransaction = ({
                   )}
                 </Field>
                 <Field
-                  name="transaction-amount"
-                  initialValue={""}
+                  name="transactionAmount"
                   onSubmitValidate={z.union([
-                    z
-                      .string()
-                      .nonempty({ message: t(dict.errors.amountNotEmpty) }),
+                    z.string().nonempty({
+                      message: t(dict.errors.amountNotEmpty),
+                    }),
                     z.number().positive({
                       message: t(dict.errors.amountGraterThanZero),
                     }),
                   ])}
                   onChangeValidate={z.union([
-                    z
-                      .string()
-                      .nonempty({ message: t(dict.errors.amountNotEmpty) }),
+                    z.string().nonempty({
+                      message: t(dict.errors.amountNotEmpty),
+                    }),
                     z.number().positive({
                       message: t(dict.errors.amountGraterThanZero),
                     }),
                   ])}>
                   {({ value, setValue, errors }) => (
                     <Input
-                      name="transaction-amount"
+                      name="transactionAmount"
                       type="number"
                       label={t(dict.amountLabel)}
                       value={value}
                       hasError={errors.length > 0}
                       onChange={(e) => {
-                        setValue(e.currentTarget.value);
+                        setValue(parseFloat(e.currentTarget.value));
                       }}
                       supportingLabel={errors.length ? errors : null}
                       onInputCleared={() => setValue("")}
@@ -202,6 +228,8 @@ export const CreateNewTransaction = ({
                         setValue(newValue);
                       }}
                       label={t(dict.categoryLabel)}
+                      categoryMap={categoryMap}
+                      hasScrollbar={hasScrollbar}
                     />
                   )}
                 </Field>
@@ -221,12 +249,16 @@ export const CreateNewTransaction = ({
                       <CustomDatePicker
                         hasError={errors.length > 0}
                         label={t(dict.dateLabel)}
-                        selected={value && value}
+                        selected={value}
                         onSelect={(date) => {
                           setValue(date);
                         }}
                       />
-                      <DatePickerErrorStyled>{errors[0]}</DatePickerErrorStyled>
+                      {errors.length > 0 && (
+                        <DatePickerErrorStyled>
+                          {errors[0]}
+                        </DatePickerErrorStyled>
+                      )}
                     </DatePickerWrapperStyled>
                   )}
                 </Field>

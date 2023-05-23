@@ -53,7 +53,7 @@ export const IconSelector = ({
 
     document.addEventListener("keydown", handleEscapeKey);
     return () => document.removeEventListener("keydown", handleEscapeKey);
-  }, []);
+  }, [onClose]);
 
   return (
     <IconsSelectorStyled>
@@ -80,7 +80,8 @@ export const IconPicker = ({
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIconSelectorVisible(false));
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     setIconSelectorVisible(!iconSelectorVisible);
   };
 

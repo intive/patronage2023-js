@@ -1,5 +1,5 @@
 import { TransactionsTable } from "./TransactionsTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,10 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
+import { useAtomValue } from "jotai";
+import { categoryFilterAtom } from "store";
+import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
+import { TransactionTypeFilter } from "./TransactionTypeFilter";
 
 type APIResponse = {
   items: Item[];
@@ -32,9 +36,17 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [transactionType, setTransactionType] = useState<
+    "Income" | "Expense" | null
+  >(null);
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
+  const categoryFilterState = useAtomValue(categoryFilterAtom);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
@@ -64,7 +76,15 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["datatable", itemsPerPage, currentPage, budget, session],
+    queryKey: [
+      "datatable",
+      itemsPerPage,
+      currentPage,
+      budget,
+      session,
+      categoryFilterState,
+      transactionType,
+    ],
     queryFn: async () => {
       return fetch(
         env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
@@ -72,6 +92,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: JSON.stringify({
             pageSize: itemsPerPage,
             pageIndex: currentPage,
+            categoryTypes: categoryFilterState,
+            search: "",
+            transactionType: transactionType,
           }),
           headers: {
             Authorization: "Bearer " + session!.user.accessToken,
@@ -91,6 +114,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     enabled: !!session && !!budget,
   });
 
+  useEffect(() => setCurrentPage(1), [transactionType]);
+
   if (isError) {
     return (
       <ErrorMessage
@@ -102,6 +127,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
 
   return (
     <>
+      <FilterSearchWrapper>
+        <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
+      </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}

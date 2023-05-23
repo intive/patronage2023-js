@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import styled from "styled-components";
 
 import { InfoTile, InfoTileProps, StyledAddInfoSpan } from "ui/InfoTile";
-import { Icon } from 'ui'
+import { Icon } from "ui";
 
 const Wrapper = styled.div`
   width: fit-content;
@@ -14,7 +14,9 @@ export default {
   component: InfoTile,
 } as ComponentMeta<typeof InfoTile>;
 
-const Template: ComponentStory<typeof InfoTile> = ({ ...args }: InfoTileProps) => (
+const Template: ComponentStory<typeof InfoTile> = ({
+  ...args
+}: InfoTileProps) => (
   <Wrapper>
     <InfoTile {...args}></InfoTile>
   </Wrapper>
@@ -46,7 +48,4 @@ InfoTileWithIcon.args = {
     </>
   ),
   label: "Some icon",
-}
-
-
-
+};
