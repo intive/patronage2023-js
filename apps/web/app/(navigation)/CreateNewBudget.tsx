@@ -40,7 +40,7 @@ import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 import { useAtomValue } from "jotai";
-import { languageAtom } from "app/store";
+import { languageAtom } from "store";
 
 type NewBudget = {
   onClose: Function;

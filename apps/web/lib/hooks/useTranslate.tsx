@@ -1,7 +1,7 @@
 "use client";
 import { dictionaryType } from "lib/dictionary";
 import dictionary from "lib/dictionary";
-import { languageAtom } from "app/store";
+import { languageAtom } from "store";
 import { useAtomValue } from "jotai";
 
 type NestedObjectType = {

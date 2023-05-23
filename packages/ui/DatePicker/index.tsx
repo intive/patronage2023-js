@@ -1,7 +1,7 @@
 "use client";
 
 import { useAtomValue } from "jotai";
-import { languageAtom } from "../../../apps/web/app/store";
+import { languageAtom } from "../../../apps/web/store";
 
 import DatePicker from "react-datepicker";
 import { DatePickerStyled } from "./DatePicker.styled";

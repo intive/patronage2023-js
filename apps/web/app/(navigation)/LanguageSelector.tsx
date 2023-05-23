@@ -6,7 +6,7 @@ import {
   SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
-import { Language, languageAtom } from "app/store";
+import { Language, languageAtom } from "store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 

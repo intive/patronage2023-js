@@ -10,7 +10,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "../css/global.css";
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
-import { Language, languageAtom } from "./store";
+import { Language, languageAtom } from "store";
 
 export type LayoutProps = {
   children: React.ReactNode;
