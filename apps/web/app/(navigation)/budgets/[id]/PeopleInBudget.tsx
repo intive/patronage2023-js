@@ -1,16 +1,13 @@
+"use client";
+
 import styled from "styled-components";
 import { BudgetFixed, BudgetUser } from "lib/types";
 import { useSession } from "next-auth/react";
-import * as Tooltip from '@radix-ui/react-tooltip';
-import { Avatar } from "ui";
+import { Avatar, Tooltip } from "ui";
 
 type PeopleInBudgetProps = {
   budget: BudgetFixed;
 };
-
-const StyledAvatar = styled(Avatar)`
-  /* font-size: 3em; */
-`;
 
 const StyledWrapper = styled.div`
   margin-left: auto;
@@ -56,25 +53,28 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
     remainingUsers = peopleWithoutLoggedUser.slice(3);
   }
 
+  console.log(remainingUsers);
+
   const remainingUserNames = remainingUsers
-    .map((user) => `${user.firstName} ${user.lastName}`)
-    .join(", ");
+    .map((user) => <div key={user.id}>{user.firstName} {user.lastName}</div>)
 
   return (
     <StyledWrapper>
       {shortUserList.map((user) => (
-        <StyledAvatar
-          key={user.id}
-          src={user.avatar}
-          username={`${user.firstName} ${user.lastName}`}
-          outlined
-          title={`${user.firstName} ${user.lastName}`}
-        />
+        <Tooltip key={user.id} text={`${user.firstName} ${user.lastName}`} position="bottom">
+          <Avatar
+            src={user.avatar}
+            username={`${user.firstName} ${user.lastName}`}
+            outlined
+          />
+        </Tooltip>
       ))}
       {remainingUsers.length && (
-        <StyledCounter title={remainingUserNames}>
-          <span>{remainingUsers.length}</span>
-        </StyledCounter>
+        <Tooltip text={remainingUserNames}>
+          <StyledCounter>
+            <span>{remainingUsers.length}</span>
+          </StyledCounter>
+        </Tooltip>
       )}
     </StyledWrapper>
   );

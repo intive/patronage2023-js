@@ -1,3 +1,5 @@
+import { Tooltip } from "@radix-ui/react-tooltip";
+
 export * from "./NavList";
 export { Button, ButtonStyled } from "./Button";
 export { SideNavigationBar } from "./SideNavigationBar";
@@ -32,3 +34,4 @@ export { Spinner } from "./Spinner";
 export { TrendChip } from "./TrendChip";
 export * from "./Toast";
 export { CategorySelector } from "./CategorySelector";
+export { Tooltip } from "./Tooltip";

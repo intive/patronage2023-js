@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled, { css } from "styled-components";
 
 export type AvatarProps = {
@@ -22,21 +23,20 @@ const Image = styled.img<AvatarProps>`
     `}
 `;
 
-export const Avatar = ({
-  username = "user",
-  src,
-  alt,
-  className,
-  outlined,
-  title
-}: AvatarProps) => {
-  return (
-    <Image
-      src={src}
-      alt={alt ? alt : `${username}'s avatar`}
-      className={className}
-      outlined={outlined}
-      title={title}
-    />
-  );
-};
+export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
+  (
+    { username = "user", src, alt, className, outlined, title }: AvatarProps,
+    ref
+  ) => {
+    return (
+      <Image
+        ref={ref}
+        src={src}
+        alt={alt ? alt : `${username}'s avatar`}
+        className={className}
+        outlined={outlined}
+        title={title}
+      />
+    );
+  }
+);
