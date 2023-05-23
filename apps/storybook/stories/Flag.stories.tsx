@@ -11,8 +11,6 @@ const Template: ComponentStory<typeof Flag> = ({ ...args }) => (
   <Flag {...args} />
 );
 
-// import PL from "../../web/public/flags/pl.svg";
-
 export const PolishFlag = Template.bind({});
 PolishFlag.args = {
   src: "/flags/pl.svg",
