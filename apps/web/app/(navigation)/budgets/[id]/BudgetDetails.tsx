@@ -32,8 +32,8 @@ const BudgetDetails = ({ budget }: Props) => {
     enabled: !!session,
   });
 
-  if (!statistics?.items){
-    return null
+  if (!statistics?.items) {
+    return null;
   }
 
   return (

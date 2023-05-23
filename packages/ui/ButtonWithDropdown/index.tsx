@@ -51,8 +51,7 @@ const StyledButton = styled.button`
 `;
 
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
-  box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08),
-    0 2px 4px rgba(32, 37, 50, 0.03);
+  box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08), 0 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.card.border};

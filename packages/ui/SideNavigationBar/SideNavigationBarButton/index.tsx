@@ -25,7 +25,7 @@ const ButtonStyled = styled.button`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.button.simple.background};
-    width: 100%;
+  width: 100%;
 `;
 
 const Wrapper = styled.div<WrapperProps>`
