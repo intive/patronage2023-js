@@ -484,6 +484,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Oops, something went wrong",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+      error401: {
+        en: "Please log in or register to continue.",
+        pl: "Zaloguj się lub zarejestruj, aby kontynuować.",
+        fr: "Veuillez vous connecter ou vous inscrire pour continuer.",
+      },
+      errorDefault: {
+        en: "An unexpected error occurred.",
+        pl: "Wystąpił nieoczekiwany błąd.",
+        fr: "Une erreur inattendue est apparue.",
+      },
     },
   },
   EditBudgetModal: {
