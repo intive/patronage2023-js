@@ -135,7 +135,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
           onChange={(e) => {
             setSearchTransactionByName(e.currentTarget.value);
-            // setCurrentPage(1);
           }}
         />
       </FilterSearchWrapper>
@@ -159,5 +158,5 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     </>
   );
 };
-// prettier
+
 export default TransactionTableController;
