@@ -592,7 +592,7 @@ const dictionary = {
       error400: {
         en: "Wrong data.",
         pl: "Niewłaściwe dane.",
-        fr: "Données erronées",
+        fr: "Données incorrectes",
       },
       error401: {
         en: "No authorization!",
@@ -602,7 +602,7 @@ const dictionary = {
       errorDefault: {
         en: "Oops, something went wrong.",
         pl: "Ups, coś poszło nie tak.",
-        fr: "Oups, quelque chose s'est mal passé.",
+        fr: "Oups, quelque chose a mal tourné.",
       },
     },
   },
@@ -690,7 +690,7 @@ const dictionary = {
       dateNotInStartEndRange: {
         en: "The date must be within the budget period",
         pl: "Data musi się mieścić w okresie trwania budżetu",
-        fr: "La date doit être comprise dans la période budgétaire",
+        fr: "La date doit être comprise dans la période du budget",
       },
     },
     responseErrors: {
@@ -702,7 +702,7 @@ const dictionary = {
       401: {
         en: "401: Unauthorized user",
         pl: "401: Nieautoryzowany użytkownik",
-        fr: "401: Usager non autorisé",
+        fr: "401: L'utilisateur non autorisé",
       },
       default: {
         en: "Adding transaction failed. Please try again.",
@@ -757,7 +757,7 @@ const dictionary = {
       header: {
         en: "Are you sure you want to delete the budget:",
         pl: "Czy na pewno chcesz usunąć ten budżet:",
-        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
+        fr: "Êtes-vous sûr de vouloir supprimer ce budget:",
       },
       confirmButton: {
         en: "Confirm",
@@ -772,12 +772,12 @@ const dictionary = {
       errorMessage: {
         en: "Ops, something went wrong",
         pl: "Ups, coś poszło nie tak",
-        fr: "Oups, quelque chose s'est mal passé",
+        fr: "Oups, quelque chose a mal tourné",
       },
       confirmMessage: {
         en: "Budget was successfully removed",
         pl: "Budżet został pomyślnie usunięty",
-        fr: "Le budget a bien été supprimé",
+        fr: "Le budget a été supprimé correctement",
       },
     },
     createButton: {
@@ -923,7 +923,7 @@ const dictionary = {
       settings: {
         en: "Manage",
         pl: "Zarządzaj",
-        fr: "Gestion",
+        fr: "Gérer",
       },
     },
   },
@@ -941,7 +941,7 @@ const dictionary = {
     car: {
       en: "Car",
       pl: "Samochód",
-      fr: "Automobile",
+      fr: "Voiture",
     },
     grocery: {
       en: "Grocery",
