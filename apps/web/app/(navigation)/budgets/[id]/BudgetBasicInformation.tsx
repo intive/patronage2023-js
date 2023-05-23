@@ -14,6 +14,7 @@ import {
   TileWrapper,
   TitleEditButton,
   TopSectionWrapper,
+  TitleWrapper
 } from "./BudgetBasicInformation.styled";
 import { iconNames } from "lib/iconValidation";
 import { EditBudget } from "app/(navigation)/EditBudget";
@@ -87,7 +88,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetIconStyled
             icon={iconNames.includes(icon) ? icon : "notifications"}
           />
-          <div style={{ flex: 1}}>
+          <TitleWrapper>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
               <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
@@ -98,7 +99,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
               <PeopleInBudget budget={budget} />
             </TitleEditButton>
             <StyledDescription>{description}</StyledDescription>
-          </div>
+          </TitleWrapper>
         </TopSectionWrapper>
         <TileWrapper>
           <InfoTile
