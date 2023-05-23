@@ -8,9 +8,11 @@ import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useTranslate } from "lib/hooks";
-import useSuperfetch from "lib/hooks/useSuperfetch";
+import { useAtomValue } from "jotai";
+import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type APIResponse = {
   items: Item[];
@@ -41,6 +43,11 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
+  const categoryFilterState = useAtomValue(categoryFilterAtom);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
@@ -72,7 +79,14 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     refetch,
     error,
   } = useQuery({
-    queryKey: ["datatable", itemsPerPage, currentPage, budget, transactionType],
+    queryKey: [
+      "datatable",
+      itemsPerPage,
+      currentPage,
+      budget,
+      transactionType,
+      categoryFilterState,
+    ],
 
     queryFn: async () => {
       return fetch(
@@ -82,6 +96,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           body: {
             pageSize: itemsPerPage,
             pageIndex: currentPage,
+            categoryTypes: categoryFilterState,
             search: "",
             transactionType: transactionType,
           },

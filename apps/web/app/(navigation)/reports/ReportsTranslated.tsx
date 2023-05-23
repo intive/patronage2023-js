@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslate } from "lib/hooks";
-import { DummyAsideCardContent } from "app/DummyAsideCardContent";
+import { AsideCardContent } from "app/AsideCardContent";
 import MultiCardLayout from "../MultiCardLayout";
 
 export const ReportsTitle = () => {
@@ -9,6 +9,6 @@ export const ReportsTitle = () => {
   const mainCardContent = <h1>{t(dict.title)}</h1>;
 
   return (
-    <MultiCardLayout main={mainCardContent} aside={<DummyAsideCardContent />} />
+    <MultiCardLayout main={mainCardContent} aside={<AsideCardContent />} />
   );
 };

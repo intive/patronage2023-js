@@ -80,7 +80,8 @@ export const IconPicker = ({
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIconSelectorVisible(false));
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
     setIconSelectorVisible(!iconSelectorVisible);
   };
 

@@ -10,6 +10,7 @@ const ContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1em;
 `;
 export const MainPageTranslated = () => {
   const { dict, t } = useTranslate("MainPage");
@@ -23,7 +24,6 @@ export const MainPageTranslated = () => {
       {data ? (
         <>
           <Button onClick={() => signOut()}>Log out</Button>
-          <br />
           <p>
             User: {data.user.name}, <br /> Avatar: {data.user.image}, <br />{" "}
             AccessToken:

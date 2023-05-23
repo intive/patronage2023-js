@@ -25,7 +25,7 @@ const CheckboxTemplate: ComponentStory<typeof Checkbox> = ({
 const CheckboxWithAvatarChildren = () => {
   return (
     <Wrapper>
-      <Avatar username="Rajesh" src="3d_avatar_28.svg" />
+      <Avatar username="Rajesh" src="avatars/1.svg" />
       <Text>Rajesh Koothrappali</Text>
     </Wrapper>
   );
