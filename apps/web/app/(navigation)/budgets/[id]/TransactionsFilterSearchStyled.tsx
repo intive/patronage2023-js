@@ -7,7 +7,12 @@ export const ButtonGroupWrapper = styled.div`
   width: 100%;
 
   ${device.tablet} {
-    width: 350px;
+    width: 380px;
+    height: 40px;
+  }
+
+  ${device.desktop} {
+    width: 430px;
     height: 40px;
   }
 `;

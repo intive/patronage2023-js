@@ -1,8 +1,7 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
-import { CategoryIcon } from "ui";
-import { CategoryIconProps } from "ui/CategoryIcon";
+import { CategoryIcon, CategoryIconProps } from "ui";
 
 export default {
   title: "Category Icon",
