@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Budget, BudgetFixed } from "lib/types";
+import { BudgetFixed } from "lib/types";
 import { useSession } from "next-auth/react";
 import { Avatar } from "ui";
 
@@ -19,7 +19,24 @@ const StyledWrapper = styled.div`
   line-height: 1em;
 
   > * + * {
-    margin-left: -0.17em;
+    margin-left: -8px;
+  }
+`;
+
+const StyledCounter = styled.div`
+  border: 2px solid ${({ theme }) => theme.avatar.outline};
+  background-color: #7e7e7e;
+  color: white;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-size: 12px;
+    font-weight: 600;
   }
 `;
 
@@ -28,12 +45,12 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
   console.log(session);
 
   const loggedUser = session?.user.id;
-  console.log("logged user: " + loggedUser)
+  console.log("logged user: " + loggedUser);
 
   const people = budget.budgetUsers;
   console.log("people: " + people);
 
-  const withoutloggedUser = people.filter(user => user.id !== loggedUser);
+  const withoutloggedUser = people.filter((user) => user.id !== loggedUser);
   console.log(withoutloggedUser);
 
   return (
@@ -44,8 +61,12 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
           src={user.avatar}
           username={`${user.firstName} ${user.lastName}`}
           outlined
+          title={`${user.firstName} ${user.lastName}`}
         />
       ))}
+      <StyledCounter title="uygyuguyguyg">
+        <span>5</span>
+      </StyledCounter>
     </StyledWrapper>
   );
 };

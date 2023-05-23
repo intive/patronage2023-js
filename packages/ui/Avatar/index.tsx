@@ -6,6 +6,7 @@ export type AvatarProps = {
   alt?: string;
   outlined?: boolean;
   className?: string;
+  title?: string;
 };
 
 const Image = styled.img<AvatarProps>`
@@ -27,6 +28,7 @@ export const Avatar = ({
   alt,
   className,
   outlined,
+  title
 }: AvatarProps) => {
   return (
     <Image
@@ -34,6 +36,7 @@ export const Avatar = ({
       alt={alt ? alt : `${username}'s avatar`}
       className={className}
       outlined={outlined}
+      title={title}
     />
   );
 };
