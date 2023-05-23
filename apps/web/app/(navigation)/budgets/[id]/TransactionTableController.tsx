@@ -33,7 +33,7 @@ type ID = {
 };
 
 const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
-  const [getPageSizeValue, setPageSizeValue] = useLocalStorage("pageSize", "5");
+  const [getPageSizeValue, setPageSizeValue] = useLocalStorage("transactionsTablePageSize", "5");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [transactionType, setTransactionType] = useState<
@@ -43,7 +43,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
-  const pageSize = parseFloat(getPageSizeValue);
+  const pageSize = parseInt(getPageSizeValue);
 
   useEffect(() => {
     setCurrentPage(1);
