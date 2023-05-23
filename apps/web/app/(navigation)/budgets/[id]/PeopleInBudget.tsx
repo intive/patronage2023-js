@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { BudgetFixed } from "lib/types";
 import { useSession } from "next-auth/react";
 import { Avatar } from "ui";
+import { number } from "zod";
 
 type PeopleInBudgetProps = {
   budget: BudgetFixed;
@@ -42,20 +43,22 @@ const StyledCounter = styled.div`
 
 const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
   const { data: session } = useSession();
-  console.log(session);
 
   const loggedUser = session?.user.id;
-  console.log("logged user: " + loggedUser);
+  const peopleWithoutLoggedUser = budget.budgetUsers.filter(
+    (user) => user.id !== loggedUser
+  );
 
-  const people = budget.budgetUsers;
-  console.log("people: " + people);
-
-  const withoutloggedUser = people.filter((user) => user.id !== loggedUser);
-  console.log(withoutloggedUser);
+  let shortUserList = peopleWithoutLoggedUser;
+  let remainingUsers = 0;
+  if (peopleWithoutLoggedUser.length > 4) {
+    shortUserList = peopleWithoutLoggedUser.slice(0, 3);
+    remainingUsers = peopleWithoutLoggedUser.length - shortUserList.length;
+  }
 
   return (
     <StyledWrapper>
-      {people.map((user) => (
+      {shortUserList.map((user) => (
         <StyledAvatar
           key={user.id}
           src={user.avatar}
@@ -64,9 +67,11 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
           title={`${user.firstName} ${user.lastName}`}
         />
       ))}
-      <StyledCounter title="uygyuguyguyg">
-        <span>5</span>
-      </StyledCounter>
+      {remainingUsers && (
+        <StyledCounter>
+          <span>{remainingUsers}</span>
+        </StyledCounter>
+      )}
     </StyledWrapper>
   );
 };
