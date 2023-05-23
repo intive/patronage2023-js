@@ -576,7 +576,7 @@ const dictionary = {
         en: "Oops, something went wrong.",
         pl: "Ups, coś poszło nie tak.",
         fr: "Oups, quelque chose s'est mal passé.",
-      }
+      },
     },
   },
   CreateNewTransactionModal: {

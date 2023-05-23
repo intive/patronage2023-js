@@ -99,9 +99,9 @@ export const UsersListTable = ({
                   if (!props.rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
 
                   const text = props.rowData.avatar;
-                  //check if avatar string is one from public folder
-                  const schemaPath = z.string().startsWith("/avatars/").endsWith(".svg");
-                  //check if avatar url is valid url
+                  //check if avatar string is a path coming from our avatars folder
+                  const schemaPath = z.string().startsWith("/avatars/");
+                  //check if avatar string is valid url
                   const schemaUrl = z.string().url();
                   const isPath = schemaPath.safeParse(text);
                   const isUrl = schemaUrl.safeParse(text);
