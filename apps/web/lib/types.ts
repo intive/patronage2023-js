@@ -22,7 +22,7 @@ export interface Transaction {
   creator: Creator;
 }
 
-interface BudgetUser {
+export interface BudgetUser {
   id: string;
   avatar: string;
   firstName: string;
