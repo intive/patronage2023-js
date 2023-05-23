@@ -1,7 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo, Avatar } from "ui";
+import { Logo, Avatar } from "ui";
+import { LanguageSelector } from "./LanguageSelector";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -18,20 +19,22 @@ const NavBar = styled.nav`
 const ActionWrapper = styled.div`
   display: flex;
   min-width: 150px;
-  justify-content: space-around;
   align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
 `;
 
 const AvatarStyled = styled(Avatar)`
   height: 2.1em;
   width: 2.1em;
 `;
+
 export default function Nav() {
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <Icon icon="notifications" color="white" />
+        <LanguageSelector />
         <AvatarStyled src="avatars/3.svg" outlined />
       </ActionWrapper>
     </NavBar>

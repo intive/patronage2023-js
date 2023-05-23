@@ -12,7 +12,7 @@ export const useGetBudgets = (
   const token = sessionData?.user.accessToken;
 
   return useInfiniteQuery({
-    queryKey: ["budgets", { searchValue, sortAscending }],
+    queryKey: ["budgetsList", { searchValue, sortAscending }],
     queryFn: async ({ pageParam = 1 }): Promise<ItemType> => {
       return getBudgetsList({
         pageSize,

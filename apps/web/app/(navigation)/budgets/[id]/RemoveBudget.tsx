@@ -40,12 +40,7 @@ export const RemoveBudget = ({ budget, onClose }: RemoveBudgetProps) => {
       });
     },
     onSuccess: () => {
-      queryClient
-        .invalidateQueries([
-          "budgets",
-          { searchValue: "", sortAscending: true },
-        ])
-        .then((r) => console.log(r));
+      queryClient.clear();
       replace("/");
       showToast({
         variant: "confirm",
