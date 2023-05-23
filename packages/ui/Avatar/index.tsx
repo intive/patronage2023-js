@@ -7,7 +7,6 @@ export type AvatarProps = {
   alt?: string;
   outlined?: boolean;
   className?: string;
-  title?: string;
 };
 
 const Image = styled.img<AvatarProps>`
@@ -25,7 +24,7 @@ const Image = styled.img<AvatarProps>`
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
   (
-    { username = "user", src, alt, className, outlined, title }: AvatarProps,
+    { username = "user", src, alt, className, outlined}: AvatarProps,
     ref
   ) => {
     return (
@@ -35,7 +34,6 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
         alt={alt ? alt : `${username}'s avatar`}
         className={className}
         outlined={outlined}
-        title={title}
       />
     );
   }

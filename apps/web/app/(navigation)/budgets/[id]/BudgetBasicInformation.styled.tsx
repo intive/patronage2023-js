@@ -9,6 +9,7 @@ export const BasicInfoWrapper = styled.div`
 export const TitleEditButton = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
 `;
@@ -38,6 +39,7 @@ export const TileWrapper = styled.div`
 `;
 
 export const BudgetIconStyled = styled(BudgetIcon)`
+  display: none;
   height: 40px;
   width: 40px;
   font-size: 0.9em;
@@ -46,10 +48,12 @@ export const BudgetIconStyled = styled(BudgetIcon)`
     height: 80px;
     width: 80px;
     font-size: 1.5em;
+    display: flex;
   }
 `;
 
 export const StyledTitle = styled.h1`
+  width: 100%;
   font-family: "Signika", sans-serif;
   font-size: 28px;
   font-weight: 600;
@@ -58,16 +62,19 @@ export const StyledTitle = styled.h1`
   ${device.tablet} {
     font-size: 32px;
     line-height: 48px;
+    width: auto;
   }
 `;
 
 export const StyledDescription = styled.span`
+  display: none;
   line-height: 20px;
   letter-spacing: 0px;
   font-size: 12px;
   color: ${({ theme }) => theme.infoTile.label};
   ${device.tablet} {
     font-size: 14px;
+    display: initial;
   }
 `;
 

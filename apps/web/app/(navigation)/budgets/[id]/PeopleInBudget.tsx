@@ -4,20 +4,25 @@ import styled from "styled-components";
 import { BudgetFixed, BudgetUser } from "lib/types";
 import { useSession } from "next-auth/react";
 import { Avatar, Tooltip } from "ui";
+import { device } from "lib/media-queries";
 
 type PeopleInBudgetProps = {
   budget: BudgetFixed;
 };
 
 const StyledWrapper = styled.div`
+  font-size: 32px;
   margin-left: auto;
   display: flex;
   align-items: center;
-  font-size: 48px;
   line-height: 1em;
 
   > * + * {
     margin-left: -8px;
+  }
+
+  ${device.tablet} {
+    font-size: 48px;
   }
 `;
 

@@ -56,6 +56,7 @@ export const theme = {
   },
   tooltip: {
     backgroundColor: colors.BasicWhite,
+    border: colors.Neutral2,
   },
   background: {
     background: colors.Teal10,
