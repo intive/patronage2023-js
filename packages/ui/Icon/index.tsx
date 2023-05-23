@@ -55,7 +55,8 @@ export type IconType =
   | "priority_high"
   | "navigate_before"
   | "navigate_next"
-  | "trending_flat";
+  | "trending_flat"
+  | "currency_exchange";
 
 type styledIconProps = {
   color?: string;
