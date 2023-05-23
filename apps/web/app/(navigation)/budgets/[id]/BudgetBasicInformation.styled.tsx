@@ -20,7 +20,7 @@ export const TopSectionWrapper = styled.div`
   align-items: flex-start;
   gap: 8px;
   margin-bottom: 16px;
-  ${device.tablet} {
+  ${device.largeMobile} {
     margin-bottom: 32px;
     align-items: center;
     gap: 16px;
@@ -32,7 +32,7 @@ export const TileWrapper = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   gap: 4px;
-  ${device.tablet} {
+  ${device.largeMobile} {
     flex-direction: row;
     gap: 8px;
   }
@@ -44,7 +44,7 @@ export const BudgetIconStyled = styled(BudgetIcon)`
   width: 40px;
   font-size: 0.9em;
   flex-shrink: 0;
-  ${device.tablet} {
+  ${device.largeMobile} {
     height: 80px;
     width: 80px;
     font-size: 1.5em;
@@ -59,7 +59,7 @@ export const StyledTitle = styled.h1`
   font-weight: 600;
   line-height: 28px;
   color: ${({ theme }) => theme.main};
-  ${device.tablet} {
+  ${device.largeMobile} {
     font-size: 32px;
     line-height: 48px;
     width: auto;
@@ -72,7 +72,7 @@ export const StyledDescription = styled.span`
   letter-spacing: 0px;
   font-size: 12px;
   color: ${({ theme }) => theme.infoTile.label};
-  ${device.tablet} {
+  ${device.largeMobile} {
     font-size: 14px;
     display: initial;
   }
