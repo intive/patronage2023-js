@@ -13,6 +13,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { ItemType } from "services/mutations";
 import styled from "styled-components";
+import { categoryFilterAtom } from "store";
+import { useSetAtom } from "jotai";
 
 export const IconStyled = styled(Icon)`
   background: white;

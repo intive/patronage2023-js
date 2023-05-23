@@ -13,7 +13,7 @@ export const SelectContentStyled = styled(Select.Content)`
   overflow: hidden;
   color: ${({ theme }) => theme.datePicker.neutral10};
   background-color: ${({ theme }) => theme.card.background};
-  z-index: 40000;
+  z-index: 10;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.card.border};
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
