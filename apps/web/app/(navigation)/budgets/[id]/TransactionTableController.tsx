@@ -113,7 +113,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     },
   });
 
-  useEffect(() => setCurrentPage(1), [transactionType, categoryFilterState]);
+  useEffect(
+    () => setCurrentPage(1),
+    [transactionType, categoryFilterState, debouncedSearch]
+  );
 
   if (isError) {
     return (
@@ -132,7 +135,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
           onChange={(e) => {
             setSearchTransactionByName(e.currentTarget.value);
-            setCurrentPage(1);
+            // setCurrentPage(1);
           }}
         />
       </FilterSearchWrapper>
