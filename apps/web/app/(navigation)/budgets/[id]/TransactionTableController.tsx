@@ -12,6 +12,7 @@ import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type APIResponse = {
   items: Item[];
@@ -70,6 +71,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     );
   };
 
+  const fetch = useSuperfetch();
+
   const {
     data: transactionsData,
     isError,
@@ -82,37 +85,27 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       pageSize,
       currentPage,
       budget,
-      session,
-      categoryFilterState,
       transactionType,
+      categoryFilterState,
     ],
+
     queryFn: async () => {
       return fetch(
-        env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
         {
-          body: JSON.stringify({
+          method: "POST",
+          body: {
             pageSize: pageSize,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
             search: "",
             transactionType: transactionType,
-          }),
-          headers: {
-            Authorization: "Bearer " + session!.user.accessToken,
-            "Content-Type": "application/json",
           },
-          method: "POST",
         }
       )
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error(`${res.status}`);
-        })
-        .then((json) => fixFetchedData(json));
+        .then((res) => fixFetchedData(res))
+        .catch((err) => console.error(err));
     },
-    enabled: !!session && !!budget,
   });
 
   useEffect(() => setCurrentPage(1), [transactionType]);
@@ -134,7 +127,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={transactionsData}
+        transactions={transactionsData as Transaction[]}
         isLoading={isLoading}
       />
       <Pagination
