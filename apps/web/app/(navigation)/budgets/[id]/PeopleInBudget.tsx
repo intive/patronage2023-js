@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { BudgetFixed, BudgetUser } from "lib/types";
 import { useSession } from "next-auth/react";
+import * as Tooltip from '@radix-ui/react-tooltip';
 import { Avatar } from "ui";
 
 type PeopleInBudgetProps = {
