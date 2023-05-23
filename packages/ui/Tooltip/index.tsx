@@ -22,7 +22,7 @@ const StyledTooltipContent = styled(RadixTooltip.Content)`
 
 export const Tooltip = ({ children, text, position }: TooltipProps) => {
   return (
-    <RadixTooltip.Provider>
+    <RadixTooltip.Provider delayDuration={0}>
       <RadixTooltip.Root>
         <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
         <RadixTooltip.Portal>
