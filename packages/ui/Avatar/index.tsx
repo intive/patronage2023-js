@@ -24,12 +24,22 @@ const Image = styled.img<AvatarProps>`
 
 export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
   (
-    { username = "user", src, alt, className, outlined}: AvatarProps,
+    {
+      username = "user",
+      src,
+      alt,
+      className,
+      outlined,
+      // other components, like Tooltip, might add
+      // custom props to extend functionality of this component
+      ...otherProps
+    }: AvatarProps,
     ref
   ) => {
     return (
       <Image
         ref={ref}
+        {...otherProps}
         src={src}
         alt={alt ? alt : `${username}'s avatar`}
         className={className}

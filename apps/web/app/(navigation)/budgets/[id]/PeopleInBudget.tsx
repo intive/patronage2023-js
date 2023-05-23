@@ -62,8 +62,6 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
     remainingUsers = peopleWithoutLoggedUser.slice(3);
   }
 
-  console.log(remainingUsers);
-
   const remainingUserNames = remainingUsers.map((user) => (
     <StyledUser key={user.id}>
       {user.firstName} {user.lastName}
@@ -85,7 +83,7 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
         </Tooltip>
       ))}
       {remainingUsers.length && (
-        <Tooltip text={remainingUserNames}>
+        <Tooltip text={remainingUserNames} position="bottom">
           <StyledCounter>
             <span>{remainingUsers.length}</span>
           </StyledCounter>

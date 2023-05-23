@@ -26,7 +26,9 @@ export const Tooltip = ({ children, text, position }: TooltipProps) => {
       <RadixTooltip.Root>
         <RadixTooltip.Trigger asChild>{children}</RadixTooltip.Trigger>
         <RadixTooltip.Portal>
-          <StyledTooltipContent side={position} sideOffset={3}>{text}</StyledTooltipContent>
+          <StyledTooltipContent side={position} sideOffset={3}>
+            {text}
+          </StyledTooltipContent>
         </RadixTooltip.Portal>
       </RadixTooltip.Root>
     </RadixTooltip.Provider>
