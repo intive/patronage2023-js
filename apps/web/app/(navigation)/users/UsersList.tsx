@@ -6,10 +6,8 @@ import { useTranslate } from "lib/hooks";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
-
 import { Icon, Avatar } from "ui";
 import { z } from 'zod';
-
 import {
   UsersListStyled,
   EmailStyled
@@ -70,7 +68,7 @@ export const UsersListTable = ({
       title: t(usersTable.email),
       isSortable: true,
       dataType: DataType.String,
-      style: { width: "33%" },
+      style: { width: "34%" },
     },
     {
       key: "createdTimestamp",
@@ -92,24 +90,24 @@ export const UsersListTable = ({
         }}
         childComponents={{
           cell: {
-            content: (props) => {
-              switch (props.column.key) {
+            content: ({ column, rowData }) => {
+              switch (column.key) {
                 case "avatar":
                   //set default avatar if missing data
-                  if (!props.rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
+                  if (!rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
 
-                  const text = props.rowData.avatar;
+                  const text = rowData.avatar;
                   //check if avatar string is a path coming from our avatars folder
                   const schemaPath = z.string().startsWith("/avatars/");
                   //check if avatar string is valid url
                   const schemaUrl = z.string().url();
                   const isPath = schemaPath.safeParse(text);
                   const isUrl = schemaUrl.safeParse(text);
-                  return <Avatar src={isPath.success || isUrl.success ? props.rowData.avatar : "/unsetAvatar.svg"} />;
+                  return <Avatar src={isPath.success || isUrl.success ? rowData.avatar : "/unsetAvatar.svg"} />;
                 case "email":
-                  return <EmailStyled>{props.rowData.email}</EmailStyled>;
+                  return <EmailStyled>{rowData.email}</EmailStyled>;
                 case "createdTimestamp":
-                  const date = new Date(props.rowData.createdTimestamp);
+                  const date = new Date(rowData.createdTimestamp);
                   const dateString = `${date.getFullYear()}-${((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1)}-${(date.getDate() < 10 ? '0' : '') + date.getDate()}`;
                   return dateString
               }
