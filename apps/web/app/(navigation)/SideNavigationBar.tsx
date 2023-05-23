@@ -12,7 +12,7 @@ import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
 import { ItemType } from "services/mutations"
-import {Favorite} from "./Favorite"
+import {Favourite} from "./Favourite"
 import { useSession } from "next-auth/react";
 import { categoryFilterAtom } from "store";
 import { useSetAtom } from "jotai";
@@ -95,7 +95,7 @@ export default function SideNav() {
                 iconSize={24}
               />
               <SpanStyled>{name}</SpanStyled>
-              <Favorite isFav={isFavourite} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
+              <Favourite isFav={isFavourite} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
             </>
           ),
           href: `/budgets/${id.value}`,
