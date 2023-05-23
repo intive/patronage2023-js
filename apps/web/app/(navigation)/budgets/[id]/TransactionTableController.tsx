@@ -53,10 +53,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseInt(getPageSizeValue);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [categoryFilterState]);
-
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / pageSize));
     return res.items.map(
@@ -117,7 +113,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     },
   });
 
-  useEffect(() => setCurrentPage(1), [transactionType]);
+  useEffect(() => setCurrentPage(1), [transactionType, categoryFilterState]);
 
   if (isError) {
     return (
@@ -160,5 +156,5 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     </>
   );
 };
-//fix prettier test
+
 export default TransactionTableController;
