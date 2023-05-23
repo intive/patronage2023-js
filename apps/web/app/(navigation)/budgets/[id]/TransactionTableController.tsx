@@ -7,7 +7,7 @@ import categoryMap from "lib/category-map";
 import { ErrorMessage } from "ui";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
-import { useTranslate } from "lib/hooks";
+import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
@@ -34,8 +34,11 @@ type ID = {
 };
 
 const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
+  const [getPageSizeValue, setPageSizeValue] = useLocalStorage(
+    "transactionsTablePageSize",
+    "5"
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
@@ -44,13 +47,14 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
+  const pageSize = parseInt(getPageSizeValue);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
-    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
+    setTotalPages(Math.ceil(res.totalCount / pageSize));
     return res.items.map(
       (item): Transaction => ({
         id: item.transactionId.value,
@@ -81,7 +85,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: [
       "datatable",
-      itemsPerPage,
+      pageSize,
       currentPage,
       budget,
       transactionType,
@@ -94,7 +98,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         {
           method: "POST",
           body: {
-            pageSize: itemsPerPage,
+            pageSize: pageSize,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
             search: "",
@@ -133,9 +137,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         pageIndex={currentPage - 1}
         numberOfPages={totalPages}
         pageSizeOptions={[5, 10, 25]}
-        currentPageSize={itemsPerPage}
+        currentPageSize={pageSize}
         onChangePageSize={(val) => {
-          setItemsPerPage(val);
+          setPageSizeValue(val);
           setCurrentPage(1);
         }}
         onChangePageIndex={(val) => setCurrentPage(val + 1)}
