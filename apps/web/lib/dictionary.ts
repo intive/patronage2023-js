@@ -570,13 +570,13 @@ const dictionary = {
       error401: {
         en: "No authorization!",
         pl: "Brak autoryzacji!",
-        fr: "Absence d'autorisation!"
+        fr: "Absence d'autorisation!",
       },
       errorDefault: {
         en: "Oops, something went wrong.",
         pl: "Ups, coś poszło nie tak.",
         fr: "Oups, quelque chose s'est mal passé.",
-      }
+      },
     },
   },
   CreateNewTransactionModal: {
