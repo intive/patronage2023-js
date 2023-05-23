@@ -589,6 +589,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Wrong data.",
+        pl: "Niewłaściwe dane.",
+        fr: "Données erronées",
+      },
+      error401: {
+        en: "No authorization!",
+        pl: "Brak autoryzacji!",
+        fr: "Absence d'autorisation!"
+      },
+      errorDefault: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose s'est mal passé.",
+      }
     },
   },
   CreateNewTransactionModal: {
@@ -896,6 +911,52 @@ const dictionary = {
         pl: "Budżet z ostatnich 3 miesięcy",
         fr: "Budget sous 3 mois",
       },
+    },
+  },
+  AsideCard: {
+    categories: {
+      title: {
+        en: "Categories",
+        pl: "Kategorie",
+        fr: "Catégories",
+      },
+      settings: {
+        en: "Manage",
+        pl: "Zarządzaj",
+        fr: "Gestion",
+      },
+    },
+  },
+  CategoryMap: {
+    homeSpendings: {
+      en: "Home spendings",
+      pl: "Wydatki domowe",
+      fr: "Dépenses à domicile",
+    },
+    subscriptions: {
+      en: "Subscriptions",
+      pl: "Subskrypcje",
+      fr: "Abonnements",
+    },
+    car: {
+      en: "Car",
+      pl: "Samochód",
+      fr: "Automobile",
+    },
+    grocery: {
+      en: "Grocery",
+      pl: "Zakupy spożywcze",
+      fr: "Épicerie",
+    },
+    salary: {
+      en: "Salary",
+      pl: "Wynagrodzenie",
+      fr: "Salaire",
+    },
+    refund: {
+      en: "Refund",
+      pl: "Zwrot kosztów",
+      fr: "Remboursement",
     },
   },
 };

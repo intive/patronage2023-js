@@ -35,7 +35,7 @@ export default function Nav() {
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-        <AvatarStyled src="/avatar.svg" outlined />
+        <AvatarStyled src="avatars/3.svg" outlined />
       </ActionWrapper>
     </NavBar>
   );

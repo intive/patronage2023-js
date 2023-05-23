@@ -39,7 +39,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "/user1",
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatar.svg" />
+        <AvatarStyled src="avatars/3.svg" />
         <SpanStyled>Leonard Hofstadter</SpanStyled>
       </>
     ),
@@ -50,7 +50,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "/user2",
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatar.svg" />
+        <AvatarStyled src="avatars/3.svg" />
         <SpanStyled>Howard Wolowitz</SpanStyled>
       </>
     ),
@@ -61,7 +61,7 @@ const dummyNavItemContentsWithAvatar: Array<NavItemContents> = [
     href: "/user3",
     ComponentToRender: (
       <>
-        <AvatarStyled src="/avatar.svg" />
+        <AvatarStyled src="avatars/3.svg" />
         <SpanStyled>Rajesh Kotthrappall</SpanStyled>
       </>
     ),

@@ -1,5 +1,6 @@
 import { IconType } from "ui/Icon";
 import { CategoryType } from "ui/CategoryIcon";
+import { CategoryMapType } from "./category-map";
 
 export interface Currency {
   tag: string;

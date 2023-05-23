@@ -25,6 +25,7 @@ export default function SideNav() {
   const { SideNav } = dict;
 
   const { data: session } = useSession();
+  const setCategoryFilter = useSetAtom(categoryFilterAtom);
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
@@ -70,6 +71,11 @@ export default function SideNav() {
 
   const hideSubMenu = () => {
     setIsNavItemClicked(true);
+  };
+
+  const navListItemClickHandler = () => {
+    hideSubMenu();
+    setCategoryFilter([]);
   };
 
   const closeModal = () => {
@@ -119,7 +125,7 @@ export default function SideNav() {
     navigationList: (
       <NavList
         contents={successData}
-        onNavListItemClick={hideSubMenu}
+        onNavListItemClick={navListItemClickHandler}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
         text={text}
