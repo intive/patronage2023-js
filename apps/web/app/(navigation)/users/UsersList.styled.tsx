@@ -9,11 +9,6 @@ export const UsersListStyled = styled.div`
     }
   }
 
-  // hide empty cell added by group row
-  .ka-empty-cell {
-    display: none;
-  }
-
   // header styles
   .ka-thead-background {
     background-color: ${({ theme }) => theme.transactionsTable.background};
@@ -77,12 +72,7 @@ export const UsersListStyled = styled.div`
     cursor: pointer;
   }
 
-  // center "Creator" header
-  .ka-thead-cell#creator .ka-thead-cell-content {
-    justify-content: center;
-  }
-
-  // hide creator column on mobile
+  // hide side columns on mobile
   tr.ka-thead-row th:first-child,
   tr.ka-row td:first-child,
   tr.ka-thead-row th:last-child,
@@ -94,30 +84,6 @@ export const UsersListStyled = styled.div`
     }
   }
 
-  // group row
-  .ka-icon-group-arrow {
-    display: none;
-  }
-
-  .ka-group-row {
-    background-color: ${({ theme }) => theme.transactionsTable.background};
-
-    > td {
-      padding-top: 24px;
-    }
-  }
-
-  .ka-group-cell {
-    padding: 8px 8px 8px 0;
-  }
-
-  .ka-group-cell-content {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    color: ${({ theme }) => theme.transactionsTable.date};
-  }
-
   // normal row styles
   .ka-row {
     border: none;
@@ -126,10 +92,6 @@ export const UsersListStyled = styled.div`
       border-top: 1px solid
         ${({ theme }) => theme.transactionsTable.rowSeparator};
     }
-  }
-
-  .ka-group-row + .ka-row td {
-    border-top: none;
   }
 
   // cell styles
@@ -153,7 +115,6 @@ export const UsersListStyled = styled.div`
   }
 `;
 
-
 export const EmailStyled = styled.div`
     font-size: 12px;
     color: ${({ theme }) => theme.transactionsTable.cellText};
@@ -170,6 +131,7 @@ export const EmailStyled = styled.div`
 export const InputWrapper = styled.div`
   width: 220px;
   align-self: center;
+  
   @media (min-width: 510px) {
     width: 240px;
     align-self: flex-end;
