@@ -3,7 +3,7 @@ name: "Style"
 on:
   push:
     branches: [main]
-  pull_request_target:
+  pull_request:
     types:
       - opened
       - synchronize
@@ -15,6 +15,8 @@ jobs:
     name: Lint
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Run linting rules and tests
         uses: actions/setup-node@v3
         with:
@@ -28,6 +30,8 @@ jobs:
     name: Prettier
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Run linting rules and tests
         uses: actions/setup-node@v3
         with:

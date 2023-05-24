@@ -5,21 +5,29 @@ import { useDebounce } from "lib/hooks/useDebounce";
 import { useCallback, useRef, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
-import { IconStyled } from "./SideNavigationBarNavListData";
-import { SettingsSubMenuNavListContents } from "./SideNavigationBarNavListData";
+
 import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import { BudgetFixed } from "lib/types";
 import { ItemType } from "services/mutations";
+import styled from "styled-components";
+import { categoryFilterAtom } from "store";
+import { useSetAtom } from "jotai";
+
+export const IconStyled = styled(Icon)`
+  background: white;
+  padding: 4px;
+  border-radius: 8px;
+`;
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
 
   const { data: session } = useSession();
+  const setCategoryFilter = useSetAtom(categoryFilterAtom);
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
@@ -65,6 +73,11 @@ export default function SideNav() {
 
   const hideSubMenu = () => {
     setIsNavItemClicked(true);
+  };
+
+  const navListItemClickHandler = () => {
+    hideSubMenu();
+    setCategoryFilter([]);
   };
 
   const closeModal = () => {
@@ -114,7 +127,7 @@ export default function SideNav() {
     navigationList: (
       <NavList
         contents={successData}
-        onNavListItemClick={hideSubMenu}
+        onNavListItemClick={navListItemClickHandler}
         loading={isFetchingNextPage || status === "loading"}
         error={status === "error"}
         text={text}
@@ -129,18 +142,43 @@ export default function SideNav() {
     },
   };
 
+  // edit settingSubmenu items below
+  const settingsSubmenuItems = [
+    {
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.editProfile)}</span>
+      ),
+      href: "/settings/edit-profile",
+      id: 1,
+    },
+    {
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.changePassword)}</span>
+      ),
+      href: "/settings/change-password",
+      id: 2,
+    },
+    {
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.language)}</span>
+      ),
+      href: "/settings/change-language",
+      id: 3,
+    },
+  ];
+
   const settingsSubMenuData = {
     title: t(SideNav.settingsItem.title),
     navigationList: (
       <NavList
-        contents={SettingsSubMenuNavListContents}
+        contents={settingsSubmenuItems}
         onNavListItemClick={hideSubMenu}
       />
     ),
   };
 
   //edit navbarItems below
-  const NavbarItems = [
+  const navbarItems = [
     {
       href: "/budgets",
       icon: <Icon icon="wallet" iconSize={32} />,
@@ -167,7 +205,7 @@ export default function SideNav() {
     //add items for admin
     if (session?.user.role === "ADMIN") {
       return [
-        ...NavbarItems,
+        ...navbarItems,
         {
           href: "/users",
           icon: <Icon icon="account_circle" iconSize={32} />,
@@ -176,7 +214,7 @@ export default function SideNav() {
         },
       ];
     }
-    return NavbarItems;
+    return navbarItems;
   };
 
   return (

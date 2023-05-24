@@ -31,14 +31,19 @@ export type CurrencySelectComponentProps = {
 
 const currency = [
   {
-    tag: "EUR",
-    label: "Euro",
-    id: "2",
+    tag: "PLN",
+    label: "Polish Zloty",
+    id: "0",
   },
   {
     tag: "USD",
     label: "United States Dollar",
     id: "1",
+  },
+  {
+    tag: "EUR",
+    label: "Euro",
+    id: "2",
   },
 ];
 
