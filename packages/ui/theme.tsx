@@ -285,6 +285,7 @@ export const theme = {
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
     sortIcon: colors.Neutral8,
+    sortIconInactive: colors.Neutral3,
   },
   categoryIcons: {
     homeSpendings: {

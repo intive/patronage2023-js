@@ -44,7 +44,7 @@ const UsersTableController = () => {
   const { data: session } = useSession();
   const debouncedSearch = useDebounce(searchValue, 500);
 
-  useEffect(() => setCurrentPage(1), [searchValue]);
+  useEffect(() => setCurrentPage(1), [searchValue, itemsPerPage, sortParams]);
 
   const dataForTable = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
@@ -119,6 +119,7 @@ const UsersTableController = () => {
         setSorting={setSorting}
         users={users}
         isLoading={isLoading}
+        sortingData={sortParams}
       />
       <Pagination
         pageIndex={currentPage - 1}
@@ -127,7 +128,6 @@ const UsersTableController = () => {
         currentPageSize={itemsPerPage}
         onChangePageSize={(val) => {
           setItemsPerPage(val);
-          setCurrentPage(1);
         }}
         onChangePageIndex={(val) => setCurrentPage(val + 1)}
       />
