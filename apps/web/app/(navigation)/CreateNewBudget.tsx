@@ -186,6 +186,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       }
     );
 
+    
   const { mutate: sendBudget } = useSendBudget();
 
   const closeErrorMessage = () => {
