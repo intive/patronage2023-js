@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { BudgetFixed, BudgetUser } from "lib/types";
-import { useSession } from "next-auth/react";
-import { Avatar, Tooltip } from "ui";
+import { BudgetUser } from "lib/types";
 import { device } from "lib/media-queries";
+import { Avatar, Tooltip } from "ui";
 
 type PeopleInBudgetProps = {
-  budget: BudgetFixed;
+  users: BudgetUser[];
 };
 
 const StyledWrapper = styled.div`
@@ -45,20 +44,10 @@ const StyledUser = styled.div`
   padding: 3px;
 `;
 
-const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
-  const { data: session } = useSession();
-
-  const loggedUser = session?.user.id;
-  const peopleWithoutLoggedUser = budget.budgetUsers.filter(
-    (user) => user.id !== loggedUser
-  );
-
-  let shortUserList = peopleWithoutLoggedUser;
-  let remainingUsers: BudgetUser[] = [];
-  if (peopleWithoutLoggedUser.length > 4) {
-    shortUserList = peopleWithoutLoggedUser.slice(0, 3);
-    remainingUsers = peopleWithoutLoggedUser.slice(3);
-  }
+const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
+  const range = users.length > 4 ? 3 : users.length;
+  const visibleUsers = users.slice(0, range);
+  const remainingUsers = users.slice(range);
 
   const remainingUserNames = remainingUsers.map((user) => (
     <StyledUser key={user.id}>
@@ -68,7 +57,7 @@ const PeopleInBudget = ({ budget }: PeopleInBudgetProps) => {
 
   return (
     <StyledWrapper>
-      {shortUserList.map((user) => (
+      {visibleUsers.map((user) => (
         <Tooltip
           key={user.id}
           text={`${user.firstName} ${user.lastName}`}

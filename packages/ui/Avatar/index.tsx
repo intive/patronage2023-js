@@ -48,3 +48,4 @@ export const Avatar = forwardRef<HTMLImageElement, AvatarProps>(
     );
   }
 );
+Avatar.displayName = "Avatar";

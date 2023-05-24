@@ -1,10 +1,10 @@
 "use client";
 
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 import { BudgetFixed } from "lib/types";
-import { NavBudgetIcon, InfoTile } from "ui";
-import { StyledAddInfoSpan } from "ui/InfoTile";
 import { useTranslate } from "lib/hooks";
-
+import { iconNames } from "lib/iconValidation";
 import {
   BasicInfoWrapper,
   BudgetIconStyled,
@@ -14,13 +14,13 @@ import {
   TileWrapper,
   TitleEditButton,
   TopSectionWrapper,
-  TitleWrapper
+  TitleWrapper,
 } from "./BudgetBasicInformation.styled";
-import { iconNames } from "lib/iconValidation";
 import { EditBudget } from "app/(navigation)/EditBudget";
-import { useState } from "react";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
+import { NavBudgetIcon, InfoTile } from "ui";
+import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -29,6 +29,12 @@ type BudgetBasicInfoProps = {
 
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
+  const { data: session } = useSession();
+
+  const loggedUserId = session?.user.id;
+  const peopleWithoutLoggedUser = budget.budgetUsers.filter(
+    (user) => user.id !== loggedUserId
+  );
 
   const { basicInformation } = dict;
   const { startDate, endDate, limit, currency, description, icon, name } =
@@ -96,7 +102,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
               />
-              <PeopleInBudget budget={budget} />
+              <PeopleInBudget users={peopleWithoutLoggedUser} />
             </TitleEditButton>
             <StyledDescription>{description}</StyledDescription>
           </TitleWrapper>
