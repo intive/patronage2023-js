@@ -33,11 +33,11 @@ const UsersTableController = () => {
   const [sortParams, setSortParams] = useState({
     actualColumn: "lastName",
     ascending: {
-      "lastName": true,
-      "firstName": false,
-      "email": false,
-      "createdTimestamp": false,
-    }
+      lastName: true,
+      firstName: false,
+      email: false,
+      createdTimestamp: false,
+    },
   });
 
   const { t, dict } = useTranslate("BudgetsPage");
@@ -49,18 +49,18 @@ const UsersTableController = () => {
   const dataForTable = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
     return res.items;
-  }
+  };
 
   const setSorting = (column: string) => {
-    setSortParams(prev => {
+    setSortParams((prev) => {
       return {
         actualColumn: column,
         ascending: {
           ...prev.ascending,
-          [column]: !prev.ascending[column as keyof typeof prev.ascending]
-        }
-      }
-    })
+          [column]: !prev.ascending[column as keyof typeof prev.ascending],
+        },
+      };
+    });
   };
 
   const {
@@ -80,7 +80,10 @@ const UsersTableController = () => {
           sortDescriptors: [
             {
               columnName: sortParams.actualColumn,
-              sortAscending: sortParams.ascending[sortParams.actualColumn as keyof typeof sortParams.ascending],
+              sortAscending:
+                sortParams.ascending[
+                  sortParams.actualColumn as keyof typeof sortParams.ascending
+                ],
             },
           ],
         }),
@@ -108,12 +111,15 @@ const UsersTableController = () => {
         message={`${t(dict.tableError)} ${error}`}
       />
     );
-  };
+  }
 
   return (
     <>
       <InputWrapper>
-        <SearchInput placeholder="" onChange={(e) => setSearchValue(e.currentTarget.value) } />
+        <SearchInput
+          placeholder=""
+          onChange={(e) => setSearchValue(e.currentTarget.value)}
+        />
       </InputWrapper>
       <UsersListTable
         setSorting={setSorting}

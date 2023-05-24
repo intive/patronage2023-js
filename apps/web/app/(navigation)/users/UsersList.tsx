@@ -32,13 +32,13 @@ type UsersListProps = {
 };
 
 type SortingData = {
-  actualColumn: string,
-    ascending: {
-      lastName: boolean,
-      firstName: boolean,
-      email: Boolean,
-      createdTimestamp: boolean,
-    }
+  actualColumn: string;
+  ascending: {
+    lastName: boolean;
+    firstName: boolean;
+    email: Boolean;
+    createdTimestamp: boolean;
+  };
 };
 
 export const UsersListTable = ({
@@ -143,22 +143,32 @@ export const UsersListTable = ({
                 {column.key !== "avatar" && (
                   <button onClick={() => setSorting(column.key)}>
                     <Icon
-                        icon="sort"
-                        iconSize={20}
-                        color={sortingData.actualColumn === column.key ? theme.transactionsTable.sortIcon : theme.transactionsTable.sortIconInactive}
-                      />
-                    {(sortingData.actualColumn === column.key)
-                    ?
-                    <Icon
-                        icon={sortingData.ascending[column.key as keyof typeof sortingData.ascending] ? "arrow_downward" : "arrow_upward"}
-                        iconSize={15}
-                        color={sortingData.actualColumn === column.key ? theme.transactionsTable.sortIcon : theme.transactionsTable.sortIconInactive}
+                      icon="sort"
+                      iconSize={20}
+                      color={
+                        sortingData.actualColumn === column.key
+                          ? theme.transactionsTable.sortIcon
+                          : theme.transactionsTable.sortIconInactive
+                      }
                     />
-                    :
-                    null
-                  }  
+                    {sortingData.actualColumn === column.key ? (
+                      <Icon
+                        icon={
+                          sortingData.ascending[
+                            column.key as keyof typeof sortingData.ascending
+                          ]
+                            ? "arrow_downward"
+                            : "arrow_upward"
+                        }
+                        iconSize={15}
+                        color={
+                          sortingData.actualColumn === column.key
+                            ? theme.transactionsTable.sortIcon
+                            : theme.transactionsTable.sortIconInactive
+                        }
+                      />
+                    ) : null}
                   </button>
-                  
                 )}
               </>
             ),

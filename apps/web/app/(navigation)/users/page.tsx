@@ -4,7 +4,6 @@ import MultiCardLayout from "../MultiCardLayout";
 import UsersTableController from "./UsersTableController";
 import { useTranslate } from "lib/hooks";
 
-
 const PageWrapper = styled.div`
   display: flex;
   align-self: flex-start;

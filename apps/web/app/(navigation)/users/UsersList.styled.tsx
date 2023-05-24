@@ -116,25 +116,25 @@ export const UsersListStyled = styled.div`
 `;
 
 export const EmailStyled = styled.div`
-    font-size: 12px;
-    color: ${({ theme }) => theme.transactionsTable.cellText};
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  font-size: 12px;
+  color: ${({ theme }) => theme.transactionsTable.cellText};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
-    @media (min-width: 510px) {
-      font-size: 14px;
-      white-space: initial;
-    }
-`
+  @media (min-width: 510px) {
+    font-size: 14px;
+    white-space: initial;
+  }
+`;
 
 export const InputWrapper = styled.div`
   width: 220px;
   align-self: center;
-  
+
   @media (min-width: 510px) {
     width: 240px;
     align-self: flex-end;
     margin-bottom: 10px;
-    }
+  }
 `;
