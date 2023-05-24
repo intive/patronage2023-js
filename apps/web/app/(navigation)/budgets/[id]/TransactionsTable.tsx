@@ -19,6 +19,7 @@ import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 
 type TransactionsTableProps = {

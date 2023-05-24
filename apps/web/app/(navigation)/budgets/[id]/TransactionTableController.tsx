@@ -1,10 +1,12 @@
-import { TransactionsTable } from "./TransactionsTable";
 import { useEffect, useState } from "react";
 import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
+import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
 import { useLocalStorage, useTranslate } from "lib/hooks";
@@ -12,7 +14,7 @@ import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
-import useSuperfetch from "lib/hooks/useSuperfetch";
+import { TransactionsTable } from "./TransactionsTable";
 
 type APIResponse = {
   items: Item[];
@@ -43,15 +45,13 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
   >(null);
+  const [searchTransactionByName, setSearchTransactionByName] = useState("");
+  const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
   const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseInt(getPageSizeValue);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [categoryFilterState]);
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / pageSize));
@@ -90,6 +90,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       budget,
       transactionType,
       categoryFilterState,
+      transactionType,
+      debouncedSearch,
     ],
 
     queryFn: async () => {
@@ -101,8 +103,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             pageSize: pageSize,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
-            search: "",
             transactionType: transactionType,
+            search: debouncedSearch,
           },
         }
       )
@@ -111,7 +113,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     },
   });
 
-  useEffect(() => setCurrentPage(1), [transactionType]);
+  useEffect(
+    () => setCurrentPage(1),
+    [transactionType, categoryFilterState, debouncedSearch]
+  );
 
   if (isError) {
     return (
@@ -126,6 +131,12 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     <>
       <FilterSearchWrapper>
         <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
+        <SearchInput
+          placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
+          onChange={(e) => {
+            setSearchTransactionByName(e.currentTarget.value);
+          }}
+        />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
