@@ -91,7 +91,7 @@ export const theme = {
     },
     secondary: {
       main: colors.Teal10,
-      border: colors.Neutral4,
+      border: colors.Neutral2,
       notSelected: colors.Neutral7,
     },
   },

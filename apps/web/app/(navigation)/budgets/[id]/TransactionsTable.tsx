@@ -18,6 +18,7 @@ import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 
 type TransactionsTableProps = {
@@ -158,12 +159,7 @@ export const TransactionsTable = ({
                     />
                   );
                 case "creator":
-                  return (
-                    <Avatar
-                      className="avatar"
-                      src={`/avatars/${props.value.avatar}`}
-                    />
-                  );
+                  return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
                     <TransactionDropdownMenu

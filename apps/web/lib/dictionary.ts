@@ -816,6 +816,11 @@ const dictionary = {
       income: { en: "Incomes", pl: "Wpływy", fr: "Les recettes" },
       expenses: { en: "Expenses", pl: "Wydatki", fr: "Les dépenses" },
     },
+    searchInputTransactionPlaceholder: {
+      en: "Search by Name",
+      pl: "Wyszukaj po nazwie",
+      fr: "Rechercher par nom",
+    },
     transactionsTable: {
       groupRowDays: {
         yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
