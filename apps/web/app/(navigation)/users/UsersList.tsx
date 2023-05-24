@@ -1,18 +1,19 @@
 "use client";
 
 import { useContext } from "react";
+import { z } from "zod";
+import { format } from "date-fns";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 import { Icon, Avatar } from "ui";
-import { z } from 'zod';
-import {
-  UsersListStyled,
-  EmailStyled
-} from "./UsersList.styled";
+import { UsersListStyled, EmailStyled } from "./UsersList.styled";
 import { TransactionsTableSuspense as UserTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
+
+import { useAtom } from "jotai";
+import { languageAtom } from "store";
 
 type User = {
   id: string;
@@ -38,6 +39,7 @@ export const UsersListTable = ({
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("UsersPage");
   const { usersTable } = dict;
+  const [language] = useAtom(languageAtom);
 
   const columns = [
     {
@@ -82,6 +84,7 @@ export const UsersListTable = ({
   return (
     <UsersListStyled>
       <Table
+        key={language}
         columns={columns}
         rowKeyField={"id"}
         data={users}
@@ -94,7 +97,7 @@ export const UsersListTable = ({
               switch (column.key) {
                 case "avatar":
                   //set default avatar if missing data
-                  if (!rowData.avatar) return <Avatar src="/unsetAvatar.svg" />
+                  if (!rowData.avatar) return <Avatar src="/unsetAvatar.svg" />;
 
                   const text = rowData.avatar;
                   //check if avatar string is a path coming from our avatars folder
@@ -103,13 +106,22 @@ export const UsersListTable = ({
                   const schemaUrl = z.string().url();
                   const isPath = schemaPath.safeParse(text);
                   const isUrl = schemaUrl.safeParse(text);
-                  return <Avatar src={isPath.success || isUrl.success ? rowData.avatar : "/unsetAvatar.svg"} />;
+                  return (
+                    <Avatar
+                      src={
+                        isPath.success || isUrl.success
+                          ? rowData.avatar
+                          : "/unsetAvatar.svg"
+                      }
+                    />
+                  );
                 case "email":
                   return <EmailStyled>{rowData.email}</EmailStyled>;
                 case "createdTimestamp":
-                  const date = new Date(rowData.createdTimestamp);
-                  const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-                  return dateString
+                  return format(
+                    new Date(rowData.createdTimestamp),
+                    "yyyy-MM-dd"
+                  );
               }
             },
           },
@@ -132,9 +144,7 @@ export const UsersListTable = ({
           tableBody: {
             content: (props) => {
               return (
-                isLoading && (
-                  <UserTableSuspense rowsNumber={5} {...props} />
-                )
+                isLoading && <UserTableSuspense rowsNumber={5} {...props} />
               );
             },
             elementAttributes: () => ({
