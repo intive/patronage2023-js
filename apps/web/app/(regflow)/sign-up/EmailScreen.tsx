@@ -2,7 +2,6 @@
 
 import { Field, Form } from "houseform";
 import { Button, Input, FormFooter } from "ui";
-import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
 import { FormWrapper } from "./SignUpFormStyled";
@@ -11,12 +10,6 @@ type EmailScreenProps = {
   onNext: (email: string) => void;
   userInfo?: string;
 };
-
-const FooterStyled = styled.div`
-  font-size: 16px;
-  line-height: 150%;
-  margin-top: 42px;
-`;
 
 export const EmailScreen = ({ onNext, userInfo = "" }: EmailScreenProps) => {
   const { t, dict } = useTranslate("SignUpPage");

@@ -2,15 +2,10 @@ import styled from "styled-components";
 import { Avatar } from "../Avatar";
 import { device } from "../../../apps/web/lib/media-queries";
 
-interface AvatarProps {
-  src: string;
-  id: string;
-}
-
 interface SelectorProps {
-  avatars: AvatarProps[];
+  avatars: string[];
   selectedAvatar?: string;
-  onSelect: (id: string) => void;
+  onSelect: (src: string) => void;
 }
 
 interface ButtonProps {
@@ -25,14 +20,14 @@ export const AvatarSelector = ({
   return (
     <AvatarsWrapper>
       <AvatarGridStyled>
-        {avatars.map(({ src, id }) => (
+        {avatars.map((src) => (
           <ButtonStyled
-            key={id}
+            key={src}
             onClick={(e) => {
               e.preventDefault();
-              onSelect(id);
+              onSelect(src);
             }}
-            selected={selectedAvatar === id}>
+            selected={selectedAvatar === src}>
             <Avatar src={src} />
           </ButtonStyled>
         ))}

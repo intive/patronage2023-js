@@ -1,4 +1,5 @@
 "use client";
+
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { Button, Input, Separator } from "ui";
