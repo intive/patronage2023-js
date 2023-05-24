@@ -168,7 +168,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             case 201:
               onClose();
               queryClient.invalidateQueries([
-                "budgets",
+                "budgetsList",
                 { searchValue: "", sortAscending: true },
               ]);
               break;
