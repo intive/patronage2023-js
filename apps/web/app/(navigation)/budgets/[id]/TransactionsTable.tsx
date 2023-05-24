@@ -50,7 +50,7 @@ export const TransactionsTable = ({
 
   const locale = useAtomValue(languageAtom);
 
-  const columns = (): Column[] => [
+  const columns = [
     {
       key: "category",
       title: t(transactionsTable.tableColumnHeaders.category),
@@ -105,7 +105,7 @@ export const TransactionsTable = ({
       isSortable: false,
       dataType: DataType.Number,
     },
-  ];
+  ] as Column[];
 
   const getDayName = (timestamp: number) => {
     dayjs.extend(localizedFormat);
@@ -151,7 +151,8 @@ export const TransactionsTable = ({
   return (
     <TableWrapperStyled>
       <Table
-        columns={columns()}
+        key={locale}
+        columns={columns}
         rowKeyField={"id"}
         data={transactions}
         groups={[{ columnKey: "date" }]}
