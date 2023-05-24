@@ -15,6 +15,7 @@ import { useSession } from "next-auth/react";
 import { ItemType } from "services/mutations";
 import { categoryFilterAtom } from "store";
 import { useSetAtom } from "jotai";
+import { ImportModal } from "components/ImportModal";
 
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
@@ -148,10 +149,11 @@ export default function SideNav() {
     },
     importButton: {
       clickHandler: () => {
-        showToast({
-          variant: "error",
-          message: "Check which records haven't been imported",
-        });
+        setIsImportModalVisible(true);
+        // showToast({
+        //   variant: "error",
+        //   message: "Check which records haven't been imported",
+        // });
       },
       label: "Import",
     },
@@ -217,6 +219,9 @@ export default function SideNav() {
       <>
         {isCreateNewBudgetModalVisible && (
           <CreateNewBudget onClose={closeModal} />
+        )}
+        {isImportModalVisible && (
+          <ImportModal onClose={() => setIsImportModalVisible(false)} />
         )}
       </>
     </>
