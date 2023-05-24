@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Icon } from "ui";
-import { IconType } from "ui/Icon/index";
+import { Icon, IconType } from "ui";
 
 export type CategoryType = {
   id: number;

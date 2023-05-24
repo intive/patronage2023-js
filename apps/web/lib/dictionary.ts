@@ -11,7 +11,7 @@ const dictionary = {
         buttonLabel: {
           en: "Add new budget",
           pl: "Dodaj nowy budżet",
-          fr: "Ajouter un nouveau budget",
+          fr: "Créer un nouveau budget",
         },
         infos: {
           loading: {
@@ -41,6 +41,23 @@ const dictionary = {
       },
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia", fr: "Paramètres" },
+        settingsItems: {
+          editProfile: {
+            en: "Edit profile",
+            pl: "Edytuj profil",
+            fr: "Editer le profil",
+          },
+          changePassword: {
+            en: "Change password",
+            pl: "Zmień hasło",
+            fr: "Changer le mot de passe",
+          },
+          language: {
+            en: "Language",
+            pl: "Język",
+            fr: "Langue",
+          },
+        },
       },
       usersItem: {
         title: { en: "Users", pl: "Użytkownicy", fr: "Utilisateurs" },
@@ -103,6 +120,16 @@ const dictionary = {
       en: "Create my free account!",
       pl: "Utwórz bezpłatne konto!",
       fr: "Créer un compte gratuit !",
+    },
+    signIn: {
+      en: "Sign in",
+      pl: "Zaloguj",
+      fr: "Se connecter",
+    },
+    logOut: {
+      en: "Log out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
     },
   },
   SignInPage: {
@@ -457,6 +484,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Oops, something went wrong",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+      error401: {
+        en: "Please log in or register to continue.",
+        pl: "Zaloguj się lub zarejestruj, aby kontynuować.",
+        fr: "Veuillez vous connecter ou vous inscrire pour continuer.",
+      },
+      errorDefault: {
+        en: "An unexpected error occurred.",
+        pl: "Wystąpił nieoczekiwany błąd.",
+        fr: "Une erreur inattendue est apparue.",
+      },
     },
   },
   EditBudgetModal: {
@@ -565,12 +607,12 @@ const dictionary = {
       error400: {
         en: "Wrong data.",
         pl: "Niewłaściwe dane.",
-        fr: "Données erronées",
+        fr: "Données incorrectes",
       },
       error401: {
         en: "No authorization!",
         pl: "Brak autoryzacji!",
-        fr: "Absence d'autorisation!"
+        fr: "Absence d'autorisation!",
       },
       errorDefault: {
         en: "Oops, something went wrong.",
@@ -600,12 +642,12 @@ const dictionary = {
     nameLabel: {
       income: {
         en: "Income name",
-        pl: "Nazwa przychodu",
+        pl: "Nazwa wpływu",
         fr: "Nom de la recette",
       },
       expense: {
         en: "Expense name",
-        pl: "Nazwa wpływu",
+        pl: "Nazwa wydatku",
         fr: "Nom de la dépense",
       },
     },
@@ -663,7 +705,7 @@ const dictionary = {
       dateNotInStartEndRange: {
         en: "The date must be within the budget period",
         pl: "Data musi się mieścić w okresie trwania budżetu",
-        fr: "La date doit être comprise dans la période budgétaire",
+        fr: "La date doit être comprise dans la période du budget",
       },
     },
     responseErrors: {
@@ -675,7 +717,7 @@ const dictionary = {
       401: {
         en: "401: Unauthorized user",
         pl: "401: Nieautoryzowany użytkownik",
-        fr: "401: Usager non autorisé",
+        fr: "401: L'utilisateur non autorisé",
       },
       default: {
         en: "Adding transaction failed. Please try again.",
@@ -730,7 +772,7 @@ const dictionary = {
       header: {
         en: "Are you sure you want to delete the budget:",
         pl: "Czy na pewno chcesz usunąć ten budżet:",
-        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
+        fr: "Êtes-vous sûr de vouloir supprimer ce budget:",
       },
       confirmButton: {
         en: "Confirm",
@@ -745,12 +787,12 @@ const dictionary = {
       errorMessage: {
         en: "Ops, something went wrong",
         pl: "Ups, coś poszło nie tak",
-        fr: "Oups, quelque chose s'est mal passé",
+        fr: "Oups, quelque chose a mal tourné",
       },
       confirmMessage: {
         en: "Budget was successfully removed",
         pl: "Budżet został pomyślnie usunięty",
-        fr: "Le budget a bien été supprimé",
+        fr: "Le budget a été supprimé correctement",
       },
     },
     createButton: {
@@ -925,7 +967,7 @@ const dictionary = {
       settings: {
         en: "Manage",
         pl: "Zarządzaj",
-        fr: "Gestion",
+        fr: "Gérer",
       },
     },
   },
@@ -943,7 +985,7 @@ const dictionary = {
     car: {
       en: "Car",
       pl: "Samochód",
-      fr: "Automobile",
+      fr: "Voiture",
     },
     grocery: {
       en: "Grocery",
