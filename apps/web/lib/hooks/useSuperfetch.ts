@@ -33,7 +33,7 @@ export default function useSuperfetch() {
       headers,
     })
       .then(async (res) => {
-        console.log(res)
+        console.log(res);
         if (res.ok) {
           const data = options?.emptyResponse ? {} : await res.json();
           return { ...data, httpStatus: res.status };
