@@ -54,7 +54,7 @@ export const BudgetIconStyled = styled(BudgetIcon)`
 
 export const TitleWrapper = styled.div`
   flex: 1;
-`
+`;
 
 export const StyledTitle = styled.h1`
   width: 100%;

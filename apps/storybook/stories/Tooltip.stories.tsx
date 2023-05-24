@@ -7,7 +7,7 @@ const StyledSpan = styled.span`
   background-color: green;
   color: white;
   padding: 10px;
-`
+`;
 
 export default {
   title: "Tooltip",
