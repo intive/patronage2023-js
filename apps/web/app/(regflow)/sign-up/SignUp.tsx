@@ -47,7 +47,6 @@ export const SignUp = () => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}user/sign-up`, {
         method: "POST",
         body: backendUser,
-        emptyResponse: true,
       });
     },
     onSettled: () => {
