@@ -10,8 +10,8 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { ItemType } from "services/mutations"
-import {Favourite} from "./Favourite"
+import { ItemType } from "services/mutations";
+import { Favourite } from "./Favourite";
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
 import { categoryFilterAtom } from "store";
@@ -41,8 +41,14 @@ export default function SideNav() {
   const queryClient = useQueryClient();
   const pageSize = 13;
 
-  const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status } =
-    useGetBudgets(debouncedSearch, sortAscending, pageSize);
+  const {
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    data,
+    status,
+    refetch,
+  } = useGetBudgets(debouncedSearch, sortAscending, pageSize);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
 
@@ -101,7 +107,11 @@ export default function SideNav() {
                 iconSize={24}
               />
               <SpanStyled>{name}</SpanStyled>
-              <Favourite isFav={isFavourite} budgetId={id.value} budgets={items} activeHref={`/budgets/${id.value}`}/>
+              <Favourite
+                isFav={isFavourite}
+                budgetId={id.value}
+                activeHref={`/budgets/${id.value}`}
+              />
             </>
           ),
           href: `/budgets/${id.value}`,
@@ -225,6 +235,7 @@ export default function SideNav() {
         items={renderNavbar()}
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
+        refetchBudgetsFunction={refetch}
       />
       <>
         {isCreateNewBudgetModalVisible && (
