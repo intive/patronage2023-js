@@ -46,12 +46,38 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     "Income" | "Expense" | null
   >(null);
   const [searchTransactionByName, setSearchTransactionByName] = useState("");
+  const [sortDescriptors, setSortDescriptors] = useState([
+    { columnName: "description", sortAscending: true },
+  ]);
   const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
-  const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseInt(getPageSizeValue);
+
+  const setSorting = (column: string) => {
+    setSortDescriptors((previousSortDescriptors) => {
+      if (
+        previousSortDescriptors.find((element) => element.columnName === column)
+      ) {
+        return [
+          ...previousSortDescriptors.filter(
+            (element) => element.columnName !== column
+          ),
+          {
+            columnName: column,
+            sortAscending: !previousSortDescriptors.find(
+              (element) => element.columnName === column
+            )?.sortAscending,
+          },
+        ];
+      }
+      return [
+        ...previousSortDescriptors,
+        { columnName: column, sortAscending: true },
+      ];
+    });
+  };
 
   const fixFetchedData = (res: APIResponse) => {
     setTotalPages(Math.ceil(res.totalCount / pageSize));
@@ -92,9 +118,11 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       categoryFilterState,
       transactionType,
       debouncedSearch,
+      sortDescriptors,
     ],
 
     queryFn: async () => {
+      console.log(sortDescriptors);
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
         {
@@ -105,6 +133,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             categoryTypes: categoryFilterState,
             transactionType: transactionType,
             search: debouncedSearch,
+            sortDescriptors,
           },
         }
       )
@@ -141,6 +170,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
+        sortDescriptors={sortDescriptors}
         transactions={transactionsData as Transaction[]}
         isLoading={isLoading}
       />
