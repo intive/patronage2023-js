@@ -16,7 +16,6 @@ import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
 
-
 type APIResponse = {
   items: Item[];
   totalCount: number;
