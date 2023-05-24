@@ -33,7 +33,7 @@ export default function useSuperfetch() {
     })
       .then(async (res) => {
         if (res.ok) {
-          const data = await res.json().catch(()=>{});
+          const data = await res.json().catch(() => {});
           return { ...data, httpStatus: res.status };
         }
         throw new SuperError("An error has occurred.", res.status);
