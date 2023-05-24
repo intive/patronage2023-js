@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { FormWrapper } from "./SignUpFormStyled";
 
 interface UserInfo {

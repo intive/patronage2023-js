@@ -1,10 +1,14 @@
 "use client";
+
 import { EmailScreen } from "./EmailScreen";
 import { FlowController } from "./FlowController";
-import { PasswordSubComponent } from "./PasswordSubComponent";
+import { PasswordSubComponent } from "./PasswordScreen";
 import { ProfileScreen } from "./ProfileScreen";
 import { SuccessErrorScreen } from "./SuccessErrorScreen";
 import { useState } from "react";
+import { env } from "env.mjs";
+import { useMutation } from "@tanstack/react-query";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 interface userObject {
   email: string;
@@ -18,7 +22,6 @@ interface userObject {
 
 export const SignUp = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [result, setResult] = useState<number | null>(null); // 200, 400
   const [user, setUser] = useState<userObject>({
     email: "",
     password: "",
@@ -26,6 +29,28 @@ export const SignUp = () => {
       firstName: "",
       lastName: "",
       avatar: "",
+    },
+  });
+
+  const fetch = useSuperfetch();
+
+  const signUpMutation = useMutation({
+    mutationFn: (user: userObject) => {
+      const backendUser = {
+        avatar: user.profile.avatar,
+        firstName: user.profile.firstName,
+        lastName: user.profile.lastName,
+        password: user.password,
+        email: user.email,
+      };
+
+      return fetch(`${env.NEXT_PUBLIC_API_URL}user/sign-up`, {
+        method: "POST",
+        body: backendUser,
+      });
+    },
+    onSettled: () => {
+      setCurrentStep(currentStep + 1);
     },
   });
 
@@ -51,26 +76,9 @@ export const SignUp = () => {
 
   const validateProfile = (profileInfo: userObject["profile"]) => {
     //set profile info to user
-    setUser({ ...user, profile: profileInfo });
-
-    //useState might not be updated here, so we use fetch with passed profileInfo directly
-    //   fetch("http://strzelam_w_backend:5000", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       email: user.email,
-    //       password: hashedPassword,
-    //       profile: profileInfo,
-    //     }),
-    //   }).then((res) => {
-    //     setResult(res.status);
-    //   });
-    // };
-
-    setResult(user.email === "smutnarzaba@png.pl" ? 400 : 200); //mocked result
-    setCurrentStep(currentStep + 1);
+    const newUser = { ...user, profile: profileInfo };
+    setUser(newUser);
+    signUpMutation.mutate(newUser);
   };
 
   return (
@@ -106,7 +114,7 @@ export const SignUp = () => {
           props: {
             loginHref: "/sign-in",
             onBackToStart: goToBeginning,
-            success: result === 200,
+            success: signUpMutation.isSuccess,
           },
         },
       ]}

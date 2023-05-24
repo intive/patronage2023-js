@@ -68,7 +68,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         creator: {
           id: budget.userID,
           name: session!.user.name,
-          avatar: `${session!.user.image}.svg`,
+          avatar: session!.user.image,
         },
       })
     );
