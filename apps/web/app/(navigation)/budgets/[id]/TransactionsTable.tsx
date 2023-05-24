@@ -106,18 +106,19 @@ export const TransactionsTable = ({
     const formattedDate = date.format("DD.MM.YYYY");
 
     let dayOfWeek = date.format("dddd");
-    if (date.isToday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.today);
-    } else if (date.isYesterday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.yesterday);
-    }
+
+    if (date.isToday())
+      return `${t(transactionsTable.groupRowDays.today)}, ` + formattedDate;
+
+    if (date.isYesterday())
+      return `${t(transactionsTable.groupRowDays.yesterday)}, ` + formattedDate;
 
     if (!(date.isToday() && date.isYesterday())) {
       const lowerCaseDay =
         dayOfWeek.toLowerCase() as keyof typeof transactionsTable.groupRowDays;
       dayOfWeek = t(transactionsTable.groupRowDays[lowerCaseDay]);
+      return `${dayOfWeek}, ${formattedDate}`;
     }
-    return `${dayOfWeek}, ${formattedDate}`;
   };
 
   const dropdownMenuItems = [
