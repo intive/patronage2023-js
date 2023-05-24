@@ -3,6 +3,7 @@ import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
 import { SearchInput } from "ui/Input/SearchInput";
@@ -14,7 +15,7 @@ import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
-import useSuperfetch from "lib/hooks/useSuperfetch";
+
 
 type APIResponse = {
   items: Item[];
