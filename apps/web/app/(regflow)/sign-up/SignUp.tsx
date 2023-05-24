@@ -8,6 +8,7 @@ import { SuccessErrorScreen } from "./SuccessErrorScreen";
 import { useState } from "react";
 import { env } from "env.mjs";
 import { useMutation } from "@tanstack/react-query";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 interface userObject {
   email: string;
@@ -31,6 +32,8 @@ export const SignUp = () => {
     },
   });
 
+  const fetch = useSuperfetch();
+
   const signUpMutation = useMutation({
     mutationFn: (user: userObject) => {
       const backendUser = {
@@ -43,15 +46,8 @@ export const SignUp = () => {
 
       return fetch(`${env.NEXT_PUBLIC_API_URL}user/sign-up`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(backendUser),
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response;
+        body: backendUser,
+        emptyResponse: true,
       });
     },
     onSettled: () => {

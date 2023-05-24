@@ -2,6 +2,7 @@ import { useSession } from "next-auth/react";
 
 interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body: object;
+  emptyResponse?: boolean;
 }
 
 class SuperError extends Error {
@@ -32,8 +33,9 @@ export default function useSuperfetch() {
       headers,
     })
       .then(async (res) => {
+        console.log(res)
         if (res.ok) {
-          const data = await res.json();
+          const data = options?.emptyResponse ? {} : await res.json();
           return { ...data, httpStatus: res.status };
         }
         throw new SuperError("An error has occurred.", res.status);
