@@ -141,7 +141,7 @@ export default function SideNav() {
       clickHandler: () => {
         showToast({
           variant: "confirm",
-          message: "Heehe dobrze",
+          message: "CSV imported successfully",
         });
       },
       label: "Export",
@@ -150,7 +150,7 @@ export default function SideNav() {
       clickHandler: () => {
         showToast({
           variant: "error",
-          message: "Heehe źle",
+          message: "Check which records haven't been imported",
         });
       },
       label: "Import",
