@@ -833,9 +833,9 @@ const dictionary = {
         creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
       },
       threeDotsComponentNames: {
-        edit: { en: "Edit", pl: "Edytuj", fr: "" },
-        clone: { en: "Clone", pl: "Klonuj", fr: "" },
-        remove: { en: "Remove", pl: "Usuń", fr: "" },
+        edit: { en: "Edit", pl: "Edytuj", fr: "Modifier" },
+        clone: { en: "Clone", pl: "Klonuj", fr: "Cloner" },
+        remove: { en: "Remove", pl: "Usuń", fr: "Supprimer" },
       },
     },
   },
