@@ -18,6 +18,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 
 require("dayjs/locale/pl");
 require("dayjs/locale/fr");
+require("dayjs/locale/en-gb");
 
 import {
   TableWrapperStyled,
@@ -124,8 +125,9 @@ export const TransactionsTable = ({
     dayjs.extend(isYesterday);
     dayjs.locale(locale);
 
-    const date = dayjs(timestamp);
+    locale === "en" ? dayjs.locale("en-gb") : dayjs.locale(locale);
 
+    const date = dayjs(timestamp);
     const formattedDate = date.format("L");
     const dayName = date.format("dddd");
 
