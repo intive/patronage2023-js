@@ -4,27 +4,27 @@ import { device } from "lib/media-queries";
 
 export const TopWrapperStyled = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
-
-  background-color: #78b7ef;
+  ${device.tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const BasicBudgetInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
-  background-color: antiquewhite;
   padding-right: 16px;
 `;
 
 export const BudgetIconStyled = styled(BudgetIcon)`
   margin-right: 16px;
-  height: 40px;
-  width: 40px;
+  height: 58px;
+  width: 58px;
   font-size: 0.9em;
   flex-shrink: 0;
-  ${device.largeMobile} {
+  ${device.tablet} {
     height: 80px;
     width: 80px;
     font-size: 1.5em;
@@ -51,7 +51,7 @@ export const BudgetNameStyled = styled.h1`
   font-weight: 600;
   line-height: 28px;
   color: ${({ theme }) => theme.main};
-  ${device.largeMobile} {
+  ${device.tablet} {
     font-size: 32px;
     line-height: 150%;
     width: auto;
@@ -63,7 +63,7 @@ export const BudgetDescriptionStyled = styled.span`
   letter-spacing: 0px;
   font-size: 12px;
   color: ${({ theme }) => theme.infoTile.label};
-  ${device.largeMobile} {
+  ${device.tablet} {
     font-size: 14px;
     display: initial;
   }
@@ -74,12 +74,13 @@ export const InfoTileWrapperStyled = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   gap: 4px;
-  ${device.largeMobile} {
+  width: 100%;
+  margin-top: -16px;
+  ${device.tablet} {
     flex-direction: row;
     gap: 8px;
+    margin-top: 0;
   }
-
-  background-color: #e8f381;
 `;
 
 export const InfoTileAmount = styled(CurrencyAmount)`

@@ -8,12 +8,11 @@ import { iconNames } from "lib/iconValidation";
 import {
   TopWrapperStyled,
   BasicBudgetInfoWrapper,
-  BudgetIconStyled,  
+  BudgetIconStyled,
   BudgetNameWrapperStyled,
   BudgetNameIconsWrapperStyled,
   BudgetNameStyled,
   BudgetDescriptionStyled,
-
   InfoTileAmount,
   InfoTileWrapperStyled,
   // TitleEditButton,
@@ -100,6 +99,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
               <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
+              <NavBudgetIcon onClick={() => {}} icon={"favorite"} />
               <NavBudgetIcon
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
@@ -111,7 +111,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
         <PeopleInBudget users={peopleWithoutLoggedUser} />
       </TopWrapperStyled>
 
-      <InfoTileWrapperStyled style={{ width: "100%" }}>
+      <InfoTileWrapperStyled>
         <InfoTile
           label={t(basicInformation.labels.period)}
           dataToRender={dataRangeInfo}
@@ -125,6 +125,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           dataToRender={currencyInfo}
         />
       </InfoTileWrapperStyled>
+
       {isEditBudgetModalOpen && (
         <EditBudget budget={budget} onClose={() => closeModal()} />
       )}
