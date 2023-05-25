@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import styled from "styled-components";
+import { useState, useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { env } from "env.mjs";
 import { useTranslate } from "lib/hooks";
 import { Icon } from "ui";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 //props
 interface FavouriteProps {
@@ -28,14 +28,11 @@ const FavButton = styled.button<Active>`
   cursor: pointer;
 `;
 
-export const Favourite = ({
-  isFav,
-  budgetId,
-  activeHref,
-}: FavouriteProps) => {
+export const Favourite = ({ isFav, budgetId, activeHref }: FavouriteProps) => {
   const { t, dict } = useTranslate("FavouriteBudget");
   const currentPage = usePathname() || "";
-  const { data: session } = useSession();
+  const fetch = useSuperfetch();
+  const theme = useContext(ThemeContext);
 
   //initial state is what will come from props
   const [isFavourite, setIsFavourite] = useState<boolean>(isFav);
@@ -47,6 +44,7 @@ export const Favourite = ({
     event.preventDefault();
     //to prevent closing budget's list
     event.stopPropagation();
+    setIsFavourite((prevState) => !prevState);
 
     fetch(
       `${
@@ -54,18 +52,8 @@ export const Favourite = ({
       }/budgets/${budgetId}/favourite?isFavourite=${!isFavourite}`,
       {
         method: "PUT",
-        headers: {
-          accept: "text/plain",
-          Authorization: `Bearer ${session!.user.accessToken}`,
-          "Content-Type": "application/json",
-        },
       }
-    ).then((response) => {
-      setIsFavourite((prevState) => !prevState);
-      if (response.status === 400 || response.status === 401) {
-        setIsFavourite((prevState) => !prevState);
-      }
-    });
+    ).catch((err) => err && setIsFavourite((prevState) => !prevState));
   };
 
   //filled isFav -> if true, filled, if false, outlined
@@ -77,7 +65,7 @@ export const Favourite = ({
       <Icon
         icon="favorite"
         filled={isFavourite}
-        color="#ef4e4e"
+        color={theme.favouriteBudget.heartColor}
         iconSize={20}></Icon>
     </FavButton>
   );
