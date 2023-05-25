@@ -69,7 +69,7 @@ export const NavItem = forwardRef<HTMLLIElement, NavItemProps>(
   ({ active, href, children, onClick }, ref) => (
     <li ref={ref}>
       <NavItemStyled $active={active} href={href} onClick={onClick}>
-        <ChildrenWrapper>{children}</ChildrenWrapper>
+        {children}
         {active && (
           <Icon
             icon="chevron_right"
