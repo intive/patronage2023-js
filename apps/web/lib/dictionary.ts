@@ -931,6 +931,47 @@ const dictionary = {
       },
     },
   },
+  UsersPage: {
+    title: {
+      en: "Users",
+      pl: "Użytkownicy",
+      fr: "Utilisateurs",
+    },
+    aside: {
+      title: {
+        en: "User information",
+        pl: "Informacje o użytkowniku",
+        fr: "Information de l'utilisateur",
+      },
+    },
+    usersTable: {
+      firstName: {
+        en: "First name",
+        pl: "Imię",
+        fr: "Nom",
+      },
+      lastName: {
+        en: "Last name",
+        pl: "Nazwisko",
+        fr: "Prénom",
+      },
+      email: {
+        en: "Email",
+        pl: "Email",
+        fr: "Email",
+      },
+      dateCreated: {
+        en: "Date created",
+        pl: "Utworzono",
+        fr: "Date créée",
+      },
+      noDataFound: {
+        en: "No data found",
+        pl: "Brak danych",
+        fr: "Aucune donnée disponible",
+      },
+    },
+  },
   AsideCard: {
     categories: {
       title: {
