@@ -1,13 +1,11 @@
 import Skeleton from "react-loading-skeleton";
 import {
-  BasicInfoWrapper,
-  StyledDescription,
-  StyledTitle,
-  TileWrapper,
-  TopSectionWrapper,
+  BudgetDescriptionStyled,
+  BudgetNameStyled,
+  InfoTileWrapperStyled,
+  TopWrapperStyled,
 } from "./BudgetBasicInformation.styled";
 import { InfoTileStyled } from "ui/InfoTile";
-import styled from "styled-components";
 import {
   DetailsWrapperStyled,
   DetailsWrapperSuspense,
@@ -18,35 +16,33 @@ import {
 
 export const BudgetBasicInformationSuspense = () => {
   return (
-    <BasicInfoWrapper>
-      <TopSectionWrapper>
+    <>
+      <TopWrapperStyled>
         <Skeleton circle height={40} width={40} />
         <div>
-          <StyledTitle>
+          <BudgetNameStyled>
             <Skeleton height={25} width={150} />
-          </StyledTitle>
-          <StyledDescription>
+          </BudgetNameStyled>
+          <BudgetDescriptionStyled>
             <Skeleton height={15} width={150} />
-          </StyledDescription>
+          </BudgetDescriptionStyled>
         </div>
-      </TopSectionWrapper>
-      <TileWrapper>
+      </TopWrapperStyled>
+      <InfoTileWrapperStyled>
         <InfoTileStyled>
           <Skeleton height={10} width={100} />
           <Skeleton height={20} width={150} />
         </InfoTileStyled>
-
         <InfoTileStyled>
           <Skeleton height={10} width={50} />
           <Skeleton height={20} width={75} />
         </InfoTileStyled>
-
         <InfoTileStyled>
           <Skeleton height={10} width={50} />
           <Skeleton height={20} width={75} />
         </InfoTileStyled>
-      </TileWrapper>
-    </BasicInfoWrapper>
+      </InfoTileWrapperStyled>
+    </>
   );
 };
 

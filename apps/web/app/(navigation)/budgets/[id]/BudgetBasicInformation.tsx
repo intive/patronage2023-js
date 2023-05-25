@@ -6,15 +6,17 @@ import { BudgetFixed } from "lib/types";
 import { useTranslate } from "lib/hooks";
 import { iconNames } from "lib/iconValidation";
 import {
-  BasicInfoWrapper,
-  BudgetIconStyled,
+  TopWrapperStyled,
+  BasicBudgetInfoWrapper,
+  BudgetIconStyled,  
+  BudgetNameWrapperStyled,
+  BudgetNameIconsWrapperStyled,
+  BudgetNameStyled,
+  BudgetDescriptionStyled,
+
   InfoTileAmount,
-  StyledDescription,
-  StyledTitle,
-  TileWrapper,
-  TitleEditButton,
-  TopSectionWrapper,
-  TitleWrapper,
+  InfoTileWrapperStyled,
+  // TitleEditButton,
 } from "./BudgetBasicInformation.styled";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
@@ -89,39 +91,40 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
 
   return (
     <>
-      <BasicInfoWrapper>
-        <TopSectionWrapper>
+      <TopWrapperStyled>
+        <BasicBudgetInfoWrapper>
           <BudgetIconStyled
             icon={iconNames.includes(icon) ? icon : "notifications"}
           />
-          <TitleWrapper>
-            <TitleEditButton>
-              <StyledTitle>{name}</StyledTitle>
+          <BudgetNameWrapperStyled>
+            <BudgetNameIconsWrapperStyled>
+              <BudgetNameStyled>{name}</BudgetNameStyled>
               <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
               <NavBudgetIcon
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
               />
-              <PeopleInBudget users={peopleWithoutLoggedUser} />
-            </TitleEditButton>
-            <StyledDescription>{description}</StyledDescription>
-          </TitleWrapper>
-        </TopSectionWrapper>
-        <TileWrapper>
-          <InfoTile
-            label={t(basicInformation.labels.period)}
-            dataToRender={dataRangeInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.limit)}
-            dataToRender={limitInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.currency)}
-            dataToRender={currencyInfo}
-          />
-        </TileWrapper>
-      </BasicInfoWrapper>
+            </BudgetNameIconsWrapperStyled>
+            <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
+          </BudgetNameWrapperStyled>
+        </BasicBudgetInfoWrapper>
+        <PeopleInBudget users={peopleWithoutLoggedUser} />
+      </TopWrapperStyled>
+
+      <InfoTileWrapperStyled style={{ width: "100%" }}>
+        <InfoTile
+          label={t(basicInformation.labels.period)}
+          dataToRender={dataRangeInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.limit)}
+          dataToRender={limitInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.currency)}
+          dataToRender={currencyInfo}
+        />
+      </InfoTileWrapperStyled>
       {isEditBudgetModalOpen && (
         <EditBudget budget={budget} onClose={() => closeModal()} />
       )}

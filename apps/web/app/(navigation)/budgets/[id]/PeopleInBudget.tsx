@@ -11,7 +11,7 @@ const StyledWrapper = styled.div`
   font-size: 32px;
   margin-left: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   line-height: 1em;
 
   > * + * {
@@ -21,6 +21,8 @@ const StyledWrapper = styled.div`
   ${device.tablet} {
     font-size: 48px;
   }
+
+  background-color: #b3d9fb;
 `;
 
 const StyledCounter = styled.div`

@@ -2,44 +2,24 @@ import styled from "styled-components";
 import { BudgetIcon, CurrencyAmount } from "ui";
 import { device } from "lib/media-queries";
 
-export const BasicInfoWrapper = styled.div`
+export const TopWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: row;
   width: 100%;
+
+  background-color: #78b7ef;
 `;
 
-export const TitleEditButton = styled.div`
+export const BasicBudgetInfoWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-`;
-
-export const TopSectionWrapper = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 16px;
-  ${device.largeMobile} {
-    margin-bottom: 32px;
-    align-items: center;
-    gap: 16px;
-  }
-`;
-
-export const TileWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 4px;
-  ${device.largeMobile} {
-    flex-direction: row;
-    gap: 8px;
-  }
+  flex-direction: row;
+  flex: 1;
+  background-color: antiquewhite;
+  padding-right: 16px;
 `;
 
 export const BudgetIconStyled = styled(BudgetIcon)`
-  display: none;
+  margin-right: 16px;
   height: 40px;
   width: 40px;
   font-size: 0.9em;
@@ -52,12 +32,20 @@ export const BudgetIconStyled = styled(BudgetIcon)`
   }
 `;
 
-export const TitleWrapper = styled.div`
+export const BudgetNameWrapperStyled = styled.div`
   flex: 1;
+  flex-direction: column;
+  display: flex;
 `;
 
-export const StyledTitle = styled.h1`
-  width: 100%;
+export const BudgetNameIconsWrapperStyled = styled.div`
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const BudgetNameStyled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 28px;
   font-weight: 600;
@@ -65,14 +53,13 @@ export const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.main};
   ${device.largeMobile} {
     font-size: 32px;
-    line-height: 48px;
+    line-height: 150%;
     width: auto;
   }
 `;
 
-export const StyledDescription = styled.span`
-  display: none;
-  line-height: 20px;
+export const BudgetDescriptionStyled = styled.span`
+  line-height: 150%;
   letter-spacing: 0px;
   font-size: 12px;
   color: ${({ theme }) => theme.infoTile.label};
@@ -80,6 +67,19 @@ export const StyledDescription = styled.span`
     font-size: 14px;
     display: initial;
   }
+`;
+
+export const InfoTileWrapperStyled = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 4px;
+  ${device.largeMobile} {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  background-color: #e8f381;
 `;
 
 export const InfoTileAmount = styled(CurrencyAmount)`
