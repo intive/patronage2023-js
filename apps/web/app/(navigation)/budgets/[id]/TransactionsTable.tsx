@@ -213,7 +213,7 @@ export const TransactionsTable = ({
                 {column.key !== "editColumn" && (
                   <button onClick={() => setSorting(column.key)}>
                     <Icon
-                      icon={"sort"}
+                      icon="sort"
                       iconSize={20}
                       color={
                         isSortedByColumn(column.key)

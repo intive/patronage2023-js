@@ -57,24 +57,16 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
 
   const setSorting = (column: string) => {
     setSortDescriptors((previousSortDescriptors) => {
-      if (
-        previousSortDescriptors.find((element) => element.columnName === column)
-      ) {
-        return [
-          ...previousSortDescriptors.filter(
-            (element) => element.columnName !== column
-          ),
-          {
-            columnName: column,
-            sortAscending: !previousSortDescriptors.find(
-              (element) => element.columnName === column
-            )?.sortAscending,
-          },
-        ];
-      }
       return [
-        ...previousSortDescriptors,
-        { columnName: column, sortAscending: true },
+        ...previousSortDescriptors.filter(
+          (element) => element.columnName !== column
+        ),
+        {
+          columnName: column,
+          sortAscending: !previousSortDescriptors.find(
+            (element) => element.columnName === column
+          )?.sortAscending,
+        },
       ];
     });
   };
@@ -122,7 +114,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     ],
 
     queryFn: async () => {
-      console.log(sortDescriptors);
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
         {
