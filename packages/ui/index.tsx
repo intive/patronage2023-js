@@ -33,3 +33,4 @@ export { TrendChip } from "./TrendChip";
 export { Flag } from "./Flag";
 export * from "./Toast";
 export { CategorySelector } from "./CategorySelector";
+export { Tooltip } from "./Tooltip";
