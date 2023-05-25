@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useTranslate } from "lib/hooks";
@@ -42,7 +41,6 @@ const UsersTableController = () => {
   });
 
   const { t, dict } = useTranslate("BudgetsPage");
-  // const { data: session } = useSession();
   const debouncedSearch = useDebounce(searchValue, 500);
 
   useEffect(() => setCurrentPage(1), [searchValue, itemsPerPage, sortParams]);
@@ -75,9 +73,7 @@ const UsersTableController = () => {
   } = useQuery({
     queryKey: ["user", itemsPerPage, currentPage, sortParams, debouncedSearch],
     queryFn: async () => {
-      return fetch(
-        `${env.NEXT_PUBLIC_API_URL}user/list`, 
-        {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}user/list`, {
         method: "POST",
         body: {
           pageSize: itemsPerPage,
@@ -86,14 +82,17 @@ const UsersTableController = () => {
           sortDescriptors: [
             {
               columnName: sortParams.actualColumn,
-              sortAscending: sortParams.ascending[sortParams.actualColumn as keyof typeof sortParams.ascending],
+              sortAscending:
+                sortParams.ascending[
+                  sortParams.actualColumn as keyof typeof sortParams.ascending
+                ],
             },
           ],
         },
       })
         .then((json) => dataForTable(json))
         .catch((err) => console.error(err));
-    }
+    },
   });
 
   if (isError) {

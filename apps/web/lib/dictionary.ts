@@ -941,7 +941,7 @@ const dictionary = {
       title: {
         en: "User information",
         pl: "Informacje o użytkowniku",
-        fr: "Informations de l'utilisateur",
+        fr: "Information de l'utilisateur",
       },
     },
     usersTable: {
