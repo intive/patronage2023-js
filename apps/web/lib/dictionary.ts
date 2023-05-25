@@ -823,19 +823,21 @@ const dictionary = {
     },
     transactionsTable: {
       groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
-        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
+        yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
+        today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
+        monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
+        tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
+        wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
+        thursday: { en: "Thursday", pl: "Czwartek", fr: "Jeudi" },
+        friday: { en: "Friday", pl: "Piątek", fr: "Vendredi" },
+        saturday: { en: "Saturday", pl: "Sobota", fr: "Samedi" },
+        sunday: { en: "Sunday", pl: "Niedziela", fr: "Dimanche" },
       },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
         amount: { en: "Amount", pl: "Kwota", fr: "Montant" },
         creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
-      },
-      threeDotsComponentNames: {
-        edit: { en: "Edit", pl: "Edytuj", fr: "Modifier" },
-        clone: { en: "Clone", pl: "Klonuj", fr: "Cloner" },
-        remove: { en: "Remove", pl: "Usuń", fr: "Supprimer" },
       },
     },
   },
