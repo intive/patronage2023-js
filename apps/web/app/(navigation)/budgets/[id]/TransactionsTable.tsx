@@ -14,12 +14,20 @@ import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+require("dayjs/locale/pl");
+require("dayjs/locale/fr");
 
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
+
+import { useAtomValue } from "jotai";
+import { languageAtom } from "store";
 
 type TransactionsTableProps = {
   currency: {
@@ -40,6 +48,8 @@ export const TransactionsTable = ({
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { transactionsTable } = dict;
+
+  const locale = useAtomValue(languageAtom);
 
   const columns = [
     {
@@ -99,38 +109,42 @@ export const TransactionsTable = ({
   ] as Column[];
 
   const getDayName = (timestamp: number) => {
+    dayjs.extend(localizedFormat);
     dayjs.extend(isToday);
     dayjs.extend(isYesterday);
+    dayjs.locale(locale);
 
     const date = dayjs(timestamp);
-    const formattedDate = date.format("DD.MM.YYYY");
 
-    let dayOfWeek = date.format("dddd");
-    if (date.isToday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.today);
-    } else if (date.isYesterday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.yesterday);
-    }
+    const formattedDate = date.format("L");
+    const dayName = date.format("dddd");
 
-    if (!(date.isToday() && date.isYesterday())) {
-      const lowerCaseDay =
-        dayOfWeek.toLowerCase() as keyof typeof transactionsTable.groupRowDays;
-      dayOfWeek = t(transactionsTable.groupRowDays[lowerCaseDay]);
-    }
-    return `${dayOfWeek}, ${formattedDate}`;
+    if (date.isToday())
+      return `${t(transactionsTable.groupRowDays.today)}, ` + formattedDate;
+
+    if (date.isYesterday())
+      return `${t(transactionsTable.groupRowDays.yesterday)}, ` + formattedDate;
+
+    return `${dayName}, ${formattedDate}`;
   };
 
   const dropdownMenuItems = [
     {
-      ComponentToRender: <div>Edit</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.edit)}</div>
+      ),
       id: "edit-budget",
     },
     {
-      ComponentToRender: <div>Clone</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.clone)}</div>
+      ),
       id: "clone-budget",
     },
     {
-      ComponentToRender: <div>Remove</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.remove)}</div>
+      ),
       id: "remove-budget",
     },
   ];
@@ -138,6 +152,7 @@ export const TransactionsTable = ({
   return (
     <TableWrapperStyled>
       <Table
+        key={locale}
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
@@ -159,12 +174,7 @@ export const TransactionsTable = ({
                     />
                   );
                 case "creator":
-                  return (
-                    <Avatar
-                      className="avatar"
-                      src={`/avatars/${props.value.avatar}`}
-                    />
-                  );
+                  return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
                     <TransactionDropdownMenu
