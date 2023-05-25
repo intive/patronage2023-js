@@ -15,6 +15,7 @@ import {
   LabelStyled,
   PStyled,
 } from "./ImportModal.styled";
+import { Spinner } from "ui/NavList/Spinner";
 
 type ImportModalProps = {
   onClose: Function;
@@ -52,6 +53,8 @@ type ImportBEProps = {
   status: number;
   body: ImportResponseProps;
 };
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
@@ -126,7 +129,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     }
   );
 
-  const sendFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const sendFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (!e.currentTarget.files) {
       return;
@@ -137,6 +140,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     mutate(formData);
     e.currentTarget.value = "";
     // temp
+    await sleep(3600);
     setIsCSVError(true);
   };
 
@@ -160,6 +164,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             ))}
           </ErrorWindowStyled>
         )}
+        {isLoading && !isCSVError && <Spinner />}
         <ImportButtonStyled variant="secondary" onClick={() => {}}>
           <LabelStyled htmlFor="import-csv">
             <input
