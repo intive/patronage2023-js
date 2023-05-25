@@ -147,8 +147,8 @@ export const UsersListTable = ({
                       iconSize={20}
                       color={
                         sortingData.actualColumn === column.key
-                          ? theme.transactionsTable.sortIcon
-                          : theme.transactionsTable.sortIconInactive
+                          ? theme.transactionsTable.sortIcon.active
+                          : theme.transactionsTable.sortIcon.inactive
                       }
                     />
                     {sortingData.actualColumn === column.key ? (

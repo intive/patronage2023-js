@@ -289,8 +289,7 @@ export const theme = {
     date: colors.Neutral6,
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
-    sortIcon: colors.Neutral8,
-    sortIconInactive: colors.Neutral3,
+    sortIcon: { active: colors.Neutral8, inactive: colors.Neutral3 },
   },
   categoryIcons: {
     homeSpendings: {
