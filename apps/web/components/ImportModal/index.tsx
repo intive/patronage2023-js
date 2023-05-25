@@ -1,11 +1,11 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import { useTranslate } from "lib/hooks";
-import { Button, ButtonStyled, Icon, Modal } from "ui";
+import { Modal, useToast } from "ui";
 import {
   SeparatorTopStyled,
   ModalContentStyled,
@@ -26,84 +26,141 @@ export type ModalContentProps = {
 
 const errors = [
   "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 2: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 3: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 4: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 5: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 6: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 7: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 8: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 9: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 10: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 11: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 12: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 13: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 14: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 15: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
+  "Errror: 16: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
 ];
+
+type ImportResponseProps = {
+  errors: string[];
+  uri: string;
+};
+
+type ImportBEProps = {
+  status: number;
+  body: ImportResponseProps;
+};
 
 export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
+  const [isCSVError, setIsCSVError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const showToast = useToast();
 
-  const { data: session } = useSession();
-
-  const [temporaryState, setTemporaryState] = useState(false);
-  // required for queryClient in onSuccess
   const queryClient = useQueryClient();
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
 
-  // const useSendBudget = () =>
-  //   useMutation(
-  //     () =>
-  //       fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
-  //         method: "POST",
-  //         headers: {
-  //           accept: "text/plain",
-  //           Authorization: "Bearer " + session!.user.accessToken,
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           name: newBudget.name,
-  //           limit: {
-  //             value: newBudget.limit,
-  //             currency: newBudget.currency.tag,
-  //           },
-  //           period: {
-  //             startDate: budgetStartDate,
-  //             endDate: budgetEndDate,
-  //           },
-  //           description: newBudget.description,
-  //           iconName: newBudget.icon,
-  //         }),
-  //       }),
-  //     {
-  //       onSuccess: () => {
-  //         onClose();
-  //         queryClient.invalidateQueries([
-  //           "budgets",
-  //           { searchValue: "", sortAscending: true },
-  //         ]);
-  //       },
-  //     }
-  //   );
+  const { mutate, data, isLoading, isError } = useMutation(
+    async (formData: FormData): Promise<ImportBEProps> => {
+      const result = fetch(``, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+      const res = await result;
+      return res.ok && res.json();
+    },
+    {
+      onSuccess: (data: ImportBEProps) => {
+        switch (data.status) {
+          case 201:
+            const isDataValid = data.body.errors.length === 0;
+            setIsCSVError(!isDataValid);
+            queryClient.invalidateQueries([
+              "budgets",
+              { searchValue: "", sortAscending: true },
+            ]);
+            if (isDataValid) {
+              onClose();
+              showToast({
+                variant: "confirm",
+                message: "CSV file imported successfully",
+              });
+            } else {
+              showToast({
+                variant: "error",
+                message: "Check which records haven't been imported",
+              });
+            }
+            break;
+          case 400:
+            setErrorMsg("400");
+            showToast({
+              variant: "error",
+              message: "Error 400",
+            });
+            break;
+          case 401:
+            setErrorMsg("401");
+            showToast({
+              variant: "error",
+              message: "Error 401",
+            });
+            break;
+          default:
+            setErrorMsg("default");
+            showToast({
+              variant: "error",
+              // Change it
+              // message: "Error, something went wrong",
+              message: "Check which records haven't been imported",
+            });
+            return;
+        }
+      },
+    }
+  );
 
-  // const { mutate: sendBudget } = useSendBudget();
+  const sendFileHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (!e.currentTarget.files) {
+      return;
+    }
+    const file = e.currentTarget.files[0];
+    const formData = new FormData();
+    formData.append("file", file, file.name);
+    mutate(formData);
+    e.currentTarget.value = "";
+    // temp
+    setIsCSVError(true);
+  };
+
+  if (isError) {
+    showToast({
+      variant: "error",
+      message: "Error",
+    });
+  }
+
+  // const errors = data?.body.errors
 
   return (
     <Modal header="Import CSV" onClose={() => onClose()}>
       <SeparatorTopStyled />
-      <ModalContentStyled isError={temporaryState}>
-        {temporaryState && (
+      <ModalContentStyled isError={isCSVError}>
+        {isCSVError && (
           <ErrorWindowStyled>
             {errors.map((error) => (
               <PStyled key={error}>{error}</PStyled>
             ))}
           </ErrorWindowStyled>
         )}
-        <ImportButtonStyled
-          variant="secondary"
-          onClick={() => {}}
-          htmlFor="export-input">
+        <ImportButtonStyled variant="secondary" onClick={() => {}}>
           <LabelStyled htmlFor="import-csv">
             <input
               type="file"
@@ -111,13 +168,12 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
               name="import-csv"
               accept=".csv"
               onChange={(e) => {
-                //e.target.value = '';
                 console.log("run func to submit and export file");
-                setTemporaryState(true);
+                sendFileHandler(e);
               }}
             />
             <IconStyled icon={"file_upload"} />
-            <p>Click to import</p>
+            <span>Click to import</span>
           </LabelStyled>
         </ImportButtonStyled>
       </ModalContentStyled>

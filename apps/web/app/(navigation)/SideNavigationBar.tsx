@@ -161,7 +161,7 @@ export default function SideNav() {
       clickHandler: () => {
         showToast({
           variant: "confirm",
-          message: "CSV imported successfully",
+          message: "CSV exported successfully",
         });
       },
       label: "Export",
@@ -169,10 +169,6 @@ export default function SideNav() {
     importButton: {
       clickHandler: () => {
         setIsImportModalVisible(true);
-        // showToast({
-        //   variant: "error",
-        //   message: "Check which records haven't been imported",
-        // });
       },
       label: "Import",
     },
