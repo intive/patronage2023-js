@@ -45,9 +45,8 @@ const StyledUser = styled.div`
 `;
 
 const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
-  const range = users.length > 4 ? 3 : users.length;
-  const visibleUsers = users.slice(0, range);
-  const remainingUsers = users.slice(range);
+  const visibleUsers = users.slice(0, 3);
+  const remainingUsers = users.slice(3);
 
   const remainingUserNames = remainingUsers.map((user) => (
     <StyledUser key={user.id}>
