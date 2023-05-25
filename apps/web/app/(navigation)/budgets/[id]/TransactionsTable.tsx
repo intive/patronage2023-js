@@ -113,11 +113,11 @@ export const TransactionsTable = ({
     dayjs.extend(localizedFormat);
     dayjs.extend(isToday);
     dayjs.extend(isYesterday);
+    dayjs.locale(locale);
 
     locale === "en" ? dayjs.locale("en-gb") : dayjs.locale(locale);
 
     const date = dayjs(timestamp);
-
     const formattedDate = date.format("L");
     const dayName = date.format("dddd");
 
