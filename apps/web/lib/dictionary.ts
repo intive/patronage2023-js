@@ -371,6 +371,18 @@ const dictionary = {
       },
     },
   },
+  FavouriteBudget: {
+    favourite: {
+      en: "Add to favourites",
+      pl: "Dodaj do ulubionych",
+      fr: "Ajouter aux favoris",
+    },
+    unfavourite: {
+      en: "Remove from favourites",
+      pl: "Usuń z ulubionych",
+      fr: "Supprimer des favoris",
+    },
+  },
   AddNewBudgetModal: {
     title: {
       en: "New budget",
