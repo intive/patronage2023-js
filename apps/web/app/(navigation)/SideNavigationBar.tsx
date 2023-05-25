@@ -85,6 +85,7 @@ export default function SideNav() {
   const navListItemClickHandler = () => {
     hideSubMenu();
     setCategoryFilter([]);
+    refetch();
   };
 
   const closeModal = () => {
