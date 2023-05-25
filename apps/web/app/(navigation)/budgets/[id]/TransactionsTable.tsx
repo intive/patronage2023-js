@@ -26,6 +26,10 @@ import {
 
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
 
+type SortDescriptor = {
+  columnName: string;
+  sortAscending: boolean;
+};
 import { useAtomValue } from "jotai";
 import { languageAtom } from "store";
 
@@ -35,6 +39,7 @@ type TransactionsTableProps = {
     locale: string;
   };
   setSorting: (column: string) => void;
+  sortDescriptors: SortDescriptor[];
   transactions: Transaction[] | undefined;
   isLoading: boolean;
 };
@@ -42,6 +47,7 @@ type TransactionsTableProps = {
 export const TransactionsTable = ({
   currency,
   setSorting,
+  sortDescriptors,
   transactions = [],
   isLoading,
 }: TransactionsTableProps) => {
@@ -107,6 +113,10 @@ export const TransactionsTable = ({
       dataType: DataType.Number,
     },
   ] as Column[];
+
+  const isSortedByColumn = (column: string | undefined) => {
+    return sortDescriptors.find((element) => element.columnName === column);
+  };
 
   const getDayName = (timestamp: number) => {
     dayjs.extend(localizedFormat);
@@ -204,8 +214,24 @@ export const TransactionsTable = ({
                     <Icon
                       icon="sort"
                       iconSize={20}
-                      color={theme.transactionsTable.sortIcon}
+                      color={
+                        isSortedByColumn(column.key)
+                          ? theme.transactionsTable.sortIcon.active
+                          : theme.transactionsTable.sortIcon.inactive
+                      }
                     />
+                    {isSortedByColumn(column.key) ? (
+                      <Icon
+                        icon={
+                          isSortedByColumn(column.key)?.sortAscending
+                            ? "arrow_upward"
+                            : "arrow_downward"
+                        }
+                        iconSize={15}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </button>
                 )}
               </>
