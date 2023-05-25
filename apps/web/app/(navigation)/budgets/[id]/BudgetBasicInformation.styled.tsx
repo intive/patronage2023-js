@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { BudgetIcon, CurrencyAmount } from "ui";
-import { device } from "lib/media-queries";
+import { device, budgetDetailsDevices } from "lib/media-queries";
 
 export const TopWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${device.tablet} {
+  ${budgetDetailsDevices.big} {
     flex-direction: row;
   }
 `;
@@ -16,6 +16,10 @@ export const BasicBudgetInfoWrapper = styled.div`
   flex-direction: row;
   flex: 1;
   padding-right: 16px;
+  
+  ${budgetDetailsDevices.medium} {
+    padding-right: 0;
+  }
 `;
 
 export const BudgetIconStyled = styled(BudgetIcon)`
@@ -24,7 +28,7 @@ export const BudgetIconStyled = styled(BudgetIcon)`
   width: 58px;
   font-size: 0.9em;
   flex-shrink: 0;
-  ${device.tablet} {
+  ${budgetDetailsDevices.big} {
     height: 80px;
     width: 80px;
     font-size: 1.5em;
@@ -51,10 +55,14 @@ export const BudgetNameStyled = styled.h1`
   font-weight: 600;
   line-height: 28px;
   color: ${({ theme }) => theme.main};
-  ${device.tablet} {
+
+  ${budgetDetailsDevices.big} {
     font-size: 32px;
     line-height: 150%;
-    width: auto;
+    /* width: auto; */
+  }
+  ${budgetDetailsDevices.medium} {
+    margin-right: auto;
   }
 `;
 
@@ -63,7 +71,7 @@ export const BudgetDescriptionStyled = styled.span`
   letter-spacing: 0px;
   font-size: 12px;
   color: ${({ theme }) => theme.infoTile.label};
-  ${device.tablet} {
+  ${budgetDetailsDevices.big} {
     font-size: 14px;
     display: initial;
   }
@@ -76,7 +84,7 @@ export const InfoTileWrapperStyled = styled.div`
   gap: 4px;
   width: 100%;
   margin-top: -16px;
-  ${device.tablet} {
+  ${budgetDetailsDevices.big} {
     flex-direction: row;
     gap: 8px;
     margin-top: 0;
