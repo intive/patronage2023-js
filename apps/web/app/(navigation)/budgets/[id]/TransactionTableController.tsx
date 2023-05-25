@@ -1,17 +1,20 @@
-import { TransactionsTable } from "./TransactionsTable";
 import { useEffect, useState } from "react";
 import { env } from "env.mjs";
 import { BudgetFixed, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
 import categoryMap from "lib/category-map";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
+import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components";
-import { useTranslate } from "lib/hooks";
+import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
+import { TransactionsTable } from "./TransactionsTable";
 
 type APIResponse = {
   items: Item[];
@@ -33,23 +36,43 @@ type ID = {
 };
 
 const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
+  const [getPageSizeValue, setPageSizeValue] = useLocalStorage(
+    "transactionsTablePageSize",
+    "5"
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [transactionType, setTransactionType] = useState<
     "Income" | "Expense" | null
   >(null);
+  const [searchTransactionByName, setSearchTransactionByName] = useState("");
+  const [sortDescriptors, setSortDescriptors] = useState([
+    { columnName: "description", sortAscending: true },
+  ]);
+  const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
-  const setSorting = (column: string) => console.log(column);
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
+  const pageSize = parseInt(getPageSizeValue);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [categoryFilterState]);
+  const setSorting = (column: string) => {
+    setSortDescriptors((previousSortDescriptors) => {
+      return [
+        ...previousSortDescriptors.filter(
+          (element) => element.columnName !== column
+        ),
+        {
+          columnName: column,
+          sortAscending: !previousSortDescriptors.find(
+            (element) => element.columnName === column
+          )?.sortAscending,
+        },
+      ];
+    });
+  };
 
   const fixFetchedData = (res: APIResponse) => {
-    setTotalPages(Math.ceil(res.totalCount / itemsPerPage));
+    setTotalPages(Math.ceil(res.totalCount / pageSize));
     return res.items.map(
       (item): Transaction => ({
         id: item.transactionId.value,
@@ -63,11 +86,13 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         creator: {
           id: budget.userID,
           name: session!.user.name,
-          avatar: `${session!.user.image}.svg`,
+          avatar: session!.user.image,
         },
       })
     );
   };
+
+  const fetch = useSuperfetch();
 
   const {
     data: transactionsData,
@@ -78,43 +103,40 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   } = useQuery({
     queryKey: [
       "datatable",
-      itemsPerPage,
+      pageSize,
       currentPage,
       budget,
-      session,
+      transactionType,
       categoryFilterState,
       transactionType,
+      debouncedSearch,
+      sortDescriptors,
     ],
+
     queryFn: async () => {
       return fetch(
-        env.NEXT_PUBLIC_API_URL + "/budgets/" + budget.id + "/transactions",
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/transactions`,
         {
-          body: JSON.stringify({
-            pageSize: itemsPerPage,
+          method: "POST",
+          body: {
+            pageSize: pageSize,
             pageIndex: currentPage,
             categoryTypes: categoryFilterState,
-            search: "",
             transactionType: transactionType,
-          }),
-          headers: {
-            Authorization: "Bearer " + session!.user.accessToken,
-            "Content-Type": "application/json",
+            search: debouncedSearch,
+            sortDescriptors,
           },
-          method: "POST",
         }
       )
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error(`${res.status}`);
-        })
-        .then((json) => fixFetchedData(json));
+        .then((res) => fixFetchedData(res))
+        .catch((err) => console.error(err));
     },
-    enabled: !!session && !!budget,
   });
 
-  useEffect(() => setCurrentPage(1), [transactionType]);
+  useEffect(
+    () => setCurrentPage(1),
+    [transactionType, categoryFilterState, debouncedSearch]
+  );
 
   if (isError) {
     return (
@@ -129,20 +151,27 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
     <>
       <FilterSearchWrapper>
         <TransactionTypeFilter onSelect={(type) => setTransactionType(type)} />
+        <SearchInput
+          placeholder={`${t(dict.searchInputTransactionPlaceholder)}`}
+          onChange={(e) => {
+            setSearchTransactionByName(e.currentTarget.value);
+          }}
+        />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
-        transactions={transactionsData}
+        sortDescriptors={sortDescriptors}
+        transactions={transactionsData as Transaction[]}
         isLoading={isLoading}
       />
       <Pagination
         pageIndex={currentPage - 1}
         numberOfPages={totalPages}
         pageSizeOptions={[5, 10, 25]}
-        currentPageSize={itemsPerPage}
+        currentPageSize={pageSize}
         onChangePageSize={(val) => {
-          setItemsPerPage(val);
+          setPageSizeValue(val);
           setCurrentPage(1);
         }}
         onChangePageIndex={(val) => setCurrentPage(val + 1)}

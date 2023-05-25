@@ -1,6 +1,5 @@
 import { IconType } from "ui/Icon";
 import { CategoryType } from "ui/CategoryIcon";
-import { CategoryMapType } from "./category-map";
 
 export interface Currency {
   tag: string;
@@ -23,6 +22,13 @@ export interface Transaction {
   creator: Creator;
 }
 
+export interface BudgetUser {
+  id: string;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+}
+
 export interface Budget {
   id: string;
   name: string;
@@ -33,6 +39,7 @@ export interface Budget {
   limit: number;
   currency: string;
   userID: string;
+  budgetUsers: BudgetUser[];
 }
 
 export interface BudgetFixed {
@@ -44,6 +51,7 @@ export interface BudgetFixed {
   endDate: string;
   limit: number;
   userID: string;
+  budgetUsers: BudgetUser[];
   currency: {
     tag: string;
     locale: string;

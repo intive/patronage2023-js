@@ -29,6 +29,8 @@ export type IconType =
   | "arrow_drop_down"
   | "arrow_back"
   | "arrow_forward"
+  | "arrow_upward"
+  | "arrow_downward"
   | "chevron_left"
   | "chevron_right"
   | "radio_button_checked"

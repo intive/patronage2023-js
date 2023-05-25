@@ -1,7 +1,9 @@
 "use client";
 
 import styled from "styled-components";
-import { Icon, Logo, Avatar } from "ui";
+import { useSession } from "next-auth/react";
+import { LanguageSelector } from "./LanguageSelector";
+import { Logo, Avatar } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -18,21 +20,25 @@ const NavBar = styled.nav`
 const ActionWrapper = styled.div`
   display: flex;
   min-width: 150px;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
 `;
 
 const AvatarStyled = styled(Avatar)`
   height: 2.1em;
   width: 2.1em;
 `;
+
 export default function Nav() {
+  const { data } = useSession();
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
-        <Icon icon="notifications" color="white" />
-        <AvatarStyled src="avatars/3.svg" outlined />
+        <LanguageSelector />
+        {data && <AvatarStyled src={data.user.image} outlined />}
       </ActionWrapper>
     </NavBar>
   );

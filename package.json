@@ -11,7 +11,7 @@
     "dev": "turbo run dev",
     "dev:app": "turbo run dev --filter=web",
     "lint": "turbo run lint",
-    "prettier": "prettier -c \"**/*.{ts,tsx,md}\"",
+    "prettier": "prettier -c \"**/*.{ts,tsx,md}\" --no-color",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dict-check": "ts-node dict-check.ts"
   },
@@ -19,9 +19,9 @@
     "@types/cli-color": "^2.0.2",
     "@types/react-datepicker": "^4.10.0",
     "@types/styled-components": "^5.1.26",
+    "cli-color": "^2.0.3",
     "eslint-config-custom": "*",
     "eslint-config-prettier": "^8.8.0",
-    "cli-color": "^2.0.3",
     "prettier": "2.8.7",
     "ts-node": "^10.9.1",
     "turbo": "latest"

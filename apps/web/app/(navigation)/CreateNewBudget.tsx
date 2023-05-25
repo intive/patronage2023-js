@@ -1,9 +1,10 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
+import { ErrorMessage } from "ui";
 
 import {
   Button,
@@ -16,6 +17,7 @@ import {
 import { IconType } from "ui/Icon";
 import {
   TabsStyled,
+  ErrorMessageWrapper,
   TabsTriggerStyled,
   ParagraphStyled,
   InputWrapperHalfStyled,
@@ -37,8 +39,10 @@ import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
-import { LanguageContext } from "lib/contexts";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+
+import { useAtomValue } from "jotai";
+import { languageAtom } from "store";
 
 type NewBudget = {
   onClose: Function;
@@ -54,9 +58,13 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  dateStart: any;
-  dateEnd: any;
+  dateStart: string;
+  dateEnd: string;
   currency: currencyType;
+};
+
+type createBudgetBEProps = {
+  status: number;
 };
 
 export const icons: IconType[] = [
@@ -80,9 +88,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
   const [lang, setLang] = useState<string>("en-US");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
-  const { currentLang } = useContext(LanguageContext);
+  const currentLang = useAtomValue(languageAtom);
   const { hasScrollbar } = useHasScrollBar();
 
   const {
@@ -99,8 +108,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     limit: "",
     description: "",
     icon: selectedIcon,
-    dateStart: null,
-    dateEnd: null,
+    dateStart: "",
+    dateEnd: "",
     currency: {
       tag: "USD",
       locale: lang,
@@ -109,27 +118,22 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const onSelectStartDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
-      : setNewBudget({ ...newBudget, dateStart: null });
+      ? setNewBudget({ ...newBudget, dateStart: date.toISOString() })
+      : setNewBudget({ ...newBudget, dateStart: "" });
   };
-
   const onSelectEndDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
-      : setNewBudget({ ...newBudget, dateEnd: null });
+      ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
+      : setNewBudget({ ...newBudget, dateEnd: "" });
   };
 
   useEffect(() => {
     currentLang === "en" && setLang("en-US");
     currentLang === "pl" && setLang("pl-PL");
+    currentLang === "fr" && setLang("fr-FR");
   }, [lang, currentLang]);
 
   const { data: session } = useSession();
-
-  const startDateTimestamp = newBudget.dateStart;
-  const endDateTimeStamp = newBudget.dateEnd;
-  const budgetStartDate = new Date(startDateTimestamp).toISOString();
-  const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
@@ -151,25 +155,42 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               currency: newBudget.currency.tag,
             },
             period: {
-              startDate: budgetStartDate,
-              endDate: budgetEndDate,
+              startDate: newBudget.dateStart,
+              endDate: newBudget.dateEnd,
             },
             description: newBudget.description,
             iconName: newBudget.icon,
           }),
         }),
       {
-        onSuccess: () => {
-          onClose();
-          queryClient.invalidateQueries([
-            "budgets",
-            { searchValue: "", sortAscending: true },
-          ]);
+        onSuccess: (data: createBudgetBEProps) => {
+          switch (data.status) {
+            case 201:
+              onClose();
+              queryClient.invalidateQueries([
+                "budgetsList",
+                { searchValue: "", sortAscending: true },
+              ]);
+              break;
+            case 400:
+              setErrorMsg(t(dict.errors.error400));
+              break;
+            case 401:
+              setErrorMsg(t(dict.errors.error401));
+              break;
+            default:
+              alert(t(dict.errors.errorDefault));
+              return;
+          }
         },
       }
     );
 
   const { mutate: sendBudget } = useSendBudget();
+
+  const closeErrorMessage = () => {
+    setErrorMsg("");
+  };
 
   return (
     <Modal
@@ -177,7 +198,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       onClose={() => onClose && onClose()}
       fullHeight>
       <SeparatorStyledTop />
-
+      <ErrorMessageWrapper>
+        {errorMsg && (
+          <ErrorMessage message={errorMsg} onClose={closeErrorMessage} />
+        )}
+      </ErrorMessageWrapper>
       <TabsStyled defaultValue={defaultValue}>
         <Tabs.List>
           <TabsTriggerStyled value="settings">
@@ -187,6 +212,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
+
         <Form
           onSubmit={() => {
             sendBudget();
@@ -282,7 +308,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <CurrencySelect
                           value={value}
                           id="currency"
-                          label="Currency"
+                          label={t(dict.inputNames.currency)}
                           supportingLabel={errors[0]}
                           onValueChange={(e) => {
                             setValue(e);

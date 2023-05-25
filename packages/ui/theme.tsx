@@ -54,6 +54,11 @@ export const theme = {
   main: colors.Teal10,
   avatar: {
     outline: colors.BasicWhite,
+    aggregator: colors.Neutral6,
+  },
+  tooltip: {
+    backgroundColor: colors.BasicWhite,
+    border: colors.Neutral2,
   },
   background: {
     background: colors.Teal10,
@@ -91,7 +96,7 @@ export const theme = {
     },
     secondary: {
       main: colors.Teal10,
-      border: colors.Neutral4,
+      border: colors.Neutral2,
       notSelected: colors.Neutral7,
     },
   },
@@ -284,7 +289,7 @@ export const theme = {
     date: colors.Neutral6,
     rowSeparator: colors.Neutral1,
     cellText: colors.Neutral10,
-    sortIcon: colors.Neutral8,
+    sortIcon: { active: colors.Neutral8, inactive: colors.Neutral3 },
   },
   categoryIcons: {
     homeSpendings: {

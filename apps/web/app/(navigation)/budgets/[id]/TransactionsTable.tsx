@@ -3,7 +3,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
-
 import { Transaction } from "lib/types";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
@@ -14,12 +13,25 @@ import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 import isYesterday from "dayjs/plugin/isYesterday";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+require("dayjs/locale/pl");
+require("dayjs/locale/fr");
+require("dayjs/locale/en-gb");
 
 import {
   TableWrapperStyled,
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
+
 import { TransactionsTableSuspense } from "./TransactionsTableSuspense";
+
+type SortDescriptor = {
+  columnName: string;
+  sortAscending: boolean;
+};
+import { useAtomValue } from "jotai";
+import { languageAtom } from "store";
 
 type TransactionsTableProps = {
   currency: {
@@ -27,6 +39,7 @@ type TransactionsTableProps = {
     locale: string;
   };
   setSorting: (column: string) => void;
+  sortDescriptors: SortDescriptor[];
   transactions: Transaction[] | undefined;
   isLoading: boolean;
 };
@@ -34,12 +47,15 @@ type TransactionsTableProps = {
 export const TransactionsTable = ({
   currency,
   setSorting,
+  sortDescriptors,
   transactions = [],
   isLoading,
 }: TransactionsTableProps) => {
   const theme = useContext(ThemeContext);
   const { t, dict } = useTranslate("BudgetsPage");
   const { transactionsTable } = dict;
+
+  const locale = useAtomValue(languageAtom);
 
   const columns = [
     {
@@ -98,39 +114,48 @@ export const TransactionsTable = ({
     },
   ] as Column[];
 
+  const isSortedByColumn = (column: string | undefined) => {
+    return sortDescriptors.find((element) => element.columnName === column);
+  };
+
   const getDayName = (timestamp: number) => {
+    dayjs.extend(localizedFormat);
     dayjs.extend(isToday);
     dayjs.extend(isYesterday);
+    dayjs.locale(locale);
+
+    locale === "en" ? dayjs.locale("en-gb") : dayjs.locale(locale);
 
     const date = dayjs(timestamp);
-    const formattedDate = date.format("DD.MM.YYYY");
+    const formattedDate = date.format("L");
+    const dayName = date.format("dddd");
 
-    let dayOfWeek = date.format("dddd");
-    if (date.isToday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.today);
-    } else if (date.isYesterday()) {
-      dayOfWeek = t(transactionsTable.groupRowDays.yesterday);
-    }
+    if (date.isToday())
+      return `${t(transactionsTable.groupRowDays.today)}, ` + formattedDate;
 
-    if (!(date.isToday() && date.isYesterday())) {
-      const lowerCaseDay =
-        dayOfWeek.toLowerCase() as keyof typeof transactionsTable.groupRowDays;
-      dayOfWeek = t(transactionsTable.groupRowDays[lowerCaseDay]);
-    }
-    return `${dayOfWeek}, ${formattedDate}`;
+    if (date.isYesterday())
+      return `${t(transactionsTable.groupRowDays.yesterday)}, ` + formattedDate;
+
+    return `${dayName}, ${formattedDate}`;
   };
 
   const dropdownMenuItems = [
     {
-      ComponentToRender: <div>Edit</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.edit)}</div>
+      ),
       id: "edit-budget",
     },
     {
-      ComponentToRender: <div>Clone</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.clone)}</div>
+      ),
       id: "clone-budget",
     },
     {
-      ComponentToRender: <div>Remove</div>,
+      ComponentToRender: (
+        <div>{t(dict.transactionsTable.threeDotsComponentNames.remove)}</div>
+      ),
       id: "remove-budget",
     },
   ];
@@ -138,6 +163,7 @@ export const TransactionsTable = ({
   return (
     <TableWrapperStyled>
       <Table
+        key={locale}
         columns={columns}
         rowKeyField={"id"}
         data={transactions}
@@ -159,12 +185,7 @@ export const TransactionsTable = ({
                     />
                   );
                 case "creator":
-                  return (
-                    <Avatar
-                      className="avatar"
-                      src={`/avatars/${props.value.avatar}`}
-                    />
-                  );
+                  return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
                     <TransactionDropdownMenu
@@ -193,8 +214,24 @@ export const TransactionsTable = ({
                     <Icon
                       icon="sort"
                       iconSize={20}
-                      color={theme.transactionsTable.sortIcon}
+                      color={
+                        isSortedByColumn(column.key)
+                          ? theme.transactionsTable.sortIcon.active
+                          : theme.transactionsTable.sortIcon.inactive
+                      }
                     />
+                    {isSortedByColumn(column.key) ? (
+                      <Icon
+                        icon={
+                          isSortedByColumn(column.key)?.sortAscending
+                            ? "arrow_upward"
+                            : "arrow_downward"
+                        }
+                        iconSize={15}
+                      />
+                    ) : (
+                      ""
+                    )}
                   </button>
                 )}
               </>

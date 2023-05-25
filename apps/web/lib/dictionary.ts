@@ -11,7 +11,7 @@ const dictionary = {
         buttonLabel: {
           en: "Add new budget",
           pl: "Dodaj nowy budżet",
-          fr: "Ajouter un nouveau budget",
+          fr: "Créer un nouveau budget",
         },
         infos: {
           loading: {
@@ -41,6 +41,23 @@ const dictionary = {
       },
       settingsItem: {
         title: { en: "Settings", pl: "Ustawienia", fr: "Paramètres" },
+        settingsItems: {
+          editProfile: {
+            en: "Edit profile",
+            pl: "Edytuj profil",
+            fr: "Editer le profil",
+          },
+          changePassword: {
+            en: "Change password",
+            pl: "Zmień hasło",
+            fr: "Changer le mot de passe",
+          },
+          language: {
+            en: "Language",
+            pl: "Język",
+            fr: "Langue",
+          },
+        },
       },
       usersItem: {
         title: { en: "Users", pl: "Użytkownicy", fr: "Utilisateurs" },
@@ -103,6 +120,16 @@ const dictionary = {
       en: "Create my free account!",
       pl: "Utwórz bezpłatne konto!",
       fr: "Créer un compte gratuit !",
+    },
+    signIn: {
+      en: "Sign in",
+      pl: "Zaloguj",
+      fr: "Se connecter",
+    },
+    logOut: {
+      en: "Log out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
     },
   },
   SignInPage: {
@@ -457,6 +484,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Oops, something went wrong",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+      error401: {
+        en: "Please log in or register to continue.",
+        pl: "Zaloguj się lub zarejestruj, aby kontynuować.",
+        fr: "Veuillez vous connecter ou vous inscrire pour continuer.",
+      },
+      errorDefault: {
+        en: "An unexpected error occurred.",
+        pl: "Wystąpił nieoczekiwany błąd.",
+        fr: "Une erreur inattendue est apparue.",
+      },
     },
   },
   EditBudgetModal: {
@@ -562,6 +604,21 @@ const dictionary = {
         pl: "Podaj datę późniejszą.",
         fr: "Entrez une date ultérieure.",
       },
+      error400: {
+        en: "Wrong data.",
+        pl: "Niewłaściwe dane.",
+        fr: "Données incorrectes",
+      },
+      error401: {
+        en: "No authorization!",
+        pl: "Brak autoryzacji!",
+        fr: "Absence d'autorisation!",
+      },
+      errorDefault: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
     },
   },
   CreateNewTransactionModal: {
@@ -585,12 +642,12 @@ const dictionary = {
     nameLabel: {
       income: {
         en: "Income name",
-        pl: "Nazwa przychodu",
+        pl: "Nazwa wpływu",
         fr: "Nom de la recette",
       },
       expense: {
         en: "Expense name",
-        pl: "Nazwa wpływu",
+        pl: "Nazwa wydatku",
         fr: "Nom de la dépense",
       },
     },
@@ -648,7 +705,7 @@ const dictionary = {
       dateNotInStartEndRange: {
         en: "The date must be within the budget period",
         pl: "Data musi się mieścić w okresie trwania budżetu",
-        fr: "La date doit être comprise dans la période budgétaire",
+        fr: "La date doit être comprise dans la période du budget",
       },
     },
     responseErrors: {
@@ -660,7 +717,7 @@ const dictionary = {
       401: {
         en: "401: Unauthorized user",
         pl: "401: Nieautoryzowany użytkownik",
-        fr: "401: Usager non autorisé",
+        fr: "401: L'utilisateur non autorisé",
       },
       default: {
         en: "Adding transaction failed. Please try again.",
@@ -715,7 +772,7 @@ const dictionary = {
       header: {
         en: "Are you sure you want to delete the budget:",
         pl: "Czy na pewno chcesz usunąć ten budżet:",
-        fr: "Souhaitez-vous hon hon supprimer ce uoi budget:",
+        fr: "Êtes-vous sûr de vouloir supprimer ce budget:",
       },
       confirmButton: {
         en: "Confirm",
@@ -730,12 +787,12 @@ const dictionary = {
       errorMessage: {
         en: "Ops, something went wrong",
         pl: "Ups, coś poszło nie tak",
-        fr: "Oups, quelque chose s'est mal passé",
+        fr: "Oups, quelque chose a mal tourné",
       },
       confirmMessage: {
         en: "Budget was successfully removed",
         pl: "Budżet został pomyślnie usunięty",
-        fr: "Le budget a bien été supprimé",
+        fr: "Le budget a été supprimé correctement",
       },
     },
     createButton: {
@@ -759,23 +816,26 @@ const dictionary = {
       income: { en: "Incomes", pl: "Wpływy", fr: "Les recettes" },
       expenses: { en: "Expenses", pl: "Wydatki", fr: "Les dépenses" },
     },
+    searchInputTransactionPlaceholder: {
+      en: "Search by Name",
+      pl: "Wyszukaj po nazwie",
+      fr: "Rechercher par nom",
+    },
     transactionsTable: {
       groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
-        today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
-        monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
-        tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
-        wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
-        thursday: { en: "Thursday", pl: "Czwartek", fr: "Jeudi" },
-        friday: { en: "Friday", pl: "Piątek", fr: "Vendredi" },
-        saturday: { en: "Saturday", pl: "Sobota", fr: "Samedi" },
-        sunday: { en: "Sunday", pl: "Niedziela", fr: "Dimanche" },
+        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
+        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
       },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
         amount: { en: "Amount", pl: "Kwota", fr: "Montant" },
         creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
+      },
+      threeDotsComponentNames: {
+        edit: { en: "Edit", pl: "Edytuj", fr: "Modifier" },
+        clone: { en: "Clone", pl: "Klonuj", fr: "Cloner" },
+        remove: { en: "Remove", pl: "Usuń", fr: "Supprimer" },
       },
     },
   },
@@ -871,6 +931,47 @@ const dictionary = {
       },
     },
   },
+  UsersPage: {
+    title: {
+      en: "Users",
+      pl: "Użytkownicy",
+      fr: "Utilisateurs",
+    },
+    aside: {
+      title: {
+        en: "User information",
+        pl: "Informacje o użytkowniku",
+        fr: "Information de l'utilisateur",
+      },
+    },
+    usersTable: {
+      firstName: {
+        en: "First name",
+        pl: "Imię",
+        fr: "Nom",
+      },
+      lastName: {
+        en: "Last name",
+        pl: "Nazwisko",
+        fr: "Prénom",
+      },
+      email: {
+        en: "Email",
+        pl: "Email",
+        fr: "Email",
+      },
+      dateCreated: {
+        en: "Date created",
+        pl: "Utworzono",
+        fr: "Date créée",
+      },
+      noDataFound: {
+        en: "No data found",
+        pl: "Brak danych",
+        fr: "Aucune donnée disponible",
+      },
+    },
+  },
   AsideCard: {
     categories: {
       title: {
@@ -881,7 +982,7 @@ const dictionary = {
       settings: {
         en: "Manage",
         pl: "Zarządzaj",
-        fr: "Gestion",
+        fr: "Gérer",
       },
     },
   },
@@ -899,7 +1000,7 @@ const dictionary = {
     car: {
       en: "Car",
       pl: "Samochód",
-      fr: "Automobile",
+      fr: "Voiture",
     },
     grocery: {
       en: "Grocery",

@@ -4,7 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "ui";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { device } from "../../../apps/web/lib/media-queries";
+import { device } from "web/lib/media-queries";
 
 export type ButtonWithDropdownProps = {
   label: string;
@@ -51,11 +51,11 @@ const StyledButton = styled.button`
 `;
 
 const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
-  box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
-    0px 2px 4px rgba(32, 37, 50, 0.03);
+  box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08), 0 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.card.border};
+  z-index: 2;
   ${device.tablet} {
     width: 288px;
   }
