@@ -22,7 +22,7 @@ const TitleStyled = styled.h1`
 
 export default function UsersPage() {
   const { t, dict } = useTranslate("UsersPage");
-  const { title } = dict;
+  const { title, aside } = dict;
 
   const mainCardContent = (
     <>
@@ -32,7 +32,7 @@ export default function UsersPage() {
       </PageWrapper>
     </>
   );
-  const data = "Some user info";
+  const data = t(aside.title);
   const shown = true;
   //conditionally render aside if needed e.g. pass user info to it etc.
   return (

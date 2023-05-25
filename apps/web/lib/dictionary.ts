@@ -937,6 +937,13 @@ const dictionary = {
       pl: "Użytkownicy",
       fr: "Utilisateurs",
     },
+    aside: {
+      title: {
+        en: "User information",
+        pl: "Informacje o użytkowniku",
+        fr: "Informations de l'utilisateur",
+      },
+    },
     usersTable: {
       firstName: {
         en: "First name",
@@ -957,6 +964,11 @@ const dictionary = {
         en: "Date created",
         pl: "Utworzono",
         fr: "Date créée",
+      },
+      noDataFound: {
+        en: "No data found",
+        pl: "Brak danych",
+        fr: "Aucune donnée disponible",
       },
     },
   },

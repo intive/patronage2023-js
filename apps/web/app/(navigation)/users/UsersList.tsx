@@ -26,7 +26,7 @@ type User = {
 
 type UsersListProps = {
   setSorting: (column: string) => void;
-  users: User[] | undefined;
+  users: User[] | undefined | void;
   isLoading: boolean;
   sortingData: SortingData;
 };
@@ -100,7 +100,7 @@ export const UsersListTable = ({
         rowKeyField={"id"}
         data={users}
         noData={{
-          text: "No Data Found",
+          text: t(usersTable.noDataFound),
         }}
         childComponents={{
           cell: {

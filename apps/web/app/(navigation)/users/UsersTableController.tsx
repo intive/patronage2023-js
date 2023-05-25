@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useTranslate } from "lib/hooks";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
 import { Pagination } from "components";
@@ -41,7 +42,7 @@ const UsersTableController = () => {
   });
 
   const { t, dict } = useTranslate("BudgetsPage");
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const debouncedSearch = useDebounce(searchValue, 500);
 
   useEffect(() => setCurrentPage(1), [searchValue, itemsPerPage, sortParams]);
@@ -63,6 +64,8 @@ const UsersTableController = () => {
     });
   };
 
+  const fetch = useSuperfetch();
+
   const {
     data: users,
     isError,
@@ -72,36 +75,25 @@ const UsersTableController = () => {
   } = useQuery({
     queryKey: ["user", itemsPerPage, currentPage, sortParams, debouncedSearch],
     queryFn: async () => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}user/list`, {
-        body: JSON.stringify({
+      return fetch(
+        `${env.NEXT_PUBLIC_API_URL}user/list`, 
+        {
+        method: "POST",
+        body: {
           pageSize: itemsPerPage,
           pageIndex: currentPage,
           search: searchValue,
           sortDescriptors: [
             {
               columnName: sortParams.actualColumn,
-              sortAscending:
-                sortParams.ascending[
-                  sortParams.actualColumn as keyof typeof sortParams.ascending
-                ],
+              sortAscending: sortParams.ascending[sortParams.actualColumn as keyof typeof sortParams.ascending],
             },
           ],
-        }),
-        headers: {
-          Authorization: "Bearer " + session!.user.accessToken,
-          "Content-Type": "application/json",
         },
-        method: "POST",
       })
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error(`${res.status}`);
-        })
-        .then((json) => dataForTable(json));
-    },
-    enabled: !!session,
+        .then((json) => dataForTable(json))
+        .catch((err) => console.error(err));
+    }
   });
 
   if (isError) {
