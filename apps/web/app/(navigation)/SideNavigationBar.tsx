@@ -10,8 +10,9 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { ItemType } from "services/mutations";
+import { Favourite } from "./Favourite";
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
 import { categoryFilterAtom } from "store";
 import { useSetAtom } from "jotai";
@@ -40,8 +41,14 @@ export default function SideNav() {
   const queryClient = useQueryClient();
   const pageSize = 13;
 
-  const { fetchNextPage, hasNextPage, isFetchingNextPage, data, status } =
-    useGetBudgets(debouncedSearch, sortAscending, pageSize);
+  const {
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    data,
+    status,
+    refetch,
+  } = useGetBudgets(debouncedSearch, sortAscending, pageSize);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
 
@@ -78,6 +85,7 @@ export default function SideNav() {
   const navListItemClickHandler = () => {
     hideSubMenu();
     setCategoryFilter([]);
+    refetch();
   };
 
   const closeModal = () => {
@@ -92,7 +100,7 @@ export default function SideNav() {
     data?.pages?.flatMap(
       ({ items }: ItemType) =>
         items &&
-        items.map(({ icon, name, id }) => ({
+        items.map(({ icon, name, id, isFavourite }) => ({
           ComponentToRender: (
             <>
               <IconStyled
@@ -100,6 +108,11 @@ export default function SideNav() {
                 iconSize={24}
               />
               <SpanStyled>{name}</SpanStyled>
+              <Favourite
+                isFav={isFavourite}
+                budgetId={id.value}
+                activeHref={`/budgets/${id.value}`}
+              />
             </>
           ),
           href: `/budgets/${id.value}`,
@@ -223,6 +236,7 @@ export default function SideNav() {
         items={renderNavbar()}
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
+        refetchBudgetsFunction={refetch}
       />
       <>
         {isCreateNewBudgetModalVisible && (

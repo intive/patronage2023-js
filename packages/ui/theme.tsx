@@ -360,6 +360,9 @@ export const theme = {
   asideCard: {
     title: colors.Neutral8,
   },
+  favouriteBudget: {
+    heartColor: "#ef4e4e",
+  },
 };
 
 export type ThemeType = typeof theme;

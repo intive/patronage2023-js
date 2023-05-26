@@ -58,7 +58,7 @@ export type IconType =
   | "navigate_before"
   | "navigate_next"
   | "trending_flat"
-  | "favorite"  
+  | "favorite"
   | "currency_exchange";
 
 type styledIconProps = {
