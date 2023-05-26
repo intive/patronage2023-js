@@ -5,13 +5,13 @@ import {
   NavBudgetIcon,
   TransactionDropdownMenu,
 } from "ui";
-import { device, budgetDetailsDevices } from "lib/media-queries";
+import { device } from "lib/media-queries";
 
 export const TopWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  ${budgetDetailsDevices.big} {
+  ${device.tv} {
     flex-direction: row;
   }
 `;
@@ -24,11 +24,11 @@ export const BasicBudgetInfoWrapper = styled.div`
   max-width: 100%;
   align-items: center;
 
-${budgetDetailsDevices.small} {
-  align-items: flex-start;
-}
+  ${device.tablet} {
+    align-items: flex-start;
+  }
 
-  ${budgetDetailsDevices.big} {
+  ${device.tv} {
     padding-right: 16px;
   }
 `;
@@ -39,7 +39,7 @@ export const BudgetIconStyled = styled(BudgetIcon)`
   width: 58px;
   font-size: 0.9em;
   flex-shrink: 0;
-  ${budgetDetailsDevices.small} {
+  ${device.tablet} {
     height: 80px;
     width: 80px;
     font-size: 1.5em;
@@ -51,7 +51,10 @@ export const BudgetNameWrapperStyled = styled.div`
   flex: 1;
   flex-direction: column;
   display: flex;
-  max-width: calc(100% - 96px);
+  max-width: calc(100% - 74px);
+  ${device.tablet} {
+    max-width: calc(100% - 96px);
+  }
 `;
 
 export const BudgetNameIconsWrapperStyled = styled.div`
@@ -63,13 +66,13 @@ export const BudgetNameIconsWrapperStyled = styled.div`
 
 export const NavBudgetIconStyled = styled(NavBudgetIcon)`
   display: none;
-  ${budgetDetailsDevices.small} {
+  ${device.tablet} {
     display: initial;
   }
 `;
 
 export const DropdownMenuStyled = styled(TransactionDropdownMenu)`
-  ${budgetDetailsDevices.small} {
+  ${device.tablet} {
     display: none;
   }
 `;
@@ -90,13 +93,13 @@ export const BudgetNameStyled = styled.h1`
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  ${budgetDetailsDevices.small} {
+  ${device.tablet} {
     font-size: 32px;
     margin-bottom: 4px;
     max-width: calc(100% - 120px);
   }
 
-  ${budgetDetailsDevices.big} {
+  ${device.tv} {
     margin-right: 8px;
     line-height: 150%;
   }
@@ -109,9 +112,8 @@ export const BudgetDescriptionStyled = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  ${budgetDetailsDevices.small} {
+  ${device.tablet} {
     font-size: 14px;
-    /* line-height: 150%; */
     max-width: calc(100% - 120px);
   }
 `;
@@ -123,7 +125,7 @@ export const InfoTileWrapperStyled = styled.div`
   gap: 4px;
   width: 100%;
   margin-top: -16px;
-  ${budgetDetailsDevices.big} {
+  ${device.tv} {
     flex-direction: row;
     gap: 8px;
     margin-top: 0;

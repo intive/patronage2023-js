@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BudgetUser } from "lib/types";
-import { device, budgetDetailsDevices } from "lib/media-queries";
+import { device } from "lib/media-queries";
 import { Avatar, Tooltip } from "ui";
 
 type PeopleInBudgetProps = {
@@ -18,7 +18,7 @@ const StyledWrapper = styled.div`
     margin-left: -8px;
   }
 
-  ${budgetDetailsDevices.big} {
+  ${device.tv} {
     font-size: 48px;
     margin-top: 0;
   }
