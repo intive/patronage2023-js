@@ -42,6 +42,7 @@ const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   margin: 8px;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
+  border: 1px solid ${({ theme }) => theme.tooltip.border};
   border-radius: 16px;
   background-color: white;
   overflow: hidden;

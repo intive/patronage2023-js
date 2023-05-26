@@ -16,8 +16,8 @@ export const BasicBudgetInfoWrapper = styled.div`
   flex-direction: row;
   flex: 1;
   padding-right: 16px;
-  
-  ${budgetDetailsDevices.medium} {
+
+  ${budgetDetailsDevices.small} {
     padding-right: 0;
   }
 `;
@@ -47,6 +47,16 @@ export const BudgetNameIconsWrapperStyled = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
+  & :not(:first-child) {
+    display: none;
+  }
+
+  ${budgetDetailsDevices.small} {
+    & :not(:first-child) {
+      display: initial;
+    }
+  }
 `;
 
 export const BudgetNameStyled = styled.h1`
@@ -56,13 +66,14 @@ export const BudgetNameStyled = styled.h1`
   line-height: 28px;
   color: ${({ theme }) => theme.main};
 
+  ${budgetDetailsDevices.small} {
+    margin-right: auto;
+  }
+
   ${budgetDetailsDevices.big} {
     font-size: 32px;
     line-height: 150%;
-    /* width: auto; */
-  }
-  ${budgetDetailsDevices.medium} {
-    margin-right: auto;
+    margin-right: 8px;
   }
 `;
 

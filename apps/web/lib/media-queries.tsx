@@ -12,15 +12,14 @@ export const device = {
 
 // BUDGET'S DETAILS PAGE - TOP
 
-// Budżet o bardzo długiej nazwie
-// Długi opis zupełnie bez sensu niewiadomo czemu tak
-
 const budgetDetailsBreakpoints = {
   big: "1400px",
-  medium: "1024px" // same as above !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  medium: "1024px", // same as above !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  small: "768px", // same as above !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 export const budgetDetailsDevices = {
   big: `@media (min-width: ${budgetDetailsBreakpoints.big})`,
   medium: `@media (min-width: ${budgetDetailsBreakpoints.medium})`,
+  small: `@media (min-width: ${budgetDetailsBreakpoints.small})`,
 };

@@ -15,12 +15,11 @@ import {
   BudgetDescriptionStyled,
   InfoTileAmount,
   InfoTileWrapperStyled,
-  // TitleEditButton,
 } from "./BudgetBasicInformation.styled";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { NavBudgetIcon, InfoTile } from "ui";
+import { NavBudgetIcon, InfoTile, TransactionDropdownMenu } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
@@ -103,6 +102,34 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
               <NavBudgetIcon
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
+              />
+              <TransactionDropdownMenu
+                items={[
+                  {
+                    ComponentToRender: (
+                      <button onClick={() => openModal()}>edit</button>
+                    ),
+                    id: "edit",
+                  },
+                  {
+                    ComponentToRender: (
+                      <button onClick={() => setDeleteModalVisibility(true)}>
+                        delete
+                      </button>
+                    ),
+                    id: "delete",
+                  },
+                  {
+                    ComponentToRender: (
+                      <button onClick={() => setDeleteModalVisibility(true)}>
+                        add to favorite
+                      </button>
+                    ),
+                    id: "favorite",
+                  },
+                ]}
+                side="bottom"
+                ariaLabel="budget options"
               />
             </BudgetNameIconsWrapperStyled>
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
