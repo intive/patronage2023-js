@@ -22,7 +22,7 @@ import {
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { InfoTile } from "ui";
+import { InfoTile, NavBudgetIcon } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
@@ -110,27 +110,28 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 items={[
                   {
                     ComponentToRender: (
-                      <DropdownMenuButtonStyled onClick={() => openModal()}>
-                        edit
-                      </DropdownMenuButtonStyled>
+                      <NavBudgetIcon
+                        onClick={() => openModal()}
+                        icon={"edit"}
+                      />
                     ),
                     id: "edit",
                   },
                   {
                     ComponentToRender: (
-                      <DropdownMenuButtonStyled
-                        onClick={() => setDeleteModalVisibility(true)}>
-                        delete
-                      </DropdownMenuButtonStyled>
+                      <NavBudgetIcon
+                        onClick={() => {}}
+                        icon={"favorite"}
+                      />
                     ),
                     id: "delete",
                   },
                   {
                     ComponentToRender: (
-                      <DropdownMenuButtonStyled
-                        onClick={() => setDeleteModalVisibility(true)}>
-                        add to favorite
-                      </DropdownMenuButtonStyled>
+                      <NavBudgetIcon
+                        onClick={() => setDeleteModalVisibility(true)}
+                        icon={"delete"}
+                      />
                     ),
                     id: "favorite",
                   },
