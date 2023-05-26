@@ -77,6 +77,11 @@ export const BudgetNameStyled = styled.h1`
   }
 `;
 
+export const DropdownMenuButtonStyled = styled.button`
+  background-color: transparent;
+  border: none;
+`
+
 export const BudgetDescriptionStyled = styled.span`
   line-height: 150%;
   letter-spacing: 0px;

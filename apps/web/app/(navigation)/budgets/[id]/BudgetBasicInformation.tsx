@@ -12,6 +12,7 @@ import {
   BudgetNameWrapperStyled,
   BudgetNameIconsWrapperStyled,
   BudgetNameStyled,
+  DropdownMenuButtonStyled,
   BudgetDescriptionStyled,
   InfoTileAmount,
   InfoTileWrapperStyled,
@@ -107,23 +108,27 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 items={[
                   {
                     ComponentToRender: (
-                      <button onClick={() => openModal()}>edit</button>
+                      <DropdownMenuButtonStyled onClick={() => openModal()}>
+                        edit
+                      </DropdownMenuButtonStyled>
                     ),
                     id: "edit",
                   },
                   {
                     ComponentToRender: (
-                      <button onClick={() => setDeleteModalVisibility(true)}>
+                      <DropdownMenuButtonStyled
+                        onClick={() => setDeleteModalVisibility(true)}>
                         delete
-                      </button>
+                      </DropdownMenuButtonStyled>
                     ),
                     id: "delete",
                   },
                   {
                     ComponentToRender: (
-                      <button onClick={() => setDeleteModalVisibility(true)}>
+                      <DropdownMenuButtonStyled
+                        onClick={() => setDeleteModalVisibility(true)}>
                         add to favorite
-                      </button>
+                      </DropdownMenuButtonStyled>
                     ),
                     id: "favorite",
                   },
