@@ -7,7 +7,7 @@ import { useTranslate } from "lib/hooks";
 import { iconNames } from "lib/iconValidation";
 import {
   TopWrapperStyled,
-  BasicBudgetInfoWrapper,
+  BasicBudgetInfoWrapperStyled,
   BudgetIconStyled,
   BudgetNameWrapperStyled,
   BudgetNameIconsWrapperStyled,
@@ -93,7 +93,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   return (
     <>
       <TopWrapperStyled>
-        <BasicBudgetInfoWrapper>
+        <BasicBudgetInfoWrapperStyled>
           <BudgetIconStyled
             icon={iconNames.includes(icon) ? icon : "notifications"}
           />
@@ -142,7 +142,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             </BudgetNameIconsWrapperStyled>
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
           </BudgetNameWrapperStyled>
-        </BasicBudgetInfoWrapper>
+        </BasicBudgetInfoWrapperStyled>
         <PeopleInBudget users={peopleWithoutLoggedUser} />
       </TopWrapperStyled>
       <InfoTileWrapperStyled>

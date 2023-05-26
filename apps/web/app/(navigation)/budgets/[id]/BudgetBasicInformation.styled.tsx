@@ -16,7 +16,7 @@ export const TopWrapperStyled = styled.div`
   }
 `;
 
-export const BasicBudgetInfoWrapper = styled.div`
+export const BasicBudgetInfoWrapperStyled = styled.div`
   display: flex;
   flex-direction: row;
   flex: 1;
