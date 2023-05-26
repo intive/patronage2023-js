@@ -11,6 +11,8 @@ import {
   BudgetIconStyled,
   BudgetNameWrapperStyled,
   BudgetNameIconsWrapperStyled,
+  NavBudgetIconStyled,
+  DropdownMenuStyled,
   BudgetNameStyled,
   DropdownMenuButtonStyled,
   BudgetDescriptionStyled,
@@ -20,7 +22,7 @@ import {
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { NavBudgetIcon, InfoTile, TransactionDropdownMenu } from "ui";
+import { InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
@@ -98,13 +100,13 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetNameWrapperStyled>
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
-              <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
-              <NavBudgetIcon onClick={() => {}} icon={"favorite"} />
-              <NavBudgetIcon
+              <NavBudgetIconStyled onClick={() => openModal()} icon={"edit"} />
+              <NavBudgetIconStyled onClick={() => {}} icon={"favorite"} />
+              <NavBudgetIconStyled
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
               />
-              <TransactionDropdownMenu
+              <DropdownMenuStyled
                 items={[
                   {
                     ComponentToRender: (

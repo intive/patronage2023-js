@@ -14,6 +14,7 @@ type TransactionDropdownMenuProps = {
   items: Array<DropdownMenuSingleItem>;
   side: "top" | "right" | "bottom" | "left";
   ariaLabel?: string;
+  className?: string;
 };
 
 const DropdownMenuTriggerStyled = styled(DropdownMenu.Trigger)`
@@ -81,10 +82,11 @@ export const TransactionDropdownMenu = ({
   items,
   side,
   ariaLabel,
+  className,
 }: TransactionDropdownMenuProps) => {
   return (
     <DropdownMenu.Root modal={false}>
-      <DropdownMenuTriggerStyled asChild>
+      <DropdownMenuTriggerStyled asChild className={className}>
         <button aria-label={ariaLabel}>
           <IconStyled icon="more_vert" />
         </button>

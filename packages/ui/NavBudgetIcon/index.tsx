@@ -3,7 +3,7 @@ import { Icon, IconType } from "../Icon";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-interface NavBudgetIcon {
+export interface NavBudgetIcon {
   onClick: () => void;
   icon: IconType;
   className?: string;
