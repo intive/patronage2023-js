@@ -77,11 +77,6 @@ export const DropdownMenuStyled = styled(TransactionDropdownMenu)`
   }
 `;
 
-export const DropdownMenuButtonStyled = styled.button`
-  background-color: transparent;
-  border: none;
-`;
-
 export const BudgetNameStyled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 20px;
@@ -132,6 +127,6 @@ export const InfoTileWrapperStyled = styled.div`
   }
 `;
 
-export const InfoTileAmount = styled(CurrencyAmount)`
+export const InfoTileAmountStyled = styled(CurrencyAmount)`
   color: ${({ theme }) => theme.infoTile.value};
 `;

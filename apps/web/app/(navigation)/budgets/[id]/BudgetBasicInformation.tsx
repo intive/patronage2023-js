@@ -14,12 +14,12 @@ import {
   NavBudgetIconStyled,
   DropdownMenuStyled,
   BudgetNameStyled,
-  DropdownMenuButtonStyled,
   BudgetDescriptionStyled,
-  InfoTileAmount,
+  InfoTileAmountStyled,
   InfoTileWrapperStyled,
 } from "./BudgetBasicInformation.styled";
 import { EditBudget } from "app/(navigation)/EditBudget";
+import { Favourite } from "app/(navigation)/Favourite"; // waiting for BE
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
 import { InfoTile, NavBudgetIcon } from "ui";
@@ -61,7 +61,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
+    <InfoTileAmountStyled amount={limit} currencyOptions={currency} hidePlus />
   );
 
   const currencyInfo = (
@@ -101,7 +101,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
               <NavBudgetIconStyled onClick={() => openModal()} icon={"edit"} />
-              <NavBudgetIconStyled onClick={() => {}} icon={"favorite"} />
+              <NavBudgetIconStyled onClick={() => {alert("waiting for BE :(")}} icon={"favorite"} />
               <NavBudgetIconStyled
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
@@ -145,7 +145,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
         </BasicBudgetInfoWrapper>
         <PeopleInBudget users={peopleWithoutLoggedUser} />
       </TopWrapperStyled>
-
       <InfoTileWrapperStyled>
         <InfoTile
           label={t(basicInformation.labels.period)}
