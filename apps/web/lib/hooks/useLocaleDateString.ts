@@ -14,27 +14,32 @@ dayjs.extend(localizedFormat);
 dayjs.extend(isToday);
 dayjs.extend(isYesterday);
 
-export default function useDayName() {
+export default function useLocaleDateString() {
   const locale = useAtomValue(languageAtom);
   const { t, dict } = useTranslate("Common");
 
   dayjs.locale(locale === "en" ? "en-gb" : locale);
 
-  const getDayName = (timestamp: number) => {
-    const date = dayjs(timestamp);
-    const formattedDate = date.format("L");
-    const dayName = date.format("dddd");
-
+  const getDayName = (date: dayjs.Dayjs) => {
     if (date.isToday()) {
-      return `${t(dict.days.today)}, ` + formattedDate;
+      return t(dict.days.today);
     }
 
     if (date.isYesterday()) {
-      return `${t(dict.days.yesterday)}, ` + formattedDate;
+      return t(dict.days.yesterday);
     }
 
-    return `${dayName}, ${formattedDate}`;
+    const dayName = date.format("dddd");
+
+    return dayName;
   };
 
-  return getDayName;
+  const getDateString = (timestamp: number) => {
+    const date = dayjs(timestamp);
+    const formattedDate = date.format("L");
+
+    return `${getDayName(date)}, ${formattedDate}`;
+  };
+
+  return getDateString;
 }

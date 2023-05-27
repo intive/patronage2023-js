@@ -10,7 +10,7 @@ import { Column } from "ka-table/models";
 import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
 
 import { useTranslate } from "lib/hooks";
-import useDayName from "lib/hooks/useDayName";
+import useLocaleDateString from "lib/hooks/useLocaleDateString";
 import { Transaction } from "lib/types";
 
 import {
@@ -49,7 +49,7 @@ export const TransactionsTable = ({
 
   const locale = useAtomValue(languageAtom);
 
-  const getDayName = useDayName();
+  const getLocaleDateString = useLocaleDateString();
 
   const columns = useMemo(
     () =>
@@ -180,7 +180,7 @@ export const TransactionsTable = ({
               switch (props.column.key) {
                 case "date":
                   const value = props.groupKey[props.groupIndex];
-                  return <>{getDayName(value)}</>;
+                  return <>{getLocaleDateString(value)}</>;
               }
             },
           },
