@@ -53,11 +53,11 @@ const spawnRows = (props: TableSuspenseProps) => {
   return rowsArray;
 };
 
-export const TableSuspense = (props: TableSuspenseProps) => {
+export default function TableSuspense(props: TableSuspenseProps) {
   return (
     <>
       {spawnRows(props)}
       <GradientTrStyled />
     </>
   );
-};
+}

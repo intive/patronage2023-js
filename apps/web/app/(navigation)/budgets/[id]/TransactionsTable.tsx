@@ -18,7 +18,7 @@ import {
   StyledCurrencyAmount,
 } from "./TransactionsTable.styled";
 
-import { TableSuspense } from "./TransactionsTableSuspense";
+import TableSuspense from "components/TableSuspense";
 
 type SortDescriptor = {
   columnName: string;
