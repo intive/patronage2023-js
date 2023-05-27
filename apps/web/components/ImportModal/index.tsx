@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
@@ -10,15 +10,18 @@ import {
   SeparatorTopStyled,
   ModalContentStyled,
   ImportButtonStyled,
-  ErrorWindowStyled,
+  InformationWindowStyled,
   IconStyled,
   LabelStyled,
-  PStyled,
 } from "./ImportModal.styled";
-import { Spinner } from "ui/NavList/Spinner";
+import { LoadErrors, LoadSpinner, LoadTutorial } from "./helperComponents";
 
 type ImportModalProps = {
   onClose: Function;
+};
+
+export type ColorProps = {
+  color?: string;
 };
 
 export type ModalContentProps = {
@@ -57,9 +60,9 @@ type ImportBEProps = {
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const ImportModal = ({ onClose }: ImportModalProps) => {
-  const { t, dict } = useTranslate("AddNewBudgetModal");
+  const { t, dict } = useTranslate("ImportModal");
   const [isCSVError, setIsCSVError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [successfullyImported, setSuccessfullyImported] = useState(false);
   const showToast = useToast();
 
   const queryClient = useQueryClient();
@@ -68,6 +71,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
 
   const { mutate, data, isLoading, isError } = useMutation(
     async (formData: FormData): Promise<ImportBEProps> => {
+      await sleep(2600);
       const result = fetch(``, {
         method: "POST",
         headers: {
@@ -84,44 +88,42 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
           case 201:
             const isDataValid = data.body.errors.length === 0;
             setIsCSVError(!isDataValid);
+
             queryClient.invalidateQueries([
               "budgets",
               { searchValue: "", sortAscending: true },
             ]);
+
             if (isDataValid) {
-              onClose();
+              setSuccessfullyImported(true);
               showToast({
                 variant: "confirm",
-                message: "CSV file imported successfully",
+                message: t(dict.successImport),
               });
+              onClose();
             } else {
               showToast({
                 variant: "error",
-                message: "Check which records haven't been imported",
+                message: t(dict.responseErrors.default),
               });
             }
             break;
           case 400:
-            setErrorMsg("400");
             showToast({
               variant: "error",
-              message: "Error 400",
+              message: t(dict.responseErrors[400]),
             });
             break;
           case 401:
-            setErrorMsg("401");
             showToast({
               variant: "error",
-              message: "Error 401",
+              message: t(dict.responseErrors[401]),
             });
             break;
           default:
-            setErrorMsg("default");
             showToast({
               variant: "error",
-              // Change it
-              // message: "Error, something went wrong",
-              message: "Check which records haven't been imported",
+              message: t(dict.responseErrors.default),
             });
             return;
         }
@@ -129,9 +131,13 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     }
   );
 
-  const sendFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+  const importFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (!e.currentTarget.files) {
+      showToast({
+        variant: "error",
+        message: "Check your file, it may be corrupted",
+      });
       return;
     }
     const file = e.currentTarget.files[0];
@@ -140,31 +146,22 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     mutate(formData);
     e.currentTarget.value = "";
     // temp
-    await sleep(3600);
+    await sleep(2600);
     setIsCSVError(true);
   };
-
-  if (isError) {
-    showToast({
-      variant: "error",
-      message: "Error",
-    });
-  }
 
   // const errors = data?.body.errors
 
   return (
-    <Modal header="Import CSV" onClose={() => onClose()}>
+    <Modal header={t(dict.modalHeader)} onClose={() => onClose()}>
       <SeparatorTopStyled />
       <ModalContentStyled isError={isCSVError}>
-        {isCSVError && (
-          <ErrorWindowStyled>
-            {errors.map((error) => (
-              <PStyled key={error}>{error}</PStyled>
-            ))}
-          </ErrorWindowStyled>
-        )}
-        {isLoading && !isCSVError && <Spinner />}
+        <InformationWindowStyled>
+          {!isLoading && !isCSVError && <LoadTutorial />}
+          {isCSVError && <LoadErrors errors={errors} />}
+          {isLoading && !isCSVError && <LoadSpinner />}
+          {successfullyImported && "Good"}
+        </InformationWindowStyled>
         <ImportButtonStyled variant="secondary" onClick={() => {}}>
           <LabelStyled htmlFor="import-csv">
             <input
@@ -173,12 +170,11 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
               name="import-csv"
               accept=".csv"
               onChange={(e) => {
-                console.log("run func to submit and export file");
-                sendFileHandler(e);
+                importFileHandler(e);
               }}
             />
             <IconStyled icon={"file_upload"} />
-            <span>Click to import</span>
+            <span>{t(dict.importButtonText)}</span>
           </LabelStyled>
         </ImportButtonStyled>
       </ModalContentStyled>

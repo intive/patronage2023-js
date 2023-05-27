@@ -1030,6 +1030,82 @@ const dictionary = {
       fr: "Remboursement",
     },
   },
+  ImportModal: {
+    successImport: {
+      en: "CSV file successfully imported",
+      pl: "Plik CSV został pomyślnie zaimportowany",
+      fr: "Fichier CSV importé avec succès",
+    },
+    responseErrors: {
+      400: {
+        en: "400: Incorrect data. Please try again.",
+        pl: "400: Nieprawidłowe dane. Spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Veuillez réessayer.",
+      },
+      401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: Utilisateur non autorisé",
+      },
+      default: {
+        en: "Check which records have not been imported! Correct the records in the downloaded file and import them again.",
+        pl: "Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
+        fr: "Vérifiez les enregistrements qui n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+      },
+    },
+    modalHeader: {
+      en: "Import CSV",
+      pl: "Importuj CSV",
+      fr: "Importer un fichier CSV",
+    },
+    importButtonText: {
+      en: "Click to import",
+      pl: "Kliknij, aby zaimportować",
+      fr: "Cliquez pour importer",
+    },
+    tutorial: {
+      wantToUpload: {
+        en: "If you want to upload a file, please click the button below.",
+        pl: "Jeśli chcesz załadować plik, proszę kliknij przycisk poniżej.",
+        fr: "Si vous souhaitez charger un fichier, veuillez cliquer sur le bouton ci-dessous.",
+      },
+      correctFile: {
+        en: "The correct file should have a .csv extension. The CSV file should have headers on the ",
+        pl: "Prawidłowy plik powinien mieć rozszerzenie .csv. Plik CSV powinien zawierać nagłówki w ",
+        fr: "Le fichier correct doit avoir une extension .csv. Le fichier CSV doit avoir des en-têtes sur la ",
+      },
+      HLFirstLine: {
+        en: "first line",
+        pl: "pierwszej linii",
+        fr: "première ligne",
+      },
+      subsequentLines: {
+        en: ". Subsequent lines should contain the",
+        pl: ". Kolejne linie powinny zawierać",
+        fr: ". Les lignes suivantes doivent contenir les",
+      },
+      HLCorrectData: {
+        en: " correct data ",
+        pl: " poprawne dane ",
+        fr: " données correctes ",
+      },
+      eachLine: {
+        en: "on each line.",
+        pl: "w każdej linii.",
+        fr: "sur chaque ligne.",
+      },
+      example: {
+        en: "Example below:",
+        pl: "Przykład poniżej:",
+        fr: "Exemple ci-dessous :",
+      },
+      useComas: {
+        en: "Use commas to separate the individual data.",
+        pl: "Użyj przecinków do oddzielenia poszczególnych danych.",
+        fr: "Utilisez des virgules pour séparer les données individuelles.",
+      },
+    },
+  },
 };
 
 export default dictionary;

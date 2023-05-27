@@ -1,7 +1,7 @@
 import { device } from "lib/media-queries";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Button, Icon, Separator } from "ui";
-import { ModalContentProps } from ".";
+import { ColorProps, ModalContentProps } from ".";
 
 export const SeparatorTopStyled = styled(Separator)`
   display: block;
@@ -13,29 +13,15 @@ export const ModalContentStyled = styled.div<ModalContentProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   gap: 32px;
-
-  ${({ isError }) =>
-    isError
-      ? css`
-          max-width: 500px;
-          max-height: 500px;
-        `
-      : css`
-          min-width: 500px;
-          min-height: 500px;
-        `}
-
-  ${device.tablet} {
-    min-width: 500px;
-    min-height: 500px;
-  }
+  max-width: 500px;
+  height: 500px;
 `;
 
-export const ErrorWindowStyled = styled.div`
+export const InformationWindowStyled = styled.div`
   max-width: 500px;
-  max-height: 314px;
+  height: 314px;
   overflow-y: overlay;
 
   &::-webkit-scrollbar {
@@ -48,10 +34,8 @@ export const ErrorWindowStyled = styled.div`
     background-color: ${({ theme }) => theme.modal.closeButton};
     border-radius: 10px;
   }
-
   ${device.tablet} {
     min-width: 500px;
-    min-height: 314px;
   }
 `;
 
@@ -67,18 +51,21 @@ export const LabelStyled = styled.label`
   gap: 8px;
   width: fit-content;
   aspect-ratio: 1 / 1;
-  padding: 16px 24px;
-  inline-size: 150px;
+  padding: 8px 12px;
+  inline-size: 100px;
+  font-size: 0.875em;
   overflow-wrap: break-word;
   cursor: pointer;
 
   input[type="file"] {
     display: none;
   }
-`;
 
-export const PStyled = styled.p`
-  padding: 2px;
+  ${device.tablet} {
+    padding: 16px 24px;
+    font-size: 1.125em;
+    inline-size: 150px;
+  }
 `;
 
 export const IconStyled = styled(Icon)`
@@ -87,4 +74,31 @@ export const IconStyled = styled(Icon)`
   ${device.tablet} {
     font-size: 64px;
   }
+`;
+
+export const SpinnerWrapperStyled = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 500px;
+  height: 100%;
+`;
+
+export const PStyled = styled.p<ColorProps>`
+  color: ${({ color }) => color};
+  padding: 4px;
+`;
+
+export const LoadTutorialWrapperStyled = styled.div`
+  color: ${({ theme }) => theme.main};
+  font-weight: 600;
+  font-size: 1em;
+
+  ${device.tablet} {
+    font-size: 1.125em;
+  }
+`;
+
+export const SpanStyled = styled.span<ColorProps>`
+  color: ${({ color }) => color};
 `;

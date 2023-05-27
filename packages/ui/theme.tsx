@@ -25,6 +25,9 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting24: "#FB8C00",
+  Supporting23: "#8E24AA",
+  Supporting22: "#B3443D",
   Supporting21: "#D1A11F",
   Supporting20: "#FFF7E0",
   Supporting19: "#368B4F",
@@ -362,6 +365,11 @@ export const theme = {
   },
   favouriteBudget: {
     heartColor: "#ef4e4e",
+  },
+  importModal: {
+    error: colors.Supporting22,
+    HLCorrectData: colors.Supporting23,
+    HLFirstLine: colors.Supporting24,
   },
 };
 
