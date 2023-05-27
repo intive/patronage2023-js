@@ -234,7 +234,7 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
-  transactionDropdownMenu: {
+  dropdownMenu: {
     outlineFocus: colors.Teal10,
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,

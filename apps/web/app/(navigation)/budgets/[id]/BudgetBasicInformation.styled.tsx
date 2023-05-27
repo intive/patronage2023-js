@@ -3,7 +3,7 @@ import {
   BudgetIcon,
   CurrencyAmount,
   NavBudgetIcon,
-  TransactionDropdownMenu,
+  DropdownMenu,
 } from "ui";
 import { device } from "lib/media-queries";
 
@@ -71,7 +71,7 @@ export const NavBudgetIconStyled = styled(NavBudgetIcon)`
   }
 `;
 
-export const DropdownMenuStyled = styled(TransactionDropdownMenu)`
+export const DropdownMenuStyled = styled(DropdownMenu)`
   ${device.tablet} {
     display: none;
   }

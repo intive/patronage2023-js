@@ -8,7 +8,7 @@ import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 
-import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
+import { Icon, Avatar, DropdownMenu, CategoryIcon } from "ui";
 
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
@@ -188,7 +188,7 @@ export const TransactionsTable = ({
                   return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
-                    <TransactionDropdownMenu
+                    <DropdownMenu
                       items={dropdownMenuItems}
                       side="right"
                     />

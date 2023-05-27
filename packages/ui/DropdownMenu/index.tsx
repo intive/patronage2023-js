@@ -1,5 +1,5 @@
 "use client";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Icon } from "ui";
 import styled from "styled-components";
 import { ReactElement } from "react";
@@ -10,14 +10,14 @@ type DropdownMenuSingleItem = {
   id: string;
 };
 
-type TransactionDropdownMenuProps = {
+type DropdownMenuProps = {
   items: Array<DropdownMenuSingleItem>;
   side: "top" | "right" | "bottom" | "left";
   ariaLabel?: string;
   className?: string;
 };
 
-const DropdownMenuTriggerStyled = styled(DropdownMenu.Trigger)`
+const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
   background-color: transparent;
   border: 0;
   border-radius: 50%;
@@ -31,15 +31,15 @@ const DropdownMenuTriggerStyled = styled(DropdownMenu.Trigger)`
 
   &:focus {
     outline: 2px solid
-      ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+      ${({ theme }) => theme.dropdownMenu.outlineFocus};
   }
 `;
 
 const IconStyled = styled(Icon)`
-  color: ${({ theme }) => theme.transactionDropdownMenu.iconColor};
+  color: ${({ theme }) => theme.dropdownMenu.iconColor};
 `;
 
-const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
+const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)`
   margin: 8px;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
@@ -49,7 +49,7 @@ const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   overflow: hidden;
 `;
 
-export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
+export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
   padding: 6px 11px;
   font-size: 14px;
   border: 1px solid transparent;
@@ -65,33 +65,33 @@ export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.transactionDropdownMenu.outlineFocus};
+    border-color: ${({ theme }) => theme.dropdownMenu.outlineFocus};
     background-color: ${({ theme }) =>
-      theme.transactionDropdownMenu.activeBackground};
+      theme.dropdownMenu.activeBackground};
     outline: 0;
   }
   &:hover {
     background-color: ${({ theme }) =>
-      theme.transactionDropdownMenu.activeBackground};
+      theme.dropdownMenu.activeBackground};
     outline: 0;
     border: 1px solid transparent;
   }
 `;
 
-export const TransactionDropdownMenu = ({
+export const DropdownMenu = ({
   items,
   side,
   ariaLabel,
   className,
-}: TransactionDropdownMenuProps) => {
+}: DropdownMenuProps) => {
   return (
-    <DropdownMenu.Root modal={false}>
+    <RadixDropdownMenu.Root modal={false}>
       <DropdownMenuTriggerStyled asChild className={className}>
         <button aria-label={ariaLabel}>
           <IconStyled icon="more_vert" />
         </button>
       </DropdownMenuTriggerStyled>
-      <DropdownMenu.Portal>
+      <RadixDropdownMenu.Portal>
         <DropdownMenuContentStyled side={side}>
           {items.map((item) => {
             return (
@@ -101,7 +101,7 @@ export const TransactionDropdownMenu = ({
             );
           })}
         </DropdownMenuContentStyled>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+      </RadixDropdownMenu.Portal>
+    </RadixDropdownMenu.Root>
   );
 };

@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { TransactionDropdownMenu } from "ui";
+import { DropdownMenu } from "ui";
 import styled from "styled-components";
 import Link from "next/link";
 import React, { ReactElement } from "react";
@@ -11,7 +11,7 @@ type DropdownMenuSingleItem = {
 };
 
 //creating a wrapper for proper display on Storybook
-const TransactionDropdownMenuWrapper = styled.div`
+const DropdownMenuWrapper = styled.div`
   margin: 120px 100px;
 `;
 
@@ -52,7 +52,7 @@ export default {
       mapping: { Default: dummyItems },
     },
   },
-  component: TransactionDropdownMenu,
+  component: DropdownMenu,
   parameters: {
     docs: {
       description: {
@@ -61,14 +61,14 @@ export default {
       },
     },
   },
-} as ComponentMeta<typeof TransactionDropdownMenu>;
+} as ComponentMeta<typeof DropdownMenu>;
 
-const Template: ComponentStory<typeof TransactionDropdownMenu> = ({
+const Template: ComponentStory<typeof DropdownMenu> = ({
   ...args
 }) => (
-  <TransactionDropdownMenuWrapper>
-    <TransactionDropdownMenu {...args} />
-  </TransactionDropdownMenuWrapper>
+  <DropdownMenuWrapper>
+    <DropdownMenu {...args} />
+  </DropdownMenuWrapper>
 );
 
 export const Basic = Template.bind({});
