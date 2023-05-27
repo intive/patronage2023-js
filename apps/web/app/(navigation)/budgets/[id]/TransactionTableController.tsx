@@ -84,7 +84,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         description: item.name,
         status: "Done",
         creator: {
-          id: budget.userID,
+          id: budget.userId,
           name: session!.user.name,
           avatar: session!.user.image,
         },

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import { ErrorMessage } from "ui";
 
 import {
   Button,
@@ -17,7 +16,6 @@ import {
 import { IconType } from "ui/Icon";
 import {
   TabsStyled,
-  ErrorMessageWrapper,
   TabsTriggerStyled,
   ParagraphStyled,
   InputWrapperHalfStyled,
@@ -34,12 +32,15 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
+  SettingsTab,
+  ShareTab,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "./useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { ShareBudget } from "./ShareBudget";
 
 import { useAtomValue } from "jotai";
 import { languageAtom } from "store";
@@ -58,13 +59,9 @@ type newBudgetType = {
   limit: number | string;
   description: string;
   icon: string;
-  dateStart: string;
-  dateEnd: string;
+  dateStart: any;
+  dateEnd: any;
   currency: currencyType;
-};
-
-type createBudgetBEProps = {
-  status: number;
 };
 
 export const icons: IconType[] = [
@@ -88,7 +85,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
   const [lang, setLang] = useState<string>("en-US");
-  const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const currentLang = useAtomValue(languageAtom);
@@ -108,8 +104,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     limit: "",
     description: "",
     icon: selectedIcon,
-    dateStart: "",
-    dateEnd: "",
+    dateStart: null,
+    dateEnd: null,
     currency: {
       tag: "USD",
       locale: lang,
@@ -118,22 +114,27 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const onSelectStartDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateStart: date.toISOString() })
-      : setNewBudget({ ...newBudget, dateStart: "" });
+      ? setNewBudget({ ...newBudget, dateStart: date.getTime() })
+      : setNewBudget({ ...newBudget, dateStart: null });
   };
+
   const onSelectEndDate = (date: Date | null) => {
     date
-      ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
-      : setNewBudget({ ...newBudget, dateEnd: "" });
+      ? setNewBudget({ ...newBudget, dateEnd: date.getTime() })
+      : setNewBudget({ ...newBudget, dateEnd: null });
   };
 
   useEffect(() => {
     currentLang === "en" && setLang("en-US");
     currentLang === "pl" && setLang("pl-PL");
-    currentLang === "fr" && setLang("fr-FR");
   }, [lang, currentLang]);
 
   const { data: session } = useSession();
+
+  const startDateTimestamp = newBudget.dateStart;
+  const endDateTimeStamp = newBudget.dateEnd;
+  const budgetStartDate = new Date(startDateTimestamp).toISOString();
+  const budgetEndDate = new Date(endDateTimeStamp).toISOString();
 
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
@@ -155,42 +156,22 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               currency: newBudget.currency.tag,
             },
             period: {
-              startDate: newBudget.dateStart,
-              endDate: newBudget.dateEnd,
+              startDate: budgetStartDate,
+              endDate: budgetEndDate,
             },
             description: newBudget.description,
             iconName: newBudget.icon,
           }),
         }),
       {
-        onSuccess: (data: createBudgetBEProps) => {
-          switch (data.status) {
-            case 201:
-              onClose();
-              queryClient.invalidateQueries([
-                "budgetsList",
-                { searchValue: "", sortAscending: true },
-              ]);
-              break;
-            case 400:
-              setErrorMsg(t(dict.errors.error400));
-              break;
-            case 401:
-              setErrorMsg(t(dict.errors.error401));
-              break;
-            default:
-              alert(t(dict.errors.errorDefault));
-              return;
-          }
+        onSuccess: () => {
+          onClose();
+          queryClient.invalidateQueries(["budgetsList"]);
         },
       }
     );
 
   const { mutate: sendBudget } = useSendBudget();
-
-  const closeErrorMessage = () => {
-    setErrorMsg("");
-  };
 
   return (
     <Modal
@@ -198,21 +179,16 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       onClose={() => onClose && onClose()}
       fullHeight>
       <SeparatorStyledTop />
-      <ErrorMessageWrapper>
-        {errorMsg && (
-          <ErrorMessage message={errorMsg} onClose={closeErrorMessage} />
-        )}
-      </ErrorMessageWrapper>
-      <TabsStyled defaultValue={defaultValue}>
-        <Tabs.List>
+
+      <TabsStyled>
+        {/* <Tabs.List>
           <TabsTriggerStyled value="settings">
             {t(dict.tabs.settings)}
           </TabsTriggerStyled>
           <TabsTriggerStyled value="share">
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
-        </Tabs.List>
-
+        </Tabs.List> */}
         <Form
           onSubmit={() => {
             sendBudget();
@@ -223,7 +199,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 e.preventDefault();
               }}>
               <ContentStyled>
-                <Tabs.Content value="settings">
+                <SettingsTab>
                   <ParagraphStyled>
                     {t(dict.paragraphs.details)}
                   </ParagraphStyled>
@@ -430,8 +406,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       )}
                     </Field>
                   </InputWrapperFullFlex>
-                </Tabs.Content>
-                <Tabs.Content value="share">Welcome to share</Tabs.Content>
+                </SettingsTab>
+                {/* <ShareTab value="share">
+                <ShareBudget />
+              </ShareTab> */}
               </ContentStyled>
               <div>
                 <SeparatorStyled />

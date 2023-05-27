@@ -18,7 +18,7 @@ import {
   FormWrapper,
   ParagraphStyled,
   SeparatorStyled,
-} from "./CreateNewTransactionStyled";
+} from "./CreateNewTransaction.styled";
 import { useTranslate } from "lib/hooks";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
