@@ -188,10 +188,7 @@ export const TransactionsTable = ({
                   return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
-                    <DropdownMenu
-                      items={dropdownMenuItems}
-                      side="right"
-                    />
+                    <DropdownMenu items={dropdownMenuItems} side="right" />
                   );
               }
             },

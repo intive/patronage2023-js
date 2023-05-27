@@ -63,9 +63,7 @@ export default {
   },
 } as ComponentMeta<typeof DropdownMenu>;
 
-const Template: ComponentStory<typeof DropdownMenu> = ({
-  ...args
-}) => (
+const Template: ComponentStory<typeof DropdownMenu> = ({ ...args }) => (
   <DropdownMenuWrapper>
     <DropdownMenu {...args} />
   </DropdownMenuWrapper>

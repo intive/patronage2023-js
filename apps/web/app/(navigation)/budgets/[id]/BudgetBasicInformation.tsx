@@ -124,7 +124,12 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                   },
                   {
                     ComponentToRender: (
-                      <NavBudgetIcon onClick={() => {alert("waiting for BE :(")}} icon={"favorite"} />
+                      <NavBudgetIcon
+                        onClick={() => {
+                          alert("waiting for BE :(");
+                        }}
+                        icon={"favorite"}
+                      />
                     ),
                     id: "delete",
                   },

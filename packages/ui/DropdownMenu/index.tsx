@@ -30,8 +30,7 @@ const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
   cursor: pointer;
 
   &:focus {
-    outline: 2px solid
-      ${({ theme }) => theme.dropdownMenu.outlineFocus};
+    outline: 2px solid ${({ theme }) => theme.dropdownMenu.outlineFocus};
   }
 `;
 
@@ -66,13 +65,11 @@ export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
 
   &:focus {
     border-color: ${({ theme }) => theme.dropdownMenu.outlineFocus};
-    background-color: ${({ theme }) =>
-      theme.dropdownMenu.activeBackground};
+    background-color: ${({ theme }) => theme.dropdownMenu.activeBackground};
     outline: 0;
   }
   &:hover {
-    background-color: ${({ theme }) =>
-      theme.dropdownMenu.activeBackground};
+    background-color: ${({ theme }) => theme.dropdownMenu.activeBackground};
     outline: 0;
     border: 1px solid transparent;
   }

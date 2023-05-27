@@ -83,14 +83,12 @@ const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
 
   &:focus {
     border-color: ${({ theme }) => theme.input.focus};
-    background-color: ${({ theme }) =>
-      theme.dropdownMenu.activeBackground};
+    background-color: ${({ theme }) => theme.dropdownMenu.activeBackground};
     outline: none;
   }
 
   &:hover {
-    background-color: ${({ theme }) =>
-      theme.dropdownMenu.activeBackground};
+    background-color: ${({ theme }) => theme.dropdownMenu.activeBackground};
     border: 1px solid transparent;
   }
 `;
