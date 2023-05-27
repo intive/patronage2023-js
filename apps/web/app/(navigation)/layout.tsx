@@ -1,13 +1,15 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { useAtom } from "jotai";
 import styled from "styled-components";
 import Nav from "../(navigation)/Nav";
 import SideNav from "./SideNavigationBar";
 import { LayoutProps } from "../layout";
 import { ToastHoast } from "ui";
-import { hamburgerAtom } from "store";
-import { useAtom } from "jotai";
+import { mobileMenuAtom } from "store";
 import { device } from "lib/media-queries";
 
 const Wrapper = styled.div`
@@ -52,15 +54,32 @@ const SideNavDesktop = styled.div`
 `;
 
 export default function NavigationLayout({ children }: LayoutProps) {
-  const [isOpen] = useAtom(hamburgerAtom); 
+  const [isOpen, setOpen] = useAtom(mobileMenuAtom); 
   const { data } = useSession();
+  const menuRef = useRef<HTMLDivElement>(null);
+  const path = usePathname();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isOpen, setOpen]);
+  
+  useEffect(()=>{setOpen(false)}, [path, setOpen])
 
   return (
     <Wrapper>
       <Nav />
       <ToastHoast />
       <Main>
-        <SideNavMobile>
+        <SideNavMobile ref={menuRef}>
           {(isOpen && data) && <SideNav />}
         </SideNavMobile>
         <SideNavDesktop>

@@ -1,5 +1,5 @@
 export { categoryFilterAtom } from "./store";
 export { languageAtom } from "./store";
-export { hamburgerAtom } from "./store";
+export { mobileMenuAtom } from "./store";
 
 export type { Language } from "./store";

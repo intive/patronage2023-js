@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState, ReactNode, useMemo } from "react";
+import { useState, ReactNode, useMemo } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";

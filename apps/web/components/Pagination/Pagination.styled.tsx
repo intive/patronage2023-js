@@ -1,15 +1,19 @@
 "use client";
 import styled from "styled-components";
+import { device } from "lib/media-queries";
 
 export const ContainerStyled = styled.section`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 32px;
   width: 100%;
   height: auto;
   padding-top: 32px;
+  ${device.tablet} {
+    justify-content: space-between;
+  }
 `;
 
 export const RowsPerPageContainerStyled = styled.div`
@@ -21,12 +25,14 @@ export const RowsPerPageContainerStyled = styled.div`
 
 export const ListStyled = styled.ul`
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-
+  gap: 0;
   li {
     list-style-type: none;
   }
+  ${device.tablet} {
+    gap: 8px;
+  }
+
 `;
 
 export const NavigationButtonStyled = styled.button`

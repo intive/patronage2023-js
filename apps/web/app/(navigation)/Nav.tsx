@@ -6,8 +6,9 @@ import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
 import { Logo, Avatar } from "ui";
-import { hamburgerAtom } from "store";
+import { mobileMenuAtom } from "store";
 import { useAtom } from "jotai";
+import {useState} from "react";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -43,15 +44,11 @@ const BurgerWrapper = styled.div`
 
 export default function Nav() {
   const { data } = useSession();
-  const [isOpen, setOpen] = useAtom(hamburgerAtom);
+  const [isOpen, setOpen] = useAtom(mobileMenuAtom);
 
-  const toggleMenu = (toggled: boolean) => {
-    if (toggled) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }
+  const toggleMenu = () => {
+    setOpen(prev=>!prev)
+  };
 
   return (
     <NavBar>
@@ -60,9 +57,8 @@ export default function Nav() {
           label="Show menu"
           color="#FFF"
           rounded
-          // toggled={isOpen}
-          // toggle={setOpen}
-          onToggle={toggleMenu}
+          toggled={isOpen}
+          toggle={toggleMenu}
         />
       </BurgerWrapper>}
       <Logo white />
