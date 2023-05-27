@@ -238,6 +238,7 @@ export const theme = {
     outlineFocus: colors.Teal10,
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
+    border: colors.Neutral2,
   },
   infoTile: {
     border: colors.Neutral2,
