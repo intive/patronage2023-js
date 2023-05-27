@@ -1,9 +1,13 @@
 "use client";
 
-import styled from "styled-components";
 import { useSession } from "next-auth/react";
+import { Turn as Hamburger } from "hamburger-react";
+import styled from "styled-components";
+import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
 import { Logo, Avatar } from "ui";
+import { hamburgerAtom } from "store";
+import { useAtom } from "jotai";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -12,6 +16,7 @@ const NavBar = styled.nav`
   margin: 0;
   padding: 15px 15px;
   justify-content: space-between;
+  align-items: center;
   z-index: 10;
   position: fixed;
   width: 100%;
@@ -19,7 +24,6 @@ const NavBar = styled.nav`
 
 const ActionWrapper = styled.div`
   display: flex;
-  min-width: 150px;
   justify-content: flex-end;
   align-items: center;
   justify-content: flex-end;
@@ -31,10 +35,36 @@ const AvatarStyled = styled(Avatar)`
   width: 2.1em;
 `;
 
+const BurgerWrapper = styled.div`
+  ${device.tablet} {
+  display: none;
+}
+`;
+
 export default function Nav() {
   const { data } = useSession();
+  const [isOpen, setOpen] = useAtom(hamburgerAtom);
+
+  const toggleMenu = (toggled: boolean) => {
+    if (toggled) {
+      setOpen(true)
+    } else {
+      setOpen(false)
+    }
+  }
+
   return (
     <NavBar>
+      {data && <BurgerWrapper>
+        <Hamburger
+          label="Show menu"
+          color="#FFF"
+          rounded
+          // toggled={isOpen}
+          // toggle={setOpen}
+          onToggle={toggleMenu}
+        />
+      </BurgerWrapper>}
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
