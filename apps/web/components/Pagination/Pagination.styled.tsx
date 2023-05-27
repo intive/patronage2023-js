@@ -32,7 +32,6 @@ export const ListStyled = styled.ul`
   ${device.tablet} {
     gap: 8px;
   }
-
 `;
 
 export const NavigationButtonStyled = styled.button`

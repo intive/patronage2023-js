@@ -48,13 +48,13 @@ const SideNavMobile = styled.div`
 `;
 
 const SideNavDesktop = styled.div`
-  @media(max-width: 767px) {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
 
 export default function NavigationLayout({ children }: LayoutProps) {
-  const [isOpen, setOpen] = useAtom(mobileMenuAtom); 
+  const [isOpen, setOpen] = useAtom(mobileMenuAtom);
   const { data } = useSession();
   const menuRef = useRef<HTMLDivElement>(null);
   const path = usePathname();
@@ -66,13 +66,15 @@ export default function NavigationLayout({ children }: LayoutProps) {
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen, setOpen]);
-  
-  useEffect(()=>{setOpen(false)}, [path, setOpen])
+
+  useEffect(() => {
+    setOpen(false);
+  }, [path, setOpen]);
 
   return (
     <Wrapper>
@@ -80,12 +82,14 @@ export default function NavigationLayout({ children }: LayoutProps) {
       <ToastHoast />
       <Main>
         <SideNavMobile ref={menuRef}>
-          {(isOpen && data) && <SideNav />}
+          {isOpen && data && <SideNav />}
         </SideNavMobile>
-        <SideNavDesktop>
-          {data && <SideNav />}
-        </SideNavDesktop>
-        {data ? <ContentUser>{children}</ContentUser> : <ContentNoUser>{children}</ContentNoUser>}
+        <SideNavDesktop>{data && <SideNav />}</SideNavDesktop>
+        {data ? (
+          <ContentUser>{children}</ContentUser>
+        ) : (
+          <ContentNoUser>{children}</ContentNoUser>
+        )}
       </Main>
     </Wrapper>
   );

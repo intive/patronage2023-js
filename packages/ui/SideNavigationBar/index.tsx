@@ -41,16 +41,16 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   padding-top: 40px;
   list-style: none;
   background-color: ${({ theme }) => theme.sideNavigationBar.background.mobile};
-  border-right: 1px solid ${({ theme }) => theme.sideNavigationBar.background.separator};
-  
+  border-right: 1px solid
+    ${({ theme }) => theme.sideNavigationBar.background.separator};
+
   ${device.tablet} {
     border-right: none;
     background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
-    !isNavListItemClicked && !isSubMenuShown
-      ? theme.sideNavigationBar.background.activeColor
-      : theme.sideNavigationBar.background.inactiveColor};
+      !isNavListItemClicked && !isSubMenuShown
+        ? theme.sideNavigationBar.background.activeColor
+        : theme.sideNavigationBar.background.inactiveColor};
   }
-  
 `;
 
 export const SideNavigationBar = ({

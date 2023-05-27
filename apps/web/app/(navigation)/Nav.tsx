@@ -8,7 +8,7 @@ import { LanguageSelector } from "./LanguageSelector";
 import { Logo, Avatar } from "ui";
 import { mobileMenuAtom } from "store";
 import { useAtom } from "jotai";
-import {useState} from "react";
+import { useState } from "react";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -38,8 +38,8 @@ const AvatarStyled = styled(Avatar)`
 
 const BurgerWrapper = styled.div`
   ${device.tablet} {
-  display: none;
-}
+    display: none;
+  }
 `;
 
 export default function Nav() {
@@ -47,20 +47,22 @@ export default function Nav() {
   const [isOpen, setOpen] = useAtom(mobileMenuAtom);
 
   const toggleMenu = () => {
-    setOpen(prev=>!prev)
+    setOpen((prev) => !prev);
   };
 
   return (
     <NavBar>
-      {data && <BurgerWrapper>
-        <Hamburger
-          label="Show menu"
-          color="#FFF"
-          rounded
-          toggled={isOpen}
-          toggle={toggleMenu}
-        />
-      </BurgerWrapper>}
+      {data && (
+        <BurgerWrapper>
+          <Hamburger
+            label="Show menu"
+            color="#FFF"
+            rounded
+            toggled={isOpen}
+            toggle={toggleMenu}
+          />
+        </BurgerWrapper>
+      )}
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
