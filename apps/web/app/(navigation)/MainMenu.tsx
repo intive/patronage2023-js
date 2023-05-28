@@ -10,6 +10,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Avatar } from "ui";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { useTranslate } from "lib/hooks";
 
 export const AvatarStyled = styled(Avatar)`
   height: 2.1em;
@@ -20,9 +21,11 @@ export const MainMenu = () => {
   const { hasScrollbar } = useHasScrollBar();
   const router = useRouter();
   const { data } = useSession();
+  const { t, dict } = useTranslate("MainPage");
 
   const menuHandler = (value: string) => {
     if (value === "sign-out") {
+      router.push("/");
       signOut();
     }
     router.push("/");
@@ -31,11 +34,11 @@ export const MainMenu = () => {
   const items = [
     {
       value: "home",
-      text: "Home",
+      text: t(dict.home),
     },
     {
       value: "sign-out",
-      text: "Sign out",
+      text: t(dict.signOut),
     },
   ];
 
