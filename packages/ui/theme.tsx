@@ -170,6 +170,7 @@ export const theme = {
   },
   nav: {
     main: colors.Teal10,
+    burgerMenu: colors.BasicWhite,
     avatarSelector: {
       active: colors.Teal6,
     },

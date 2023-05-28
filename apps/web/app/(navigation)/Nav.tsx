@@ -8,7 +8,9 @@ import { LanguageSelector } from "./LanguageSelector";
 import { Logo, Avatar } from "ui";
 import { mobileMenuAtom } from "store";
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { useTranslate } from "lib/hooks";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -45,18 +47,23 @@ const BurgerWrapper = styled.div`
 export default function Nav() {
   const { data } = useSession();
   const [isSideOpen, setSideOpen] = useAtom(mobileMenuAtom);
+  const theme = useContext(ThemeContext);
+  const { t, dict } = useTranslate("NavigationLayout");
+  const { burgerMenuLabel } = dict;
 
   const toggleMenu = () => {
     setSideOpen((prev) => !prev);
   };
+
+  console.log(burgerMenuLabel);
 
   return (
     <NavBar>
       {data && (
         <BurgerWrapper>
           <Hamburger
-            label="Show menu"
-            color="#FFF"
+            label={t(burgerMenuLabel)}
+            color={theme.nav.burgerMenu}
             rounded
             toggled={isSideOpen}
             toggle={toggleMenu}

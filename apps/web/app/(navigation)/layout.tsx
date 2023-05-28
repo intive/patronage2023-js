@@ -26,19 +26,16 @@ const Main = styled.main`
   padding-top: 68px;
 `;
 
-const ContentUser = styled.div`
-  flex-grow: 1;
-  width: 100%;
-  padding-left: 25px;
-  ${device.tablet} {
-    padding-left: 94px;
-  }
-`;
-
 const ContentNoUser = styled.div`
   flex-grow: 1;
   width: 100%;
   padding-left: 25px;
+`;
+
+const ContentUser = styled(ContentNoUser)`
+  ${device.tablet} {
+    padding-left: 94px;
+  }
 `;
 
 const SideNavMobile = styled.div`
@@ -61,14 +58,13 @@ export default function NavigationLayout({ children }: LayoutProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // event.stopPropagation();
       if (!menuRef.current || menuRef.current.contains(event.target as Node)) {
-        return
+        return;
       }
       setSideOpen(false);
     };
 
-    const mainElement = document.querySelector('main') as HTMLElement;
+    const mainElement = document.querySelector("main") as HTMLElement;
 
     mainElement.addEventListener("mousedown", handleClickOutside);
     return () => {
