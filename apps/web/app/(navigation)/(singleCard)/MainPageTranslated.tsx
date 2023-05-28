@@ -14,26 +14,13 @@ const ContentWrapperStyled = styled.div`
 `;
 export const MainPageTranslated = () => {
   const { dict, t } = useTranslate("MainPage");
-  const { data } = useSession();
+  const { data: session } = useSession();
 
   return (
     <ContentWrapperStyled>
       <TypoStyled>{t(dict.welcomeText)}</TypoStyled>
-      <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
-      <br />
-      {data ? (
-        <>
-          <Button onClick={() => signOut()}>{t(dict.logOut)}</Button>
-          <br />
-          <p>
-            User: {data.user.name}, <br /> Avatar: {data.user.image}, <br />{" "}
-            AccessToken:
-            {data.user.accessToken.substring(0, 30)}... <br />
-            Role: <u>{data.user.role}</u>
-          </p>
-        </>
-      ) : (
-        <Button onClick={() => signIn()}>{t(dict.signIn)}</Button>
+      {!session && (
+        <LinkStyled href="/sign-up">{t(dict.createAccountLink)}</LinkStyled>
       )}
     </ContentWrapperStyled>
   );
