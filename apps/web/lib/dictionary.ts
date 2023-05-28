@@ -863,6 +863,27 @@ const dictionary = {
   },
   SettingsPage: {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },
+    editProfile: {
+      title: {
+        en: "Edit profile",
+        pl: "Edytuj profil",
+        fr: "",
+      },
+    },
+    changePassword: {
+      title: {
+        en: "Change password",
+        pl: "Zmień hasło",
+        fr: "",
+      },
+    },
+    language: {
+      title: {
+        en: "Language",
+        pl: "Język",
+        fr: "",
+      },
+    },
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },
   Pagination: {
