@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
 import { BudgetFixed } from "lib/types";
 import { useTranslate } from "lib/hooks";
 import { iconNames } from "lib/iconValidation";
@@ -12,6 +13,8 @@ import {
   BudgetNameWrapperStyled,
   BudgetNameIconsWrapperStyled,
   NavBudgetIconStyled,
+  FavouriteStyled,
+  FavouriteDropdownStyled,
   DropdownMenuStyled,
   BudgetNameStyled,
   BudgetDescriptionStyled,
@@ -19,7 +22,6 @@ import {
   InfoTileWrapperStyled,
 } from "./BudgetBasicInformation.styled";
 import { EditBudget } from "app/(navigation)/EditBudget";
-import { Favourite } from "app/(navigation)/Favourite"; // waiting for BE
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
 import { InfoTile, NavBudgetIcon } from "ui";
@@ -33,6 +35,7 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { data: session } = useSession();
+  const currentPage = usePathname() || "";
 
   const loggedUserId = session?.user.id;
   const peopleWithoutLoggedUser = budget.budgetUsers.filter(
@@ -101,12 +104,16 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
               <NavBudgetIconStyled onClick={() => openModal()} icon={"edit"} />
-              <NavBudgetIconStyled
+                <FavouriteStyled
+                  isFav={budget.isFavourite}
+                  budgetId={budget.id}
+                />
+              {/* <NavBudgetIconStyled
                 onClick={() => {
                   alert("waiting for BE :(");
                 }}
                 icon={"favorite"}
-              />
+              /> */}
               <NavBudgetIconStyled
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
@@ -124,14 +131,12 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                   },
                   {
                     ComponentToRender: (
-                      <NavBudgetIcon
-                        onClick={() => {
-                          alert("waiting for BE :(");
-                        }}
-                        icon={"favorite"}
+                      <FavouriteDropdownStyled
+                        isFav={budget.isFavourite}
+                        budgetId={budget.id}
                       />
                     ),
-                    id: "delete",
+                    id: "favourite",
                   },
                   {
                     ComponentToRender: (
@@ -140,7 +145,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                         icon={"delete"}
                       />
                     ),
-                    id: "favorite",
+                    id: "delete",
                   },
                 ]}
                 side="bottom"

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { BudgetIcon, CurrencyAmount, NavBudgetIcon, DropdownMenu } from "ui";
+import { Favourite } from "app/(navigation)/Favourite";
 import { device } from "lib/media-queries";
 
 export const TopWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
   ${device.tv} {
     flex-direction: row;
   }
@@ -34,6 +36,7 @@ export const BudgetIconStyled = styled(BudgetIcon)`
   width: 58px;
   font-size: 0.9em;
   flex-shrink: 0;
+
   ${device.tablet} {
     height: 80px;
     width: 80px;
@@ -47,6 +50,7 @@ export const BudgetNameWrapperStyled = styled.div`
   flex-direction: column;
   display: flex;
   max-width: calc(100% - 74px);
+
   ${device.tablet} {
     max-width: calc(100% - 96px);
   }
@@ -61,9 +65,28 @@ export const BudgetNameIconsWrapperStyled = styled.div`
 
 export const NavBudgetIconStyled = styled(NavBudgetIcon)`
   display: none;
+
   ${device.tablet} {
     display: initial;
   }
+`;
+
+export const FavouriteStyled = styled(Favourite)`
+  display: none;
+  margin: 0;  
+  background-color: ${({ theme }) => theme.editIcon.background};
+  height: 3em;
+  width: 3em;
+  border-radius: 8px;
+  line-height: 0;
+
+  ${device.tablet} {
+    display: initial;
+  }
+`;
+
+export const FavouriteDropdownStyled = styled(FavouriteStyled)`
+  display: initial;
 `;
 
 export const DropdownMenuStyled = styled(DropdownMenu)`
@@ -102,6 +125,7 @@ export const BudgetDescriptionStyled = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
   ${device.tablet} {
     font-size: 14px;
     max-width: calc(100% - 120px);
@@ -115,6 +139,7 @@ export const InfoTileWrapperStyled = styled.div`
   gap: 4px;
   width: 100%;
   margin-top: -16px;
+
   ${device.tv} {
     flex-direction: row;
     gap: 8px;
