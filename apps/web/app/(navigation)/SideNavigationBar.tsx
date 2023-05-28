@@ -1,22 +1,26 @@
 "use client";
+import { useCallback, useRef, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSetAtom } from "jotai";
+import { env } from "env.mjs";
+import { useSession } from "next-auth/react";
+import styled from "styled-components";
 
 import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
-import { useCallback, useRef, useState } from "react";
-import { SideNavigationBar, Icon, NavList, useToast } from "ui";
-import { CreateNewBudget } from "./CreateNewBudget";
-
-import { iconNames } from "lib/iconValidation";
-import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
-import { useQueryClient } from "@tanstack/react-query";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { iconNames } from "lib/iconValidation";
+
+import { CreateNewBudget } from "./CreateNewBudget";
 import { ItemType } from "services/mutations";
 import { Favourite } from "./Favourite";
-import { useSession } from "next-auth/react";
-import styled from "styled-components";
+
 import { categoryFilterAtom } from "store";
-import { useSetAtom } from "jotai";
+
 import { ImportModal } from "components/ImportModal";
+import { SideNavigationBar, Icon, NavList, useToast } from "ui";
+import { SpanStyled } from "ui/NavList";
 
 export const IconStyled = styled(Icon)`
   background: white;
@@ -31,6 +35,8 @@ export default function SideNav() {
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
   const showToast = useToast();
+
+  const superFetch = useSuperfetch();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
@@ -125,6 +131,13 @@ export default function SideNav() {
         }))
     ) ?? [];
 
+  const { data: csvLinkData } = useQuery({
+    queryKey: ["rangedStatistics", {}],
+    queryFn: async () => {
+      return superFetch(``).catch((err) => console.error(err));
+    },
+  });
+
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
@@ -165,6 +178,7 @@ export default function SideNav() {
         });
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),
+      csvUri: "/avatars/3.svg" || csvLinkData.uri,
     },
     importButton: {
       clickHandler: () => {

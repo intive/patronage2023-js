@@ -1,13 +1,27 @@
-import styled, { css } from "styled-components";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { SearchInput } from "../../Input/SearchInput";
-import { Button } from "../../Button";
 import { ButtonStyled } from "../../Button";
 import { Icon } from "../../Icon";
+import { ExportDropdown } from "../../ExportDropdown";
+import {
+  IconUpsideDown,
+  StyledButton,
+  LinkStyled,
+  SubMenuStyled,
+  MainDiv,
+  SubMenuHeaderStyled,
+  HeaderStyled,
+  IconWrapperStyled,
+  ButtonGroupStyled,
+  ImportButton,
+  NewBudgetButtonStyled,
+  Title,
+} from "./SubMenu.styled";
 
 type SubMenuButtonType = {
   clickHandler: () => void;
   label: string;
+  csvUri?: string;
 };
 
 export type SubMenuDataProps = {
@@ -32,96 +46,6 @@ export type SubMenuDataProps = {
 type SubMenuProps = {
   subMenuDataObject: SubMenuDataProps;
 } & React.HTMLProps<HTMLDivElement>;
-
-const SubMenuStyled = styled.div`
-  position: fixed;
-  top: 0;
-  left: 94px;
-  height: 100%;
-  width: 288px;
-  display: flex;
-  flex-direction: column;
-  z-index: 2;
-  margin-top: 68px;
-  padding: 40px 4px 24px 16px;
-  border-left: 1px solid
-    ${({ theme }) => theme.sideNavigationBar.subMenu.separator};
-  background-color: ${({ theme }) =>
-    theme.sideNavigationBar.subMenu.background};
-  box-shadow: 0px 6px 20px -2px rgba(26, 26, 26, 0.14);
-`;
-
-const SubMenuHeaderStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-right: 12px; // + padding above = 16 to handle scroll
-`;
-
-const MainDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  height: 100%;
-`;
-
-const HeaderStyled = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Title = styled.span`
-  font-family: "Signika";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 24px;
-  color: ${({ theme }) => theme.sideNavigationBar.subMenu.title};
-  line-height: 36px;
-`;
-
-const NewBudgetButtonStyled = styled(Button)`
-  width: 256px;
-  position: fixed;
-  bottom: 25px;
-`;
-
-const ButtonGroupStyled = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 8px;
-`;
-
-const IconUpsideDown = styled(Icon)`
-  transform: rotate(180deg);
-  cursor: pointer;
-`;
-
-const IconWrapperStyled = styled.div`
-  cursor: pointer;
-`;
-
-const ImportExportButtonsStyle = css`
-  display: flex;
-  justify-items: flex-start;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.875em;
-  padding: 6px;
-  line-height: 1.25em;
-  outline: 0;
-  color: ${({ theme }) => theme.main};
-  cursor: pointer;
-`;
-
-const InputButton = styled(Button)`
-  ${ImportExportButtonsStyle};
-`;
-
-const LinkStyled = styled.a`
-  ${ImportExportButtonsStyle};
-  text-decoration: none;
-`;
 
 export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   const {
@@ -148,6 +72,42 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     <IconUpsideDown icon="filter_list" />
   );
 
+  // For some reason, radix doesn't work with our Button from UI (doesn't like onClick)
+  // So I use polymorphism to get the styles from our Button and pass them to <button>
+  const triggerButton = (
+    <ButtonStyled as={StyledButton} variant="secondary">
+      <Icon icon="file_download" size={12} />
+      {exportButton?.label}
+    </ButtonStyled>
+  );
+
+  const downloadLink = (
+    <LinkStyled href={exportButton?.csvUri} download title="csv">
+      <Icon icon="file_download" size={12} />
+      <span>{exportButton?.label}</span>
+    </LinkStyled>
+  );
+
+  const emailButton = (
+    <button
+      onClick={() => {
+        console.log("email");
+      }}>
+      email
+    </button>
+  );
+
+  const exportBudgetsItems = [
+    {
+      id: "export-budgets-download",
+      node: downloadLink,
+    },
+    {
+      id: "export-budgets-email",
+      node: emailButton,
+    },
+  ];
+
   return (
     <SubMenuStyled>
       <MainDiv>
@@ -160,22 +120,16 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
           </HeaderStyled>
           {exportButton && importButton && (
             <ButtonGroupStyled>
-              <ButtonStyled
-                variant="secondary"
-                onClick={exportButton.clickHandler}
-                as={LinkStyled}
-                href="/avatars/3.svg"
-                download
-                title="csvv">
-                <Icon icon="file_download" size={12} />
-                <span>{exportButton.label}</span>
-              </ButtonStyled>
-              <InputButton
+              <ExportDropdown
+                triggerButton={triggerButton}
+                items={exportBudgetsItems}
+              />
+              <ImportButton
                 variant="secondary"
                 onClick={importButton.clickHandler}>
                 <Icon icon="file_upload" size={12} />
                 <span> {importButton.label}</span>
-              </InputButton>
+              </ImportButton>
             </ButtonGroupStyled>
           )}
           {searchInput && (

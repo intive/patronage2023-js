@@ -53,7 +53,7 @@ const initialState: ImportExportState = {
   csvUri: "/avatars/1.svg",
   screen: TutorialScreen,
   props: {
-    errors: undefined,
+    errors: [],
     errorMessage: "",
   },
 };
@@ -126,10 +126,6 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
 
             if (isDataValid) {
               dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
-              showToast({
-                variant: "confirm",
-                message: t(dict.successImport),
-              });
             } else {
               dispatch({ type: "SET_CSV_URI", payload: data.body.uri });
               dispatch({
@@ -231,8 +227,8 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
               dispatch({ type: "SET_CSV_ERROR", payload: false });
             }}
             as={LinkStyled}
-            href={"#" || csvUri}
-            // download
+            href={csvUri}
+            download
             title="csv-file">
             <IconStyled icon="file_download" size={12} />
             <span>{t(dict.exportButtonText)}</span>
