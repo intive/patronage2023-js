@@ -1,4 +1,4 @@
-export const iconNames = [
+const iconNames = [
   "home",
   "add",
   "cancel",
@@ -50,3 +50,7 @@ export const iconNames = [
   "done",
   "priority_high",
 ];
+
+export default function validateIcon(icon: string) {
+  return iconNames.includes(icon);
+}

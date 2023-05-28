@@ -1,6 +1,6 @@
-import { Budget } from "./types";
+import { Budget } from "../types";
 
-export const FixCurrencyObject = (budget: Budget) => {
+export default function fixCurrencyObject(budget: Budget) {
   const localObj = {
     USD: "en-US",
     GBP: "en-GB",
@@ -15,4 +15,4 @@ export const FixCurrencyObject = (budget: Budget) => {
       locale: localObj[budget.currency as keyof typeof localObj],
     },
   };
-};
+}
