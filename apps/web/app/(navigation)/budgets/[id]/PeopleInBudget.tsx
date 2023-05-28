@@ -19,7 +19,6 @@ const StyledWrapper = styled.div`
   }
 
   ${device.tv} {
-    font-size: 48px;
     margin-top: 0;
   }
 `;

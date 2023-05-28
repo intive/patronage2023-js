@@ -101,22 +101,22 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetNameWrapperStyled>
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
-              <NavBudgetIconStyled onClick={() => openModal()} icon={"edit"} />
+              <NavBudgetIconStyled onClick={openModal} icon="edit" />
               <FavouriteStyled
                 isFav={budget.isFavourite}
                 budgetId={budget.id}
               />
               <NavBudgetIconStyled
                 onClick={() => setDeleteModalVisibility(true)}
-                icon={"delete"}
+                icon="delete"
               />
               <DropdownMenuStyled
                 items={[
                   {
                     ComponentToRender: (
                       <NavBudgetIcon
-                        onClick={() => openModal()}
-                        icon={"edit"}
+                        onClick={openModal}
+                        icon="edit"
                       />
                     ),
                     id: "edit",
@@ -134,14 +134,14 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                     ComponentToRender: (
                       <NavBudgetIcon
                         onClick={() => setDeleteModalVisibility(true)}
-                        icon={"delete"}
+                        icon="delete"
                       />
                     ),
                     id: "delete",
                   },
                 ]}
                 side="bottom"
-                ariaLabel="budget options"
+                ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
               />
             </BudgetNameIconsWrapperStyled>
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>

@@ -41,7 +41,6 @@ export const BudgetIconStyled = styled(BudgetIcon)`
     height: 80px;
     width: 80px;
     font-size: 1.5em;
-    display: flex;
   }
 `;
 
@@ -49,6 +48,7 @@ export const BudgetNameWrapperStyled = styled.div`
   flex: 1;
   flex-direction: column;
   display: flex;
+  // 74px -> budget icon and its margin
   max-width: calc(100% - 74px);
 
   ${device.tablet} {
@@ -73,7 +73,7 @@ export const NavBudgetIconStyled = styled(NavBudgetIcon)`
 
 export const FavouriteStyled = styled(Favourite)`
   display: none;
-  margin: 0;
+  margin-left: 0;
   background-color: ${({ theme }) => theme.editIcon.background};
   height: 3em;
   width: 3em;
@@ -110,12 +110,12 @@ export const BudgetNameStyled = styled.h1`
   ${device.tablet} {
     font-size: 32px;
     margin-bottom: 4px;
+    // 120px - space for action icons on the right side
     max-width: calc(100% - 120px);
   }
 
   ${device.tv} {
     margin-right: 8px;
-    line-height: 150%;
   }
 `;
 
