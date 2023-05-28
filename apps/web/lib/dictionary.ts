@@ -139,7 +139,7 @@ const dictionary = {
     home: {
       en: "Home",
       pl: "Strona główna",
-      fr: "Maison",
+      fr: "Page d'accueil",
     },
   },
   SignInPage: {
