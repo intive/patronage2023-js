@@ -1,7 +1,7 @@
 "use client";
 
 import { EmailScreen } from "./EmailScreen";
-import { FlowController } from "./FlowController";
+import { FlowController } from ".";
 import { PasswordSubComponent } from "./PasswordScreen";
 import { ProfileScreen } from "./ProfileScreen";
 import { SuccessErrorScreen } from "./SuccessErrorScreen";
