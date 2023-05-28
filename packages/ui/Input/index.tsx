@@ -46,6 +46,7 @@ export const Input = forwardRef(
       if (type === "password") {
         return (
           <StyledIcon
+            type="button"
             onClick={(event) => {
               event.preventDefault();
               inputRef.current?.focus();
@@ -69,6 +70,7 @@ export const Input = forwardRef(
       if (value && onInputCleared) {
         return (
           <StyledIcon
+            type="button"
             onClick={(event) => {
               event.preventDefault();
               inputRef.current?.focus();
