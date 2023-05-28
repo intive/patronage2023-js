@@ -20,7 +20,7 @@ const ScreenStatusWrapper = styled.div`
   align-items: center;
 `;
 
-const ScreenCircle = styled.div<SuccessType>`
+export const ScreenCircle = styled.div<SuccessType>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +32,7 @@ const ScreenCircle = styled.div<SuccessType>`
     success ? theme.signUp.main : theme.signUp.error};
 `;
 
-const IconStyled = styled(Icon)`
+export const IconStyled = styled(Icon)`
   color: ${({ theme }) => theme.signUp.icon};
   font-weight: 700;
 `;

@@ -164,13 +164,13 @@ export default function SideNav() {
           message: "CSV exported successfully",
         });
       },
-      label: "Export",
+      label: t(SideNav.budgetsItem.exportButtonLabel),
     },
     importButton: {
       clickHandler: () => {
         setIsImportModalVisible(true);
       },
-      label: "Import",
+      label: t(SideNav.budgetsItem.importButtonLabel),
     },
   };
 

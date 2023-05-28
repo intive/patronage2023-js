@@ -1,11 +1,11 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import { useTranslate } from "lib/hooks";
-import { Modal, useToast } from "ui";
+import { ButtonStyled, Icon, Modal, useToast } from "ui";
 import {
   SeparatorTopStyled,
   ModalContentStyled,
@@ -13,8 +13,14 @@ import {
   InformationWindowStyled,
   IconStyled,
   LabelStyled,
+  LinkStyled,
 } from "./ImportModal.styled";
-import { LoadErrors, LoadSpinner, LoadTutorial } from "./helperComponents";
+import {
+  LoadErrors,
+  LoadSpinner,
+  LoadSuccess,
+  LoadTutorial,
+} from "./helperComponents";
 
 type ImportModalProps = {
   onClose: Function;
@@ -28,7 +34,7 @@ export type ModalContentProps = {
   isError: boolean;
 };
 
-const errors = [
+const errorsArray = [
   "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
   "Errror: 2: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
   "Errror: 3: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
@@ -63,11 +69,21 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("ImportModal");
   const [isCSVError, setIsCSVError] = useState(false);
   const [successfullyImported, setSuccessfullyImported] = useState(false);
+  const [errors, setErrorsArray] = useState<string[]>(errorsArray);
+  const [csvUri, setCsvUri] = useState("");
+
   const showToast = useToast();
 
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const token = session?.user.accessToken;
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleInputClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    inputRef.current?.click();
+  };
 
   const { mutate, data, isLoading, isError } = useMutation(
     async (formData: FormData): Promise<ImportBEProps> => {
@@ -88,7 +104,6 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
           case 201:
             const isDataValid = data.body.errors.length === 0;
             setIsCSVError(!isDataValid);
-
             queryClient.invalidateQueries([
               "budgets",
               { searchValue: "", sortAscending: true },
@@ -100,8 +115,10 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
                 variant: "confirm",
                 message: t(dict.successImport),
               });
-              onClose();
             } else {
+              setErrorsArray(data.body.errors);
+              setCsvUri(data.body.uri);
+
               showToast({
                 variant: "error",
                 message: t(dict.responseErrors.default),
@@ -136,7 +153,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     if (!e.currentTarget.files) {
       showToast({
         variant: "error",
-        message: "Check your file, it may be corrupted",
+        message: t(dict.corruptedFile),
       });
       return;
     }
@@ -150,22 +167,32 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     setIsCSVError(true);
   };
 
-  // const errors = data?.body.errors
+  const showInitialTutorial = !isLoading && !isCSVError;
+  const showLoader = isLoading && !isCSVError;
 
   return (
     <Modal header={t(dict.modalHeader)} onClose={() => onClose()}>
       <SeparatorTopStyled />
-      <ModalContentStyled isError={isCSVError}>
+      <ModalContentStyled>
         <InformationWindowStyled>
-          {!isLoading && !isCSVError && <LoadTutorial />}
+          {showInitialTutorial && <LoadTutorial />}
           {isCSVError && <LoadErrors errors={errors} />}
-          {isLoading && !isCSVError && <LoadSpinner />}
-          {successfullyImported && "Good"}
+          {showLoader && <LoadSpinner />}
+          {successfullyImported && <LoadSuccess />}
         </InformationWindowStyled>
-        <ImportButtonStyled variant="secondary" onClick={() => {}}>
-          <LabelStyled htmlFor="import-csv">
+        {!isCSVError && (
+          <>
+            <ImportButtonStyled variant="secondary" onClick={handleInputClick}>
+              <LabelStyled htmlFor="import-csv" aria-label="upload-file">
+                <IconStyled icon="file_upload" />
+                <span>{t(dict.importButtonText)}</span>
+              </LabelStyled>
+            </ImportButtonStyled>
             <input
+              style={{ display: "none" }}
+              ref={inputRef}
               type="file"
+              aria-label="upload-file"
               id="import-csv"
               name="import-csv"
               accept=".csv"
@@ -173,10 +200,20 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
                 importFileHandler(e);
               }}
             />
-            <IconStyled icon={"file_upload"} />
-            <span>{t(dict.importButtonText)}</span>
-          </LabelStyled>
-        </ImportButtonStyled>
+          </>
+        )}
+        {isCSVError && (
+          <ButtonStyled
+            variant="secondary"
+            onClick={() => {}}
+            as={LinkStyled}
+            href={csvUri}
+            download
+            title="csv-file">
+            <IconStyled icon="file_download" size={12} />
+            <span>{t(dict.exportButtonText)}</span>
+          </ButtonStyled>
+        )}
       </ModalContentStyled>
     </Modal>
   );

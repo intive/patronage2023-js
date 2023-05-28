@@ -1,7 +1,7 @@
 import { device } from "lib/media-queries";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Button, Icon, Separator } from "ui";
-import { ColorProps, ModalContentProps } from ".";
+import { ColorProps } from ".";
 
 export const SeparatorTopStyled = styled(Separator)`
   display: block;
@@ -9,7 +9,7 @@ export const SeparatorTopStyled = styled(Separator)`
   margin-bottom: 16px;
 `;
 
-export const ModalContentStyled = styled.div<ModalContentProps>`
+export const ModalContentStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,33 +39,36 @@ export const InformationWindowStyled = styled.div`
   }
 `;
 
-export const ImportButtonStyled = styled(Button)`
-  width: fit-content;
-  padding: 0;
-`;
-
-export const LabelStyled = styled.label`
+const ImportExportButtonStyles = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
-  width: fit-content;
-  aspect-ratio: 1 / 1;
   padding: 8px 12px;
   inline-size: 100px;
   font-size: 0.875em;
   overflow-wrap: break-word;
   cursor: pointer;
-
-  input[type="file"] {
-    display: none;
-  }
+  text-align: center;
 
   ${device.tablet} {
     padding: 16px 24px;
     font-size: 1.125em;
     inline-size: 150px;
   }
+`;
+
+export const ImportButtonStyled = styled(Button)`
+  padding: 0;
+`;
+
+export const LabelStyled = styled.label`
+  ${ImportExportButtonStyles}
+`;
+
+export const LinkStyled = styled.a`
+  ${ImportExportButtonStyles};
+  text-decoration: none;
 `;
 
 export const IconStyled = styled(Icon)`
@@ -101,4 +104,13 @@ export const LoadTutorialWrapperStyled = styled.div`
 
 export const SpanStyled = styled.span<ColorProps>`
   color: ${({ color }) => color};
+`;
+
+export const ScreenStatusWrapperStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

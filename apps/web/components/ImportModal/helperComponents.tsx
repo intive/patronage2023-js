@@ -1,13 +1,22 @@
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
+import { useTranslate } from "lib/hooks";
 import { Spinner } from "ui";
 import {
   LoadTutorialWrapperStyled,
   PStyled,
+  ScreenStatusWrapperStyled,
   SpanStyled,
   SpinnerWrapperStyled,
 } from "./ImportModal.styled";
-import { ThemeContext } from "styled-components";
-import { useContext } from "react";
-import { useTranslate } from "lib/hooks";
+import {
+  StyledHeader,
+  StyledSubHeader,
+} from "app/(regflow)/sign-up/SignUpFormStyled";
+import {
+  IconStyled,
+  ScreenCircle,
+} from "app/(regflow)/sign-up/SuccessErrorScreen";
 
 export const LoadErrors = ({ errors }: { errors: string[] }) => {
   const theme = useContext(ThemeContext);
@@ -28,6 +37,19 @@ export const LoadSpinner = () => (
     <Spinner />
   </SpinnerWrapperStyled>
 );
+
+export const LoadSuccess = () => {
+  const { t, dict } = useTranslate("ImportModal");
+  return (
+    <ScreenStatusWrapperStyled>
+      <ScreenCircle success={true}>
+        <IconStyled icon={"done"} iconSize={56} />
+      </ScreenCircle>
+      <StyledHeader>{t(dict.successHeader)}</StyledHeader>
+      <StyledSubHeader>{t(dict.successSubHeader)}</StyledSubHeader>
+    </ScreenStatusWrapperStyled>
+  );
+};
 
 export const LoadTutorial = () => {
   const { t, dict } = useTranslate("ImportModal");

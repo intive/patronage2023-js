@@ -13,6 +13,16 @@ const dictionary = {
           pl: "Dodaj nowy budżet",
           fr: "Créer un nouveau budget",
         },
+        importButtonLabel: {
+          en: "Import",
+          pl: "Importuj",
+          fr: "Importer",
+        },
+        exportButtonLabel: {
+          en: "Export",
+          pl: "Eksportuj",
+          fr: "Exporter",
+        },
         infos: {
           loading: {
             en: "Loading...",
@@ -1036,6 +1046,21 @@ const dictionary = {
       pl: "Plik CSV został pomyślnie zaimportowany",
       fr: "Fichier CSV importé avec succès",
     },
+    successHeader: {
+      en: "Success!",
+      pl: "Operacja powidła się!",
+      fr: "L'opération a été un succès !",
+    },
+    successSubHeader: {
+      en: "Your file has been successfully imported!",
+      pl: "Plik został pomyślnie zaimportowany!",
+      fr: "Le fichier a été importé avec succès !",
+    },
+    corruptedFile: {
+      en: "Check the file, it may be corrupted!",
+      pl: "Sprawdź plik, może być uszkodzony!",
+      fr: "Vérifiez le fichier, il est peut-être corrompu !",
+    },
     responseErrors: {
       400: {
         en: "400: Incorrect data. Please try again.",
@@ -1062,6 +1087,11 @@ const dictionary = {
       en: "Click to import",
       pl: "Kliknij, aby zaimportować",
       fr: "Cliquez pour importer",
+    },
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Ściągnij plik CSV",
+      fr: "Télécharger le fichier CSV",
     },
     tutorial: {
       wantToUpload: {
