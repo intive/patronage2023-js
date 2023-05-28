@@ -55,8 +55,6 @@ export default function Nav() {
     setSideOpen((prev) => !prev);
   };
 
-  console.log(burgerMenuLabel);
-
   return (
     <NavBar>
       {data && (
