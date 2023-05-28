@@ -3,14 +3,14 @@
 import { AsideCardContent } from "app/AsideCardContent";
 import MultiCardLayout from "../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
-import { BudgetBasicInformation } from "./BudgetBasicInformation";
+import { BudgetBasicInformation } from "./BudgetBasinInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
 import {
   BudgetBasicInformationSuspense,
   BudgetDetailsSuspense,
-} from "./BudgetSuspense";
-import BudgetDetails from "./BudgetDetails";
+} from "./BudgetDetails/BudgetSuspense";
+import BudgetDetails from "./BudgetDetails/BudgetDetails";
 import { useSession } from "next-auth/react";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { ButtonWithDropdown, Separator } from "ui";

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import QueryDropdown from "./QueryDropdown";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
-import { useSession } from "next-auth/react";
 import dayjs from "dayjs";
 import { BudgetStatisticsSuspense } from "./BudgetSuspense";
 import {

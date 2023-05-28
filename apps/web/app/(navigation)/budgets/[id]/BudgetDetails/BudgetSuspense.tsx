@@ -5,7 +5,7 @@ import {
   StyledTitle,
   TileWrapper,
   TopSectionWrapper,
-} from "./BudgetBasicInformation.styled";
+} from "../BudgetBasinInformation/BudgetBasicInformation.styled";
 import { InfoTileStyled } from "ui/InfoTile";
 import styled from "styled-components";
 import {

@@ -16,7 +16,7 @@ import {
   TopSectionWrapper,
   TitleWrapper,
 } from "./BudgetBasicInformation.styled";
-import { EditBudget } from "app/(navigation)/EditBudget";
+import { EditBudget } from "./EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
 import { NavBudgetIcon, InfoTile } from "ui";

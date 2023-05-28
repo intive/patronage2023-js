@@ -12,7 +12,7 @@ import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 import { Icon, Avatar } from "ui";
 import { UsersListStyled, EmailStyled } from "./UsersList.styled";
-import { TransactionsTableSuspense as UserTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
+import { TransactionsTableSuspense as UserTableSuspense } from "../budgets/[id]/TransactionTableController/TransactionsTableSuspense";
 
 type User = {
   id: string;
