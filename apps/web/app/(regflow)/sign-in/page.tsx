@@ -68,6 +68,7 @@ export default function SignInPage() {
         signIn("credentials", {
           email: values.email,
           password: values.password,
+          redirect: false,
         }).then((res) => {
           if (res!.ok) {
             router.push("/");
