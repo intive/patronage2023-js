@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SignUp } from "./FlowController/SignUp";
+import { SignUp } from "./SignUp";
 
 export const metadata: Metadata = {
   title: "Register",
