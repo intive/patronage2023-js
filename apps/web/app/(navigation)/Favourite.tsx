@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { usePathname } from "next/navigation";
 import { env } from "env.mjs";
@@ -42,6 +42,10 @@ export const Favourite = ({
 
   //initial state is what will come from props
   const [isFavourite, setIsFavourite] = useState<boolean>(isFav);
+
+  useEffect(() => {
+    setIsFavourite(isFav);
+  }, [budgetId, isFav]);
 
   const active = currentPage === activeHref;
 

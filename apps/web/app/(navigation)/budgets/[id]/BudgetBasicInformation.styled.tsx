@@ -79,6 +79,7 @@ export const FavouriteStyled = styled(Favourite)`
   width: 3em;
   border-radius: 8px;
   line-height: 0;
+  flex-shrink: 0;
 
   ${device.tablet} {
     display: initial;
