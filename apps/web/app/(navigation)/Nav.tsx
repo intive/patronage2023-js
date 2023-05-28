@@ -1,8 +1,9 @@
 "use client";
 
 import styled from "styled-components";
-import { Logo, Avatar } from "ui";
+import { Logo } from "ui";
 import { LanguageSelector } from "./LanguageSelector";
+import { MainMenu } from "./MainMenu";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -24,18 +25,13 @@ const ActionWrapper = styled.div`
   gap: 1rem;
 `;
 
-const AvatarStyled = styled(Avatar)`
-  height: 2.1em;
-  width: 2.1em;
-`;
-
 export default function Nav() {
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-        <AvatarStyled src="avatars/3.svg" outlined />
+        <MainMenu />
       </ActionWrapper>
     </NavBar>
   );
