@@ -1,6 +1,6 @@
 "use client";
 import { device } from "lib/media-queries";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Card } from "ui";
 
 export const CardWrapperStyled = styled.div`
@@ -32,5 +32,22 @@ export const TypoStyled = styled.h1`
   padding: 0 10px;
   ${device.desktop} {
     font-size: 3.5em;
+  }
+`;
+export const AsideCard = styled(Card)`
+  display: none;
+  ${device.desktop} {
+    &:empty {
+      visibility: hidden;
+    }
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    width: max-content;
+    min-width: 288px;
+    margin-left: 31px;
+    padding: 32px;
+    position: sticky;
+    top: 94px;
   }
 `;
