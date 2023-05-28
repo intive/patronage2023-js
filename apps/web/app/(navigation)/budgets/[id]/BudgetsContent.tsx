@@ -12,7 +12,7 @@ import {
 } from "./BudgetSuspense";
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
-import fixCurrencyObject from "lib/validations/currencyValidation";
+import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { ButtonWithDropdown, Separator } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
