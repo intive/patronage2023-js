@@ -45,7 +45,7 @@ const dictionary = {
           editProfile: {
             en: "Edit profile",
             pl: "Edytuj profil",
-            fr: "Editer le profil",
+            fr: "Modifier le profil",
           },
           changePassword: {
             en: "Change password",
@@ -867,21 +867,21 @@ const dictionary = {
       title: {
         en: "Edit profile",
         pl: "Edytuj profil",
-        fr: "",
+        fr: "Modifier le profil",
       },
     },
     changePassword: {
       title: {
         en: "Change password",
         pl: "Zmień hasło",
-        fr: "",
+        fr: "Changer le mot de passe",
       },
     },
     language: {
       title: {
         en: "Language",
         pl: "Język",
-        fr: "",
+        fr: "Langue",
       },
     },
   },
