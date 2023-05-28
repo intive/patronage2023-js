@@ -136,9 +136,6 @@ export default function SideNav() {
       onChange: (value: string) => {
         setSearchValue(value);
       },
-      resetSearch: () => {
-        setSearchValue("");
-      },
     },
     navigationList: (
       <NavList
