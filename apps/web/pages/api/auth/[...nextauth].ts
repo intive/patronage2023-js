@@ -22,6 +22,7 @@ interface DefaultUser extends User {
   accessToken: string;
   refreshToken: string;
   role: UserRole;
+  id: string;
 }
 
 export const authOptions: NextAuthOptions = {
@@ -36,6 +37,7 @@ export const authOptions: NextAuthOptions = {
     session({ session, token }) {
       session.user.accessToken = token.accessToken as string;
       session.user.role = token.role;
+      session.user.id = token.sub as string;
       return session;
     },
   },

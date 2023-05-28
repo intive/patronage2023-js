@@ -371,6 +371,18 @@ const dictionary = {
       },
     },
   },
+  FavouriteBudget: {
+    favourite: {
+      en: "Add to favourites",
+      pl: "Dodaj do ulubionych",
+      fr: "Ajouter aux favoris",
+    },
+    unfavourite: {
+      en: "Remove from favourites",
+      pl: "Usuń z ulubionych",
+      fr: "Supprimer des favoris",
+    },
+  },
   AddNewBudgetModal: {
     title: {
       en: "New budget",
@@ -816,23 +828,26 @@ const dictionary = {
       income: { en: "Incomes", pl: "Wpływy", fr: "Les recettes" },
       expenses: { en: "Expenses", pl: "Wydatki", fr: "Les dépenses" },
     },
+    searchInputTransactionPlaceholder: {
+      en: "Search by Name",
+      pl: "Wyszukaj po nazwie",
+      fr: "Rechercher par nom",
+    },
     transactionsTable: {
       groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "Wczoraj", fr: "Hier" },
-        today: { en: "Today", pl: "Dzisiaj", fr: "Aujourd'hui" },
-        monday: { en: "Monday", pl: "Poniedziałek", fr: "Lundi" },
-        tuesday: { en: "Tuesday", pl: "Wtorek", fr: "Mardi" },
-        wednesday: { en: "Wednesday", pl: "Środa", fr: "Mercredi" },
-        thursday: { en: "Thursday", pl: "Czwartek", fr: "Jeudi" },
-        friday: { en: "Friday", pl: "Piątek", fr: "Vendredi" },
-        saturday: { en: "Saturday", pl: "Sobota", fr: "Samedi" },
-        sunday: { en: "Sunday", pl: "Niedziela", fr: "Dimanche" },
+        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
+        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
       },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
         amount: { en: "Amount", pl: "Kwota", fr: "Montant" },
         creator: { en: "Creator", pl: "Twórca", fr: "Créateur" },
+      },
+      threeDotsComponentNames: {
+        edit: { en: "Edit", pl: "Edytuj", fr: "Modifier" },
+        clone: { en: "Clone", pl: "Klonuj", fr: "Cloner" },
+        remove: { en: "Remove", pl: "Usuń", fr: "Supprimer" },
       },
     },
   },
@@ -925,6 +940,47 @@ const dictionary = {
         en: "Budget within 3 months",
         pl: "Budżet z ostatnich 3 miesięcy",
         fr: "Budget sous 3 mois",
+      },
+    },
+  },
+  UsersPage: {
+    title: {
+      en: "Users",
+      pl: "Użytkownicy",
+      fr: "Utilisateurs",
+    },
+    aside: {
+      title: {
+        en: "User information",
+        pl: "Informacje o użytkowniku",
+        fr: "Information de l'utilisateur",
+      },
+    },
+    usersTable: {
+      firstName: {
+        en: "First name",
+        pl: "Imię",
+        fr: "Nom",
+      },
+      lastName: {
+        en: "Last name",
+        pl: "Nazwisko",
+        fr: "Prénom",
+      },
+      email: {
+        en: "Email",
+        pl: "Email",
+        fr: "Email",
+      },
+      dateCreated: {
+        en: "Date created",
+        pl: "Utworzono",
+        fr: "Date créée",
+      },
+      noDataFound: {
+        en: "No data found",
+        pl: "Brak danych",
+        fr: "Aucune donnée disponible",
       },
     },
   },

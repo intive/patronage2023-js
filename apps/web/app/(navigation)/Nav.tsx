@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { Logo } from "ui";
 import { LanguageSelector } from "./LanguageSelector";
-import { MainMenu } from "./MainMenu";
+import { Logo, Avatar } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -20,17 +20,20 @@ const NavBar = styled.nav`
 const ActionWrapper = styled.div`
   display: flex;
   min-width: 150px;
+  justify-content: flex-end;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
 `;
 
 export default function Nav() {
+  const { data } = useSession();
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
+        {data && <AvatarStyled src={data.user.image} outlined />}
         <MainMenu />
       </ActionWrapper>
     </NavBar>
