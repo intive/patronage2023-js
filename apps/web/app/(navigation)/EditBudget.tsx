@@ -3,7 +3,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "./useValidateBudgetModal";
+import { useValidateBudgetModal } from "../../lib/validations/useValidateBudgetModal";
 import { BudgetFixed } from "lib/types";
 import { Modal, IconPicker, Input, CustomDatePicker, Button } from "ui";
 import {
@@ -50,7 +50,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
   const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
-    useValidateBudgetModal("AddNewBudgetModal");
+    useValidateBudgetModal("EditBudgetModal");
 
   //BE integration
   const { data: session } = useSession();

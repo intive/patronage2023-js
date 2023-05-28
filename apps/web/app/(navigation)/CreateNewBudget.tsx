@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
@@ -37,20 +37,12 @@ import {
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "./useValidateBudgetModal";
+import { useValidateBudgetModal } from "../../lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
-import { useAtomValue } from "jotai";
-import { languageAtom } from "store";
-
 type NewBudget = {
   onClose: Function;
-};
-
-type currencyType = {
-  tag: string;
-  locale?: string;
 };
 
 type newBudgetType = {
@@ -60,7 +52,7 @@ type newBudgetType = {
   icon: string;
   dateStart: string;
   dateEnd: string;
-  currency: currencyType;
+  currency: string;
 };
 
 type createBudgetBEProps = {
@@ -79,19 +71,13 @@ export const icons: IconType[] = [
   "help",
 ];
 
-//mocked existing user budgets
-export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
-//mocked currency
-export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
-
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
-  const [lang, setLang] = useState<string>("en-US");
+
   const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
-  const currentLang = useAtomValue(languageAtom);
   const { hasScrollbar } = useHasScrollBar();
 
   const {
@@ -110,10 +96,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     icon: selectedIcon,
     dateStart: "",
     dateEnd: "",
-    currency: {
-      tag: "USD",
-      locale: lang,
-    },
+    currency: "USD",
   });
 
   const onSelectStartDate = (date: Date | null) => {
@@ -126,12 +109,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
       : setNewBudget({ ...newBudget, dateEnd: "" });
   };
-
-  useEffect(() => {
-    currentLang === "en" && setLang("en-US");
-    currentLang === "pl" && setLang("pl-PL");
-    currentLang === "fr" && setLang("fr-FR");
-  }, [lang, currentLang]);
 
   const { data: session } = useSession();
 
@@ -152,7 +129,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             name: newBudget.name,
             limit: {
               value: newBudget.limit,
-              currency: newBudget.currency.tag,
+              currency: newBudget.currency,
             },
             period: {
               startDate: newBudget.dateStart,
@@ -300,7 +277,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <InputWrapperHalfStyledCurrency>
                     <Field
                       name="currency"
-                      initialValue={newBudget.currency.tag}
+                      initialValue={newBudget.currency}
                       onSubmitValidate={checkCurrency}
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
@@ -314,7 +291,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             setValue(e);
                             setNewBudget({
                               ...newBudget,
-                              currency: { ...newBudget.currency, tag: e },
+                              currency: e,
                             });
                           }}
                           hasScrollbar={hasScrollbar}
