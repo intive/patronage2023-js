@@ -8,7 +8,7 @@ import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
 import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
-import { Pagination } from "components";
+import { Pagination } from "components/Pagination";
 import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
