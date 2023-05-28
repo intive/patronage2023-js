@@ -11,6 +11,7 @@ import { LayoutProps } from "../layout";
 import { ToastHoast } from "ui";
 import { mobileMenuAtom } from "store";
 import { device } from "lib/media-queries";
+import { useOnClickOutside } from "ui/IconPicker/useOnclickOutside";
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,27 +55,16 @@ const SideNavDesktop = styled.div`
 `;
 
 export default function NavigationLayout({ children }: LayoutProps) {
-  const [isOpen, setOpen] = useAtom(mobileMenuAtom);
+  const [isSideOpen, setSideOpen] = useAtom(mobileMenuAtom);
   const { data } = useSession();
   const menuRef = useRef<HTMLDivElement>(null);
   const path = usePathname();
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [isOpen, setOpen]);
+  useOnClickOutside(menuRef, () => setSideOpen(false));
 
   useEffect(() => {
-    setOpen(false);
-  }, [path, setOpen]);
+    setSideOpen(false);
+  }, [path, setSideOpen]);
 
   return (
     <Wrapper>
@@ -82,7 +72,7 @@ export default function NavigationLayout({ children }: LayoutProps) {
       <ToastHoast />
       <Main>
         <SideNavMobile ref={menuRef}>
-          {isOpen && data && <SideNav />}
+          {isSideOpen && data && <SideNav />}
         </SideNavMobile>
         <SideNavDesktop>{data && <SideNav />}</SideNavDesktop>
         {data ? (

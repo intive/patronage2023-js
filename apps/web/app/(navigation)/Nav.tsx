@@ -44,10 +44,10 @@ const BurgerWrapper = styled.div`
 
 export default function Nav() {
   const { data } = useSession();
-  const [isOpen, setOpen] = useAtom(mobileMenuAtom);
+  const [isSideOpen, setSideOpen] = useAtom(mobileMenuAtom);
 
   const toggleMenu = () => {
-    setOpen((prev) => !prev);
+    setSideOpen((prev) => !prev);
   };
 
   return (
@@ -58,7 +58,7 @@ export default function Nav() {
             label="Show menu"
             color="#FFF"
             rounded
-            toggled={isOpen}
+            toggled={isSideOpen}
             toggle={toggleMenu}
           />
         </BurgerWrapper>
