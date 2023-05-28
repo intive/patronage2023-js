@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
 import { BudgetFixed } from "lib/types";
 import { useTranslate } from "lib/hooks";
 import { iconNames } from "lib/iconValidation";
@@ -35,7 +34,6 @@ type BudgetBasicInfoProps = {
 export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { t, dict } = useTranslate("BudgetsPage");
   const { data: session } = useSession();
-  const currentPage = usePathname() || "";
 
   const loggedUserId = session?.user.id;
   const peopleWithoutLoggedUser = budget.budgetUsers.filter(
