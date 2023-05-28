@@ -136,6 +136,9 @@ export default function SideNav() {
       onChange: (value: string) => {
         setSearchValue(value);
       },
+      resetSearch: () => {
+        setSearchValue("");
+      }
     },
     navigationList: (
       <NavList
@@ -237,6 +240,7 @@ export default function SideNav() {
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
         refetchBudgetsFunction={refetch}
+        resetSearch={setSearchValue}
       />
       <>
         {isCreateNewBudgetModalVisible && (
