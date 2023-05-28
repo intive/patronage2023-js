@@ -102,16 +102,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
               <NavBudgetIconStyled onClick={() => openModal()} icon={"edit"} />
-                <FavouriteStyled
-                  isFav={budget.isFavourite}
-                  budgetId={budget.id}
-                />
-              {/* <NavBudgetIconStyled
-                onClick={() => {
-                  alert("waiting for BE :(");
-                }}
-                icon={"favorite"}
-              /> */}
+              <FavouriteStyled
+                isFav={budget.isFavourite}
+                budgetId={budget.id}
+              />
               <NavBudgetIconStyled
                 onClick={() => setDeleteModalVisibility(true)}
                 icon={"delete"}
