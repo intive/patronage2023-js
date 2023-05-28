@@ -1,6 +1,6 @@
 "use client";
 
-import { TypoStyled } from "components/HomePageComponents";
+import { TypoStyled } from "components/HomePage.styled";
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 
