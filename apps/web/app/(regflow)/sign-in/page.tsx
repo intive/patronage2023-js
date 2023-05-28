@@ -34,7 +34,7 @@ const FieldsWrapper = styled.div`
 const ErrorWrapper = styled.div`
   position: absolute;
   width: 100%;
-  top: 1rem;
+  top: -1rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -46,7 +46,7 @@ const InputWrapper = styled.div`
 
 const ErrorSuportingMsg = styled.div`
   position: absolute;
-  top: 60px;
+  top: 0px;
   left: 10px;
   color: #b3261e;
   font-size: small;
