@@ -1,13 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { Spinner } from "ui";
 import {
-  LoadTutorialWrapperStyled,
+  TutorialScreenWrapperStyled,
   PStyled,
   ScreenStatusWrapperStyled,
   SpanStyled,
   SpinnerWrapperStyled,
+  ErrorMessageStyled,
 } from "./ImportModal.styled";
 import {
   StyledHeader,
@@ -18,11 +19,23 @@ import {
   ScreenCircle,
 } from "app/(regflow)/sign-up/SuccessErrorScreen";
 
-export const LoadErrors = ({ errors }: { errors: string[] }) => {
+type ErrorsScreenProps = {
+  errors: string[];
+  errorMessage: string;
+};
+
+export const ErrorsScreen = ({ errors, errorMessage }: ErrorsScreenProps) => {
   const theme = useContext(ThemeContext);
   const errorColor = theme.importModal.error;
+  const [showErrorMessage, setShowErrorMessage] = useState(true);
   return (
     <>
+      {showErrorMessage && (
+        <ErrorMessageStyled
+          message={errorMessage}
+          onClose={() => setShowErrorMessage(false)}
+        />
+      )}
       {errors.map((error) => (
         <PStyled color={errorColor} key={error}>
           {error}
@@ -32,13 +45,13 @@ export const LoadErrors = ({ errors }: { errors: string[] }) => {
   );
 };
 
-export const LoadSpinner = () => (
+export const SpinnerScreen = () => (
   <SpinnerWrapperStyled>
     <Spinner />
   </SpinnerWrapperStyled>
 );
 
-export const LoadSuccess = () => {
+export const SuccessScreen = () => {
   const { t, dict } = useTranslate("ImportModal");
   return (
     <ScreenStatusWrapperStyled>
@@ -51,14 +64,14 @@ export const LoadSuccess = () => {
   );
 };
 
-export const LoadTutorial = () => {
+export const TutorialScreen = () => {
   const { t, dict } = useTranslate("ImportModal");
   const theme = useContext(ThemeContext);
   const firstLineColor = theme.importModal.HLFirstLine;
   const correctDataColor = theme.importModal.HLCorrectData;
 
   return (
-    <LoadTutorialWrapperStyled>
+    <TutorialScreenWrapperStyled>
       <PStyled>{t(dict.tutorial.wantToUpload)}</PStyled>
       <PStyled>
         {t(dict.tutorial.correctFile)}
@@ -72,19 +85,15 @@ export const LoadTutorial = () => {
         {t(dict.tutorial.eachLine)}
       </PStyled>
       <PStyled>{t(dict.tutorial.example)}</PStyled>
-      <PStyled>
-        <SpanStyled color={firstLineColor}>
-          {"Name, IconName, Description, Currency, Value, StartDate, EndDate"}
-        </SpanStyled>
+      <PStyled color={firstLineColor}>
+        {"Name, IconName, Description, Currency, Value, StartDate, EndDate"}
       </PStyled>
-      <PStyled>
-        <SpanStyled color={correctDataColor}>
-          {
-            "budgetName,yellowIcon,some budget description,USD,15.00,04/20/2023 19:14:20,04/25/2023 20:14:20"
-          }
-        </SpanStyled>
+      <PStyled color={correctDataColor}>
+        {
+          "budgetName,yellowIcon,some budget description,USD,15.00,04/20/2023 19:14:20,04/25/2023 20:14:20"
+        }
       </PStyled>
       <PStyled>{t(dict.tutorial.useComas)}</PStyled>
-    </LoadTutorialWrapperStyled>
+    </TutorialScreenWrapperStyled>
   );
 };

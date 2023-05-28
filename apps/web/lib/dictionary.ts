@@ -1047,9 +1047,9 @@ const dictionary = {
       fr: "Fichier CSV importé avec succès",
     },
     successHeader: {
-      en: "Success!",
-      pl: "Operacja powidła się!",
-      fr: "L'opération a été un succès !",
+      en: "Congratulations",
+      pl: "Gratulacje",
+      fr: "Félicitations",
     },
     successSubHeader: {
       en: "Your file has been successfully imported!",
@@ -1060,6 +1060,11 @@ const dictionary = {
       en: "Check the file, it may be corrupted!",
       pl: "Sprawdź plik, może być uszkodzony!",
       fr: "Vérifiez le fichier, il est peut-être corrompu !",
+    },
+    errorCsvMessage: {
+      en: "Check which records have not been imported! Correct the records in the downloaded file and import them again.",
+      pl: "Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
+      fr: "Vérifiez les enregistrements qui n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
     },
     responseErrors: {
       400: {
@@ -1073,9 +1078,9 @@ const dictionary = {
         fr: "401: Utilisateur non autorisé",
       },
       default: {
-        en: "Check which records have not been imported! Correct the records in the downloaded file and import them again.",
-        pl: "Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
-        fr: "Vérifiez les enregistrements qui n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
       },
     },
     modalHeader: {

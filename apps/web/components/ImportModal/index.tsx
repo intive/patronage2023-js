@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
 import { useTranslate } from "lib/hooks";
-import { ButtonStyled, Icon, Modal, useToast } from "ui";
+import { ButtonStyled, Modal, useToast } from "ui";
 import {
   SeparatorTopStyled,
   ModalContentStyled,
@@ -16,19 +16,17 @@ import {
   LinkStyled,
 } from "./ImportModal.styled";
 import {
-  LoadErrors,
-  LoadSpinner,
-  LoadSuccess,
-  LoadTutorial,
-} from "./helperComponents";
-
-type ImportModalProps = {
-  onClose: Function;
-};
-
-export type ColorProps = {
-  color?: string;
-};
+  ErrorsScreen,
+  SpinnerScreen,
+  SuccessScreen,
+  TutorialScreen,
+} from "./ImportModal.screens";
+import {
+  ImportBEProps,
+  ImportExportAction,
+  ImportExportState,
+  ImportModalProps,
+} from "./ImportModal.types";
 
 // temp
 const errorsArray = [
@@ -50,39 +48,13 @@ const errorsArray = [
   "Errror: 16: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
 ];
 
-type ImportResponseProps = {
-  errors: string[];
-  uri: string;
-};
-
-type ImportBEProps = {
-  status: number;
-  body: ImportResponseProps;
-};
-
-type PropsType = {
-  errors?: string[];
-};
-
-type ImportExportState = {
-  isCSVError: boolean;
-  csvUri: string;
-  screen: React.ComponentType<any>;
-  props: PropsType;
-};
-
-type ImportExportAction =
-  | { type: "SET_CSV_ERROR"; payload: boolean }
-  | { type: "SET_CSV_URI"; payload: string }
-  | { type: "SET_SCREEN"; payload: React.ComponentType<any> }
-  | { type: "SET_PROPS"; payload: PropsType };
-
 const initialState: ImportExportState = {
   isCSVError: false,
-  csvUri: "",
-  screen: LoadTutorial,
+  csvUri: "/avatars/1.svg",
+  screen: TutorialScreen,
   props: {
     errors: undefined,
+    errorMessage: "",
   },
 };
 
@@ -109,16 +81,13 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("ImportModal");
-
   const [
     { isCSVError, csvUri, screen: Screen, props: importExportProps },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   const showToast = useToast();
-
   const queryClient = useQueryClient();
-
   // Currently, I can't use superFetch here because it doesn't accept custom headers.
   const { data: session } = useSession();
   const token = session?.user.accessToken;
@@ -156,7 +125,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             ]);
 
             if (isDataValid) {
-              dispatch({ type: "SET_SCREEN", payload: LoadSuccess });
+              dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
               showToast({
                 variant: "confirm",
                 message: t(dict.successImport),
@@ -165,15 +134,11 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
               dispatch({ type: "SET_CSV_URI", payload: data.body.uri });
               dispatch({
                 type: "SET_SCREEN",
-                payload: LoadErrors,
+                payload: ErrorsScreen,
               });
               dispatch({
                 type: "SET_PROPS",
                 payload: { errors: data.body.errors },
-              });
-              showToast({
-                variant: "error",
-                message: t(dict.responseErrors.default),
               });
             }
             break;
@@ -218,8 +183,14 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     e.currentTarget.value = "";
     await sleep(2600);
     dispatch({ type: "SET_CSV_ERROR", payload: true });
-    dispatch({ type: "SET_SCREEN", payload: LoadErrors });
-    dispatch({ type: "SET_PROPS", payload: { errors: errorsArray } });
+    dispatch({ type: "SET_SCREEN", payload: ErrorsScreen });
+    dispatch({
+      type: "SET_PROPS",
+      payload: {
+        errors: errorsArray,
+        errorMessage: t(dict.errorCsvMessage),
+      },
+    });
   };
 
   const showLoader = isLoading && !isCSVError;
@@ -229,7 +200,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
       <SeparatorTopStyled />
       <ModalContentStyled>
         <InformationWindowStyled>
-          {showLoader ? <LoadSpinner /> : <Screen {...importExportProps} />}
+          {showLoader ? <SpinnerScreen /> : <Screen {...importExportProps} />}
         </InformationWindowStyled>
         {!isCSVError && (
           <>
@@ -256,15 +227,24 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
         {isCSVError && (
           <ButtonStyled
             variant="secondary"
-            onClick={() => {}}
+            onClick={() => {
+              dispatch({ type: "SET_CSV_ERROR", payload: false });
+            }}
             as={LinkStyled}
-            href={csvUri}
-            download
+            href={"#" || csvUri}
+            // download
             title="csv-file">
             <IconStyled icon="file_download" size={12} />
             <span>{t(dict.exportButtonText)}</span>
           </ButtonStyled>
         )}
+        <button
+          style={{ position: "absolute", top: "0" }}
+          onClick={() => {
+            dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
+          }}>
+          Temp button shows success Screen
+        </button>
       </ModalContentStyled>
     </Modal>
   );

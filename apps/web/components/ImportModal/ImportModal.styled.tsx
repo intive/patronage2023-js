@@ -1,7 +1,7 @@
 import { device } from "lib/media-queries";
 import styled, { css } from "styled-components";
-import { Button, Icon, Separator } from "ui";
-import { ColorProps } from ".";
+import { Button, ErrorMessage, Icon, Separator } from "ui";
+import { ColorProps } from "./ImportModal.types";
 
 export const SeparatorTopStyled = styled(Separator)`
   display: block;
@@ -92,7 +92,7 @@ export const PStyled = styled.p<ColorProps>`
   padding: 4px;
 `;
 
-export const LoadTutorialWrapperStyled = styled.div`
+export const TutorialScreenWrapperStyled = styled.div`
   color: ${({ theme }) => theme.main};
   font-weight: 600;
   font-size: 1em;
@@ -113,4 +113,9 @@ export const ScreenStatusWrapperStyled = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const ErrorMessageStyled = styled(ErrorMessage)`
+  margin-right: 8px;
+  margin-bottom: 8px;
 `;
