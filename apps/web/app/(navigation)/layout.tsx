@@ -11,7 +11,6 @@ import { LayoutProps } from "../layout";
 import { ToastHoast } from "ui";
 import { mobileMenuAtom } from "store";
 import { device } from "lib/media-queries";
-import { useOnClickOutside } from "ui/IconPicker/useOnclickOutside";
 
 const Wrapper = styled.div`
   display: flex;
@@ -60,7 +59,22 @@ export default function NavigationLayout({ children }: LayoutProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const path = usePathname();
 
-  useOnClickOutside(menuRef, () => setSideOpen(false));
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      // event.stopPropagation();
+      if (!menuRef.current || menuRef.current.contains(event.target as Node)) {
+        return
+      }
+      setSideOpen(false);
+    };
+
+    const mainElement = document.querySelector('main') as HTMLElement;
+
+    mainElement.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      mainElement.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSideOpen, setSideOpen]);
 
   useEffect(() => {
     setSideOpen(false);
