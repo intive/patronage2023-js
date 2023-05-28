@@ -1,9 +1,12 @@
 import Skeleton from "react-loading-skeleton";
 import {
+  TopWrapperStyled,
+  BasicBudgetInfoWrapperStyled,
+  BudgetIconStyled,
+  BudgetNameWrapperStyled,
   BudgetDescriptionStyled,
   BudgetNameStyled,
   InfoTileWrapperStyled,
-  TopWrapperStyled,
 } from "./BudgetBasicInformation.styled";
 import { InfoTileStyled } from "ui/InfoTile";
 import {
@@ -18,15 +21,19 @@ export const BudgetBasicInformationSuspense = () => {
   return (
     <>
       <TopWrapperStyled>
-        <Skeleton circle height={40} width={40} />
-        <div>
-          <BudgetNameStyled>
-            <Skeleton height={25} width={150} />
-          </BudgetNameStyled>
-          <BudgetDescriptionStyled>
-            <Skeleton height={15} width={150} />
-          </BudgetDescriptionStyled>
-        </div>
+        <BasicBudgetInfoWrapperStyled>
+          <BudgetIconStyled>
+            <Skeleton circle height={40} width={40} />
+          </BudgetIconStyled>
+          <BudgetNameWrapperStyled>
+            <BudgetNameStyled>
+              <Skeleton height={25} width={150} />
+            </BudgetNameStyled>
+            <BudgetDescriptionStyled>
+              <Skeleton height={15} width={150} />
+            </BudgetDescriptionStyled>
+          </BudgetNameWrapperStyled>
+        </BasicBudgetInfoWrapperStyled>
       </TopWrapperStyled>
       <InfoTileWrapperStyled>
         <InfoTileStyled>
