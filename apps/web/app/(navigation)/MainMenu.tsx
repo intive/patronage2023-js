@@ -9,7 +9,7 @@ import styled from "styled-components";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Avatar } from "ui";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 export const AvatarStyled = styled(Avatar)`
   height: 2.1em;
@@ -19,6 +19,7 @@ export const AvatarStyled = styled(Avatar)`
 export const MainMenu = () => {
   const { hasScrollbar } = useHasScrollBar();
   const router = useRouter();
+  const { data } = useSession();
 
   const menuHandler = (value: string) => {
     if (value === "sign-out") {
@@ -39,25 +40,32 @@ export const MainMenu = () => {
   ];
 
   return (
-    <Select.Root onValueChange={(value) => menuHandler(value)}>
-      <SelectTriggerStyled>
-        <Select.Value>
-          <AvatarStyled src="avatars/3.svg" outlined />
-        </Select.Value>
-      </SelectTriggerStyled>
+    <>
+      {data && (
+        <Select.Root onValueChange={(value) => menuHandler(value)}>
+          <SelectTriggerStyled>
+            <Select.Value>
+              <AvatarStyled src="avatars/3.svg" outlined />
+            </Select.Value>
+          </SelectTriggerStyled>
 
-      <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
-        <SelectContentStyled position="popper" align="center" sideOffset={5}>
-          <Select.Viewport>
-            {items.map((item) => (
-              <SelectItemStyled value={item.value} key={item.value}>
-                <Select.ItemText>{item.text}</Select.ItemText>
-              </SelectItemStyled>
-            ))}
-          </Select.Viewport>
-        </SelectContentStyled>
-      </Select.Portal>
-    </Select.Root>
+          <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
+            <SelectContentStyled
+              position="popper"
+              align="center"
+              sideOffset={5}>
+              <Select.Viewport>
+                {items.map((item) => (
+                  <SelectItemStyled value={item.value} key={item.value}>
+                    <Select.ItemText>{item.text}</Select.ItemText>
+                  </SelectItemStyled>
+                ))}
+              </Select.Viewport>
+            </SelectContentStyled>
+          </Select.Portal>
+        </Select.Root>
+      )}
+    </>
   );
 };
 //

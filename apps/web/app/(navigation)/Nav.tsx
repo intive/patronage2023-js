@@ -1,9 +1,10 @@
 "use client";
 
 import styled from "styled-components";
-import { Logo } from "ui";
+
 import { LanguageSelector } from "./LanguageSelector";
-import { Logo, Avatar } from "ui";
+import { MainMenu } from "./MainMenu";
+import { Logo } from "ui";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -27,13 +28,12 @@ const ActionWrapper = styled.div`
 `;
 
 export default function Nav() {
-  const { data } = useSession();
   return (
     <NavBar>
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-        {data && <AvatarStyled src={data.user.image} outlined />}
+
         <MainMenu />
       </ActionWrapper>
     </NavBar>
