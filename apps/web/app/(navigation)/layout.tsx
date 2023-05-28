@@ -45,8 +45,9 @@ const SideNavMobile = styled.div`
 `;
 
 const SideNavDesktop = styled.div`
-  @media (max-width: 767px) {
-    display: none;
+  display: none;
+  ${device.tablet} {
+    display: block;
   }
 `;
 
