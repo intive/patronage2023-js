@@ -12,7 +12,7 @@ import {
 } from "./BudgetSuspense";
 import BudgetDetails from "./BudgetDetails";
 import { useSession } from "next-auth/react";
-import { FixCurrencyObject } from "lib/currencyValidation";
+import fixCurrencyObject from "lib/validations/currencyValidation";
 import { ButtonWithDropdown, Separator } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
@@ -74,7 +74,7 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
   const mainCardContent = (
     <BudgetContentWrapperStyled>
       {budget ? (
-        <BudgetBasicInformation budget={FixCurrencyObject(budget)} />
+        <BudgetBasicInformation budget={fixCurrencyObject(budget)} />
       ) : (
         <BudgetBasicInformationSuspense />
       )}
@@ -98,12 +98,12 @@ export const BudgetsContent = ({ id }: BudgetsContentProps) => {
         />
       </CreateButtonWrapper>
       {budget ? (
-        <BudgetDetails budget={FixCurrencyObject(budget)} />
+        <BudgetDetails budget={fixCurrencyObject(budget)} />
       ) : (
         <BudgetDetailsSuspense />
       )}
       {budget && (
-        <TransactionTableController budget={FixCurrencyObject(budget)} />
+        <TransactionTableController budget={fixCurrencyObject(budget)} />
       )}
     </BudgetContentWrapperStyled>
   );

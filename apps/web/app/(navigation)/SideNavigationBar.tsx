@@ -6,7 +6,7 @@ import { useCallback, useRef, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
 import { CreateNewBudget } from "./CreateNewBudget";
 
-import { iconNames } from "lib/iconValidation";
+import validate from "lib/validations/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
@@ -103,10 +103,7 @@ export default function SideNav() {
         items.map(({ icon, name, id, isFavourite }) => ({
           ComponentToRender: (
             <>
-              <IconStyled
-                icon={iconNames.includes(icon) ? icon : "help"}
-                iconSize={24}
-              />
+              <IconStyled icon={validate(icon) ? icon : "help"} iconSize={24} />
               <SpanStyled>{name}</SpanStyled>
               <Favourite
                 isFav={isFavourite}

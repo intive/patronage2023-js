@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { BudgetFixed } from "lib/types";
 import { useTranslate } from "lib/hooks";
-import { iconNames } from "lib/iconValidation";
+import validate from "lib/validations/iconValidation";
 import {
   BasicInfoWrapper,
   BudgetIconStyled,
@@ -91,9 +91,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
     <>
       <BasicInfoWrapper>
         <TopSectionWrapper>
-          <BudgetIconStyled
-            icon={iconNames.includes(icon) ? icon : "notifications"}
-          />
+          <BudgetIconStyled icon={validate(icon) ? icon : "notifications"} />
           <TitleWrapper>
             <TitleEditButton>
               <StyledTitle>{name}</StyledTitle>
