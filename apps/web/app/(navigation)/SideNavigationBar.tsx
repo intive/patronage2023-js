@@ -138,7 +138,7 @@ export default function SideNav() {
       },
       resetSearch: () => {
         setSearchValue("");
-      }
+      },
     },
     navigationList: (
       <NavList

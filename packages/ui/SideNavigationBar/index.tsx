@@ -71,7 +71,6 @@ export const SideNavigationBar = ({
   const showSubMenu = (id: string) => {
     if (subMenuData && subMenuId === id && !isNavListItemClicked) {
       return hideSubMenu();
-      
     }
     setSubMenuId(id);
     resetIsNavListItemClicked();
