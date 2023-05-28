@@ -1,23 +1,23 @@
 "use client";
 
 import { AsideCardContent } from "app/AsideCardContent";
-import MultiCardLayout from "../../MultiCardLayout";
+import MultiCardLayout from "../../../MultiCardLayout";
 import { useQuery } from "@tanstack/react-query";
-import { BudgetBasicInformation } from "./BudgetBasinInformation";
+import { BudgetBasicInformation } from "../BudgetBasinInformation";
 import styled from "styled-components";
 import { env } from "env.mjs";
 import {
   BudgetBasicInformationSuspense,
   BudgetDetailsSuspense,
-} from "./BudgetDetails/BudgetSuspense";
-import BudgetDetails from "./BudgetDetails/BudgetDetails";
+} from "../BudgetDetails/BudgetSuspense";
+import BudgetDetails from "../BudgetDetails/BudgetDetails";
 import { useSession } from "next-auth/react";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { ButtonWithDropdown, Separator } from "ui";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
-import { CreateNewTransaction } from "./CreateNewTransaction";
-import TransactionTableController from "./TransactionTableController";
+import { CreateNewTransaction } from "../CreateNewTransaction";
+import TransactionTableController from "../TransactionTableController";
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,7 +42,7 @@ interface BudgetsContentProps {
   id: string;
 }
 
-export const BudgetsContent = ({ id }: BudgetsContentProps) => {
+export const BudgetContent = ({ id }: BudgetsContentProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
   const [
     createNewTransactionModalVisible,

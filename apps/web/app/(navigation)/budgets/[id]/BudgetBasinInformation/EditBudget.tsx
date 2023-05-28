@@ -3,7 +3,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "../../../../../lib/validations/useValidateBudgetModal";
+import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import { BudgetFixed } from "lib/types";
 import { Modal, IconPicker, Input, CustomDatePicker, Button } from "ui";
 import {
@@ -23,11 +23,11 @@ import {
   SeparatorStyled,
   ButtonWrapperStyled,
   ErrorMessageWrapper,
-} from "../../../CreateNewBudget.styled";
+} from "../BudgetContent/CreateNewBudget.styled";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
-import { icons } from "../../../CreateNewBudget";
+import { icons } from "../BudgetContent/CreateNewBudget";
 import { useState } from "react";
 import { ErrorMessage } from "ui";
 

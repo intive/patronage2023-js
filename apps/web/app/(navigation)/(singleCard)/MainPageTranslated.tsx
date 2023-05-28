@@ -1,6 +1,6 @@
 "use client";
 
-import { TypoStyled } from "app/(navigation)/HomePageComponents";
+import { TypoStyled } from "components/HomePageComponents";
 import { useTranslate } from "lib/hooks";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "ui";

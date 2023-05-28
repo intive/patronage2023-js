@@ -37,7 +37,7 @@ import {
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "../../lib/validations/useValidateBudgetModal";
+import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 

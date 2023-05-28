@@ -1,8 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import Nav from "../(navigation)/Nav";
-import SideNav from "./SideNavigationBar";
+import Nav from "components/Navbar";
+import SideNav from "components/SideNavigationBar";
 import { LayoutProps } from "../layout";
 import { ToastHoast } from "ui";
 

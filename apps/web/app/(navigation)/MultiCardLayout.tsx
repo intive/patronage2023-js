@@ -2,7 +2,7 @@
 import {
   CardWrapperStyled,
   CardStyled as MainCard,
-} from "./HomePageComponents";
+} from "components/HomePageComponents";
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { ReactElement } from "react";

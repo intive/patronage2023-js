@@ -1,5 +1,5 @@
 "use client";
-import { CardWrapperStyled, CardStyled } from "../HomePageComponents";
+import { CardWrapperStyled, CardStyled } from "components/HomePageComponents";
 import { LayoutProps } from "app/layout";
 
 export default function SingleCardLayout({ children }: LayoutProps) {

@@ -4,7 +4,7 @@ import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { useCallback, useRef, useState } from "react";
 import { SideNavigationBar, Icon, NavList } from "ui";
-import { CreateNewBudget } from "./CreateNewBudget";
+import { CreateNewBudget } from "../../app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget";
 
 import validate from "lib/validations/iconValidation";
 import { SpanStyled } from "ui/NavList";
