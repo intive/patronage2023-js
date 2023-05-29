@@ -83,6 +83,7 @@ const ButtonStyled = styled(Button)`
   position: fixed;
   bottom: 25px;
   z-index: 5;
+  background-color: ${({ theme }) => theme.sideNavigationBar.subMenu.background};
 `;
 
 const IconUpsideDown = styled(Icon)`
