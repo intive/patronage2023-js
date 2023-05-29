@@ -1,16 +1,17 @@
 import * as Select from "@radix-ui/react-select";
+import styled from "styled-components";
+import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { Avatar } from "ui";
+import { useTranslate } from "lib/hooks";
+
 import {
   SelectContentStyled,
   SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
-import styled from "styled-components";
-
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Avatar } from "ui";
-import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
-import { useTranslate } from "lib/hooks";
 
 export const AvatarStyled = styled(Avatar)`
   height: 2.1em;
@@ -25,7 +26,6 @@ export const MainMenu = () => {
 
   const menuHandler = (value: string) => {
     if (value === "sign-out") {
-      router.push("/");
       signOut();
     }
     router.push("/");
@@ -48,7 +48,7 @@ export const MainMenu = () => {
         <Select.Root onValueChange={(value) => menuHandler(value)}>
           <SelectTriggerStyled>
             <Select.Value>
-              <AvatarStyled src="avatars/3.svg" outlined />
+              <AvatarStyled src={data.user.image} outlined />
             </Select.Value>
           </SelectTriggerStyled>
 
@@ -58,9 +58,9 @@ export const MainMenu = () => {
               align="center"
               sideOffset={5}>
               <Select.Viewport>
-                {items.map((item) => (
-                  <SelectItemStyled value={item.value} key={item.value}>
-                    <Select.ItemText>{item.text}</Select.ItemText>
+                {items.map(({ value, text }) => (
+                  <SelectItemStyled value={value} key={value}>
+                    <Select.ItemText>{text}</Select.ItemText>
                   </SelectItemStyled>
                 ))}
               </Select.Viewport>
@@ -71,4 +71,3 @@ export const MainMenu = () => {
     </>
   );
 };
-//
