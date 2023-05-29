@@ -88,6 +88,16 @@ export const FavouriteStyled = styled(Favourite)`
 
 export const FavouriteDropdownStyled = styled(FavouriteStyled)`
   display: initial;
+
+  ${device.tablet} {
+    display: none;
+  }
+`;
+
+export const NavBudgetIconDropdownStyled = styled(NavBudgetIcon)`
+  ${device.tablet} {
+    display: none;
+  }
 `;
 
 export const DropdownMenuStyled = styled(DropdownMenu)`

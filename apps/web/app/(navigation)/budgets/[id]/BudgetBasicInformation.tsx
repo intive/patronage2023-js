@@ -14,6 +14,7 @@ import {
   NavBudgetIconStyled,
   FavouriteStyled,
   FavouriteDropdownStyled,
+  NavBudgetIconDropdownStyled,
   DropdownMenuStyled,
   BudgetNameStyled,
   BudgetDescriptionStyled,
@@ -114,7 +115,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 items={[
                   {
                     ComponentToRender: (
-                      <NavBudgetIcon onClick={openModal} icon="edit" />
+                      <NavBudgetIconDropdownStyled onClick={openModal} icon="edit" />
                     ),
                     id: "edit",
                   },
@@ -129,7 +130,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                   },
                   {
                     ComponentToRender: (
-                      <NavBudgetIcon
+                      <NavBudgetIconDropdownStyled
                         onClick={() => setDeleteModalVisibility(true)}
                         icon="delete"
                       />
