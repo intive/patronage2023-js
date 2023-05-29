@@ -11,8 +11,8 @@ type SelectItem = {
 export type SelectProps = {
   items: Array<SelectItem>;
   placeholder: string;
+  onValueChange: (value: string) => void;
   hasIcon: boolean;
-  sideOffset: number;
   ariaLabel: string;
   className?: string;
 };
@@ -20,8 +20,8 @@ export type SelectProps = {
 export const Select = ({
   items,
   placeholder,
+  onValueChange,
   hasIcon,
-  // sideOffset,
   ariaLabel,
   className,
 }: SelectProps) => {
@@ -42,6 +42,8 @@ export const Select = ({
 
   return (
     <AtomicSelect.Root
+      name="test"
+      onValueChange={onValueChange}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
@@ -51,7 +53,7 @@ export const Select = ({
       </SelectTriggerStyled>
 
       <SelectPortalStyled>
-        <SelectContentStyled sideOffset={50}>
+        <SelectContentStyled position="popper">
           <AtomicSelect.ScrollUpButton />
           <AtomicSelect.Viewport>
             {items.map((item) => (
@@ -88,7 +90,7 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)`
   cursor: pointer;
   transition: border-color 200ms ease-out;
 
-// poziomki tu były
+  // poziomki tu były
 
   :focus {
     transition: border-color 200ms ease-out;
@@ -154,7 +156,6 @@ export const CategoryNameStyled = styled.p`
 //   font-size: 12px;
 //   margin: 4px 10px 0 10px;
 // `;
-
 
 // poziomki:
 

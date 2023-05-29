@@ -19,6 +19,7 @@ const SelectTemplate: ComponentStory<typeof Select> = ({
       <Wrapper>
         <Select
           {...args}
+          onValueChange={(newVal) => setVal(newVal)}
         />
       </Wrapper>
       <p>{`Selected value is ${val}`}</p>
