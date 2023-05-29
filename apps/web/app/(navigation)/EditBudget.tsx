@@ -37,7 +37,7 @@ import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { icons } from "./CreateNewBudget";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ErrorMessage } from "ui";
 import { ShareBudget } from "./ShareBudget";
 
@@ -62,19 +62,17 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
 
-  console.log(budget.id);
-
   const budgetUsersId = budget.budgetUsers.map((user) => user.id);
   const [budgetUsers, setBudgetUsers] = useState(budgetUsersId);
-  console.log("budgetUsers: " + budgetUsers);
-
-  const [editedBudget, setEditedBudget] = useState<EditedBudgetBEProps>({
+  const initialBudget = {
     name: budget.name,
     description: budget.description,
     iconName: budget.icon,
     period: { startDate: budget.startDate, endDate: budget.endDate },
-  });
-  console.log("editedBudget: " + JSON.stringify(editedBudget));
+  };
+  const [editedBudget, setEditedBudget] =
+    useState<EditedBudgetBEProps>(initialBudget);
+  console.log(JSON.stringify(editedBudget));
 
   //BE integration
   const { data: session } = useSession();
@@ -84,12 +82,19 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const filteredUsers = budgetUsers.filter(
     (user) => !budgetUsersId.includes(user)
   );
-  console.log(filteredUsers);
+
   const url = `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`;
-  console.log(url);
+
+  const [canBeClosed, setCanBeClosed] = useState<boolean[]>([false, false]);
+
+  useEffect(() => {
+    console.log("can be closed: [" + canBeClosed + "]");
+    !canBeClosed.includes(false) && onClose();
+  }, [canBeClosed]);
 
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {
+      console.log("wysyłamy uzytkowników" + filteredUsers);
       return fetch(url, {
         method: "POST",
         headers: {
@@ -100,7 +105,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         body: JSON.stringify(budgetUsers),
       });
     },
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       setErrMsg(t(dict.errors.errorDefault));
       return;
     },
@@ -108,7 +114,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       switch (data!.status) {
         case 200:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
-          onClose();
+          setCanBeClosed([canBeClosed[0], true]);
           break;
         case 400:
           setErrMsg(t(dict.errors.error400));
@@ -143,8 +149,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       switch (data!.status) {
         case 201:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
-
-          // onClose();
+          setCanBeClosed([true, canBeClosed[1]]);
           break;
         case 400:
           setErrMsg(t(dict.errors.error400));
@@ -186,11 +191,21 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     return Promise.resolve(true);
   };
 
+  const handleSubmit = () => {
+    console.log(Object.is(editedBudget, initialBudget));
+
+    const editBudget = true;
+    const updateUsers = filteredUsers.length > 0;
+    setCanBeClosed([!editBudget, !updateUsers]);
+
+    sendEditedBudgetMutation.mutate(editedBudget);
+
+    updateUsers && updateBudgetUsersMutation.mutate(filteredUsers);
+    // : setCanBeClosed([...canBeClosed, true]);
+  };
+
   return (
-    <Modal
-      header={t(dict.title)}
-      onClose={() => onClose && onClose()}
-      fullHeight>
+    <Modal header={t(dict.title)} onClose={onClose} fullHeight>
       {errMsg.length > 0 && (
         <ErrorMessageWrapper>
           <ErrorMessage message={errMsg} onClose={() => setErrMsg("")} />
@@ -216,16 +231,23 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             //     startDate: values["start-date"].toISOString(),
             //     endDate: values["end-date"].toISOString(),
             //   },
+
             // };
 
-            sendEditedBudgetMutation.mutate(editedBudget);
-            updateBudgetUsersMutation.mutate(filteredUsers);
+            handleSubmit();
+            // console.log("status:" + updateBudgetUsersMutation.status);
+            // console.log("erros after submit: " + errMsg);
+
+            // filteredUsers.length > 0 &&
+            //   updateBudgetUsersMutation.status === "success" &&
+            //   sendEditedBudgetMutation.status === "success" &&
+            //   !errMsg &&
+            //   onClose();
           }}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                submit();
               }}>
               <ContentStyled>
                 <SettingsTab value="settings">
