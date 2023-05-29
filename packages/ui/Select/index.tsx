@@ -10,49 +10,50 @@ type SelectItem = {
 
 export type SelectProps = {
   items: Array<SelectItem>;
-  placeholder: string;
   onValueChange: (value: string) => void;
   hasIcon: boolean;
-  ariaLabel: string;
+  label: string;
   className?: string;
+  error?: string;
+  value?: string;  
+  hasScrollbar?: boolean;
 };
 
 export const Select = ({
   items,
-  placeholder,
   onValueChange,
   hasIcon,
-  ariaLabel,
+  label,
   className,
+  error,
+  value,
+  hasScrollbar,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const renderIcon = () => {
-    if (hasIcon) {
-      return (
-        <SelectIconStyled>
-          <Icon
-            icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-            iconSize={27}
-          />
-        </SelectIconStyled>
-      );
-    }
-  };
 
   return (
     <AtomicSelect.Root
       name="test"
       onValueChange={onValueChange}
+      value={value}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTriggerStyled aria-label={ariaLabel} className={className}>
-        <AtomicSelect.Value placeholder={placeholder} />
-        {renderIcon()}
+      <SelectTriggerStyled className={className} $hasError={Boolean(error)}>
+        {value && <TriggerLabelStyled>{label}</TriggerLabelStyled>}
+        <AtomicSelect.Value placeholder={label} />
+        {hasIcon && (
+          <SelectIconStyled>
+            <Icon
+              icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+              iconSize={27}
+            />
+          </SelectIconStyled>
+        )}
       </SelectTriggerStyled>
+      {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
 
-      <SelectPortalStyled>
+      <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper">
           <AtomicSelect.ScrollUpButton />
           <AtomicSelect.Viewport>
@@ -73,7 +74,9 @@ export const Select = ({
 //   position: relative;
 // `;
 
-export const SelectTriggerStyled = styled(AtomicSelect.Trigger)`
+export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
+  $hasError: boolean;
+}>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -89,14 +92,30 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)`
   font-size: 1em;
   cursor: pointer;
   transition: border-color 200ms ease-out;
+  position: relative;
 
-  // poziomki tu były
+  ${({ $hasError }) =>
+    $hasError &&
+    css`
+      color: ${({ theme }) => theme.categorySelect.error};
+      border: solid 2px ${({ theme }) => theme.categorySelect.error};
+    `}
 
   :focus {
     transition: border-color 200ms ease-out;
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
   }
+`;
+
+export const TriggerLabelStyled = styled.div`
+  position: absolute;
+  margin-top: -56px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: ${({ theme }) => theme.input.labelBackground};
+  padding-left: 4px;
+  padding-right: 4px;
 `;
 
 export const SelectIconStyled = styled(AtomicSelect.Icon)`
@@ -145,23 +164,9 @@ export const CategoryNameStyled = styled.p`
   padding: 0 16px;
 `;
 
-// export const SupportingLabelStyled = styled.div<{ hasError: boolean }>`
-//   position: absolute;
-//   top: 56px;
-//   color: ${({ hasError }) =>
-//     hasError
-//       ? ({ theme }) => theme.categorySelect.error
-//       : ({ theme }) => theme.categorySelect.neutral};
-//   font-weight: 400;
-//   font-size: 12px;
-//   margin: 4px 10px 0 10px;
-// `;
-
-// poziomki:
-
-// ${({ $hasError }) =>
-// $hasError &&
-// css`
-//   color: ${({ theme }) => theme.categorySelect.error};
-//   border: solid 2px ${({ theme }) => theme.categorySelect.error};
-// `}
+export const SupportingLabelStyled = styled.div`
+  color: ${({ theme }) => theme.categorySelect.error};
+  font-weight: 400;
+  font-size: 12px;
+  /* margin: 4px 10px 0 10px; */
+`;

@@ -9,10 +9,8 @@ export default {
   component: Select,
 } as ComponentMeta<typeof Select>;
 
-const SelectTemplate: ComponentStory<typeof Select> = ({
-  ...args
-}) => {
-  const [val, setVal] = useState("");
+const SelectTemplate: ComponentStory<typeof Select> = ({ ...args }) => {
+  const [val, setVal] = useState<string | undefined>(args.value);
 
   return (
     <>
@@ -20,6 +18,7 @@ const SelectTemplate: ComponentStory<typeof Select> = ({
         <Select
           {...args}
           onValueChange={(newVal) => setVal(newVal)}
+          value={val}
         />
       </Wrapper>
       <p>{`Selected value is ${val}`}</p>
@@ -27,28 +26,74 @@ const SelectTemplate: ComponentStory<typeof Select> = ({
   );
 };
 
-export const Normal = SelectTemplate.bind({});
-Normal.args = {
-  label: "Category",
-  categoryMap: categoryMap,
-  items: [
-    {
-      label: "Category 1",
-      value: "category-1"
-    },
-    {
-      label: "Category 2",
-      value: "category-2"
-    },
-    {
-      label: "Category 3",
-      value: "category-3"
-    },
-  ],
-  placeholder: "select a value",
-  hasIcon: true,
-};
-
 const Wrapper = styled.div`
   width: 300px;
 `;
+
+const CategoryWrapperStyled = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CategoryNameStyled = styled.p`
+  height: 100%;
+  padding: 0 16px;
+`;
+
+export const Normal = SelectTemplate.bind({});
+Normal.args = {
+  label: "Category",
+  items: [
+    {
+      label: "Category 1",
+      value: "category-1",
+    },
+    {
+      label: "Category 2",
+      value: "category-2",
+    },
+    {
+      label: "Category 3",
+      value: "category-3",
+    },
+  ],
+  hasIcon: true,
+  error: "",
+};
+
+export const Categories = SelectTemplate.bind({});
+Categories.args = {
+  label: "Categories",
+  items: [
+    {
+      label: (
+        <CategoryWrapperStyled>
+          <CategoryIcon small category={categoryMap.HomeSpendings} />
+          <CategoryNameStyled>Category name 1</CategoryNameStyled>
+        </CategoryWrapperStyled>
+      ),
+      value: "category-1",
+    },
+    {
+      label: (
+        <CategoryWrapperStyled>
+          <CategoryIcon small category={categoryMap.Subscriptions} />
+          <CategoryNameStyled>Category name 2</CategoryNameStyled>
+        </CategoryWrapperStyled>
+      ),
+      value: "category-2",
+    },
+    {
+      label: (
+        <CategoryWrapperStyled>
+          <CategoryIcon small category={categoryMap.Grocery} />
+          <CategoryNameStyled>Category name 3</CategoryNameStyled>
+        </CategoryWrapperStyled>
+      ),
+      value: "category-3",
+    },
+  ],
+  hasIcon: true,
+  error: "",
+  value: "category-3",
+};
