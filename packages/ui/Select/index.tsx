@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import * as AtomicSelect from "@radix-ui/react-select";
-import { CategoryIcon, Icon } from "ui";
+import { Icon } from "ui";
 
 type SelectItem = {
-  componentToRender: ReactNode;
-  label: string;
+  label: ReactNode;
+  value: string;
 };
 
 export type SelectProps = {
@@ -22,6 +22,7 @@ export const Select = ({
   ariaLabel,
   className,
 }: SelectProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const renderIcon = () => {
     if (hasIcon) {
@@ -37,7 +38,10 @@ export const Select = ({
   };
 
   return (
-    <AtomicSelect.Root>
+    <AtomicSelect.Root
+      onOpenChange={() => {
+        setIsOpen(!isOpen);
+      }}>
       <AtomicSelect.Trigger aria-label={ariaLabel} className={className}>
         <AtomicSelect.Value placeholder={placeholder} />
         {renderIcon()}
@@ -47,23 +51,13 @@ export const Select = ({
         <AtomicSelect.Content>
           <AtomicSelect.ScrollUpButton />
           <AtomicSelect.Viewport>
-            <AtomicSelect.Item>
-              <AtomicSelect.ItemText />
-              <AtomicSelect.ItemIndicator />
-            </AtomicSelect.Item>
-
-            <AtomicSelect.Group>
-              <AtomicSelect.Label />
-              <AtomicSelect.Item>
-                <AtomicSelect.ItemText />
-                <AtomicSelect.ItemIndicator />
+            {items.map((item) => (
+              <AtomicSelect.Item value={item.value} key={item.value}>
+                <AtomicSelect.ItemText>{item.label}</AtomicSelect.ItemText>
               </AtomicSelect.Item>
-            </AtomicSelect.Group>
-
-            <AtomicSelect.Separator />
+            ))}
           </AtomicSelect.Viewport>
           <AtomicSelect.ScrollDownButton />
-          <AtomicSelect.Arrow />
         </AtomicSelect.Content>
       </AtomicSelect.Portal>
     </AtomicSelect.Root>
