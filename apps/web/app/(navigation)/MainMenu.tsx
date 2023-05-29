@@ -25,10 +25,7 @@ export const MainMenu = () => {
   const { t, dict } = useTranslate("MainPage");
 
   const menuHandler = (value: string) => {
-    if (value === "sign-out") {
-      signOut();
-    }
-    router.push("/");
+    value === "sign-out" ? signOut() : router.push("/");
   };
 
   const items = [
