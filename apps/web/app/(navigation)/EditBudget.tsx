@@ -46,15 +46,39 @@ interface EditBudgetProps {
   onClose: () => void;
 }
 
-interface EditedBudgetBEProps {
+interface EditedBudgetProps {
   name: string;
   description: string;
   iconName: string;
-  period: {
-    startDate: string;
-    endDate: string;
-  };
+  startDate: string;
+  endDate: string;
 }
+
+// interface EditedBudgetBEProps {
+//   name: string;
+//   description: string;
+//   iconName: string;
+//   period: {
+//     startDate: string;
+//     endDate: string;
+//   };
+// }
+
+const isEqual = (obj1: Object, obj2: Object) => {
+  type propType = keyof typeof obj1;
+  const props1 = Object.keys(obj1);
+  const props2 = Object.keys(obj2);
+
+  if (props1.length !== props2.length) {
+    return false;
+  }
+
+  for (const prop in obj1) {
+    if (obj1[prop as propType] !== obj2[prop as propType]) return false;
+  }
+
+  return true;
+};
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
@@ -68,11 +92,11 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     name: budget.name,
     description: budget.description,
     iconName: budget.icon,
-    period: { startDate: budget.startDate, endDate: budget.endDate },
+    startDate: budget.startDate,
+    endDate: budget.endDate,
   };
   const [editedBudget, setEditedBudget] =
-    useState<EditedBudgetBEProps>(initialBudget);
-  console.log(JSON.stringify(editedBudget));
+    useState<EditedBudgetProps>(initialBudget);
 
   //BE integration
   const { data: session } = useSession();
@@ -88,13 +112,11 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const [canBeClosed, setCanBeClosed] = useState<boolean[]>([false, false]);
 
   useEffect(() => {
-    console.log("can be closed: [" + canBeClosed + "]");
     !canBeClosed.includes(false) && onClose();
   }, [canBeClosed]);
 
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {
-      console.log("wysyłamy uzytkowników" + filteredUsers);
       return fetch(url, {
         method: "POST",
         headers: {
@@ -105,8 +127,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         body: JSON.stringify(budgetUsers),
       });
     },
-    onError: (error) => {
-      console.log(error);
+    onError: () => {
       setErrMsg(t(dict.errors.errorDefault));
       return;
     },
@@ -130,7 +151,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   });
 
   const sendEditedBudgetMutation = useMutation({
-    mutationFn: (edited: EditedBudgetBEProps) => {
+    mutationFn: (edited: EditedBudgetProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
         method: "PUT",
         headers: {
@@ -138,7 +159,15 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
           "Content-Type": "application/json",
           Authorization: "Bearer " + session?.user.accessToken,
         },
-        body: JSON.stringify(edited),
+        body: JSON.stringify({
+          name: edited.name,
+          description: edited.description,
+          iconName: edited.iconName,
+          period: {
+            startDate: edited.startDate,
+            endDate: edited.endDate,
+          },
+        }),
       });
     },
     onError: () => {
@@ -169,13 +198,9 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   const getDateObject = (dateType: string) => {
     if (dateType === "start-date") {
-      return editedBudget.period.startDate
-        ? new Date(editedBudget.period.startDate)
-        : null;
+      return editedBudget.startDate ? new Date(editedBudget.startDate) : null;
     } else if (dateType === "end-date")
-      return editedBudget.period.endDate
-        ? new Date(editedBudget.period.endDate)
-        : null;
+      return editedBudget.endDate ? new Date(editedBudget.endDate) : null;
   };
 
   const checkEndDateOnChangeValidate = (
@@ -192,16 +217,13 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   };
 
   const handleSubmit = () => {
-    console.log(Object.is(editedBudget, initialBudget));
-
-    const editBudget = true;
+    const editBudget = !isEqual(initialBudget, editedBudget);
     const updateUsers = filteredUsers.length > 0;
     setCanBeClosed([!editBudget, !updateUsers]);
 
-    sendEditedBudgetMutation.mutate(editedBudget);
+    editBudget && sendEditedBudgetMutation.mutate(editedBudget);
 
     updateUsers && updateBudgetUsersMutation.mutate(filteredUsers);
-    // : setCanBeClosed([...canBeClosed, true]);
   };
 
   return (
@@ -221,29 +243,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
-        <Form
-          onSubmit={(values) => {
-            // const editedBudget: EditedBudgetBEProps = {
-            //   name: values["budget-name"],
-            //   description: values["description"],
-            //   iconName: values["icon"],
-            //   period: {
-            //     startDate: values["start-date"].toISOString(),
-            //     endDate: values["end-date"].toISOString(),
-            //   },
-
-            // };
-
-            handleSubmit();
-            // console.log("status:" + updateBudgetUsersMutation.status);
-            // console.log("erros after submit: " + errMsg);
-
-            // filteredUsers.length > 0 &&
-            //   updateBudgetUsersMutation.status === "success" &&
-            //   sendEditedBudgetMutation.status === "success" &&
-            //   !errMsg &&
-            //   onClose();
-          }}>
+        <Form onSubmit={() => handleSubmit()}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
@@ -348,10 +348,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                               setValue(date);
                               setEditedBudget({
                                 ...editedBudget,
-                                period: {
-                                  ...editedBudget.period,
-                                  startDate: date ? date.toISOString() : "",
-                                },
+                                startDate: date ? date.toISOString() : "",
                               });
                             }}
                           />
@@ -382,10 +379,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                               setValue(date);
                               setEditedBudget({
                                 ...editedBudget,
-                                period: {
-                                  ...editedBudget.period,
-                                  endDate: date ? date.toISOString() : "",
-                                },
+                                endDate: date ? date.toISOString() : "",
                               });
                             }}
                           />

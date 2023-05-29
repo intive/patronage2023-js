@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
@@ -7,6 +7,9 @@ import { SearchInput } from "ui/Input/SearchInput";
 import { Checkbox, Avatar } from "ui";
 import { ParagraphStyled } from "./CreateNewBudget.styled";
 import {
+  AvatarWrapperStyled,
+  LabelStyled,
+  ListItemStyled,
   ShareBudgetWrapperStyled,
   UsersListStyled,
 } from "./ShareBudget.styled";
@@ -56,42 +59,27 @@ const UsersListItem = ({
 }: UsersListItemProps) => {
   const { firstName, lastName, avatar, id } = user;
   return (
-    <li
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        width: "100%",
-        margin: "16px 0",
-      }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}>
-        <div
-          style={{
-            display: "flex",
-            fontSize: "48px",
-            margin: "0 16px 0 8px",
-          }}>
+    <ListItemStyled>
+      <LabelStyled htmlFor={`share-users-${id}`}>
+        <AvatarWrapperStyled>
           <Avatar
-            src={avatars.includes(avatar) ? avatar : "/avatars/1.svg"}
+            src={avatars.includes(avatar) ? avatar : "/unsetAvatar.svg"}
             username={`${firstName} ${lastName}`}
           />
-        </div>
-        <span>{`${firstName} ${lastName}`}</span>
-      </div>
+        </AvatarWrapperStyled>
+        <p>{`${firstName} ${lastName}`}</p>
+      </LabelStyled>
       <div>
         <Checkbox
           label={`share-users-${id}`}
           id={`share-users-${id}`}
           name={id}
+          value={id}
           onChange={onCheckboxChange}
           checked={checked}
         />
       </div>
-    </li>
+    </ListItemStyled>
   );
 };
 
@@ -100,8 +88,6 @@ export const ShareBudget = ({
   budgetUsers,
   setBudgetUsers,
 }: ShareBudgetProps) => {
-  console.log("owner: " + owner);
-
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
 
@@ -205,14 +191,11 @@ export const ShareBudget = ({
             />
           ))}
         {/* {mockUsers.map((user: User) => (
-          <UserListItem
+          <UsersListItem
             key={user.id}
-            id={user.id}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            avatar={
-              avatars.includes(user.avatar) ? user.avatar : "/avatars/1.svg"
-            }
+            user={user}
+            onCheckboxChange={onCheckboxChange}
+            checked={isChecked(user)}
           />
         ))} */}
       </UsersListStyled>
