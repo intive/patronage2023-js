@@ -8,6 +8,7 @@ import { device } from "web/lib/media-queries";
 export type ExportDropdownProps = {
   items: ExportDropdownItem[];
   triggerButton: React.ReactNode;
+  isButtonDisabled: boolean;
 };
 
 export type ExportDropdownItem = {
@@ -60,12 +61,15 @@ const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
 export const ExportDropdown = ({
   items,
   triggerButton,
+  isButtonDisabled,
 }: ExportDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenu.Trigger asChild>{triggerButton}</DropdownMenu.Trigger>
+      <DropdownMenu.Trigger disabled={isButtonDisabled} asChild>
+        {triggerButton}
+      </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="start">
           {items.map(({ id, node }) => (

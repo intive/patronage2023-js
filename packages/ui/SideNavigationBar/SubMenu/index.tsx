@@ -75,7 +75,10 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   // For some reason, radix doesn't work with our Button from UI (doesn't like onClick)
   // So I use polymorphism to get the styles from our Button and pass them to <button>
   const triggerButton = (
-    <ButtonStyled as={StyledButton} variant="secondary">
+    <ButtonStyled
+      as={StyledButton}
+      disabled={!!!exportButton?.csvUri}
+      variant="secondary">
       <Icon icon="file_download" size={12} />
       {exportButton?.label}
     </ButtonStyled>
@@ -121,6 +124,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
           {exportButton && importButton && (
             <ButtonGroupStyled>
               <ExportDropdown
+                isButtonDisabled={!!!exportButton?.csvUri}
                 triggerButton={triggerButton}
                 items={exportBudgetsItems}
               />

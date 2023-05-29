@@ -1,3 +1,5 @@
+"use client";
+
 import { useContext, useState } from "react";
 import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";

@@ -81,6 +81,9 @@ export const ImportExportButtonsStyle = css`
   outline: 0;
   color: ${({ theme }) => theme.main};
   cursor: pointer;
+  &:focus {
+    outline: 1px solid black;
+  }
 `;
 
 export const ImportButton = styled(Button)`

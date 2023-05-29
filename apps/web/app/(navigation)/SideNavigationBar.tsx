@@ -178,7 +178,7 @@ export default function SideNav() {
         });
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),
-      csvUri: "/avatars/3.svg" || csvLinkData.uri,
+      csvUri: "/avatars/3.svg" || csvLinkData?.uri,
     },
     importButton: {
       clickHandler: () => {

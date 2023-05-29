@@ -151,10 +151,10 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             });
             break;
           default:
-            showToast({
-              variant: "error",
-              message: t(dict.responseErrors.default),
-            });
+            // showToast({
+            //   variant: "error",
+            //   message: t(dict.responseErrors.default),
+            // });
             return;
         }
       },
