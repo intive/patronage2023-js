@@ -115,7 +115,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 items={[
                   {
                     ComponentToRender: (
-                      <NavBudgetIconDropdownStyled onClick={openModal} icon="edit" />
+                      <NavBudgetIconDropdownStyled
+                        onClick={openModal}
+                        icon="edit"
+                      />
                     ),
                     id: "edit",
                   },
