@@ -364,10 +364,10 @@ export const theme = {
     heartColor: "#ef4e4e",
   },
   accordion: {
-    borderActive: colors.Supporting1,
-    borderInactive: colors.Supporting1,
-    header: colors.Supporting1,
-    content: colors.Supporting1,
+    main: colors.Teal10,
+    borderInactive: colors.Neutral4,
+    content: colors.Teal7,
+    background: colors.BasicWhite,
   },
 };
 

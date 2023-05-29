@@ -1,5 +1,6 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import styled from "styled-components";
+import React from "react";
 
 export const AccordionRoot = styled(Accordion.Root)`
   width: 100%;
@@ -10,16 +11,16 @@ export const AccordionItem = styled(Accordion.Item)`
   justify-content: flex-start;
   align-items: stretch;
   align-content: center;
-  color: ${({ theme }) => theme.categorySelect.neutral};
-  background-color: ${({ theme }) => theme.categorySelect.background};
-  border: solid 2px ${({ theme }) => theme.categorySelect.border};
+  color: ${({ theme }) => theme.accordion.main};
+  border: solid 2px ${({ theme }) => theme.accordion.borderInactive};
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   transition: border-color 200ms ease-out;
 
-  &[data-state="open"] {
-    border: solid 2px black;
+  &[data-state="open"],
+  &:hover {
+    border: solid 2px ${({ theme }) => theme.accordion.main};
   }
 `;
 export const AccordionHeader = styled(Accordion.Header)`
@@ -37,4 +38,21 @@ export const AccordionTrigger = styled(Accordion.Trigger)`
   border-width: 0;
   padding: 0;
 `;
-export const AccordionContent = styled(Accordion.Content)``;
+
+export const AccordionTriggerHeader = React.forwardRef(
+  ({ children, className, ...props }: any, forwardedRef) => (
+    <AccordionHeader className="AccordionHeader">
+      <AccordionTrigger
+        className={`AccordionTrigger ${className}`}
+        {...props}
+        ref={forwardedRef}>
+        {children}
+      </AccordionTrigger>
+    </AccordionHeader>
+  )
+);
+
+AccordionTriggerHeader.displayName = `AccordionTriggerHeader`;
+export const AccordionContent = styled(Accordion.Content)`
+  color: ${({ theme }) => theme.accordion.content};
+`;
