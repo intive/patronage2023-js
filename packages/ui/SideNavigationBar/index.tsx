@@ -41,9 +41,9 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   padding-top: 40px;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
-      !isNavListItemClicked && !isSubMenuShown
-        ? theme.sideNavigationBar.background.activeColor
-        : theme.sideNavigationBar.background.inactiveColor};
+    !isNavListItemClicked && !isSubMenuShown
+      ? theme.sideNavigationBar.background.activeColor
+      : theme.sideNavigationBar.background.inactiveColor};
   border-right: 1px solid
     ${({ theme }) => theme.sideNavigationBar.background.separator};
 
