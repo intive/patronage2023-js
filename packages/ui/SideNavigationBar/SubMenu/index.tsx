@@ -82,6 +82,7 @@ const ButtonStyled = styled(Button)`
   width: 256px;
   position: fixed;
   bottom: 25px;
+  z-index: 5;
 `;
 
 const IconUpsideDown = styled(Icon)`
