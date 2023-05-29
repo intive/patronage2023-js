@@ -58,7 +58,6 @@ Normal.args = {
     },
   ],
   hasIcon: true,
-  error: "",
 };
 
 export const Categories = SelectTemplate.bind({});
@@ -94,6 +93,27 @@ Categories.args = {
     },
   ],
   hasIcon: true,
-  error: "",
   value: "category-3",
 };
+
+export const WithError = SelectTemplate.bind({});
+WithError.args = {
+  label: "Category",
+  items: [
+    {
+      label: "Category 1",
+      value: "category-1",
+    },
+    {
+      label: "Category 2",
+      value: "category-2",
+    },
+    {
+      label: "Category 3",
+      value: "category-3",
+    },
+  ],
+  hasIcon: true,
+  error: "Select something!",
+};
+

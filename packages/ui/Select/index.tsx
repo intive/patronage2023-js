@@ -15,7 +15,7 @@ export type SelectProps = {
   label: string;
   className?: string;
   error?: string;
-  value?: string;  
+  value?: string;
   hasScrollbar?: boolean;
 };
 
@@ -70,10 +70,6 @@ export const Select = ({
   );
 };
 
-// export const SelectTriggerWrapperStyled = styled.div`
-//   position: relative;
-// `;
-
 export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   $hasError: boolean;
 }>`
@@ -82,7 +78,7 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   justify-content: space-between;
   align-items: center;
   padding: 14px;
-  margin-bottom: 18px;
+  margin-bottom: ${({ $hasError }) => ($hasError ? "0" : "18px")};
   width: 100%;
   height: 56px;
   color: ${({ theme }) => theme.categorySelect.neutral};
@@ -168,5 +164,5 @@ export const SupportingLabelStyled = styled.div`
   color: ${({ theme }) => theme.categorySelect.error};
   font-weight: 400;
   font-size: 12px;
-  /* margin: 4px 10px 0 10px; */
+  margin-left: 14px;
 `;
