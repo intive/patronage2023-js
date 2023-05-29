@@ -363,6 +363,12 @@ export const theme = {
   favouriteBudget: {
     heartColor: "#ef4e4e",
   },
+  accordion: {
+    borderActive: colors.Supporting1,
+    borderInactive: colors.Supporting1,
+    header: colors.Supporting1,
+    content: colors.Supporting1,
+  },
 };
 
 export type ThemeType = typeof theme;
