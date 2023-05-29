@@ -34,7 +34,7 @@ const FieldsWrapper = styled.div`
 const ErrorWrapper = styled.div`
   position: absolute;
   width: 100%;
-  top: 1rem;
+  top: -1rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -68,6 +68,7 @@ export default function SignInPage() {
         signIn("credentials", {
           email: values.email,
           password: values.password,
+          redirect: false,
         }).then((res) => {
           if (res!.ok) {
             router.push("/");
