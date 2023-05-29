@@ -1,17 +1,16 @@
 import * as Accordion from "@radix-ui/react-accordion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import React from "react";
 import { Icon } from "ui/Icon";
+
+type StylingDivProps = {
+  maxHeight: string | undefined;
+};
 
 export const AccordionRoot = styled(Accordion.Root)`
   width: 100%;
 `;
 export const AccordionItem = styled(Accordion.Item)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: center;
   color: ${({ theme }) => theme.accordion.main};
   border: solid 2px ${({ theme }) => theme.accordion.borderInactive};
   padding: 8px;
@@ -26,7 +25,6 @@ export const AccordionItem = styled(Accordion.Item)`
 `;
 export const AccordionHeader = styled(Accordion.Header)`
   cursor: pointer;
-  width: 100%;
 `;
 export const AccordionTrigger = styled(Accordion.Trigger)`
   display: flex;
@@ -54,6 +52,26 @@ export const AccordionTrigger = styled(Accordion.Trigger)`
 
 export const AccordionContent = styled(Accordion.Content)`
   color: ${({ theme }) => theme.accordion.content};
+`;
+
+export const StylingDiv = styled.div<StylingDivProps>`
+  ${({ maxHeight }) =>
+    maxHeight &&
+    css`
+      max-height: ${maxHeight}px;
+      overflow-y: scroll;
+
+      &::-webkit-scrollbar {
+        background-color: ${({ theme }) => theme.textarea.disabled};
+        border-radius: 10px;
+        width: 6px;
+        margin-bottom: 5px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: ${({ theme }) => theme.modal.closeButton};
+        border-radius: 10px;
+      }
+    `};
 `;
 
 export const AccordionTriggerHeader = React.forwardRef(
