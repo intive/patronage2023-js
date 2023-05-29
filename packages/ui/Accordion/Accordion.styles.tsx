@@ -40,6 +40,7 @@ export const AccordionTrigger = styled(Accordion.Trigger)`
   background-color: transparent;
   border-width: 0;
   padding: 0;
+  color: ${({ theme }) => theme.accordion.main};
 
   & > .iconStyles {
     color: ${({ theme }) => theme.accordion.main};
