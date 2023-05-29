@@ -1,16 +1,16 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useContext } from "react";
 import { Turn as Hamburger } from "hamburger-react";
+import { ThemeContext } from "styled-components";
+import { useSession } from "next-auth/react";
+import { useAtom } from "jotai";
+import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
 import { Logo, Avatar } from "ui";
 import { mobileMenuAtom } from "store";
-import { useAtom } from "jotai";
-import { useContext } from "react";
-import { ThemeContext } from "styled-components";
-import { useTranslate } from "lib/hooks";
 
 const NavBar = styled.nav`
   box-sizing: border-box;

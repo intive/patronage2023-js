@@ -25,7 +25,6 @@ export const RowsPerPageContainerStyled = styled.div`
 
 export const ListStyled = styled.ul`
   display: flex;
-  gap: 0;
   li {
     list-style-type: none;
   }
