@@ -3,17 +3,28 @@
 import { useTranslate } from "lib/hooks";
 import { Form, Field } from "houseform";
 import { z } from "zod";
-import { Input, Button, AvatarSelector, Separator, ButtonGroup } from "ui";
-import { useRef, useState } from "react";
+import {
+  Input,
+  Button,
+  AvatarSelector,
+  Separator,
+  ButtonGroup,
+  Icon,
+} from "ui";
+import { useCallback, useState } from "react";
 import {
   ButtonWrapper,
+  CropperStyled,
   FormWrapper,
+  StyledButton,
   StyledHeader,
   StyledSubHeader,
   SwitcherWrapper,
 } from "./SignUpFormStyled";
-import ImageUploader from "components/ImageUploader";
-import StyledDropzone from "components/Dropzone";
+import StyledDropzone, { Container } from "components/Dropzone";
+import ImageCropperModal from "components/ImageCropperModal";
+import Image from "next/image";
+import { StyledSpan } from "components/ImageCropperModal/ImageCropper.styled";
 
 type ProfileScreenProps = {
   onBack: () => void;
@@ -34,6 +45,22 @@ export const ProfileScreen = ({
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("/avatars/1.svg");
   const [customAvatar, setCustomAvatar] = useState(false);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [croppedImage, setCroppedImage] = useState("");
+  const [modal, setModal] = useState(false);
+
+  const handleDrop = useCallback((acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setModal(true);
+      setImageSrc(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
+  }, []);
+
   return (
     <Form
       onSubmit={(values) => {
@@ -78,7 +105,42 @@ export const ProfileScreen = ({
           </SwitcherWrapper>
           <Separator />
           {customAvatar ? (
-            <StyledDropzone handleDrop={() => {}} />
+            <>
+              {croppedImage ? (
+                <Container>
+                  <StyledSpan>
+                    {t(dict.profileScreen.dropZone.croppedTitle)}
+                  </StyledSpan>
+                  <Image
+                    src={croppedImage}
+                    alt="blob"
+                    width={72}
+                    height={72}
+                    style={{
+                      borderRadius: "100%",
+                    }}
+                  />
+                  <StyledButton
+                    onClick={() => {
+                      setCroppedImage("");
+                      setModal(true);
+                    }}>
+                    {t(dict.profileScreen.dropZone.goBack)} <Icon icon="edit" />
+                  </StyledButton>
+                </Container>
+              ) : (
+                <>
+                  <StyledDropzone handleDrop={handleDrop} />
+                  {imageSrc && modal && (
+                    <ImageCropperModal
+                      closeModal={() => setModal(false)}
+                      imageSrc={imageSrc}
+                      setCroppedImage={setCroppedImage}
+                    />
+                  )}
+                </>
+              )}
+            </>
           ) : (
             <AvatarSelector
               avatars={[

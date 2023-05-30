@@ -7,6 +7,7 @@ import getCroppedImg from "./getCroppedImg";
 import { CropperImage, CropperWrapper } from "./ImageCropper.styled";
 import { useToast } from "ui";
 import { useUploadThing } from "lib/hooks/useUploadthing";
+import { useTranslate } from "lib/hooks";
 interface CropperModalProps {
   closeModal: () => void;
   setCroppedImage: (crop: string) => void;
@@ -18,6 +19,7 @@ const ImageCropperModal = ({
   imageSrc,
   setCroppedImage,
 }: CropperModalProps) => {
+  const { t, dict } = useTranslate("SignUpPage");
   const showToast = useToast();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -61,7 +63,9 @@ const ImageCropperModal = ({
     []
   );
   return (
-    <Modal header="Crop your image before submitting." onClose={closeModal}>
+    <Modal
+      header={t(dict.profileScreen.dropZone.modalHeader)}
+      onClose={closeModal}>
       <CropperWrapper>
         <CropperImage>
           <Cropper

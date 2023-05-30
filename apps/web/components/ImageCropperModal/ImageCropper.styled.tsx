@@ -1,3 +1,4 @@
+import { device } from "lib/media-queries";
 import styled from "styled-components";
 
 export const CropperWrapper = styled.div`
@@ -15,6 +16,10 @@ export const CropperImage = styled.div`
 
 export const StyledSpan = styled.span`
   font-family: "Signika", sans-serif;
-  font-size: 1.8em;
+  font-size: 1.4em;
   color: ${({ theme }) => theme.nav.main};
+
+  ${device.tablet} {
+    font-size: 1.8em;
+  }
 `;

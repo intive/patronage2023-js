@@ -4,17 +4,22 @@ import React from "react";
 import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Button } from "ui";
-
-const Container = styled.div`
+import { useTranslate } from "lib/hooks";
+import { device } from "lib/media-queries";
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.main};
   border-radius: 20px;
-  height: 200px;
+  height: 150px;
   width: 100%;
   gap: 4px;
+  ${device.tablet} {
+    height: 300px;
+    margin-block: 10px;
+  }
 `;
 
 interface DropzoneProps {
@@ -22,11 +27,18 @@ interface DropzoneProps {
 }
 
 export default function StyledDropzone({ handleDrop }: DropzoneProps) {
+  const { t, dict } = useTranslate("SignUpPage");
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     // Disable click and keydown behavior
     maxFiles: 1,
     noClick: true,
     noKeyboard: true,
+    accept: {
+      "image/jpeg": [],
+      "image/png": [],
+      "image/svg": [],
+    },
+
     onDrop: handleDrop,
   });
 
@@ -34,12 +46,14 @@ export default function StyledDropzone({ handleDrop }: DropzoneProps) {
     <Container {...getRootProps()}>
       <input {...getInputProps()} />
       {isDragActive ? (
-        <StyledSpan>Drop here...</StyledSpan>
+        <StyledSpan>{t(dict.profileScreen.dropZone.onOver)}</StyledSpan>
       ) : (
         <>
-          <StyledSpan>Drop file here</StyledSpan>
-          <StyledSpan>or</StyledSpan>
-          <Button onClick={open}>Choose a file</Button>
+          <StyledSpan>{t(dict.profileScreen.dropZone.mainText)}</StyledSpan>
+          <StyledSpan>{t(dict.profileScreen.dropZone.separator)}</StyledSpan>
+          <Button onClick={open}>
+            {t(dict.profileScreen.dropZone.buttonText)}
+          </Button>
         </>
       )}
     </Container>
