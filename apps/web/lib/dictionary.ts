@@ -281,7 +281,7 @@ const dictionary = {
       },
       avatarSwitcherCustom: {
         en: "Personalized",
-        pl: "Spersonalizowane",
+        pl: "Spersonalizowany",
         fr: "",
       },
       subtitle: {

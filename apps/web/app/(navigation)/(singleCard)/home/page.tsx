@@ -1,43 +1,31 @@
 "use client";
 import ImageCropperModal from "components/ImageCropperModal";
 import React, { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone";
+import StyledDropzone from "components/Dropzone";
 
 const ImageUploaderAndCropper: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [croppedImage, setCroppedImage] = useState("");
+  const [modal, setModal] = useState(false);
   const handleDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-      setSelectedImage(reader.result as string);
+      setModal(true);
+      setImageSrc(reader.result as string);
     };
 
     reader.readAsDataURL(file);
   }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop: handleDrop,
-  });
-
+  console.log(croppedImage);
   return (
     <>
-      <div>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          {isDragActive ? (
-            <p>Drop the image here...</p>
-          ) : (
-            <p>Drag and drop an image here, or click to select an image</p>
-          )}
-        </div>
-      </div>
-
-      {selectedImage && (
+      <StyledDropzone handleDrop={handleDrop} />
+      {imageSrc && modal && (
         <ImageCropperModal
-          closeModal={() => setSelectedImage(null)}
-          selectedImage={selectedImage}
+          closeModal={() => setModal(false)}
+          imageSrc={imageSrc}
           setCroppedImage={setCroppedImage}
         />
       )}
@@ -47,8 +35,8 @@ const ImageUploaderAndCropper: React.FC = () => {
           alt="blob"
           style={{
             borderRadius: "100%",
-            height: 64,
-            width: 64,
+            height: 128,
+            width: 128,
           }}
         />
       )}

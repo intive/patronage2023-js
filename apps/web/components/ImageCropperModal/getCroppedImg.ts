@@ -1,6 +1,6 @@
 import { Area } from "react-easy-crop";
 
-export default async function getCroppedImg(imageSrc: string, pixelCrop: Area) {
+export default function getCroppedImg(imageSrc: string, pixelCrop: Area) {
   const image = new Image();
   image.src = imageSrc;
   const canvas = document.createElement("canvas");

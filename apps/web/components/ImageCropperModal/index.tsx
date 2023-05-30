@@ -6,15 +6,16 @@ import { Button, Modal } from "ui";
 import getCroppedImg from "./getCroppedImg";
 import { CropperImage, CropperWrapper } from "./ImageCropper.styled";
 import { useToast } from "ui";
+import { useUploadThing } from "lib/hooks/useUploadthing";
 interface CropperModalProps {
   closeModal: () => void;
   setCroppedImage: (crop: string) => void;
-  selectedImage: string;
+  imageSrc: string;
 }
 
 const ImageCropperModal = ({
   closeModal,
-  selectedImage,
+  imageSrc,
   setCroppedImage,
 }: CropperModalProps) => {
   const showToast = useToast();
@@ -26,17 +27,29 @@ const ImageCropperModal = ({
     x: 0,
     y: 0,
   });
-
+  const { startUpload } = useUploadThing({
+    endpoint: "imageUploader",
+    onUploadError: (err) => console.error(err),
+  });
   const handleSubmit = async () => {
     //setCroppedImage to component that renders cropped image
-    const data = await getCroppedImg(selectedImage, croppedAreaPixels);
+    const data = getCroppedImg(imageSrc, croppedAreaPixels);
 
-    //maybe toast
     if (!data)
       return showToast({
-        variant: "confirm",
+        variant: "error",
         message: "Error cropping Image, try again.",
       });
+    //create Blob and set it as file then pass to startUpload from uploadthing
+    const Blob = await fetch(data)
+      .then((r) => r.blob())
+      .then(
+        (blobFile) =>
+          new File([blobFile], "SomeRandomURLGeneratorNeeded.jpg", {
+            type: "image/jpg",
+          })
+      );
+    startUpload([Blob]);
     setCroppedImage(data);
     closeModal();
   };
@@ -52,7 +65,7 @@ const ImageCropperModal = ({
       <CropperWrapper>
         <CropperImage>
           <Cropper
-            image={selectedImage}
+            image={imageSrc}
             objectFit="auto-cover"
             crop={crop}
             zoom={zoom}

@@ -13,6 +13,7 @@ import {
   SwitcherWrapper,
 } from "./SignUpFormStyled";
 import ImageUploader from "components/ImageUploader";
+import StyledDropzone from "components/Dropzone";
 
 type ProfileScreenProps = {
   onBack: () => void;
@@ -77,13 +78,7 @@ export const ProfileScreen = ({
           </SwitcherWrapper>
           <Separator />
           {customAvatar ? (
-            <div
-              style={{
-                width: "400px",
-                height: "500px",
-              }}>
-              Siema
-            </div>
+            <StyledDropzone handleDrop={() => {}} />
           ) : (
             <AvatarSelector
               avatars={[
