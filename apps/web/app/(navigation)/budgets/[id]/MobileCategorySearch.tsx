@@ -19,7 +19,7 @@ const StyledButton = styled.button`
   margin: 0 0 0 2em;
   cursor: pointer;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 0.8em;
   align-self: end;
 `;
 
