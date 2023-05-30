@@ -284,6 +284,43 @@ const dictionary = {
         pl: "Spersonalizowany",
         fr: "",
       },
+      dropZone: {
+        mainText: {
+          en: "Drop file here",
+          pl: "Upuść plik tutaj",
+          fr: "",
+        },
+        separator: {
+          en: "or",
+          pl: "lub",
+          fr: "",
+        },
+        buttonText: {
+          en: "Choose a file",
+          pl: "Wybierz plik",
+          fr: "",
+        },
+        onOver: {
+          en: "Drop here...",
+          pl: "Upuść tutaj...",
+          fr: "",
+        },
+        goBack: {
+          en: "Crop again",
+          pl: "Przytnij jeszcze raz",
+          fr: "",
+        },
+        modalHeader: {
+          en: "Crop your image before submitting.",
+          pl: "Przytnij zdjęcie przed wysłaniem.",
+          fr: "",
+        },
+        croppedTitle: {
+          en: "Your avatar",
+          pl: "Twój awatar",
+          fr: "",
+        },
+      },
       subtitle: {
         en: "Select or upload your avatar and tell us your name",
         pl: "Wybierz lub prześlij swój avatar i powiedz jak się nazywasz",
