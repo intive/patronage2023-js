@@ -1,5 +1,5 @@
-import { Accordion } from "ui";
 import styled from "styled-components";
+import { Accordion } from "ui";
 import { device } from "lib/media-queries";
 import { useTranslate } from "lib/hooks";
 import { CategoryFilter } from "components";

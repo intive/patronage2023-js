@@ -5,11 +5,11 @@ import {
   AccordionTriggerHeader,
   StylingDiv,
 } from "./Accordion.styles";
-import React from "react";
+import { ReactNode } from "react";
 
 type AccordionProps = {
   header: string;
-  content: React.ReactNode | string;
+  content: ReactNode | string;
   maxHeight?: string;
   className?: string;
 };
