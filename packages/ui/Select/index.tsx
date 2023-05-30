@@ -71,6 +71,8 @@ export const Select = ({
   );
 };
 
+export const SelectLabelHiddenInTrigger = styled.span``;
+
 export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{$hasError: boolean;}>`
   position: relative;
   display: flex;
@@ -100,6 +102,10 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{$hasError: bool
     transition: border-color 200ms ease-out;
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
+  }
+
+  ${SelectLabelHiddenInTrigger} {
+    display: none;
   }
 `;
 

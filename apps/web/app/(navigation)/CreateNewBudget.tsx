@@ -44,6 +44,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 import { useAtomValue } from "jotai";
 import { languageAtom } from "store";
+import { SelectLabelHiddenInTrigger } from "ui/Select";
 
 type NewBudget = {
   onClose: Function;
@@ -112,7 +113,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     dateStart: "",
     dateEnd: "",
     currency: {
-      tag: "0",
+      tag: "USD",
       locale: lang,
     },
   });
@@ -309,15 +310,36 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <Select
                           items={[
                             {
-                              label: "PLN Polish Zloty",
+                              label: (
+                                <>
+                                  PLN{" "}
+                                  <SelectLabelHiddenInTrigger>
+                                    Polish Zloty
+                                  </SelectLabelHiddenInTrigger>
+                                </>
+                              ),
                               value: "PLN",
                             },
                             {
-                              label: "USD United States Dollar",
+                              label: (
+                                <>
+                                  USD{" "}
+                                  <SelectLabelHiddenInTrigger>
+                                    United States Dollar
+                                  </SelectLabelHiddenInTrigger>
+                                </>
+                              ),
                               value: "USD",
                             },
                             {
-                              label: "EUR Euro",
+                              label: (
+                                <>
+                                  EUR{" "}
+                                  <SelectLabelHiddenInTrigger>
+                                    Euro
+                                  </SelectLabelHiddenInTrigger>
+                                </>
+                              ),
                               value: "EUR",
                             },
                           ]}
@@ -335,20 +357,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           error={errors[0]}
                           hasScrollbar={hasScrollbar}
                         />
-                        // <CurrencySelect
-                        //   value={value}
-                        //   id="currency"
-                        //   label={t(dict.inputNames.currency)}
-                        //   supportingLabel={errors[0]}
-                        //   onValueChange={(e) => {
-                        //     setValue(e);
-                        //     setNewBudget({
-                        //       ...newBudget,
-                        //       currency: { ...newBudget.currency, tag: e },
-                        //     });
-                        //   }}
-                        //   hasScrollbar={hasScrollbar}
-                        // />
                       )}
                     </Field>
                   </InputWrapperHalfStyledCurrency>
