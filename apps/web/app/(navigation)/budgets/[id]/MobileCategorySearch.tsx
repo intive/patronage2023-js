@@ -5,6 +5,7 @@ import { useTranslate } from "lib/hooks";
 import { CategoryFilter } from "components";
 
 const StyledAccordion = styled(Accordion)`
+  flex-basis: 100%;
   ${device.desktop} {
     display: none;
   }

@@ -158,8 +158,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             setSearchTransactionByName(e.currentTarget.value);
           }}
         />
+        <MobileCategorySearch />
       </FilterSearchWrapper>
-      <MobileCategorySearch />
       <TransactionsTable
         currency={budget.currency}
         setSorting={setSorting}
