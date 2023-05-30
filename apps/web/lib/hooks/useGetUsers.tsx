@@ -71,9 +71,6 @@ export const useGetUsers = (searchValue: string, pageSize: number) => {
       });
     },
     getNextPageParam: (lastPage, allPages) => {
-      console.log(
-        lastPage && lastPage.items!.length ? allPages.length + 1 : undefined
-      );
       return lastPage && lastPage.items!.length
         ? allPages.length + 1
         : undefined;

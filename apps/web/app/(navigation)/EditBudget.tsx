@@ -54,16 +54,6 @@ interface EditedBudgetProps {
   endDate: string;
 }
 
-// interface EditedBudgetBEProps {
-//   name: string;
-//   description: string;
-//   iconName: string;
-//   period: {
-//     startDate: string;
-//     endDate: string;
-//   };
-// }
-
 const isEqual = (obj1: Object, obj2: Object) => {
   type propType = keyof typeof obj1;
   const props1 = Object.keys(obj1);
@@ -113,7 +103,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   useEffect(() => {
     !canBeClosed.includes(false) && onClose();
-  }, [canBeClosed]);
+  }, [canBeClosed, onClose]);
 
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {

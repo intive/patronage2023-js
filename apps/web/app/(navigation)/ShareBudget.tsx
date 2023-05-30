@@ -83,6 +83,11 @@ export const ShareBudget = ({
   budgetUsers,
   setBudgetUsers,
 }: ShareBudgetProps) => {
+  const pageSize = 15;
+
+  const [searchValue, setSearchValue] = useState("");
+  const debouncedSearch = useDebounce(searchValue, 500);
+
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
 
@@ -95,11 +100,6 @@ export const ShareBudget = ({
   };
 
   const isChecked = (user: User) => budgetUsers.includes(user.id);
-
-  const [searchValue, setSearchValue] = useState("");
-  const debouncedSearch = useDebounce(searchValue, 500);
-
-  const pageSize = 15;
 
   const { fetchNextPage, hasNextPage, isFetchingNextPage, data } = useGetUsers(
     debouncedSearch,
@@ -143,7 +143,10 @@ export const ShareBudget = ({
   return (
     <ShareBudgetWrapperStyled>
       <ParagraphStyled>Invite existing members</ParagraphStyled>
-      <SearchInput placeholder="Search" />
+      <SearchInput
+        placeholder="Search"
+        onChange={(e) => setSearchValue(e.currentTarget.value)}
+      />
       <UsersListStyled>{users}</UsersListStyled>
     </ShareBudgetWrapperStyled>
   );
