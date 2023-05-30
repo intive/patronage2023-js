@@ -763,6 +763,11 @@ const dictionary = {
           fr: "Limite du budget",
         },
         currency: { en: "Currency", pl: "Waluta", fr: "Monnaie" },
+        dropdownMenuAriaLabel: {
+          en: "More options",
+          pl: "Więcej opcji",
+          fr: "Plus d'options",
+        },
       },
       currencyNames: {
         USD: {

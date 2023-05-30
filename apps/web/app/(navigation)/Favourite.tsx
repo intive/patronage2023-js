@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { usePathname } from "next/navigation";
 import { env } from "env.mjs";
@@ -9,10 +9,11 @@ import { Icon } from "ui";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 //props
-interface FavouriteProps {
+export interface FavouriteProps {
   isFav: boolean;
   budgetId: string | number;
-  activeHref: string;
+  activeHref?: string;
+  className?: string;
 }
 
 type Active = {
@@ -28,7 +29,12 @@ const FavButton = styled.button<Active>`
   cursor: pointer;
 `;
 
-export const Favourite = ({ isFav, budgetId, activeHref }: FavouriteProps) => {
+export const Favourite = ({
+  isFav,
+  budgetId,
+  activeHref,
+  className,
+}: FavouriteProps) => {
   const { t, dict } = useTranslate("FavouriteBudget");
   const currentPage = usePathname() || "";
   const fetch = useSuperfetch();
@@ -36,6 +42,10 @@ export const Favourite = ({ isFav, budgetId, activeHref }: FavouriteProps) => {
 
   //initial state is what will come from props
   const [isFavourite, setIsFavourite] = useState<boolean>(isFav);
+
+  useEffect(() => {
+    setIsFavourite(isFav);
+  }, [budgetId, isFav]);
 
   const active = currentPage === activeHref;
 
@@ -61,12 +71,14 @@ export const Favourite = ({ isFav, budgetId, activeHref }: FavouriteProps) => {
     <FavButton
       onClick={setFavHandler}
       active={active}
-      aria-label={isFavourite ? t(dict.unfavourite) : t(dict.favourite)}>
+      aria-label={isFavourite ? t(dict.unfavourite) : t(dict.favourite)}
+      className={className}>
       <Icon
         icon="favorite"
         filled={isFavourite}
         color={theme.favouriteBudget.heartColor}
-        iconSize={20}></Icon>
+        iconSize={20}
+      />
     </FavButton>
   );
 };
