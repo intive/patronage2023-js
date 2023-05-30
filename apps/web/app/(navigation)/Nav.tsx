@@ -2,14 +2,15 @@
 
 import { useContext } from "react";
 import { Turn as Hamburger } from "hamburger-react";
-import { ThemeContext } from "styled-components";
 import { useSession } from "next-auth/react";
+import { ThemeContext } from "styled-components";
 import { useAtom } from "jotai";
 import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
-import { Logo, Avatar } from "ui";
+import { MainMenu } from "./MainMenu";
+import { Logo } from "ui";
 import { mobileMenuAtom } from "store";
 
 const NavBar = styled.nav`
@@ -33,10 +34,6 @@ const ActionWrapper = styled.div`
   gap: 1rem;
 `;
 
-const AvatarStyled = styled(Avatar)`
-  height: 2.1em;
-  width: 2.1em;
-`;
 
 const BurgerWrapper = styled.div`
   ${device.tablet} {
@@ -71,7 +68,7 @@ export default function Nav() {
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-        {data && <AvatarStyled src={data.user.image} outlined />}
+        <MainMenu />
       </ActionWrapper>
     </NavBar>
   );

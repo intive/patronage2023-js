@@ -2,9 +2,9 @@ import { SkeletonLoading } from "ui";
 import styled from "styled-components";
 import { PropsWithChildren } from "react";
 import { ITableBodyProps } from "ka-table/props";
-import "css/transactionsTableSuspense.css";
+import "css/tableSuspense.css";
 
-interface TransactionsTableSuspenseProps extends ITableBodyProps {
+interface TableSuspenseProps extends ITableBodyProps {
   rowsNumber: number;
 }
 
@@ -43,24 +43,21 @@ const DataRow = ({ columns }: ITableBodyProps) => {
 };
 
 //function for creating array full of <DataRow/> components
-const spawnRows = (props: TransactionsTableSuspenseProps) => {
+const spawnRows = (props: TableSuspenseProps) => {
   const rowsArray = [];
-  let id = 1;
 
   for (let i = 0; i < props.rowsNumber; i++) {
-    rowsArray.push(<DataRow {...props} key={id++} />);
+    rowsArray.push(<DataRow {...props} key={i} />);
   }
 
   return rowsArray;
 };
 
-export const TransactionsTableSuspense = (
-  props: TransactionsTableSuspenseProps
-) => {
+export default function TableSuspense(props: TableSuspenseProps) {
   return (
     <>
       {spawnRows(props)}
       <GradientTrStyled />
     </>
   );
-};
+}
