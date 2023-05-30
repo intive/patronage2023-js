@@ -18,6 +18,7 @@ type SideNavigationBarProps = {
   isNavListItemClicked: boolean;
   resetIsNavListItemClicked: () => void;
   refetchBudgetsFunction: () => void;
+  resetSearch: Function;
 };
 
 type SubMenuBoolean = {
@@ -49,6 +50,7 @@ export const SideNavigationBar = ({
   isNavListItemClicked,
   resetIsNavListItemClicked,
   refetchBudgetsFunction,
+  resetSearch,
 }: SideNavigationBarProps) => {
   const [subMenuId, setSubMenuId] = useState("");
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
@@ -63,6 +65,7 @@ export const SideNavigationBar = ({
     setSubMenuId("");
     setIsSubMenuShown(false);
     refetchBudgetsFunction();
+    resetSearch();
   };
 
   const showSubMenu = (id: string) => {
@@ -72,6 +75,7 @@ export const SideNavigationBar = ({
     setSubMenuId(id);
     resetIsNavListItemClicked();
     setIsSubMenuShown(true);
+    resetSearch();
   };
 
   const handleLinkClick = (id: string) => {
