@@ -3,14 +3,16 @@
 import { useTranslate } from "lib/hooks";
 import { Form, Field } from "houseform";
 import { z } from "zod";
-import { Input, Button, AvatarSelector, Separator } from "ui";
-import { useState } from "react";
+import { Input, Button, AvatarSelector, Separator, ButtonGroup } from "ui";
+import { useRef, useState } from "react";
 import {
   ButtonWrapper,
   FormWrapper,
   StyledHeader,
   StyledSubHeader,
+  SwitcherWrapper,
 } from "./SignUpFormStyled";
+import ImageUploader from "components/ImageUploader";
 
 type ProfileScreenProps = {
   onBack: () => void;
@@ -30,7 +32,7 @@ export const ProfileScreen = ({
   const { dict, t } = useTranslate("SignUpPage");
   const { profileScreen } = dict;
   const [selectedAvatar, setSelectedAvatar] = useState("/avatars/1.svg");
-
+  const [customAvatar, setCustomAvatar] = useState(false);
   return (
     <Form
       onSubmit={(values) => {
@@ -50,21 +52,55 @@ export const ProfileScreen = ({
           }}>
           <StyledHeader>{t(profileScreen.title)}</StyledHeader>
           <StyledSubHeader>{t(profileScreen.subtitle)}</StyledSubHeader>
+          <SwitcherWrapper>
+            <ButtonGroup
+              secondary
+              options={[
+                {
+                  component: t(profileScreen.avatarSwitcherDefault),
+                  onSelect: () => {
+                    setCustomAvatar(false);
+                  },
+                  defaultChecked: true,
+
+                  id: "default",
+                },
+                {
+                  component: t(profileScreen.avatarSwitcherCustom),
+                  onSelect: () => {
+                    setCustomAvatar(true);
+                  },
+                  id: "custom",
+                },
+              ]}
+            />
+          </SwitcherWrapper>
           <Separator />
-          <AvatarSelector
-            avatars={[
-              "/avatars/1.svg",
-              "/avatars/2.svg",
-              "/avatars/3.svg",
-              "/avatars/4.svg",
-              "/avatars/5.svg",
-              "/avatars/6.svg",
-              "/avatars/7.svg",
-              "/avatars/8.svg",
-            ]}
-            selectedAvatar={selectedAvatar}
-            onSelect={setSelectedAvatar}
-          />
+          {customAvatar ? (
+            <div
+              style={{
+                width: "400px",
+                height: "500px",
+              }}>
+              Siema
+            </div>
+          ) : (
+            <AvatarSelector
+              avatars={[
+                "/avatars/1.svg",
+                "/avatars/2.svg",
+                "/avatars/3.svg",
+                "/avatars/4.svg",
+                "/avatars/5.svg",
+                "/avatars/6.svg",
+                "/avatars/7.svg",
+                "/avatars/8.svg",
+              ]}
+              selectedAvatar={selectedAvatar}
+              onSelect={setSelectedAvatar}
+            />
+          )}
+
           <Field
             onChangeValidate={z.string().min(1, t(profileScreen.inputErrorMsg))}
             name="firstName"

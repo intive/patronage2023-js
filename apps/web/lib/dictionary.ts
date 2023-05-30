@@ -274,10 +274,20 @@ const dictionary = {
         pl: "Spersonalizuj swoje konto",
         fr: "Personnaliser votre compte",
       },
+      avatarSwitcherDefault: {
+        en: "Default",
+        pl: "Podstawowe",
+        fr: "",
+      },
+      avatarSwitcherCustom: {
+        en: "Personalized",
+        pl: "Spersonalizowane",
+        fr: "",
+      },
       subtitle: {
-        en: "Select your avatar and tell us your name",
-        pl: "Wybierz avatar i powiedz jak się nazywasz",
-        fr: "Choisissez un avatar et dites votre nom",
+        en: "Select or upload your avatar and tell us your name",
+        pl: "Wybierz lub prześlij swój avatar i powiedz jak się nazywasz",
+        fr: "Choisissez ou téléchargez votre avatar et prononcez votre nom",
       },
       firstNameInputLabel: {
         en: "First name",

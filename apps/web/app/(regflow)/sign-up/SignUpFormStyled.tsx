@@ -17,6 +17,11 @@ export const FormWrapper = styled.div<WrapperProps>`
   }
 `;
 
+export const SwitcherWrapper = styled.div`
+  height: 50px;
+  margin-bottom: 20px;
+`;
+
 export const StyledHeader = styled.h2`
   color: ${({ theme }) => theme.primary};
   font-family: "Signika", sans-serif;
