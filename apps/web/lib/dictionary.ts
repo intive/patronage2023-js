@@ -137,6 +137,16 @@ const dictionary = {
       pl: "Wyloguj",
       fr: "Se déconnecter",
     },
+    signOut: {
+      en: "Sign out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
+    },
+    home: {
+      en: "Home",
+      pl: "Strona główna",
+      fr: "Page d'accueil",
+    },
   },
   SignInPage: {
     form: {
@@ -769,6 +779,11 @@ const dictionary = {
           fr: "Limite du budget",
         },
         currency: { en: "Currency", pl: "Waluta", fr: "Monnaie" },
+        dropdownMenuAriaLabel: {
+          en: "More options",
+          pl: "Więcej opcji",
+          fr: "Plus d'options",
+        },
       },
       currencyNames: {
         USD: {

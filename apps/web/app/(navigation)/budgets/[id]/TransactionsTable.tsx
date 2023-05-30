@@ -7,7 +7,7 @@ import { languageAtom } from "store";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
-import { Icon, Avatar, TransactionDropdownMenu, CategoryIcon } from "ui";
+import { Icon, Avatar, DropdownMenu, CategoryIcon } from "ui";
 
 import { useTranslate } from "lib/hooks";
 import useLocaleDateString from "lib/hooks/useLocaleDateString";
@@ -167,10 +167,7 @@ export const TransactionsTable = ({
                   return <Avatar className="avatar" src={props.value.avatar} />;
                 case "editColumn":
                   return (
-                    <TransactionDropdownMenu
-                      items={dropdownMenuItems}
-                      side="right"
-                    />
+                    <DropdownMenu items={dropdownMenuItems} side="right" />
                   );
               }
             },

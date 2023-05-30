@@ -2,6 +2,7 @@ import styled from "styled-components";
 import * as Select from "@radix-ui/react-select";
 
 export const SelectTriggerStyled = styled(Select.Trigger)`
+  color: ${({ theme }) => theme.avatar.outline};
   background-color: unset;
   cursor: pointer;
   border: 0;
