@@ -53,7 +53,8 @@ export const MainMenu = () => {
     <>
       {data && (
         <Select.Root
-          onValueChange={(value) => menuHandler(value)}
+          value=""
+          onValueChange={menuHandler}
           onOpenChange={() => setIsIconDown(!isIconDown)}>
           <SelectTriggerStyled>
             <Select.Value>
