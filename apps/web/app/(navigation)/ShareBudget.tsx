@@ -1,7 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { env } from "env.mjs";
+import { forwardRef, useCallback, useRef, useState } from "react";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { SearchInput } from "ui/Input/SearchInput";
 import { Checkbox, Avatar } from "ui";
@@ -13,7 +10,7 @@ import {
   ShareBudgetWrapperStyled,
   UsersListStyled,
 } from "./ShareBudget.styled";
-import { useGetUsers, ItemType } from "lib/hooks/useGetUsers";
+import { useGetUsers } from "lib/hooks/useGetUsers";
 
 type User = {
   id: string;
@@ -49,36 +46,37 @@ const avatars = [
   "/avatars/8.svg",
 ];
 
-const UsersListItem = ({
-  user,
-  onCheckboxChange,
-  checked,
-}: UsersListItemProps) => {
-  const { firstName, lastName, avatar, id } = user;
-  return (
-    <ListItemStyled>
-      <LabelStyled htmlFor={`share-users-${id}`}>
-        <AvatarWrapperStyled>
-          <Avatar
-            src={avatars.includes(avatar) ? avatar : "/unsetAvatar.svg"}
-            username={`${firstName} ${lastName}`}
+const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
+  ({ user, onCheckboxChange, checked }, ref) => {
+    const { firstName, lastName, avatar, id } = user;
+
+    return (
+      <ListItemStyled ref={ref} key={id}>
+        <LabelStyled htmlFor={`share-users-${id}`}>
+          <AvatarWrapperStyled>
+            <Avatar
+              src={avatars.includes(avatar) ? avatar : "/unsetAvatar.svg"}
+              username={`${firstName} ${lastName}`}
+            />
+          </AvatarWrapperStyled>
+          <p>{`${firstName} ${lastName}`}</p>
+        </LabelStyled>
+        <div>
+          <Checkbox
+            label={`share-users-${id}`}
+            id={`share-users-${id}`}
+            name={id}
+            value={id}
+            onChange={onCheckboxChange}
+            checked={checked}
           />
-        </AvatarWrapperStyled>
-        <p>{`${firstName} ${lastName}`}</p>
-      </LabelStyled>
-      <div>
-        <Checkbox
-          label={`share-users-${id}`}
-          id={`share-users-${id}`}
-          name={id}
-          value={id}
-          onChange={onCheckboxChange}
-          checked={checked}
-        />
-      </div>
-    </ListItemStyled>
-  );
-};
+        </div>
+      </ListItemStyled>
+    );
+  }
+);
+
+UsersListItem.displayName = "UsersListItem";
 
 export const ShareBudget = ({
   owner,
@@ -98,88 +96,15 @@ export const ShareBudget = ({
 
   const isChecked = (user: User) => budgetUsers.includes(user.id);
 
-  // const mockUsers = [
-  //   {
-  //     firstName: "Howard",
-  //     lastName: "Wolovitz",
-  //     avatar: "/avatars/1.svg",
-  //     id: "1",
-  //   },
-  //   {
-  //     firstName: "Anna",
-  //     lastName: "Kozik",
-  //     avatar: "/avatars/2.svg",
-  //     id: "2",
-  //   },
-  //   {
-  //     firstName: "Jan",
-  //     lastName: "Kowalski",
-  //     avatar: "/avatars/3.svg",
-  //     id: "3",
-  //   },
-  //   {
-  //     firstName: "Julia",
-  //     lastName: "Nowak",
-  //     avatar: "/avatars/4.svg",
-  //     id: "4",
-  //   },
-  // ];
-  // const { data: session } = useSession();
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [itemsPerPage, setItemsPerPage] = useState(500);
-  // const [totalPages, setTotalPages] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
 
-  // const {
-  //   data: allUsers,
-  //   // isError,
-  //   // isLoading,
-  //   // refetch,
-  //   // error,
-  // } = useQuery({
-  //   queryKey: ["user", itemsPerPage, currentPage, debouncedSearch],
-  //   queryFn: async () => {
-  //     return fetch(`${env.NEXT_PUBLIC_API_URL}user/list`, {
-  //       body: JSON.stringify({
-  //         pageSize: itemsPerPage,
-  //         pageIndex: currentPage,
-  //         search: searchValue,
-  //         sortDescriptors: [
-  //           {
-  //             columnName: "firstName",
-  //             sortAscending: true,
-  //           },
-  //         ],
-  //       }),
-  //       headers: {
-  //         Authorization: "Bearer " + session!.user.accessToken,
-  //         "Content-Type": "application/json",
-  //       },
-  //       method: "POST",
-  //     })
-  //       .then((res) => {
-  //         if (res.ok) {
-  //           return res.json();
-  //         }
-  //         throw new Error(`${res.status}`);
-  //       })
-  //       .then((json) => json.items);
-  //   },
-  //   enabled: !!session,
-  // });
+  const pageSize = 15;
 
-  const pageSize = 5;
-
-  const {
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    data,
-    status,
-    refetch,
-  } = useGetUsers(debouncedSearch, pageSize);
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, data } = useGetUsers(
+    debouncedSearch,
+    pageSize
+  );
 
   const intObserver = useRef<IntersectionObserver | null>(null);
 
@@ -201,33 +126,25 @@ export const ShareBudget = ({
   const users =
     data &&
     data.pages?.flatMap(({ items }) =>
-      items.map((user) => (
-        <UsersListItem
-          ref={lastUserRef}
-          key={user.id}
-          user={user}
-          onCheckboxChange={onCheckboxChange}
-          checked={isChecked(user)}
-        />
-      ))
+      items.map((user) => {
+        return user.id !== owner ? (
+          <UsersListItem
+            ref={lastUserRef}
+            user={user}
+            onCheckboxChange={onCheckboxChange}
+            checked={isChecked(user)}
+          />
+        ) : (
+          <></>
+        );
+      })
     );
 
   return (
     <ShareBudgetWrapperStyled>
       <ParagraphStyled>Invite existing members</ParagraphStyled>
       <SearchInput placeholder="Search" />
-      <UsersListStyled>
-        {users}
-
-        {/* {mockUsers.map((user: User) => (
-          <UsersListItem
-            key={user.id}
-            user={user}
-            onCheckboxChange={onCheckboxChange}
-            checked={isChecked(user)}
-          />
-        ))} */}
-      </UsersListStyled>
+      <UsersListStyled>{users}</UsersListStyled>
     </ShareBudgetWrapperStyled>
   );
 };
