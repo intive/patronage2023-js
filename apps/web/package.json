@@ -26,7 +26,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-image-crop": "^10.1.4",
+    "react-easy-crop": "^4.7.4",
     "react-loading-skeleton": "^3.3.1",
     "react-query": "^3.39.3",
     "ui": "*",
