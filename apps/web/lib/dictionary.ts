@@ -131,6 +131,16 @@ const dictionary = {
       pl: "Wyloguj",
       fr: "Se déconnecter",
     },
+    signOut: {
+      en: "Sign out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
+    },
+    home: {
+      en: "Home",
+      pl: "Strona główna",
+      fr: "Page d'accueil",
+    },
   },
   SignInPage: {
     form: {
