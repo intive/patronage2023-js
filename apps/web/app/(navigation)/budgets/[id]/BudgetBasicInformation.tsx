@@ -6,20 +6,25 @@ import { BudgetFixed } from "lib/types";
 import { useTranslate } from "lib/hooks";
 import { iconNames } from "lib/iconValidation";
 import {
-  BasicInfoWrapper,
+  TopWrapperStyled,
+  BasicBudgetInfoWrapperStyled,
   BudgetIconStyled,
-  InfoTileAmount,
-  StyledDescription,
-  StyledTitle,
-  TileWrapper,
-  TitleEditButton,
-  TopSectionWrapper,
-  TitleWrapper,
+  BudgetNameWrapperStyled,
+  BudgetNameIconsWrapperStyled,
+  NavBudgetIconStyled,
+  FavouriteStyled,
+  FavouriteDropdownStyled,
+  NavBudgetIconDropdownStyled,
+  DropdownMenuStyled,
+  BudgetNameStyled,
+  BudgetDescriptionStyled,
+  InfoTileAmountStyled,
+  InfoTileWrapperStyled,
 } from "./BudgetBasicInformation.styled";
 import { EditBudget } from "app/(navigation)/EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { NavBudgetIcon, InfoTile } from "ui";
+import { InfoTile, NavBudgetIcon } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
@@ -58,7 +63,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   );
 
   const limitInfo = (
-    <InfoTileAmount amount={limit} currencyOptions={currency} hidePlus />
+    <InfoTileAmountStyled amount={limit} currencyOptions={currency} hidePlus />
   );
 
   const currencyInfo = (
@@ -89,39 +94,77 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
 
   return (
     <>
-      <BasicInfoWrapper>
-        <TopSectionWrapper>
+      <TopWrapperStyled>
+        <BasicBudgetInfoWrapperStyled>
           <BudgetIconStyled
             icon={iconNames.includes(icon) ? icon : "notifications"}
           />
-          <TitleWrapper>
-            <TitleEditButton>
-              <StyledTitle>{name}</StyledTitle>
-              <NavBudgetIcon onClick={() => openModal()} icon={"edit"} />
-              <NavBudgetIcon
-                onClick={() => setDeleteModalVisibility(true)}
-                icon={"delete"}
+          <BudgetNameWrapperStyled>
+            <BudgetNameIconsWrapperStyled>
+              <BudgetNameStyled>{name}</BudgetNameStyled>
+              <NavBudgetIconStyled onClick={openModal} icon="edit" />
+              <FavouriteStyled
+                isFav={budget.isFavourite}
+                budgetId={budget.id}
               />
-              <PeopleInBudget users={peopleWithoutLoggedUser} />
-            </TitleEditButton>
-            <StyledDescription>{description}</StyledDescription>
-          </TitleWrapper>
-        </TopSectionWrapper>
-        <TileWrapper>
-          <InfoTile
-            label={t(basicInformation.labels.period)}
-            dataToRender={dataRangeInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.limit)}
-            dataToRender={limitInfo}
-          />
-          <InfoTile
-            label={t(basicInformation.labels.currency)}
-            dataToRender={currencyInfo}
-          />
-        </TileWrapper>
-      </BasicInfoWrapper>
+              <NavBudgetIconStyled
+                onClick={() => setDeleteModalVisibility(true)}
+                icon="delete"
+              />
+              <DropdownMenuStyled
+                items={[
+                  {
+                    ComponentToRender: (
+                      <NavBudgetIconDropdownStyled
+                        onClick={openModal}
+                        icon="edit"
+                      />
+                    ),
+                    id: "edit",
+                  },
+                  {
+                    ComponentToRender: (
+                      <FavouriteDropdownStyled
+                        isFav={budget.isFavourite}
+                        budgetId={budget.id}
+                      />
+                    ),
+                    id: "favourite",
+                  },
+                  {
+                    ComponentToRender: (
+                      <NavBudgetIconDropdownStyled
+                        onClick={() => setDeleteModalVisibility(true)}
+                        icon="delete"
+                      />
+                    ),
+                    id: "delete",
+                  },
+                ]}
+                side="bottom"
+                ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
+              />
+            </BudgetNameIconsWrapperStyled>
+            <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
+          </BudgetNameWrapperStyled>
+        </BasicBudgetInfoWrapperStyled>
+        <PeopleInBudget users={peopleWithoutLoggedUser} />
+      </TopWrapperStyled>
+      <InfoTileWrapperStyled>
+        <InfoTile
+          label={t(basicInformation.labels.period)}
+          dataToRender={dataRangeInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.limit)}
+          dataToRender={limitInfo}
+        />
+        <InfoTile
+          label={t(basicInformation.labels.currency)}
+          dataToRender={currencyInfo}
+        />
+      </InfoTileWrapperStyled>
+
       {isEditBudgetModalOpen && (
         <EditBudget budget={budget} onClose={() => closeModal()} />
       )}

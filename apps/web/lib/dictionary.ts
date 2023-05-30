@@ -1,5 +1,16 @@
 const dictionary = {
+  Common: {
+    days: {
+      yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
+      today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
+    },
+  },
   NavigationLayout: {
+    burgerMenuLabel: {
+      en: "Open menu",
+      pl: "Otwórz menu",
+      fr: "Ouvrir le menu",
+    },
     SideNav: {
       budgetsItem: {
         title: { en: "Budgets", pl: "Budżety", fr: "Budgets" },
@@ -130,6 +141,16 @@ const dictionary = {
       en: "Log out",
       pl: "Wyloguj",
       fr: "Se déconnecter",
+    },
+    signOut: {
+      en: "Sign out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
+    },
+    home: {
+      en: "Home",
+      pl: "Strona główna",
+      fr: "Page d'accueil",
     },
   },
   SignInPage: {
@@ -763,6 +784,11 @@ const dictionary = {
           fr: "Limite du budget",
         },
         currency: { en: "Currency", pl: "Waluta", fr: "Monnaie" },
+        dropdownMenuAriaLabel: {
+          en: "More options",
+          pl: "Więcej opcji",
+          fr: "Plus d'options",
+        },
       },
       currencyNames: {
         USD: {
@@ -834,10 +860,6 @@ const dictionary = {
       fr: "Rechercher par nom",
     },
     transactionsTable: {
-      groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
-        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
-      },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
