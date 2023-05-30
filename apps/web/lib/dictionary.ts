@@ -1,4 +1,10 @@
 const dictionary = {
+  Common: {
+    days: {
+      yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
+      today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
+    },
+  },
   NavigationLayout: {
     SideNav: {
       budgetsItem: {
@@ -849,10 +855,6 @@ const dictionary = {
       fr: "Rechercher par nom",
     },
     transactionsTable: {
-      groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
-        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
-      },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
