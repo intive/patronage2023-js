@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from "react";
 import { SearchInput } from "../../Input/SearchInput";
 import { Button } from "../../Button";
 import { Icon } from "../../Icon";
+import { device } from "web/lib/media-queries";
 
 export type SubMenuDataProps = {
   title: string;
@@ -33,7 +34,7 @@ const SubMenuStyled = styled.div`
   top: 0;
   left: 94px;
   height: 100%;
-  width: 288px;
+  width: 278px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,6 +46,10 @@ const SubMenuStyled = styled.div`
   background-color: ${({ theme }) =>
     theme.sideNavigationBar.subMenu.background};
   box-shadow: 0px 6px 20px -2px rgba(26, 26, 26, 0.14);
+
+  ${device.tablet} {
+    width: 288px;
+  }
 `;
 
 const SubMenuHeaderStyled = styled.div`
@@ -55,6 +60,7 @@ const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  height: 100%;
 `;
 
 const HeaderStyled = styled.div`
@@ -77,6 +83,9 @@ const ButtonStyled = styled(Button)`
   width: 256px;
   position: fixed;
   bottom: 25px;
+  z-index: 5;
+  background-color: ${({ theme }) =>
+    theme.sideNavigationBar.subMenu.background};
 `;
 
 const IconUpsideDown = styled(Icon)`

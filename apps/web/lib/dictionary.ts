@@ -6,6 +6,11 @@ const dictionary = {
     },
   },
   NavigationLayout: {
+    burgerMenuLabel: {
+      en: "Open menu",
+      pl: "Otwórz menu",
+      fr: "Ouvrir le menu",
+    },
     SideNav: {
       budgetsItem: {
         title: { en: "Budgets", pl: "Budżety", fr: "Budgets" },
