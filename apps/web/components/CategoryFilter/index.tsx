@@ -18,16 +18,13 @@ export const CategoryFilter = () => {
 
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
-
+    console.log(categoryEntries);
     if (checked) {
-      setCategoryFilterAtom([...categoryFilterAtomState, name]);
+      setCategoryFilterAtom((prev) => [...prev, name]);
     } else {
-      const newState = [
-        ...categoryFilterAtomState.filter(
-          (category) => !category.includes(name)
-        ),
-      ];
-      setCategoryFilterAtom(newState);
+      setCategoryFilterAtom((prev) =>
+        prev.filter((category) => category !== name)
+      );
     }
   };
 
@@ -41,6 +38,7 @@ export const CategoryFilter = () => {
               label={`category-filter-${name}`}
               id={`category-filter-${id}`}
               name={categoryKey}
+              checked={categoryFilterAtomState.includes(categoryKey)}
               onChange={onCheckboxChange}>
               <CheckboxLabelContentStyled>
                 <CategoryIconStyled small category={category} />
