@@ -18,17 +18,18 @@ const StyledButton = styled.button`
   margin: 0 0 0 2em;
   cursor: pointer;
   font-weight: 600;
-  font-size: large;
+  font-size: 1em;
+  align-self: end;
 `;
 
 const MobileFilter = () => {
   const { t, dict } = useTranslate("AsideCard");
   return (
     <>
-      <CategoryFilter />
       <StyledButton onClick={() => console.log("Manage modal")}>
         ...{t(dict.categories.settings)}
       </StyledButton>
+      <CategoryFilter />
     </>
   );
 };

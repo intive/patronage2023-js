@@ -51,6 +51,8 @@ export const AccordionTrigger = styled(Accordion.Trigger)`
 `;
 
 export const AccordionContent = styled(Accordion.Content)`
+  display: flex;
+  flex-direction: column;
   color: ${({ theme }) => theme.accordion.content};
 `;
 

@@ -365,7 +365,7 @@ export const theme = {
   },
   accordion: {
     main: colors.Teal10,
-    borderInactive: colors.Neutral4,
+    borderInactive: colors.Neutral2,
     content: colors.Teal10,
     background: colors.BasicWhite,
   },
