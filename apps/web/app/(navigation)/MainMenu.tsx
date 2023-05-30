@@ -2,9 +2,10 @@ import * as Select from "@radix-ui/react-select";
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Avatar } from "ui";
+import { Avatar, Icon } from "ui";
 import { useTranslate } from "lib/hooks";
 
 import {
@@ -18,11 +19,20 @@ export const AvatarStyled = styled(Avatar)`
   width: 2.1em;
 `;
 
+const IconUpStyled = styled(Icon)`
+  transform: rotate(180deg);
+`;
+
 export const MainMenu = () => {
   const { hasScrollbar } = useHasScrollBar();
   const router = useRouter();
   const { data } = useSession();
   const { t, dict } = useTranslate("MainPage");
+
+  const [isIconDown, setIsIconDown] = useState<boolean | undefined>();
+
+  const IconUp = () => <IconUpStyled icon="arrow_drop_down" />;
+  const IconDown = () => <Icon icon="arrow_drop_down" />;
 
   const menuHandler = (value: string) => {
     value === "sign-out" ? signOut() : router.push("/");
@@ -42,13 +52,17 @@ export const MainMenu = () => {
   return (
     <>
       {data && (
-        <Select.Root onValueChange={(value) => menuHandler(value)}>
+        <Select.Root
+          onValueChange={(value) => menuHandler(value)}
+          onOpenChange={() => setIsIconDown(!isIconDown)}>
           <SelectTriggerStyled>
             <Select.Value>
               <AvatarStyled src={data.user.image} outlined />
             </Select.Value>
+            <Select.Icon className="SelectIcon">
+              {isIconDown ? <IconUp /> : <IconDown />}
+            </Select.Icon>
           </SelectTriggerStyled>
-
           <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
             <SelectContentStyled
               position="popper"
