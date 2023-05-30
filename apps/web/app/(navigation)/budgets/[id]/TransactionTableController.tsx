@@ -72,7 +72,6 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   };
 
   const fixFetchedData = (res: APIResponse) => {
-    setTotalPages(Math.ceil(res.totalCount / pageSize));
     return res.items.map(
       (item): Transaction => ({
         id: item.transactionId.value,
@@ -128,7 +127,10 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           },
         }
       )
-        .then((res) => fixFetchedData(res))
+        .then((res) => {
+          setTotalPages(Math.ceil(res.totalCount / pageSize));
+          return fixFetchedData(res);
+        })
         .catch((err) => console.error(err));
     },
   });
