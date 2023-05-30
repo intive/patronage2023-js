@@ -34,7 +34,6 @@ const ActionWrapper = styled.div`
   gap: 1rem;
 `;
 
-
 const BurgerWrapper = styled.div`
   ${device.tablet} {
     display: none;
