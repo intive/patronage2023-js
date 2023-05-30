@@ -17,6 +17,7 @@ export type SelectProps = {
   error?: string;
   value?: string;
   hasScrollbar?: boolean;
+  id?: string;
 };
 
 export const Select = ({
@@ -28,18 +29,18 @@ export const Select = ({
   error,
   value,
   hasScrollbar,
+  id,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <AtomicSelect.Root
-      name="test"
       onValueChange={onValueChange}
       value={value}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTriggerStyled className={className} $hasError={Boolean(error)}>
+      <SelectTriggerStyled className={className} $hasError={Boolean(error)} id={id}>
         {value && <TriggerLabelStyled>{label}</TriggerLabelStyled>}
         <AtomicSelect.Value placeholder={label} />
         {hasIcon && (
@@ -70,9 +71,7 @@ export const Select = ({
   );
 };
 
-export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
-  $hasError: boolean;
-}>`
+export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{$hasError: boolean;}>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -148,16 +147,6 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
       outline: transparent;
     }
   }
-`;
-
-export const CategoryWrapperStyled = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const CategoryNameStyled = styled.p`
-  height: 100%;
-  padding: 0 16px;
 `;
 
 export const SupportingLabelStyled = styled.div`

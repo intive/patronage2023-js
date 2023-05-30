@@ -13,6 +13,7 @@ import {
   IconPicker,
   Input,
   Modal,
+  Select,
 } from "ui";
 import { IconType } from "ui/Icon";
 import {
@@ -111,7 +112,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     dateStart: "",
     dateEnd: "",
     currency: {
-      tag: "USD",
+      tag: "0",
       locale: lang,
     },
   });
@@ -305,20 +306,49 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
                         // WIP
-                        <CurrencySelect
+                        <Select
+                          items={[
+                            {
+                              label: "PLN Polish Zloty",
+                              value: "PLN",
+                            },
+                            {
+                              label: "USD United States Dollar",
+                              value: "USD",
+                            },
+                            {
+                              label: "EUR Euro",
+                              value: "EUR",
+                            },
+                          ]}
+                          onValueChange={(value) => {
+                            setValue(value);
+                            setNewBudget({
+                              ...newBudget,
+                              currency: { ...newBudget.currency, tag: value },
+                            });
+                          }}
+                          hasIcon
                           value={value}
                           id="currency"
                           label={t(dict.inputNames.currency)}
-                          supportingLabel={errors[0]}
-                          onValueChange={(e) => {
-                            setValue(e);
-                            setNewBudget({
-                              ...newBudget,
-                              currency: { ...newBudget.currency, tag: e },
-                            });
-                          }}
+                          error={errors[0]}
                           hasScrollbar={hasScrollbar}
                         />
+                        // <CurrencySelect
+                        //   value={value}
+                        //   id="currency"
+                        //   label={t(dict.inputNames.currency)}
+                        //   supportingLabel={errors[0]}
+                        //   onValueChange={(e) => {
+                        //     setValue(e);
+                        //     setNewBudget({
+                        //       ...newBudget,
+                        //       currency: { ...newBudget.currency, tag: e },
+                        //     });
+                        //   }}
+                        //   hasScrollbar={hasScrollbar}
+                        // />
                       )}
                     </Field>
                   </InputWrapperHalfStyledCurrency>
