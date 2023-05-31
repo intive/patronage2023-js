@@ -81,6 +81,7 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("ImportModal");
+  const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
   const [
     { isCSVError, csvUri, screen: Screen, props: importExportProps },
     dispatch,
@@ -231,7 +232,7 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             download
             title="csv-file">
             <IconStyled icon="file_download" size={12} />
-            <span>{t(dict.exportButtonText)}</span>
+            <span>{tExport(dictExport.exportButtonText)}</span>
           </ButtonStyled>
         )}
         <button

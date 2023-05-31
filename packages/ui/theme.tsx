@@ -25,6 +25,7 @@ const colors = {
   Neutral3: "#CFCFCF",
   Neutral2: "#E1E1E1",
   Neutral1: "#F7F7F7",
+  Supporting25: "#000000",
   Supporting24: "#FB8C00",
   Supporting23: "#8E24AA",
   Supporting22: "#B3443D",
@@ -55,6 +56,7 @@ const colors = {
 
 export const theme = {
   main: colors.Teal10,
+  black: colors.Supporting25,
   avatar: {
     outline: colors.BasicWhite,
     aggregator: colors.Neutral6,
@@ -183,6 +185,7 @@ export const theme = {
       inactiveBackground: colors.BasicTransparent,
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
+      iconBackgroundColor: colors.BasicWhite,
     },
     infoText: colors.Neutral8,
     spinner: colors.Neutral5,

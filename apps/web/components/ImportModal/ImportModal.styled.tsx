@@ -48,7 +48,6 @@ const ImportExportButtonStyles = css`
   inline-size: 100px;
   font-size: 0.875em;
   overflow-wrap: break-word;
-  cursor: pointer;
   text-align: center;
 
   ${device.tablet} {
@@ -64,6 +63,7 @@ export const ImportButtonStyled = styled(Button)`
 
 export const LabelStyled = styled.label`
   ${ImportExportButtonStyles}
+  cursor: pointer;
 `;
 
 export const LinkStyled = styled.a`

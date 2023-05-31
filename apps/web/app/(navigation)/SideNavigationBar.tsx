@@ -23,7 +23,7 @@ import { SideNavigationBar, Icon, NavList, useToast } from "ui";
 import { SpanStyled } from "ui/NavList";
 
 export const IconStyled = styled(Icon)`
-  background: white;
+  background: ${({ theme }) => theme.navList.navItem.iconBackgroundColor};
   padding: 4px;
   border-radius: 8px;
 `;
@@ -31,6 +31,7 @@ export const IconStyled = styled(Icon)`
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
+  const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
 
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
@@ -174,7 +175,7 @@ export default function SideNav() {
       clickHandler: () => {
         showToast({
           variant: "confirm",
-          message: "CSV exported successfully",
+          message: tExport(dictExport.exportToastMessage),
         });
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),

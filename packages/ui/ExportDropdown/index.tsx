@@ -3,7 +3,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { device } from "web/lib/media-queries";
+import {
+  DropdownMenuItemStyled,
+  DropdownMenuContentStyled as MenuContentStyled,
+} from "../ButtonWithDropdown";
 
 export type ExportDropdownProps = {
   items: ExportDropdownItem[];
@@ -16,46 +19,8 @@ export type ExportDropdownItem = {
   node: React.ReactNode;
 };
 
-const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
-  box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08), 0 2px 4px rgba(32, 37, 50, 0.03);
-  border-radius: 16px;
-  background-color: white;
-  border: 1px solid ${({ theme }) => theme.card.border};
-  z-index: 2;
-`;
-
-const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid transparent;
-  cursor: pointer;
-
-  ${device.tablet} {
-    padding: 16px;
-    font-size: 16px;
-  }
-
-  &:first-child {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-  }
-  &:last-child {
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-  }
-
-  &:focus {
-    border-color: ${({ theme }) => theme.input.focus};
-    background-color: ${({ theme }) =>
-      theme.transactionDropdownMenu.activeBackground};
-    outline: none;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) =>
-      theme.transactionDropdownMenu.activeBackground};
-    border: 1px solid transparent;
-  }
+const DropdownMenuContentStyled = styled(MenuContentStyled)`
+  width: 100%;
 `;
 
 export const ExportDropdown = ({

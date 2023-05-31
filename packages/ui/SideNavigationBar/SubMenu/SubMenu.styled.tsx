@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { Button } from "../../Button";
 import { Icon } from "../../Icon";
+import { theme } from "../../theme";
 
 export const SubMenuStyled = styled.div`
   position: fixed;
@@ -60,8 +61,9 @@ export const ImportExportButtonsStyle = css`
   outline: 0;
   color: ${({ theme }) => theme.main};
   cursor: pointer;
+
   &:focus {
-    outline: 1px solid black;
+    outline: 1px solid ${({ theme }) => theme.black};
   }
 `;
 

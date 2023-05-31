@@ -50,7 +50,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
+export const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08), 0 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
   background-color: white;
@@ -61,7 +61,7 @@ const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   }
 `;
 
-const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
+export const DropdownMenuItemStyled = styled(DropdownMenu.Item)`
   padding: 10px;
   font-size: 14px;
   border: 1px solid transparent;

@@ -1040,6 +1040,18 @@ const dictionary = {
       fr: "Remboursement",
     },
   },
+  ExportFile: {
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Ściągnij plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
+    exportToastMessage: {
+      en: "CSV exported successfully",
+      pl: "CSV wyeksportowany pomyślnie",
+      fr: "CSV exporté avec succès",
+    },
+  },
   ImportModal: {
     successImport: {
       en: "CSV file successfully imported",
@@ -1092,11 +1104,6 @@ const dictionary = {
       en: "Click to import",
       pl: "Kliknij, aby zaimportować",
       fr: "Cliquez pour importer",
-    },
-    exportButtonText: {
-      en: "Download CSV",
-      pl: "Ściągnij plik CSV",
-      fr: "Télécharger le fichier CSV",
     },
     tutorial: {
       wantToUpload: {
