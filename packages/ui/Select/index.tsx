@@ -78,14 +78,14 @@ export const Select = ({
   );
 };
 
-export const SelectLabelHiddenInTrigger = styled.span``;
-
 const SelectItemLabelWrapperStyled = styled.span`
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
 `;
+
+export const SelectLabelHiddenInTrigger = styled.span``;
 
 const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   $hasError: boolean;

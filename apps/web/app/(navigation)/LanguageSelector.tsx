@@ -1,12 +1,21 @@
 import { Language, languageAtom } from "store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import styled from "styled-components";
 
-import { Flag } from "ui";
-import {
-  SelectStyled,
-} from "./LanguageSelectorStyled";
+import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select";
+
+const SelectStyled = styled(Select)`
+  color: ${({ theme }) => theme.avatar.outline};
+  background-color: unset;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  margin-bottom: 0;
+  width: auto;
+`;
 
 export const LanguageSelector = () => {
   const { hasScrollbar } = useHasScrollBar();
