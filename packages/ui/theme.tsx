@@ -245,6 +245,9 @@ export const theme = {
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
   },
+  dropdownMenu: {
+    contentBackground: colors.BasicWhite,
+  },
   infoTile: {
     border: colors.Neutral2,
     label: colors.Neutral6,

@@ -53,7 +53,7 @@ const StyledButton = styled.button`
 export const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
   box-shadow: 0 2px 8px rgba(32, 37, 50, 0.08), 0 2px 4px rgba(32, 37, 50, 0.03);
   border-radius: 16px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.dropdownMenu.contentBackground};
   border: 1px solid ${({ theme }) => theme.card.border};
   z-index: 2;
   ${device.tablet} {
