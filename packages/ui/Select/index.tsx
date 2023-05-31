@@ -36,11 +36,14 @@ export const Select = ({
   return (
     <AtomicSelect.Root
       onValueChange={onValueChange}
-      value={value}
+      value={value || undefined}
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTriggerStyled className={className} $hasError={Boolean(error)} id={id}>
+      <SelectTriggerStyled
+        className={className}
+        $hasError={Boolean(error)}
+        id={id}>
         {value && <TriggerLabelStyled>{label}</TriggerLabelStyled>}
         <AtomicSelect.Value placeholder={label} />
         {hasIcon && (
@@ -73,7 +76,9 @@ export const Select = ({
 
 export const SelectLabelHiddenInTrigger = styled.span``;
 
-export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{$hasError: boolean;}>`
+export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
+  $hasError: boolean;
+}>`
   position: relative;
   display: flex;
   justify-content: space-between;

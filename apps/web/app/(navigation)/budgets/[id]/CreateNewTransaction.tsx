@@ -7,8 +7,8 @@ import {
   Modal,
   CategorySelector,
   ErrorMessage,
-
   Select,
+  CategoryIcon,
 } from "ui";
 import { z } from "zod";
 import {
@@ -223,22 +223,28 @@ export const CreateNewTransaction = ({
                   onChangeValidate={z
                     .string()
                     .nonempty({ message: t(dict.errors.selectCategory) })}>
-                  {({ setValue, errors }) => (
+                  {({ setValue, errors, value }) => (
                     <Select
-                      items={[
-                        
-                      ]}
-                      //error={errors}
+                      items={Object.entries(categoryMap).map(
+                        ([categoryKey, category]) => ({
+                          value: categoryKey,
+                          label: (
+                            <>
+                              <CategoryIcon small category={category} />
+                              <span>{category.name}</span>
+                            </>
+                          ),
+                        })
+                      )}
+                      onValueChange={(newValue) => {
+                        setValue(newValue);
+                      }}
+                      hasIcon
+                      label={t(dict.categoryLabel)}
+                      error={errors[0]}
+                      value={value}
+                      hasScrollbar={hasScrollbar}
                     />
-                    // <CategorySelector
-                    //   errors={errors}
-                    //   onValueChange={(newValue) => {
-                    //     setValue(newValue);
-                    //   }}
-                    //   label={t(dict.categoryLabel)}
-                    //   categoryMap={categoryMap}
-                    //   hasScrollbar={hasScrollbar}
-                    // />
                   )}
                 </Field>
                 <Field
