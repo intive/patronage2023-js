@@ -18,7 +18,7 @@ export const CategoryFilter = () => {
 
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.currentTarget;
-    console.log(categoryEntries);
+
     if (checked) {
       setCategoryFilterAtom((prev) => [...prev, name]);
     } else {
