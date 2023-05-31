@@ -20,7 +20,6 @@ export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
 export { DropdownMenu } from "./DropdownMenu";
 export { InfoTile } from "./InfoTile";
-export { CurrencySelect } from "./CurrencySelect";
 export { BudgetIcon } from "./BudgetIcon";
 export { CurrencyAmount } from "./CurrencyAmount";
 export * from "./CategoryIcon";
