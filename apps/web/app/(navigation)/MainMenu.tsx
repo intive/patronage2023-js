@@ -1,12 +1,12 @@
-import * as Select from "@radix-ui/react-select";
 import styled from "styled-components";
+import * as Select from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Avatar, Icon } from "ui";
 import { useTranslate } from "lib/hooks";
+import { Avatar, Icon } from "ui";
 
 import {
   SelectContentStyled,
@@ -83,3 +83,17 @@ export const MainMenu = () => {
     </>
   );
 };
+
+{
+  /* <Select
+items={items.map((item) => ({
+  value: item.value,
+  label: item.text,
+}))}
+onValueChange={menuHandler}
+hasIcon
+label=""
+value=""
+hasScrollbar={hasScrollbar}
+/> */
+}
