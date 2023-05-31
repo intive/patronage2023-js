@@ -15,7 +15,7 @@ export const Container = styled.div`
   border-radius: 20px;
   height: 150px;
   width: 100%;
-  gap: 4px;
+  gap: 10px;
   ${device.tablet} {
     height: 300px;
     margin-block: 10px;

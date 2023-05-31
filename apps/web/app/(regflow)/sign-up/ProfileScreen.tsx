@@ -28,11 +28,14 @@ import { StyledSpan } from "components/ImageCropperModal/ImageCropper.styled";
 
 type ProfileScreenProps = {
   onBack: () => void;
-  done: (profileInfo: {
-    firstName: string;
-    lastName: string;
-    avatar: string;
-  }) => void;
+  done: (
+    profileInfo: {
+      firstName: string;
+      lastName: string;
+      avatar: string;
+    },
+    blob?: File
+  ) => void;
   userInfo: { firstName: string; lastName: string; avatar: string };
 } & React.HTMLProps<HTMLDivElement>;
 
@@ -48,6 +51,7 @@ export const ProfileScreen = ({
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [croppedImage, setCroppedImage] = useState("");
   const [modal, setModal] = useState(false);
+  const [blob, setBlob] = useState<File>();
 
   const handleDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -70,7 +74,7 @@ export const ProfileScreen = ({
           avatar: selectedAvatar,
         };
 
-        done(profileInfo);
+        done(profileInfo, blob);
       }}>
       {({ submit }) => (
         <FormWrapper
@@ -136,6 +140,7 @@ export const ProfileScreen = ({
                       closeModal={() => setModal(false)}
                       imageSrc={imageSrc}
                       setCroppedImage={setCroppedImage}
+                      setBlob={setBlob}
                     />
                   )}
                 </>

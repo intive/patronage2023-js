@@ -12,12 +12,14 @@ interface CropperModalProps {
   closeModal: () => void;
   setCroppedImage: (crop: string) => void;
   imageSrc: string;
+  setBlob: (blob: File) => void;
 }
 
 const ImageCropperModal = ({
   closeModal,
   imageSrc,
   setCroppedImage,
+  setBlob,
 }: CropperModalProps) => {
   const { t, dict } = useTranslate("SignUpPage");
   const showToast = useToast();
@@ -29,10 +31,7 @@ const ImageCropperModal = ({
     x: 0,
     y: 0,
   });
-  const { startUpload } = useUploadThing({
-    endpoint: "imageUploader",
-    onUploadError: (err) => console.error(err),
-  });
+
   const handleSubmit = async () => {
     //setCroppedImage to component that renders cropped image
     const data = getCroppedImg(imageSrc, croppedAreaPixels);
@@ -43,17 +42,19 @@ const ImageCropperModal = ({
         message: "Error cropping Image, try again.",
       });
     //create Blob and set it as file then pass to startUpload from uploadthing
-    const Blob = await fetch(data)
+    await fetch(data)
       .then((r) => r.blob())
       .then(
         (blobFile) =>
           new File([blobFile], "SomeRandomURLGeneratorNeeded.jpg", {
             type: "image/jpg",
           })
-      );
-    startUpload([Blob]);
-    setCroppedImage(data);
-    closeModal();
+      )
+      .then((blob) => {
+        setBlob(blob);
+        setCroppedImage(data);
+        closeModal();
+      });
   };
 
   const onCropComplete = useCallback(
