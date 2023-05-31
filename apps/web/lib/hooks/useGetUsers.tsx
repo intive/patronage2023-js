@@ -2,12 +2,12 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
+import useSuperfetch from "./useSuperfetch";
 
 export type GetUsersListType = {
   pageSize: number;
   pageParam: number;
   searchValue: string;
-  token: string | undefined;
 };
 
 export type User = {
@@ -25,40 +25,34 @@ export type ItemType = {
   totalCount: number;
 };
 
-const URL = `${env.NEXT_PUBLIC_API_URL}user/list`;
-
-export const getUsersList = async ({
-  pageSize,
-  pageParam,
-  searchValue,
-  token,
-}: GetUsersListType): Promise<ItemType> => {
-  const options = {
-    method: "POST",
-    headers: {
-      accept: "*/*",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      pageSize: pageSize,
-      pageIndex: pageParam,
-      search: searchValue,
-      sortDescriptors: [
-        {
-          columnName: "firstName",
-          sortAscending: true,
-        },
-      ],
-    }),
-  };
-
-  return fetch(URL, options).then((res) => res.ok && res.json());
-};
-
 export const useGetUsers = (searchValue: string, pageSize: number) => {
   const { data: sessionData } = useSession();
   const token = sessionData?.user.accessToken;
+
+  const fetch = useSuperfetch();
+
+  const getUsersList = async ({
+    pageSize,
+    pageParam,
+    searchValue,
+  }: GetUsersListType): Promise<ItemType> => {
+    const options = {
+      method: "POST",
+      body: {
+        pageSize: pageSize,
+        pageIndex: pageParam,
+        search: searchValue,
+        sortDescriptors: [
+          {
+            columnName: "firstName",
+            sortAscending: true,
+          },
+        ],
+      },
+    };
+
+    return fetch(`${env.NEXT_PUBLIC_API_URL}user/list`, options);
+  };
 
   return useInfiniteQuery({
     queryKey: ["budgetsList", { searchValue }],
@@ -67,7 +61,6 @@ export const useGetUsers = (searchValue: string, pageSize: number) => {
         pageSize,
         pageParam,
         searchValue,
-        token,
       });
     },
     getNextPageParam: (lastPage, allPages) => {
