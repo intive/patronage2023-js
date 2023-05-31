@@ -76,18 +76,16 @@ export const StylingDiv = styled.div<StylingDivProps>`
     `};
 `;
 
-export const AccordionTriggerHeader = React.forwardRef(
-  ({ children, className, ...props }: any, forwardedRef) => (
-    <AccordionHeader className="AccordionHeader">
-      <AccordionTrigger
-        className={`AccordionTrigger ${className}`}
-        {...props}
-        ref={forwardedRef}>
-        {children}
-        <Icon icon={"chevron_right"} className={"iconStyles"} />
-      </AccordionTrigger>
-    </AccordionHeader>
-  )
+export const AccordionTriggerHeader = ({
+  children,
+  className,
+}: React.HTMLProps<HTMLHeadingElement>) => (
+  <AccordionHeader className="AccordionHeader">
+    <AccordionTrigger className={`AccordionTrigger ${className}`}>
+      {children}
+      <Icon icon={"chevron_right"} className={"iconStyles"} />
+    </AccordionTrigger>
+  </AccordionHeader>
 );
 
 AccordionTriggerHeader.displayName = `AccordionTriggerHeader`;
