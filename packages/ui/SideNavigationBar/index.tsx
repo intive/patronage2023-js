@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import React, { useState, ReactNode, useMemo } from "react";
+import { useState, ReactNode, useMemo } from "react";
 
 import { SideNavigationBarButton } from "./SideNavigationBarButton";
 import { SideNavigationBarLink } from "./SideNavigationBarLink";
 import { SubMenu, SubMenuDataProps } from "./SubMenu";
+import { device } from "web/lib/media-queries";
 
 type SideNavigationBarItemProps = {
   href: string;
@@ -18,6 +19,7 @@ type SideNavigationBarProps = {
   isNavListItemClicked: boolean;
   resetIsNavListItemClicked: () => void;
   refetchBudgetsFunction: () => void;
+  resetSearch: Function;
 };
 
 type SubMenuBoolean = {
@@ -35,6 +37,7 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   flex-direction: column;
   align-items: center;
   position: fixed;
+  z-index: 5;
   height: 100%;
   padding-top: 40px;
   list-style: none;
@@ -42,6 +45,12 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
     !isNavListItemClicked && !isSubMenuShown
       ? theme.sideNavigationBar.background.activeColor
       : theme.sideNavigationBar.background.inactiveColor};
+  border-right: 1px solid
+    ${({ theme }) => theme.sideNavigationBar.background.separator};
+
+  ${device.tablet} {
+    border-right: none;
+  }
 `;
 
 export const SideNavigationBar = ({
@@ -49,6 +58,7 @@ export const SideNavigationBar = ({
   isNavListItemClicked,
   resetIsNavListItemClicked,
   refetchBudgetsFunction,
+  resetSearch,
 }: SideNavigationBarProps) => {
   const [subMenuId, setSubMenuId] = useState("");
   const [isSubMenuShown, setIsSubMenuShown] = useState(false);
@@ -63,6 +73,7 @@ export const SideNavigationBar = ({
     setSubMenuId("");
     setIsSubMenuShown(false);
     refetchBudgetsFunction();
+    resetSearch();
   };
 
   const showSubMenu = (id: string) => {
@@ -72,6 +83,7 @@ export const SideNavigationBar = ({
     setSubMenuId(id);
     resetIsNavListItemClicked();
     setIsSubMenuShown(true);
+    resetSearch();
   };
 
   const handleLinkClick = (id: string) => {

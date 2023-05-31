@@ -1,9 +1,17 @@
 "use client";
 
-import styled from "styled-components";
+import { useContext } from "react";
+import { Turn as Hamburger } from "hamburger-react";
 import { useSession } from "next-auth/react";
+import { ThemeContext } from "styled-components";
+import { useAtom } from "jotai";
+import { useTranslate } from "lib/hooks";
+import styled from "styled-components";
+import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
-import { Logo, Avatar } from "ui";
+import { MainMenu } from "./MainMenu";
+import { Logo } from "ui";
+import { mobileMenuAtom } from "store";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
@@ -12,6 +20,7 @@ const NavBar = styled.nav`
   margin: 0;
   padding: 15px 15px;
   justify-content: space-between;
+  align-items: center;
   z-index: 10;
   position: fixed;
   width: 100%;
@@ -19,26 +28,46 @@ const NavBar = styled.nav`
 
 const ActionWrapper = styled.div`
   display: flex;
-  min-width: 150px;
   justify-content: flex-end;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
 `;
 
-const AvatarStyled = styled(Avatar)`
-  height: 2.1em;
-  width: 2.1em;
+const BurgerWrapper = styled.div`
+  ${device.tablet} {
+    display: none;
+  }
 `;
 
 export default function Nav() {
   const { data } = useSession();
+  const [isSideOpen, setSideOpen] = useAtom(mobileMenuAtom);
+  const theme = useContext(ThemeContext);
+  const { t, dict } = useTranslate("NavigationLayout");
+  const { burgerMenuLabel } = dict;
+
+  const toggleMenu = () => {
+    setSideOpen((prev) => !prev);
+  };
+
   return (
     <NavBar>
+      {data && (
+        <BurgerWrapper>
+          <Hamburger
+            label={t(burgerMenuLabel)}
+            color={theme.nav.burgerMenu}
+            rounded
+            toggled={isSideOpen}
+            toggle={toggleMenu}
+          />
+        </BurgerWrapper>
+      )}
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-        {data && <AvatarStyled src={data.user.image} outlined />}
+        <MainMenu />
       </ActionWrapper>
     </NavBar>
   );

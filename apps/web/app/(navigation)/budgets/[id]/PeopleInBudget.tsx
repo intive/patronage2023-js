@@ -8,18 +8,18 @@ type PeopleInBudgetProps = {
 };
 
 const StyledWrapper = styled.div`
-  font-size: 32px;
-  margin-left: auto;
+  font-size: 48px;
+  margin-top: 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   line-height: 1em;
 
   > * + * {
     margin-left: -8px;
   }
 
-  ${device.tablet} {
-    font-size: 48px;
+  ${device.tv} {
+    margin-top: 0;
   }
 `;
 

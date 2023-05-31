@@ -159,6 +159,8 @@ export const theme = {
     background: {
       activeColor: colors.BasicWhite,
       inactiveColor: colors.Neutral1,
+      mobile: colors.Teal1,
+      separator: colors.Neutral2,
     },
     sideNavigationBarItem: {
       main: colors.Teal10,
@@ -173,6 +175,7 @@ export const theme = {
   },
   nav: {
     main: colors.Teal10,
+    burgerMenu: colors.BasicWhite,
     avatarSelector: {
       active: colors.Teal6,
     },
@@ -240,10 +243,11 @@ export const theme = {
     link: colors.BasicWhite,
     accent: colors.Neutral2,
   },
-  transactionDropdownMenu: {
+  dropdownMenu: {
     outlineFocus: colors.Teal10,
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
+    border: colors.Neutral2,
   },
   dropdownMenu: {
     contentBackground: colors.BasicWhite,

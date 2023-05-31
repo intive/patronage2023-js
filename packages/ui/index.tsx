@@ -18,7 +18,7 @@ export { Checkbox } from "./Checkbox";
 export { Textarea } from "./Textarea";
 export { IconPicker } from "./IconPicker";
 export { Modal } from "./Modal";
-export { TransactionDropdownMenu } from "./TransactionDropdownMenu";
+export { DropdownMenu } from "./DropdownMenu";
 export { InfoTile } from "./InfoTile";
 export { CurrencySelect } from "./CurrencySelect";
 export { BudgetIcon } from "./BudgetIcon";

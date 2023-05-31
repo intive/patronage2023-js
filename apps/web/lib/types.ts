@@ -40,6 +40,7 @@ export interface Budget {
   currency: string;
   userID: string;
   budgetUsers: BudgetUser[];
+  isFavourite: boolean;
 }
 
 export interface BudgetFixed {
@@ -56,6 +57,7 @@ export interface BudgetFixed {
     tag: string;
     locale: string;
   };
+  isFavourite: boolean;
 }
 
 export interface BudgetGeneralInfo {
