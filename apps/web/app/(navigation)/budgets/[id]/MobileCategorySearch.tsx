@@ -27,7 +27,7 @@ const MobileFilter = () => {
   const { t, dict } = useTranslate("AsideCard");
   return (
     <>
-      <StyledButton onClick={() => console.log("Manage modal")}>
+      <StyledButton onClick={() => {}}>
         ...{t(dict.categories.settings)}
       </StyledButton>
       <CategoryFilter />
