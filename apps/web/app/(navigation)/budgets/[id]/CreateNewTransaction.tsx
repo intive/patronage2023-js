@@ -1,16 +1,23 @@
 "use client";
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
+import { useSession } from "next-auth/react";
 import { Field, Form } from "houseform";
+import { z } from "zod";
+import { useTranslate } from "lib/hooks";
+import { useCategoryMap } from "lib/hooks";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { Budget } from "lib/types";
 import {
   Button,
   CustomDatePicker,
   Input,
   Modal,
-  CategorySelector,
   ErrorMessage,
   Select,
   CategoryIcon,
 } from "ui";
-import { z } from "zod";
 import {
   ButtonWrapperStyled,
   ContentStyled,
@@ -21,14 +28,6 @@ import {
   ParagraphStyled,
   SeparatorStyled,
 } from "./CreateNewTransactionStyled";
-import { useTranslate } from "lib/hooks";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { env } from "env.mjs";
-import { useSession } from "next-auth/react";
-import { useCategoryMap } from "lib/hooks";
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Budget } from "lib/types";
-import { useState } from "react";
 
 type CreateNewTransactionProps = {
   type: string;
