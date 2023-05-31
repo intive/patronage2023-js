@@ -5,8 +5,11 @@ import { Checkbox, Avatar } from "ui";
 import { ParagraphStyled } from "./CreateNewBudget.styled";
 import {
   AvatarWrapperStyled,
+  EmailStyled,
   LabelStyled,
   ListItemStyled,
+  NameAndEmailWrapperStyled,
+  NameStyled,
   ShareBudgetWrapperStyled,
   UsersListStyled,
 } from "./ShareBudget.styled";
@@ -14,11 +17,11 @@ import { useGetUsers } from "lib/hooks/useGetUsers";
 
 type User = {
   id: string;
-  email?: string;
+  email: string;
   firstName: string;
   lastName: string;
-  createdTimestamp?: number;
-  createdVia?: string;
+  createdTimestamp: number;
+  createdVia: string;
   avatar: string;
 };
 
@@ -48,7 +51,7 @@ const avatars = [
 
 const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
   ({ user, onCheckboxChange, checked }, ref) => {
-    const { firstName, lastName, avatar, id } = user;
+    const { firstName, lastName, avatar, id, email } = user;
 
     return (
       <ListItemStyled ref={ref} key={id}>
@@ -59,7 +62,10 @@ const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
               username={`${firstName} ${lastName}`}
             />
           </AvatarWrapperStyled>
-          <p>{`${firstName} ${lastName}`}</p>
+          <NameAndEmailWrapperStyled>
+            <NameStyled>{`${firstName} ${lastName}`}</NameStyled>
+            <EmailStyled>{email}</EmailStyled>
+          </NameAndEmailWrapperStyled>
         </LabelStyled>
         <div>
           <Checkbox

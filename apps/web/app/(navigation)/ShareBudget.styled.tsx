@@ -11,12 +11,30 @@ export const LabelStyled = styled.label`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  max-width: 90%;
+  overflow: hidden;
 `;
 
 export const AvatarWrapperStyled = styled.div`
   display: flex;
   font-size: 48px;
   margin: 0 16px 0 8px;
+`;
+
+export const NameAndEmailWrapperStyled = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+export const NameStyled = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const EmailStyled = styled.p`
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const UsersListStyled = styled.ul`
