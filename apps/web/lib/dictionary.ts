@@ -9,9 +9,9 @@ const dictionary = {
           fr: "Rechercher un budget",
         },
         buttonLabel: {
-          en: "Add new budget",
-          pl: "Dodaj nowy budżet",
-          fr: "Créer un nouveau budget",
+          en: "New budget",
+          pl: "Nowy budżet",
+          fr: "Nouveau budget",
         },
         importButtonLabel: {
           en: "Import",
@@ -19,9 +19,9 @@ const dictionary = {
           fr: "Importer",
         },
         exportButtonLabel: {
-          en: "Export",
-          pl: "Eksportuj",
-          fr: "Exporter",
+          en: "file",
+          pl: "plik",
+          fr: "fichier",
         },
         infos: {
           loading: {

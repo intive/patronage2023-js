@@ -80,7 +80,6 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
       disabled={!!!exportButton?.csvUri}
       variant="secondary">
       <Icon icon="file_download" size={12} />
-      {exportButton?.label}
     </ButtonStyled>
   );
 
@@ -123,6 +122,15 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
           </HeaderStyled>
           {exportButton && importButton && (
             <ButtonGroupStyled>
+              {button && (
+                <NewBudgetButtonStyled
+                  variant="secondary"
+                  onClick={() => button.clickHandler()}
+                  fullWidth>
+                  <Icon icon="add" size={12} />
+                  {button.label}
+                </NewBudgetButtonStyled>
+              )}
               <ExportDropdown
                 isButtonDisabled={!!!exportButton?.csvUri}
                 triggerButton={triggerButton}
@@ -132,7 +140,6 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
                 variant="secondary"
                 onClick={importButton.clickHandler}>
                 <Icon icon="file_upload" size={12} />
-                <span> {importButton.label}</span>
               </ImportButton>
             </ButtonGroupStyled>
           )}
@@ -149,14 +156,6 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
         </SubMenuHeaderStyled>
         {navigationList}
       </MainDiv>
-
-      {button && (
-        <NewBudgetButtonStyled
-          variant="secondary"
-          onClick={() => button.clickHandler()}>
-          {button.label}
-        </NewBudgetButtonStyled>
-      )}
     </SubMenuStyled>
   );
 };

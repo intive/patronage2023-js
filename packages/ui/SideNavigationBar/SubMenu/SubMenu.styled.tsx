@@ -49,10 +49,24 @@ export const Title = styled.span`
   line-height: 36px;
 `;
 
+export const ImportExportButtonsStyle = css`
+  display: flex;
+  justify-items: flex-start;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875em;
+  padding: 6px;
+  line-height: 1.25em;
+  outline: 0;
+  color: ${({ theme }) => theme.main};
+  cursor: pointer;
+  &:focus {
+    outline: 1px solid black;
+  }
+`;
+
 export const NewBudgetButtonStyled = styled(Button)`
-  width: 256px;
-  position: fixed;
-  bottom: 25px;
+  ${ImportExportButtonsStyle};
 `;
 
 export const ButtonGroupStyled = styled.div`
@@ -68,22 +82,6 @@ export const IconUpsideDown = styled(Icon)`
 
 export const IconWrapperStyled = styled.div`
   cursor: pointer;
-`;
-
-export const ImportExportButtonsStyle = css`
-  display: flex;
-  justify-items: flex-start;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.875em;
-  padding: 6px;
-  line-height: 1.25em;
-  outline: 0;
-  color: ${({ theme }) => theme.main};
-  cursor: pointer;
-  &:focus {
-    outline: 1px solid black;
-  }
 `;
 
 export const ImportButton = styled(Button)`
