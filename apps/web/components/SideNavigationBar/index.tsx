@@ -234,6 +234,7 @@ export default function SideNav() {
         isNavListItemClicked={isNavListItemClicked}
         resetIsNavListItemClicked={resetIsNavListItemClicked}
         refetchBudgetsFunction={refetch}
+        resetSearch={() => setSearchValue("")}
       />
       <>
         {isCreateNewBudgetModalVisible && (

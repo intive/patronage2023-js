@@ -12,7 +12,7 @@ import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 import { Icon, Avatar } from "ui";
 import { UsersListStyled, EmailStyled } from "./UsersList.styled";
-import { TransactionsTableSuspense as UserTableSuspense } from "../budgets/[id]/TransactionTableController/TransactionsTableSuspense";
+import TableSuspense from "components/TableSuspense";
 
 type User = {
   id: string;
@@ -176,9 +176,7 @@ export const UsersListTable = ({
           },
           tableBody: {
             content: (props) => {
-              return (
-                isLoading && <UserTableSuspense rowsNumber={5} {...props} />
-              );
+              return isLoading && <TableSuspense rowsNumber={5} {...props} />;
             },
             elementAttributes: () => ({
               className: isLoading ? "loading-tbody" : undefined,

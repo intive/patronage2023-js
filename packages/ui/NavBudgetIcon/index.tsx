@@ -3,7 +3,7 @@ import { Icon, IconType } from "../Icon";
 import { useContext } from "react";
 import { ThemeContext } from "styled-components";
 
-interface NavBudgetIcon {
+export interface NavBudgetIcon {
   onClick: () => void;
   icon: IconType;
   className?: string;
@@ -13,8 +13,8 @@ const NavBudgetIconStyled = styled.button<NavBudgetIcon>`
   cursor: pointer;
   border: none;
   background-color: ${({ theme }) => theme.editIcon.background};
-  height: 2.5em;
-  width: 2.5em;
+  height: 3em;
+  width: 3em;
   border-radius: 8px;
   flex-shrink: 0;
   line-height: 0;
