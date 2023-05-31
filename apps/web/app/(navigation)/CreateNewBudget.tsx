@@ -303,15 +303,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onSubmitValidate={checkCurrency}
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
-                        // WIP
                         <Select
                           items={[
                             {
                               label: (
                                 <>
                                   PLN{" "}
-                                  <SelectLabelHiddenInTrigger>
-                                    Polish Zloty
+                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
+                                    Polish Zloty 
                                   </SelectLabelHiddenInTrigger>
                                 </>
                               ),
@@ -321,7 +320,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               label: (
                                 <>
                                   USD{" "}
-                                  <SelectLabelHiddenInTrigger>
+                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
                                     United States Dollar
                                   </SelectLabelHiddenInTrigger>
                                 </>
@@ -332,7 +331,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               label: (
                                 <>
                                   EUR{" "}
-                                  <SelectLabelHiddenInTrigger>
+                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
                                     Euro
                                   </SelectLabelHiddenInTrigger>
                                 </>
