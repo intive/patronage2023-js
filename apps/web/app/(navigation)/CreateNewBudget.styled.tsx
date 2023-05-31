@@ -79,7 +79,6 @@ export const InputWrapperHalfStyledCurrency = styled.div`
 
 export const CurrencyTagStyled = styled.span`
   color: ${({ theme }) => theme.currencySelect.tag};
-  margin-right: 8px;
 `
 
 export const InputWrapperFullFlex = styled.div`

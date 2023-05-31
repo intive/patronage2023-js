@@ -20,10 +20,9 @@ const NavBar = styled.nav`
 
 const ActionWrapper = styled.div`
   display: flex;
-  min-width: 150px;
+  /* min-width: 150px; */
   justify-content: flex-end;
   align-items: center;
-  justify-content: flex-end;
   gap: 1rem;
 `;
 
@@ -33,7 +32,6 @@ export default function Nav() {
       <Logo white />
       <ActionWrapper>
         <LanguageSelector />
-
         <MainMenu />
       </ActionWrapper>
     </NavBar>

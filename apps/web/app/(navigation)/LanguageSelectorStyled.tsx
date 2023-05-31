@@ -1,5 +1,17 @@
 import styled from "styled-components";
 import * as Select from "@radix-ui/react-select";
+import { Select as UISelect } from "ui";
+
+export const SelectStyled = styled(UISelect)`
+  color: ${({ theme }) => theme.avatar.outline};
+  background-color: unset;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  margin-bottom: 0;
+  width: auto;
+`;
 
 export const SelectTriggerStyled = styled(Select.Trigger)`
   color: ${({ theme }) => theme.avatar.outline};

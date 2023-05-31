@@ -2,9 +2,9 @@ import { Language, languageAtom } from "store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
-import { Flag, Select } from "ui";
+import { Flag } from "ui";
 import {
-  SelectTriggerStyled,
+  SelectStyled,
 } from "./LanguageSelectorStyled";
 import { SelectLabelHiddenInTrigger } from "ui/Select";
 
@@ -40,7 +40,7 @@ export const LanguageSelector = () => {
   ];
 
   return (
-    <Select
+    <SelectStyled
       items={items.map(({ lang, flagSrc, languageName, alt }) => ({
         value: lang,
         label: (
