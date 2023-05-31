@@ -4,8 +4,6 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 import { Flag, Select } from "ui";
 import {
-  SelectContentStyled,
-  SelectItemStyled,
   SelectTriggerStyled,
 } from "./LanguageSelectorStyled";
 import { SelectLabelHiddenInTrigger } from "ui/Select";

@@ -50,7 +50,7 @@ export const Select = ({
           <SelectIconStyled>
             <Icon
               icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-              iconSize={27}
+              iconSize={24}
             />
           </SelectIconStyled>
         )}
@@ -63,7 +63,11 @@ export const Select = ({
           <AtomicSelect.Viewport>
             {items.map((item) => (
               <SelectItemStyled value={item.value} key={item.value}>
-                <AtomicSelect.ItemText>{item.label}</AtomicSelect.ItemText>
+                <AtomicSelect.ItemText>
+                  <SelectItemLabelWrapperStyled>
+                    {item.label}
+                  </SelectItemLabelWrapperStyled>
+                </AtomicSelect.ItemText>
               </SelectItemStyled>
             ))}
           </AtomicSelect.Viewport>
@@ -76,7 +80,14 @@ export const Select = ({
 
 export const SelectLabelHiddenInTrigger = styled.span``;
 
-export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
+const SelectItemLabelWrapperStyled = styled.span`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+`;
+
+const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   $hasError: boolean;
 }>`
   position: relative;
@@ -84,9 +95,12 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   justify-content: space-between;
   align-items: center;
   padding: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 150%;
+
   margin-bottom: ${({ $hasError }) => ($hasError ? "0" : "18px")};
   width: 100%;
-  height: 56px;
   color: ${({ theme }) => theme.categorySelect.neutral};
   background-color: ${({ theme }) => theme.categorySelect.background};
   border: solid 2px ${({ theme }) => theme.categorySelect.border};
@@ -114,36 +128,35 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   }
 `;
 
-export const TriggerLabelStyled = styled.div`
+const TriggerLabelStyled = styled.div`
   position: absolute;
   margin-top: -56px;
   font-size: 12px;
   font-weight: 600;
   background-color: ${({ theme }) => theme.input.labelBackground};
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 0 4px;
 `;
 
-export const SelectIconStyled = styled(AtomicSelect.Icon)`
+const SelectIconStyled = styled(AtomicSelect.Icon)`
   color: ${({ theme }) => theme.categorySelect.icon};
-  margin-top: 4px;
+  height: 1.5em;
 `;
 
-export const SelectPortalStyled = styled(AtomicSelect.Portal)`
+const SelectPortalStyled = styled(AtomicSelect.Portal)`
   z-index: 100;
 `;
 
-export const SelectContentStyled = styled(AtomicSelect.Content)`
-  border-radius: 1em;
+const SelectContentStyled = styled(AtomicSelect.Content)`
+  border-radius: 16px;
   overflow: hidden;
   background-color: ${({ theme }) => theme.categorySelect.background};
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
 `;
 
-export const SelectItemStyled = styled(AtomicSelect.Item)`
+const SelectItemStyled = styled(AtomicSelect.Item)`
   outline-color: ${({ theme }) => theme.input.focus};
-  padding: 8px 16px;
+  padding: 16px;
 
   &:focus {
     color: ${({ theme }) => theme.input.main};
@@ -160,7 +173,7 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
   }
 `;
 
-export const SupportingLabelStyled = styled.div`
+const SupportingLabelStyled = styled.div`
   color: ${({ theme }) => theme.categorySelect.error};
   font-weight: 400;
   font-size: 12px;

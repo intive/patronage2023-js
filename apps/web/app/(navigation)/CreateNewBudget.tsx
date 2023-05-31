@@ -41,6 +41,7 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
+  CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
 
 type NewBudget = {
@@ -308,8 +309,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             {
                               label: (
                                 <>
-                                  PLN{" "}
-                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
+                                  <CurrencyTagStyled>PLN</CurrencyTagStyled>
+                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
                                     Polish Zloty 
                                   </SelectLabelHiddenInTrigger>
                                 </>
@@ -319,8 +320,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             {
                               label: (
                                 <>
-                                  USD{" "}
-                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
+                                  <CurrencyTagStyled>USD</CurrencyTagStyled>
+                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
                                     United States Dollar
                                   </SelectLabelHiddenInTrigger>
                                 </>
@@ -330,8 +331,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             {
                               label: (
                                 <>
-                                  EUR{" "}
-                                  <SelectLabelHiddenInTrigger> {/*ADD DICTIONARY !!!!*/}
+                                  <CurrencyTagStyled>EUR</CurrencyTagStyled>
+                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
                                     Euro
                                   </SelectLabelHiddenInTrigger>
                                 </>

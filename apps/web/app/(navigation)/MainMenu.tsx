@@ -83,17 +83,3 @@ export const MainMenu = () => {
     </>
   );
 };
-
-{
-  /* <Select
-items={items.map((item) => ({
-  value: item.value,
-  label: item.text,
-}))}
-onValueChange={menuHandler}
-hasIcon
-label=""
-value=""
-hasScrollbar={hasScrollbar}
-/> */
-}
