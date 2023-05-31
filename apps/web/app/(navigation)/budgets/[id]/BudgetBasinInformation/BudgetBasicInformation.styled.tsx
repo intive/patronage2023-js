@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BudgetIcon, CurrencyAmount, NavBudgetIcon, DropdownMenu } from "ui";
-import { Favourite } from "app/(navigation)/Favourite";
+import { Favourite } from "components/SideNavigationBar/Favourite";
 import { device } from "lib/media-queries";
 
 export const TopWrapperStyled = styled.div`

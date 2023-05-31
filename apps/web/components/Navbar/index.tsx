@@ -9,9 +9,10 @@ import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
-import { MainMenu } from "./MainMenu";
+
 import { Logo } from "ui";
 import { mobileMenuAtom } from "store";
+import { MainMenu } from "app/(navigation)/MainMenu";
 
 const NavBar = styled.nav`
   box-sizing: border-box;
