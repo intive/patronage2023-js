@@ -248,8 +248,6 @@ export const theme = {
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
     border: colors.Neutral2,
-  },
-  dropdownMenu: {
     contentBackground: colors.BasicWhite,
   },
   infoTile: {

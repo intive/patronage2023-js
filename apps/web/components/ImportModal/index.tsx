@@ -71,6 +71,8 @@ const reducer = (
       return { ...state, screen: action.payload };
     case "SET_PROPS":
       return { ...state, props: action.payload };
+    case "SET_MULTIPLE":
+      return { ...state, ...action.payload };
     default:
       return state;
   }
@@ -128,14 +130,13 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             if (isDataValid) {
               dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
             } else {
-              dispatch({ type: "SET_CSV_URI", payload: data.body.uri });
               dispatch({
-                type: "SET_SCREEN",
-                payload: ErrorsScreen,
-              });
-              dispatch({
-                type: "SET_PROPS",
-                payload: { errors: data.body.errors },
+                type: "SET_MULTIPLE",
+                payload: {
+                  screen: ErrorsScreen,
+                  props: { errors: data.body.errors },
+                  csvUri: data.body.uri,
+                },
               });
             }
             break;
@@ -179,13 +180,12 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     // temp
     e.currentTarget.value = "";
     await sleep(2600);
-    dispatch({ type: "SET_CSV_ERROR", payload: true });
-    dispatch({ type: "SET_SCREEN", payload: ErrorsScreen });
     dispatch({
-      type: "SET_PROPS",
+      type: "SET_MULTIPLE",
       payload: {
-        errors: errorsArray,
-        errorMessage: t(dict.errorCsvMessage),
+        isCSVError: true,
+        screen: ErrorsScreen,
+        props: { errors: errorsArray, errorMessage: t(dict.errorCsvMessage) },
       },
     });
   };

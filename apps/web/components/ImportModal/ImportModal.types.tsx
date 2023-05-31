@@ -22,14 +22,15 @@ type PropsType = {
 };
 
 export type ImportExportState = {
-  isCSVError: boolean;
-  csvUri: string;
+  isCSVError?: boolean;
+  csvUri?: string;
   screen: React.ComponentType<any>;
-  props: PropsType;
+  props?: PropsType;
 };
 
 export type ImportExportAction =
   | { type: "SET_CSV_ERROR"; payload: boolean }
   | { type: "SET_CSV_URI"; payload: string }
   | { type: "SET_SCREEN"; payload: React.ComponentType<any> }
-  | { type: "SET_PROPS"; payload: PropsType };
+  | { type: "SET_PROPS"; payload: PropsType }
+  | { type: "SET_MULTIPLE"; payload: ImportExportState };
