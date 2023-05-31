@@ -97,8 +97,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     (user) => !budgetUsersId.includes(user)
   );
 
-  const url = `${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`;
-
   const [canBeClosed, setCanBeClosed] = useState<boolean[]>([false, false]);
 
   useEffect(() => {
@@ -107,7 +105,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {
-      return fetch(url, {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`, {
         method: "POST",
         headers: {
           accept: "application/json",

@@ -129,22 +129,9 @@ export const ShareBudget = ({
     [isFetchingNextPage, fetchNextPage, hasNextPage]
   );
 
-  const users =
-    data &&
-    data.pages?.flatMap(({ items }) =>
-      items.map((user) => {
-        return user.id !== owner ? (
-          <UsersListItem
-            ref={lastUserRef}
-            user={user}
-            onCheckboxChange={onCheckboxChange}
-            checked={isChecked(user)}
-          />
-        ) : (
-          <></>
-        );
-      })
-    );
+  const allUsers = data && data.pages?.flatMap(({ items }) => items);
+  const usersWithoutOwner =
+    allUsers && allUsers.filter((user) => user.id !== owner);
 
   return (
     <ShareBudgetWrapperStyled>
@@ -153,7 +140,18 @@ export const ShareBudget = ({
         placeholder="Search"
         onChange={(e) => setSearchValue(e.currentTarget.value)}
       />
-      <UsersListStyled>{users}</UsersListStyled>
+      <UsersListStyled>
+        {usersWithoutOwner &&
+          usersWithoutOwner.map((user) => (
+            <UsersListItem
+              key={user.id}
+              ref={lastUserRef}
+              user={user}
+              onCheckboxChange={onCheckboxChange}
+              checked={isChecked(user)}
+            />
+          ))}
+      </UsersListStyled>
     </ShareBudgetWrapperStyled>
   );
 };
