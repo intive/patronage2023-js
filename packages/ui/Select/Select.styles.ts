@@ -34,18 +34,22 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   transition: border-color 200ms ease-out;
   position: relative;
 
-  ${({ $hasError }) =>
-    $hasError &&
-    css`
-      color: ${({ theme }) => theme.select.error};
-      border: solid 2px ${({ theme }) => theme.select.error};
-    `}
-
   :focus {
     transition: border-color 200ms ease-out;
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
   }
+
+  ${({ $hasError }) =>
+    $hasError &&
+    css`
+      color: ${({ theme }) => theme.select.error};
+      border: solid 2px ${({ theme }) => theme.select.error};
+
+      &:focus {
+        border: solid 2px ${({ theme }) => theme.select.error};
+      }
+    `}
 
   ${SelectLabelHiddenInTrigger} {
     display: none;
@@ -71,6 +75,22 @@ export const SelectPortalStyled = styled(AtomicSelect.Portal)`
   z-index: 100;
 `;
 
+const ScrollButtons = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+`;
+
+export const SelectScrollUpButtonStyled = styled(AtomicSelect.ScrollUpButton)`
+  ${ScrollButtons}
+`;
+export const SelectScrollDownButtonStyled = styled(
+  AtomicSelect.ScrollDownButton
+)`
+  ${ScrollButtons}
+`;
+
 export const SelectContentStyled = styled(AtomicSelect.Content)`
   border-radius: 16px;
   overflow: hidden;
@@ -78,6 +98,7 @@ export const SelectContentStyled = styled(AtomicSelect.Content)`
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
   z-index: 100;
+  max-height: var(--radix-select-content-available-height);
 `;
 
 export const SelectItemStyled = styled(AtomicSelect.Item)`
@@ -95,6 +116,9 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
     }
     &:hover {
       outline: transparent;
+    }
+    * {
+      color: inherit;
     }
   }
 `;

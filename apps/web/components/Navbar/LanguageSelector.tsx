@@ -8,9 +8,7 @@ import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 const SelectStyled = styled(Select)`
-  color: ${({ theme }) => theme.avatar.outline};
   background-color: unset;
-  cursor: pointer;
   border: 0;
   padding: 0;
   line-height: 0;

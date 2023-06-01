@@ -18,7 +18,6 @@ export const AvatarStyled = styled(Avatar)`
 const SelectTriggerStyled = styled(Select.Trigger)`
   color: ${({ theme }) => theme.avatar.outline};
   background-color: unset;
-  cursor: pointer;
   border: 0;
   padding: 0;
   line-height: 0;

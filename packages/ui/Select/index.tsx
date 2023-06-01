@@ -10,6 +10,8 @@ import {
   SelectContentStyled,
   SelectItemStyled,
   SelectItemLabelWrapperStyled,
+  SelectScrollUpButtonStyled,
+  SelectScrollDownButtonStyled,
 } from "./Select.styles";
 
 type SelectItem = {
@@ -69,10 +71,11 @@ export const Select = ({
         )}
       </SelectTriggerStyled>
       {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
-
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper" sideOffset={sideOffset}>
-          <AtomicSelect.ScrollUpButton />
+          <SelectScrollUpButtonStyled>
+            <Icon icon="keyboard_arrow_up" iconSize={24} color="#515151" />
+          </SelectScrollUpButtonStyled>
           <AtomicSelect.Viewport>
             {items.map((item) => (
               <SelectItem value={item.value} key={item.value}>
@@ -84,7 +87,9 @@ export const Select = ({
               </SelectItem>
             ))}
           </AtomicSelect.Viewport>
-          <AtomicSelect.ScrollDownButton />
+          <SelectScrollDownButtonStyled>
+            <Icon icon="keyboard_arrow_down" iconSize={24} color="#515151" />
+          </SelectScrollDownButtonStyled>
         </SelectContentStyled>
       </SelectPortalStyled>
     </AtomicSelect.Root>
