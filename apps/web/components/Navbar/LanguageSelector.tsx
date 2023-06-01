@@ -4,7 +4,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import styled from "styled-components";
 
 import { Flag, Select } from "ui";
-import { SelectLabelHiddenInTrigger } from "ui/Select";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 const SelectStyled = styled(Select)`
   color: ${({ theme }) => theme.avatar.outline};
