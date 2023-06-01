@@ -76,7 +76,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const fetch = useSuperfetch();
   const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
-    useValidateBudgetModal("AddNewBudgetModal");
+    useValidateBudgetModal("EditBudgetModal");
 
   const budgetUsersId = budget.budgetUsers.map((user) => user.id);
   const [budgetUsers, setBudgetUsers] = useState(budgetUsersId);

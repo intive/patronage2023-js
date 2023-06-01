@@ -153,27 +153,7 @@ export const TabsStyled = styled(Tabs.Root)`
 export const ContentStyled = styled.div`
   display: grid;
   overflow: hidden;
-  /* grid-row-start: 1;
-  grid-row-end: 2; */
 `;
-
-// export const ContentStyled = styled.div`
-//   display: grid;
-//   overflow-y: auto;
-//   padding-right: ${({ fullHeight }) => fullHeight && "10px"};
-//   gap: 8px;
-
-//   &::-webkit-scrollbar {
-//     background-color: ${({ theme }) => theme.textarea.Neutral2};
-//     border-radius: 10px;
-//     width: 6px;
-//     margin-bottom: 5px;
-//   }
-//   &::-webkit-scrollbar-thumb {
-//     background-color: ${({ theme }) => theme.modal.closeButton};
-//     border-radius: 10px;
-//   }
-// `;
 
 export const SettingsTab = styled(Tabs.Content)`
   height: 100%;

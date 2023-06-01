@@ -42,19 +42,11 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-
-import { useAtomValue } from "jotai";
-import { languageAtom } from "store";
 import { ShareBudget } from "../../../ShareBudget";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type NewBudget = {
   onClose: Function;
-};
-
-type currencyType = {
-  tag: string;
-  locale?: string;
 };
 
 type newBudgetType = {
@@ -64,7 +56,7 @@ type newBudgetType = {
   icon: string;
   dateStart: string;
   dateEnd: string;
-  currency: currencyType;
+  currency: string;
 };
 
 type sendUsersProps = {
@@ -84,18 +76,11 @@ export const icons: IconType[] = [
   "help",
 ];
 
-//mocked existing user budgets
-export const loggedUserExistingBudgets = ["smutnarzaba", "frytki123"];
-//mocked currency
-export const acceptedCurrencies: Array<string> = ["USD", "PLN", "EUR", "GBP"];
-
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");
-  const [lang, setLang] = useState<string>("en-US");
   const [errorMsg, setErrorMsg] = useState("");
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
-  const currentLang = useAtomValue(languageAtom);
   const { hasScrollbar } = useHasScrollBar();
 
   const { data: session } = useSession();
@@ -119,10 +104,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     icon: selectedIcon,
     dateStart: "",
     dateEnd: "",
-    currency: {
-      tag: "USD",
-      locale: lang,
-    },
+    currency: "USD",
   });
 
   const onSelectStartDate = (date: Date | null) => {
@@ -135,12 +117,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
       : setNewBudget({ ...newBudget, dateEnd: "" });
   };
-
-  useEffect(() => {
-    currentLang === "en" && setLang("en-US");
-    currentLang === "pl" && setLang("pl-PL");
-    currentLang === "fr" && setLang("fr-FR");
-  }, [lang, currentLang]);
 
   //temporary just for current version BE endpoint
   const filteredUsers = budgetUsers.filter((user) => user !== owner);
@@ -194,7 +170,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             name: newBudget.name,
             limit: {
               value: newBudget.limit,
-              currency: newBudget.currency.tag,
+              currency: newBudget.currency,
             },
             period: {
               startDate: newBudget.dateStart,
@@ -348,7 +324,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <InputWrapperHalfStyledCurrency>
                     <Field
                       name="currency"
-                      initialValue={newBudget.currency.tag}
+                      initialValue={newBudget.currency}
                       onSubmitValidate={checkCurrency}
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
@@ -362,7 +338,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                             setValue(e);
                             setNewBudget({
                               ...newBudget,
-                              currency: { ...newBudget.currency, tag: e },
+                              currency: e,
                             });
                           }}
                           hasScrollbar={hasScrollbar}
