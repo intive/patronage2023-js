@@ -6,6 +6,11 @@ const dictionary = {
     },
   },
   NavigationLayout: {
+    burgerMenuLabel: {
+      en: "Open menu",
+      pl: "Otwórz menu",
+      fr: "Ouvrir le menu",
+    },
     SideNav: {
       budgetsItem: {
         title: { en: "Budgets", pl: "Budżety", fr: "Budgets" },
@@ -51,7 +56,7 @@ const dictionary = {
           editProfile: {
             en: "Edit profile",
             pl: "Edytuj profil",
-            fr: "Editer le profil",
+            fr: "Modifier le profil",
           },
           changePassword: {
             en: "Change password",
@@ -880,6 +885,27 @@ const dictionary = {
   },
   SettingsPage: {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },
+    editProfile: {
+      title: {
+        en: "Edit profile",
+        pl: "Edytuj profil",
+        fr: "Modifier le profil",
+      },
+    },
+    changePassword: {
+      title: {
+        en: "Change password",
+        pl: "Zmień hasło",
+        fr: "Changer le mot de passe",
+      },
+    },
+    language: {
+      title: {
+        en: "Language",
+        pl: "Język",
+        fr: "Langue",
+      },
+    },
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },
   Pagination: {

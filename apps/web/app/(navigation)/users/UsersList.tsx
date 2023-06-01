@@ -108,7 +108,8 @@ export const UsersListTable = ({
               switch (column.key) {
                 case "avatar":
                   //set default avatar if missing data
-                  if (!rowData.avatar) return <Avatar src="/unsetAvatar.svg" />;
+                  if (!rowData.avatar)
+                    return <Avatar src="/avatars/default.svg" />;
 
                   const text = rowData.avatar;
                   //check if avatar string is a path coming from our avatars folder
@@ -122,7 +123,7 @@ export const UsersListTable = ({
                       src={
                         isPath.success || isUrl.success
                           ? rowData.avatar
-                          : "/unsetAvatar.svg"
+                          : "avatars/default.svg"
                       }
                     />
                   );
