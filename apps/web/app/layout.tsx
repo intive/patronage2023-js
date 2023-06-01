@@ -4,13 +4,13 @@ import { StyledComponentsRegistry } from "../lib/registry";
 import { Inter } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
-import SessionProviderWrapper from "./SessionProviderWrapper";
 import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../css/global.css";
 import { useEffect } from "react";
 import { useSetAtom } from "jotai";
 import { Language, languageAtom } from "store";
+import { SessionProvider } from "next-auth/react";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -44,13 +44,13 @@ export default function RootLayout({ children }: LayoutProps) {
       </head>
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
-          <SessionProviderWrapper>
+          <SessionProvider>
             <StyledComponentsRegistry>
               <StyledComponentsThemeWrapper>
                 {children}
               </StyledComponentsThemeWrapper>
             </StyledComponentsRegistry>
-          </SessionProviderWrapper>
+          </SessionProvider>
         </QueryClientProvider>
       </body>
     </html>

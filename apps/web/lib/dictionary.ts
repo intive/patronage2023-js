@@ -1,5 +1,16 @@
 const dictionary = {
+  Common: {
+    days: {
+      yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
+      today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
+    },
+  },
   NavigationLayout: {
+    burgerMenuLabel: {
+      en: "Open menu",
+      pl: "Otwórz menu",
+      fr: "Ouvrir le menu",
+    },
     SideNav: {
       budgetsItem: {
         title: { en: "Budgets", pl: "Budżety", fr: "Budgets" },
@@ -45,7 +56,7 @@ const dictionary = {
           editProfile: {
             en: "Edit profile",
             pl: "Edytuj profil",
-            fr: "Editer le profil",
+            fr: "Modifier le profil",
           },
           changePassword: {
             en: "Change password",
@@ -130,6 +141,16 @@ const dictionary = {
       en: "Log out",
       pl: "Wyloguj",
       fr: "Se déconnecter",
+    },
+    signOut: {
+      en: "Sign out",
+      pl: "Wyloguj",
+      fr: "Se déconnecter",
+    },
+    home: {
+      en: "Home",
+      pl: "Strona główna",
+      fr: "Page d'accueil",
     },
   },
   SignInPage: {
@@ -810,6 +831,11 @@ const dictionary = {
           fr: "Limite du budget",
         },
         currency: { en: "Currency", pl: "Waluta", fr: "Monnaie" },
+        dropdownMenuAriaLabel: {
+          en: "More options",
+          pl: "Więcej opcji",
+          fr: "Plus d'options",
+        },
       },
       currencyNames: {
         USD: {
@@ -881,10 +907,6 @@ const dictionary = {
       fr: "Rechercher par nom",
     },
     transactionsTable: {
-      groupRowDays: {
-        yesterday: { en: "Yesterday", pl: "wczoraj", fr: "hier" },
-        today: { en: "Today", pl: "dzisiaj", fr: "aujourd'hui" },
-      },
       tableColumnHeaders: {
         category: { en: "Category", pl: "Kategoria", fr: "Catégorie" },
         name: { en: "Name", pl: "Nazwa", fr: "Nom" },
@@ -910,6 +932,27 @@ const dictionary = {
   },
   SettingsPage: {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },
+    editProfile: {
+      title: {
+        en: "Edit profile",
+        pl: "Edytuj profil",
+        fr: "Modifier le profil",
+      },
+    },
+    changePassword: {
+      title: {
+        en: "Change password",
+        pl: "Zmień hasło",
+        fr: "Changer le mot de passe",
+      },
+    },
+    language: {
+      title: {
+        en: "Language",
+        pl: "Język",
+        fr: "Langue",
+      },
+    },
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },
   Pagination: {

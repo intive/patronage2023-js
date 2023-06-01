@@ -15,6 +15,7 @@
     "chart.js": "^4.3.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.7",
+    "hamburger-react": "^2.5.0",
     "houseform": "^1.9.0",
     "jotai": "^2.1.0",
     "jsonwebtoken": "^9.0.0",

@@ -12,7 +12,7 @@ import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
 import { Icon, Avatar } from "ui";
 import { UsersListStyled, EmailStyled } from "./UsersList.styled";
-import { TransactionsTableSuspense as UserTableSuspense } from "./../budgets/[id]/TransactionsTableSuspense";
+import TableSuspense from "components/TableSuspense";
 
 type User = {
   id: string;
@@ -108,7 +108,8 @@ export const UsersListTable = ({
               switch (column.key) {
                 case "avatar":
                   //set default avatar if missing data
-                  if (!rowData.avatar) return <Avatar src="/unsetAvatar.svg" />;
+                  if (!rowData.avatar)
+                    return <Avatar src="/avatars/default.svg" />;
 
                   const text = rowData.avatar;
                   //check if avatar string is a path coming from our avatars folder
@@ -122,7 +123,7 @@ export const UsersListTable = ({
                       src={
                         isPath.success || isUrl.success
                           ? rowData.avatar
-                          : "/unsetAvatar.svg"
+                          : "avatars/default.svg"
                       }
                     />
                   );
@@ -175,9 +176,7 @@ export const UsersListTable = ({
           },
           tableBody: {
             content: (props) => {
-              return (
-                isLoading && <UserTableSuspense rowsNumber={5} {...props} />
-              );
+              return isLoading && <TableSuspense rowsNumber={5} {...props} />;
             },
             elementAttributes: () => ({
               className: isLoading ? "loading-tbody" : undefined,

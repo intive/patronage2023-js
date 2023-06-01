@@ -1,10 +1,10 @@
 "use client";
 
-import { EmailScreen } from "./EmailScreen";
+import { EmailScreen } from "./FlowController/EmailScreen";
 import { FlowController } from "./FlowController";
-import { PasswordSubComponent } from "./PasswordScreen";
-import { ProfileScreen } from "./ProfileScreen";
-import { SuccessErrorScreen } from "./SuccessErrorScreen";
+import { PasswordSubComponent } from "./FlowController/PasswordScreen";
+import { ProfileScreen } from "./FlowController/ProfileScreen";
+import { SuccessErrorScreen } from "./FlowController/SuccessErrorScreen";
 import { useState } from "react";
 import { env } from "env.mjs";
 import { useMutation } from "@tanstack/react-query";
