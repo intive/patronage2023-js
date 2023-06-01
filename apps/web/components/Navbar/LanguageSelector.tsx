@@ -38,13 +38,13 @@ export const LanguageSelector = () => {
       lang: "en",
       flagSrc: "/flags/en.svg",
       languageName: "English",
-      alt: t(dict.languageFlagAlts.britishFlag)
+      alt: t(dict.languageFlagAlts.britishFlag),
     },
     {
       lang: "fr",
       flagSrc: "/flags/fr.svg",
       languageName: "Français",
-      alt: t(dict.languageFlagAlts.frenchFlag)
+      alt: t(dict.languageFlagAlts.frenchFlag),
     },
   ];
 

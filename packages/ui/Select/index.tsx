@@ -73,7 +73,6 @@ export const Select = ({
         </SelectTriggerStyled>
         {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
       </div>
-
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper" sideOffset={sideOffset}>
           <SelectScrollUpButtonStyled>

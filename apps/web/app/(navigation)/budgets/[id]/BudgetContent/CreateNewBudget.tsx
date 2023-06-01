@@ -82,6 +82,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
 
+  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
+
   const {
     checkNameOnChange,
     checkNameOnSubmit,
@@ -284,41 +286,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
                         <Select
-                          items={[
-                            {
-                              label: (
-                                <>
-                                  <CurrencyTagStyled>PLN</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>
-                                    {t(dict.currencyNames.PLN)}
-                                  </SelectLabelHiddenInTrigger>
-                                </>
-                              ),
-                              value: "PLN",
-                            },
-                            {
-                              label: (
-                                <>
-                                  <CurrencyTagStyled>USD</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>
-                                    {t(dict.currencyNames.USD)}
-                                  </SelectLabelHiddenInTrigger>
-                                </>
-                              ),
-                              value: "USD",
-                            },
-                            {
-                              label: (
-                                <>
-                                  <CurrencyTagStyled>EUR</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>
-                                    {t(dict.currencyNames.EUR)}
-                                  </SelectLabelHiddenInTrigger>
-                                </>
-                              ),
-                              value: "EUR",
-                            },
-                          ]}
+                          items={currencies.map((currency) => ({
+                            label: (
+                              <>
+                                <CurrencyTagStyled>PLN</CurrencyTagStyled>
+                                <SelectLabelHiddenInTrigger>
+                                  {t(dict.currencyNames[currency])}
+                                </SelectLabelHiddenInTrigger>
+                              </>
+                            ),
+                            value: currency,
+                          }))}
                           onValueChange={(value) => {
                             setValue(value);
                             setNewBudget({

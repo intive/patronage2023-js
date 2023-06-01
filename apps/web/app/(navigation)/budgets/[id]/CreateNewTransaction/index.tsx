@@ -226,52 +226,17 @@ export const CreateNewTransaction = ({
                     .nonempty({ message: t(dict.errors.selectCategory) })}>
                   {({ setValue, errors, value }) => (
                     <Select
-                      items={[
-                        ...Object.entries(categoryMap).map(
-                          ([categoryKey, category]) => ({
-                            value: categoryKey,
-                            label: (
-                              <>
-                                <CategoryIcon small category={category} />
-                                <span>{category.name}</span>
-                              </>
-                            ),
-                          })
-                        ),
-                        ...Object.entries(categoryMap).map(
-                          ([categoryKey, category]) => ({
-                            value: categoryKey + "b",
-                            label: (
-                              <>
-                                <CategoryIcon small category={category} />
-                                <span>{category.name}</span>
-                              </>
-                            ),
-                          })
-                        ),
-                        ...Object.entries(categoryMap).map(
-                          ([categoryKey, category]) => ({
-                            value: categoryKey + "c",
-                            label: (
-                              <>
-                                <CategoryIcon small category={category} />
-                                <span>{category.name}</span>
-                              </>
-                            ),
-                          })
-                        ),
-                        ...Object.entries(categoryMap).map(
-                          ([categoryKey, category]) => ({
-                            value: categoryKey + "d",
-                            label: (
-                              <>
-                                <CategoryIcon small category={category} />
-                                <span>{category.name}</span>
-                              </>
-                            ),
-                          })
-                        ),
-                      ]}
+                      items={Object.entries(categoryMap).map(
+                        ([categoryKey, category]) => ({
+                          value: categoryKey,
+                          label: (
+                            <>
+                              <CategoryIcon small category={category} />
+                              <span>{category.name}</span>
+                            </>
+                          ),
+                        })
+                      )}
                       onValueChange={(newValue) => {
                         setValue(newValue);
                       }}

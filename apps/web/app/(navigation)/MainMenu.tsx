@@ -3,11 +3,9 @@ import * as Select from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
-
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useTranslate } from "lib/hooks";
 import { Avatar, Icon } from "ui";
-
 import { SelectContentStyled, SelectItemStyled } from "ui/Select/Select.styles";
 
 export const AvatarStyled = styled(Avatar)`
