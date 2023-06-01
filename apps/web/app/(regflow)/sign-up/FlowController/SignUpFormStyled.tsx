@@ -54,3 +54,13 @@ export const CropperStyled = styled.div`
 export const StyledButton = styled(Button)`
   padding: 8px 12px;
 `;
+
+export const CroppSectionButtonWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+export const CustomSectionWrapper = styled.div`
+  height: 100%;
+  padding: 10px;
+`;

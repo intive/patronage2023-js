@@ -87,6 +87,7 @@ export const SignUp = () => {
     const newUser = { ...user, profile: profileInfo };
 
     if (blob) {
+      //function takes File[]
       await startUpload([blob]).then((res) => {
         if (res)
           //we only accept one file so we know it's [0]

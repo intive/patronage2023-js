@@ -5,7 +5,6 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Button } from "ui";
 import { useTranslate } from "lib/hooks";
-import { device } from "lib/media-queries";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,13 +12,9 @@ export const Container = styled.div`
   align-items: center;
   border: 2px solid ${({ theme }) => theme.main};
   border-radius: 20px;
-  height: 150px;
   width: 100%;
+  height: 100%;
   gap: 10px;
-  ${device.tablet} {
-    height: 300px;
-    margin-block: 10px;
-  }
 `;
 
 interface DropzoneProps {

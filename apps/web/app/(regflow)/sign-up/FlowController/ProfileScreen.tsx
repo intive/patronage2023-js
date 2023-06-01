@@ -14,7 +14,8 @@ import {
 import { useCallback, useState } from "react";
 import {
   ButtonWrapper,
-  CropperStyled,
+  CroppSectionButtonWrapper,
+  CustomSectionWrapper,
   FormWrapper,
   StyledButton,
   StyledHeader,
@@ -109,7 +110,7 @@ export const ProfileScreen = ({
           </SwitcherWrapper>
           <Separator />
           {customAvatar ? (
-            <>
+            <CustomSectionWrapper>
               {croppedImage ? (
                 <Container>
                   <StyledSpan>
@@ -124,28 +125,38 @@ export const ProfileScreen = ({
                       borderRadius: "100%",
                     }}
                   />
-                  <StyledButton
-                    onClick={() => {
-                      setCroppedImage("");
-                      setModal(true);
-                    }}>
-                    {t(dict.profileScreen.dropZone.goBack)} <Icon icon="edit" />
-                  </StyledButton>
+                  <CroppSectionButtonWrapper>
+                    <StyledButton
+                      onClick={() => {
+                        setModal(true);
+                      }}>
+                      {t(dict.profileScreen.dropZone.goBack)}
+                      <Icon icon="edit" />
+                    </StyledButton>
+                    <StyledButton
+                      onClick={() => {
+                        setCroppedImage("");
+                        setImageSrc("");
+                      }}>
+                      {t(dict.profileScreen.dropZone.delete)}
+                      <Icon icon="delete" />
+                    </StyledButton>
+                  </CroppSectionButtonWrapper>
                 </Container>
               ) : (
                 <>
                   <StyledDropzone handleDrop={handleDrop} />
-                  {imageSrc && modal && (
-                    <ImageCropperModal
-                      closeModal={() => setModal(false)}
-                      imageSrc={imageSrc}
-                      setCroppedImage={setCroppedImage}
-                      setBlob={setBlob}
-                    />
-                  )}
                 </>
               )}
-            </>
+              {imageSrc && modal && (
+                <ImageCropperModal
+                  closeModal={() => setModal(false)}
+                  imageSrc={imageSrc}
+                  setCroppedImage={setCroppedImage}
+                  setBlob={setBlob}
+                />
+              )}
+            </CustomSectionWrapper>
           ) : (
             <AvatarSelector
               avatars={[
