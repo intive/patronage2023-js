@@ -10,17 +10,17 @@ const dictionary = {
       polishFlag: {
         en: "flag of Poland",
         pl: "flaga Polski",
-        fr: "drapeau de la Pologne"
+        fr: "drapeau de la Pologne",
       },
       britishFlag: {
         en: "flag of United Kingdom",
         pl: "flaga Wielkiej Brytanii",
-        fr: "drapeau du Royaume-Uni"
+        fr: "drapeau du Royaume-Uni",
       },
       frenchFlag: {
         en: "flag of France",
         pl: "flaga Francji",
-        fr: "drapeau de la France"
+        fr: "drapeau de la France",
       },
     },
     burgerMenuLabel: {

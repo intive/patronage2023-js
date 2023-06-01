@@ -289,7 +289,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           items={currencies.map((currency) => ({
                             label: (
                               <>
-                                <CurrencyTagStyled>{currency}</CurrencyTagStyled>
+                                <CurrencyTagStyled>
+                                  {currency}
+                                </CurrencyTagStyled>
                                 <SelectLabelHiddenInTrigger>
                                   {t(dict.currencyNames[currency])}
                                 </SelectLabelHiddenInTrigger>
