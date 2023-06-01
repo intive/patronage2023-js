@@ -130,11 +130,16 @@ export default function SideNav() {
         }))
     ) ?? [];
 
-  const { data: csvLinkData } = useQuery({
-    queryKey: ["rangedStatistics", {}],
+  const { data: csvUri } = useQuery({
+    queryKey: ["csvUri"],
     queryFn: async () => {
-      return superFetch(``).catch((err) => console.error(err));
+      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      }).then((res) => res.text());
     },
+    enabled: !!session,
   });
 
   const budgetsSubMenuData = {
@@ -177,7 +182,7 @@ export default function SideNav() {
         });
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),
-      csvUri: "/avatars/3.svg" || csvLinkData?.uri,
+      csvUri: csvUri,
     },
     importButton: {
       clickHandler: () => {

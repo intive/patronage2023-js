@@ -193,6 +193,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Form
           onSubmit={() => {
             sendBudget();
+            queryClient.invalidateQueries({ queryKey: ["csvUri"] });
           }}>
           {({ submit }) => (
             <form
