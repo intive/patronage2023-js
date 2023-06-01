@@ -40,6 +40,7 @@ import { icons } from "./CreateNewBudget";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "ui";
 import { ShareBudget } from "./ShareBudget";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 interface EditBudgetProps {
   budget: BudgetFixed;
@@ -72,6 +73,7 @@ const isEqual = (obj1: Object, obj2: Object) => {
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { t, dict } = useTranslate("EditBudgetModal");
+  const fetch = useSuperfetch();
   const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("AddNewBudgetModal");
@@ -107,12 +109,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     mutationFn: (budgetUsers: string[]) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`, {
         method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + session?.user.accessToken,
-        },
-        body: JSON.stringify(budgetUsers),
+        body: budgetUsers,
       });
     },
     onError: () => {
@@ -120,7 +117,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       return;
     },
     onSettled: (data) => {
-      switch (data!.status) {
+      switch (data!.httpStatus) {
         case 200:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
           setCanBeClosed([canBeClosed[0], true]);
@@ -142,12 +139,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     mutationFn: (edited: EditedBudgetProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
         method: "PUT",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + session?.user.accessToken,
-        },
-        body: JSON.stringify({
+        body: {
           name: edited.name,
           description: edited.description,
           iconName: edited.iconName,
@@ -155,7 +147,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             startDate: edited.startDate,
             endDate: edited.endDate,
           },
-        }),
+        },
       });
     },
     onError: () => {
@@ -163,7 +155,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       return;
     },
     onSettled: (data) => {
-      switch (data!.status) {
+      switch (data!.httpStatus) {
         case 201:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
           setCanBeClosed([true, canBeClosed[1]]);

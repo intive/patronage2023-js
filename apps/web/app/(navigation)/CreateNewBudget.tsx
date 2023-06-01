@@ -46,6 +46,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useAtomValue } from "jotai";
 import { languageAtom } from "store";
 import { ShareBudget } from "./ShareBudget";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type NewBudget = {
   onClose: Function;
@@ -147,16 +148,13 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
 
+  const superFetch = useSuperfetch();
+
   const sendBudgetUsersMutation = useMutation({
     mutationFn: ({ budgetUsers, budgetId }: sendUsersProps) => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/users`, {
+      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/users`, {
         method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + session?.user.accessToken,
-        },
-        body: JSON.stringify(budgetUsers),
+        body: budgetUsers,
       });
     },
     onError: () => {
@@ -164,7 +162,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       return;
     },
     onSettled: (data) => {
-      switch (data!.status) {
+      switch (data.httpStatus) {
         case 200:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
           onClose();
