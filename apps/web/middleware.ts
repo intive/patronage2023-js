@@ -13,7 +13,7 @@ export default withAuth(
 
     //append new routes if needed in future
     const authRoutes = ["/sign-up", "/sign-in"];
-    const sensitiveRoutes = ["/budgets", "/reports"];
+    const sensitiveRoutes = ["/budgets", "/reports", "/"];
     const adminRoutes = ["/users"];
 
     //auth safeguards
@@ -55,6 +55,7 @@ export default withAuth(
 
 export const config = {
   matcher: [
+    "/",
     "/sign-in",
     "/sign-up",
     "/users",
