@@ -1,5 +1,5 @@
 "use client";
-import { useCategoryMap } from "lib/hooks";
+import { useCategoryMap, useTranslate } from "lib/hooks";
 import { Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
 import { useAtom } from "jotai";
@@ -8,6 +8,8 @@ import {
   CategoryTitleStyled,
   CheckboxLabelContentStyled,
   CheckboxListStyled,
+  StyledAccordion,
+  StyledButton,
 } from "./CategoryFilter.styled";
 
 export const CategoryFilter = () => {
@@ -20,14 +22,11 @@ export const CategoryFilter = () => {
     const { name, checked } = e.currentTarget;
 
     if (checked) {
-      setCategoryFilterAtom([...categoryFilterAtomState, name]);
+      setCategoryFilterAtom((prev) => [...prev, name]);
     } else {
-      const newState = [
-        ...categoryFilterAtomState.filter(
-          (category) => !category.includes(name)
-        ),
-      ];
-      setCategoryFilterAtom(newState);
+      setCategoryFilterAtom((prev) =>
+        prev.filter((category) => category !== name)
+      );
     }
   };
 
@@ -41,6 +40,7 @@ export const CategoryFilter = () => {
               label={`category-filter-${name}`}
               id={`category-filter-${id}`}
               name={categoryKey}
+              checked={categoryFilterAtomState.includes(categoryKey)}
               onChange={onCheckboxChange}>
               <CheckboxLabelContentStyled>
                 <CategoryIconStyled small category={category} />
@@ -51,5 +51,28 @@ export const CategoryFilter = () => {
         );
       })}
     </CheckboxListStyled>
+  );
+};
+
+const MobileFilter = () => {
+  const { t, dict } = useTranslate("AsideCard");
+  return (
+    <>
+      <StyledButton onClick={() => {}}>
+        {t(dict.categories.settings)}
+      </StyledButton>
+      <CategoryFilter />
+    </>
+  );
+};
+
+export const MobileCategorySearch = () => {
+  const { t, dict } = useTranslate("AsideCard");
+
+  return (
+    <StyledAccordion
+      header={t(dict.categories.title)}
+      content={<MobileFilter />}
+    />
   );
 };
