@@ -55,22 +55,25 @@ export const Select = ({
       onOpenChange={() => {
         setIsOpen(!isOpen);
       }}>
-      <SelectTriggerStyled
-        className={className}
-        $hasError={Boolean(error)}
-        id={id}>
-        {value && <TriggerLabelStyled>{label}</TriggerLabelStyled>}
-        <AtomicSelect.Value placeholder={label} />
-        {hasIcon && (
-          <SelectIconStyled>
-            <Icon
-              icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-              iconSize={24}
-            />
-          </SelectIconStyled>
-        )}
-      </SelectTriggerStyled>
-      {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
+      <div>
+        <SelectTriggerStyled
+          className={className}
+          $hasError={Boolean(error)}
+          id={id}>
+          {value && <TriggerLabelStyled>{label}</TriggerLabelStyled>}
+          <AtomicSelect.Value placeholder={label} />
+          {hasIcon && (
+            <SelectIconStyled>
+              <Icon
+                icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+                iconSize={24}
+              />
+            </SelectIconStyled>
+          )}
+        </SelectTriggerStyled>
+        {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
+      </div>
+
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper" sideOffset={sideOffset}>
           <SelectScrollUpButtonStyled>

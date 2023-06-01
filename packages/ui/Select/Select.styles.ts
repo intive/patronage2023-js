@@ -1,12 +1,6 @@
 import styled, { css } from "styled-components";
 import * as AtomicSelect from "@radix-ui/react-select";
 
-export const SelectItemLabelWrapperStyled = styled.span`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-`;
 
 export const SelectLabelHiddenInTrigger = styled.span``;
 
@@ -54,6 +48,13 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   ${SelectLabelHiddenInTrigger} {
     display: none;
   }
+`;
+
+export const SupportingLabelStyled = styled.div`
+  color: ${({ theme }) => theme.select.error};
+  font-weight: 400;
+  font-size: 12px;
+  margin: 4px 10px 0 10px;
 `;
 
 export const TriggerLabelStyled = styled.div`
@@ -123,9 +124,9 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
   }
 `;
 
-export const SupportingLabelStyled = styled.div`
-  color: ${({ theme }) => theme.select.error};
-  font-weight: 400;
-  font-size: 12px;
-  margin-left: 14px;
+export const SelectItemLabelWrapperStyled = styled.span`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 `;
