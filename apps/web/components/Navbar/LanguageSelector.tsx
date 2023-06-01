@@ -1,6 +1,7 @@
 import { Language, languageAtom } from "store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { useTranslate } from "lib/hooks";
 import styled from "styled-components";
 
 import { Flag, Select } from "ui";
@@ -21,6 +22,7 @@ export const LanguageSelector = () => {
   const { hasScrollbar } = useHasScrollBar();
   const setLanguage = useSetAtom(languageAtom);
   const language = useAtomValue(languageAtom);
+  const { t, dict } = useTranslate("NavigationLayout");
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
@@ -32,19 +34,19 @@ export const LanguageSelector = () => {
       lang: "pl",
       flagSrc: "/flags/pl.svg",
       languageName: "Polski",
-      alt: "Flag of Poland", // DICTIONARY !!
+      alt: t(dict.languageFlagAlts.polishFlag),
     },
     {
       lang: "en",
       flagSrc: "/flags/en.svg",
       languageName: "English",
-      alt: "Flag of UK", // DICTIONARY !!
+      alt: t(dict.languageFlagAlts.britishFlag)
     },
     {
       lang: "fr",
       flagSrc: "/flags/fr.svg",
       languageName: "Français",
-      alt: "Flag of France", // DICTIONARY !!
+      alt: t(dict.languageFlagAlts.frenchFlag)
     },
   ];
 

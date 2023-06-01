@@ -17,7 +17,7 @@ import {
   Input,
   Modal,
   Select,
-  ErrorMessage
+  ErrorMessage,
 } from "ui";
 import { IconType } from "ui/Icon";
 import {
@@ -39,7 +39,7 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
-  CurrencyTagStyled
+  CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
@@ -289,8 +289,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               label: (
                                 <>
                                   <CurrencyTagStyled>PLN</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
-                                    Polish Zloty 
+                                  <SelectLabelHiddenInTrigger>
+                                    {t(dict.currencyNames.PLN)}
                                   </SelectLabelHiddenInTrigger>
                                 </>
                               ),
@@ -300,8 +300,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               label: (
                                 <>
                                   <CurrencyTagStyled>USD</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
-                                    United States Dollar
+                                  <SelectLabelHiddenInTrigger>
+                                    {t(dict.currencyNames.USD)}
                                   </SelectLabelHiddenInTrigger>
                                 </>
                               ),
@@ -311,8 +311,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               label: (
                                 <>
                                   <CurrencyTagStyled>EUR</CurrencyTagStyled>
-                                  <SelectLabelHiddenInTrigger>{/*ADD DICTIONARY !!!!*/}
-                                    Euro
+                                  <SelectLabelHiddenInTrigger>
+                                    {t(dict.currencyNames.EUR)}
                                   </SelectLabelHiddenInTrigger>
                                 </>
                               ),
