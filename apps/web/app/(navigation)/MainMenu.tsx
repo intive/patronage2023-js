@@ -7,12 +7,11 @@ import { useState } from "react";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Avatar, Icon } from "ui";
 import { useTranslate } from "lib/hooks";
-
 import {
   SelectContentStyled,
   SelectItemStyled,
   SelectTriggerStyled,
-} from "./LanguageSelectorStyled";
+} from "components/Navbar/LanguageSelectorStyled";
 
 export const AvatarStyled = styled(Avatar)`
   height: 2.1em;
