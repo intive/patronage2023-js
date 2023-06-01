@@ -255,6 +255,7 @@ export const theme = {
     border: colors.Neutral2,
     neutral: colors.Neutral8,
     error: colors.Supporting4,
+    tag: colors.Neutral8,
   },
   budgetIcon: {
     main: colors.Teal10,

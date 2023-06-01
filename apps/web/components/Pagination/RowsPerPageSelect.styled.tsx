@@ -8,7 +8,7 @@ export const SelectTriggerStyled = styled(Select.Trigger)`
   min-width: 84px;
   height: 40px;
   color: ${({ theme }) => theme.input.neutral};
-  background-color: ${({ theme }) => theme.currencySelect.background};
+  background-color: ${({ theme }) => theme.select.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
   border-radius: 8px;
   padding: 4px 4px 4px 16px;
@@ -26,7 +26,7 @@ export const SelectTriggerStyled = styled(Select.Trigger)`
 export const SelectIconStyled = styled(Select.Icon)`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.currencySelect.icon};
+  color: ${({ theme }) => theme.select.icon};
 `;
 
 export const SelectPortalStyled = styled(Select.Portal)`
@@ -38,7 +38,7 @@ export const SelectPortalStyled = styled(Select.Portal)`
 export const SelectContentStyled = styled(Select.Content)`
   border-radius: 8px;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.currencySelect.background};
+  background-color: ${({ theme }) => theme.select.background};
   border: solid 2px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
 `;
@@ -51,7 +51,7 @@ export const SelectItemStyled = styled(Select.Item)`
 
   &:focus {
     color: ${({ theme }) => theme.input.main};
-    background-color: ${({ theme }) => theme.currencySelect.focusBackground};
+    background-color: ${({ theme }) => theme.select.focusBackground};
     outline-offset: -1px;
 
     &:first-child {
