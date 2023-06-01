@@ -30,9 +30,9 @@ const dictionary = {
           fr: "Importer",
         },
         exportButtonLabel: {
-          en: "file",
-          pl: "plik",
-          fr: "fichier",
+          en: "Export file",
+          pl: "Eksportuj plik",
+          fr: "*Le point de vue d'Eksportuj",
         },
         infos: {
           loading: {

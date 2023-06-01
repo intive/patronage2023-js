@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { Button } from "../../Button";
 import { Icon } from "../../Icon";
-import { theme } from "../../theme";
 
 export const SubMenuStyled = styled.div`
   position: fixed;
@@ -93,12 +92,8 @@ export const IconWrapperStyled = styled.div`
   cursor: pointer;
 `;
 
-export const ImportButton = styled(Button)`
+export const ImportExportButtonStyled = styled.button`
   ${ImportExportButtonsStyle};
-`;
-
-export const StyledButton = styled.button`
-  ${ImportExportButtonsStyle}
 `;
 
 export const LinkStyled = styled.a`

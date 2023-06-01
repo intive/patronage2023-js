@@ -5,7 +5,6 @@ import { Icon } from "../../Icon";
 import { ExportDropdown } from "../../ExportDropdown";
 import {
   IconUpsideDown,
-  StyledButton,
   LinkStyled,
   SubMenuStyled,
   MainDiv,
@@ -13,10 +12,11 @@ import {
   HeaderStyled,
   IconWrapperStyled,
   ButtonGroupStyled,
-  ImportButton,
+  ImportExportButtonStyled,
   NewBudgetButtonStyled,
   Title,
 } from "./SubMenu.styled";
+import { Tooltip } from "../../Tooltip";
 
 type SubMenuButtonType = {
   clickHandler: () => void;
@@ -76,7 +76,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   // So I use polymorphism to get the styles from our Button and pass them to <button>
   const triggerButton = (
     <ButtonStyled
-      as={StyledButton}
+      as={ImportExportButtonStyled}
       disabled={!!!exportButton?.csvUri}
       variant="secondary">
       <Icon icon="file_download" size={12} />
@@ -136,12 +136,16 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
                 isButtonDisabled={!!!exportButton?.csvUri}
                 triggerButton={triggerButton}
                 items={exportBudgetsItems}
+                tooltipLabel={exportButton.label}
               />
-              <ImportButton
-                variant="secondary"
-                onClick={importButton.clickHandler}>
-                <Icon icon="file_upload" size={12} />
-              </ImportButton>
+              <Tooltip text={`${importButton.label}`} position="bottom">
+                <ButtonStyled
+                  as={ImportExportButtonStyled}
+                  variant="secondary"
+                  onClick={importButton.clickHandler}>
+                  <Icon icon="file_upload" size={12} />
+                </ButtonStyled>
+              </Tooltip>
             </ButtonGroupStyled>
           )}
           {searchInput && (

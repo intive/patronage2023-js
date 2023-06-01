@@ -7,11 +7,13 @@ import {
   DropdownMenuItemStyled,
   DropdownMenuContentStyled as MenuContentStyled,
 } from "../ButtonWithDropdown";
+import { Tooltip } from "ui";
 
 export type ExportDropdownProps = {
   items: ExportDropdownItem[];
   triggerButton: React.ReactNode;
   isButtonDisabled: boolean;
+  tooltipLabel: string;
 };
 
 export type ExportDropdownItem = {
@@ -27,14 +29,17 @@ export const ExportDropdown = ({
   items,
   triggerButton,
   isButtonDisabled,
+  tooltipLabel,
 }: ExportDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenu.Trigger disabled={isButtonDisabled} asChild>
-        {triggerButton}
-      </DropdownMenu.Trigger>
+      <Tooltip text={tooltipLabel} position="bottom">
+        <DropdownMenu.Trigger disabled={isButtonDisabled} asChild>
+          {triggerButton}
+        </DropdownMenu.Trigger>
+      </Tooltip>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="start">
           {items.map(({ id, node }) => (
