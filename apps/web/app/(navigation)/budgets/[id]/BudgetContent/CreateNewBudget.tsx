@@ -41,7 +41,7 @@ import {
   InputWrapperHalfStyledCurrency,
   CurrencyTagStyled
 } from "./CreateNewBudget.styled";
-import { SelectLabelHiddenInTrigger } from "ui/Select";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 type NewBudget = {
   onClose: Function;

@@ -24,9 +24,9 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
 
   margin-bottom: ${({ $hasError }) => ($hasError ? "0" : "18px")};
   width: 100%;
-  color: ${({ theme }) => theme.categorySelect.neutral};
-  background-color: ${({ theme }) => theme.categorySelect.background};
-  border: solid 2px ${({ theme }) => theme.categorySelect.border};
+  color: ${({ theme }) => theme.select.neutral};
+  background-color: ${({ theme }) => theme.select.background};
+  border: solid 2px ${({ theme }) => theme.select.border};
   border-radius: 8px;
   font-size: 1em;
   cursor: pointer;
@@ -36,8 +36,8 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   ${({ $hasError }) =>
     $hasError &&
     css`
-      color: ${({ theme }) => theme.categorySelect.error};
-      border: solid 2px ${({ theme }) => theme.categorySelect.error};
+      color: ${({ theme }) => theme.select.error};
+      border: solid 2px ${({ theme }) => theme.select.error};
     `}
 
   :focus {
@@ -61,7 +61,7 @@ export const TriggerLabelStyled = styled.div`
 `;
 
 export const SelectIconStyled = styled(AtomicSelect.Icon)`
-  color: ${({ theme }) => theme.categorySelect.icon};
+  color: ${({ theme }) => theme.select.icon};
   height: 1.5em;
 `;
 
@@ -72,7 +72,7 @@ export const SelectPortalStyled = styled(AtomicSelect.Portal)`
 export const SelectContentStyled = styled(AtomicSelect.Content)`
   border-radius: 16px;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.categorySelect.background};
+  background-color: ${({ theme }) => theme.select.background};
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
   z-index: 10;
@@ -84,7 +84,7 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
 
   &:focus {
     color: ${({ theme }) => theme.input.main};
-    background-color: ${({ theme }) => theme.categorySelect.focusBackground};
+    background-color: ${({ theme }) => theme.select.focusBackground};
     &:first-child {
       border-radius: 1em 1em 0 0;
     }
@@ -98,7 +98,7 @@ export const SelectItemStyled = styled(AtomicSelect.Item)`
 `;
 
 export const SupportingLabelStyled = styled.div`
-  color: ${({ theme }) => theme.categorySelect.error};
+  color: ${({ theme }) => theme.select.error};
   font-weight: 400;
   font-size: 12px;
   margin-left: 14px;

@@ -248,14 +248,7 @@ export const theme = {
     label: colors.Neutral6,
     value: colors.Neutral8,
   },
-  currencySelect: {
-    background: colors.BasicWhite,
-    icon: colors.Neutral7,
-    focusBackground: colors.Teal1,
-    tag: colors.Neutral8,
-    tagFocus: colors.Teal8,
-  },
-  categorySelect: {
+  select: {
     background: colors.BasicWhite,
     icon: colors.Neutral7,
     focusBackground: colors.Teal1,
