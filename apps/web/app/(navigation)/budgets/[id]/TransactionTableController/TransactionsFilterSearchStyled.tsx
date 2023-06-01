@@ -18,12 +18,14 @@ export const ButtonGroupWrapper = styled.div`
 `;
 
 export const FilterSearchWrapper = styled.div`
+  flex-wrap: wrap;
   display: flex;
   flex-direction: column;
   gap: 16px;
   width: 100%;
 
-  ${device.tablet} {
+  ${device.desktop} {
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
   }
