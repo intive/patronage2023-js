@@ -42,7 +42,7 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { ShareBudget } from "../../../ShareBudget";
+import { ShareBudget } from "../ShareBudget";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type NewBudget = {

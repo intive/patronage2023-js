@@ -568,6 +568,11 @@ const dictionary = {
         pl: "do",
         fr: "à",
       },
+      onlyOwnerShare: {
+        en: "Only the owner can share the budget",
+        pl: "Tylko właściciel może udostępniać budżet",
+        fr: "",
+      },
     },
     button: {
       en: "Save",
@@ -652,6 +657,18 @@ const dictionary = {
         pl: "Ups, coś poszło nie tak.",
         fr: "Oups, quelque chose a mal tourné.",
       },
+    },
+  },
+  ShareBudget: {
+    noUsersFound: {
+      en: "No members found.",
+      pl: "Nie znaleziono użytkowników.",
+      fr: "",
+    },
+    inviteMembers: {
+      en: "Invite existing members",
+      pl: "Zaproś użytkowników",
+      fr: "",
     },
   },
   CreateNewTransactionModal: {

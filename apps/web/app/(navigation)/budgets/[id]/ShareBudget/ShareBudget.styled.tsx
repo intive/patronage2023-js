@@ -4,7 +4,7 @@ export const ListItemStyled = styled.li`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 16px 0;
+  margin-bottom: 16px;
 `;
 
 export const LabelStyled = styled.label`
@@ -39,6 +39,7 @@ export const EmailStyled = styled.p`
 
 export const UsersListStyled = styled.ul`
   width: 100%;
+  flex-grow: 1;
   overflow-y: auto;
   margin-top: 24px;
   padding-right: 8px;
@@ -60,4 +61,12 @@ export const ShareBudgetWrapperStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
+`;
+
+export const ContentWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

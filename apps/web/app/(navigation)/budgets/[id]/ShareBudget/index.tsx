@@ -2,9 +2,11 @@ import { forwardRef, useCallback, useRef, useState } from "react";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { SearchInput } from "ui/Input/SearchInput";
 import { Checkbox, Avatar } from "ui";
-import { ParagraphStyled } from "./budgets/[id]/BudgetContent/CreateNewBudget.styled";
+import { Spinner } from "ui/NavList/Spinner";
+import { ParagraphStyled } from "../BudgetContent/CreateNewBudget.styled";
 import {
   AvatarWrapperStyled,
+  ContentWrapper,
   EmailStyled,
   LabelStyled,
   ListItemStyled,
@@ -14,6 +16,8 @@ import {
   UsersListStyled,
 } from "./ShareBudget.styled";
 import { useGetUsers } from "lib/hooks/useGetUsers";
+import { z } from "zod";
+import { useTranslate } from "lib/hooks";
 
 type User = {
   id: string;
@@ -38,16 +42,14 @@ type UsersListItemProps = {
   ref?: (user: HTMLLIElement) => void;
 };
 
-const avatars = [
-  "/avatars/1.svg",
-  "/avatars/2.svg",
-  "/avatars/3.svg",
-  "/avatars/4.svg",
-  "/avatars/5.svg",
-  "/avatars/6.svg",
-  "/avatars/7.svg",
-  "/avatars/8.svg",
-];
+const isAvatarValid = (text: string) => {
+  const schemaPath = z.string().startsWith("/avatars/");
+  const schemaUrl = z.string().url();
+
+  return (
+    schemaPath.safeParse(text).success || schemaUrl.safeParse(text).success
+  );
+};
 
 const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
   ({ user, onCheckboxChange, checked }, ref) => {
@@ -58,7 +60,7 @@ const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
         <LabelStyled htmlFor={`share-users-${id}`}>
           <AvatarWrapperStyled>
             <Avatar
-              src={avatars.includes(avatar) ? avatar : "/avatars/default.svg"}
+              src={isAvatarValid(avatar) ? avatar : "/avatars/default.svg"}
               username={`${firstName} ${lastName}`}
             />
           </AvatarWrapperStyled>
@@ -91,6 +93,8 @@ export const ShareBudget = ({
 }: ShareBudgetProps) => {
   const pageSize = 15;
 
+  const { t, dict } = useTranslate("ShareBudget");
+
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
 
@@ -107,10 +111,8 @@ export const ShareBudget = ({
 
   const isChecked = (user: User) => budgetUsers.includes(user.id);
 
-  const { fetchNextPage, hasNextPage, isFetchingNextPage, data } = useGetUsers(
-    debouncedSearch,
-    pageSize
-  );
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, data, isLoading } =
+    useGetUsers(debouncedSearch, pageSize);
 
   const intObserver = useRef<IntersectionObserver | null>(null);
 
@@ -133,24 +135,38 @@ export const ShareBudget = ({
   const usersWithoutOwner =
     allUsers && allUsers.filter((user) => user.id !== owner);
 
+  const usersToDisplay =
+    usersWithoutOwner && usersWithoutOwner.length > 0 ? (
+      usersWithoutOwner.map((user) => (
+        <UsersListItem
+          key={user.id}
+          ref={lastUserRef}
+          user={user}
+          onCheckboxChange={onCheckboxChange}
+          checked={isChecked(user)}
+        />
+      ))
+    ) : (
+      <ContentWrapper>
+        <p>{t(dict.noUsersFound)}</p>
+      </ContentWrapper>
+    );
+
   return (
     <ShareBudgetWrapperStyled>
-      <ParagraphStyled>Invite existing members</ParagraphStyled>
+      <ParagraphStyled>{t(dict.inviteMembers)}</ParagraphStyled>
       <SearchInput
         placeholder="Search"
         onChange={(e) => setSearchValue(e.currentTarget.value)}
       />
       <UsersListStyled>
-        {usersWithoutOwner &&
-          usersWithoutOwner.map((user) => (
-            <UsersListItem
-              key={user.id}
-              ref={lastUserRef}
-              user={user}
-              onCheckboxChange={onCheckboxChange}
-              checked={isChecked(user)}
-            />
-          ))}
+        {isLoading ? (
+          <ContentWrapper>
+            <Spinner />
+          </ContentWrapper>
+        ) : (
+          usersToDisplay
+        )}
       </UsersListStyled>
     </ShareBudgetWrapperStyled>
   );

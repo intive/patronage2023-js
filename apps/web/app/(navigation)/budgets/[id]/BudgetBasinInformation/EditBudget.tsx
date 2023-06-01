@@ -39,8 +39,9 @@ import { env } from "env.mjs";
 import { icons } from "../BudgetContent/CreateNewBudget";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "ui";
-import { ShareBudget } from "../../../ShareBudget";
+import { ShareBudget } from "../ShareBudget";
 import useSuperfetch from "lib/hooks/useSuperfetch";
+import { ContentWrapper } from "../ShareBudget/ShareBudget.styled";
 
 interface EditBudgetProps {
   budget: BudgetFixed;
@@ -72,14 +73,15 @@ const isEqual = (obj1: Object, obj2: Object) => {
 };
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
+  const defaultValueTabs = "settings";
   const { t, dict } = useTranslate("EditBudgetModal");
   const fetch = useSuperfetch();
   const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("EditBudgetModal");
 
-  const budgetUsersId = budget.budgetUsers.map((user) => user.id);
-  const [budgetUsers, setBudgetUsers] = useState(budgetUsersId);
+  const initBudgetUsers = budget.budgetUsers.map((user) => user.id);
+  const [budgetUsers, setBudgetUsers] = useState(initBudgetUsers);
   const initialBudget = {
     name: budget.name,
     description: budget.description,
@@ -90,20 +92,17 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const [editedBudget, setEditedBudget] =
     useState<EditedBudgetProps>(initialBudget);
 
-  //BE integration
   const { data: session } = useSession();
+  const currentUser = session && session.user.id;
+
   const queryClient = useQueryClient();
 
   // temporary just for current version of query
   const filteredUsers = budgetUsers.filter(
-    (user) => !budgetUsersId.includes(user)
+    (user) => !initBudgetUsers.includes(user)
   );
 
   const [canBeClosed, setCanBeClosed] = useState<boolean[]>([false, false]);
-
-  useEffect(() => {
-    !canBeClosed.includes(false) && onClose();
-  }, [canBeClosed, onClose]);
 
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {
@@ -172,9 +171,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       }
     },
   });
-  //BE integration end
-
-  const defaultValueTabs = "settings";
 
   const getDateObject = (dateType: string) => {
     if (dateType === "start-date") {
@@ -205,6 +201,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
     updateUsers && updateBudgetUsersMutation.mutate(filteredUsers);
   };
+
+  useEffect(() => {
+    !canBeClosed.includes(false) && onClose();
+  }, [canBeClosed, onClose]);
 
   return (
     <Modal header={t(dict.title)} onClose={onClose} fullHeight>
@@ -372,11 +372,17 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                   </InputWrapperFullFlex>
                 </SettingsTab>
                 <ShareTab value="share">
-                  <ShareBudget
-                    owner={budget.userId}
-                    budgetUsers={budgetUsers}
-                    setBudgetUsers={setBudgetUsers}
-                  />
+                  {currentUser === budget.userId ? (
+                    <ShareBudget
+                      owner={budget.userId}
+                      budgetUsers={budgetUsers}
+                      setBudgetUsers={setBudgetUsers}
+                    />
+                  ) : (
+                    <ContentWrapper>
+                      <p>{t(dict.paragraphs.onlyOwnerShare)}</p>
+                    </ContentWrapper>
+                  )}
                 </ShareTab>
               </ContentStyled>
               <div>
