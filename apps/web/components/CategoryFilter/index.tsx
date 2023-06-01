@@ -1,5 +1,5 @@
 "use client";
-import { useCategoryMap } from "lib/hooks";
+import { useCategoryMap, useTranslate } from "lib/hooks";
 import { Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
 import { useAtom } from "jotai";
@@ -8,6 +8,8 @@ import {
   CategoryTitleStyled,
   CheckboxLabelContentStyled,
   CheckboxListStyled,
+  StyledAccordion,
+  StyledButton,
 } from "./CategoryFilter.styled";
 
 export const CategoryFilter = () => {
@@ -49,5 +51,28 @@ export const CategoryFilter = () => {
         );
       })}
     </CheckboxListStyled>
+  );
+};
+
+const MobileFilter = () => {
+  const { t, dict } = useTranslate("AsideCard");
+  return (
+    <>
+      <StyledButton onClick={() => {}}>
+        {t(dict.categories.settings)}
+      </StyledButton>
+      <CategoryFilter />
+    </>
+  );
+};
+
+export const MobileCategorySearch = () => {
+  const { t, dict } = useTranslate("AsideCard");
+
+  return (
+    <StyledAccordion
+      header={t(dict.categories.title)}
+      content={<MobileFilter />}
+    />
   );
 };

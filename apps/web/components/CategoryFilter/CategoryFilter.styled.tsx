@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CategoryIcon } from "ui";
+import { Accordion, CategoryIcon } from "ui";
 import { device } from "lib/media-queries";
 
 export const CheckboxListStyled = styled.ul`
@@ -41,4 +41,23 @@ export const CheckboxLabelContentStyled = styled.div`
 export const CategoryIconStyled = styled(CategoryIcon)`
   width: 32px;
   height: 32px;
+`;
+
+export const StyledAccordion = styled(Accordion)`
+  flex-basis: 100%;
+  ${device.desktop} {
+    display: none;
+  }
+`;
+
+export const StyledButton = styled.button`
+  background-color: transparent;
+  border-width: 0;
+  padding: 0;
+  color: inherit;
+  margin: 0.7em 2em 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8em;
+  align-self: end;
 `;

@@ -15,7 +15,7 @@ import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
-import { MobileCategorySearch } from "./MobileCategorySearch";
+import { MobileCategorySearch } from "components/CategoryFilter";
 
 type APIResponse = {
   items: Item[];
