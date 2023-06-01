@@ -1,4 +1,5 @@
 import { env } from "env.mjs";
+import { SuperOptions } from "lib/hooks/useSuperfetch";
 import { IconType } from "ui/Icon";
 
 export type BudgetType = {
@@ -20,6 +21,7 @@ export type GetBudgetsListType = {
   searchValue: string;
   sortAscending: boolean;
   token: string | undefined;
+  fetch: (url: string, options?: SuperOptions) => Promise<any>;
 };
 
 const URL = env.NEXT_PUBLIC_API_URL + "budgets/list";
@@ -30,6 +32,7 @@ export const getBudgetsList = async ({
   searchValue,
   sortAscending,
   token,
+  fetch,
 }: GetBudgetsListType): Promise<ItemType> => {
   const options = {
     method: "POST",
@@ -38,7 +41,7 @@ export const getBudgetsList = async ({
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
+    body: {
       pageSize: pageSize,
       pageIndex: pageParam,
       search: searchValue,
@@ -48,8 +51,8 @@ export const getBudgetsList = async ({
           sortAscending: sortAscending,
         },
       ],
-    }),
+    },
   };
 
-  return fetch(URL, options).then((res) => res.ok && res.json());
+  return fetch(URL, { ...options });
 };

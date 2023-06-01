@@ -1,21 +1,22 @@
 "use client";
 
-import { useTranslate } from "lib/hooks";
-import { useDebounce } from "lib/hooks/useDebounce";
 import { useCallback, useRef, useState } from "react";
-import { SideNavigationBar, Icon, NavList } from "ui";
-import { CreateNewBudget } from "../../app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget";
-
-import validate from "lib/validations/iconValidation";
-import { SpanStyled } from "ui/NavList";
-import { useGetBudgets } from "lib/hooks/useGetBudgets";
-import { useQueryClient } from "@tanstack/react-query";
-import { BudgetType, ItemType } from "services/mutations";
-import { Favourite } from "./Favourite";
 import { useSession } from "next-auth/react";
-import styled from "styled-components";
-import { categoryFilterAtom } from "store";
+
 import { useSetAtom } from "jotai";
+import { useQueryClient } from "@tanstack/react-query";
+import styled from "styled-components";
+import validate from "lib/validations/iconValidation";
+import { categoryFilterAtom } from "store";
+import { useTranslate } from "lib/hooks";
+import { useGetBudgets } from "lib/hooks/useGetBudgets";
+import { useDebounce } from "lib/hooks/useDebounce";
+import { BudgetType, ItemType } from "services/mutations";
+
+import { SideNavigationBar, Icon, NavList } from "ui";
+import { SpanStyled } from "ui/NavList";
+import { CreateNewBudget } from "../../app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget";
+import { Favourite } from "./Favourite";
 
 export const IconStyled = styled(Icon)`
   background: white;
@@ -96,39 +97,11 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  // const successData =
-  //   data?.pages?.flatMap(
-  //     ({ items }: ItemType) =>
-  //       items &&
-  //       items.map(({ icon, name, id, isFavourite }) => ({
-  //         ComponentToRender: (
-  //           <>
-  //             <IconStyled
-  //               icon={iconNames.includes(icon) ? icon : "help"}
-  //               iconSize={24}
-  //             />
-  //             <SpanStyled>{name}</SpanStyled>
-  //             <Favourite
-  //               isFav={isFavourite}
-  //               budgetId={id.value}
-  //               activeHref={`/budgets/${id.value}`}
-  //             />
-  //           </>
-  //         ),
-  //         href: `/budgets/${id.value}`,
-  //         id: id.value,
-  //         ref: lastBudgetRef,
-  //       }))
-  //   ) ?? [];
-
   const mapToBudgetsComponents = (budgets: BudgetType[]) => {
     return budgets.map(({ icon, name, id, isFavourite }) => ({
       ComponentToRender: (
         <>
-          <IconStyled
-            icon={iconNames.includes(icon) ? icon : "help"}
-            iconSize={24}
-          />
+          <IconStyled icon={validate(icon) ? icon : "help"} iconSize={24} />
           <SpanStyled>{name}</SpanStyled>
           <Favourite
             isFav={isFavourite}
@@ -144,11 +117,12 @@ export default function SideNav() {
   };
 
   const removeDuplicates = (fetchedBudgets: BudgetType[]) => {
-    const uniqueBudgets = fetchedBudgets
-    .filter((budget, idx) => (fetchedBudgets.map(object => 
-      object.id.value).indexOf(budget.id.value) === idx
-    ));
-    console.log(uniqueBudgets)
+    const uniqueBudgets = fetchedBudgets.filter(
+      (budget, idx) =>
+        fetchedBudgets
+          .map((object) => object.id.value)
+          .indexOf(budget.id.value) === idx
+    );
     return uniqueBudgets;
   };
 
