@@ -117,13 +117,12 @@ export default function SideNav() {
   };
 
   const removeDuplicates = (fetchedBudgets: BudgetType[]) => {
-    const uniqueBudgets = fetchedBudgets.filter(
+    return fetchedBudgets.filter(
       (budget, idx) =>
         fetchedBudgets
           .map((object) => object.id.value)
           .indexOf(budget.id.value) === idx
     );
-    return uniqueBudgets;
   };
 
   const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
