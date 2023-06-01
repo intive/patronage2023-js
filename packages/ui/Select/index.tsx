@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ComponentType, ReactNode, useState } from "react";
 import * as AtomicSelect from "@radix-ui/react-select";
 import { Icon } from "ui";
 import {
@@ -9,7 +9,7 @@ import {
   SelectPortalStyled,
   SelectContentStyled,
   SelectItemStyled,
-  SelectItemLabelWrapperStyled
+  SelectItemLabelWrapperStyled,
 } from "./Select.styles";
 
 type SelectItem = {
@@ -28,6 +28,7 @@ export type SelectProps = {
   value?: string;
   hasScrollbar?: boolean;
   id?: string;
+  SelectItem?: ComponentType<AtomicSelect.SelectItemProps>;
 };
 
 export const Select = ({
@@ -41,6 +42,7 @@ export const Select = ({
   value,
   hasScrollbar,
   id,
+  SelectItem = SelectItemStyled,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -73,13 +75,13 @@ export const Select = ({
           <AtomicSelect.ScrollUpButton />
           <AtomicSelect.Viewport>
             {items.map((item) => (
-              <SelectItemStyled value={item.value} key={item.value}>
+              <SelectItem value={item.value} key={item.value}>
                 <AtomicSelect.ItemText>
                   <SelectItemLabelWrapperStyled>
                     {item.label}
                   </SelectItemLabelWrapperStyled>
                 </AtomicSelect.ItemText>
-              </SelectItemStyled>
+              </SelectItem>
             ))}
           </AtomicSelect.Viewport>
           <AtomicSelect.ScrollDownButton />

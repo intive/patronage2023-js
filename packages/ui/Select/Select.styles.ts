@@ -24,6 +24,7 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
 
   margin-bottom: ${({ $hasError }) => ($hasError ? "0" : "18px")};
   width: 100%;
+  max-height: 56px;
   color: ${({ theme }) => theme.select.neutral};
   background-color: ${({ theme }) => theme.select.background};
   border: solid 2px ${({ theme }) => theme.select.border};
@@ -58,6 +59,7 @@ export const TriggerLabelStyled = styled.div`
   font-weight: 600;
   background-color: ${({ theme }) => theme.input.labelBackground};
   padding: 0 4px;
+  line-height: 1;
 `;
 
 export const SelectIconStyled = styled(AtomicSelect.Icon)`

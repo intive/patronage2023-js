@@ -28,6 +28,7 @@ import {
   FormWrapper,
   ParagraphStyled,
   SeparatorStyled,
+  TransactionSelectItemStyled,
 } from "./CreateNewTransactionStyled";
 
 type CreateNewTransactionProps = {
@@ -245,6 +246,7 @@ export const CreateNewTransaction = ({
                       value={value}
                       hasScrollbar={hasScrollbar}
                       sideOffset={2}
+                      SelectItem={TransactionSelectItemStyled}
                     />
                   )}
                 </Field>
