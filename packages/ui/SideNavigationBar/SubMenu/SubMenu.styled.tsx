@@ -55,7 +55,7 @@ export const ImportExportButtonsStyle = css`
   justify-items: flex-start;
   align-items: center;
   gap: 4px;
-  font-size: 0.875em;
+  font-size: 1em;
   padding: 6px;
   line-height: 1.25em;
   outline: 0;
@@ -67,8 +67,15 @@ export const ImportExportButtonsStyle = css`
   }
 `;
 
-export const NewBudgetButtonStyled = styled(Button)`
+type NewBudgetButtonFontResizeType = {
+  reduceFontSize: boolean | undefined;
+};
+
+export const NewBudgetButtonStyled = styled(
+  Button
+)<NewBudgetButtonFontResizeType>`
   ${ImportExportButtonsStyle};
+  font-size: ${({ reduceFontSize }) => (reduceFontSize ? "0.875em" : "1em")};
 `;
 
 export const ButtonGroupStyled = styled.div`

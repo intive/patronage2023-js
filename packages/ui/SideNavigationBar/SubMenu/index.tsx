@@ -124,6 +124,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
             <ButtonGroupStyled>
               {button && (
                 <NewBudgetButtonStyled
+                  reduceFontSize={button.label.length > 12}
                   variant="secondary"
                   onClick={() => button.clickHandler()}
                   fullWidth>
