@@ -361,6 +361,12 @@ export const theme = {
   favouriteBudget: {
     heartColor: "#ef4e4e",
   },
+  accordion: {
+    main: colors.Teal10,
+    borderInactive: colors.Neutral2,
+    content: colors.Teal10,
+    background: colors.BasicWhite,
+  },
 };
 
 export type ThemeType = typeof theme;

@@ -32,4 +32,5 @@ export { TrendChip } from "./TrendChip";
 export { Flag } from "./Flag";
 export * from "./Toast";
 export { Tooltip } from "./Tooltip";
+export { Accordion } from "./Accordion";
 export { Select } from "./Select";
