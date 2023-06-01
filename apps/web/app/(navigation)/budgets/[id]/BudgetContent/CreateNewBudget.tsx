@@ -332,6 +332,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           label={t(dict.inputNames.currency)}
                           error={errors[0]}
                           hasScrollbar={hasScrollbar}
+                          sideOffset={2}
                         />
                       )}
                     </Field>

@@ -68,6 +68,7 @@ export const LanguageSelector = () => {
       label=""
       hasIcon={false}
       hasScrollbar={hasScrollbar}
+      sideOffset={5}
     />
   );
 };

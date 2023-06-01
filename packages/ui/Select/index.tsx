@@ -22,6 +22,7 @@ export type SelectProps = {
   onValueChange: (value: string) => void;
   hasIcon: boolean;
   label: string;
+  sideOffset?: number;
   className?: string;
   error?: string;
   value?: string;
@@ -34,6 +35,7 @@ export const Select = ({
   onValueChange,
   hasIcon,
   label,
+  sideOffset,
   className,
   error,
   value,
@@ -67,7 +69,7 @@ export const Select = ({
       {error && <SupportingLabelStyled>{error}</SupportingLabelStyled>}
 
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
-        <SelectContentStyled position="popper">
+        <SelectContentStyled position="popper" sideOffset={sideOffset}>
           <AtomicSelect.ScrollUpButton />
           <AtomicSelect.Viewport>
             {items.map((item) => (

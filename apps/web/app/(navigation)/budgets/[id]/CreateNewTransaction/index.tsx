@@ -244,6 +244,7 @@ export const CreateNewTransaction = ({
                       error={errors[0]}
                       value={value}
                       hasScrollbar={hasScrollbar}
+                      sideOffset={2}
                     />
                   )}
                 </Field>

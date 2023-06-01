@@ -75,7 +75,7 @@ export const SelectContentStyled = styled(AtomicSelect.Content)`
   background-color: ${({ theme }) => theme.select.background};
   border: solid 1px ${({ theme }) => theme.input.borderError};
   cursor: pointer;
-  z-index: 10;
+  z-index: 100;
 `;
 
 export const SelectItemStyled = styled(AtomicSelect.Item)`
