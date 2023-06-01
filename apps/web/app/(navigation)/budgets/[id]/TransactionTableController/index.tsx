@@ -15,6 +15,7 @@ import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
+import { MobileCategorySearch } from "components/CategoryFilter";
 
 type APIResponse = {
   items: Item[];
@@ -159,6 +160,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
             setSearchTransactionByName(e.currentTarget.value);
           }}
         />
+        <MobileCategorySearch />
       </FilterSearchWrapper>
       <TransactionsTable
         currency={budget.currency}
