@@ -331,6 +331,11 @@ const dictionary = {
           pl: "Przytnij jeszcze raz",
           fr: "",
         },
+        delete: {
+          en: "Delete",
+          pl: "Usuń",
+          fr: "",
+        },
         modalHeader: {
           en: "Crop your image before submitting.",
           pl: "Przytnij zdjęcie przed wysłaniem.",
