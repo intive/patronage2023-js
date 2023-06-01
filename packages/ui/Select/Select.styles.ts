@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import * as AtomicSelect from "@radix-ui/react-select";
 
-
 export const SelectLabelHiddenInTrigger = styled.span``;
 
 export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
