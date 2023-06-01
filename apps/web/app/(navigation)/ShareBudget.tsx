@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useRef, useState } from "react";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { SearchInput } from "ui/Input/SearchInput";
 import { Checkbox, Avatar } from "ui";
-import { ParagraphStyled } from "./CreateNewBudget.styled";
+import { ParagraphStyled } from "./budgets/[id]/BudgetContent/CreateNewBudget.styled";
 import {
   AvatarWrapperStyled,
   EmailStyled,
@@ -58,7 +58,7 @@ const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
         <LabelStyled htmlFor={`share-users-${id}`}>
           <AvatarWrapperStyled>
             <Avatar
-              src={avatars.includes(avatar) ? avatar : "/unsetAvatar.svg"}
+              src={avatars.includes(avatar) ? avatar : "/avatars/default.svg"}
               username={`${firstName} ${lastName}`}
             />
           </AvatarWrapperStyled>

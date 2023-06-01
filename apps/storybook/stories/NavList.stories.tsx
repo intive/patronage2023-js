@@ -1,7 +1,13 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import styled from "styled-components";
-import { Avatar, NavList, NavItemContents, SpanStyled } from "ui";
-import { dummyNavItemContents as dummyNavItemContentsWithIcon } from "../../web/app/NavListDemo";
+import {
+  Avatar,
+  NavList,
+  NavItemContents,
+  SpanStyled,
+  IconWrapper,
+  Icon,
+} from "ui";
 
 import React from "react";
 
@@ -22,6 +28,48 @@ const dummyNavItemContentsTextOnly: Array<NavItemContents> = [
   },
   {
     ComponentToRender: <SpanStyled>Savings</SpanStyled>,
+    href: "/savings",
+    id: 3,
+    ref: () => {},
+  },
+];
+
+const dummyNavItemContentsWithIcon: Array<NavItemContents> = [
+  {
+    ComponentToRender: (
+      <>
+        <IconWrapper>
+          <Icon icon="payments" color="#1E4C40" />
+        </IconWrapper>
+        <SpanStyled>Bills</SpanStyled>
+      </>
+    ),
+    href: "/bills",
+    id: 1,
+    ref: () => {},
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconWrapper>
+          <Icon icon="subscriptions" color="#1E4C40" />
+        </IconWrapper>
+        <SpanStyled>Subscriptions</SpanStyled>
+      </>
+    ),
+    href: "/subscriptions",
+    id: 2,
+    ref: () => {},
+  },
+  {
+    ComponentToRender: (
+      <>
+        <IconWrapper>
+          <Icon icon="savings" color="#1E4C40" />
+        </IconWrapper>
+        <SpanStyled>Savings</SpanStyled>
+      </>
+    ),
     href: "/savings",
     id: 3,
     ref: () => {},

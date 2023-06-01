@@ -140,7 +140,6 @@ export const Checkbox = ({
         sizeBig={sizeBig}
       />
       <CheckmarkStyled sizeBig={sizeBig} />
-
       {children && <LabelStyled htmlFor={id}>{children}</LabelStyled>}
     </CheckboxWrapperStyled>
   );
