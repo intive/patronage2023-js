@@ -1098,7 +1098,7 @@ const dictionary = {
     errorCsvMessage: {
       en: "Check which records have not been imported! Correct the records in the downloaded file and import them again.",
       pl: "Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
-      fr: "Vérifiez les enregistrements qui n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+      fr: "Vérifiez les dossiers qui n'ont pas été importés ! Corrigez les dossiers dans le fichier téléchargé et importez-les à nouveau.",
     },
     responseErrors: {
       400: {
