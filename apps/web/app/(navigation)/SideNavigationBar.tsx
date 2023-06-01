@@ -10,7 +10,7 @@ import { iconNames } from "lib/iconValidation";
 import { SpanStyled } from "ui/NavList";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import { useQueryClient } from "@tanstack/react-query";
-import { ItemType } from "services/mutations";
+import { BudgetType, ItemType } from "services/mutations";
 import { Favourite } from "./Favourite";
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
@@ -96,30 +96,67 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const successData =
-    data?.pages?.flatMap(
-      ({ items }: ItemType) =>
-        items &&
-        items.map(({ icon, name, id, isFavourite }) => ({
-          ComponentToRender: (
-            <>
-              <IconStyled
-                icon={iconNames.includes(icon) ? icon : "help"}
-                iconSize={24}
-              />
-              <SpanStyled>{name}</SpanStyled>
-              <Favourite
-                isFav={isFavourite}
-                budgetId={id.value}
-                activeHref={`/budgets/${id.value}`}
-              />
-            </>
-          ),
-          href: `/budgets/${id.value}`,
-          id: id.value,
-          ref: lastBudgetRef,
-        }))
-    ) ?? [];
+  // const successData =
+  //   data?.pages?.flatMap(
+  //     ({ items }: ItemType) =>
+  //       items &&
+  //       items.map(({ icon, name, id, isFavourite }) => ({
+  //         ComponentToRender: (
+  //           <>
+  //             <IconStyled
+  //               icon={iconNames.includes(icon) ? icon : "help"}
+  //               iconSize={24}
+  //             />
+  //             <SpanStyled>{name}</SpanStyled>
+  //             <Favourite
+  //               isFav={isFavourite}
+  //               budgetId={id.value}
+  //               activeHref={`/budgets/${id.value}`}
+  //             />
+  //           </>
+  //         ),
+  //         href: `/budgets/${id.value}`,
+  //         id: id.value,
+  //         ref: lastBudgetRef,
+  //       }))
+  //   ) ?? [];
+
+  const mapToBudgetsComponents = (budgets: BudgetType[]) => {
+    return budgets.map(({ icon, name, id, isFavourite }) => ({
+      ComponentToRender: (
+        <>
+          <IconStyled
+            icon={iconNames.includes(icon) ? icon : "help"}
+            iconSize={24}
+          />
+          <SpanStyled>{name}</SpanStyled>
+          <Favourite
+            isFav={isFavourite}
+            budgetId={id.value}
+            activeHref={`/budgets/${id.value}`}
+          />
+        </>
+      ),
+      href: `/budgets/${id.value}`,
+      id: id.value,
+      ref: lastBudgetRef,
+    }));
+  };
+
+  const removeDuplicates = (fetchedBudgets: BudgetType[]) => {
+    const uniqueBudgets = fetchedBudgets
+    .filter((budget, idx) => (fetchedBudgets.map(object => 
+      object.id.value).indexOf(budget.id.value) === idx
+    ));
+    console.log(uniqueBudgets)
+    return uniqueBudgets;
+  };
+
+  const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
+
+  const uniqueValues = removeDuplicates(flatData);
+
+  const successData = mapToBudgetsComponents(uniqueValues);
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
