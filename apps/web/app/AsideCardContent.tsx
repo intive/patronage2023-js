@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { LinkComponent } from "ui";
-import { CategoryFilter } from "components";
+import { CategoryFilter } from "components/CategoryFilter";
 import { useTranslate } from "lib/hooks";
 
 const CardHeaderStyled = styled.div`

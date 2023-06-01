@@ -1,4 +1,4 @@
-import { BudgetsContent } from "./BudgetsContent";
+import { BudgetContent } from "./BudgetContent";
 
 interface PageProps {
   params: {
@@ -6,5 +6,5 @@ interface PageProps {
   };
 }
 export default function BudgetsPage({ params }: PageProps) {
-  return <BudgetsContent id={params.id} />;
+  return <BudgetContent id={params.id} />;
 }

@@ -5,7 +5,7 @@ import { useTranslate } from "lib/hooks";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
-import { Pagination } from "components";
+import { Pagination } from "components/Pagination";
 import { UsersListTable } from "./UsersList";
 import { InputWrapper } from "./UsersList.styled";
 import { SearchInput } from "ui/Input/SearchInput";
