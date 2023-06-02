@@ -3,7 +3,7 @@ import * as Select from "@radix-ui/react-select";
 import { Flag } from "ui";
 
 import { Language, languageAtom } from "store";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import {
   SelectContentStyled,
@@ -13,8 +13,7 @@ import {
 
 export const LanguageSelector = () => {
   const { hasScrollbar } = useHasScrollBar();
-  const setLanguage = useSetAtom(languageAtom);
-  const language = useAtomValue(languageAtom);
+  const [language, setLanguage] = useAtom(languageAtom);
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
