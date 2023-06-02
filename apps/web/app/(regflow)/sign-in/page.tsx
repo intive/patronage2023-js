@@ -71,6 +71,7 @@ export default function SignInPage() {
           redirect: false,
         }).then((res) => {
           if (res!.ok) {
+            router.refresh();
             router.push("/");
           } else {
             setErrMsg(t(form.errorMessage));
