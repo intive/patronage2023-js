@@ -27,19 +27,20 @@ export const HoverCardArrow = styled(HoverCard.Arrow)`
 export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 export const UserName = styled.span`
-  font-size: 16px;
+  font-size: 24px;
 `;
 
 export const UserEmail = styled.span`
-  font-size: 8px;
+  font-size: 12px;
 `;
 
 export const AvatarStyled = styled(Avatar)`
-  height: 64px;
-  width: 64px;
+  height: 96px;
+  width: 96px;
 `;
 
 /* Popover */

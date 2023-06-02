@@ -58,18 +58,16 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
   return (
     <StyledWrapper>
       {visibleUsers.map((user) => (
-        // <Tooltip
-        //   key={user.id}
-        //   text={`${user.firstName} ${user.lastName}`}
-        //   position="bottom">
-        //   <Avatar
-        //     src={user.avatar}
-        //     username={`${user.firstName} ${user.lastName}`}
-        //     outlined
-        //   />
-        // </Tooltip>
-
-        <PersonalCard key={user.id} user={user}></PersonalCard>
+        <PersonalCard
+          key={user.id}
+          triggerComponent={
+            <Avatar
+              src={user.avatar}
+              username={`${user.firstName} ${user.lastName}`}
+              outlined
+            />
+          }
+          user={user}></PersonalCard>
       ))}
       {remainingUsers.length > 0 && (
         <Tooltip text={remainingUserNames} position="bottom">

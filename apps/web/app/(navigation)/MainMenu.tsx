@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { Avatar, Icon } from "ui";
+import { Avatar, Icon, PersonalCard } from "ui";
 import { useTranslate } from "lib/hooks";
 import {
   SelectContentStyled,
@@ -58,8 +58,13 @@ export const MainMenu = () => {
           onValueChange={menuHandler}
           onOpenChange={() => setIsIconDown(!isIconDown)}>
           <SelectTriggerStyled>
-            <Select.Value>
-              <AvatarStyled src={data.user.image} outlined />
+            <Select.Value asChild>
+              <PersonalCard
+                triggerComponent={
+                  <AvatarStyled src={data.user.image} outlined />
+                }
+                user={data.user}
+              />
             </Select.Value>
             <Select.Icon className="SelectIcon">
               {isIconDown ? <IconUp /> : <IconDown />}

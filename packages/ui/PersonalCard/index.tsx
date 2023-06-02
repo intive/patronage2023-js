@@ -1,7 +1,6 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 import * as Popover from "@radix-ui/react-popover";
 import { useMediaQuery } from "react-responsive";
-import { Avatar } from "../Avatar";
 import {
   HoverCardContent,
   HoverCardArrow,
@@ -14,39 +13,38 @@ import {
 } from "./PersonalCard.styles";
 
 interface PersonalCardProps {
+  triggerComponent: any;
   user: any;
 }
 
-export const PersonalCard = ({ user }: PersonalCardProps) => {
+export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
   const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
   return (
     <>
       {isTablet ? (
         <HoverCard.Root>
-          <HoverCard.Trigger asChild>
-            <Avatar src={user.avatar} />
-          </HoverCard.Trigger>
+          <HoverCard.Trigger asChild>{triggerComponent}</HoverCard.Trigger>
           <HoverCard.Portal>
             <HoverCardContent>
-              <AvatarStyled src={user.avatar} />
+              <AvatarStyled src={user.image ? user.image : user.avatar} />
               <UserInfo>
                 <UserName>
-                  {user.firstName} {user.lastName}
+                  {user.name ? user.name : user.firstName + " " + user.lastName}
                 </UserName>
                 <UserEmail>
-                  {user.firstName}
-                  {user.lastName}@mail.com
+                  {user.email
+                    ? user.email
+                    : user.firstName + user.lastName + `@mail.com`}
                 </UserEmail>
               </UserInfo>
+
               <HoverCardArrow />
             </HoverCardContent>
           </HoverCard.Portal>
         </HoverCard.Root>
       ) : (
         <Popover.Root>
-          <Popover.Trigger asChild>
-            <Avatar src={user.avatar} />
-          </Popover.Trigger>
+          <Popover.Trigger asChild>{triggerComponent}</Popover.Trigger>
           <Popover.Portal>
             <PopoverContent>
               <AvatarStyled src={user.avatar} />
@@ -55,8 +53,9 @@ export const PersonalCard = ({ user }: PersonalCardProps) => {
                   {user.firstName} {user.lastName}
                 </UserName>
                 <UserEmail>
-                  {user.firstName}
-                  {user.lastName}@mail.com
+                  {user.email
+                    ? user.email
+                    : user.firstName + user.lastName + `@mail.com`}
                 </UserEmail>
               </UserInfo>
               <PopoverArrow />

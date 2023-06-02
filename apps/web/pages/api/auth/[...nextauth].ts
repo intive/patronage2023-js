@@ -16,6 +16,7 @@ type decodedData = {
   realm_access: {
     roles: string[];
   };
+  email: string;
 };
 
 interface DefaultUser extends User {
@@ -59,7 +60,7 @@ export const authOptions: NextAuthOptions = {
         if (res.ok) {
           const { accessToken, refreshToken } = await res.json();
 
-          const { sub, name, avatar, realm_access } = jwt.decode(
+          const { sub, name, avatar, realm_access, email } = jwt.decode(
             accessToken
           ) as decodedData;
 
@@ -70,6 +71,7 @@ export const authOptions: NextAuthOptions = {
             role: realm_access.roles.includes("admin") ? "ADMIN" : "USER",
             name,
             image: avatar,
+            email,
           };
         } else return null;
       },
