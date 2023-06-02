@@ -65,7 +65,7 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
           </Select.Value>
         )}
         {variant === "descriptive" && (
-          <Select.Value>
+          <Select.Value asChild>
             <StyledSelectorBox>
               <Flag
                 src={`/flags/${language}.svg`}

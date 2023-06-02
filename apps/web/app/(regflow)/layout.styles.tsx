@@ -120,10 +120,10 @@ export const ParagraphStyled = styled.p`
 
 export const CustomCard = styled(Card)`
   position: relative;
-  padding: 1.5rem;
+  padding: 3rem;
 
   ${device.tablet} {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
   }
 
   ${device.desktop} {
@@ -133,7 +133,12 @@ export const CustomCard = styled(Card)`
 
 export const LanguageSelectorWrapper = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 6px;
+  right: 6px;
   z-index: 2;
+
+  ${device.desktop} {
+    top: 20px;
+    right: 20px;
+  }
 `;
