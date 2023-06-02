@@ -55,7 +55,11 @@ export const SelectItemStyled = styled(Select.Item)`
 
 export const StyledSelectorBox = styled.div`
   display: flex;
-  gap: 4px;
-  border: 2px solid ${({ theme }) => theme.input.neutral};
+  align-items: center;
+  gap: 10px;
+  border: 2px solid ${({ theme }) => theme.input.borderError};
+  border-radius: 8px;
   padding: 8px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.primary};
 `;

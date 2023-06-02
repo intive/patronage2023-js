@@ -11,6 +11,8 @@ import {
   SelectTriggerStyled,
   StyledSelectorBox,
 } from "./LanguageSelectorStyled";
+import { useContext } from "react";
+import { ThemeContext } from "styled-components";
 
 type LanguageSelectorProps = {
   variant: "flag" | "descriptive";
@@ -19,6 +21,7 @@ type LanguageSelectorProps = {
 export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
   const [language, setLanguage] = useAtom(languageAtom);
+  const theme = useContext(ThemeContext);
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
@@ -68,7 +71,8 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
                 src={`/flags/${language}.svg`}
                 alt={`Flag - ${language.toUpperCase()}`}
               />
-              <Icon icon={"arrow_drop_down"} />
+              {/*<span>Français</span>*/}
+              <Icon icon={"arrow_drop_down"} color={theme.primary} />
             </StyledSelectorBox>
           </Select.Value>
         )}
