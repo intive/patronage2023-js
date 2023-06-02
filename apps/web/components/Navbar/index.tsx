@@ -3,10 +3,9 @@
 import { useContext } from "react";
 import { Turn as Hamburger } from "hamburger-react";
 import { useSession } from "next-auth/react";
-import { ThemeContext } from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { useAtom } from "jotai";
 import { useTranslate } from "lib/hooks";
-import styled from "styled-components";
 import { device } from "lib/media-queries";
 import { LanguageSelector } from "./LanguageSelector";
 
@@ -31,7 +30,6 @@ const ActionWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  justify-content: flex-end;
   gap: 1rem;
 `;
 
@@ -67,7 +65,7 @@ export default function Nav() {
       )}
       <Logo white />
       <ActionWrapper>
-        <LanguageSelector />
+        <LanguageSelector variant={"flag"} />
         <MainMenu />
       </ActionWrapper>
     </NavBar>

@@ -1,6 +1,6 @@
 import * as Select from "@radix-ui/react-select";
 
-import { Flag } from "ui";
+import { Flag, Icon } from "ui";
 
 import { Language, languageAtom } from "store";
 import { useAtom } from "jotai";
@@ -9,9 +9,14 @@ import {
   SelectContentStyled,
   SelectItemStyled,
   SelectTriggerStyled,
+  StyledSelectorBox,
 } from "./LanguageSelectorStyled";
 
-export const LanguageSelector = () => {
+type LanguageSelectorProps = {
+  variant: "flag" | "descriptive";
+};
+
+export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
   const [language, setLanguage] = useAtom(languageAtom);
 
@@ -48,14 +53,25 @@ export const LanguageSelector = () => {
         changeLanguage(lang);
       }}>
       <SelectTriggerStyled>
-        <Select.Value>
-          {
+        {variant === "flag" && (
+          <Select.Value>
             <Flag
               src={`/flags/${language}.svg`}
               alt={`Flag - ${language.toUpperCase()}`}
             />
-          }
-        </Select.Value>
+          </Select.Value>
+        )}
+        {variant === "descriptive" && (
+          <Select.Value>
+            <StyledSelectorBox>
+              <Flag
+                src={`/flags/${language}.svg`}
+                alt={`Flag - ${language.toUpperCase()}`}
+              />
+              <Icon icon={"arrow_drop_down"} />
+            </StyledSelectorBox>
+          </Select.Value>
+        )}
       </SelectTriggerStyled>
 
       <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>

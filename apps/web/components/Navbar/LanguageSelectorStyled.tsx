@@ -52,3 +52,10 @@ export const SelectItemStyled = styled(Select.Item)`
     border-bottom-left-radius: 16px;
   }
 `;
+
+export const StyledSelectorBox = styled.div`
+  display: flex;
+  gap: 4px;
+  border: 2px solid ${({ theme }) => theme.input.neutral};
+  padding: 8px;
+`;
