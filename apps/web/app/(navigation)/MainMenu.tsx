@@ -48,6 +48,8 @@ export const MainMenu = () => {
     },
   ];
 
+  console.log(data);
+
   return (
     <>
       {data && (

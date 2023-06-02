@@ -373,6 +373,10 @@ export const theme = {
     content: colors.Teal10,
     background: colors.BasicWhite,
   },
+  personalCard: {
+    main: colors.Teal10,
+    background: colors.Teal1,
+  },
 };
 
 export type ThemeType = typeof theme;
