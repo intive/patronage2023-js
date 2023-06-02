@@ -69,7 +69,7 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
         //   />
         // </Tooltip>
 
-        <PersonalCard user={user}></PersonalCard>
+        <PersonalCard key={user.id} user={user}></PersonalCard>
       ))}
       {remainingUsers.length > 0 && (
         <Tooltip text={remainingUserNames} position="bottom">
