@@ -9,11 +9,7 @@ export type ColorProps = {
 export type ImportResponseProps = {
   errors: string[];
   uri: string;
-};
-
-export type ImportBEProps = {
   status: number;
-  body: ImportResponseProps;
 };
 
 type PropsType = {

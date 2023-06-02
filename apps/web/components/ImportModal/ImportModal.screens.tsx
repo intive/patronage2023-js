@@ -11,13 +11,15 @@ import {
   SpanStyled,
   SpinnerWrapperStyled,
   ErrorMessageStyled,
-  IconStyled,
 } from "./ImportModal.styled";
 import {
   StyledHeader,
   StyledSubHeader,
 } from "app/(regflow)/sign-up/FlowController/SignUpFormStyled";
-import { ScreenCircle } from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
+import {
+  ScreenCircle,
+  IconStyled,
+} from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
 
 type ErrorsScreenProps = {
   errors: string[];

@@ -22,31 +22,11 @@ import {
   TutorialScreen,
 } from "./ImportModal.screens";
 import {
-  ImportBEProps,
   ImportExportAction,
   ImportExportState,
   ImportModalProps,
+  ImportResponseProps,
 } from "./ImportModal.types";
-
-// temp
-const errorsArray = [
-  "Errror: 1: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 2: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 3: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 4: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 5: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 6: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 7: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 8: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 9: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 10: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 11: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 12: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 13: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 14: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 15: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-  "Errror: 16: lotem ipsum lotem ipsum lorem ispmsum lirem ipsumsdaldosadosaodas",
-];
 
 const initialState: ImportExportState = {
   isCSVError: false,
@@ -78,9 +58,6 @@ const reducer = (
   }
 };
 
-// temp func
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export const ImportModal = ({ onClose }: ImportModalProps) => {
   const { t, dict } = useTranslate("ImportModal");
   const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
@@ -102,11 +79,9 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     inputRef.current?.click();
   };
 
-  const { mutate, isLoading } = useMutation(
-    async (formData: FormData): Promise<ImportBEProps> => {
-      // temp await
-      await sleep(2600);
-      const result = fetch(``, {
+  const { mutate: importCsvMutation, isLoading } = useMutation({
+    mutationFn: async (formData: FormData): Promise<ImportResponseProps> => {
+      const result = fetch(`${env.NEXT_PUBLIC_API_URL}budgets/import`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -114,54 +89,71 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
         body: formData,
       });
       const res = await result;
-      return res.ok && res.json();
+      const data = await res.json().catch(() => ({}));
+      return { ...data, status: res.status };
     },
-    {
-      onSuccess: (data: ImportBEProps) => {
-        switch (data.status) {
-          case 201:
-            const isDataValid = data.body.errors.length === 0;
-            dispatch({ type: "SET_CSV_ERROR", payload: !isDataValid });
-            queryClient.invalidateQueries([
-              "budgets",
-              { searchValue: "", sortAscending: true },
-            ]);
+    onSuccess: (data: ImportResponseProps) => {
+      console.log(data);
 
-            if (isDataValid) {
-              dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
-            } else {
-              dispatch({
-                type: "SET_MULTIPLE",
-                payload: {
-                  screen: ErrorsScreen,
-                  props: { errors: data.body.errors },
-                  csvUri: data.body.uri,
+      switch (data.status) {
+        case 200:
+          const isDataValid = data.errors.length === 0;
+          dispatch({ type: "SET_CSV_ERROR", payload: !isDataValid });
+          queryClient.invalidateQueries([
+            "budgets",
+            { searchValue: "", sortAscending: true },
+          ]);
+
+          if (isDataValid) {
+            dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
+          } else {
+            dispatch({
+              type: "SET_MULTIPLE",
+              payload: {
+                screen: ErrorsScreen,
+                props: {
+                  errors: data.errors,
+                  errorMessage: t(dict.errorCsvMessage),
                 },
-              });
-            }
-            break;
-          case 400:
-            showToast({
-              variant: "error",
-              message: t(dict.responseErrors[400]),
+                csvUri: data.uri,
+              },
             });
-            break;
-          case 401:
-            showToast({
-              variant: "error",
-              message: t(dict.responseErrors[401]),
-            });
-            break;
-          default:
-            // showToast({
-            //   variant: "error",
-            //   message: t(dict.responseErrors.default),
-            // });
-            return;
-        }
-      },
-    }
-  );
+          }
+          break;
+        case 400:
+          showToast({
+            variant: "error",
+            message: t(dict.responseErrors[400]),
+          });
+          dispatch({
+            type: "SET_MULTIPLE",
+            payload: {
+              isCSVError: false, // show download button or show import button
+              screen: ErrorsScreen,
+              props: {
+                errors: data.errors,
+                errorMessage: data.uri, // add dict
+              },
+              csvUri: data.uri,
+            },
+          });
+          break;
+        case 401:
+          showToast({
+            variant: "error",
+            message: t(dict.responseErrors[401]),
+          });
+          dispatch({ type: "SET_SCREEN", payload: TutorialScreen });
+          break;
+        default:
+          // showToast({
+          //   variant: "error",
+          //   message: t(dict.responseErrors.default),
+          // });
+          return;
+      }
+    },
+  });
 
   const importFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -175,19 +167,9 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
     const file = e.currentTarget.files[0];
     const formData = new FormData();
     formData.append("file", file, file.name);
-    mutate(formData);
+    importCsvMutation(formData);
 
-    // temp
     e.currentTarget.value = "";
-    await sleep(2600);
-    dispatch({
-      type: "SET_MULTIPLE",
-      payload: {
-        isCSVError: true,
-        screen: ErrorsScreen,
-        props: { errors: errorsArray, errorMessage: t(dict.errorCsvMessage) },
-      },
-    });
   };
 
   const showLoader = isLoading && !isCSVError;
@@ -235,13 +217,6 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             <span>{tExport(dictExport.exportButtonText)}</span>
           </ButtonStyled>
         )}
-        <button
-          style={{ position: "absolute", top: "0" }}
-          onClick={() => {
-            dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
-          }}>
-          Temp button shows success Screen
-        </button>
       </ModalContentStyled>
     </Modal>
   );
