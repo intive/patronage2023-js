@@ -874,13 +874,30 @@ const dictionary = {
     },
   },
   ReportsPage: {
-    title: { en: "Reports page", pl: "Raporty", fr: "Rapports" },
+    title: { en: "Reports", pl: "Raporty", fr: "Rapports" },
+    aside: {
+      title: {
+        en: "Additional information",
+        pl: "Dodatkowe informacje",
+        fr: "",
+      },
+    },
+    balance: {
+      en: "Total balance",
+      pl: "Bilans",
+      fr: "Solde total",
+    },
     trendChip: {
       text: {
         en: "Your budget's percentage growth is ",
         pl: "Wzrost procentowy twojego budżetu wynosi ",
         fr: "Le pourcentage de croissance de votre budget est de ",
       },
+    },
+    currency: {
+      en: "Currency",
+      pl: "Waluta",
+      fr: "Monnaie",
     },
   },
   SettingsPage: {
