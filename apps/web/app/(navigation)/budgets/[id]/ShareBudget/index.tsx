@@ -39,7 +39,6 @@ type UsersListItemProps = {
   user: User;
   onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
-  ref?: (user: HTMLLIElement) => void;
 };
 
 const isAvatarValid = (text: string) => {

@@ -55,7 +55,7 @@ export const useGetUsers = (searchValue: string, pageSize: number) => {
   };
 
   return useInfiniteQuery({
-    queryKey: ["budgetsList", { searchValue }],
+    queryKey: ["usersList", { searchValue }],
     queryFn: async ({ pageParam = 1 }): Promise<ItemType> => {
       return getUsersList({
         pageSize,

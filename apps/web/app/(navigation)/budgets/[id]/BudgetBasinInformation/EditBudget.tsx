@@ -219,7 +219,9 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
           <TabsTriggerStyled value="settings">
             {t(dict.tabs.settings)}
           </TabsTriggerStyled>
-          <TabsTriggerStyled value="share">
+          <TabsTriggerStyled
+            value="share"
+            disabled={currentUser !== budget.userId}>
             {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
@@ -294,7 +296,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                             label={t(dict.inputNames.description)}
                             value={value}
                             hasError={errors.length > 0}
-                            onChange={(e: any) => {
+                            onChange={(e) => {
                               setValue(e.currentTarget.value);
                               setEditedBudget({
                                 ...editedBudget,
@@ -372,17 +374,11 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                   </InputWrapperFullFlex>
                 </SettingsTab>
                 <ShareTab value="share">
-                  {currentUser === budget.userId ? (
-                    <ShareBudget
-                      owner={budget.userId}
-                      budgetUsers={budgetUsers}
-                      setBudgetUsers={setBudgetUsers}
-                    />
-                  ) : (
-                    <ContentWrapper>
-                      <p>{t(dict.paragraphs.onlyOwnerShare)}</p>
-                    </ContentWrapper>
-                  )}
+                  <ShareBudget
+                    owner={budget.userId}
+                    budgetUsers={budgetUsers}
+                    setBudgetUsers={setBudgetUsers}
+                  />
                 </ShareTab>
               </ContentStyled>
               <div>

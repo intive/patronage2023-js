@@ -84,9 +84,9 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { hasScrollbar } = useHasScrollBar();
 
   const { data: session } = useSession();
-  const owner = session && session.user.id;
+  const owner = session?.user.id as string;
 
-  const [budgetUsers, setBudgetUsers] = useState(owner ? [owner] : []);
+  const [budgetUsers, setBudgetUsers] = useState([owner]);
 
   const {
     checkNameOnChange,
@@ -456,13 +456,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   </InputWrapperFullFlex>
                 </SettingsTab>
                 <ShareTab value="share">
-                  {owner && (
-                    <ShareBudget
-                      owner={owner}
-                      budgetUsers={budgetUsers}
-                      setBudgetUsers={setBudgetUsers}
-                    />
-                  )}
+                  <ShareBudget
+                    owner={owner}
+                    budgetUsers={budgetUsers}
+                    setBudgetUsers={setBudgetUsers}
+                  />
                 </ShareTab>
               </ContentStyled>
               <div>
