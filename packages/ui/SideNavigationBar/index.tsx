@@ -37,7 +37,6 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 5;
   height: 100%;
   padding-top: 40px;
   list-style: none;

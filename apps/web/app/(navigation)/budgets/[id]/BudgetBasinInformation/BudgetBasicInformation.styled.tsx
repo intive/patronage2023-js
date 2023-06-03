@@ -73,7 +73,7 @@ export const NavBudgetIconStyled = styled(NavBudgetIcon)`
 
 export const FavouriteStyled = styled(Favourite)`
   display: none;
-  margin-left: 0;
+  margin-left: 0px;
   background-color: ${({ theme }) => theme.editIcon.background};
   height: 3em;
   width: 3em;

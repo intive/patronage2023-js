@@ -1,8 +1,9 @@
 "use client";
 import styled from "styled-components";
-import { LinkComponent } from "ui";
+import { LinkComponent, Modal } from "ui";
 import { CategoryFilter } from "components/CategoryFilter";
 import { useTranslate } from "lib/hooks";
+import { useState } from "react";
 
 const CardHeaderStyled = styled.div`
   display: flex;
@@ -25,15 +26,17 @@ const CardSettingsButton = styled(LinkComponent)`
 
 export const AsideCardContent = () => {
   const { t, dict } = useTranslate("AsideCard");
+  const [modal, setModal] = useState(false);
   return (
     <>
       <CardHeaderStyled>
         <CardTitleStyled>{t(dict.categories.title)}</CardTitleStyled>
-        <CardSettingsButton onClick={() => {}}>
+        <CardSettingsButton onClick={() => setModal(true)}>
           {t(dict.categories.settings)}
         </CardSettingsButton>
       </CardHeaderStyled>
       <CategoryFilter />
+      {modal && <Modal onClose={() => setModal(false)}>siema</Modal>}
     </>
   );
 };
