@@ -4,6 +4,8 @@ import { LinkComponent, Modal } from "ui";
 import { CategoryFilter } from "components/CategoryFilter";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import ManageCategories from "components/ManageCategories";
 
 const CardHeaderStyled = styled.div`
   display: flex;
@@ -25,6 +27,8 @@ const CardSettingsButton = styled(LinkComponent)`
 `;
 
 export const AsideCardContent = () => {
+  // const fetch = useSuperfetch("")
+
   const { t, dict } = useTranslate("AsideCard");
   const [modal, setModal] = useState(false);
   return (
@@ -36,7 +40,7 @@ export const AsideCardContent = () => {
         </CardSettingsButton>
       </CardHeaderStyled>
       <CategoryFilter />
-      {modal && <Modal onClose={() => setModal(false)}>siema</Modal>}
+      <ManageCategories open={modal} onClose={() => setModal(false)} />
     </>
   );
 };
