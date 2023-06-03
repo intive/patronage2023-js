@@ -64,13 +64,14 @@ export default function SignInPage() {
 
   return (
     <Form
-      onSubmit={async (values) => {
+      onSubmit={(values) => {
         signIn("credentials", {
           email: values.email,
           password: values.password,
           redirect: false,
         }).then((res) => {
-          if (res!.ok) {
+          if (res?.ok) {
+            router.refresh();
             router.push("/");
           } else {
             setErrMsg(t(form.errorMessage));
@@ -139,7 +140,7 @@ export default function SignInPage() {
                 )}
               </Field>
             </FieldsWrapper>
-            <Button onClick={submit} type="submit" fullWidth>
+            <Button type="submit" fullWidth>
               {t(form.submitButton)}
             </Button>
             <FormFooter
