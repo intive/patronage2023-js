@@ -41,14 +41,28 @@ export default function useSuperfetch() {
           const data = await res.json().catch(() => ({}));
           return { ...data, httpStatus: res.status };
         } else if (res.status === 400) {
+          const hardcodedError = "10.10";
           showToast({
             variant: "error",
-            message: t(dict.title) + " " + "10.10" + ": " + t(dict["10.10"]),
+            message:
+              t(dict.title) + hardcodedError + " - " + t(dict[hardcodedError]),
           });
-          // CODE BELOW WAIT FOR BE
-          // } else if (res.status === 400 && ErrorCode === "10.1" || "10.2") {
-          //   console.log(t(dict.title)+" "+`${[ErroCode]}`+": "+ t(dict[ErrorCode]))
+        } else if (res.status !== 200 || 400 || 401) {
+          showToast({
+            variant: "error",
+            message: t(dict["defaultError"]),
+          });
         }
+        // CODE BELOW IS DRAFT AND WAIT FOR BE
+        // } else if ((res.status === 400 && ErrorCode === "10.1") || "10.2") {
+        //   console.log(
+        //     t(dict.title) + " " + `${[ErroCode]}` + ": " + t(dict[ErrorCode])
+        //   );
+        // } else if ((res.status === 400 && ErrorCode === "")) {
+        //   showToast({
+        //     variant: "error",
+        //     message: t(dict[""]),
+        //   });
       })
 
       .catch(() => {

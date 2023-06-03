@@ -1074,6 +1074,11 @@ const dictionary = {
     },
   },
   Errors: {
+    title: {
+      en: "Error: ",
+      pl: "Błąd: ",
+      fr: "Erreur: ",
+    },
     "1.1": {
       //FE validation
       en: "Budget name is too long.",
@@ -1260,16 +1265,22 @@ const dictionary = {
       pl: "Nieprawidłowy deskryptor sortowania.",
       fr: "Descripteur de tri invalide.",
     },
+    "": {
+      //no ErrorCode from BE
+      en: "An unexpected error occurred.",
+      pl: "Wystąpił nieoczekiwany błąd.",
+      fr: "Une erreur inattendue est apparue.",
+    },
+    defaultError: {
+      en: "Oops, something went wrong.",
+      pl: "Ups, coś poszło nie tak.",
+      fr: "Oups, quelque chose a mal tourné.",
+    },
     "10.10": {
       en: "Hardcoded error.",
       pl: "Błąd zahardkodowany.",
       fr: "Erreur en dur.",
     },
-    title: {
-      en: "Error",
-      pl: "Błąd",
-      fr: "Erreur",
-    }
   },
 };
 
