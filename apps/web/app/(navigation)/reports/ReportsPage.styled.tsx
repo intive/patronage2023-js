@@ -9,6 +9,11 @@ export const PageWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const TopWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const TitleStyled = styled.h1`
   align-self: flex-start;
   width: 100%;

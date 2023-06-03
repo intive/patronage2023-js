@@ -6,10 +6,11 @@ import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { TrendChip } from "ui";
 import ReportsChart from "./ReportsChart";
-import { ButtonGroup, Icon, CurrencySelect } from "ui";
+import { ButtonGroup, Icon, CurrencySelect, ButtonGroupSimple } from "ui";
 
 import {
   PageWrapper,
+  TopWrapper,
   TitleStyled,
   StyledWrapper,
   ButtonWrapper,
@@ -23,13 +24,42 @@ export default function ReportsPage() {
   const { t, dict } = useTranslate("ReportsPage");
   const { title, aside, balance, currency } = dict;
   const [chart, setChart] = useState("line");
-  const [reportsCurrency, setReportsCurrency] = useState("USD");
+  const [period, setPeriod] = useState("12month");
+  const [ reportsCurrency, setReportsCurrency ] = useState("USD");
   const { hasScrollbar } = useHasScrollBar();
 
   const mainCardContent = (
     <>
       <PageWrapper>
-        <TitleStyled>{t(title)}</TitleStyled>
+        <TopWrapper>
+          <TitleStyled>{t(title)}</TitleStyled>
+          <ButtonGroupSimple options={[
+            {
+              component: "7d",
+              id: "7days",
+              checked: period === "7days",
+            },
+            {
+              component: "30d",
+              id: "30days",
+              checked: period === "30days",
+            },
+            {
+              component: "6m",
+              id: "6month",
+              checked: period === "6month",
+            },
+            {
+              component: "12m",
+              id: "12month",
+              checked: period === "12month",
+            },
+          ]}
+          selectedOption={period}
+          onOptionSelect={setPeriod}
+        />
+        </TopWrapper>
+        
         <StyledWrapper>
           <StyledTitle>{t(balance)}</StyledTitle>
           <StyledReportsBalanceWrapper>
@@ -59,7 +89,7 @@ export default function ReportsPage() {
                   onSelect: () => {
                     setChart("line");
                   },
-                  defaultChecked: true,
+                  defaultChecked: chart === "line",
                 },
                 {
                   component: <Icon icon="bar_chart" />,
@@ -67,6 +97,7 @@ export default function ReportsPage() {
                   onSelect: () => {
                     setChart("bar");
                   },
+                  defaultChecked: chart === "bar",
                 },
               ]}
               secondary
