@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { useToast } from "ui";
 import { useTranslate } from "./useTranslate";
 
-interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
+export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body?: object;
 }
 
