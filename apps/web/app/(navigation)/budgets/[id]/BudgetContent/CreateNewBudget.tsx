@@ -42,7 +42,7 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { ShareBudget } from "../ShareBudget";
+import { ShareBudget } from "../ShareBudgetOld";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type NewBudget = {
@@ -57,11 +57,6 @@ type newBudgetType = {
   dateStart: string;
   dateEnd: string;
   currency: string;
-};
-
-type sendUsersProps = {
-  budgetUsers: string[];
-  budgetId: string;
 };
 
 export const icons: IconType[] = [
@@ -84,9 +79,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { hasScrollbar } = useHasScrollBar();
 
   const { data: session } = useSession();
-  const owner = session?.user.id as string;
-
-  const [budgetUsers, setBudgetUsers] = useState([owner]);
 
   const {
     checkNameOnChange,
@@ -118,55 +110,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       : setNewBudget({ ...newBudget, dateEnd: "" });
   };
 
-  //temporary just for current version BE endpoint
-  const filteredUsers = budgetUsers.filter((user) => user !== owner);
-
   // required for queryClient in onSuccess
   const queryClient = useQueryClient();
 
-  const superFetch = useSuperfetch();
-
-  const sendBudgetUsersMutation = useMutation({
-    mutationFn: ({ budgetUsers, budgetId }: sendUsersProps) => {
-      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/users`, {
-        method: "POST",
-        body: budgetUsers,
-      });
-    },
-    onError: () => {
-      setErrorMsg(t(dict.errors.errorDefault));
-      return;
-    },
-    onSettled: (data) => {
-      switch (data.httpStatus) {
-        case 200:
-          queryClient.invalidateQueries({ queryKey: ["budgets"] });
-          onClose();
-          break;
-        case 400:
-          setErrorMsg(t(dict.errors.error400));
-          break;
-        case 401:
-          setErrorMsg(t(dict.errors.error401));
-          break;
-        default:
-          setErrorMsg(t(dict.errors.errorDefault));
-          return;
-      }
-    },
-  });
+  const fetch = useSuperfetch();
 
   const useSendBudget = () =>
     useMutation(
       () =>
         fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
           method: "POST",
-          headers: {
-            accept: "text/plain",
-            Authorization: "Bearer " + session!.user.accessToken,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+          body: {
             name: newBudget.name,
             limit: {
               value: newBudget.limit,
@@ -178,23 +132,17 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             },
             description: newBudget.description,
             iconName: newBudget.icon,
-          }),
+          },
         }),
       {
-        onSuccess: async (data) => {
-          switch (data.status) {
+        onSuccess: (data) => {
+          switch (data.httpStatus) {
             case 201:
               queryClient.invalidateQueries([
                 "budgetsList",
                 { searchValue: "", sortAscending: true },
               ]);
-              const budgetId = (await data.text()).replaceAll('"', "");
-              filteredUsers.length > 0
-                ? sendBudgetUsersMutation.mutate({
-                    budgetUsers: filteredUsers,
-                    budgetId,
-                  })
-                : onClose();
+              onClose();
               break;
             case 400:
               setErrorMsg(t(dict.errors.error400));
@@ -231,9 +179,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Tabs.List>
           <TabsTriggerStyled value="settings">
             {t(dict.tabs.settings)}
-          </TabsTriggerStyled>
-          <TabsTriggerStyled value="share">
-            {t(dict.tabs.share)}
           </TabsTriggerStyled>
         </Tabs.List>
 
@@ -455,13 +400,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     </Field>
                   </InputWrapperFullFlex>
                 </SettingsTab>
-                <ShareTab value="share">
-                  <ShareBudget
-                    owner={owner}
-                    budgetUsers={budgetUsers}
-                    setBudgetUsers={setBudgetUsers}
-                  />
-                </ShareTab>
               </ContentStyled>
               <div>
                 <SeparatorStyled />

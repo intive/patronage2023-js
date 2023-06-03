@@ -568,11 +568,11 @@ const dictionary = {
         pl: "do",
         fr: "à",
       },
-      onlyOwnerShare: {
-        en: "Only the owner can share the budget",
-        pl: "Tylko właściciel może udostępniać budżet",
-        fr: "Seul le propriétaire peut partager le budget",
-      },
+      // onlyOwnerShare: {
+      //   en: "Only the owner can share the budget",
+      //   pl: "Tylko właściciel może udostępniać budżet",
+      //   fr: "Seul le propriétaire peut partager le budget",
+      // },
     },
     button: {
       en: "Save",

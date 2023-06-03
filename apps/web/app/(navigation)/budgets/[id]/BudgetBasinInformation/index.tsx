@@ -26,6 +26,7 @@ import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
 import { InfoTile, NavBudgetIcon } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
+import { ShareBudget } from "./ShareBudget";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -82,12 +83,22 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
 
   const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
 
-  const openModal = () => {
+  const openEditModal = () => {
     setIsEditBudgetModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeEditModal = () => {
     setIsEditBudgetModalOpen(false);
+  };
+
+  const [isShareBudgetModalOpen, setIsShareBudgetModalOpen] = useState(false);
+
+  const openShareModal = () => {
+    setIsShareBudgetModalOpen(true);
+  };
+
+  const closeShareModal = () => {
+    setIsShareBudgetModalOpen(false);
   };
 
   const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
@@ -100,7 +111,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetNameWrapperStyled>
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
-              <NavBudgetIconStyled onClick={openModal} icon="edit" />
+              <NavBudgetIconStyled onClick={openEditModal} icon="edit" />
+              {loggedUserId === budget.userId && (
+                <NavBudgetIconStyled icon="share" onClick={openShareModal} />
+              )}
               <FavouriteStyled
                 isFav={budget.isFavourite}
                 budgetId={budget.id}
@@ -114,12 +128,21 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                   {
                     ComponentToRender: (
                       <NavBudgetIconDropdownStyled
-                        onClick={openModal}
+                        onClick={openEditModal}
                         icon="edit"
                       />
                     ),
                     id: "edit",
                   },
+                  // {
+                  //   ComponentToRender: (
+                  //     <NavBudgetIconDropdownStyled
+                  //       onClick={openShareModal}
+                  //       icon="share"
+                  //     />
+                  //   ),
+                  //   id: "share",
+                  // },
                   {
                     ComponentToRender: (
                       <FavouriteDropdownStyled
@@ -164,7 +187,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       </InfoTileWrapperStyled>
 
       {isEditBudgetModalOpen && (
-        <EditBudget budget={budget} onClose={() => closeModal()} />
+        <EditBudget budget={budget} onClose={() => closeEditModal()} />
+      )}
+      {isShareBudgetModalOpen && (
+        <ShareBudget budget={budget} onClose={() => closeShareModal()} /> // budget={budget} onClose={() => closeEditModal()} />
       )}
       {deleteModalVisibility && (
         <RemoveBudget

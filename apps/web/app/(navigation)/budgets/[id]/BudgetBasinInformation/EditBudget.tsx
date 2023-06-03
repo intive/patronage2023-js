@@ -39,9 +39,9 @@ import { env } from "env.mjs";
 import { icons } from "../BudgetContent/CreateNewBudget";
 import { useEffect, useState } from "react";
 import { ErrorMessage } from "ui";
-import { ShareBudget } from "../ShareBudget";
+import { ShareBudget } from "../ShareBudgetOld";
 import useSuperfetch from "lib/hooks/useSuperfetch";
-import { ContentWrapper } from "../ShareBudget/ShareBudget.styled";
+import { ContentWrapper } from "../ShareBudgetOld/ShareBudget.styled";
 
 interface EditBudgetProps {
   budget: BudgetFixed;
