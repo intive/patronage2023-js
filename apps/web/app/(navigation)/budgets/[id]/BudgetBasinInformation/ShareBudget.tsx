@@ -15,6 +15,7 @@ import {
   ButtonWrapperStyled,
   ParagraphStyled,
   SeparatorStyled,
+  SeparatorStyledTop,
 } from "../BudgetContent/CreateNewBudget.styled";
 import { SearchInput } from "ui/Input/SearchInput";
 import { Spinner } from "ui/NavList/Spinner";
@@ -201,6 +202,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
 
   return (
     <Modal header={"Share budget"} onClose={onClose} fullHeight>
+      <SeparatorStyledTop />
       <ShareBudgetWrapperStyled>
         <ParagraphStyled>{t(dict.inviteMembers)}</ParagraphStyled>
         <SearchInput

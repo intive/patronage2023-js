@@ -1,35 +1,10 @@
 import styled from "styled-components";
 import { Separator, Textarea } from "ui";
-import * as Tabs from "@radix-ui/react-tabs";
 import { device } from "lib/media-queries";
 
 type TextareaErrorType = {
   hasError?: boolean;
 };
-
-export const TabsTriggerStyled = styled(Tabs.Trigger)`
-  font-size: 14px;
-  font-weight: 600;
-  background-color: ${({ theme }) => theme.createNewBudget.background};
-  color: ${({ theme }) => theme.createNewBudget.inactive};
-  width: 50%;
-  border: 0;
-  cursor: pointer;
-  padding: 8px 8px 12px 8px;
-  border-bottom: 2px solid white;
-  &[data-state="active"] {
-    color: ${({ theme }) => theme.createNewBudget.active};
-    border-bottom: 2px solid ${({ theme }) => theme.createNewBudget.active};
-  }
-  &[disabled],
-  &[disabled]:hover {
-    color: ${({ theme }) => theme.button.secondary.disabled};
-    cursor: not-allowed;
-  }
-  &:hover {
-    color: ${({ theme }) => theme.button.secondary.hover};
-  }
-`;
 
 export const ParagraphStyled = styled.p`
   font-style: unset;
@@ -132,33 +107,33 @@ export const DatePickerErrorStyled = styled.div`
   top: 55px;
 `;
 
-export const TabsStyled = styled(Tabs.Root)`
+export const FormWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 68px);
   width: 311px;
-  min-height: calc(100% - 48px);
+
   & form {
-    height: calc(100% - 64px);
-    display: grid;
-    grid-template-rows: auto 64px [end];
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   ${device.tablet} {
+    height: calc(100% - 84px);
     width: 464px;
-  }
-  ${device.desktop} {
-    form {
-      height: calc(100% - 80px);
-    }
   }
 `;
 
 export const ContentStyled = styled.div`
-  display: grid;
-  overflow: hidden;
-`;
-
-export const SettingsTab = styled(Tabs.Content)`
-  height: 100%;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
   padding-right: 10px;
+
+  height: 100%;
+
+  ${device.tablet} {
+  }
 
   &::-webkit-scrollbar {
     background-color: ${({ theme }) => theme.textarea.Neutral2};
@@ -170,14 +145,6 @@ export const SettingsTab = styled(Tabs.Content)`
     background-color: ${({ theme }) => theme.modal.closeButton};
     border-radius: 10px;
   }
-`;
-
-export const ShareTab = styled(Tabs.Content)`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  overflow-y: hidden;
 `;
 
 export const ErrorMessageWrapper = styled.div`

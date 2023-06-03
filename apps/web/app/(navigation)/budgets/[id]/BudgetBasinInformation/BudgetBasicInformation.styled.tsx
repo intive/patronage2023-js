@@ -75,7 +75,6 @@ export const FavouriteStyled = styled(Favourite)`
   display: none;
   margin-left: 0;
   background-color: ${({ theme }) => theme.editIcon.background};
-  color: #7e7e7e;
   height: 3em;
   width: 3em;
   border-radius: 8px;

@@ -41,7 +41,6 @@ export const EmailStyled = styled.p`
 
 export const UsersListStyled = styled.ul`
   width: 100%;
-  flex-grow: 1;
   overflow-y: auto;
   margin-top: 24px;
   padding-right: 8px;

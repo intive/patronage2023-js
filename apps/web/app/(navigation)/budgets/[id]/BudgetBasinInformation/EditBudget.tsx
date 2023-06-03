@@ -1,6 +1,5 @@
 "use client";
 
-import * as Tabs from "@radix-ui/react-tabs";
 import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
@@ -15,8 +14,7 @@ import {
 } from "ui";
 import {
   SeparatorStyledTop,
-  TabsStyled,
-  TabsTriggerStyled,
+  FormWrapperStyled,
   ContentStyled,
   ParagraphStyled,
   IconPickerStyled,
@@ -30,8 +28,6 @@ import {
   SeparatorStyled,
   ButtonWrapperStyled,
   ErrorMessageWrapper,
-  SettingsTab,
-  ShareTab,
 } from "../BudgetContent/CreateNewBudget.styled";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -56,32 +52,13 @@ interface EditedBudgetProps {
   endDate: string;
 }
 
-const isEqual = (obj1: Object, obj2: Object) => {
-  type propType = keyof typeof obj1;
-  const props1 = Object.keys(obj1);
-  const props2 = Object.keys(obj2);
-
-  if (props1.length !== props2.length) {
-    return false;
-  }
-
-  for (const prop in obj1) {
-    if (obj1[prop as propType] !== obj2[prop as propType]) return false;
-  }
-
-  return true;
-};
-
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
-  const defaultValueTabs = "settings";
   const { t, dict } = useTranslate("EditBudgetModal");
   const fetch = useSuperfetch();
   const [errMsg, setErrMsg] = useState("");
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("EditBudgetModal");
 
-  const initBudgetUsers = budget.budgetUsers.map((user) => user.id);
-  const [budgetUsers, setBudgetUsers] = useState(initBudgetUsers);
   const initialBudget = {
     name: budget.name,
     description: budget.description,
@@ -89,50 +66,11 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     startDate: budget.startDate,
     endDate: budget.endDate,
   };
+
   const [editedBudget, setEditedBudget] =
     useState<EditedBudgetProps>(initialBudget);
 
-  const { data: session } = useSession();
-  const currentUser = session && session.user.id;
-
   const queryClient = useQueryClient();
-
-  // temporary just for current version of query
-  const filteredUsers = budgetUsers.filter(
-    (user) => !initBudgetUsers.includes(user)
-  );
-
-  const [canBeClosed, setCanBeClosed] = useState<boolean[]>([false, false]);
-
-  const updateBudgetUsersMutation = useMutation({
-    mutationFn: (budgetUsers: string[]) => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`, {
-        method: "POST",
-        body: budgetUsers,
-      });
-    },
-    onError: () => {
-      setErrMsg(t(dict.errors.errorDefault));
-      return;
-    },
-    onSettled: (data) => {
-      switch (data!.httpStatus) {
-        case 200:
-          queryClient.invalidateQueries({ queryKey: ["budgets"] });
-          setCanBeClosed([canBeClosed[0], true]);
-          break;
-        case 400:
-          setErrMsg(t(dict.errors.error400));
-          break;
-        case 401:
-          setErrMsg(t(dict.errors.error401));
-          break;
-        default:
-          setErrMsg(t(dict.errors.errorDefault));
-          return;
-      }
-    },
-  });
 
   const sendEditedBudgetMutation = useMutation({
     mutationFn: (edited: EditedBudgetProps) => {
@@ -157,7 +95,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       switch (data!.httpStatus) {
         case 201:
           queryClient.invalidateQueries({ queryKey: ["budgets"] });
-          setCanBeClosed([true, canBeClosed[1]]);
+          onClose();
           break;
         case 400:
           setErrMsg(t(dict.errors.error400));
@@ -193,18 +131,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   };
 
   const handleSubmit = () => {
-    const editBudget = !isEqual(initialBudget, editedBudget);
-    const updateUsers = filteredUsers.length > 0;
-    setCanBeClosed([!editBudget, !updateUsers]);
-
-    editBudget && sendEditedBudgetMutation.mutate(editedBudget);
-
-    updateUsers && updateBudgetUsersMutation.mutate(filteredUsers);
+    sendEditedBudgetMutation.mutate(editedBudget);
   };
-
-  useEffect(() => {
-    !canBeClosed.includes(false) && onClose();
-  }, [canBeClosed, onClose]);
 
   return (
     <Modal header={t(dict.title)} onClose={onClose} fullHeight>
@@ -214,17 +142,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         </ErrorMessageWrapper>
       )}
       <SeparatorStyledTop />
-      <TabsStyled defaultValue={defaultValueTabs}>
-        <Tabs.List>
-          <TabsTriggerStyled value="settings">
-            {t(dict.tabs.settings)}
-          </TabsTriggerStyled>
-          <TabsTriggerStyled
-            value="share"
-            disabled={currentUser !== budget.userId}>
-            {t(dict.tabs.share)}
-          </TabsTriggerStyled>
-        </Tabs.List>
+      <FormWrapperStyled>
         <Form onSubmit={() => handleSubmit()}>
           {({ submit }) => (
             <form
@@ -232,154 +150,143 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                 e.preventDefault();
               }}>
               <ContentStyled>
-                <SettingsTab value="settings">
-                  <ParagraphStyled>
-                    {t(dict.paragraphs.details)}
-                  </ParagraphStyled>
-                  <IconPickerStyled>
-                    <Field
-                      name="icon"
-                      initialValue={editedBudget.iconName as IconType}>
-                      {({ value, setValue }) => (
-                        <IconPicker
-                          defaultIcon={value}
-                          icons={icons}
-                          onSelect={(icon) => {
-                            setValue(icon);
-                            setEditedBudget({
-                              ...editedBudget,
-                              iconName: icon,
-                            });
-                          }}
-                        />
-                      )}
-                    </Field>
-                  </IconPickerStyled>
-                  <InputWrapperFullStyled>
-                    <Field
-                      name="budget-name"
-                      initialValue={editedBudget.name}
-                      onSubmitValidate={checkNameOnSubmit}
-                      onChangeValidate={checkNameOnChange}>
-                      {({ value, setValue, errors }) => (
-                        <Input
-                          name="budget-name"
+                <ParagraphStyled>{t(dict.paragraphs.details)}</ParagraphStyled>
+                <IconPickerStyled>
+                  <Field
+                    name="icon"
+                    initialValue={editedBudget.iconName as IconType}>
+                    {({ value, setValue }) => (
+                      <IconPicker
+                        defaultIcon={value}
+                        icons={icons}
+                        onSelect={(icon) => {
+                          setValue(icon);
+                          setEditedBudget({
+                            ...editedBudget,
+                            iconName: icon,
+                          });
+                        }}
+                      />
+                    )}
+                  </Field>
+                </IconPickerStyled>
+                <InputWrapperFullStyled>
+                  <Field
+                    name="budget-name"
+                    initialValue={editedBudget.name}
+                    onSubmitValidate={checkNameOnSubmit}
+                    onChangeValidate={checkNameOnChange}>
+                    {({ value, setValue, errors }) => (
+                      <Input
+                        name="budget-name"
+                        value={value}
+                        hasError={errors.length > 0}
+                        supportingLabel={errors.length ? errors : null}
+                        onChange={(e) => {
+                          setValue(e.currentTarget.value);
+                          setEditedBudget({
+                            ...editedBudget,
+                            name: e.currentTarget.value,
+                          });
+                        }}
+                        onInputCleared={() => setValue("")}
+                        label={t(dict.inputNames.budgetName)}>
+                        {budget.name}
+                      </Input>
+                    )}
+                  </Field>
+                </InputWrapperFullStyled>
+                <Field
+                  name="description"
+                  initialValue={editedBudget.description}
+                  onSubmitValidate={checkDescription}
+                  onChangeValidate={checkDescription}>
+                  {({ value, setValue, errors }) => {
+                    return (
+                      <TextAreaWrapperStyled>
+                        <TextareaStyled
+                          id="description"
+                          name="description"
+                          placeholder={editedBudget.description}
+                          label={t(dict.inputNames.description)}
                           value={value}
                           hasError={errors.length > 0}
-                          supportingLabel={errors.length ? errors : null}
                           onChange={(e) => {
                             setValue(e.currentTarget.value);
                             setEditedBudget({
                               ...editedBudget,
-                              name: e.currentTarget.value,
+                              description: e.currentTarget.value,
                             });
                           }}
-                          onInputCleared={() => setValue("")}
-                          label={t(dict.inputNames.budgetName)}>
-                          {budget.name}
-                        </Input>
-                      )}
-                    </Field>
-                  </InputWrapperFullStyled>
+                        />
+                        <TextareaErrorStyled>
+                          {errors.at(0)}
+                        </TextareaErrorStyled>
+                      </TextAreaWrapperStyled>
+                    );
+                  }}
+                </Field>
+                <ParagraphStyled>
+                  {t(dict.paragraphs.budgetPeriod)}
+                </ParagraphStyled>
+                <InputWrapperFullFlex>
                   <Field
-                    name="description"
-                    initialValue={editedBudget.description}
-                    onSubmitValidate={checkDescription}
-                    onChangeValidate={checkDescription}>
-                    {({ value, setValue, errors }) => {
-                      return (
-                        <TextAreaWrapperStyled>
-                          <TextareaStyled
-                            id="description"
-                            name="description"
-                            placeholder={editedBudget.description}
-                            label={t(dict.inputNames.description)}
-                            value={value}
-                            hasError={errors.length > 0}
-                            onChange={(e) => {
-                              setValue(e.currentTarget.value);
-                              setEditedBudget({
-                                ...editedBudget,
-                                description: e.currentTarget.value,
-                              });
-                            }}
-                          />
-                          <TextareaErrorStyled>
-                            {errors.at(0)}
-                          </TextareaErrorStyled>
-                        </TextAreaWrapperStyled>
-                      );
-                    }}
+                    name="start-date"
+                    initialValue={getDateObject("start-date")}
+                    onSubmitValidate={checkDate}
+                    onChangeValidate={checkDate}>
+                    {({ value, setValue, errors }) => (
+                      <DatePickerWrapperStyled>
+                        <CustomDatePicker
+                          hasError={errors.length > 0}
+                          label={t(dict.inputNames.startDate)}
+                          selected={value}
+                          onSelect={(date) => {
+                            setValue(date);
+                            setEditedBudget({
+                              ...editedBudget,
+                              startDate: date ? date.toISOString() : "",
+                            });
+                          }}
+                        />
+                        <DatePickerErrorStyled>
+                          {errors.at(0)}
+                        </DatePickerErrorStyled>
+                      </DatePickerWrapperStyled>
+                    )}
                   </Field>
-                  <ParagraphStyled>
-                    {t(dict.paragraphs.budgetPeriod)}
-                  </ParagraphStyled>
-                  <InputWrapperFullFlex>
-                    <Field
-                      name="start-date"
-                      initialValue={getDateObject("start-date")}
-                      onSubmitValidate={checkDate}
-                      onChangeValidate={checkDate}>
-                      {({ value, setValue, errors }) => (
-                        <DatePickerWrapperStyled>
-                          <CustomDatePicker
-                            hasError={errors.length > 0}
-                            label={t(dict.inputNames.startDate)}
-                            selected={value}
-                            onSelect={(date) => {
-                              setValue(date);
-                              setEditedBudget({
-                                ...editedBudget,
-                                startDate: date ? date.toISOString() : "",
-                              });
-                            }}
-                          />
-                          <DatePickerErrorStyled>
-                            {errors.at(0)}
-                          </DatePickerErrorStyled>
-                        </DatePickerWrapperStyled>
-                      )}
-                    </Field>
-                    <div style={{ alignSelf: "flex-start", marginTop: "18px" }}>
-                      {t(dict.paragraphs.wordIt)}
-                    </div>
-                    <Field
-                      name="end-date"
-                      listenTo={["start-date"]}
-                      initialValue={getDateObject("end-date")}
-                      onSubmitValidate={checkDate}
-                      onChangeValidate={(val, form) =>
-                        checkEndDateOnChangeValidate(val, form)
-                      }>
-                      {({ value, setValue, errors }) => (
-                        <DatePickerWrapperStyled>
-                          <CustomDatePicker
-                            hasError={errors.length > 0}
-                            label={t(dict.inputNames.endDate)}
-                            selected={value}
-                            onSelect={(date) => {
-                              setValue(date);
-                              setEditedBudget({
-                                ...editedBudget,
-                                endDate: date ? date.toISOString() : "",
-                              });
-                            }}
-                          />
-                          <DatePickerErrorStyled>
-                            {errors[0]}
-                          </DatePickerErrorStyled>
-                        </DatePickerWrapperStyled>
-                      )}
-                    </Field>
-                  </InputWrapperFullFlex>
-                </SettingsTab>
-                <ShareTab value="share">
-                  <ShareBudget
-                    owner={budget.userId}
-                    budgetUsers={budgetUsers}
-                    setBudgetUsers={setBudgetUsers}
-                  />
-                </ShareTab>
+                  <div style={{ alignSelf: "flex-start", marginTop: "18px" }}>
+                    {t(dict.paragraphs.wordIt)}
+                  </div>
+                  <Field
+                    name="end-date"
+                    listenTo={["start-date"]}
+                    initialValue={getDateObject("end-date")}
+                    onSubmitValidate={checkDate}
+                    onChangeValidate={(val, form) =>
+                      checkEndDateOnChangeValidate(val, form)
+                    }>
+                    {({ value, setValue, errors }) => (
+                      <DatePickerWrapperStyled>
+                        <CustomDatePicker
+                          hasError={errors.length > 0}
+                          label={t(dict.inputNames.endDate)}
+                          selected={value}
+                          onSelect={(date) => {
+                            setValue(date);
+                            setEditedBudget({
+                              ...editedBudget,
+                              endDate: date ? date.toISOString() : "",
+                            });
+                          }}
+                        />
+                        <DatePickerErrorStyled>
+                          {errors[0]}
+                        </DatePickerErrorStyled>
+                      </DatePickerWrapperStyled>
+                    )}
+                  </Field>
+                </InputWrapperFullFlex>
               </ContentStyled>
               <div>
                 <SeparatorStyled />
@@ -390,7 +297,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
             </form>
           )}
         </Form>
-      </TabsStyled>
+      </FormWrapperStyled>
     </Modal>
   );
 };
