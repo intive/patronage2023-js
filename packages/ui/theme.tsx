@@ -375,7 +375,7 @@ export const theme = {
   },
   personalCard: {
     main: colors.Teal10,
-    background: colors.Teal1,
+    background: colors.BasicWhite,
   },
 };
 

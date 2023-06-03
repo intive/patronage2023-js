@@ -11,11 +11,11 @@ export const HoverCardContent = styled(HoverCard.Content)`
   align-items: center;
   background-color: ${({ theme }) => theme.personalCard.background};
   border: 1px solid ${({ theme }) => theme.card.border};
-  box-shadow: 0 2px 6px rgba(32, 41, 50, 0.1);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 16px;
   overflow: hidden;
 
-  padding: 10px;
+  padding: 0.8em 2em;
   gap: 10px;
   z-index: 100;
 `;

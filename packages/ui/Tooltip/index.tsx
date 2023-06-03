@@ -21,6 +21,7 @@ const StyledTooltipContent = styled(RadixTooltip.Content)`
 `;
 
 export const Tooltip = ({ children, text, position }: TooltipProps) => {
+  // Instead of {text}, there might be a Personal Card component (it will receive user data ofc) taking {text} as a trigger, and once user hovers on it, hover card will be displayed?
   return (
     <RadixTooltip.Provider delayDuration={0}>
       <RadixTooltip.Root>
