@@ -1260,6 +1260,16 @@ const dictionary = {
       pl: "Nieprawidłowy deskryptor sortowania.",
       fr: "Descripteur de tri invalide.",
     },
+    "10.10": {
+      en: "Hardcoded error.",
+      pl: "Błąd zahardkodowany.",
+      fr: "Erreur en dur.",
+    },
+    title: {
+      en: "Error",
+      pl: "Błąd",
+      fr: "Erreur",
+    }
   },
 };
 

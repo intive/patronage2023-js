@@ -43,11 +43,12 @@ export default function useSuperfetch() {
         } else if (res.status === 400) {
           showToast({
             variant: "error",
-            message: t(dict["1.1"]),
+            message: t(dict.title) + " " + "10.10" + ": " + t(dict["10.10"]),
           });
+          // CODE BELOW WAIT FOR BE
+          // } else if (res.status === 400 && ErrorCode === "10.1" || "10.2") {
+          //   console.log(t(dict.title)+" "+`${[ErroCode]}`+": "+ t(dict[ErrorCode]))
         }
-
-        // throw new SuperError("An error has occurred.", res.status);
       })
 
       .catch(() => {
