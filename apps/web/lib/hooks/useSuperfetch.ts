@@ -1,4 +1,7 @@
+import dictionary from "lib/dictionary";
 import { useSession } from "next-auth/react";
+import { useToast } from "ui";
+import { useTranslate } from "./useTranslate";
 
 interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body?: object;
@@ -14,6 +17,8 @@ class SuperError extends Error {
 
 export default function useSuperfetch() {
   const { data: session } = useSession();
+  const showToast = useToast();
+  const { t, dict } = useTranslate("Errors");
 
   const superfetch = (
     url: string,
@@ -35,9 +40,16 @@ export default function useSuperfetch() {
         if (res.ok) {
           const data = await res.json().catch(() => ({}));
           return { ...data, httpStatus: res.status };
+        } else if (res.status === 400) {
+          showToast({
+            variant: "error",
+            message: t(dict["1.1"]),
+          });
         }
-        throw new SuperError("An error has occurred.", res.status);
+
+        // throw new SuperError("An error has occurred.", res.status);
       })
+
       .catch(() => {
         throw new SuperError("Something went wrong", 500);
       });

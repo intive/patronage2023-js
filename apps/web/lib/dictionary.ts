@@ -1073,6 +1073,194 @@ const dictionary = {
       fr: "Remboursement",
     },
   },
+  Errors: {
+    "1.1": {
+      //FE validation
+      en: "Budget name is too long.",
+      pl: "Nazwa budżetu jest zbyt długa.",
+      fr: "Le nom du budget est trop long.",
+    },
+    "1.2": {
+      //FE validation
+      en: "Name cannot be empty.",
+      pl: "Nazwa nie może być pusta.",
+      fr: "Le nom ne peut pas être vide.",
+    },
+    "1.3": {
+      //FE validation
+      en: "Name is too long.",
+      pl: "Nazwa jest zbyt długa.",
+      fr: "Le nom est trop long.",
+    },
+    "1.4": {
+      //TOAST
+      en: "Budget with given name already exists.",
+      pl: "Budżet o podanej nazwie już istnieje.",
+      fr: "Un budget portant le nom donné existe déjà.",
+    },
+    "1.5": {
+      //FE validation
+      en: "Start date cannot be empty.",
+      pl: "Data rozpoczęcia nie może być pusta.",
+      fr: "La date de début ne peut pas être vide.",
+    },
+    "1.6": {
+      //FE validation
+      en: "End date cannot be empty.",
+      pl: "Data zakończenia nie może być pusta.",
+      fr: "La date de fin ne peut pas être vide.",
+    },
+    "1.7": {
+      //FE validation
+      en: "Start date must be earlier than end date.",
+      pl: "Data rozpoczęcia musi być wcześniejsza niż data zakończenia.",
+      fr: "La date de début doit être antérieure à la date de fin.",
+    },
+    "1.8": {
+      //FE validation
+      en: "Limit cannot be empty.",
+      pl: "Limit nie może być pusty.",
+      fr: "La limite ne peut pas être vide.",
+    },
+    "1.9": {
+      //FE validation
+      en: "Limit must be greater than 0.",
+      pl: "Limit musi być większy niż 0.",
+      fr: "La limite doit être supérieure à 0.",
+    },
+    "1.10": {
+      //Not working with hardcoded currency
+      en: "Currency is not supported.",
+      pl: "Nie obsługiwana waluta.",
+      fr: "La monnaie n'est pas supporté.",
+    },
+    "1.11": {
+      //TOAST
+      en: "Budget not exists.",
+      pl: "Budżet nie istnieje.",
+      fr: "Le budget n'existe pas.",
+    },
+    "2.1": {
+      //FE validation
+      en: "Transaction type cannot be empty.",
+      pl: "Typ transakcji nie może być pusty.",
+      fr: "Le type de transaction ne peut pas être vide.",
+    },
+    "2.2": {
+      //TOAST
+      en: "Invalid budget transaction type.",
+      pl: "Nieprawidłowy typ transakcji budżetu.",
+      fr: "Type de transaction invalid",
+    },
+    "2.3": {
+      //FE validation
+      en: "Transaction name cannot be empty.",
+      pl: "Nazwa transakcji nie może być pusta.",
+      fr: "Le nom de la transaction ne peut pas être vide.",
+    },
+    "2.4": {
+      //FE validation
+      en: "Transaction name is too long.",
+      pl: "Nazwa transakcji jest zbyt długa.",
+      fr: "Le nom de la transaction est trop long.",
+    },
+    "2.5": {
+      //FE validation
+      en: "Value cannot be empty.",
+      pl: "Wartość nie może być pusta.",
+      fr: "La valeur ne peut pas être vide.",
+    },
+    "2.6": {
+      //FE validation - FE add positive for income or negative for expense
+      en: "Value must be positive for income or negative for expense.",
+      pl: "Wartość musi być dodatnia dla przychodu lub ujemna dla wydatku.",
+      fr: "La valeur doit être positive pour une recette ou négative pour une dépense.",
+    },
+    "2.7": {
+      //FE validation
+      en: "Category cannot be empty.",
+      pl: "Kategoria nie może być pusta.",
+      fr: "La catégorie ne peut pas être vide.",
+    },
+    "2.8": {
+      //TOAST
+      en: "Category is invalid.",
+      pl: "Nieprawidłowa kategoria.",
+      fr: "La catégorie est invalide.",
+    },
+    "2.9": {
+      //FE validation
+      en: "Transaction date is outside the budget period.",
+      pl: "Data transakcji znajduje się poza okresem budżetowym.",
+      fr: "La date de la transaction est en dehors de la période du budget.",
+    },
+    "2.10": {
+      //TOAST
+      en: "Transaction does not belong to the specified budget.",
+      pl: "Transakcja nie należy do określonego budżetu.",
+      fr: "La transaction n'appartient pas au budget spécifié.",
+    },
+    "2.11": {
+      //TOAST
+      en: "Budget transaction not exists.",
+      pl: "Transakcja budżetu nie istnieje.",
+      fr: "La transaction du budget n'existe pas.",
+    },
+    "3.1": {
+      //FE validation
+      en: "Avatar cannot be empty.",
+      pl: "Awatar nie może być pusty.",
+      fr: "L'avatar ne peut pas être vide.",
+    },
+    "3.2": {
+      //FE validation
+      en: "First name cannot be empty.",
+      pl: "Imię nie może być puste.",
+      fr: "Le prénom ne peut pas être vide.",
+    },
+    "3.3": {
+      //FE validation
+      en: "Last name cannot be empty.",
+      pl: "Nazwisko nie może być puste.",
+      fr: "Le nom ne peut pas être vide.",
+    },
+    "3.4": {
+      //FE validation
+      en: "Email cannot be empty.",
+      pl: "Email nie może być pusty.",
+      fr: "L'e-mail ne peut pas être vide.",
+    },
+    "3.5": {
+      //FE validation
+      en: "Email is invalid.",
+      pl: "Nieprawidłowy email.",
+      fr: "L'e-mail est invalide.",
+    },
+    "3.6": {
+      //FE validation
+      en: "Password does not meet criteria...",
+      pl: "Hasło nie spełnia kryteriów...",
+      fr: "Le mot de passe ne correspond pas aux critères…",
+    },
+    "3.11": {
+      //TOAST
+      en: "User not exists.",
+      pl: "Użytkownik nie istnieje.",
+      fr: "L'utilisateur n'existe pas.",
+    },
+    "10.1": {
+      //CONSOLE
+      en: "Invalid page.",
+      pl: "Nieprawidłowa strona.",
+      fr: "Page invalide.",
+    },
+    "10.2": {
+      //CONSOLE
+      en: "Invalid sort descriptor.",
+      pl: "Nieprawidłowy deskryptor sortowania.",
+      fr: "Descripteur de tri invalide.",
+    },
+  },
 };
 
 export default dictionary;
