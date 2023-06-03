@@ -1,6 +1,8 @@
 "use client";
 import styled from "styled-components";
 import { device } from "lib/media-queries";
+import { Select } from "ui";
+import { SelectItemStyled } from "ui/Select/Select.styles";
 
 export const ContainerStyled = styled.section`
   display: flex;
@@ -21,6 +23,18 @@ export const RowsPerPageContainerStyled = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+`;
+
+export const SelectStyled = styled(Select)`
+  padding: 5px 4px 5px 16px;
+  margin-bottom: 0;
+  min-width: 84px;
+`;
+
+export const PaginationSelectItemStyled = styled(SelectItemStyled)`
+  padding: 8px 16px;
+  min-width: 84px;
+  text-align: center;
 `;
 
 export const ListStyled = styled.ul`
@@ -93,40 +107,5 @@ export const PageButtonStyled = styled.button<PageButtonType>`
     border: none;
     outline: none;
     cursor: default;
-  }
-`;
-
-type InputStyledType = {
-  isActive?: boolean;
-};
-
-export const InputStyled = styled.input<InputStyledType>`
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-size: 1em;
-  font-weight: 600;
-  border-radius: 4px;
-  width: 40px;
-  height: 40px;
-  color: ${({ isActive, theme }) =>
-    isActive ? theme.pagination.active : theme.pagination.text};
-  border: none;
-  cursor: pointer;
-
-  &:focus,
-  &:hover {
-    border: 2px solid
-      ${({ isActive, theme }) =>
-        isActive ? theme.pagination.active : theme.pagination.text};
-  }
-
-  &[type="number"]::-webkit-outer-spin-button,
-  &[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  &[type="number"] {
-    -moz-appearance: none;
   }
 `;

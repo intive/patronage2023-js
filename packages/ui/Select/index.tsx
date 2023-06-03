@@ -1,5 +1,6 @@
-import { ComponentType, ReactNode, useState } from "react";
+import { ComponentType, ReactNode, useState, useContext } from "react";
 import * as AtomicSelect from "@radix-ui/react-select";
+import { ThemeContext } from "styled-components";
 import { Icon } from "ui";
 import {
   SelectTriggerStyled,
@@ -46,6 +47,7 @@ export const Select = ({
   id,
   SelectItem = SelectItemStyled,
 }: SelectProps) => {
+  const theme = useContext(ThemeContext);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -76,7 +78,11 @@ export const Select = ({
       <SelectPortalStyled className={hasScrollbar ? "radix-scroll" : ""}>
         <SelectContentStyled position="popper" sideOffset={sideOffset}>
           <SelectScrollUpButtonStyled>
-            <Icon icon="keyboard_arrow_up" iconSize={24} color="#515151" />
+            <Icon
+              icon="keyboard_arrow_up"
+              iconSize={24}
+              color={theme.select.icon}
+            />
           </SelectScrollUpButtonStyled>
           <AtomicSelect.Viewport>
             {items.map((item) => (
@@ -90,7 +96,11 @@ export const Select = ({
             ))}
           </AtomicSelect.Viewport>
           <SelectScrollDownButtonStyled>
-            <Icon icon="keyboard_arrow_down" iconSize={24} color="#515151" />
+            <Icon
+              icon="keyboard_arrow_down"
+              iconSize={24}
+              color={theme.select.icon}
+            />
           </SelectScrollDownButtonStyled>
         </SelectContentStyled>
       </SelectPortalStyled>
