@@ -13,6 +13,7 @@ export const ContainerStyled = styled.section`
   width: 100%;
   height: auto;
   padding-top: 32px;
+  margin-top: auto;
   ${device.tablet} {
     justify-content: space-between;
   }
