@@ -21,7 +21,7 @@ interface Props {
 
 const BudgetStatistics = ({ budget }: Props) => {
   const [range, setRange] = useState("week");
-  const { id, currency, endDate } = budget;
+  const { id, currency, endDate, startDate } = budget;
   const { dict, t } = useTranslate("BudgetStatistics");
   const { queryButtonLabels, title: translatedTitle } = dict;
 
@@ -36,13 +36,17 @@ const BudgetStatistics = ({ budget }: Props) => {
   const getRange = () => {
     let start = dayjs();
     let end = dayjs();
+    //if we are looking at old budget
+    if (start.isAfter(endDate)) return [startDate, endDate];
     switch (range) {
       case "week":
         //-1 in case of checking weekly budget on sunday
         start = start.subtract(1, "day").startOf("week");
+        end = end.endOf("week");
         break;
       case "month":
         start = start.startOf("month");
+        end = start.endOf("month");
         break;
       case "quarter":
         start = start.subtract(3, "months");
@@ -62,7 +66,7 @@ const BudgetStatistics = ({ budget }: Props) => {
   const fetch = useSuperfetch();
 
   const { data: statistics, isLoading } = useQuery({
-    queryKey: ["rangedStatistics", startRange, endRange, budget.id],
+    queryKey: ["rangedStatistics", startRange, endRange],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/statistics?startDate=${startRange}&endDate=${endRange}`
