@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
-import { useSession } from "next-auth/react";
 import { ErrorMessage } from "ui";
 
 import {
@@ -33,7 +32,6 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
-  // SettingsTab,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
@@ -47,12 +45,16 @@ type NewBudget = {
 
 type newBudgetType = {
   name: string;
-  limit: number | string;
+  limit: {
+    value: number;
+    currency: string;
+  };
+  period: {
+    startDate: string;
+    endDate: string;
+  };
   description: string;
-  icon: string;
-  dateStart: string;
-  dateEnd: string;
-  currency: string;
+  iconName: string;
 };
 
 export const icons: IconType[] = [
@@ -74,8 +76,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
 
-  const { data: session } = useSession();
-
   const {
     checkNameOnChange,
     checkNameOnSubmit,
@@ -85,76 +85,61 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
-  const [newBudget, setNewBudget] = useState<newBudgetType>({
-    name: "",
-    limit: "",
-    description: "",
-    icon: selectedIcon,
-    dateStart: "",
-    dateEnd: "",
-    currency: "USD",
-  });
-
-  const onSelectStartDate = (date: Date | null) => {
-    date
-      ? setNewBudget({ ...newBudget, dateStart: date.toISOString() })
-      : setNewBudget({ ...newBudget, dateStart: "" });
-  };
-  const onSelectEndDate = (date: Date | null) => {
-    date
-      ? setNewBudget({ ...newBudget, dateEnd: date.toISOString() })
-      : setNewBudget({ ...newBudget, dateEnd: "" });
+  const convertDate = (date: Date | null) => {
+    return date ? date.toISOString() : "";
   };
 
-  // required for queryClient in onSuccess
   const queryClient = useQueryClient();
 
   const fetch = useSuperfetch();
 
-  const useSendBudget = () =>
-    useMutation(
-      () =>
-        fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
-          method: "POST",
-          body: {
-            name: newBudget.name,
-            limit: {
-              value: newBudget.limit,
-              currency: newBudget.currency,
-            },
-            period: {
-              startDate: newBudget.dateStart,
-              endDate: newBudget.dateEnd,
-            },
-            description: newBudget.description,
-            iconName: newBudget.icon,
-          },
-        }),
-      {
-        onSuccess: (data) => {
-          switch (data.httpStatus) {
-            case 201:
-              queryClient.invalidateQueries([
-                "budgetsList",
-                { searchValue: "", sortAscending: true },
-              ]);
-              onClose();
-              break;
-            case 400:
-              setErrorMsg(t(dict.errors.error400));
-              break;
-            case 401:
-              setErrorMsg(t(dict.errors.error401));
-              break;
-            default:
-              alert(t(dict.errors.errorDefault));
-              return;
-          }
-        },
-      }
-    );
+  const sendBudget = useMutation(
+    (budget: newBudgetType) =>
+      fetch(`${env.NEXT_PUBLIC_API_URL}budgets`, {
+        method: "POST",
+        body: budget,
+      }),
+    {
+      onSuccess: (data) => {
+        switch (data.httpStatus) {
+          case 201:
+            queryClient.invalidateQueries([
+              "budgetsList",
+              { searchValue: "", sortAscending: true },
+            ]);
+            onClose();
+            break;
+          case 400:
+            setErrorMsg(t(dict.errors.error400));
+            break;
+          case 401:
+            setErrorMsg(t(dict.errors.error401));
+            break;
+          default:
+            setErrorMsg(t(dict.errors.errorDefault));
+            return;
+        }
+      },
+    }
+  );
 
-  const { mutate: sendBudget } = useSendBudget();
+  const handleSubmit = (values: Record<string, any>) => {
+    const newBudget: newBudgetType = {
+      name: values["budget-name"],
+      limit: {
+        value: values["budget-limit"],
+        currency: values.currency,
+      },
+      period: {
+        startDate: convertDate(values["start-date"]),
+        endDate: convertDate(values["end-date"]),
+      },
+      description: values.description,
+      iconName: selectedIcon,
+    };
+    console.log(JSON.stringify(newBudget));
+    sendBudget.mutate(newBudget);
+  };
 
   const closeErrorMessage = () => {
     setErrorMsg("");
@@ -172,10 +157,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       </ErrorMessageWrapper>
       <SeparatorStyledTop />
       <FormWrapperStyled defaultValue="settings">
-        <Form
-          onSubmit={() => {
-            sendBudget();
-          }}>
+        <Form onSubmit={(values) => handleSubmit(values)}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
@@ -188,7 +170,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     defaultIcon={selectedIcon}
                     icons={icons}
                     onSelect={(icon) => {
-                      setNewBudget({ ...newBudget, icon });
                       setSelectedIcon(icon);
                     }}
                   />
@@ -196,7 +177,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperFullStyled>
                   <Field
                     name="budget-name"
-                    initialValue={newBudget.name}
+                    initialValue={""}
                     onSubmitValidate={checkNameOnSubmit}
                     onChangeValidate={checkNameOnChange}>
                     {({ value, setValue, errors }) => {
@@ -207,15 +188,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           hasError={errors.length > 0}
                           supportingLabel={errors.length ? errors : null}
                           onChange={(e) => {
-                            setNewBudget({
-                              ...newBudget,
-                              name: e.currentTarget.value,
-                            });
                             setValue(e.currentTarget.value);
                           }}
                           onInputCleared={() => setValue("")}
                           label={t(dict.inputNames.budgetName)}>
-                          {newBudget.name}
+                          {""}
                         </Input>
                       );
                     }}
@@ -224,7 +201,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperHalfStyled>
                   <Field
                     name="budget-limit"
-                    initialValue={newBudget.limit}
                     onChangeValidate={checkLimit}
                     onSubmitValidate={checkLimit}>
                     {({ value, setValue, errors }) => (
@@ -237,18 +213,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                               parseFloat(e.currentTarget.value) * 100
                             ) / 100;
                           if (e.currentTarget.value) {
-                            setNewBudget({
-                              ...newBudget,
-                              limit: roundedValue,
-                            });
                             setValue(roundedValue);
-                          } else setValue("");
+                          } else setValue(null);
                         }}
                         supportingLabel={errors.length ? errors : null}
                         label={t(dict.inputNames.budgetLimit)}
                         name="budget-limit"
                         type="number"
-                        onInputCleared={() => setValue("")}
+                        onInputCleared={() => setValue(0)}
                       />
                     )}
                   </Field>
@@ -256,7 +228,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperHalfStyledCurrency>
                   <Field
                     name="currency"
-                    initialValue={newBudget.currency}
+                    initialValue={"USD"}
                     onSubmitValidate={checkCurrency}
                     onChangeValidate={checkCurrency}>
                     {({ value, setValue, errors }) => (
@@ -268,10 +240,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         supportingLabel={errors[0]}
                         onValueChange={(e) => {
                           setValue(e);
-                          setNewBudget({
-                            ...newBudget,
-                            currency: e,
-                          });
                         }}
                         hasScrollbar={hasScrollbar}
                       />
@@ -280,7 +248,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 </InputWrapperHalfStyledCurrency>
                 <Field
                   name="description"
-                  initialValue={newBudget.description}
+                  initialValue={""}
                   onSubmitValidate={checkDescription}
                   onChangeValidate={checkDescription}>
                   {({ value, setValue, errors }) => {
@@ -289,15 +257,11 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                         <TextareaStyled
                           id="description"
                           name="description"
-                          placeholder={newBudget.description}
+                          placeholder={""}
                           label={t(dict.inputNames.description)}
                           value={value}
                           hasError={errors.length > 0}
                           onChange={(e) => {
-                            setNewBudget({
-                              ...newBudget,
-                              description: e.currentTarget.value,
-                            });
                             setValue(e.currentTarget.value);
                           }}
                         />
@@ -312,24 +276,16 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperFullFlex>
                   <Field
                     name="start-date"
-                    initialValue={
-                      newBudget.dateStart ? new Date(newBudget.dateStart) : null
-                    }
                     onSubmitValidate={checkDate}
                     onChangeValidate={checkDate}>
-                    {({ setValue, errors }) => (
+                    {({ value, setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
                           hasError={errors.length > 0}
                           label={t(dict.inputNames.startDate)}
-                          selected={
-                            newBudget.dateStart
-                              ? new Date(newBudget.dateStart)
-                              : null
-                          }
+                          selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            onSelectStartDate(date);
                           }}
                         />
                         <DatePickerErrorStyled>
@@ -344,9 +300,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                   <Field
                     name="end-date"
                     listenTo={["start-date"]}
-                    initialValue={
-                      newBudget.dateEnd ? new Date(newBudget.dateEnd) : null
-                    }
                     onSubmitValidate={checkDate}
                     onChangeValidate={(val, form) => {
                       const start = val! && val.getTime();
@@ -360,19 +313,14 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       }
                       return Promise.resolve(true);
                     }}>
-                    {({ setValue, errors }) => (
+                    {({ value, setValue, errors }) => (
                       <DatePickerWrapperStyled>
                         <CustomDatePicker
                           hasError={errors.length > 0}
                           label={t(dict.inputNames.endDate)}
-                          selected={
-                            newBudget.dateEnd
-                              ? new Date(newBudget.dateEnd)
-                              : null
-                          }
+                          selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            onSelectEndDate(date);
                           }}
                         />
                         <DatePickerErrorStyled>

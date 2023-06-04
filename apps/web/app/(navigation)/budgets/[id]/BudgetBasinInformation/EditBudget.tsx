@@ -51,17 +51,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("EditBudgetModal");
 
-  // const initialBudget = {
-  //   name: budget.name,
-  //   description: budget.description,
-  //   iconName: budget.icon,
-  //   startDate: budget.startDate,
-  //   endDate: budget.endDate,
-  // };
-
-  // const [editedBudget, setEditedBudget] =
-  //   useState<EditedBudgetProps>(initialBudget);
-
   const queryClient = useQueryClient();
 
   const sendEditedBudgetMutation = useMutation({
@@ -153,10 +142,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                         icons={icons}
                         onSelect={(icon) => {
                           setValue(icon);
-                          // setEditedBudget({
-                          //   ...editedBudget,
-                          //   iconName: icon,
-                          // });
                         }}
                       />
                     )}
@@ -176,10 +161,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                         supportingLabel={errors.length ? errors : null}
                         onChange={(e) => {
                           setValue(e.currentTarget.value);
-                          // setEditedBudget({
-                          //   ...editedBudget,
-                          //   name: e.currentTarget.value,
-                          // });
                         }}
                         onInputCleared={() => setValue("")}
                         label={t(dict.inputNames.budgetName)}>
@@ -231,10 +212,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            // setEditedBudget({
-                            //   ...editedBudget,
-                            //   startDate: date ? date.toISOString() : "",
-                            // });
                           }}
                         />
                         <DatePickerErrorStyled>
@@ -262,10 +239,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            // setEditedBudget({
-                            //   ...editedBudget,
-                            //   endDate: date ? date.toISOString() : "",
-                            // });
                           }}
                         />
                         <DatePickerErrorStyled>

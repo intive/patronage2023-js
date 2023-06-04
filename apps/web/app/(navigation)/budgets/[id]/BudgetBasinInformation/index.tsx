@@ -126,18 +126,18 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                   />
                 </>
               )}
-              {/* {loggedUserId === budget.userId && (
-                <NavBudgetIconStyled icon="share" onClick={openShareModal} />
-              )}
-              {loggedUserId === budget.userId && (
-                <NavBudgetIconStyled
-                  onClick={() => setDeleteModalVisibility(true)}
-                  icon="delete"
-                />
-              )} */}
               {loggedUserId === budget.userId && (
                 <DropdownMenuStyled
                   items={[
+                    {
+                      ComponentToRender: (
+                        <FavouriteDropdownStyled
+                          isFav={budget.isFavourite}
+                          budgetId={budget.id}
+                        />
+                      ),
+                      id: "favourite",
+                    },
                     {
                       ComponentToRender: (
                         <NavBudgetIconDropdownStyled
@@ -155,15 +155,6 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                         />
                       ),
                       id: "share",
-                    },
-                    {
-                      ComponentToRender: (
-                        <FavouriteDropdownStyled
-                          isFav={budget.isFavourite}
-                          budgetId={budget.id}
-                        />
-                      ),
-                      id: "favourite",
                     },
                     {
                       ComponentToRender: (

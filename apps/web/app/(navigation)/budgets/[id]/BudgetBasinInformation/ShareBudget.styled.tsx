@@ -44,6 +44,7 @@ export const UsersListStyled = styled.ul`
   overflow-y: auto;
   margin-top: 24px;
   padding-right: 8px;
+  flex-grow: 1;
 
   &::-webkit-scrollbar {
     background-color: ${({ theme }) => theme.textarea.Neutral2};
