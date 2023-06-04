@@ -39,7 +39,6 @@ import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { ShareBudget } from "../ShareBudgetOld";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type NewBudget = {

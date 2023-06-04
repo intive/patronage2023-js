@@ -29,15 +29,12 @@ import {
   ButtonWrapperStyled,
   ErrorMessageWrapper,
 } from "../BudgetContent/CreateNewBudget.styled";
-import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { icons } from "../BudgetContent/CreateNewBudget";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ErrorMessage } from "ui";
-import { ShareBudget } from "../ShareBudgetOld";
 import useSuperfetch from "lib/hooks/useSuperfetch";
-import { ContentWrapper } from "../ShareBudgetOld/ShareBudget.styled";
 
 interface EditBudgetProps {
   budget: BudgetFixed;
