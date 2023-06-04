@@ -42,7 +42,7 @@ const ButtonRadioGroupStyled = styled.div`
 
   label:has(input:checked),
   label:has(input:focus) {
-    border-bottom: 2px solid ${({ theme }) => theme.buttonGroup.secondary.main};
+    border-bottom: 2px solid ${({ theme }) => theme.main};
     z-index: 1;
     color: ${({ theme }) => theme.main};
     font-weight: 600;
@@ -58,7 +58,7 @@ const ButtonRadioGroupStyled = styled.div`
 
   //label on hover
   label:hover {
-    border-bottom: 2px solid ${({ theme }) => theme.buttonGroup.secondary.main};
+    border-bottom: 2px solid ${({ theme }) => theme.main};
     z-index: 1;
   }
 `;

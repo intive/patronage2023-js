@@ -70,3 +70,9 @@ export const StyledCurrencyAmount = styled(CurrencyAmount)`
   color: ${({ theme }) => theme.trendChart.currencyAmount};
 `;
 
+export const StyledInfo = styled.h2`
+  font-family: "Signika", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 48px;
+`;
