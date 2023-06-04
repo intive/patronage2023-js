@@ -13,12 +13,11 @@ export const CardWrapperStyled = styled.div`
 `;
 
 export const CardStyled = styled(Card)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
   min-height: 100%;
   width: 100%;
   padding: 14px 10px;
+  height: 100%;
   ${device.tablet} {
     padding: 32px 48px;
   }
