@@ -40,6 +40,8 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { useAtomValue } from "jotai";
+import { currencyAtom } from "store";
 
 type NewBudget = {
   onClose: Function;
@@ -89,6 +91,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
+  const defaultCurrency = useAtomValue(currencyAtom);
+
   const [newBudget, setNewBudget] = useState<newBudgetType>({
     name: "",
     limit: "",
@@ -96,7 +100,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     icon: selectedIcon,
     dateStart: "",
     dateEnd: "",
-    currency: "USD",
+    currency: defaultCurrency,
   });
 
   const onSelectStartDate = (date: Date | null) => {
