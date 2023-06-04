@@ -379,6 +379,12 @@ export const theme = {
     HLCorrectData: colors.Supporting23,
     HLFirstLine: colors.Supporting24,
   },
+  accordion: {
+    main: colors.Teal10,
+    borderInactive: colors.Neutral2,
+    content: colors.Teal10,
+    background: colors.BasicWhite,
+  },
 };
 
 export type ThemeType = typeof theme;

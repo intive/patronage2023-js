@@ -8,13 +8,12 @@ import styled from "styled-components";
 
 import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
-
-import validate from "lib/validations/iconValidation";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
 import useSuperfetch from "lib/hooks/useSuperfetch";
+import validate from "lib/validations/iconValidation";
 
 import { CreateNewBudget } from "../../app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget";
-import { ItemType } from "services/mutations";
+import { ItemType, BudgetType } from "services/mutations";
 import { Favourite } from "./Favourite";
 
 import { categoryFilterAtom } from "store";
@@ -110,27 +109,39 @@ export default function SideNav() {
     setIsCreateNewBudgetModalVisible(true);
   };
 
-  const successData =
-    data?.pages?.flatMap(
-      ({ items }: ItemType) =>
-        items &&
-        items.map(({ icon, name, id, isFavourite }) => ({
-          ComponentToRender: (
-            <>
-              <IconStyled icon={validate(icon) ? icon : "help"} iconSize={24} />
-              <SpanStyled>{name}</SpanStyled>
-              <Favourite
-                isFav={isFavourite}
-                budgetId={id.value}
-                activeHref={`/budgets/${id.value}`}
-              />
-            </>
-          ),
-          href: `/budgets/${id.value}`,
-          id: id.value,
-          ref: lastBudgetRef,
-        }))
-    ) ?? [];
+  const mapToBudgetsComponents = (budgets: BudgetType[]) => {
+    return budgets.map(({ icon, name, id, isFavourite }) => ({
+      ComponentToRender: (
+        <>
+          <IconStyled icon={validate(icon) ? icon : "help"} iconSize={24} />
+          <SpanStyled>{name}</SpanStyled>
+          <Favourite
+            isFav={isFavourite}
+            budgetId={id.value}
+            activeHref={`/budgets/${id.value}`}
+          />
+        </>
+      ),
+      href: `/budgets/${id.value}`,
+      id: id.value,
+      ref: lastBudgetRef,
+    }));
+  };
+
+  const removeDuplicates = (fetchedBudgets: BudgetType[]) => {
+    return fetchedBudgets.filter(
+      (budget, idx) =>
+        fetchedBudgets
+          .map((object) => object.id.value)
+          .indexOf(budget.id.value) === idx
+    );
+  };
+
+  const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
+
+  const uniqueValues = removeDuplicates(flatData);
+
+  const successData = mapToBudgetsComponents(uniqueValues);
 
   const { data: csvUri } = useQuery({
     queryKey: ["csvUri"],

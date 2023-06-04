@@ -35,3 +35,4 @@ export * from "./Toast";
 export { CategorySelector } from "./CategorySelector";
 export { Tooltip } from "./Tooltip";
 export { ExportDropdown } from "./ExportDropdown";
+export { Accordion } from "./Accordion";
