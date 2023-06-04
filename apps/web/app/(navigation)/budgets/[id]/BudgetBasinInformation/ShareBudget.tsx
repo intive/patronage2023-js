@@ -1,4 +1,4 @@
-import { Avatar, Button, Checkbox, Modal } from "ui";
+import { Avatar, Button, Checkbox, ErrorMessage, Modal } from "ui";
 import {
   AvatarWrapperStyled,
   ContentWrapper,
@@ -13,6 +13,7 @@ import {
 } from "./ShareBudget.styled";
 import {
   ButtonWrapperStyled,
+  ErrorMessageWrapper,
   ParagraphStyled,
   SeparatorStyled,
   SeparatorStyledTop,
@@ -178,7 +179,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
       });
     },
     onError: () => {
-      // setErrorMsg(t(dict.errors.errorDefault));
+      setErrorMsg(t(dict.errors.errorDefault));
       return;
     },
     onSettled: (data) => {
@@ -188,25 +189,30 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
           onClose();
           break;
         case 400:
-          // setErrMsg(t(dict.errors.error400));
+          setErrorMsg(t(dict.errors.error400));
           break;
         case 401:
-          // setErrMsg(t(dict.errors.error401));
+          setErrorMsg(t(dict.errors.error401));
           break;
         default:
-          // setErrMsg(t(dict.errors.errorDefault));
+          setErrorMsg(t(dict.errors.errorDefault));
           return;
       }
     },
   });
 
   return (
-    <Modal header={"Share budget"} onClose={onClose} fullHeight>
+    <Modal header={t(dict.header)} onClose={onClose} fullHeight>
+      {errorMsg.length > 0 && (
+        <ErrorMessageWrapper>
+          <ErrorMessage message={errorMsg} onClose={() => setErrorMsg("")} />
+        </ErrorMessageWrapper>
+      )}
       <SeparatorStyledTop />
       <ShareBudgetWrapperStyled>
         <ParagraphStyled>{t(dict.inviteMembers)}</ParagraphStyled>
         <SearchInput
-          placeholder="Search"
+          placeholder={t(dict.search)}
           onChange={(e) => setSearchValue(e.currentTarget.value)}
         />
         <UsersListStyled>
@@ -228,7 +234,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
                 ? updateBudgetUsersMutation.mutate(filteredUsers)
                 : onClose();
             }}>
-            {"Share"}
+            {t(dict.share)}
           </Button>
         </ButtonWrapperStyled>
       </SeparatorAndButtonWrapperStyled>
