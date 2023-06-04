@@ -10,7 +10,6 @@ import {
   SeparatorTopStyled,
   ModalContentStyled,
   ImportButtonStyled,
-  InformationWindowStyled,
   IconStyled,
   LabelStyled,
   LinkStyled,
@@ -19,32 +18,21 @@ import {
   ErrorsScreen,
   SpinnerScreen,
   SuccessScreen,
-  TutorialScreen,
 } from "./ImportModal.screens";
 import {
   ImportExportAction,
   ImportExportState,
-  ImportModalProps,
   ImportResponseProps,
 } from "./ImportModal.types";
-
-const initialState: ImportExportState = {
-  isCSVError: false,
-  csvUri: "/avatars/1.svg",
-  screen: TutorialScreen,
-  props: {
-    errors: [],
-    errorMessage: "",
-  },
-};
+import { InstructionPopover } from "./InstructionPopover";
 
 const reducer = (
   state: ImportExportState,
   action: ImportExportAction
 ): ImportExportState => {
   switch (action.type) {
-    case "SET_CSV_ERROR":
-      return { ...state, isCSVError: action.payload };
+    case "SET_SHOW_IMPORT_BUTTON":
+      return { ...state, showImportButton: action.payload };
     case "SET_CSV_URI":
       return { ...state, csvUri: action.payload };
     case "SET_SCREEN":
@@ -58,30 +46,50 @@ const reducer = (
   }
 };
 
-export const ImportModal = ({ onClose }: ImportModalProps) => {
-  const { t, dict } = useTranslate("ImportModal");
-  const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
+const initialState: ImportExportState = {
+  showImportButton: true,
+  csvUri: "",
+  screen: () => null,
+  props: {
+    errors: [],
+    errorMessage: "",
+  },
+};
+
+export type ImportModalProps = {
+  onClose: Function;
+  importEndpoint: string;
+  allowedFileExtensions?: string[];
+  instructionScreen?: React.ComponentType<any>;
+  downloadButtonLabel: string;
+  importButtonLabel: string;
+  noDataSavedToastMsg: string;
+};
+
+export const ImportModal = ({
+  onClose,
+  importEndpoint,
+  allowedFileExtensions,
+  instructionScreen: InstructionScreen,
+  downloadButtonLabel,
+  importButtonLabel,
+  noDataSavedToastMsg,
+}: ImportModalProps) => {
   const [
-    { isCSVError, csvUri, screen: Screen, props: importExportProps },
+    { showImportButton, csvUri, screen: Screen, props: importExportProps },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   const showToast = useToast();
   const queryClient = useQueryClient();
-  // Currently, I can't use superFetch here because it doesn't accept custom headers.
+  const { t, dict } = useTranslate("ImportModal");
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  const handleInputClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    inputRef.current?.click();
-  };
-
-  const { mutate: importCsvMutation, isLoading } = useMutation({
+  const { mutate: importFileMutation, isLoading } = useMutation({
     mutationFn: async (formData: FormData): Promise<ImportResponseProps> => {
-      const result = fetch(`${env.NEXT_PUBLIC_API_URL}budgets/import`, {
+      const result = fetch(`${env.NEXT_PUBLIC_API_URL}${importEndpoint}`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -93,23 +101,25 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
       return { ...data, status: res.status };
     },
     onSuccess: (data: ImportResponseProps) => {
-      console.log(data);
-
       switch (data.status) {
         case 200:
           const isDataValid = data.errors.length === 0;
-          dispatch({ type: "SET_CSV_ERROR", payload: !isDataValid });
+
           queryClient.invalidateQueries([
-            "budgets",
+            "budgetsList",
             { searchValue: "", sortAscending: true },
           ]);
 
           if (isDataValid) {
-            dispatch({ type: "SET_SCREEN", payload: SuccessScreen });
+            dispatch({
+              type: "SET_MULTIPLE",
+              payload: { screen: SuccessScreen, showImportButton: true },
+            });
           } else {
             dispatch({
               type: "SET_MULTIPLE",
               payload: {
+                showImportButton: false,
                 screen: ErrorsScreen,
                 props: {
                   errors: data.errors,
@@ -128,11 +138,11 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
           dispatch({
             type: "SET_MULTIPLE",
             payload: {
-              isCSVError: false, // show download button or show import button
+              showImportButton: true, // show download button or show import button
               screen: ErrorsScreen,
               props: {
                 errors: data.errors,
-                errorMessage: data.uri, // add dict
+                errorMessage: noDataSavedToastMsg,
               },
               csvUri: data.uri,
             },
@@ -143,17 +153,22 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
             variant: "error",
             message: t(dict.responseErrors[401]),
           });
-          dispatch({ type: "SET_SCREEN", payload: TutorialScreen });
+          dispatch({ type: "SET_SCREEN", payload: () => null });
           break;
         default:
-          // showToast({
-          //   variant: "error",
-          //   message: t(dict.responseErrors.default),
-          // });
+          showToast({
+            variant: "error",
+            message: t(dict.responseErrors.default),
+          });
           return;
       }
     },
   });
+
+  const inputClickHandler = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    inputRef.current?.click();
+  };
 
   const importFileHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -162,61 +177,87 @@ export const ImportModal = ({ onClose }: ImportModalProps) => {
         variant: "error",
         message: t(dict.corruptedFile),
       });
+      e.currentTarget.value = "";
       return;
     }
     const file = e.currentTarget.files[0];
     const formData = new FormData();
-    formData.append("file", file, file.name);
-    importCsvMutation(formData);
+    const fileType = file.type;
 
+    // fileType: "text/csv"
+    // allowedFileExtensions: [".csv", ".doc"]
+    if (
+      allowedFileExtensions
+        ?.join(",")
+        .replaceAll(".", "")
+        .includes(fileType.split("/")[1])
+    ) {
+      formData.append("file", file, file.name);
+      importFileMutation(formData);
+    } else {
+      showToast({
+        variant: "error",
+        message: `${t(dict.incorrectFileExtension)} ${allowedFileExtensions}`,
+      });
+    }
     e.currentTarget.value = "";
   };
 
-  const showLoader = isLoading && !isCSVError;
+  const allowedExtensions = allowedFileExtensions
+    ?.join(", ")
+    .replaceAll(".", "");
 
   return (
-    <Modal header={t(dict.modalHeader)} onClose={() => onClose()}>
+    <Modal
+      header={`${t(dict.modalHeader)} ${allowedExtensions || ""}`}
+      onClose={() => onClose()}>
       <SeparatorTopStyled />
       <ModalContentStyled>
-        <InformationWindowStyled>
-          {showLoader ? <SpinnerScreen /> : <Screen {...importExportProps} />}
-        </InformationWindowStyled>
-        {!isCSVError && (
+        {isLoading ? <SpinnerScreen /> : <Screen {...importExportProps} />}
+        {showImportButton ? (
           <>
-            <ImportButtonStyled variant="secondary" onClick={handleInputClick}>
-              <LabelStyled htmlFor="import-csv" aria-label="upload-file">
+            <ImportButtonStyled
+              variant="secondary"
+              onClick={inputClickHandler}
+              disabled={isLoading}>
+              <LabelStyled htmlFor="import-file" aria-label="upload-file">
                 <IconStyled icon="file_upload" />
-                <span>{t(dict.importButtonText)}</span>
+                <span>{importButtonLabel}</span>
               </LabelStyled>
             </ImportButtonStyled>
             <input
+              disabled={isLoading}
               style={{ display: "none" }}
               ref={inputRef}
               type="file"
               aria-label="upload-file"
-              id="import-csv"
-              name="import-csv"
-              accept=".csv"
+              id="import-file"
+              name="import-file"
+              accept={allowedFileExtensions?.join(",")}
               onChange={(e) => {
                 importFileHandler(e);
               }}
             />
           </>
-        )}
-        {isCSVError && (
+        ) : (
           <ButtonStyled
             variant="secondary"
             onClick={() => {
-              dispatch({ type: "SET_CSV_ERROR", payload: false });
+              dispatch({ type: "SET_SHOW_IMPORT_BUTTON", payload: true });
             }}
             as={LinkStyled}
             href={csvUri}
             download
             title="csv-file">
             <IconStyled icon="file_download" size={12} />
-            <span>{tExport(dictExport.exportButtonText)}</span>
+            <span>{downloadButtonLabel}</span>
           </ButtonStyled>
         )}
+        {InstructionScreen ? (
+          <InstructionPopover>
+            <InstructionScreen />
+          </InstructionPopover>
+        ) : null}
       </ModalContentStyled>
     </Modal>
   );

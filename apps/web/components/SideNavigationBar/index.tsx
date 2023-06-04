@@ -22,6 +22,7 @@ import { categoryFilterAtom } from "store";
 import { ImportModal } from "components/ImportModal";
 import { SideNavigationBar, Icon, NavList, useToast } from "ui";
 import { SpanStyled } from "ui/NavList";
+import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
 
 export const IconStyled = styled(Icon)`
   background: ${({ theme }) => theme.navList.navItem.iconBackgroundColor};
@@ -33,6 +34,7 @@ export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
   const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
+  const { t: tImport, dict: dictImport } = useTranslate("ImportModal"); //
 
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
@@ -276,14 +278,28 @@ export default function SideNav() {
         refetchBudgetsFunction={refetch}
         resetSearch={() => setSearchValue("")}
       />
-      <>
-        {isCreateNewBudgetModalVisible && (
-          <CreateNewBudget onClose={closeModal} />
-        )}
-        {isImportModalVisible && (
-          <ImportModal onClose={() => setIsImportModalVisible(false)} />
-        )}
-      </>
+
+      {isCreateNewBudgetModalVisible && (
+        <CreateNewBudget onClose={closeModal} />
+      )}
+      {isImportModalVisible && (
+        <ImportModal
+          importEndpoint="budgets/import"
+          allowedFileExtensions={[".csv"]}
+          downloadButtonLabel={tExport(dictExport.exportButtonText)}
+          importButtonLabel={tImport(dictImport.importButtonText)}
+          noDataSavedToastMsg={tImport(dictImport.noBudgetSaved)}
+          onClose={() => setIsImportModalVisible(false)}
+          instructionScreen={() =>
+            ImportCSVInstructionScreen({
+              exampleHeader:
+                "Name, IconName, Description, Currency, Value, StartDate, EndDate",
+              exampleFirstLine:
+                "budgetName,yellowIcon,some budget description,USD,15.00,04/20/2023 19:14:20,04/25/2023 20:14:20",
+            })
+          }
+        />
+      )}
     </>
   );
 }

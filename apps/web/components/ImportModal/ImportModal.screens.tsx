@@ -5,21 +5,20 @@ import { ThemeContext } from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { Spinner } from "ui";
 import {
-  TutorialScreenWrapperStyled,
+  InstructionWrapperStyled,
   PStyled,
-  ScreenStatusWrapperStyled,
+  SuccessWrapperStyled,
   SpanStyled,
-  SpinnerWrapperStyled,
   ErrorMessageStyled,
+  ScrollableContentStyled,
+  ScreenCircleStyled,
+  ScreenWrapperStyled,
 } from "./ImportModal.styled";
 import {
   StyledHeader,
   StyledSubHeader,
 } from "app/(regflow)/sign-up/FlowController/SignUpFormStyled";
-import {
-  ScreenCircle,
-  IconStyled,
-} from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
+import { IconStyled } from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
 
 type ErrorsScreenProps = {
   errors: string[];
@@ -31,7 +30,7 @@ export const ErrorsScreen = ({ errors, errorMessage }: ErrorsScreenProps) => {
   const errorColor = theme.importModal.error;
   const [showErrorMessage, setShowErrorMessage] = useState(true);
   return (
-    <>
+    <ScrollableContentStyled>
       {showErrorMessage && (
         <ErrorMessageStyled
           message={errorMessage}
@@ -43,59 +42,61 @@ export const ErrorsScreen = ({ errors, errorMessage }: ErrorsScreenProps) => {
           {error}
         </PStyled>
       ))}
-    </>
+    </ScrollableContentStyled>
   );
 };
 
 export const SpinnerScreen = () => (
-  <SpinnerWrapperStyled>
+  <ScreenWrapperStyled>
     <Spinner />
-  </SpinnerWrapperStyled>
+  </ScreenWrapperStyled>
 );
 
 export const SuccessScreen = () => {
   const { t, dict } = useTranslate("ImportModal");
   return (
-    <ScreenStatusWrapperStyled>
-      <ScreenCircle success={true}>
+    <SuccessWrapperStyled>
+      <ScreenCircleStyled success={true}>
         <IconStyled icon={"done"} iconSize={56} />
-      </ScreenCircle>
+      </ScreenCircleStyled>
       <StyledHeader>{t(dict.successHeader)}</StyledHeader>
       <StyledSubHeader>{t(dict.successSubHeader)}</StyledSubHeader>
-    </ScreenStatusWrapperStyled>
+    </SuccessWrapperStyled>
   );
 };
 
-export const TutorialScreen = () => {
+type ImportCSVInstructionScreenProps = {
+  exampleHeader: string;
+  exampleFirstLine: string;
+};
+
+export const ImportCSVInstructionScreen = ({
+  exampleHeader,
+  exampleFirstLine,
+}: ImportCSVInstructionScreenProps) => {
   const { t, dict } = useTranslate("ImportModal");
   const theme = useContext(ThemeContext);
   const firstLineColor = theme.importModal.HLFirstLine;
   const correctDataColor = theme.importModal.HLCorrectData;
 
   return (
-    <TutorialScreenWrapperStyled>
-      <PStyled>{t(dict.tutorial.wantToUpload)}</PStyled>
+    <InstructionWrapperStyled>
+      <PStyled>{t(dict.instruction.wantToUpload)}</PStyled>
       <PStyled>
-        {t(dict.tutorial.correctFile)}
+        {t(dict.instruction.correctFile)}
         <SpanStyled color={firstLineColor}>
-          {t(dict.tutorial.HLFirstLine)}
+          {t(dict.instruction.HLFirstLine)}
         </SpanStyled>
-        {t(dict.tutorial.subsequentLines)}
+        {t(dict.instruction.subsequentLines)}
         <SpanStyled color={correctDataColor}>
-          {t(dict.tutorial.HLCorrectData)}
+          {t(dict.instruction.HLCorrectData)}
         </SpanStyled>
-        {t(dict.tutorial.eachLine)}
+        {t(dict.instruction.eachLine)}
       </PStyled>
-      <PStyled>{t(dict.tutorial.example)}</PStyled>
-      <PStyled color={firstLineColor}>
-        {"Name, IconName, Description, Currency, Value, StartDate, EndDate"}
-      </PStyled>
-      <PStyled color={correctDataColor}>
-        {
-          "budgetName,yellowIcon,some budget description,USD,15.00,04/20/2023 19:14:20,04/25/2023 20:14:20"
-        }
-      </PStyled>
-      <PStyled>{t(dict.tutorial.useComas)}</PStyled>
-    </TutorialScreenWrapperStyled>
+      <PStyled>{t(dict.instruction.example)}</PStyled>
+      <PStyled color={firstLineColor}>{exampleHeader}</PStyled>
+      <PStyled color={correctDataColor}>{exampleFirstLine}</PStyled>
+      <PStyled>{t(dict.instruction.useComas)}</PStyled>
+    </InstructionWrapperStyled>
   );
 };

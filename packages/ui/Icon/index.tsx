@@ -61,7 +61,8 @@ export type IconType =
   | "favorite"
   | "currency_exchange"
   | "file_download"
-  | "file_upload";
+  | "file_upload"
+  | "question_mark";
 
 type styledIconProps = {
   color?: string;

@@ -1,6 +1,8 @@
+import { Content } from "@radix-ui/react-popover";
+import { ScreenCircle } from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
 import { device } from "lib/media-queries";
 import styled, { css } from "styled-components";
-import { Button, ErrorMessage, Icon, Separator } from "ui";
+import { Button, Card, ErrorMessage, Icon, Separator } from "ui";
 import { ColorProps } from "./ImportModal.types";
 
 export const SeparatorTopStyled = styled(Separator)`
@@ -15,28 +17,8 @@ export const ModalContentStyled = styled.div`
   align-items: center;
   justify-content: space-around;
   gap: 32px;
-  max-width: 500px;
-  height: 500px;
-`;
-
-export const InformationWindowStyled = styled.div`
-  max-width: 500px;
-  height: 314px;
-  overflow-y: overlay;
-
-  &::-webkit-scrollbar {
-    background-color: ${({ theme }) => theme.textarea.disabled};
-    border-radius: 10px;
-    width: 6px;
-    margin-bottom: 5px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.modal.closeButton};
-    border-radius: 10px;
-  }
-  ${device.tablet} {
-    min-width: 500px;
-  }
+  width: 100%;
+  height: 100%;
 `;
 
 const ImportExportButtonStyles = css`
@@ -66,11 +48,6 @@ export const LabelStyled = styled.label`
   cursor: pointer;
 `;
 
-export const LinkStyled = styled.a`
-  ${ImportExportButtonStyles};
-  text-decoration: none;
-`;
-
 export const IconStyled = styled(Icon)`
   font-size: 42px;
 
@@ -79,12 +56,35 @@ export const IconStyled = styled(Icon)`
   }
 `;
 
-export const SpinnerWrapperStyled = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 500px;
-  height: 100%;
+export const LinkStyled = styled.a`
+  ${ImportExportButtonStyles};
+  text-decoration: none;
+`;
+
+export const ScrollableContentStyled = styled.div`
+  max-width: 500px;
+  height: 314px;
+  overflow-y: overlay;
+
+  &::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.textarea.disabled};
+    border-radius: 10px;
+    width: 6px;
+    margin-bottom: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.modal.closeButton};
+    border-radius: 10px;
+  }
+
+  ${device.tablet} {
+    min-width: 500px;
+  }
+`;
+
+export const ErrorMessageStyled = styled(ErrorMessage)`
+  margin-right: 8px;
+  margin-bottom: 8px;
 `;
 
 export const PStyled = styled.p<ColorProps>`
@@ -92,7 +92,29 @@ export const PStyled = styled.p<ColorProps>`
   padding: 4px;
 `;
 
-export const TutorialScreenWrapperStyled = styled.div`
+export const ScreenWrapperStyled = styled.div`
+  min-width: 500px;
+  min-height: 314px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const SuccessWrapperStyled = styled(ScreenWrapperStyled)`
+  flex-direction: column;
+`;
+
+export const ScreenCircleStyled = styled(ScreenCircle)`
+  width: 100px;
+  height: 100px;
+
+  ${device.tablet} {
+    width: 120px;
+    height: 120px;
+  }
+`;
+
+export const InstructionWrapperStyled = styled(ScrollableContentStyled)`
   color: ${({ theme }) => theme.main};
   font-weight: 600;
   font-size: 1em;
@@ -106,16 +128,30 @@ export const SpanStyled = styled.span<ColorProps>`
   color: ${({ color }) => color};
 `;
 
-export const ScreenStatusWrapperStyled = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+export const PopoverContentStyled = styled(Content)`
+  z-index: 101;
 `;
 
-export const ErrorMessageStyled = styled(ErrorMessage)`
-  margin-right: 8px;
-  margin-bottom: 8px;
+export const StyledButton = styled.button`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  padding: 0;
+  &:focus {
+    outline: 1px solid ${({ theme }) => theme.black};
+  }
+`;
+
+export const CardStyled = styled(Card)`
+  max-width: 314px;
+  height: 100%;
+  padding: 12px;
+
+  ${device.tablet} {
+    max-width: 100%;
+  }
+`;
+
+export const PopoverIconStyled = styled(Icon)`
+  font-size: 20px;
 `;
