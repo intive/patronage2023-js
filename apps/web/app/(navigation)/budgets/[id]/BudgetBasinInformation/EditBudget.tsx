@@ -4,14 +4,7 @@ import { Form, Field, FormInstance } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import { BudgetFixed } from "lib/types";
-import {
-  Modal,
-  IconPicker,
-  Input,
-  CustomDatePicker,
-  Button,
-  IconType,
-} from "ui";
+import { Modal, IconPicker, Input, CustomDatePicker, Button } from "ui";
 import {
   SeparatorStyledTop,
   FormWrapperStyled,
@@ -41,12 +34,14 @@ interface EditBudgetProps {
   onClose: () => void;
 }
 
-interface EditedBudgetProps {
+interface EditedBudgetBEProps {
   name: string;
   description: string;
   iconName: string;
-  startDate: string;
-  endDate: string;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
 }
 
 export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
@@ -56,32 +51,24 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
   const { checkNameOnChange, checkNameOnSubmit, checkDescription, checkDate } =
     useValidateBudgetModal("EditBudgetModal");
 
-  const initialBudget = {
-    name: budget.name,
-    description: budget.description,
-    iconName: budget.icon,
-    startDate: budget.startDate,
-    endDate: budget.endDate,
-  };
+  // const initialBudget = {
+  //   name: budget.name,
+  //   description: budget.description,
+  //   iconName: budget.icon,
+  //   startDate: budget.startDate,
+  //   endDate: budget.endDate,
+  // };
 
-  const [editedBudget, setEditedBudget] =
-    useState<EditedBudgetProps>(initialBudget);
+  // const [editedBudget, setEditedBudget] =
+  //   useState<EditedBudgetProps>(initialBudget);
 
   const queryClient = useQueryClient();
 
   const sendEditedBudgetMutation = useMutation({
-    mutationFn: (edited: EditedBudgetProps) => {
+    mutationFn: (edited: EditedBudgetBEProps) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}/budgets/${budget.id}/edit`, {
         method: "PUT",
-        body: {
-          name: edited.name,
-          description: edited.description,
-          iconName: edited.iconName,
-          period: {
-            startDate: edited.startDate,
-            endDate: edited.endDate,
-          },
-        },
+        body: edited,
       });
     },
     onError: () => {
@@ -109,9 +96,9 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
 
   const getDateObject = (dateType: string) => {
     if (dateType === "start-date") {
-      return editedBudget.startDate ? new Date(editedBudget.startDate) : null;
+      return budget.startDate ? new Date(budget.startDate) : null;
     } else if (dateType === "end-date")
-      return editedBudget.endDate ? new Date(editedBudget.endDate) : null;
+      return budget.endDate ? new Date(budget.endDate) : null;
   };
 
   const checkEndDateOnChangeValidate = (
@@ -127,7 +114,17 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     return Promise.resolve(true);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (values: Record<string, any>) => {
+    const editedBudget: EditedBudgetBEProps = {
+      name: values["budget-name"],
+      description: values.description,
+      iconName: values.icon,
+      period: {
+        startDate: values["start-date"].toISOString(),
+        endDate: values["end-date"].toISOString(),
+      },
+    };
+    console.log(JSON.stringify(editedBudget));
     sendEditedBudgetMutation.mutate(editedBudget);
   };
 
@@ -140,7 +137,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
       )}
       <SeparatorStyledTop />
       <FormWrapperStyled>
-        <Form onSubmit={() => handleSubmit()}>
+        <Form onSubmit={(values) => handleSubmit(values)}>
           {({ submit }) => (
             <form
               onSubmit={(e) => {
@@ -149,19 +146,17 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
               <ContentStyled>
                 <ParagraphStyled>{t(dict.paragraphs.details)}</ParagraphStyled>
                 <IconPickerStyled>
-                  <Field
-                    name="icon"
-                    initialValue={editedBudget.iconName as IconType}>
+                  <Field name="icon" initialValue={budget.icon}>
                     {({ value, setValue }) => (
                       <IconPicker
                         defaultIcon={value}
                         icons={icons}
                         onSelect={(icon) => {
                           setValue(icon);
-                          setEditedBudget({
-                            ...editedBudget,
-                            iconName: icon,
-                          });
+                          // setEditedBudget({
+                          //   ...editedBudget,
+                          //   iconName: icon,
+                          // });
                         }}
                       />
                     )}
@@ -170,7 +165,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                 <InputWrapperFullStyled>
                   <Field
                     name="budget-name"
-                    initialValue={editedBudget.name}
+                    initialValue={budget.name}
                     onSubmitValidate={checkNameOnSubmit}
                     onChangeValidate={checkNameOnChange}>
                     {({ value, setValue, errors }) => (
@@ -181,10 +176,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                         supportingLabel={errors.length ? errors : null}
                         onChange={(e) => {
                           setValue(e.currentTarget.value);
-                          setEditedBudget({
-                            ...editedBudget,
-                            name: e.currentTarget.value,
-                          });
+                          // setEditedBudget({
+                          //   ...editedBudget,
+                          //   name: e.currentTarget.value,
+                          // });
                         }}
                         onInputCleared={() => setValue("")}
                         label={t(dict.inputNames.budgetName)}>
@@ -195,7 +190,7 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                 </InputWrapperFullStyled>
                 <Field
                   name="description"
-                  initialValue={editedBudget.description}
+                  initialValue={budget.description}
                   onSubmitValidate={checkDescription}
                   onChangeValidate={checkDescription}>
                   {({ value, setValue, errors }) => {
@@ -204,16 +199,12 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                         <TextareaStyled
                           id="description"
                           name="description"
-                          placeholder={editedBudget.description}
+                          placeholder={budget.description}
                           label={t(dict.inputNames.description)}
                           value={value}
                           hasError={errors.length > 0}
                           onChange={(e) => {
                             setValue(e.currentTarget.value);
-                            setEditedBudget({
-                              ...editedBudget,
-                              description: e.currentTarget.value,
-                            });
                           }}
                         />
                         <TextareaErrorStyled>
@@ -240,10 +231,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            setEditedBudget({
-                              ...editedBudget,
-                              startDate: date ? date.toISOString() : "",
-                            });
+                            // setEditedBudget({
+                            //   ...editedBudget,
+                            //   startDate: date ? date.toISOString() : "",
+                            // });
                           }}
                         />
                         <DatePickerErrorStyled>
@@ -271,10 +262,10 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
                           selected={value}
                           onSelect={(date) => {
                             setValue(date);
-                            setEditedBudget({
-                              ...editedBudget,
-                              endDate: date ? date.toISOString() : "",
-                            });
+                            // setEditedBudget({
+                            //   ...editedBudget,
+                            //   endDate: date ? date.toISOString() : "",
+                            // });
                           }}
                         />
                         <DatePickerErrorStyled>

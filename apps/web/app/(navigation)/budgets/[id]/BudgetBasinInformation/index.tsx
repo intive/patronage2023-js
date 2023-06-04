@@ -111,60 +111,74 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetNameWrapperStyled>
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
-              <NavBudgetIconStyled onClick={openEditModal} icon="edit" />
-              {loggedUserId === budget.userId && (
-                <NavBudgetIconStyled icon="share" onClick={openShareModal} />
-              )}
               <FavouriteStyled
                 isFav={budget.isFavourite}
                 budgetId={budget.id}
+                isOwner={loggedUserId === budget.userId}
               />
-              <NavBudgetIconStyled
-                onClick={() => setDeleteModalVisibility(true)}
-                icon="delete"
-              />
-              <DropdownMenuStyled
-                items={[
-                  {
-                    ComponentToRender: (
-                      <NavBudgetIconDropdownStyled
-                        onClick={openEditModal}
-                        icon="edit"
-                      />
-                    ),
-                    id: "edit",
-                  },
-                  // {
-                  //   ComponentToRender: (
-                  //     <NavBudgetIconDropdownStyled
-                  //       onClick={openShareModal}
-                  //       icon="share"
-                  //     />
-                  //   ),
-                  //   id: "share",
-                  // },
-                  {
-                    ComponentToRender: (
-                      <FavouriteDropdownStyled
-                        isFav={budget.isFavourite}
-                        budgetId={budget.id}
-                      />
-                    ),
-                    id: "favourite",
-                  },
-                  {
-                    ComponentToRender: (
-                      <NavBudgetIconDropdownStyled
-                        onClick={() => setDeleteModalVisibility(true)}
-                        icon="delete"
-                      />
-                    ),
-                    id: "delete",
-                  },
-                ]}
-                side="bottom"
-                ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
-              />
+              {loggedUserId === budget.userId && (
+                <>
+                  <NavBudgetIconStyled onClick={openEditModal} icon="edit" />
+                  <NavBudgetIconStyled icon="share" onClick={openShareModal} />
+                  <NavBudgetIconStyled
+                    onClick={() => setDeleteModalVisibility(true)}
+                    icon="delete"
+                  />
+                </>
+              )}
+              {/* {loggedUserId === budget.userId && (
+                <NavBudgetIconStyled icon="share" onClick={openShareModal} />
+              )}
+              {loggedUserId === budget.userId && (
+                <NavBudgetIconStyled
+                  onClick={() => setDeleteModalVisibility(true)}
+                  icon="delete"
+                />
+              )} */}
+              {loggedUserId === budget.userId && (
+                <DropdownMenuStyled
+                  items={[
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={openEditModal}
+                          icon="edit"
+                        />
+                      ),
+                      id: "edit",
+                    },
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={openShareModal}
+                          icon="share"
+                        />
+                      ),
+                      id: "share",
+                    },
+                    {
+                      ComponentToRender: (
+                        <FavouriteDropdownStyled
+                          isFav={budget.isFavourite}
+                          budgetId={budget.id}
+                        />
+                      ),
+                      id: "favourite",
+                    },
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={() => setDeleteModalVisibility(true)}
+                          icon="delete"
+                        />
+                      ),
+                      id: "delete",
+                    },
+                  ]}
+                  side="bottom"
+                  ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
+                />
+              )}
             </BudgetNameIconsWrapperStyled>
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
           </BudgetNameWrapperStyled>
