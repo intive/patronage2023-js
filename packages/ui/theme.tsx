@@ -373,6 +373,13 @@ export const theme = {
     content: colors.Teal10,
     background: colors.BasicWhite,
   },
+  reports: {
+    incomesBar: colors.Supporting7,
+    incomesLine: colors.Supporting14,
+    expencesBar: colors.Neutral2,
+    expencesLine: colors.Neutral6,
+    lineChartPointsFill: colors.Neutral1,
+  },
 };
 
 export type ThemeType = typeof theme;
