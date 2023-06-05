@@ -2,13 +2,27 @@ import { Language, languageAtom } from "store";
 import { useAtom } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useTranslate } from "lib/hooks";
-import { Flag } from "ui";
+import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
-import { SelectStyled } from "./LanguageSelector.styled";
+import styled from "styled-components";
 
 type LanguageSelectorProps = {
   variant: "flag" | "descriptive";
 };
+
+const SelectStyled = styled(Select)`
+  background-color: unset;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  margin-bottom: 0;
+  width: auto;
+
+  &:focus,
+  &[data-state="open"] {
+    outline: revert;
+  }
+`;
 
 export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
@@ -48,10 +62,16 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
         label: (
           <>
             <Flag src={flagSrc} alt={alt} />
-            <span>Tekst</span>
-            <SelectLabelHiddenInTrigger>
-              {languageName}
-            </SelectLabelHiddenInTrigger>
+            {variant === "descriptive" && (
+              <>
+                <span>{languageName}</span>
+              </>
+            )}
+            {variant === "flag" && (
+              <SelectLabelHiddenInTrigger>
+                {languageName}
+              </SelectLabelHiddenInTrigger>
+            )}
           </>
         ),
       }))}
@@ -60,7 +80,7 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
         changeLanguage(language as Language);
       }}
       label=""
-      hasIcon={false}
+      hasIcon={variant === "descriptive"}
       hasScrollbar={hasScrollbar}
       sideOffset={5}
     />

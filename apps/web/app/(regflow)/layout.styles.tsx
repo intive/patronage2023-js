@@ -133,12 +133,10 @@ export const CustomCard = styled(Card)`
 
 export const LanguageSelectorWrapper = styled.div`
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 16px;
+  right: 16px;
   z-index: 2;
 
   ${device.desktop} {
-    top: 20px;
-    right: 20px;
   }
 `;
