@@ -59,8 +59,10 @@ export type IconType =
   | "navigate_next"
   | "trending_flat"
   | "favorite"
-  | "currency_exchange"
-  | "share";
+  | "share"
+  | "keyboard_arrow_down"
+  | "keyboard_arrow_up"
+  | "currency_exchange";
 
 type styledIconProps = {
   color?: string;
