@@ -1167,7 +1167,7 @@ const dictionary = {
     "1.10": {
       //Not working with hardcoded currency
       en: "Currency is not supported.",
-      pl: "Nie obsługiwana waluta.",
+      pl: "Waluta nie jest obsługiwana.",
       fr: "La monnaie n'est pas supporté.",
     },
     "1.11": {
@@ -1207,9 +1207,9 @@ const dictionary = {
       fr: "La valeur ne peut pas être vide.",
     },
     "2.6": {
-      //FE validation - FE add positive for income or negative for expense
+      //FE validation - FE adds positive for income or negative for expense
       en: "Value must be positive for income or negative for expense.",
-      pl: "Wartość musi być dodatnia dla przychodu lub ujemna dla wydatku.",
+      pl: "Wartość musi być dodatnia dla wpływów lub ujemna dla wydatków.",
       fr: "La valeur doit être positive pour une recette ou négative pour une dépense.",
     },
     "2.7": {

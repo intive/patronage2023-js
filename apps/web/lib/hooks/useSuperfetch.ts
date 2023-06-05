@@ -47,7 +47,7 @@ export default function useSuperfetch() {
             message:
               t(dict.title) + hardcodedError + " - " + t(dict[hardcodedError]),
           });
-        } else if (res.status !== 200 || 400 || 401) {
+        } else if (res.status > 401) {
           showToast({
             variant: "error",
             message: t(dict["defaultError"]),
