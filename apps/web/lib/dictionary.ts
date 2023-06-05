@@ -37,9 +37,19 @@ const dictionary = {
           fr: "Rechercher un budget",
         },
         buttonLabel: {
-          en: "Add new budget",
-          pl: "Dodaj nowy budżet",
-          fr: "Créer un nouveau budget",
+          en: "New budget",
+          pl: "Nowy budżet",
+          fr: "Nouveau budget",
+        },
+        importButtonLabel: {
+          en: "Import",
+          pl: "Importuj",
+          fr: "Importer",
+        },
+        exportButtonLabel: {
+          en: "Export file",
+          pl: "Eksportuj plik",
+          fr: "*Le point de vue d'Eksportuj",
         },
         infos: {
           loading: {
@@ -1102,6 +1112,119 @@ const dictionary = {
       en: "Refund",
       pl: "Zwrot kosztów",
       fr: "Remboursement",
+    },
+  },
+  ExportFile: {
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Ściągnij plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
+    exportToastMessage: {
+      en: "CSV exported successfully",
+      pl: "CSV wyeksportowany pomyślnie",
+      fr: "CSV exporté avec succès",
+    },
+  },
+  ImportModal: {
+    successHeader: {
+      en: "Congratulations",
+      pl: "Gratulacje",
+      fr: "Félicitations",
+    },
+    successSubHeader: {
+      en: "Your file has been successfully imported!",
+      pl: "Plik został pomyślnie zaimportowany!",
+      fr: "Le fichier a été importé avec succès !",
+    },
+    corruptedFile: {
+      en: "Check the file, it may be corrupted!",
+      pl: "Sprawdź plik, może być uszkodzony!",
+      fr: "Vérifiez le fichier, il est peut-être corrompu !",
+    },
+    errorCsvMessage: {
+      en: "Not all records have been imported. Check which records have not been imported! Correct the records in the downloaded file and import them again.",
+      pl: "Nie wszystkie rekordy zostały zaimportowane. Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
+      fr: "*Tous les enregistrements n'ont pas été importés. Vérifiez quels enregistrements n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+    },
+    noBudgetSaved: {
+      en: "No budget was saved. Correct the file and import it again",
+      pl: "Żaden budżet nie został zapisany. Popraw plik i zaimportuj go ponownie",
+      fr: "*Aucun budget n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
+    },
+    incorrectFileExtension: {
+      en: "Incorrect file extension. Import the file with the correct extension:",
+      pl: "Nieprawidłowe rozszerzenie pliku. Zaimportuj plik z prawidłowym rozszerzeniem:",
+      fr: "*Extension de fichier incorrecte. Importer le fichier avec l'extension correcte:",
+    },
+    responseErrors: {
+      400: {
+        en: "400: Incorrect data. Correct the file and try again.",
+        pl: "400: Nieprawidłowe dane. Popraw plik i spróbuj jeszcze raz.",
+        fr: "*400: Données incorrectes. Corrigez le fichier et réessayez.",
+      },
+      401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: Utilisateur non autorisé",
+      },
+      default: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+    },
+    modalHeader: {
+      en: "Import",
+      pl: "Importuj",
+      fr: "*Importer un fichier",
+    },
+    importButtonText: {
+      en: "Click to import",
+      pl: "Kliknij, aby zaimportować",
+      fr: "Cliquez pour importer",
+    },
+    instruction: {
+      wantToUpload: {
+        en: "If you want to upload a file, please click the button below.",
+        pl: "Jeśli chcesz załadować plik, proszę kliknij przycisk poniżej.",
+        fr: "Si vous souhaitez charger un fichier, veuillez cliquer sur le bouton ci-dessous.",
+      },
+      correctFile: {
+        en: "The correct file should have a .csv extension. The CSV file should have headers on the ",
+        pl: "Prawidłowy plik powinien mieć rozszerzenie .csv. Plik CSV powinien zawierać nagłówki w ",
+        fr: "Le fichier correct doit avoir une extension .csv. Le fichier CSV doit avoir des en-têtes sur la ",
+      },
+      HLFirstLine: {
+        en: "first line",
+        pl: "pierwszej linii",
+        fr: "première ligne",
+      },
+      subsequentLines: {
+        en: ". Subsequent lines should contain the",
+        pl: ". Kolejne linie powinny zawierać",
+        fr: ". Les lignes suivantes doivent contenir les",
+      },
+      HLCorrectData: {
+        en: " correct data ",
+        pl: " poprawne dane ",
+        fr: " données correctes ",
+      },
+      eachLine: {
+        en: "on each line.",
+        pl: "w każdej linii.",
+        fr: "sur chaque ligne.",
+      },
+      example: {
+        en: "Example below:",
+        pl: "Przykład poniżej:",
+        fr: "Exemple ci-dessous :",
+      },
+      useComas: {
+        en: "Use commas to separate the individual data.",
+        pl: "Użyj przecinków do oddzielenia poszczególnych danych.",
+        fr: "Utilisez des virgules pour séparer les données individuelles.",
+      },
     },
   },
 };

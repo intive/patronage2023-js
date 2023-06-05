@@ -61,7 +61,11 @@ export type IconType =
   | "favorite"
   | "keyboard_arrow_down"
   | "keyboard_arrow_up"
-  | "currency_exchange";
+  | "currency_exchange"
+  | "currency_exchange"
+  | "file_download"
+  | "file_upload"
+  | "question_mark";
 
 type styledIconProps = {
   color?: string;
