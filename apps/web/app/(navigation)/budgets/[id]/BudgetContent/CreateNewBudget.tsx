@@ -44,6 +44,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useAtomValue } from "jotai";
 import { currencyAtom } from "store";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { currency } from "lib/currency";
 
 type NewBudget = {
   onClose: Function;
@@ -83,8 +84,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
-
-  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
 
   const {
     checkNameOnChange,
@@ -290,7 +289,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
                         <Select
-                          items={currencies.map((currency) => ({
+                          items={currency.map((currency) => ({
                             label: (
                               <>
                                 <CurrencyTagStyled>

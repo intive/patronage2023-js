@@ -11,8 +11,9 @@ import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../css/global.css";
 
-import { Language, languageAtom, currencyAtom } from "store";
+import { languageAtom, currencyAtom } from "store";
 import { SessionProvider } from "next-auth/react";
+import { useLocalStorage } from "lib/hooks";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -29,9 +30,12 @@ export default function RootLayout({ children }: LayoutProps) {
   const setLanguage = useSetAtom(languageAtom);
   const setCurrency = useSetAtom(currencyAtom);
 
+  const [defaultCurrency] = useLocalStorage("currency", "USD");
+  const [lang] = useLocalStorage("lang", "en");
+
   useEffect(() => {
-    setLanguage((localStorage.getItem("lang") as Language) || "en");
-    setCurrency(localStorage.getItem("currency") || "USD");
+    setLanguage(lang);
+    setCurrency(defaultCurrency);
   }, [setLanguage, setCurrency]);
 
   return (
