@@ -7,7 +7,7 @@ import { device } from "web/lib/media-queries";
 type InputProps = {
   component: ReactNode;
   id: string;
-  checked: boolean,
+  checked: boolean;
 };
 
 type GroupProps = {
@@ -33,7 +33,7 @@ const ButtonRadioGroupStyled = styled.div`
     position: relative;
     text-align: center;
     border-bottom: 2px solid transparent;
-    color: #7E7E7E;
+    color: #7e7e7e;
 
     ${device.tablet} {
       padding: 8px 12px;

@@ -940,7 +940,7 @@ const dictionary = {
         en: "There are no transactions for the selected period",
         pl: "Brak transakcji dla wybranego okresu",
         fr: "",
-      }
+      },
     },
     labelsTooltip: {
       incomes: {
@@ -952,7 +952,7 @@ const dictionary = {
         en: "Expenses",
         pl: "Wydatki",
         fr: "Dépenses",
-      }
+      },
     },
   },
   SettingsPage: {

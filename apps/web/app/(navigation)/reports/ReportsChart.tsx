@@ -70,7 +70,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   };
 
   const gradientGrey = {
-    startColor: "rgba(0, 0, 0, 0.2)", 
+    startColor: "rgba(0, 0, 0, 0.2)",
     endColor: "transparent",
   };
 
@@ -82,7 +82,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
     return gradientFill;
   };
 
-  //define background colors depending on chart 
+  //define background colors depending on chart
   const backgroundIncomes =
     chart === "line" ? createGradient(gradientGreen) : theme.reports.incomesBar;
   const backgroundExpences =
@@ -122,7 +122,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   //CUSOTM LINE for tooltips in the line chart
   const customLine = {
     id: "lines",
-    beforeDatasetsDraw(chart: CombinedContext) {
+    beforeDatasetsDraw(chart: any) {
       const {
         ctx,
         tooltip,
