@@ -298,53 +298,53 @@ const dictionary = {
       avatarSwitcherDefault: {
         en: "Default",
         pl: "Podstawowe",
-        fr: "",
+        fr: "Par défaut",
       },
       avatarSwitcherCustom: {
         en: "Personalized",
         pl: "Spersonalizowany",
-        fr: "",
+        fr: "Personnalisé",
       },
       dropZone: {
         mainText: {
           en: "Drop file here",
           pl: "Upuść plik tutaj",
-          fr: "",
+          fr: "Déposez le fichier ici",
         },
         separator: {
           en: "or",
           pl: "lub",
-          fr: "",
+          fr: "ou",
         },
         buttonText: {
           en: "Choose a file",
           pl: "Wybierz plik",
-          fr: "",
+          fr: "Choisir un fichier",
         },
         onOver: {
           en: "Drop here...",
           pl: "Upuść tutaj...",
-          fr: "",
+          fr: "Déposez ici...",
         },
         goBack: {
           en: "Crop again",
           pl: "Przytnij jeszcze raz",
-          fr: "",
+          fr: "Recadrer à nouveau",
         },
         delete: {
           en: "Delete",
           pl: "Usuń",
-          fr: "",
+          fr: "Supprimer",
         },
         modalHeader: {
           en: "Crop your image before submitting.",
           pl: "Przytnij zdjęcie przed wysłaniem.",
-          fr: "",
+          fr: "Recadrez votre image avant de la soumettre.",
         },
         croppedTitle: {
           en: "Your avatar",
           pl: "Twój awatar",
-          fr: "",
+          fr: "Votre avatar",
         },
       },
       subtitle: {
