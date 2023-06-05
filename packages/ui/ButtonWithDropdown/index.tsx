@@ -14,8 +14,8 @@ export type ButtonWithDropdownProps = {
 
 export type ButtonWithDropdownItem = {
   id: string;
-  label: string;
-  callback: () => void;
+  callback?: () => void;
+  node?: React.ReactNode | string;
 };
 
 const StyledButton = styled.button`
@@ -114,9 +114,9 @@ export const ButtonWithDropdown = ({
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="start">
-          {items.map((item) => (
-            <DropdownMenuItemStyled key={item.id} onClick={item.callback}>
-              {item.label}
+          {items.map(({id,callback,node}) => (
+            <DropdownMenuItemStyled key={id} onClick={callback}>
+              {node}
             </DropdownMenuItemStyled>
           ))}
         </DropdownMenuContentStyled>

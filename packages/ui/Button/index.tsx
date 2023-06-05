@@ -28,7 +28,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary" | "danger" | "simple";
   fullWidth?: boolean;
   disabled?: boolean;
-  onClick?: Function;
+  onClick?: () => void;
   small?: boolean;
 } & React.HTMLProps<HTMLButtonElement>;
 
