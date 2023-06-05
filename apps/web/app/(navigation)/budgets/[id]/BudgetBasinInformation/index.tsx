@@ -110,6 +110,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
                 icon="delete"
               />
               <DropdownMenuStyled
+                icon="more_vert"
                 items={[
                   {
                     ComponentToRender: (
