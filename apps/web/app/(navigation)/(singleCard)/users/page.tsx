@@ -7,6 +7,7 @@ const PageWrapper = styled.div`
   display: flex;
   align-self: flex-start;
   flex-direction: column;
+  flex: 1;
 `;
 
 const TitleStyled = styled.h1`

@@ -1,15 +1,17 @@
 "use client";
 
 import { useTranslate } from "lib/hooks";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Icon } from "ui";
 import {
   ContainerStyled,
   ListStyled,
   NavigationButtonStyled,
   RowsPerPageContainerStyled,
+  SelectStyled,
+  PaginationSelectItemStyled,
 } from "./Pagination.styled";
 import { PaginationElementsList } from "./PaginationElementsList";
-import { RowsPerPageSelect } from "./RowsPerPageSelect";
 
 type PaginationProps = {
   pageIndex: number;
@@ -29,6 +31,7 @@ export const Pagination = ({
   onChangePageIndex,
 }: PaginationProps) => {
   const { t, dict } = useTranslate("Pagination");
+  const { hasScrollbar } = useHasScrollBar();
 
   const isNavigationForwardDisabled = pageIndex === numberOfPages - 1;
   const isNavigationBackwardDisabled = pageIndex === 0;
@@ -53,12 +56,19 @@ export const Pagination = ({
     <ContainerStyled>
       <RowsPerPageContainerStyled>
         {t(dict.rowsPerPageText)}
-        <RowsPerPageSelect
+        <SelectStyled
+          items={pageSizeOptions.map((option) => ({
+            label: option,
+            value: option.toString(),
+          }))}
+          onValueChange={comboBoxOnChangeHandler}
+          hasIcon
+          label=""
+          hasScrollbar={hasScrollbar}
           value={currentPageSize.toString()}
           id="rows-per-page"
-          label={t(dict.rowsPerPageSelectAriaLabel)}
-          onValueChange={comboBoxOnChangeHandler}
-          pageSizeOptions={pageSizeOptions}
+          sideOffset={2}
+          SelectItem={PaginationSelectItemStyled}
         />
       </RowsPerPageContainerStyled>
 

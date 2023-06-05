@@ -1,6 +1,7 @@
 import { device } from "lib/media-queries";
 import styled from "styled-components";
 import { Separator } from "ui";
+import { SelectItemStyled } from "ui/Select/Select.styles";
 
 export const FormWrapper = styled.div`
   position: relative;
@@ -38,6 +39,10 @@ export const SeparatorStyled = styled(Separator)`
 
 export const ButtonWrapperStyled = styled.div`
   margin-top: 24px;
+`;
+
+export const TransactionSelectItemStyled = styled(SelectItemStyled)`
+  padding: 8px 16px;
 `;
 
 export const DatePickerWrapperStyled = styled.div`
