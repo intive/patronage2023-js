@@ -1,4 +1,3 @@
-import dictionary from "lib/dictionary";
 import { useSession } from "next-auth/react";
 import { useToast } from "ui";
 import { useTranslate } from "./useTranslate";
