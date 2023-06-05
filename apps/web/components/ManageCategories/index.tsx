@@ -5,7 +5,6 @@ import { useState } from "react";
 import { budgetCategories } from "store/store";
 import {
   CategoryIcon,
-  CategorySelector,
   CategoryType,
   DropdownMenu,
   Icon,
