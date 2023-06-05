@@ -12,7 +12,10 @@ type MultiCardLayoutProps = {
   aside?: ReactElement;
 };
 
-export default function MultiCardLayoutTop({ main, aside }: MultiCardLayoutProps) {
+export default function MultiCardLayoutTop({
+  main,
+  aside,
+}: MultiCardLayoutProps) {
   return (
     <CardWrapperStyled>
       <MainCard>{main}</MainCard>
