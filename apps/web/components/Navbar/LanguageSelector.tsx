@@ -14,6 +14,11 @@ const SelectStyled = styled(Select)`
   line-height: 0;
   margin-bottom: 0;
   width: auto;
+
+  &:focus,
+  &[data-state="open"] {
+    outline: revert;
+  }
 `;
 
 export const LanguageSelector = () => {

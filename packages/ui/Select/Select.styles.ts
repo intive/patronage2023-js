@@ -27,7 +27,8 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
   transition: border-color 200ms ease-out;
   position: relative;
 
-  :focus {
+  &:focus,
+  &[data-state="open"] {
     transition: border-color 200ms ease-out;
     outline: none;
     border-color: ${({ theme }) => theme.input.focus};
