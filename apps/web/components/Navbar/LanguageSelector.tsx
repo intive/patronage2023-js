@@ -1,27 +1,31 @@
-import * as Select from "@radix-ui/react-select";
-
-import { Flag, Icon } from "ui";
-
 import { Language, languageAtom } from "store";
-import { useAtom } from "jotai";
+import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import {
-  SelectContentStyled,
-  SelectItemStyled,
-  SelectTriggerStyled,
-  StyledSelectorBox,
-} from "./LanguageSelectorStyled";
-import { useContext } from "react";
-import { ThemeContext } from "styled-components";
+import { useTranslate } from "lib/hooks";
+import styled from "styled-components";
 
-type LanguageSelectorProps = {
-  variant: "flag" | "descriptive";
-};
+import { Flag, Select } from "ui";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
-export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
+const SelectStyled = styled(Select)`
+  background-color: unset;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  margin-bottom: 0;
+  width: auto;
+
+  &:focus,
+  &[data-state="open"] {
+    outline: revert;
+  }
+`;
+
+export const LanguageSelector = () => {
   const { hasScrollbar } = useHasScrollBar();
-  const [language, setLanguage] = useAtom(languageAtom);
-  const theme = useContext(ThemeContext);
+  const setLanguage = useSetAtom(languageAtom);
+  const language = useAtomValue(languageAtom);
+  const { t, dict } = useTranslate("NavigationLayout");
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
@@ -33,63 +37,43 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
       lang: "pl",
       flagSrc: "/flags/pl.svg",
       languageName: "Polski",
-      alt: "Flag of Poland",
+      alt: t(dict.languageFlagAlts.polishFlag),
     },
     {
       lang: "en",
       flagSrc: "/flags/en.svg",
       languageName: "English",
-      alt: "Flag of UK",
+      alt: t(dict.languageFlagAlts.britishFlag),
     },
     {
       lang: "fr",
       flagSrc: "/flags/fr.svg",
       languageName: "Français",
-      alt: "Flag of France",
+      alt: t(dict.languageFlagAlts.frenchFlag),
     },
   ];
 
   return (
-    <Select.Root
+    <SelectStyled
+      items={items.map(({ lang, flagSrc, languageName, alt }) => ({
+        value: lang,
+        label: (
+          <>
+            <Flag src={flagSrc} alt={alt} />
+            <SelectLabelHiddenInTrigger>
+              {languageName}
+            </SelectLabelHiddenInTrigger>
+          </>
+        ),
+      }))}
       value={language || "en"}
-      onValueChange={(lang: Language) => {
-        changeLanguage(lang);
-      }}>
-      <SelectTriggerStyled>
-        {variant === "flag" && (
-          <Select.Value>
-            <Flag
-              src={`/flags/${language}.svg`}
-              alt={`Flag - ${language.toUpperCase()}`}
-            />
-          </Select.Value>
-        )}
-        {variant === "descriptive" && (
-          <Select.Value asChild>
-            <StyledSelectorBox>
-              <Flag
-                src={`/flags/${language}.svg`}
-                alt={`Flag - ${language.toUpperCase()}`}
-              />
-              {/*<span>Français</span>*/}
-              <Icon icon={"arrow_drop_down"} color={theme.primary} />
-            </StyledSelectorBox>
-          </Select.Value>
-        )}
-      </SelectTriggerStyled>
-
-      <Select.Portal className={hasScrollbar ? "radix-scroll" : ""}>
-        <SelectContentStyled position="popper" align="center" sideOffset={5}>
-          <Select.Viewport>
-            {items.map((item) => (
-              <SelectItemStyled value={item.lang} key={item.lang}>
-                <Flag src={item.flagSrc} alt={item.alt} />
-                <Select.ItemText>{item.languageName}</Select.ItemText>
-              </SelectItemStyled>
-            ))}
-          </Select.Viewport>
-        </SelectContentStyled>
-      </Select.Portal>
-    </Select.Root>
+      onValueChange={(language) => {
+        changeLanguage(language as Language);
+      }}
+      label=""
+      hasIcon={false}
+      hasScrollbar={hasScrollbar}
+      sideOffset={5}
+    />
   );
 };
