@@ -4,15 +4,20 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import { ErrorMessage } from "ui";
+import * as Tabs from "@radix-ui/react-tabs";
+import { Form, Field } from "houseform";
+import { useTranslate } from "lib/hooks";
+import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 import {
   Button,
-  CurrencySelect,
   CustomDatePicker,
   IconPicker,
   Input,
   Modal,
+  Select,
+  ErrorMessage,
 } from "ui";
 import { IconType } from "ui/Icon";
 import {
@@ -34,12 +39,9 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
+  CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
-import { Form, Field } from "houseform";
-import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
-import * as Tabs from "@radix-ui/react-tabs";
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 type NewBudget = {
   onClose: Function;
@@ -79,6 +81,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
+
+  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
 
   const {
     checkNameOnChange,
@@ -282,20 +286,34 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onSubmitValidate={checkCurrency}
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
-                        // WIP
-                        <CurrencySelect
+                        <Select
+                          items={currencies.map((currency) => ({
+                            label: (
+                              <>
+                                <CurrencyTagStyled>
+                                  {currency}
+                                </CurrencyTagStyled>
+                                <SelectLabelHiddenInTrigger>
+                                  {t(dict.currencyNames[currency])}
+                                </SelectLabelHiddenInTrigger>
+                              </>
+                            ),
+                            value: currency,
+                          }))}
+                          onValueChange={(value) => {
+                            setValue(value);
+                            setNewBudget({
+                              ...newBudget,
+                              currency: value,
+                            });
+                          }}
+                          hasIcon
                           value={value}
                           id="currency"
                           label={t(dict.inputNames.currency)}
-                          supportingLabel={errors[0]}
-                          onValueChange={(e) => {
-                            setValue(e);
-                            setNewBudget({
-                              ...newBudget,
-                              currency: e,
-                            });
-                          }}
+                          error={errors[0]}
                           hasScrollbar={hasScrollbar}
+                          sideOffset={2}
                         />
                       )}
                     </Field>

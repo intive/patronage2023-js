@@ -31,7 +31,6 @@ const ActionWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  justify-content: flex-end;
   gap: 1rem;
 `;
 
