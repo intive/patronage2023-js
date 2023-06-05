@@ -1,6 +1,5 @@
 "use client";
 import styled from "styled-components";
-import MultiCardLayout from "../MultiCardLayout";
 import UsersTableController from "./UsersTableController";
 import { useTranslate } from "lib/hooks";
 
@@ -22,23 +21,12 @@ const TitleStyled = styled.h1`
 
 export default function UsersPage() {
   const { t, dict } = useTranslate("UsersPage");
-  const { title, aside } = dict;
+  const { title } = dict;
 
-  const mainCardContent = (
-    <>
-      <PageWrapper>
-        <TitleStyled>{t(title)}</TitleStyled>
-        <UsersTableController />
-      </PageWrapper>
-    </>
-  );
-  const data = t(aside.title);
-  const shown = true;
-  //conditionally render aside if needed e.g. pass user info to it etc.
   return (
-    <MultiCardLayout
-      main={mainCardContent}
-      aside={shown ? <>{data}</> : <></>}
-    />
+    <PageWrapper>
+      <TitleStyled>{t(title)}</TitleStyled>
+      <UsersTableController />
+    </PageWrapper>
   );
 }
