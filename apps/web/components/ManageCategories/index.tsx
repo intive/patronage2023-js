@@ -3,9 +3,20 @@ import { useAtom } from "jotai";
 import { useCategoryMap } from "lib/hooks/useCategoryMap";
 import { useState } from "react";
 import { budgetCategories } from "store/store";
-import { CategoryIcon, CategoryType, Icon, Input, Modal, Separator } from "ui";
+import {
+  CategoryIcon,
+  CategorySelector,
+  CategoryType,
+  DropdownMenu,
+  Icon,
+  IconPicker,
+  Input,
+  Modal,
+  Separator,
+} from "ui";
 import { CategoryRow, ContentWrapper } from "./ManageCategories.styled";
 import { Button } from "./ManageCategories.styled";
+import { icons } from "lib/icons";
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -36,9 +47,21 @@ const ManageCategories = ({ open, onClose }: Props) => {
         ))}
         <Separator />
         <CategoryRow>
-          <Button onClick={() => setUserCategories([...userCategories])}>
-            kolor
-          </Button>
+          <DropdownMenu
+            limit="300px"
+            icon="home"
+            items={[
+              ...icons.map((icon) => ({
+                id: icon,
+                ComponentToRender: (
+                  <Button>
+                    <Icon icon={icon} />
+                  </Button>
+                ),
+              })),
+            ]}
+            side={"top"}
+          />
           <input />
           <Button onClick={() => setUserCategories([...userCategories])}>
             <Icon icon="add" />
