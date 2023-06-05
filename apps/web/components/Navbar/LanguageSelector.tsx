@@ -1,30 +1,18 @@
 import { Language, languageAtom } from "store";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useTranslate } from "lib/hooks";
-import styled from "styled-components";
-
-import { Flag, Select } from "ui";
+import { Flag } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { SelectStyled } from "./LanguageSelector.styled";
 
-const SelectStyled = styled(Select)`
-  background-color: unset;
-  border: 0;
-  padding: 0;
-  line-height: 0;
-  margin-bottom: 0;
-  width: auto;
+type LanguageSelectorProps = {
+  variant: "flag" | "descriptive";
+};
 
-  &:focus,
-  &[data-state="open"] {
-    outline: revert;
-  }
-`;
-
-export const LanguageSelector = () => {
+export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
-  const setLanguage = useSetAtom(languageAtom);
-  const language = useAtomValue(languageAtom);
+  const [language, setLanguage] = useAtom(languageAtom);
   const { t, dict } = useTranslate("NavigationLayout");
 
   const changeLanguage = (lang: Language) => {
@@ -60,6 +48,7 @@ export const LanguageSelector = () => {
         label: (
           <>
             <Flag src={flagSrc} alt={alt} />
+            <span>Tekst</span>
             <SelectLabelHiddenInTrigger>
               {languageName}
             </SelectLabelHiddenInTrigger>
