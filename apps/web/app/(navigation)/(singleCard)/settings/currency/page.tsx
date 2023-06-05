@@ -30,7 +30,7 @@ const InputWrapper = styled.div`
   }
 `;
 
-const currencyItems = () => {
+const CurrencyItems = () => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
 
   return currency.map((currency) => ({
@@ -63,15 +63,21 @@ export default function SettingsPage() {
     setCurrency(selectedCurrency);
   };
 
+  const DivStyled = styled.div`
+    display: block;
+    width: 100%;
+    height: 100%;
+  `;
+
   return (
-    <>
+    <DivStyled>
       <H1Styled>
         <SettingsTitle />
       </H1Styled>
       <Separator />
       <InputWrapper>
         <Select
-          items={currencyItems()}
+          items={CurrencyItems()}
           onValueChange={changeCurrency}
           value={value}
           label={translation.label}
@@ -80,6 +86,6 @@ export default function SettingsPage() {
         />
       </InputWrapper>
       <Button variant="primary">{translation.button}</Button>
-    </>
+    </DivStyled>
   );
 }
