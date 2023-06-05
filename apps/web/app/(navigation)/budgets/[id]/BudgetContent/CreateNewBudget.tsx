@@ -40,6 +40,7 @@ import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { icons } from "lib/icons";
 
 type NewBudget = {
   onClose: Function;
@@ -58,18 +59,6 @@ type newBudgetType = {
 type createBudgetBEProps = {
   status: number;
 };
-
-export const icons: IconType[] = [
-  "savings",
-  "directions_car",
-  "payments",
-  "subscriptions",
-  "shopping_cart",
-  "home",
-  "wallet",
-  "error",
-  "help",
-];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [defaultValue, setDefaultValue] = useState("settings");
