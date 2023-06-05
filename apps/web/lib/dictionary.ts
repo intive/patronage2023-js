@@ -899,6 +899,30 @@ const dictionary = {
       pl: "Waluta",
       fr: "Monnaie",
     },
+    info: {
+      noBudgets: {
+        en: "no budgets",
+        pl: "brak budżetów",
+        fr: "",
+      },
+      noTransaction: {
+        en: "There are no transactions for the selected period",
+        pl: "Brak transakcji dla wybranego okresu",
+        fr: "",
+      }
+    },
+    labelsTooltip: {
+      incomes: {
+        en: "Incomes",
+        pl: "Wpływy",
+        fr: "Revenus",
+      },
+      expenses: {
+        en: "Expenses",
+        pl: "Wydatki",
+        fr: "Dépenses",
+      }
+    },
   },
   SettingsPage: {
     title: { en: "Settings page", pl: "Ustawienia", fr: "Paramètres" },

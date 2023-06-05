@@ -8,10 +8,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import { languageAtom } from "store";
 import { env } from "env.mjs";
-import MultiCardLayout from "../MultiCardLayout";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import MultiCardLayout from "../MultiCardLayout";
 import { TrendChip } from "ui";
 import ReportsChart from "./ReportsChart";
 import { ButtonGroup, Icon, CurrencySelect, ButtonGroupSimple, Spinner } from "ui";
@@ -40,13 +40,13 @@ const currencyMap = {
   },
   EURO: {
     tag: "EURO",
-    locale: "en-US",
+    locale: "de-DE",
   },
 };
 
 export default function ReportsPage() {
   const { t, dict } = useTranslate("ReportsPage");
-  const { title, aside, balance, currency } = dict;
+  const { title, aside, balance, currency, info } = dict;
   const [chart, setChart] = useState("line");
   const [timeRange, setTimeRange] = useState("12month");
   const [reportsCurrency, setReportsCurrency] = useState("USD");
@@ -156,8 +156,6 @@ export default function ReportsPage() {
     }
   }
 
-  console.log(statistics);
-
   const mainCardContent = (
     <>
       {isLoading && <Spinner />}
@@ -208,7 +206,7 @@ export default function ReportsPage() {
             </>
           ) : (
             <StyledReportsBalanceWrapper>
-              <StyledInfo>{reportsCurrency}: brak budżetów</StyledInfo>
+              <StyledInfo>{reportsCurrency}: {t(info.noBudgets)}</StyledInfo>
             </StyledReportsBalanceWrapper>
           )}
         </StyledWrapper>
@@ -246,18 +244,18 @@ export default function ReportsPage() {
             />
           </ChartButtonsWrapper>
         </ButtonWrapper>
-        {isData && <ReportsChart chart={chart} transactions={transactions} />}
+        {isData && <ReportsChart chart={chart} transactions={transactions} currency={reportsCurrency}/>}
       </PageWrapper>
 }
     </>
   );
-  const data = t(aside.title);
-  const shown = true;
+  const asideData = t(aside.title);
+  const shown = false;
   //conditionally render aside if needed e.g. pass user info to it etc.
   return (
     <MultiCardLayout
       main={mainCardContent}
-      aside={shown ? <>{data}</> : <></>}
+      aside={shown ? <>{asideData}</> : <></>}
     />
   );
 }

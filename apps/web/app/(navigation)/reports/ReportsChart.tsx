@@ -1,6 +1,7 @@
+import { useTranslate } from "lib/hooks";
+import { useRef } from "react";
 import {
   Chart as ChartJS,
-  LineController,
   LineElement,
   PointElement,
   CategoryScale,
@@ -9,79 +10,102 @@ import {
   BarController,
   BarElement,
   ChartOptions,
-  Tooltip
+  ChartTypeRegistry,
+  Tooltip,
+  TooltipItem,
+  TooltipModel,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
 
 ChartJS.register(
-  LineController,
   LineElement,
-  BarController,
-  BarElement,
   PointElement,
   CategoryScale,
   LinearScale,
   Filler,
+  BarController,
+  BarElement,
   Tooltip
 );
 
-type Transaction = {
+interface Transaction {
   incomes: number;
   expenses: number;
-};
+}
 
 interface Props {
-  chart: string,
-  transactions: Transaction[],
-};
+  chart: string;
+  transactions: Transaction[];
+  currency: string;
+}
 
 interface DashContext {
   tick: {
     value: number;
   };
-};
+}
 
-function ReportsChart({chart, transactions}: Props) {
+interface CombinedContext {
+  ctx: CanvasRenderingContext2D;
+  tooltip?: TooltipModel<keyof ChartTypeRegistry>;
+  chart?: ChartJS<keyof ChartTypeRegistry>;
+  chartArea: {
+    top: number;
+    bottom: number;
+  };
+}
+
+function ReportsChart({ chart, transactions, currency }: Props) {
+  const { t, dict } = useTranslate("ReportsPage");
+  const { info, labelsTooltip } = dict;
+  const chartRef = useRef(null);
 
   const gradient = {
-    startColor: 'rgba(0, 200, 0, 0.2)',
-    endColor: 'rgba(0, 0, 0, 0)',
+    startColor: "rgba(0, 200, 0, 0.2)",
+    endColor: "rgba(0, 0, 0, 0)",
   };
 
   const gradient2 = {
-    startColor: 'rgba(0, 0, 0, 0.2)',
-    endColor: 'rgba(0, 0, 0, 0)',
+    startColor: "rgba(0, 0, 0, 0.2)",
+    endColor: "rgba(0, 0, 0, 0)",
   };
 
   const createGradient = (gradient: Record<string, string>) => {
-    const ctx = document.createElement('canvas').getContext('2d');
+    const ctx = document.createElement("canvas").getContext("2d");
     const gradientFill = ctx!.createLinearGradient(0, 0, 0, 400);
     gradientFill.addColorStop(0, gradient.startColor);
     gradientFill.addColorStop(1, gradient.endColor);
     return gradientFill;
   };
-  const backgroundIncomes = chart === "line" ? createGradient(gradient) : "#49AD1F";
-  const backgroundExpences = chart === "line" ? createGradient(gradient2) : "#E1E1E1";
-  
+  const backgroundIncomes =
+    chart === "line" ? createGradient(gradient) : "#49AD1F";
+  const backgroundExpences =
+    chart === "line" ? createGradient(gradient2) : "#E1E1E1";
+
+  //DATA for the chart
   const labels = Object.keys(transactions);
-  const incomes = Object.values(transactions).map(transaction => transaction.incomes);
-  const expenses = Object.values(transactions).map(transaction => transaction.expenses);
+  const incomes = Object.values(transactions).map(
+    (transaction) => transaction.incomes
+  );
+  const expenses = Object.values(transactions).map(
+    (transaction) => transaction.expenses
+  );
 
   const data = {
     labels: labels,
     datasets: [
       {
-        label: 'Incomes',
+        label: t(labelsTooltip.incomes),
         data: incomes,
-        borderColor: 'rgba(0, 110, 0, 0.5)',
+        borderColor: "rgba(0, 110, 0, 0.5)",
         backgroundColor: backgroundIncomes,
         borderRadius: 5,
         fill: true,
       },
       {
-        label: 'Expenses',
+        label: t(labelsTooltip.expenses),
         data: expenses,
-        borderColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: "rgba(0, 0, 0, 0.5)",
         backgroundColor: backgroundExpences,
         borderRadius: 5,
         fill: true,
@@ -89,8 +113,73 @@ function ReportsChart({chart, transactions}: Props) {
     ],
   };
 
+  //CUSOTM LINE for tooltips in the line chart
+  const customLine = {
+    id: "lines",
+    beforeDatasetsDraw(chart: CombinedContext) {
+      const {
+        ctx,
+        tooltip,
+        chartArea: { top, bottom },
+      } = chart;
+
+      //can't find a way to type here properly, but works as expected and has to be "_active" not "active" as suggested by ts
+      if (tooltip && tooltip._active[0]) {
+        const activeTooltip = tooltip.dataPoints[0];
+
+        ctx.beginPath();
+        ctx.strokeStyle = "grey";
+        ctx.lineWidth = 1;
+        ctx.moveTo(activeTooltip.element.x, top);
+        ctx.lineTo(activeTooltip.element.x, bottom);
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
+  };
+
+  //options for line chart
   const lineOptions = {
     responsive: true,
+    maintainAspectRatio: false,
+    tension: 0.1,
+    pointRadius: 0,
+    pointHoverRadius: 7,
+    pointHitRadius: 10,
+    hoverBackgroundColor: "white",
+    pointHoverBorderWidth: 3,
+    plugins: {
+      tooltip: {
+        usePointStyle: true,
+        bodySpacing: 12,
+        callbacks: {
+          label: (context: TooltipItem<keyof ChartTypeRegistry>) => {
+            let label = context.dataset.label || "";
+
+            let value;
+            if (context.parsed.y !== null && label) {
+              // Add dollar sign to the value
+              switch (currency) {
+                case "USD":
+                  value = "$ " + context.parsed.y.toLocaleString();
+                  break;
+                case "PLN":
+                  value = context.parsed.y.toLocaleString() + " PLN";
+                  break;
+                case "EUR":
+                  value = "€ " + context.parsed.y.toLocaleString();
+                  break;
+              }
+
+              // Modify the label to include the value
+              label += ": " + value;
+            }
+
+            return label;
+          },
+        },
+      },
+    },
     scales: {
       x: {
         grid: {
@@ -99,24 +188,27 @@ function ReportsChart({chart, transactions}: Props) {
       },
       y: {
         border: {
-            dash: (context: DashContext) => {
-              if(context.tick.value === 0) {
-                return 0
-              }
-              return [5, 5]
-            },
-            display: false,
+          dash: (context: DashContext) => {
+            if (context.tick.value === 0) {
+              return 0;
+            }
+            return [5, 5];
+          },
+          display: false,
         },
         beginAtZero: true,
         ticks: {
           stepSize: (): number => {
-            const sum = data.datasets[0].data.reduce((acc, val) => acc + val, 0);
-            const average = sum / data.datasets[0].data.length
-            return average > 10000 ? 10000 : 1000
+            const sum = data.datasets[0].data.reduce(
+              (acc, val) => acc + val,
+              0
+            );
+            const average = sum / data.datasets[0].data.length;
+            return average > 10000 ? 10000 : 1000;
           },
           callback: (value: number) => {
             if (value >= 1000) {
-              return (value / 1000) + ' K';
+              return value / 1000 + " K";
             }
             return value;
           },
@@ -125,24 +217,113 @@ function ReportsChart({chart, transactions}: Props) {
     },
     interaction: {
       intersect: false,
-      mode: 'index',
-    }
+      mode: "index",
+    },
   };
 
+  //plugin for line chart
+  const linePlugins = [customLine];
+
+  //options for bar chart
   const barOptions = {
-    ...lineOptions,
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        border: {
+          dash: (context: DashContext) => {
+            if (context.tick.value === 0) {
+              return 0;
+            }
+            return [5, 5];
+          },
+          display: false,
+        },
+        beginAtZero: true,
+        ticks: {
+          stepSize: (): number => {
+            const sum = data.datasets[0].data.reduce(
+              (acc, val) => acc + val,
+              0
+            );
+            const average = sum / data.datasets[0].data.length;
+            return average > 10000 ? 10000 : 1000;
+          },
+          callback: (value: number) => {
+            if (value >= 1000) {
+              return value / 1000 + " K";
+            }
+            return value;
+          },
+        },
+      },
+    },
+    interaction: {
+      intersect: false,
+      mode: "index",
+    },
+    plugins: {
+      tooltip: {
+        usePointStyle: true,
+        callbacks: {
+          label: (context: TooltipItem<keyof ChartTypeRegistry>) => {
+            let label = context.dataset.label || "";
+
+            let value;
+            if (context.parsed.y !== null && label) {
+              // Add dollar sign to the value
+              switch (currency) {
+                case "USD":
+                  value = "$ " + context.parsed.y.toLocaleString();
+                  break;
+                case "PLN":
+                  value = context.parsed.y.toLocaleString() + " PLN";
+                  break;
+                case "EUR":
+                  value = "€ " + context.parsed.y.toLocaleString();
+                  break;
+              }
+
+              // Modify the label to include the value
+              label += ": " + value;
+            }
+
+            return label;
+          },
+        },
+      },
+    },
     barPercentage: 0.7,
     categoryPercentage: 0.7,
-  }
+  };
 
   return (
     <>
-      {(Object.keys(transactions).length === 0) ? (
-        <h3>Brak transakcji dla wybranego okresu</h3>
+      {Object.keys(transactions).length === 0 ? (
+        <h3>{t(info.noTransaction)}</h3>
       ) : (
         <>
-          {chart === "line" && <Line data={data} options={lineOptions as ChartOptions<"line">} />}
-          {chart === "bar" && <Bar data={data} options={barOptions as ChartOptions<"bar">} />}
+          {chart === "line" && (
+            <Line
+              ref={chartRef}
+              style={{ maxHeight: "50vh" }}
+              data={data}
+              options={lineOptions as ChartOptions<"line">}
+              plugins={linePlugins}
+            />
+          )}
+          {chart === "bar" && (
+            <Bar
+              style={{ maxHeight: "50vh" }}
+              data={data}
+              options={barOptions as ChartOptions<"bar">}
+            />
+          )}
         </>
       )}
     </>
