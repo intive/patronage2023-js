@@ -11,16 +11,10 @@ import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import MultiCardLayout from "../MultiCardLayout";
+import MultiCardLayoutTop from "../MultiCardLayoutTop";
 import { TrendChip } from "ui";
 import ReportsChart from "./ReportsChart";
-import {
-  ButtonGroup,
-  Icon,
-  CurrencySelect,
-  ButtonGroupSimple,
-  Spinner,
-} from "ui";
+import { ButtonGroup, Icon, Select, ButtonGroupSimple, Spinner } from "ui";
 
 import {
   PageWrapper,
@@ -33,7 +27,12 @@ import {
   StyledCurrencyAmount,
   ChartButtonsWrapper,
   StyledInfo,
+  SelectWrapper,
+  SpinnerWrapper,
 } from "./ReportsPage.styled";
+
+import { CurrencyTagStyled } from "./../budgets/[id]/BudgetContent/CreateNewBudget.styled";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 const currencyMap = {
   PLN: {
@@ -52,12 +51,13 @@ const currencyMap = {
 
 export default function ReportsPage() {
   const { t, dict } = useTranslate("ReportsPage");
-  const { title, aside, balance, currency, info } = dict;
+  const { title, aside, balance, info, currency, currencyNames } = dict;
   const [chart, setChart] = useState("line");
   const [timeRange, setTimeRange] = useState("12month");
   const [reportsCurrency, setReportsCurrency] = useState("USD");
   const { hasScrollbar } = useHasScrollBar();
   const [language] = useAtom(languageAtom);
+  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
 
   useEffect(() => {
     dayjs.locale(language);
@@ -98,7 +98,7 @@ export default function ReportsPage() {
   const fetch = useSuperfetch();
 
   const { data: statistics, isLoading } = useQuery({
-    queryKey: ["GET:budgets/statistics", start, end, reportsCurrency, language],
+    queryKey: ["budgetsStatistics", start, end, reportsCurrency, language],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/statistics?startDate=${start}&endDate=${end}&currency=${reportsCurrency}`
@@ -171,7 +171,11 @@ export default function ReportsPage() {
 
   const mainCardContent = (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && (
+        <SpinnerWrapper>
+          <Spinner />
+        </SpinnerWrapper>
+      )}
       {statistics && (
         <PageWrapper>
           <TopWrapper>
@@ -234,15 +238,31 @@ export default function ReportsPage() {
             )}
           </StyledWrapper>
           <ButtonWrapper>
-            <CurrencySelect
-              value={reportsCurrency}
-              label={t(currency)}
-              hasScrollbar={hasScrollbar}
-              onValueChange={(value) => {
-                setReportsCurrency(value);
-                setTimeRange("12month");
-              }}
-            />
+            <SelectWrapper>
+              <Select
+                items={currencies.map((currency) => ({
+                  label: (
+                    <>
+                      <CurrencyTagStyled>{currency}</CurrencyTagStyled>
+                      <SelectLabelHiddenInTrigger>
+                        {t(currencyNames[currency])}
+                      </SelectLabelHiddenInTrigger>
+                    </>
+                  ),
+                  value: currency,
+                }))}
+                onValueChange={(value) => {
+                  setReportsCurrency(value);
+                  setTimeRange("12month");
+                }}
+                hasIcon
+                id="currency"
+                label={t(currency)}
+                hasScrollbar={hasScrollbar}
+                value={reportsCurrency}
+              />
+            </SelectWrapper>
+
             <ChartButtonsWrapper>
               <ButtonGroup
                 options={[
@@ -283,7 +303,7 @@ export default function ReportsPage() {
   //conditionally render aside if needed e.g. pass additional info to it etc.
 
   return (
-    <MultiCardLayout
+    <MultiCardLayoutTop
       main={mainCardContent}
       aside={shown ? <>{asideData}</> : <></>}
     />

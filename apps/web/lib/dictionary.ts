@@ -913,6 +913,20 @@ const dictionary = {
         fr: "",
       },
     },
+    currencyNames: {
+      USD: {
+        en: "United States Dollar",
+        pl: "Dolar Amerykański",
+        fr: "Dollar des États-Unis",
+      },
+      PLN: { en: "Polish Zloty", pl: "Polski Złoty", fr: "Zloty polonais" },
+      GBP: {
+        en: "British Pound",
+        pl: "Funt Brytyjski",
+        fr: "Livre britannique",
+      },
+      EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
+    },
     balance: {
       en: "Total balance",
       pl: "Bilans",

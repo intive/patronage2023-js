@@ -4,8 +4,9 @@ import { device } from "lib/media-queries";
 
 export const PageWrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
-  align-self: flex-start;
+  justify-self: flex-start;
   flex-direction: column;
 `;
 
@@ -39,8 +40,6 @@ export const StyledWrapper = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  align-items: center;
-  width: 300px;
   gap: 1em;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -49,8 +48,13 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
+export const SelectWrapper = styled.div`
+  width: 200px;
+`;
+
 export const ChartButtonsWrapper = styled.div`
-  height: 54px;
+  max-height: 56px;
+  width: 200px;
 `;
 
 export const StyledReportsBalanceWrapper = styled.div`
@@ -75,4 +79,12 @@ export const StyledInfo = styled.h2`
   font-size: 24px;
   font-weight: 600;
   line-height: 48px;
+`;
+
+export const SpinnerWrapper = styled.div`
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 `;
