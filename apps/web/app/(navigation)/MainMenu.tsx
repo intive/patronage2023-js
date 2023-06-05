@@ -1,21 +1,25 @@
-import * as Select from "@radix-ui/react-select";
 import styled from "styled-components";
+import * as Select from "@radix-ui/react-select";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
-
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Avatar, Icon, PersonalCard } from "ui";
 import { useTranslate } from "lib/hooks";
-import {
-  SelectContentStyled,
-  SelectItemStyled,
-  SelectTriggerStyled,
-} from "components/Navbar/LanguageSelectorStyled";
+import { Avatar, Icon } from "ui";
+import { SelectContentStyled, SelectItemStyled } from "ui/Select/Select.styles";
 
 export const AvatarStyled = styled(Avatar)`
   height: 2.1em;
   width: 2.1em;
+`;
+
+const SelectTriggerStyled = styled(Select.Trigger)`
+  color: ${({ theme }) => theme.avatar.outline};
+  background-color: unset;
+  border: 0;
+  padding: 0;
+  line-height: 0;
 `;
 
 const IconUpStyled = styled(Icon)`
