@@ -81,7 +81,7 @@ export default function SettingsPage() {
           onValueChange={changeCurrency}
           value={value}
           label={translation.label}
-          id="currencSelector"
+          id="currenc-selector"
           hasIcon
         />
       </InputWrapper>
