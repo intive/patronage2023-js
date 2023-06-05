@@ -689,7 +689,7 @@ const dictionary = {
     header: {
       en: "Share budget",
       pl: "Udostępnij budżet",
-      fr: "",
+      fr: "Partager le budget",
     },
     noUsersFound: {
       en: "No members found.",
