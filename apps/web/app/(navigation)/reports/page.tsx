@@ -84,11 +84,13 @@ const getDateRange = (timeRange: string) => {
 };
 
 export default function ReportsPage() {
+  const [defaultCurrency] = useAtom(currencyAtom);
+
   const { t, dict } = useTranslate("ReportsPage");
   const { title, aside, balance, info, currency, currencyNames } = dict;
   const [chart, setChart] = useState("line");
   const [timeRange, setTimeRange] = useState("12month");
-  const [reportsCurrency, setReportsCurrency] = useAtom(currencyAtom);
+  const [reportsCurrency, setReportsCurrency] = useState(defaultCurrency);
   const { hasScrollbar } = useHasScrollBar();
   const [language] = useAtom(languageAtom);
   const currencies: Array<CurrencyType> = ["PLN", "USD", "EUR"];
