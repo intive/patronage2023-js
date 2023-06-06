@@ -8,6 +8,7 @@ interface WrapperProps {
 
 export const ButtonGroupStyled = styled(ButtonGroup)`
   max-height: 42px;
+  margin-block: 10px;
 `;
 
 export const FormWrapper = styled.div<WrapperProps>`

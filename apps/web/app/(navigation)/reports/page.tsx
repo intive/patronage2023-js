@@ -221,8 +221,10 @@ export default function ReportsPage() {
                     }
                     hidePlus
                   />
-                  {statistics.trendValue != null && (
+                  {statistics.trendValue != null ? (
                     <TrendChip value={statistics.trendValue} />
+                  ) : (
+                    <TrendChip value={0} />
                   )}
                 </StyledReportsBalanceWrapper>
               </>
