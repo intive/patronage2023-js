@@ -6,7 +6,7 @@ const f = createUploadthing();
 // FileRouter for your app, can contain multiple FileRoutes
 export const imageRouter = {
   imageUploader: f({
-    image: { maxFileSize: "4MB", maxFileCount: 1 },
+    image: { maxFileSize: "128KB", maxFileCount: 1 },
   }).onUploadComplete(async ({ file }) => {
     console.log("file url", file.url);
   }),
