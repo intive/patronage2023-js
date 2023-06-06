@@ -212,7 +212,9 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
               (acc, val) => acc + val,
               0
             );
-            const average = sum / data.datasets[0].data.length;
+            const dataLength = data.datasets[0].data.length;
+            
+            const average = dataLength !== 0 ? sum / dataLength : 0;
             return average > 10000 ? 10000 : average > 1000 ? 1000 : 100;
           },
           //set custom format 1000 => 1K, 10000 => 10K etc
