@@ -86,7 +86,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   const backgroundIncomes =
     chart === "line" ? createGradient(gradientGreen) : theme.reports.incomesBar;
   const backgroundExpences =
-    chart === "line" ? createGradient(gradientGrey) : theme.reports.expensesBar;
+    chart === "line" ? createGradient(gradientGrey) : "lightgrey";
 
   //DATA for the chart
   const labels = Object.keys(transactions);

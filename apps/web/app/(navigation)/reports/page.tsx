@@ -29,6 +29,7 @@ import {
   StyledInfo,
   SelectWrapper,
   SpinnerWrapper,
+  ButtonGroupWrapper,
 } from "./ReportsPage.styled";
 
 import { CurrencyTagStyled } from "./../budgets/[id]/BudgetContent/CreateNewBudget.styled";
@@ -180,37 +181,39 @@ export default function ReportsPage() {
         <PageWrapper>
           <TopWrapper>
             <TitleStyled>{t(title)}</TitleStyled>
-            <ButtonGroupSimple
-              options={[
-                {
-                  component: "7d",
-                  id: "7days",
-                  checked: timeRange === "7days",
-                },
-                {
-                  component: "30d",
-                  id: "30days",
-                  checked: timeRange === "30days",
-                },
-                {
-                  component: "3m",
-                  id: "3month",
-                  checked: timeRange === "3month",
-                },
-                {
-                  component: "6m",
-                  id: "6month",
-                  checked: timeRange === "6month",
-                },
-                {
-                  component: "12m",
-                  id: "12month",
-                  checked: timeRange === "12month",
-                },
-              ]}
-              selectedOption={timeRange}
-              onOptionSelect={setTimeRange}
-            />
+            <ButtonGroupWrapper>
+              <ButtonGroupSimple
+                options={[
+                  {
+                    component: "7d",
+                    id: "7days",
+                    checked: timeRange === "7days",
+                  },
+                  {
+                    component: "30d",
+                    id: "30days",
+                    checked: timeRange === "30days",
+                  },
+                  {
+                    component: "3m",
+                    id: "3month",
+                    checked: timeRange === "3month",
+                  },
+                  {
+                    component: "6m",
+                    id: "6month",
+                    checked: timeRange === "6month",
+                  },
+                  {
+                    component: "12m",
+                    id: "12month",
+                    checked: timeRange === "12month",
+                  },
+                ]}
+                selectedOption={timeRange}
+                onOptionSelect={setTimeRange}
+              />
+            </ButtonGroupWrapper>
           </TopWrapper>
           <StyledWrapper>
             {isData ? (
@@ -218,7 +221,7 @@ export default function ReportsPage() {
                 <StyledTitle>{t(balance)}</StyledTitle>
                 <StyledReportsBalanceWrapper>
                   <StyledCurrencyAmount
-                    amount={statistics.totalBalance}
+                    amount={statistics.periodValue}
                     currencyOptions={
                       currencyMap[reportsCurrency as keyof typeof currencyMap]
                     }

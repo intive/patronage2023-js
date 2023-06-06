@@ -53,8 +53,8 @@ export const SelectWrapper = styled.div`
 `;
 
 export const ChartButtonsWrapper = styled.div`
-  max-height: 56px;
-  width: 200px;
+  max-height: 45px;
+  width: 120px;
 `;
 
 export const StyledReportsBalanceWrapper = styled.div`
@@ -87,4 +87,8 @@ export const SpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+`;
+
+export const ButtonGroupWrapper = styled.div`
+  height: 36px;
 `;
