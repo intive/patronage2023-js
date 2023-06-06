@@ -27,6 +27,8 @@ import {
   Separator,
   Button as ImportExportButton,
 } from "ui";
+import { ExportResponseProps } from "lib/types";
+import useSuperfetch from "lib/hooks/useSuperfetch";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -66,6 +68,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   ] = useState(false);
   const [transactionType, setTransactionType] = useState("");
   const [importModalOpen, setImportModalOpen] = useState(false);
+  const superFetch = useSuperfetch();
 
   const { data: session } = useSession();
 
@@ -89,21 +92,19 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   });
 
   //temporary it will export budgets untill endpoint for transactions won't be ready
-  const { data: csvUri } = useQuery({
-    queryKey: ["transactionsCsvUri"],
-    queryFn: async () => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`, {
-        headers: {
-          Authorization: `Bearer ${session?.user.accessToken}`,
-        },
-      }).then((res) => res.text());
+  const { data: exportData } = useQuery({
+    queryKey: ["exportedCsvUri"],
+    queryFn: async (): Promise<ExportResponseProps> => {
+      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`).catch(
+        (err) => console.error(err)
+      );
     },
     enabled: !!session,
   });
 
   //href that will come from query export transactions
   const exportLink = (
-    <LinkStyled href={csvUri} download title="csv">
+    <LinkStyled href={exportData?.uri} download title="csv">
       <Icon icon="file_download" size={12} />
       <span>{tExport(dictExport.exportButtonText)}</span>
     </LinkStyled>
@@ -196,9 +197,10 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
           noDataSavedToastMsg={tImport(dictImport.noTransactionSaved)}
           instructionScreen={() =>
             ImportCSVInstructionScreen({
-              exampleHeader: "Name,Value,TransactionType,CategoryType,Date",
+              exampleHeader:
+                "Name,Value,TransactionType,CategoryType,Date,Status",
               exampleFirstLine:
-                "Spotify premium,-5.0000,Expense,Subscriptions,2023-06-12 19:28:26",
+                "Transaction name,-5.0000,Expense,Subscriptions,2023-06-12 19:28:26,Active",
             })
           }
         />

@@ -1150,6 +1150,11 @@ const dictionary = {
       pl: "CSV wyeksportowany pomyślnie",
       fr: "CSV exporté avec succès",
     },
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Ściągnij plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
   },
   ImportModal: {
     downloadButtonText: {
