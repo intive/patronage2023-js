@@ -7,3 +7,4 @@ export const categoryFilterAtom = atom<string[]>([]);
 export const languageAtom = atom<Language>("en");
 export const mobileMenuAtom = atom<boolean>(false);
 export const budgetCategories = atom<CategoryType[]>([]);
+export const currencyAtom = atom<string>("USD");

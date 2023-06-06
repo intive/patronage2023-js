@@ -41,18 +41,18 @@ const AvatarsWrapper = styled.div`
   width: 348px;
   margin-left: -1em;
   margin-right: -1em;
-  margin-bottom: 2em;
+  margin-bottom: 0.5em;
 
   ${device.desktop} {
     width: 100%;
     max-width: 480px;
     min-width: 310px;
     margin: 0;
-    margin-bottom: 2em;
+    margin-bottom: 0.5em;
   }
 `;
 
-const AvatarGridStyled = styled.div`
+export const AvatarGridStyled = styled.div`
   overflow-x: auto;
   display: flex;
   justify-content: center;

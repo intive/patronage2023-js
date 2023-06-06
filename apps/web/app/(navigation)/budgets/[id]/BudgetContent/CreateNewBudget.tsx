@@ -4,11 +4,6 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import * as Tabs from "@radix-ui/react-tabs";
-import { Form, Field } from "houseform";
-import { useTranslate } from "lib/hooks";
-import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
-import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 
 import {
   Button,
@@ -41,9 +36,15 @@ import {
   InputWrapperHalfStyledCurrency,
   CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
-
-import { icons } from "lib/icons";
+import { Form, Field } from "houseform";
+import { useTranslate } from "lib/hooks";
+import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
+import * as Tabs from "@radix-ui/react-tabs";
+import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { useAtomValue } from "jotai";
+import { currencyAtom } from "store";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { currency } from "lib/currency";
 
 type NewBudget = {
   onClose: Function;
@@ -72,8 +73,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
 
-  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
-
   const {
     checkNameOnChange,
     checkNameOnSubmit,
@@ -83,6 +82,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
+  const defaultCurrency = useAtomValue(currencyAtom);
+
   const [newBudget, setNewBudget] = useState<newBudgetType>({
     name: "",
     limit: "",
@@ -90,7 +91,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     icon: selectedIcon,
     dateStart: "",
     dateEnd: "",
-    currency: "USD",
+    currency: defaultCurrency,
   });
 
   const onSelectStartDate = (date: Date | null) => {
@@ -276,7 +277,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
                         <Select
-                          items={currencies.map((currency) => ({
+                          items={currency.map((currency) => ({
                             label: (
                               <>
                                 <CurrencyTagStyled>
