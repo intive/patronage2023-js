@@ -170,8 +170,8 @@ export default function ReportsPage() {
 
           return acc;
         }, {});
-    };
-  };
+    }
+  }
 
   const mainCardContent = (
     <>
