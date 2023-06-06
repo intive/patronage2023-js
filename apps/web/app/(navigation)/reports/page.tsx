@@ -43,6 +43,7 @@ import { CurrencyTagStyled } from "./../budgets/[id]/BudgetContent/CreateNewBudg
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 type CurrencyType = "PLN" | "USD" | "EUR";
+type ChartType = "line" | "bar";
 
 const currencyMap = {
   PLN: {
@@ -97,7 +98,7 @@ export default function ReportsPage() {
   const { t, dict } = useTranslate("ReportsPage");
   const { title, aside, balance, info, currency, currencyNames, shortcuts } =
     dict;
-  const [chart, setChart] = useState("line");
+  const [chart, setChart] = useState<ChartType>("line");
   const [timeRange, setTimeRange] = useState("12month");
   const [reportsCurrency, setReportsCurrency] = useState(defaultCurrency);
   const { hasScrollbar } = useHasScrollBar();
