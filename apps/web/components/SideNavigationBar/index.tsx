@@ -108,7 +108,7 @@ export default function SideNav() {
   };
 
   const mapToBudgetsComponents = (budgets: BudgetType[]) => {
-    return budgets.map(({ icon, name, id, isFavourite }) => ({
+    return budgets.map(({ icon, name, id, isFavourite }, index, list) => ({
       ComponentToRender: (
         <>
           <IconStyled icon={validate(icon) ? icon : "help"} iconSize={24} />
@@ -122,22 +122,36 @@ export default function SideNav() {
       ),
       href: `/budgets/${id.value}`,
       id: id.value,
-      ref: lastBudgetRef,
+      ref: index === list.length - 1 ? lastBudgetRef : null,
     }));
   };
 
-  const removeDuplicates = (fetchedBudgets: BudgetType[]) => {
-    return fetchedBudgets.filter(
-      (budget, idx) =>
-        fetchedBudgets
-          .map((object) => object.id.value)
-          .indexOf(budget.id.value) === idx
-    );
+  interface UniqueObject {
+    [key: string]: boolean;
+  }
+  const createKey = (obj: BudgetType) => {
+    return obj.id.value;
+  };
+
+  const removeDuplicates = (fetchedBudgets: BudgetType[], fn: Function) => {
+    const unique: UniqueObject = {};
+    const distinct: BudgetType[] = [];
+
+    fetchedBudgets.forEach((fetchedBudget: BudgetType) => {
+      const key = fn(fetchedBudget);
+
+      if (!unique[key]) {
+        distinct.push(fetchedBudget);
+        unique[key] = true;
+      }
+    });
+
+    return distinct;
   };
 
   const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
 
-  const uniqueValues = removeDuplicates(flatData);
+  const uniqueValues = removeDuplicates(flatData, createKey);
 
   const successData = mapToBudgetsComponents(uniqueValues);
 
@@ -225,6 +239,13 @@ export default function SideNav() {
       ),
       href: "/settings/change-language",
       id: 3,
+    },
+    {
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.currency)}</span>
+      ),
+      href: "/settings/currency",
+      id: 4,
     },
   ];
 
