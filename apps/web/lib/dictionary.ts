@@ -932,6 +932,16 @@ const dictionary = {
       },
       EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
     },
+    currencyPlShorts: {
+      en: "PLN",
+      pl: "zł",
+      fr: "PLN",
+    },
+    thousandShorts: {
+      en: "K",
+      pl: "tys",
+      fr: "k",
+    },
     balance: {
       en: "Total balance",
       pl: "Bilans",

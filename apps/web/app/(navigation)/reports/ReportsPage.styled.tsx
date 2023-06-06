@@ -1,3 +1,4 @@
+import { Line, Bar } from "react-chartjs-2";
 import styled from "styled-components";
 import { CurrencyAmount } from "ui";
 import { device } from "lib/media-queries";
@@ -91,4 +92,12 @@ export const SpinnerWrapper = styled.div`
 
 export const ButtonGroupWrapper = styled.div`
   height: 36px;
+`;
+
+export const StyledLine = styled(Line)`
+  max-height: 50vh;
+`;
+
+export const StyledBar = styled(Bar)`
+  max-height: 50vh;
 `;

@@ -6,15 +6,22 @@ import "dayjs/locale/fr";
 import "dayjs/locale/pl";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
+import { useSession } from "next-auth/react";
 import { languageAtom, currencyAtom } from "store";
 import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import MultiCardLayoutTop from "../MultiCardLayoutTop";
-import { TrendChip } from "ui";
 import ReportsChart from "./ReportsChart";
-import { ButtonGroup, Icon, Select, ButtonGroupSimple, Spinner } from "ui";
+import {
+  ButtonGroup,
+  Icon,
+  Select,
+  ButtonGroupSimple,
+  Spinner,
+  TrendChip,
+} from "ui";
 
 import {
   PageWrapper,
@@ -85,6 +92,7 @@ const getDateRange = (timeRange: string) => {
 
 export default function ReportsPage() {
   const [defaultCurrency] = useAtom(currencyAtom);
+  const { data: session } = useSession();
 
   const { t, dict } = useTranslate("ReportsPage");
   const { title, aside, balance, info, currency, currencyNames, shortcuts } =
@@ -110,6 +118,7 @@ export default function ReportsPage() {
         `${env.NEXT_PUBLIC_API_URL}budgets/statistics?startDate=${start}&endDate=${end}&currency=${reportsCurrency}`
       ).catch((err) => console.error(err));
     },
+    enabled: !!session,
   });
 
   let isData, transactions;
@@ -118,60 +127,40 @@ export default function ReportsPage() {
   if (statistics && statistics.incomes != null && statistics.expenses != null) {
     isData = statistics.incomes || statistics.expenses;
 
-    if (
+    const groupByMonth =
       timeRange === "12month" ||
       timeRange === "6month" ||
-      timeRange === "3month"
-    ) {
-      transactions = [...statistics.incomes, ...statistics.expenses].reduce(
-        (acc, transaction) => {
-          const date = dayjs(transaction.datePoint);
-          const yearMonth = date.format("MMM | YY");
-          const { value } = transaction;
+      timeRange === "3month";
+    const dateFormat = groupByMonth ? "MMM | YY" : "DD-MM";
 
-          if (!acc[yearMonth]) {
-            // If the month is not yet in the accumulator, initialize it with zero income and expense
-            acc[yearMonth] = { incomes: 0, expenses: 0 };
-          }
+    transactions = [...statistics.incomes, ...statistics.expenses];
 
-          if (statistics.incomes.includes(transaction)) {
-            // If it's an income transaction, add the value to the incomes total
-            acc[yearMonth].incomes += value;
-          } else {
-            // If it's an expense transaction, add the value to the expenses total
-            acc[yearMonth].expenses += value;
-          }
-
-          return acc;
-        },
-        {}
+    if (!groupByMonth) {
+      transactions = transactions.sort(
+        (a, b) => dayjs(a.datePoint).valueOf() - dayjs(b.datePoint).valueOf()
       );
-    } else if (timeRange === "30days" || timeRange === "7days") {
-      transactions = [...statistics.incomes, ...statistics.expenses]
-        .sort(
-          (a, b) => dayjs(a.datePoint).valueOf() - dayjs(b.datePoint).valueOf()
-        )
-        .reduce((acc, transaction) => {
-          const date = dayjs(transaction.datePoint);
-          const day = date.format("DD-MM");
-          const { value } = transaction;
-
-          // If the day is not yet in the accumulator, initialize it with zero income and expense
-          if (!acc[day]) {
-            acc[day] = { expenses: 0, incomes: 0 };
-          }
-
-          if (statistics.incomes.includes(transaction)) {
-            // If it's an income transaction, add the value to the incomes total
-            acc[day].incomes += value;
-          } else {
-            // If it's an expense transaction, add the value to the expenses total
-            acc[day].expenses += value;
-          }
-
-          return acc;
-        }, {});
     }
+
+    transactions = transactions.reduce((acc, transaction) => {
+      const date = dayjs(transaction.datePoint);
+      const grouping = date.format(dateFormat);
+      const { value } = transaction;
+
+      if (!acc[grouping]) {
+        // If the month is not yet in the accumulator, initialize it with zero income and expense
+        acc[grouping] = { incomes: 0, expenses: 0 };
+      }
+
+      if (statistics.incomes.includes(transaction)) {
+        // If it's an income transaction, add the value to the incomes total
+        acc[grouping].incomes += value;
+      } else {
+        // If it's an expense transaction, add the value to the expenses total
+        acc[grouping].expenses += value;
+      }
+
+      return acc;
+    }, {});
   }
 
   const mainCardContent = (
@@ -232,7 +221,7 @@ export default function ReportsPage() {
                     hidePlus
                   />
                   {statistics.trendValue != null && (
-                    <TrendChip value={Math.round(statistics.trendValue)} />
+                    <TrendChip value={statistics.trendValue} />
                   )}
                 </StyledReportsBalanceWrapper>
               </>
@@ -261,13 +250,13 @@ export default function ReportsPage() {
                 }))}
                 onValueChange={(value) => {
                   setReportsCurrency(value);
-                  setTimeRange("12month");
                 }}
                 hasIcon
                 id="currency"
                 label={t(currency)}
                 hasScrollbar={hasScrollbar}
                 value={reportsCurrency}
+                sideOffset={2}
               />
             </SelectWrapper>
             <ChartButtonsWrapper>

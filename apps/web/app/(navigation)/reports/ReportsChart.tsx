@@ -15,7 +15,7 @@ import {
   TooltipItem,
   TooltipModel,
 } from "chart.js";
-import { Line, Bar } from "react-chartjs-2";
+import { StyledLine, StyledBar } from "./ReportsPage.styled";
 import { useTranslate } from "lib/hooks";
 
 ChartJS.register(
@@ -59,7 +59,7 @@ interface DashContext {
 
 function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   const { t, dict } = useTranslate("ReportsPage");
-  const { info, labelsTooltip } = dict;
+  const { info, labelsTooltip, currencyPlShorts, thousandShorts } = dict;
   const chartRef = useRef(null);
   const theme = useContext(ThemeContext);
 
@@ -85,8 +85,8 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   //define background colors depending on chart
   const backgroundIncomes =
     chart === "line" ? createGradient(gradientGreen) : theme.reports.incomesBar;
-  const backgroundExpences =
-    chart === "line" ? createGradient(gradientGrey) : theme.reports.expencesBar;
+  const backgroundExpenses =
+    chart === "line" ? createGradient(gradientGrey) : theme.reports.expensesBar;
 
   //DATA for the chart
   const labels = Object.keys(transactions);
@@ -111,8 +111,8 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
       {
         label: t(labelsTooltip.expenses),
         data: expenses,
-        borderColor: theme.reports.expencesLine,
-        backgroundColor: backgroundExpences,
+        borderColor: theme.reports.expensesLine,
+        backgroundColor: backgroundExpenses,
         borderRadius: 5,
         fill: true,
       },
@@ -136,7 +136,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
         const activeTooltip = tooltip.dataPoints[0];
 
         ctx.beginPath();
-        ctx.strokeStyle = theme.reports.expencesLine;
+        ctx.strokeStyle = theme.reports.expensesLine;
         ctx.lineWidth = 1;
         ctx.moveTo(activeTooltip.element.x, top);
         ctx.lineTo(activeTooltip.element.x, bottom);
@@ -169,10 +169,13 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
                   value = "$ " + context.parsed.y.toLocaleString();
                   break;
                 case "PLN":
-                  value = context.parsed.y.toLocaleString() + " PLN";
+                  value =
+                    context.parsed.y.toLocaleString() +
+                    " " +
+                    t(currencyPlShorts);
                   break;
                 case "EUR":
-                  value = "€ " + context.parsed.y.toLocaleString();
+                  value = context.parsed.y.toLocaleString() + " €";
                   break;
               }
 
@@ -210,12 +213,12 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
               0
             );
             const average = sum / data.datasets[0].data.length;
-            return average > 10000 ? 10000 : 1000;
+            return average > 10000 ? 10000 : average > 1000 ? 1000 : 100;
           },
           //set custom format 1000 => 1K, 10000 => 10K etc
           callback: (value: number) => {
             if (value >= 1000) {
-              return value / 1000 + " K";
+              return value / 1000 + " " + t(thousandShorts);
             }
             return value;
           },
@@ -253,7 +256,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
       ) : (
         <>
           {chart === "line" && (
-            <Line
+            <StyledLine
               ref={chartRef}
               style={{ maxHeight: "50vh" }}
               data={data}
@@ -262,7 +265,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
             />
           )}
           {chart === "bar" && (
-            <Bar
+            <StyledBar
               style={{ maxHeight: "50vh" }}
               data={data}
               options={barOptions as ChartOptions<"bar">}

@@ -370,8 +370,8 @@ export const theme = {
   reports: {
     incomesBar: colors.Supporting7,
     incomesLine: colors.Supporting14,
-    expencesBar: colors.Neutral2,
-    expencesLine: colors.Neutral6,
+    expensesBar: colors.Neutral2,
+    expensesLine: colors.Neutral6,
     lineChartPointsFill: colors.Neutral1,
     buttonGroupSimpleLabel: colors.Neutral6,
   },
