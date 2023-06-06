@@ -1,6 +1,5 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 import * as Popover from "@radix-ui/react-popover";
-import { useMediaQuery } from "react-responsive";
 import {
   HoverCardContent,
   HoverCardArrow,
@@ -10,6 +9,8 @@ import {
   UserName,
   UserEmail,
   AvatarStyled,
+  WrapperHover,
+  WrapperPopover,
 } from "./PersonalCard.styles";
 
 interface PersonalCardProps {
@@ -18,10 +19,9 @@ interface PersonalCardProps {
 }
 
 export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
-  const isTablet = useMediaQuery({ query: "(min-width: 768px)" });
   return (
     <>
-      {isTablet ? (
+      <WrapperHover>
         <HoverCard.Root>
           <HoverCard.Trigger asChild>{triggerComponent}</HoverCard.Trigger>
           <HoverCard.Portal>
@@ -42,7 +42,9 @@ export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
             </HoverCardContent>
           </HoverCard.Portal>
         </HoverCard.Root>
-      ) : (
+      </WrapperHover>
+
+      <WrapperPopover>
         <Popover.Root>
           <Popover.Trigger asChild>{triggerComponent}</Popover.Trigger>
           <Popover.Portal>
@@ -62,7 +64,7 @@ export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
             </PopoverContent>
           </Popover.Portal>
         </Popover.Root>
-      )}
+      </WrapperPopover>
     </>
   );
 };

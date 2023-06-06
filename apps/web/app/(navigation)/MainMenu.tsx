@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { Avatar, Icon, PersonalCard } from "ui";
 import { useTranslate } from "lib/hooks";
-import { Avatar, Icon } from "ui";
 import { SelectContentStyled, SelectItemStyled } from "ui/Select/Select.styles";
 
 export const AvatarStyled = styled(Avatar)`
