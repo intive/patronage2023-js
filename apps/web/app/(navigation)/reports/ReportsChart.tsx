@@ -260,7 +260,6 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
           {chart === "line" && (
             <StyledLine
               ref={chartRef}
-              style={{ maxHeight: "50vh" }}
               data={data}
               options={lineOptions as ChartOptions<"line">}
               plugins={linePlugins}
@@ -268,7 +267,6 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
           )}
           {chart === "bar" && (
             <StyledBar
-              style={{ maxHeight: "50vh" }}
               data={data}
               options={barOptions as ChartOptions<"bar">}
             />
