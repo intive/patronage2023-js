@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Button } from "ui";
 
 interface ColorProps {
   color?: string;
@@ -9,45 +10,27 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   gap: 6px;
   width: 100%;
-  height: 100%;
+  position: relative;
 `;
 
 export const CategoryRow = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
   gap: 8px;
 `;
 
 export const StyledButton = styled.button<ColorProps>`
   cursor: pointer;
   border: none;
-  height: 2.5em;
-  width: 2.5em;
+  width: 4em;
+  height: 4em;
   border-radius: 8px;
   flex-shrink: 0;
   line-height: 0;
-  background-color: ${({ theme, color }) =>
-    color ? color : theme.dropdownMenu.border};
+  background-color: ${({ color }) => color && color};
   /* make icons more visible */
   ${({ color }) =>
     color && `filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));`}
-`;
-
-export const Input = styled.input`
-  padding: 8px;
-  width: 200px;
-  border-radius: 4px;
-  border: none;
-  outline: 2px solid ${({ theme }) => theme.dropdownMenu.border};
-`;
-
-export const Submit = styled(StyledButton)`
-  width: fit-content;
-  background: ${({ theme }) => theme.main};
-  color: white;
-  padding: 8px;
-  margin-block: 10px;
 `;
 
 export const CategoriesWrapper = styled.div`
@@ -66,4 +49,20 @@ export const CategoriesWrapper = styled.div`
     background-color: ${({ theme }) => theme.modal.closeButton};
     border-radius: 10px;
   }
+`;
+
+export const ErrorMessageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+`;
+
+export const StyledDiv = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const Submit = styled(Button)`
+  margin-block: 16px;
 `;

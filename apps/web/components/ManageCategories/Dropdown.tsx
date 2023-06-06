@@ -1,7 +1,6 @@
 "use client";
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Icon, IconType } from "ui";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ReactElement } from "react";
 
 interface Item {
@@ -17,6 +16,8 @@ type DropdownMenuProps = {
 const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
   border: none;
   cursor: pointer;
+  width: 4em;
+  height: 4em;
   border-radius: 8px;
   &:focus {
     outline: 2px solid ${({ theme }) => theme.dropdownMenu.outlineFocus};
