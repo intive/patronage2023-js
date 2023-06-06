@@ -34,3 +34,4 @@ yarn-error.log*
 .vscode
 .idea
 /.env
+apps/web/.env.local

@@ -13,7 +13,7 @@ interface Step {
     onNext?: ((value: string) => void) | ((value: UserInfo) => void);
     onBack?: () => void;
     onGoToBeginning?: () => void;
-    done?: (profileInfo: UserInfo) => void | (() => void);
+    done?: (profileInfo: UserInfo) => Promise<void> | (() => void);
     success?: boolean;
     onBackToStart?: () => void;
     loginHref?: string;
