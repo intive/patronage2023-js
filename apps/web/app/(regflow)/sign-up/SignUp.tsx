@@ -9,6 +9,7 @@ import { useState } from "react";
 import { env } from "env.mjs";
 import { useMutation } from "@tanstack/react-query";
 import useSuperfetch from "lib/hooks/useSuperfetch";
+import { useUploadThing } from "lib/hooks/useUploadthing";
 
 interface userObject {
   email: string;
@@ -54,6 +55,11 @@ export const SignUp = () => {
     },
   });
 
+  const { startUpload } = useUploadThing({
+    endpoint: "imageUploader",
+    onUploadError: (err) => console.error(err),
+  });
+
   const goBack = () => setCurrentStep(currentStep - 1);
 
   const goToBeginning = () => {
@@ -74,11 +80,24 @@ export const SignUp = () => {
     setCurrentStep(currentStep + 1);
   };
 
-  const validateProfile = (profileInfo: userObject["profile"]) => {
-    //set profile info to user
+  const validateProfile = async (
+    profileInfo: userObject["profile"],
+    blob?: File
+  ) => {
     const newUser = { ...user, profile: profileInfo };
-    setUser(newUser);
-    signUpMutation.mutate(newUser);
+
+    if (blob) {
+      //function takes File[]
+      await startUpload([blob]).then((res) => {
+        if (res)
+          //we only accept one file so we know it's [0]
+          newUser.profile.avatar = res[0].fileUrl;
+      });
+      //set profile info to user
+      setUser(newUser);
+      //run mutation
+      signUpMutation.mutate(newUser);
+    }
   };
 
   return (

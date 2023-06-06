@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Form, Field } from "houseform";
+import { useAtomValue } from "jotai";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import {
@@ -13,6 +15,7 @@ import {
   ErrorMessage,
 } from "ui";
 import { IconType } from "ui/Icon";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 import {
   FormWrapperStyled,
   ErrorMessageWrapper,
@@ -33,12 +36,12 @@ import {
   InputWrapperHalfStyledCurrency,
   CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
-import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import useSuperfetch from "lib/hooks/useSuperfetch";
-import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { currency } from "lib/currency";
+import { currencyAtom } from "store";
 
 type NewBudget = {
   onClose: Function;
@@ -76,8 +79,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
 
   const { t, dict } = useTranslate("AddNewBudgetModal");
   const { hasScrollbar } = useHasScrollBar();
-
-  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
+  const deafultCurrency = useAtomValue(currencyAtom);
 
   const {
     checkNameOnChange,
@@ -231,12 +233,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 <InputWrapperHalfStyledCurrency>
                   <Field
                     name="currency"
-                    initialValue={"USD"}
+                    initialValue={deafultCurrency}
                     onSubmitValidate={checkCurrency}
                     onChangeValidate={checkCurrency}>
                     {({ value, setValue, errors }) => (
                       <Select
-                        items={currencies.map((currency) => ({
+                        items={currency.map((currency) => ({
                           label: (
                             <>
                               <CurrencyTagStyled>{currency}</CurrencyTagStyled>
@@ -273,18 +275,12 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           name="description"
                           placeholder={""}
                           label={t(dict.inputNames.description)}
-                          value={value}
-                          hasError={errors.length > 0}
-                          onChange={(e) => {
-                            setValue(e.currentTarget.value);
-                          }}
                         />
                         <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
                       </TextAreaWrapperStyled>
                     );
                   }}
                 </Field>
-
                 <ParagraphStyled>
                   {t(dict.paragraphs.budgetPeriod)}
                 </ParagraphStyled>
