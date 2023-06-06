@@ -85,17 +85,17 @@ const BudgetStatistics = ({ budget }: Props) => {
             items={[
               {
                 id: "week",
-                label: t(queryButtonLabels.week),
+                node: t(queryButtonLabels.week),
                 callback: () => setRange("week"),
               },
               {
                 id: "month",
-                label: t(queryButtonLabels.month),
+                node: t(queryButtonLabels.month),
                 callback: () => setRange("month"),
               },
               {
                 id: "quarter",
-                label: t(queryButtonLabels.quarter),
+                node: t(queryButtonLabels.quarter),
                 callback: () => setRange("quarter"),
               },
             ]}

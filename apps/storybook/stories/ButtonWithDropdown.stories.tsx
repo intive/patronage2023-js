@@ -7,11 +7,11 @@ import {
 
 const DUMMY_DROPDOWNITEMS = [
   {
-    label: "New income",
+    node: "New income",
     callback: () => alert("New income modal"),
   },
   {
-    label: "New expense",
+    node: "New expense",
     callback: () => alert("New expense modal"),
   },
 ];
