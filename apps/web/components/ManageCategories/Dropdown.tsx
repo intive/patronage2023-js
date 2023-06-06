@@ -48,7 +48,7 @@ const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)`
 
 const DropdownColorMenuStyled = styled(DropdownMenuContentStyled)`
   display: grid;
-  grid-template-columns: repeat(3, minmax(10px, 1fr));
+  grid-template-columns: repeat(4, minmax(10px, 1fr));
 `;
 
 export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
@@ -99,7 +99,7 @@ export const CategoryDropdown = ({ trigger, items }: DropdownMenuProps) => {
 export const ColorDropdown = ({ trigger, items }: DropdownMenuProps) => {
   return (
     <RadixDropdownMenu.Root modal={false}>
-      <DropdownMenuTriggerStyled>{trigger}</DropdownMenuTriggerStyled>
+      <DropdownMenuTriggerStyled asChild>{trigger}</DropdownMenuTriggerStyled>
       <RadixDropdownMenu.Portal>
         <DropdownColorMenuStyled side="bottom">
           {items.map((item) => {

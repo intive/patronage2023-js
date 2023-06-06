@@ -43,6 +43,11 @@ const ManageCategories = ({ open, onClose }: Props) => {
   });
   if (!open) return null;
 
+  const handleClose = () => {
+    onClose();
+    setErrorMsg("");
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!customCategory.name) return setErrorMsg("Name cannot be empty.");
@@ -63,7 +68,7 @@ const ManageCategories = ({ open, onClose }: Props) => {
   };
 
   return (
-    <Modal header="Manage categories" onClose={onClose}>
+    <Modal header="Manage categories" onClose={handleClose}>
       <ContentWrapper>
         <form onSubmit={handleSubmit}>
           <ErrorMessageWrapper>
@@ -90,7 +95,20 @@ const ManageCategories = ({ open, onClose }: Props) => {
               items={[
                 ...icons.map((icon) => ({
                   id: icon,
-                  ComponentToRender: <Icon icon={icon} />,
+                  ComponentToRender: (
+                    <StyledButton
+                      onClick={() =>
+                        setCustomCategory({
+                          ...customCategory,
+                          icon: {
+                            ...customCategory.icon,
+                            name: icon,
+                          },
+                        })
+                      }>
+                      <Icon icon={icon} />
+                    </StyledButton>
+                  ),
                 })),
               ]}
               trigger={
@@ -115,23 +133,25 @@ const ManageCategories = ({ open, onClose }: Props) => {
                 </StyledButton>
               }
               items={[
-                ...Object.values(colors).map((color) => ({
-                  id: color,
-                  ComponentToRender: (
-                    <StyledButton
-                      color={color}
-                      onClick={() =>
-                        setCustomCategory({
-                          ...customCategory,
-                          icon: {
-                            ...customCategory.icon,
-                            background: color,
-                          },
-                        })
-                      }
-                    />
-                  ),
-                })),
+                ...Object.values(colors)
+                  .slice(0, -1)
+                  .map((color) => ({
+                    id: color,
+                    ComponentToRender: (
+                      <StyledButton
+                        color={color}
+                        onClick={() =>
+                          setCustomCategory({
+                            ...customCategory,
+                            icon: {
+                              ...customCategory.icon,
+                              background: color,
+                            },
+                          })
+                        }
+                      />
+                    ),
+                  })),
               ]}
             />
             <ColorDropdown
@@ -146,27 +166,29 @@ const ManageCategories = ({ open, onClose }: Props) => {
                 </StyledButton>
               }
               items={[
-                ...Object.values(colors).map((color) => ({
-                  id: color,
-                  ComponentToRender: (
-                    <StyledButton
-                      color={color}
-                      onClick={() =>
-                        setCustomCategory({
-                          ...customCategory,
-                          icon: {
-                            ...customCategory.icon,
-                            foreground: color,
-                          },
-                        })
-                      }
-                    />
-                  ),
-                })),
+                ...Object.values(colors)
+                  .slice(0, -1)
+                  .map((color) => ({
+                    id: color,
+                    ComponentToRender: (
+                      <StyledButton
+                        color={color}
+                        onClick={() =>
+                          setCustomCategory({
+                            ...customCategory,
+                            icon: {
+                              ...customCategory.icon,
+                              foreground: color,
+                            },
+                          })
+                        }
+                      />
+                    ),
+                  })),
               ]}
             />
           </StyledDiv>
-          <Submit>Add new category</Submit>
+          <Submit disabled={!!errorMsg}>Add new category</Submit>
         </form>
 
         <Separator />
