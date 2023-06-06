@@ -84,7 +84,11 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   );
 
   const downloadLink = (
-    <LinkStyled href={exportButton?.csvUri} download title="csv">
+    <LinkStyled
+      href={exportButton?.csvUri}
+      download
+      title="csv"
+      onClick={exportButton?.clickHandler}>
       <Icon icon="file_download" size={12} />
       <span>{exportButton?.label}</span>
     </LinkStyled>
@@ -99,7 +103,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     </button>
   );
 
-  const exportBudgetsItems = [
+  const exportBudgetsDropdownItems = [
     {
       id: "export-budgets-download",
       node: downloadLink,
@@ -135,7 +139,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
               <ExportDropdown
                 isButtonDisabled={!!!exportButton?.csvUri}
                 triggerButton={triggerButton}
-                items={exportBudgetsItems}
+                items={exportBudgetsDropdownItems}
                 tooltipLabel={exportButton.label}
               />
               <Tooltip text={`${importButton.label}`} position="bottom">
