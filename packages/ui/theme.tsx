@@ -2,7 +2,7 @@
 import { ThemeProvider } from "styled-components";
 import { ReactNode } from "react";
 
-const colors = {
+export const colors = {
   Teal10: "#1E4C40",
   Teal9: "#2E6858",
   Teal8: "#397B65",
