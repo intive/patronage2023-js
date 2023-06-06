@@ -73,7 +73,7 @@ export default function RegFlowLayout({ children }: LayoutProps) {
         <FormWrapperStyled>
           <CustomCard>
             <LanguageSelectorWrapper>
-              <LanguageSelector variant={"descriptive"} />
+              <LanguageSelector variant="descriptive" />
             </LanguageSelectorWrapper>
             {children}
           </CustomCard>

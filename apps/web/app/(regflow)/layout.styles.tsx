@@ -136,9 +136,6 @@ export const LanguageSelectorWrapper = styled.div`
   top: 8px;
   right: 8px;
   z-index: 2;
-  border: 2px solid ${({ theme }) => theme.input.borderError};
-  border-radius: 8px;
-  padding: 8px;
 
   ${device.desktop} {
     top: 20px;

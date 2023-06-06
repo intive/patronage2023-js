@@ -1,30 +1,38 @@
-import { Language, languageAtom } from "store";
 import { useAtom } from "jotai";
+import styled, { css } from "styled-components";
+import { Language, languageAtom } from "store";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useLocalStorage, useTranslate } from "lib/hooks";
-import styled from "styled-components";
-
-import { useTranslate } from "lib/hooks";
 import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
-import styled from "styled-components";
 
 type LanguageSelectorProps = {
   variant: "flag" | "descriptive";
 };
 
-const SelectStyled = styled(Select)`
-  background-color: unset;
-  border: 0;
-  padding: 0;
-  line-height: 0;
-  margin-bottom: 0;
-  width: auto;
+const SelectStyled = styled(Select)<LanguageSelectorProps>`
+  ${({ variant }) =>
+    variant === "flag" &&
+    css`
+      background-color: unset;
+      border: 0;
+      padding: 0;
+      line-height: 0;
+      margin-bottom: 0;
+      width: auto;
 
-  &:focus,
-  &[data-state="open"] {
-    outline: revert;
-  }
+      &:focus,
+      &[data-state="open"] {
+        outline: revert;
+      }
+    `}
+
+  ${({ variant }) =>
+    variant === "descriptive" &&
+    css`
+      padding: 8px;
+      line-height: 1em;
+    `}
 `;
 
 export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
@@ -61,16 +69,13 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
 
   return (
     <SelectStyled
+      variant={variant}
       items={items.map(({ lang, flagSrc, languageName, alt }) => ({
         value: lang,
         label: (
           <>
             <Flag src={flagSrc} alt={alt} />
-            {variant === "descriptive" && (
-              <>
-                <span>{languageName}</span>
-              </>
-            )}
+            {variant === "descriptive" && <span>{languageName}</span>}
             {variant === "flag" && (
               <SelectLabelHiddenInTrigger>
                 {languageName}
