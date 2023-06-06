@@ -1,8 +1,22 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 import * as Popover from "@radix-ui/react-popover";
-import styled from "styled-components";
-import { Avatar } from "../Avatar";
+import styled, { css } from "styled-components";
+import { Avatar } from "ui/Avatar";
 import { device } from "web/lib/media-queries";
+
+const CommonContentStyled = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.personalCard.background};
+  border: 1px solid ${({ theme }) => theme.card.border};
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0.8em 2em;
+  gap: 10px;
+  z-index: 11;
+`;
 
 /* HoverCard */
 
@@ -14,18 +28,7 @@ export const WrapperHover = styled.div`
 `;
 
 export const HoverCardContent = styled(HoverCard.Content)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.personalCard.background};
-  border: 1px solid ${({ theme }) => theme.card.border};
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
-  overflow: hidden;
-
-  padding: 0.8em 2em;
-  gap: 10px;
-  z-index: 5;
+  ${CommonContentStyled}
 `;
 
 export const HoverCardArrow = styled(HoverCard.Arrow)`
@@ -47,8 +50,8 @@ export const UserEmail = styled.span`
 `;
 
 export const AvatarStyled = styled(Avatar)`
-  height: 96px;
-  width: 96px;
+  height: 80px;
+  width: 80px;
 `;
 
 /* Popover */
@@ -61,18 +64,8 @@ export const WrapperPopover = styled.div`
 `;
 
 export const PopoverContent = styled(Popover.Content)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${({ theme }) => theme.personalCard.background};
-  border: 1px solid ${({ theme }) => theme.card.border};
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-  border-radius: 16px;
-  overflow: hidden;
-
-  padding: 10px;
-  gap: 10px;
-  z-index: 5;
+  ${CommonContentStyled}
+  flex-direction: column;
 `;
 
 export const PopoverArrow = styled(Popover.Arrow)`

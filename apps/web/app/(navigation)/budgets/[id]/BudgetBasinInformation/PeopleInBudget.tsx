@@ -67,7 +67,10 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
               outlined
             />
           }
-          user={user}></PersonalCard>
+          name={`${user.firstName} ${user.lastName}`}
+          email={`${user.firstName}${user.lastName}@mail.com`}
+          image={user.avatar}
+        />
       ))}
       {remainingUsers.length > 0 && (
         <Tooltip text={remainingUserNames} position="bottom">

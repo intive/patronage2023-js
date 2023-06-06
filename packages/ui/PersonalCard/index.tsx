@@ -1,5 +1,6 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 import * as Popover from "@radix-ui/react-popover";
+import { ReactNode } from "react";
 import {
   HoverCardContent,
   HoverCardArrow,
@@ -14,11 +15,30 @@ import {
 } from "./PersonalCard.styles";
 
 interface PersonalCardProps {
-  triggerComponent: any;
-  user: any;
+  triggerComponent: ReactNode;
+  name: string;
+  email: string;
+  image: string;
 }
 
-export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
+const getPersonalCardContent = (name: string, email: string, image: string) => {
+  return (
+    <>
+      <AvatarStyled src={image} />
+      <UserInfo>
+        <UserName>{name}</UserName>
+        <UserEmail>{email ? email : `${name}@mail.com`}</UserEmail>
+      </UserInfo>
+    </>
+  );
+};
+
+export const PersonalCard = ({
+  triggerComponent,
+  name,
+  email,
+  image,
+}: PersonalCardProps) => {
   return (
     <>
       <WrapperHover>
@@ -26,18 +46,7 @@ export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
           <HoverCard.Trigger asChild>{triggerComponent}</HoverCard.Trigger>
           <HoverCard.Portal>
             <HoverCardContent>
-              <AvatarStyled src={user.image ? user.image : user.avatar} />
-              <UserInfo>
-                <UserName>
-                  {user.name ? user.name : user.firstName + " " + user.lastName}
-                </UserName>
-                <UserEmail>
-                  {user.email
-                    ? user.email
-                    : user.firstName + user.lastName + `@mail.com`}
-                </UserEmail>
-              </UserInfo>
-
+              {getPersonalCardContent(name, email, image)}
               <HoverCardArrow />
             </HoverCardContent>
           </HoverCard.Portal>
@@ -49,17 +58,7 @@ export const PersonalCard = ({ triggerComponent, user }: PersonalCardProps) => {
           <Popover.Trigger asChild>{triggerComponent}</Popover.Trigger>
           <Popover.Portal>
             <PopoverContent>
-              <AvatarStyled src={user.avatar} />
-              <UserInfo>
-                <UserName>
-                  {user.firstName} {user.lastName}
-                </UserName>
-                <UserEmail>
-                  {user.email
-                    ? user.email
-                    : user.firstName + user.lastName + `@mail.com`}
-                </UserEmail>
-              </UserInfo>
+              {getPersonalCardContent(name, email, image)}
               <PopoverArrow />
             </PopoverContent>
           </Popover.Portal>

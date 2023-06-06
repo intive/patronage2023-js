@@ -51,8 +51,6 @@ export const MainMenu = () => {
     },
   ];
 
-  console.log(data);
-
   return (
     <>
       {data && (
@@ -66,7 +64,9 @@ export const MainMenu = () => {
                 triggerComponent={
                   <AvatarStyled src={data.user.image} outlined />
                 }
-                user={data.user}
+                name={data.user.name}
+                email={data.user.email}
+                image={data.user.image}
               />
             </Select.Value>
             <Select.Icon className="SelectIcon">
