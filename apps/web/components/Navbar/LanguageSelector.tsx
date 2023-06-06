@@ -1,7 +1,7 @@
 import { Language, languageAtom } from "store";
 import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import { useTranslate } from "lib/hooks";
+import { useLocalStorage, useTranslate } from "lib/hooks";
 import styled from "styled-components";
 
 import { Flag, Select } from "ui";
@@ -26,10 +26,11 @@ export const LanguageSelector = () => {
   const setLanguage = useSetAtom(languageAtom);
   const language = useAtomValue(languageAtom);
   const { t, dict } = useTranslate("NavigationLayout");
+  const [, setLang] = useLocalStorage("lang", "en");
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem("lang", lang);
+    setLang(lang);
   };
 
   const items = [
