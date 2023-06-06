@@ -6,7 +6,7 @@ import "dayjs/locale/fr";
 import "dayjs/locale/pl";
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
-import { languageAtom } from "store";
+import { languageAtom, currencyAtom } from "store";
 import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
@@ -35,6 +35,8 @@ import {
 import { CurrencyTagStyled } from "./../budgets/[id]/BudgetContent/CreateNewBudget.styled";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
+type CurrencyType = "PLN" | "USD" | "EUR";
+
 const currencyMap = {
   PLN: {
     tag: "PLN",
@@ -44,10 +46,41 @@ const currencyMap = {
     tag: "USD",
     locale: "en-US",
   },
-  EURO: {
-    tag: "EURO",
+  EUR: {
+    tag: "EUR",
     locale: "de-DE",
   },
+};
+
+const getDateRange = (timeRange: string) => {
+  let endDate = dayjs(); // Current date as the end date
+  let startDate;
+
+  switch (timeRange) {
+    case "12month":
+      startDate = endDate.subtract(12, "month");
+      break;
+    case "6month":
+      startDate = endDate.subtract(6, "month");
+      break;
+    case "3month":
+      startDate = endDate.subtract(3, "month");
+      break;
+    case "30days":
+      startDate = endDate.subtract(30, "day");
+      break;
+    case "7days":
+      startDate = endDate.subtract(7, "day");
+      break;
+    default:
+      // Set a default time range
+      startDate = endDate.subtract(12, "month");
+  }
+
+  return {
+    start: startDate.format("YYYY-MM-DD"),
+    end: endDate.format("YYYY-MM-DD"),
+  };
 };
 
 export default function ReportsPage() {
@@ -55,45 +88,14 @@ export default function ReportsPage() {
   const { title, aside, balance, info, currency, currencyNames } = dict;
   const [chart, setChart] = useState("line");
   const [timeRange, setTimeRange] = useState("12month");
-  const [reportsCurrency, setReportsCurrency] = useState("USD");
+  const [reportsCurrency, setReportsCurrency] = useAtom(currencyAtom);
   const { hasScrollbar } = useHasScrollBar();
   const [language] = useAtom(languageAtom);
-  const currencies: Array<"PLN" | "EUR" | "USD"> = ["PLN", "USD", "EUR"];
+  const currencies: Array<CurrencyType> = ["PLN", "USD", "EUR"];
 
   useEffect(() => {
     dayjs.locale(language);
   }, [language]);
-
-  const getDateRange = (timeRange: string) => {
-    let endDate = dayjs(); // Current date as the end date
-    let startDate;
-
-    switch (timeRange) {
-      case "12month":
-        startDate = endDate.subtract(12, "month");
-        break;
-      case "6month":
-        startDate = endDate.subtract(6, "month");
-        break;
-      case "3month":
-        startDate = endDate.subtract(3, "month");
-        break;
-      case "30days":
-        startDate = endDate.subtract(30, "day");
-        break;
-      case "7days":
-        startDate = endDate.subtract(7, "day");
-        break;
-      default:
-        // Set a default time range
-        startDate = endDate.subtract(12, "month");
-    }
-
-    return {
-      start: startDate.format("YYYY-MM-DD"),
-      end: endDate.format("YYYY-MM-DD"),
-    };
-  };
 
   const { start, end } = getDateRange(timeRange);
   const fetch = useSuperfetch();
@@ -170,6 +172,8 @@ export default function ReportsPage() {
     }
   }
 
+  console.log(statistics);
+
   const mainCardContent = (
     <>
       {isLoading && (
@@ -235,7 +239,8 @@ export default function ReportsPage() {
             ) : (
               <StyledReportsBalanceWrapper>
                 <StyledInfo>
-                  {reportsCurrency}: {t(info.noBudgets)}
+                  {t(info.noData)}
+                  {reportsCurrency}
                 </StyledInfo>
               </StyledReportsBalanceWrapper>
             )}
@@ -265,7 +270,6 @@ export default function ReportsPage() {
                 value={reportsCurrency}
               />
             </SelectWrapper>
-
             <ChartButtonsWrapper>
               <ButtonGroup
                 options={[

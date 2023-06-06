@@ -950,10 +950,10 @@ const dictionary = {
       fr: "Monnaie",
     },
     info: {
-      noBudgets: {
-        en: "no budgets",
-        pl: "brak budżetów",
-        fr: "pas de budgets",
+      noData: {
+        en: "No data for ",
+        pl: "Brak danych dla ",
+        fr: "Aucune donnée pour ",
       },
       noTransaction: {
         en: "There are no transactions for the selected period",

@@ -33,7 +33,7 @@ const ButtonRadioGroupStyled = styled.div`
     position: relative;
     text-align: center;
     border-bottom: 2px solid transparent;
-    color: #7e7e7e;
+    color: ${({ theme }) => theme.reports.buttonGroupSimpleLabel};
 
     ${device.tablet} {
       padding: 8px 12px;
@@ -68,7 +68,7 @@ export const ButtonGroupSimple = ({
   selectedOption,
   onOptionSelect,
 }: GroupProps) => (
-  <ButtonRadioGroupStyled>
+  <ButtonRadioGroupStyled role="radiogroup" aria-orientation="vertical">
     {options.map(({ component, id }) => (
       <label key={id}>
         <input

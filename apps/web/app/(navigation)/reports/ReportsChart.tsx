@@ -47,15 +47,16 @@ interface DashContext {
   };
 }
 
-interface CombinedContext {
-  ctx: CanvasRenderingContext2D;
-  tooltip?: TooltipModel<keyof ChartTypeRegistry>;
-  chart?: ChartJS<keyof ChartTypeRegistry>;
-  chartArea: {
-    top: number;
-    bottom: number;
-  };
-}
+//not in use at the moment according to ts issue
+// interface CombinedContext {
+//   ctx: CanvasRenderingContext2D;
+//   tooltip?: TooltipModel<keyof ChartTypeRegistry>;
+//   chart?: ChartJS<keyof ChartTypeRegistry>;
+//   chartArea: {
+//     top: number;
+//     bottom: number;
+//   };
+// }
 
 function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   const { t, dict } = useTranslate("ReportsPage");
@@ -85,8 +86,8 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   //define background colors depending on chart
   const backgroundIncomes =
     chart === "line" ? createGradient(gradientGreen) : theme.reports.incomesBar;
-  const backgroundExpences =
-    chart === "line" ? createGradient(gradientGrey) : "lightgrey";
+  const backgroundExpences = 
+    chart === "line" ? createGradient(gradientGrey) : theme.reports.expencesBar;
 
   //DATA for the chart
   const labels = Object.keys(transactions);
