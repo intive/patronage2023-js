@@ -1,7 +1,5 @@
-import { useTranslate } from "lib/hooks";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { ThemeContext } from "styled-components";
-import { useRef } from "react";
 import {
   Chart as ChartJS,
   LineElement,
@@ -18,6 +16,7 @@ import {
   TooltipModel,
 } from "chart.js";
 import { Line, Bar } from "react-chartjs-2";
+import { useTranslate } from "lib/hooks";
 
 ChartJS.register(
   LineElement,
@@ -137,7 +136,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
         const activeTooltip = tooltip.dataPoints[0];
 
         ctx.beginPath();
-        ctx.strokeStyle = "grey";
+        ctx.strokeStyle = theme.reports.expencesLine;
         ctx.lineWidth = 1;
         ctx.moveTo(activeTooltip.element.x, top);
         ctx.lineTo(activeTooltip.element.x, bottom);

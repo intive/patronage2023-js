@@ -35,7 +35,7 @@ export const StyledWrapper = styled.div`
   color: ${({ theme }) => theme.trendChart.titleLeft};
   border: 1px solid ${({ theme }) => theme.infoTile.border};
   border-radius: 8px;
-  padding: 1em 2em;
+  padding: 16px 24px;
 `;
 
 export const ButtonWrapper = styled.div`
