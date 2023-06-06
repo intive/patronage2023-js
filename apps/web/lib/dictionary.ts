@@ -85,6 +85,11 @@ const dictionary = {
             pl: "Język",
             fr: "Langue",
           },
+          currency: {
+            en: "Currency",
+            pl: "Waluta",
+            fr: "Monnaie",
+          },
         },
       },
       usersItem: {
@@ -990,6 +995,18 @@ const dictionary = {
         en: "Language",
         pl: "Język",
         fr: "Langue",
+      },
+    },
+    currency: {
+      title: {
+        en: "Currency",
+        pl: "Waluta",
+        fr: "Monnaie",
+      },
+      button: {
+        en: "Save changes",
+        pl: "Zapisz zmianę",
+        fr: "Enregistrer",
       },
     },
   },
