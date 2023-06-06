@@ -41,10 +41,15 @@ export default function useSuperfetch() {
           return { ...data, httpStatus: res.status };
         } else if (res.status === 400) {
           const hardcodedError = "10.10";
+          const data = await res.json().catch(() => ({}));
+          console.log(data.ErrorCode);
+          const errorCode  = data.ErrorCode.toString();
+          console.log(typeof errorCode);
           showToast({
             variant: "error",
             message:
-              t(dict.title) + hardcodedError + " - " + t(dict[hardcodedError]),
+              // t(dict.title) + errorCode + " - " + t(dict[errorCode as typeof keyof dict]),
+              `${t(dict.title)} ${errorCode} : ${t(dict[errorCode as typeof keyof dict])}`,
           });
         } else if (res.status > 401) {
           showToast({
