@@ -11,7 +11,7 @@ interface InputProps {
   id: string;
 }
 
-type GroupProps = {
+export type GroupProps = {
   options: InputProps[];
   secondary?: boolean;
 } & React.HTMLProps<HTMLDivElement>;
@@ -23,6 +23,7 @@ const ButtonGroupStyled = styled.div<GroupProps>`
   line-height: 24px;
   border-radius: 100px;
   height: 100%;
+  margin-block: 10px;
 
   & > label {
     display: flex;
@@ -123,9 +124,12 @@ const ButtonGroupStyled = styled.div<GroupProps>`
   }
 `;
 
-export const ButtonGroup = ({ options, secondary }: GroupProps) => {
+export const ButtonGroup = ({ options, secondary, className }: GroupProps) => {
   return (
-    <ButtonGroupStyled options={options} secondary={secondary}>
+    <ButtonGroupStyled
+      options={options}
+      secondary={secondary}
+      className={className}>
       {options.map(({ component, onSelect, defaultChecked, id }, index) => {
         return (
           <Fragment key={id}>
