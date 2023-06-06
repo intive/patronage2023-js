@@ -188,6 +188,13 @@ export default function SideNav() {
       href: "/settings/change-language",
       id: 3,
     },
+    {
+      ComponentToRender: (
+        <span>{t(dict.SideNav.settingsItem.settingsItems.currency)}</span>
+      ),
+      href: "/settings/currency",
+      id: 4,
+    },
   ];
 
   const settingsSubMenuData = {
