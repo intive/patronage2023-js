@@ -1145,11 +1145,6 @@ const dictionary = {
     },
   },
   ExportFile: {
-    exportButtonText: {
-      en: "Download CSV",
-      pl: "Ściągnij plik CSV",
-      fr: "Télécharger le fichier CSV",
-    },
     exportToastMessage: {
       en: "CSV exported successfully",
       pl: "CSV wyeksportowany pomyślnie",
@@ -1157,6 +1152,11 @@ const dictionary = {
     },
   },
   ImportModal: {
+    downloadButtonText: {
+      en: "Download CSV",
+      pl: "Ściągnij plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
     successHeader: {
       en: "Congratulations",
       pl: "Gratulacje",

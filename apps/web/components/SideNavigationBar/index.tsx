@@ -22,6 +22,7 @@ import { ImportModal } from "components/ImportModal";
 import { SideNavigationBar, Icon, NavList, useToast } from "ui";
 import { SpanStyled } from "ui/NavList";
 import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
+import { ExportResponseProps } from "lib/types";
 
 export const IconStyled = styled(Icon)`
   background: ${({ theme }) => theme.navList.navItem.iconBackgroundColor};
@@ -155,14 +156,12 @@ export default function SideNav() {
 
   const successData = mapToBudgetsComponents(uniqueValues);
 
-  const { data: csvUri } = useQuery({
-    queryKey: ["csvUri"],
-    queryFn: async () => {
-      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`, {
-        headers: {
-          Authorization: `Bearer ${session?.user.accessToken}`,
-        },
-      }).then((res) => res.text());
+  const { data: exportData } = useQuery({
+    queryKey: ["exportedCsvUri"],
+    queryFn: async (): Promise<ExportResponseProps> => {
+      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`).catch(
+        (err) => console.error(err)
+      );
     },
     enabled: !!session,
   });
@@ -207,7 +206,7 @@ export default function SideNav() {
         });
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),
-      csvUri: csvUri,
+      csvUri: exportData?.uri,
     },
     importButton: {
       clickHandler: () => {
@@ -316,7 +315,7 @@ export default function SideNav() {
         <ImportModal
           importEndpoint="budgets/import"
           allowedFileExtensions={[".csv"]}
-          downloadButtonLabel={tExport(dictExport.exportButtonText)}
+          downloadButtonLabel={tExport(dictImport.downloadButtonText)}
           importButtonLabel={tImport(dictImport.importButtonText)}
           noDataSavedToastMsg={tImport(dictImport.noBudgetSaved)}
           onClose={() => setIsImportModalVisible(false)}

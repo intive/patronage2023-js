@@ -155,6 +155,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                 "budgetsList",
                 { searchValue: "", sortAscending: true },
               ]);
+              queryClient.invalidateQueries(["exportedCsvUri"]);
               break;
             case 400:
               setErrorMsg(t(dict.errors.error400));
@@ -200,7 +201,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
         <Form
           onSubmit={() => {
             sendBudget();
-            queryClient.invalidateQueries({ queryKey: ["csvUri"] });
           }}>
           {({ submit }) => (
             <form

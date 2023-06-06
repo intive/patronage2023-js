@@ -75,8 +75,8 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
     onSettled: (data) => {
       switch (data!.status) {
         case 201:
-          queryClient.invalidateQueries({ queryKey: ["budgets"] });
-          queryClient.invalidateQueries({ queryKey: ["csvUri"] });
+          queryClient.invalidateQueries(["budgets"]);
+          queryClient.invalidateQueries(["exportedCsvUri"]);
           onClose();
           break;
         case 400:
