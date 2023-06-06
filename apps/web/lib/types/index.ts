@@ -52,7 +52,7 @@ export interface BudgetFixed {
   endDate: string;
   limit: number;
   userID: string;
-  budgetUsers: BudgetUser[];
+  budgetUsers?: BudgetUser[];
   currency: {
     tag: string;
     locale: string;

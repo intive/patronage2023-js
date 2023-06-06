@@ -24,7 +24,7 @@ import {
 import { EditBudget } from "./EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { InfoTile, NavBudgetIcon } from "ui";
+import { InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
 //TYPES
 type BudgetBasicInfoProps = {
@@ -37,7 +37,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { data: session } = useSession();
 
   const loggedUserId = session?.user.id;
-  const peopleWithoutLoggedUser = budget.budgetUsers.filter(
+  const peopleWithoutLoggedUser = budget.budgetUsers?.filter(
     (user) => user.id !== loggedUserId
   );
 
@@ -146,7 +146,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
           </BudgetNameWrapperStyled>
         </BasicBudgetInfoWrapperStyled>
-        <PeopleInBudget users={peopleWithoutLoggedUser} />
+        <PeopleInBudget users={peopleWithoutLoggedUser || []} />
       </TopWrapperStyled>
       <InfoTileWrapperStyled>
         <InfoTile
