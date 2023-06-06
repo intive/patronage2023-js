@@ -88,9 +88,22 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
+  //temporary it will export budgets untill endpoint for transactions won't be ready
+  const { data: csvUri } = useQuery({
+    queryKey: ["transactionsCsvUri"],
+    queryFn: async () => {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`, {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      }).then((res) => res.text());
+    },
+    enabled: !!session,
+  });
+
   //href that will come from query export transactions
   const exportLink = (
-    <LinkStyled href={""} download title="csv">
+    <LinkStyled href={csvUri} download title="csv">
       <Icon icon="file_download" size={12} />
       <span>{tExport(dictExport.exportButtonText)}</span>
     </LinkStyled>
@@ -162,6 +175,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     </BudgetContentWrapperStyled>
   );
 
+  //temporary it will import budgets untill endpoint for transactions won't be ready
   return (
     <>
       <MultiCardLayout main={mainCardContent} aside={<AsideCardContent />} />
@@ -175,16 +189,16 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
       {importModalOpen && (
         <ImportModal
           onClose={() => setImportModalOpen(false)}
-          importEndpoint=""
+          importEndpoint="budgets/import"
           allowedFileExtensions={[".csv"]}
           downloadButtonLabel={tImport(dictImport.importButtonText)}
           importButtonLabel={tImport(dictImport.importButtonText)}
           noDataSavedToastMsg={tImport(dictImport.noTransactionSaved)}
           instructionScreen={() =>
             ImportCSVInstructionScreen({
-              exampleHeader: "Type,Id,Name,Value,Category,TransactionDate",
+              exampleHeader: "Name,Value,TransactionType,CategoryType,Date",
               exampleFirstLine:
-                "Income,1,Transaction name, 1000, HomeSpendings, 2023-06-20T14:15:47.392Z ",
+                "Spotify premium,-5.0000,Expense,Subscriptions,2023-06-12 19:28:26",
             })
           }
         />

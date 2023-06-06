@@ -39,8 +39,6 @@ export default function SideNav() {
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
   const showToast = useToast();
 
-  const superFetch = useSuperfetch();
-
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);

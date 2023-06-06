@@ -1195,12 +1195,12 @@ const dictionary = {
     modalHeader: {
       en: "Import",
       pl: "Importuj",
-      fr: "Importer un fichier",
+      fr: "Importer",
     },
     importButtonText: {
       en: "Click to import",
       pl: "Kliknij, aby zaimportować",
-      fr: "Cliquez pour importer",
+      fr: "Cliquer pour importer",
     },
     instruction: {
       wantToUpload: {
