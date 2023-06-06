@@ -111,8 +111,7 @@ export default function ReportsPage() {
     },
   });
 
-  let isData;
-  let transactions;
+  let isData, transactions;
 
   //prepare transactions object for the charts
   if (statistics && statistics.incomes != null && statistics.expenses != null) {
@@ -171,10 +170,8 @@ export default function ReportsPage() {
 
           return acc;
         }, {});
-    }
-  }
-
-  console.log(statistics);
+    };
+  };
 
   const mainCardContent = (
     <>
