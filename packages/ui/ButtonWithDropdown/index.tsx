@@ -114,7 +114,7 @@ export const ButtonWithDropdown = ({
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="start">
-          {items.map(({id,callback,node}) => (
+          {items.map(({ id, callback, node }) => (
             <DropdownMenuItemStyled key={id} onClick={callback}>
               {node}
             </DropdownMenuItemStyled>
