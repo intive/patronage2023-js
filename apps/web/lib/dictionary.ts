@@ -949,6 +949,18 @@ const dictionary = {
       pl: "Waluta",
       fr: "Monnaie",
     },
+    shortcuts: {
+      day: {
+        en: "d",
+        pl: "d",
+        fr: "j",
+      },
+      month: {
+        en: "m",
+        pl: "m",
+        fr: "m",
+      },
+    },
     info: {
       noData: {
         en: "No data for ",

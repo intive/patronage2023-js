@@ -87,7 +87,8 @@ export default function ReportsPage() {
   const [defaultCurrency] = useAtom(currencyAtom);
 
   const { t, dict } = useTranslate("ReportsPage");
-  const { title, aside, balance, info, currency, currencyNames } = dict;
+  const { title, aside, balance, info, currency, currencyNames, shortcuts } =
+    dict;
   const [chart, setChart] = useState("line");
   const [timeRange, setTimeRange] = useState("12month");
   const [reportsCurrency, setReportsCurrency] = useState(defaultCurrency);
@@ -188,27 +189,27 @@ export default function ReportsPage() {
               <ButtonGroupSimple
                 options={[
                   {
-                    component: "7d",
+                    component: `7${t(shortcuts.day)}`,
                     id: "7days",
                     checked: timeRange === "7days",
                   },
                   {
-                    component: "30d",
+                    component: `30${t(shortcuts.day)}`,
                     id: "30days",
                     checked: timeRange === "30days",
                   },
                   {
-                    component: "3m",
+                    component: `3${t(shortcuts.month)}`,
                     id: "3month",
                     checked: timeRange === "3month",
                   },
                   {
-                    component: "6m",
+                    component: `6${t(shortcuts.month)}`,
                     id: "6month",
                     checked: timeRange === "6month",
                   },
                   {
-                    component: "12m",
+                    component: `12${t(shortcuts.month)}`,
                     id: "12month",
                     checked: timeRange === "12month",
                   },
