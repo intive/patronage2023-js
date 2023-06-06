@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useToast } from "ui";
 import { useTranslate } from "./useTranslate";
+import { dictionaryType } from "lib/dictionary";
 
 export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body?: object;
@@ -36,37 +37,36 @@ export default function useSuperfetch() {
       headers,
     })
       .then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        const errorCode = data.ErrorCode;
         if (res.ok) {
-          const data = await res.json().catch(() => ({}));
           return { ...data, httpStatus: res.status };
         } else if (res.status === 400) {
-          const hardcodedError = "10.10";
-          const data = await res.json().catch(() => ({}));
-          console.log(data.ErrorCode);
-          const errorCode  = data.ErrorCode.toString();
-          console.log(typeof errorCode);
           showToast({
             variant: "error",
-            message:
-              // t(dict.title) + errorCode + " - " + t(dict[errorCode as typeof keyof dict]),
-              `${t(dict.title)} ${errorCode} : ${t(dict[errorCode as typeof keyof dict])}`,
+            message: `${t(dict.title)} ${errorCode}: ${t(
+              dict[errorCode as keyof dictionaryType["Errors"]]
+            )}`,
           });
-        } else if (res.status > 401) {
+        } else if (res.status === 400 && data.ErrorCode === "") {
           showToast({
             variant: "error",
-            message: t(dict["defaultError"]),
+            message: t(dict.noErrorCode),
+          });
+        } else if (res.status === 401) {
+          // brak autoryzacji
+        } else if (res.status === 403) {
+          console.log(t(dict.status403));
+        } else if (res.status === 404) {
+          console.log(t(dict.status404));
+        } else if (res.status === 500) {
+          console.log(t(dict.status500));
+        } else {
+          showToast({
+            variant: "error",
+            message: t(dict.defaultError),
           });
         }
-        // CODE BELOW IS DRAFT AND WAIT FOR BE
-        // } else if ((res.status === 400 && ErrorCode === "10.1") || "10.2") {
-        //   console.log(
-        //     t(dict.title) + " " + `${[ErroCode]}` + ": " + t(dict[ErrorCode])
-        //   );
-        // } else if ((res.status === 400 && ErrorCode === "")) {
-        //   showToast({
-        //     variant: "error",
-        //     message: t(dict[""]),
-        //   });
       })
 
       .catch(() => {

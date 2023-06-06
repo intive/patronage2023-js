@@ -1175,9 +1175,9 @@ const dictionary = {
   },
   Errors: {
     title: {
-      en: "Error: ",
-      pl: "Błąd: ",
-      fr: "Erreur: ",
+      en: "Error ",
+      pl: "Błąd ",
+      fr: "Erreur ",
     },
     "1.1": {
       //FE validation
@@ -1365,21 +1365,34 @@ const dictionary = {
       pl: "Nieprawidłowy deskryptor sortowania.",
       fr: "Descripteur de tri invalide.",
     },
-    "": {
+    noErrorCode: {
       //no ErrorCode from BE
       en: "An unexpected error occurred.",
       pl: "Wystąpił nieoczekiwany błąd.",
       fr: "Une erreur inattendue est apparue.",
     },
+    status403: {
+      //CONSOLE
+      en: "Forbidden.",
+      pl: "Zabroniony.",
+      fr: "Interdit.",
+    },
+    status404: {
+      //CONSOLE
+      en: "Budget with given id does not exist.",
+      pl: "Budżet o podanym identyfikatorze nie istnieje.",
+      fr: "Le budget avec l'identifiant donné n'existe pas.",
+    },
+    status500: {
+      //CONSOLE
+      en: "Internal server error.",
+      pl: "Wewnętrzny błąd serwera.",
+      fr: "Erreur interne du serveur.",
+    },
     defaultError: {
       en: "Oops, something went wrong.",
       pl: "Ups, coś poszło nie tak.",
       fr: "Oups, quelque chose a mal tourné.",
-    },
-    "10.10": {
-      en: "Hardcoded error.",
-      pl: "Błąd zahardkodowany.",
-      fr: "Erreur en dur.",
     },
   },
 };
