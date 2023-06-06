@@ -1,6 +1,9 @@
 import { Language, languageAtom } from "store";
 import { useAtom } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { useLocalStorage, useTranslate } from "lib/hooks";
+import styled from "styled-components";
+
 import { useTranslate } from "lib/hooks";
 import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
@@ -28,10 +31,11 @@ export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
   const [language, setLanguage] = useAtom(languageAtom);
   const { t, dict } = useTranslate("NavigationLayout");
+  const [, setLang] = useLocalStorage("lang", "en");
 
   const changeLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem("lang", lang);
+    setLang(lang);
   };
 
   const items = [
