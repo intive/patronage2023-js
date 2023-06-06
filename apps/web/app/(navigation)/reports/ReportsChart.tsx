@@ -122,6 +122,7 @@ function ReportsChart({ chart, transactions, currency }: ReportsChartProps) {
   //CUSOTM LINE for tooltips in the line chart
   const customLine = {
     id: "lines",
+    //there is a CombinedContext type for this but generates problem below
     beforeDatasetsDraw(chart: any) {
       const {
         ctx,

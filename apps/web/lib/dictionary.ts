@@ -910,7 +910,7 @@ const dictionary = {
       title: {
         en: "Additional information",
         pl: "Dodatkowe informacje",
-        fr: "",
+        fr: "Informations supplémentaires",
       },
     },
     currencyNames: {
@@ -948,19 +948,19 @@ const dictionary = {
       noBudgets: {
         en: "no budgets",
         pl: "brak budżetów",
-        fr: "",
+        fr: "pas de budgets",
       },
       noTransaction: {
         en: "There are no transactions for the selected period",
         pl: "Brak transakcji dla wybranego okresu",
-        fr: "",
+        fr: "Il n'y a aucune transaction pour la période sélectionnée",
       },
     },
     labelsTooltip: {
       incomes: {
         en: "Incomes",
         pl: "Wpływy",
-        fr: "Revenus",
+        fr: "Recettes",
       },
       expenses: {
         en: "Expenses",
