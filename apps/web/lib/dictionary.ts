@@ -6,6 +6,23 @@ const dictionary = {
     },
   },
   NavigationLayout: {
+    languageFlagAlts: {
+      polishFlag: {
+        en: "flag of Poland",
+        pl: "flaga Polski",
+        fr: "drapeau de la Pologne",
+      },
+      britishFlag: {
+        en: "flag of United Kingdom",
+        pl: "flaga Wielkiej Brytanii",
+        fr: "drapeau du Royaume-Uni",
+      },
+      frenchFlag: {
+        en: "flag of France",
+        pl: "flaga Francji",
+        fr: "drapeau de la France",
+      },
+    },
     burgerMenuLabel: {
       en: "Open menu",
       pl: "Otwórz menu",
@@ -67,6 +84,11 @@ const dictionary = {
             en: "Language",
             pl: "Język",
             fr: "Langue",
+          },
+          currency: {
+            en: "Currency",
+            pl: "Waluta",
+            fr: "Monnaie",
           },
         },
       },
@@ -528,6 +550,20 @@ const dictionary = {
         fr: "Date de fin",
       },
     },
+    currencyNames: {
+      USD: {
+        en: "United States Dollar",
+        pl: "Dolar Amerykański",
+        fr: "Dollar des États-Unis",
+      },
+      PLN: { en: "Polish Zloty", pl: "Polski Złoty", fr: "Zloty polonais" },
+      GBP: {
+        en: "British Pound",
+        pl: "Funt Brytyjski",
+        fr: "Livre britannique",
+      },
+      EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
+    },
     errors: {
       min3characters: {
         en: "Budget name must have at least 3 characters.",
@@ -956,6 +992,18 @@ const dictionary = {
         en: "Language",
         pl: "Język",
         fr: "Langue",
+      },
+    },
+    currency: {
+      title: {
+        en: "Currency",
+        pl: "Waluta",
+        fr: "Monnaie",
+      },
+      button: {
+        en: "Save changes",
+        pl: "Zapisz zmianę",
+        fr: "Enregistrer",
       },
     },
   },

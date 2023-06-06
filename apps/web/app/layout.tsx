@@ -1,16 +1,19 @@
 "use client";
 /* eslint-disable @next/next/no-head-element */
+
+import { useEffect } from "react";
 import { StyledComponentsRegistry } from "../lib/registry";
+import { useSetAtom } from "jotai";
 import { Inter } from "next/font/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import StyledComponentsThemeWrapper from "ui/theme";
 import "ka-table/style.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../css/global.css";
-import { useEffect } from "react";
-import { useSetAtom } from "jotai";
-import { Language, languageAtom } from "store";
+
+import { languageAtom, currencyAtom } from "store";
 import { SessionProvider } from "next-auth/react";
+import { useLocalStorage } from "lib/hooks";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -25,10 +28,15 @@ const queryClient = new QueryClient();
 
 export default function RootLayout({ children }: LayoutProps) {
   const setLanguage = useSetAtom(languageAtom);
+  const setCurrency = useSetAtom(currencyAtom);
+
+  const [defaultCurrency] = useLocalStorage("currency", "USD");
+  const [lang] = useLocalStorage("lang", "en");
 
   useEffect(() => {
-    setLanguage((localStorage.getItem("lang") as Language) || "en");
-  }, [setLanguage]);
+    setLanguage(lang);
+    setCurrency(defaultCurrency);
+  }, [setLanguage, setCurrency]);
 
   return (
     <html lang="en">

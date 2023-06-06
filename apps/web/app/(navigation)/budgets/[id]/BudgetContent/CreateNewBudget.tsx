@@ -4,15 +4,15 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
-import { ErrorMessage } from "ui";
 
 import {
   Button,
-  CurrencySelect,
   CustomDatePicker,
   IconPicker,
   Input,
   Modal,
+  Select,
+  ErrorMessage,
 } from "ui";
 import { IconType } from "ui/Icon";
 import {
@@ -34,12 +34,17 @@ import {
   DatePickerErrorStyled,
   ContentStyled,
   InputWrapperHalfStyledCurrency,
+  CurrencyTagStyled,
 } from "./CreateNewBudget.styled";
 import { Form, Field } from "houseform";
 import { useTranslate } from "lib/hooks";
 import { useValidateBudgetModal } from "lib/validations/useValidateBudgetModal";
 import * as Tabs from "@radix-ui/react-tabs";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { useAtomValue } from "jotai";
+import { currencyAtom } from "store";
+import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { currency } from "lib/currency";
 
 type NewBudget = {
   onClose: Function;
@@ -89,6 +94,8 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     checkDate,
   } = useValidateBudgetModal("AddNewBudgetModal");
 
+  const defaultCurrency = useAtomValue(currencyAtom);
+
   const [newBudget, setNewBudget] = useState<newBudgetType>({
     name: "",
     limit: "",
@@ -96,7 +103,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
     icon: selectedIcon,
     dateStart: "",
     dateEnd: "",
-    currency: "USD",
+    currency: defaultCurrency,
   });
 
   const onSelectStartDate = (date: Date | null) => {
@@ -281,20 +288,34 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                       onSubmitValidate={checkCurrency}
                       onChangeValidate={checkCurrency}>
                       {({ value, setValue, errors }) => (
-                        // WIP
-                        <CurrencySelect
+                        <Select
+                          items={currency.map((currency) => ({
+                            label: (
+                              <>
+                                <CurrencyTagStyled>
+                                  {currency}
+                                </CurrencyTagStyled>
+                                <SelectLabelHiddenInTrigger>
+                                  {t(dict.currencyNames[currency])}
+                                </SelectLabelHiddenInTrigger>
+                              </>
+                            ),
+                            value: currency,
+                          }))}
+                          onValueChange={(value) => {
+                            setValue(value);
+                            setNewBudget({
+                              ...newBudget,
+                              currency: value,
+                            });
+                          }}
+                          hasIcon
                           value={value}
                           id="currency"
                           label={t(dict.inputNames.currency)}
-                          supportingLabel={errors[0]}
-                          onValueChange={(e) => {
-                            setValue(e);
-                            setNewBudget({
-                              ...newBudget,
-                              currency: e,
-                            });
-                          }}
+                          error={errors[0]}
                           hasScrollbar={hasScrollbar}
+                          sideOffset={2}
                         />
                       )}
                     </Field>
