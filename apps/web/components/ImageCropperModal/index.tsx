@@ -6,7 +6,6 @@ import { Button, Modal } from "ui";
 import getCroppedImg from "./getCroppedImg";
 import { CropperImage, CropperWrapper } from "./ImageCropper.styled";
 import { useToast } from "ui";
-import { useUploadThing } from "lib/hooks/useUploadthing";
 import { useTranslate } from "lib/hooks";
 interface CropperModalProps {
   closeModal: () => void;
