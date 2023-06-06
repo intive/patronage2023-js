@@ -5,13 +5,14 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import { Button } from "ui";
 import { useTranslate } from "lib/hooks";
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid ${({ theme }) => theme.main};
-  border-radius: 20px;
+  background-color: #e1e1e1;
+  border-radius: 8px;
   width: 100%;
   height: 100%;
   gap: 10px;
@@ -46,7 +47,7 @@ export default function StyledDropzone({ handleDrop }: DropzoneProps) {
         <>
           <StyledSpan>{t(dict.profileScreen.dropZone.mainText)}</StyledSpan>
           <StyledSpan>{t(dict.profileScreen.dropZone.separator)}</StyledSpan>
-          <Button onClick={open}>
+          <Button onClick={open} variant="secondary">
             {t(dict.profileScreen.dropZone.buttonText)}
           </Button>
         </>

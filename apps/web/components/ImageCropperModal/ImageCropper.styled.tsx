@@ -20,6 +20,6 @@ export const StyledSpan = styled.span`
   color: ${({ theme }) => theme.nav.main};
 
   ${device.tablet} {
-    font-size: 1.8em;
+    font-size: 1.5em;
   }
 `;

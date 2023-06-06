@@ -3,24 +3,17 @@
 import { useTranslate } from "lib/hooks";
 import { Form, Field } from "houseform";
 import { z } from "zod";
-import {
-  Input,
-  Button,
-  AvatarSelector,
-  Separator,
-  ButtonGroup,
-  Icon,
-} from "ui";
+import { Input, Button, AvatarSelector, NavBudgetIcon } from "ui";
 import { useCallback, useState } from "react";
 import {
   ButtonWrapper,
   CroppSectionButtonWrapper,
   CustomSectionWrapper,
   FormWrapper,
-  StyledButton,
   StyledHeader,
   StyledSubHeader,
   SwitcherWrapper,
+  ButtonGroupStyled,
 } from "./SignUpFormStyled";
 import StyledDropzone, { Container } from "components/Dropzone";
 import ImageCropperModal from "components/ImageCropperModal";
@@ -86,7 +79,7 @@ export const ProfileScreen = ({
           <StyledHeader>{t(profileScreen.title)}</StyledHeader>
           <StyledSubHeader>{t(profileScreen.subtitle)}</StyledSubHeader>
           <SwitcherWrapper>
-            <ButtonGroup
+            <ButtonGroupStyled
               secondary
               options={[
                 {
@@ -108,39 +101,33 @@ export const ProfileScreen = ({
               ]}
             />
           </SwitcherWrapper>
-          <Separator />
           {customAvatar ? (
             <CustomSectionWrapper>
               {croppedImage ? (
                 <Container>
-                  <StyledSpan>
-                    {t(dict.profileScreen.dropZone.croppedTitle)}
-                  </StyledSpan>
                   <Image
                     src={croppedImage}
                     alt="blob"
-                    width={72}
-                    height={72}
+                    width={100}
+                    height={100}
                     style={{
                       borderRadius: "100%",
                     }}
                   />
                   <CroppSectionButtonWrapper>
-                    <StyledButton
+                    <NavBudgetIcon
                       onClick={() => {
                         setModal(true);
-                      }}>
-                      {t(dict.profileScreen.dropZone.goBack)}
-                      <Icon icon="edit" />
-                    </StyledButton>
-                    <StyledButton
+                      }}
+                      icon={"edit"}
+                    />
+                    <NavBudgetIcon
                       onClick={() => {
                         setCroppedImage("");
                         setImageSrc("");
-                      }}>
-                      {t(dict.profileScreen.dropZone.delete)}
-                      <Icon icon="delete" />
-                    </StyledButton>
+                      }}
+                      icon={"delete"}
+                    />
                   </CroppSectionButtonWrapper>
                 </Container>
               ) : (
