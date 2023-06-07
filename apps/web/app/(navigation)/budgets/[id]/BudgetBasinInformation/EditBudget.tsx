@@ -113,7 +113,6 @@ export const EditBudget = ({ budget, onClose }: EditBudgetProps) => {
         endDate: values["end-date"].toISOString(),
       },
     };
-    console.log(JSON.stringify(editedBudget));
     sendEditedBudgetMutation.mutate(editedBudget);
   };
 

@@ -15,6 +15,7 @@ export const ParagraphStyled = styled.p`
   :first-of-type {
     padding-top: 24px;
   }
+  color: ${({ theme }) => theme.modal.paragraph};
 `;
 
 export const IconPickerStyled = styled.div`

@@ -1,4 +1,10 @@
+import { forwardRef, useCallback, useRef, useState } from "react";
+import { z } from "zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
 import { Avatar, Button, Checkbox, ErrorMessage, Modal } from "ui";
+import { SearchInput } from "ui/Input/SearchInput";
+import { Spinner } from "ui/NavList/Spinner";
 import {
   AvatarWrapperStyled,
   ContentWrapper,
@@ -18,16 +24,10 @@ import {
   SeparatorStyled,
   SeparatorStyledTop,
 } from "../BudgetContent/CreateNewBudget.styled";
-import { SearchInput } from "ui/Input/SearchInput";
-import { Spinner } from "ui/NavList/Spinner";
 import { useTranslate } from "lib/hooks";
-import { forwardRef, useCallback, useRef, useState } from "react";
 import { useDebounce } from "lib/hooks/useDebounce";
-import { z } from "zod";
 import { useGetUsers } from "lib/hooks/useGetUsers";
 import { BudgetFixed } from "lib/types";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
 type User = {
