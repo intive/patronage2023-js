@@ -17,17 +17,21 @@ import {
 interface PersonalCardProps {
   triggerComponent: ReactNode;
   name: string;
-  email: string;
+  email?: string;
   image: string;
 }
 
-const getPersonalCardContent = (name: string, email: string, image: string) => {
+const getPersonalCardContent = (
+  name: string,
+  email: string | undefined,
+  image: string
+) => {
   return (
     <>
       <AvatarStyled src={image} />
       <UserInfo>
         <UserName>{name}</UserName>
-        <UserEmail>{email ? email : `${name}@mail.com`}</UserEmail>
+        {email && <UserEmail>{email}</UserEmail>}
       </UserInfo>
     </>
   );
