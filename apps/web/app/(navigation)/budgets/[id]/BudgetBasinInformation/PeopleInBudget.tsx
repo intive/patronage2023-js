@@ -44,15 +44,27 @@ const StyledUser = styled.div`
   padding: 3px;
 `;
 
+const WrapperRemainingUsers = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
   const maxUsersToShow = users.length > 4 ? 3 : users.length;
   const visibleUsers = users.slice(0, maxUsersToShow);
   const remainingUsers = users.slice(maxUsersToShow);
 
   const remainingUserNames = remainingUsers.map((user) => (
-    <StyledUser key={user.id}>
-      {user.firstName} {user.lastName}
-    </StyledUser>
+    <PersonalCard
+      triggerComponent={
+        <StyledUser key={user.id}>
+          {user.firstName} {user.lastName}
+        </StyledUser>
+      }
+      email={user.userEmail}
+      image={user.avatar}
+      name={`${user.firstName} ${user.lastName}`}
+    />
   ));
 
   return (
@@ -73,7 +85,11 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
         />
       ))}
       {remainingUsers.length > 0 && (
-        <Tooltip text={remainingUserNames} position="bottom">
+        <Tooltip
+          text={
+            <WrapperRemainingUsers>{remainingUserNames}</WrapperRemainingUsers>
+          }
+          position="bottom">
           <StyledCounter>
             <span>{remainingUsers.length}</span>
           </StyledCounter>
