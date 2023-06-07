@@ -1,35 +1,10 @@
 import styled from "styled-components";
 import { Separator, Textarea } from "ui";
-import * as Tabs from "@radix-ui/react-tabs";
 import { device } from "lib/media-queries";
 
 type TextareaErrorType = {
   hasError?: boolean;
 };
-
-export const TabsTriggerStyled = styled(Tabs.Trigger)`
-  font-size: 14px;
-  font-weight: 600;
-  background-color: ${({ theme }) => theme.createNewBudget.background};
-  color: ${({ theme }) => theme.createNewBudget.inactive};
-  width: 50%;
-  border: 0;
-  cursor: pointer;
-  padding: 8px 8px 12px 8px;
-  border-bottom: 2px solid white;
-  &[data-state="active"] {
-    color: ${({ theme }) => theme.createNewBudget.active};
-    border-bottom: 2px solid ${({ theme }) => theme.createNewBudget.active};
-  }
-  &[disabled],
-  &[disabled]:hover {
-    color: ${({ theme }) => theme.button.secondary.disabled};
-    cursor: not-allowed;
-  }
-  &:hover {
-    color: ${({ theme }) => theme.button.secondary.hover};
-  }
-`;
 
 export const ParagraphStyled = styled.p`
   font-style: unset;
@@ -40,6 +15,7 @@ export const ParagraphStyled = styled.p`
   :first-of-type {
     padding-top: 24px;
   }
+  color: ${({ theme }) => theme.modal.paragraph};
 `;
 
 export const IconPickerStyled = styled.div`
@@ -85,8 +61,12 @@ export const InputWrapperFullFlex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 24px;
+
+  ${device.tablet} {
+    gap: 16px;
+  }
 `;
 
 export const SeparatorStyled = styled(Separator)`
@@ -136,30 +116,33 @@ export const DatePickerErrorStyled = styled.div`
   top: 55px;
 `;
 
-export const TabsStyled = styled(Tabs.Root)`
-  width: 311px;
-  min-height: calc(100% - 48px);
+export const FormWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 68px);
+  width: 326px;
+
   & form {
-    height: calc(100% - 64px);
-    display: grid;
-    grid-template-rows: auto 64px [end];
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
   ${device.tablet} {
+    height: calc(100% - 84px);
     width: 464px;
-  }
-  ${device.desktop} {
-    form {
-      height: calc(100% - 80px);
-    }
   }
 `;
 
 export const ContentStyled = styled.div`
-  display: grid;
-  overflow-y: scroll;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding-right: 8px;
+
+  height: 100%;
+
+  ${device.tablet} {
+  }
 
   &::-webkit-scrollbar {
     background-color: ${({ theme }) => theme.textarea.Neutral2};
@@ -177,9 +160,9 @@ export const ErrorMessageWrapper = styled.div`
   position: absolute;
   z-index: 5;
   top: 125px;
-  width: 315px;
+  width: 326px;
   ${device.tablet} {
     top: 120px;
-    width: 465px;
+    width: 464px;
   }
 `;

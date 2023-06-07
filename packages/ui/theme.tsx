@@ -228,6 +228,7 @@ export const theme = {
     background: colors.Neutral8,
     header: colors.Teal10,
     closeButton: colors.Neutral6,
+    paragraph: colors.Neutral8,
   },
   signUp: {
     main: colors.Teal10,
