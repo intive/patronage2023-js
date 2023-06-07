@@ -8,14 +8,6 @@ export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body?: object;
 }
 
-// class SuperError extends Error {
-//   status: number;
-//   constructor(message: string, status: number) {
-//     super(message);
-//     this.status = status;
-//   }
-// }
-
 export default function useSuperfetch() {
   const { data: session } = useSession();
   const showToast = useToast();
@@ -74,10 +66,6 @@ export default function useSuperfetch() {
         });
       }
     });
-
-    // .catch(() => {
-    //   throw new SuperError("Something went wrong", 500);
-    // });
   };
 
   return superfetch;
