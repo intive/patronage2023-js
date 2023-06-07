@@ -73,7 +73,9 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
           text={`${user.firstName} ${user.lastName}`}
           position="bottom">
           <Avatar
-            src={isAvatarValid(user.avatar) ? user.avatar : "/avatars/default.svg"}
+            src={
+              isAvatarValid(user.avatar) ? user.avatar : "/avatars/default.svg"
+            }
             username={`${user.firstName} ${user.lastName}`}
             outlined
           />
