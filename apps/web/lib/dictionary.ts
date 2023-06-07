@@ -1371,6 +1371,12 @@ const dictionary = {
       pl: "Wystąpił nieoczekiwany błąd.",
       fr: "Une erreur inattendue est apparue.",
     },
+    status401: {
+      //TOAST
+      en: "Session expired. Redirect to Sign In...",
+      pl: "Sesja wygasła. Przekierowanie do strony logowania...",
+      fr: "Session expirée. Rediriger vers la connexion...",
+    },
     status403: {
       //CONSOLE
       en: "Forbidden.",

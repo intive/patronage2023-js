@@ -1,6 +1,7 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useToast } from "ui";
 import { dictionaryType } from "lib/dictionary";
+import { useRouter } from "next/navigation";
 import { useTranslate } from "./useTranslate";
 
 export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
@@ -18,6 +19,7 @@ export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
 export default function useSuperfetch() {
   const { data: session } = useSession();
   const showToast = useToast();
+  const router = useRouter();
   const { t, dict } = useTranslate("Errors");
 
   const superfetch = (
@@ -53,7 +55,12 @@ export default function useSuperfetch() {
           message: t(dict.noErrorCode),
         });
       } else if (res.status === 401) {
-        //redirect to /sign-in
+        showToast({
+          variant: "error",
+          message: t(dict.status401),
+        });
+        signOut();
+        router.push("/");
       } else if (res.status === 403) {
         console.log(t(dict.status403));
       } else if (res.status === 404) {
