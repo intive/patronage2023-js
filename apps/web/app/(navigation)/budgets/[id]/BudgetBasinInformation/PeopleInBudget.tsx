@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { z } from "zod";
 import { BudgetUser } from "lib/types";
 import { device } from "lib/media-queries";
 import { Avatar, Tooltip } from "ui";
@@ -44,6 +45,15 @@ const StyledUser = styled.div`
   padding: 3px;
 `;
 
+const isAvatarValid = (text: string) => {
+  const schemaPath = z.string().startsWith("/avatars/");
+  const schemaUrl = z.string().url();
+
+  return (
+    schemaPath.safeParse(text).success || schemaUrl.safeParse(text).success
+  );
+};
+
 const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
   const maxUsersToShow = users.length > 4 ? 3 : users.length;
   const visibleUsers = users.slice(0, maxUsersToShow);
@@ -63,7 +73,7 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
           text={`${user.firstName} ${user.lastName}`}
           position="bottom">
           <Avatar
-            src={user.avatar}
+            src={isAvatarValid(user.avatar) ? user.avatar : "/avatars/default.svg"}
             username={`${user.firstName} ${user.lastName}`}
             outlined
           />
