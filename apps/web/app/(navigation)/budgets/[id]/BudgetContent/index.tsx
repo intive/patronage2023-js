@@ -93,11 +93,11 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
 
   //temporary it will export budgets untill endpoint for transactions won't be ready
   const { data: exportData } = useQuery({
-    queryKey: ["exportedCsvUri"],
+    queryKey: ["exportedTransactionsCsvUri"],
     queryFn: async (): Promise<ExportResponseProps> => {
-      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`).catch(
-        (err) => console.error(err)
-      );
+      return superFetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budget?.id}/transactions/export`
+      ).catch((err) => console.error(err));
     },
     enabled: !!session,
   });
@@ -190,7 +190,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
       {importModalOpen && (
         <ImportModal
           onClose={() => setImportModalOpen(false)}
-          importEndpoint="budgets/import"
+          importEndpoint={`budgets/${budget?.id}/transactions/import`}
           allowedFileExtensions={[".csv"]}
           downloadButtonLabel={tImport(dictImport.importButtonText)}
           importButtonLabel={tImport(dictImport.importButtonText)}
