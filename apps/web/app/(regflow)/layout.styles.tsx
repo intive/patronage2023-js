@@ -119,13 +119,26 @@ export const ParagraphStyled = styled.p`
 `;
 
 export const CustomCard = styled(Card)`
-  padding: 1.5rem;
+  position: relative;
+  padding: 3rem;
 
   ${device.tablet} {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
   }
 
   ${device.desktop} {
     padding: 5rem 2rem;
+  }
+`;
+
+export const LanguageSelectorWrapper = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+
+  ${device.desktop} {
+    top: 20px;
+    right: 20px;
   }
 `;
