@@ -68,7 +68,7 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
             />
           }
           name={`${user.firstName} ${user.lastName}`}
-          email={`${user.firstName}${user.lastName}@mail.com`}
+          email={user.userEmail}
           image={user.avatar}
         />
       ))}
