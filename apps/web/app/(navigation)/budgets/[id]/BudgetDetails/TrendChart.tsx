@@ -121,7 +121,7 @@ export const TrendChart = ({ statistics, currency }: TrendChartProps) => {
     if (statistics.items.length < 2) {
       return (
         <StyledChartPlaceholder
-          height="auto"
+          height="100%"
           viewBox="0 0 240 80"
           xmlns="http://www.w3.org/2000/svg">
           <path
