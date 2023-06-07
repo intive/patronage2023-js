@@ -26,6 +26,7 @@ const getPersonalCardContent = (
   email: string | undefined,
   image: string
 ) => {
+  console.log("ccheck");
   return (
     <>
       <AvatarStyled src={image} />
