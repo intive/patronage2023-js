@@ -192,7 +192,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
           onClose={() => setImportModalOpen(false)}
           importEndpoint={`budgets/${budget?.id}/transactions/import`}
           allowedFileExtensions={[".csv"]}
-          downloadButtonLabel={tImport(dictImport.importButtonText)}
+          downloadButtonLabel={tImport(dictImport.downloadButtonText)}
           importButtonLabel={tImport(dictImport.importButtonText)}
           noDataSavedToastMsg={tImport(dictImport.noTransactionSaved)}
           instructionScreen={() =>
