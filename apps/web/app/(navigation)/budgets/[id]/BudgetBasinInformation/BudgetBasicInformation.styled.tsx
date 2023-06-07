@@ -71,8 +71,8 @@ export const NavBudgetIconStyled = styled(NavBudgetIcon)`
   }
 `;
 
-export const FavouriteStyled = styled(Favourite)`
-  display: none;
+export const FavouriteStyled = styled(Favourite)<{ isOwner?: boolean }>`
+  display: ${({ isOwner }) => (isOwner ? "none" : "initial")};
   margin-left: 0;
   background-color: ${({ theme }) => theme.editIcon.background};
   height: 3em;
