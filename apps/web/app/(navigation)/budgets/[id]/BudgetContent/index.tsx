@@ -21,12 +21,7 @@ import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.s
 import { useTranslate } from "lib/hooks";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
-import {
-  ButtonWithDropdown,
-  Icon,
-  Separator,
-  Button as ImportExportButton,
-} from "ui";
+import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
 import { ExportResponseProps } from "lib/types";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 
@@ -48,7 +43,11 @@ const CreateButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  gap: 8px;
+  gap: 6px;
+`;
+
+const ImportButton = styled(Button)`
+  font-size: 0.9em;
 `;
 
 interface BudgetsContentProps {
@@ -155,11 +154,11 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
             },
           ]}
         />
-        <ImportExportButton
+        <ImportButton
           disabled={!budget}
           onClick={() => setImportModalOpen(true)}>
           {tButton(dictButton.import)}
-        </ImportExportButton>
+        </ImportButton>
         <ButtonWithDropdown
           items={exportTransactionsItems}
           disabled={!budget}
