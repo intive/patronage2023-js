@@ -61,8 +61,12 @@ export const InputWrapperFullFlex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 24px;
+
+  ${device.tablet} {
+    gap: 16px;
+  }
 `;
 
 export const SeparatorStyled = styled(Separator)`
@@ -116,7 +120,7 @@ export const FormWrapperStyled = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100% - 68px);
-  width: 311px;
+  width: 326px;
 
   & form {
     height: 100%;
@@ -133,7 +137,7 @@ export const ContentStyled = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-  padding-right: 10px;
+  padding-right: 8px;
 
   height: 100%;
 
@@ -156,9 +160,9 @@ export const ErrorMessageWrapper = styled.div`
   position: absolute;
   z-index: 5;
   top: 125px;
-  width: 315px;
+  width: 326px;
   ${device.tablet} {
     top: 120px;
-    width: 465px;
+    width: 464px;
   }
 `;

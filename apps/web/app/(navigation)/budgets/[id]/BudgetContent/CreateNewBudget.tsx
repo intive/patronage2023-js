@@ -125,6 +125,10 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
             return;
         }
       },
+      onError: () => {
+        setErrorMsg(t(dict.errors.errorDefault));
+        return;
+      },
     }
   );
 

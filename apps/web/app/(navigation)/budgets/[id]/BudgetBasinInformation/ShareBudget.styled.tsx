@@ -1,6 +1,5 @@
 import { device } from "lib/media-queries";
 import styled from "styled-components";
-import { Separator } from "ui";
 
 export const ListItemStyled = styled.li`
   display: flex;
@@ -63,7 +62,7 @@ export const ShareBudgetWrapperStyled = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   flex-grow: 1;
-  width: 311px;
+  width: 326px;
   overflow-y: hidden;
 
   ${device.tablet} {
