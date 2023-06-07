@@ -56,8 +56,9 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
 
   const remainingUserNames = remainingUsers.map((user) => (
     <PersonalCard
+      key={user.id}
       triggerComponent={
-        <StyledUser key={user.id}>
+        <StyledUser>
           {user.firstName} {user.lastName}
         </StyledUser>
       }
