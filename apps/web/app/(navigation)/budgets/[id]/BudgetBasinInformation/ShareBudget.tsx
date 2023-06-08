@@ -1,5 +1,4 @@
 import { forwardRef, useCallback, useRef, useState } from "react";
-import { z } from "zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
 import { Avatar, Button, Checkbox, ErrorMessage, Modal } from "ui";
@@ -29,6 +28,7 @@ import { useDebounce } from "lib/hooks/useDebounce";
 import { useGetUsers } from "lib/hooks/useGetUsers";
 import { BudgetFixed } from "lib/types";
 import useSuperfetch from "lib/hooks/useSuperfetch";
+import isAvatarValid from "lib/validations/avatarValidation";
 
 type User = {
   id: string;
@@ -49,15 +49,6 @@ type UsersListItemProps = {
   user: User;
   onCheckboxChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   checked: boolean;
-};
-
-const isAvatarValid = (text: string) => {
-  const schemaPath = z.string().startsWith("/avatars/");
-  const schemaUrl = z.string().url();
-
-  return (
-    schemaPath.safeParse(text).success || schemaUrl.safeParse(text).success
-  );
 };
 
 const UsersListItem = forwardRef<HTMLLIElement, UsersListItemProps>(
