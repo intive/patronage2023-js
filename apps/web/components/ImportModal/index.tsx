@@ -231,7 +231,7 @@ export const ImportModal = ({
               onClick={inputClickHandler}
               disabled={isLoading}>
               <LabelStyled htmlFor="import-file" aria-label="upload-file">
-                <IconStyled icon="file_upload" />
+                <IconStyled icon="file_download" />
                 <span>{importButtonLabel}</span>
               </LabelStyled>
             </ImportButtonStyled>
@@ -259,7 +259,7 @@ export const ImportModal = ({
             href={csvUri}
             download
             title="csv-file">
-            <IconStyled icon="file_download" size={12} />
+            <IconStyled icon="file_upload" size={12} />
             <span>{downloadButtonLabel}</span>
           </ButtonStyled>
         )}
