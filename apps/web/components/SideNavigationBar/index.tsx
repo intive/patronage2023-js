@@ -152,7 +152,9 @@ export default function SideNav() {
     return distinct;
   };
 
-  const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
+  const flatData = data?.pages[0]
+    ? data?.pages?.flatMap(({ items }: ItemType) => items)
+    : ([] as BudgetType[]);
 
   const uniqueValues = removeDuplicates(flatData, createKey);
 
