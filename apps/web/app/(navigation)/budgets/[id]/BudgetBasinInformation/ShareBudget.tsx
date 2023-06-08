@@ -99,7 +99,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
   const pageSize = 15;
   const { t, dict } = useTranslate("ShareBudget");
 
-  const initBudgetUsers = budget.budgetUsers.map((user) => user.id);
+  const initBudgetUsers = budget.budgetUsers?.map((user) => user.id) || [];
   const [budgetUsers, setBudgetUsers] = useState(initBudgetUsers);
 
   const [searchValue, setSearchValue] = useState("");
