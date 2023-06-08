@@ -169,7 +169,8 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
           variant="secondary"
           items={exportTransactionsItems}
           disabled={!budget}
-          label={tButton(dictButton.export)}></ButtonWithDropdown>
+          label={tButton(dictButton.export)}
+        />
       </CreateButtonWrapper>
       {budget ? (
         <BudgetDetails budget={fixCurrencyObject(budget)} />
