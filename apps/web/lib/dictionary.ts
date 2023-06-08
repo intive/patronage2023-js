@@ -1155,6 +1155,11 @@ const dictionary = {
       pl: "Ściągnij plik CSV",
       fr: "Télécharger le fichier CSV",
     },
+    sendEmailText: {
+      en: "Send by email",
+      pl: "Wyślij za pomocą email",
+      fr: "",
+    },
   },
   ImportModal: {
     downloadButtonText: {

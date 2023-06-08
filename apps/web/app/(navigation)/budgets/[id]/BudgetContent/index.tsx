@@ -110,13 +110,11 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     </LinkStyled>
   );
 
-  const emailButton = (
-    <button
-      onClick={() => {
-        console.log("email");
-      }}>
-      email
-    </button>
+  const emailLink = (
+    <LinkStyled title="email">
+      <Icon icon="file_upload" size={12} />
+      <span>{tExport(dictExport.sendEmailText)}</span>
+    </LinkStyled>
   );
 
   const exportTransactionsItems = [
@@ -126,7 +124,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     },
     {
       id: "export-transactions-email",
-      node: emailButton,
+      node: emailLink,
     },
   ];
 
