@@ -85,7 +85,6 @@ export const SignUp = () => {
     profileInfo: userObject["profile"],
     blob?: File
   ) => {
-    console.log('!!!', 'hello');
     const newUser = { ...user, profile: profileInfo };
 
     if (blob) {
