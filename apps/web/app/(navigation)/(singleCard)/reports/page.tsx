@@ -12,7 +12,6 @@ import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import MultiCardLayoutTop from "../../MultiCardLayoutTop";
 import ReportsChart from "./ReportsChart";
 import {
   ButtonGroup,
