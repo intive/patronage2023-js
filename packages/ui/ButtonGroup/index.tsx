@@ -23,7 +23,6 @@ const ButtonGroupStyled = styled.div<GroupProps>`
   line-height: 24px;
   border-radius: 100px;
   height: 100%;
-  margin-block: 10px;
 
   & > label {
     display: flex;

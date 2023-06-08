@@ -52,7 +52,7 @@ export interface BudgetFixed {
   endDate: string;
   limit: number;
   userId: string;
-  budgetUsers: BudgetUser[];
+  budgetUsers?: BudgetUser[];
   currency: {
     tag: string;
     locale: string;
@@ -82,3 +82,16 @@ export interface CategoryMap {
 export interface UserRole {
   role: "ADMIN" | "USER";
 }
+
+export type ExportResponseProps = {
+  uri: string;
+  type?: "string";
+  title?: "string";
+  status?: number;
+  traceId?: "string";
+  errors?: [
+    {
+      message: string;
+    }
+  ];
+};

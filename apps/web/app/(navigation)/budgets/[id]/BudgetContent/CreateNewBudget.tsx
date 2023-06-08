@@ -112,6 +112,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
               "budgetsList",
               { searchValue: "", sortAscending: true },
             ]);
+            queryClient.invalidateQueries(["exportedCsvUri"]);
             onClose();
             break;
           case 400:
