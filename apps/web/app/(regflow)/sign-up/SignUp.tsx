@@ -81,7 +81,6 @@ export const SignUp = () => {
   };
 
   const validateProfile = async (
-
     profileInfo: userObject["profile"],
     blob?: File
   ) => {
@@ -101,7 +100,6 @@ export const SignUp = () => {
     //run mutation
 
     signUpMutation.mutate(newUser);
-
   };
 
   return (
