@@ -1008,12 +1008,89 @@ const dictionary = {
     },
   },
   ReportsPage: {
-    title: { en: "Reports page", pl: "Raporty", fr: "Rapports" },
+    title: { en: "Reports", pl: "Raporty", fr: "Rapports" },
+    aside: {
+      title: {
+        en: "Additional information",
+        pl: "Dodatkowe informacje",
+        fr: "Informations supplémentaires",
+      },
+    },
+    currencyNames: {
+      USD: {
+        en: "United States Dollar",
+        pl: "Dolar Amerykański",
+        fr: "Dollar des États-Unis",
+      },
+      PLN: { en: "Polish Zloty", pl: "Polski Złoty", fr: "Zloty polonais" },
+      GBP: {
+        en: "British Pound",
+        pl: "Funt Brytyjski",
+        fr: "Livre britannique",
+      },
+      EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
+    },
+    currencyPlShorts: {
+      en: "PLN",
+      pl: "zł",
+      fr: "PLN",
+    },
+    thousandShorts: {
+      en: "K",
+      pl: "tys",
+      fr: "k",
+    },
+    balance: {
+      en: "Total balance",
+      pl: "Bilans",
+      fr: "Solde total",
+    },
     trendChip: {
       text: {
         en: "Your budget's percentage growth is ",
         pl: "Wzrost procentowy twojego budżetu wynosi ",
         fr: "Le pourcentage de croissance de votre budget est de ",
+      },
+    },
+    currency: {
+      en: "Currency",
+      pl: "Waluta",
+      fr: "Monnaie",
+    },
+    shortcuts: {
+      day: {
+        en: "d",
+        pl: "d",
+        fr: "j",
+      },
+      month: {
+        en: "m",
+        pl: "m",
+        fr: "m",
+      },
+    },
+    info: {
+      noData: {
+        en: "No data for ",
+        pl: "Brak danych dla ",
+        fr: "Aucune donnée pour ",
+      },
+      noTransaction: {
+        en: "There are no transactions for the selected period",
+        pl: "Brak transakcji dla wybranego okresu",
+        fr: "Il n'y a aucune transaction pour la période sélectionnée",
+      },
+    },
+    labelsTooltip: {
+      incomes: {
+        en: "Incomes",
+        pl: "Wpływy",
+        fr: "Recettes",
+      },
+      expenses: {
+        en: "Expenses",
+        pl: "Wydatki",
+        fr: "Dépenses",
       },
     },
   },
