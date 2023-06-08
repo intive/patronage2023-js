@@ -13,9 +13,13 @@ const CommonContentStyled = css`
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
   border-radius: 16px;
   overflow: hidden;
-  padding: 0.8em 2em;
   gap: 10px;
   z-index: 11;
+  padding: 0.4em 1em;
+
+  ${device.tablet} {
+    padding: 0.8em 2em;
+  }
 `;
 
 /* HoverCard */
@@ -42,16 +46,26 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.span`
-  font-size: 24px;
+  font-size: 16px;
+  ${device.tablet} {
+    font-size: 24px;
+  }
 `;
 
 export const UserEmail = styled.span`
-  font-size: 12px;
+  font-size: 8px;
+  ${device.tablet} {
+    font-size: 12px;
+  }
 `;
 
 export const AvatarStyled = styled(Avatar)`
-  height: 80px;
-  width: 80px;
+  height: 40px;
+  width: 40px;
+  ${device.tablet} {
+    height: 80px;
+    width: 80px;
+  }
 `;
 
 /* Popover */
@@ -75,3 +89,9 @@ export const PopoverContent = styled(Popover.Content)`
 export const PopoverArrow = styled(Popover.Arrow)`
   fill: ${({ theme }) => theme.personalCard.main};
 `;
+
+export const PopoverRoot = styled(Popover.Root)``;
+
+export const PopoverTrigger = styled(Popover.Trigger)``;
+
+export const PopoverPortal = styled(Popover.Portal)``;

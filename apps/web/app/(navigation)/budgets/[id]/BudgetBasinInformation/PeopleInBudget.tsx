@@ -3,6 +3,7 @@ import { BudgetUser } from "lib/types";
 import { device } from "lib/media-queries";
 import { Avatar, Tooltip, PersonalCard } from "ui";
 import isAvatarValid from "lib/validations/avatarValidation";
+import { HiddenUsers } from "components/HiddenUsers";
 
 type PeopleInBudgetProps = {
   users: BudgetUser[];
@@ -29,7 +30,7 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const StyledCounter = styled.div`
+export const StyledCounter = styled.div`
   border: 2px solid ${({ theme }) => theme.avatar.outline};
   background-color: ${({ theme }) => theme.avatar.aggregator};
   color: ${({ theme }) => theme.avatar.outline};
@@ -47,12 +48,12 @@ const StyledCounter = styled.div`
 `;
 
 const StyledUser = styled.div`
+  font-size: 10px;
   padding: 3px;
-`;
 
-const WrapperRemainingUsers = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${device.tablet} {
+    font-size: 14px;
+  }
 `;
 
 const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
@@ -98,15 +99,10 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
         />
       ))}
       {remainingUsers.length > 0 && (
-        <Tooltip
-          text={
-            <WrapperRemainingUsers>{remainingUserNames}</WrapperRemainingUsers>
-          }
-          position="bottom">
-          <StyledCounter>
-            <span>{remainingUsers.length}</span>
-          </StyledCounter>
-        </Tooltip>
+        <HiddenUsers
+          remainingUserNames={remainingUserNames}
+          remainingUsers={remainingUsers}
+        />
       )}
     </StyledWrapper>
   );
