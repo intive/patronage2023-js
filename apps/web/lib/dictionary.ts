@@ -49,7 +49,7 @@ const dictionary = {
         exportButtonLabel: {
           en: "Export file",
           pl: "Eksportuj plik",
-          fr: "*Le point de vue d'Eksportuj",
+          fr: "Exporter le fichier",
         },
         infos: {
           loading: {
@@ -976,6 +976,7 @@ const dictionary = {
         fr: "Nouvelle dépense",
       },
     },
+
     charts: {
       titleLeft: {
         en: "Total balance",
@@ -1296,17 +1297,39 @@ const dictionary = {
       fr: "Remboursement",
     },
   },
+  ImportExportMainButton: {
+    import: {
+      en: "Import",
+      pl: "Importuj",
+      fr: "Importer",
+    },
+    export: {
+      en: "Export",
+      pl: "Eksportuj",
+      fr: "Exporter",
+    },
+  },
   ExportFile: {
     exportToastMessage: {
       en: "CSV exported successfully",
       pl: "CSV wyeksportowany pomyślnie",
       fr: "CSV exporté avec succès",
     },
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Pobierz plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
+    sendEmailText: {
+      en: "Send by email",
+      pl: "Wyślij za pomocą email",
+      fr: "Envoyer par email",
+    },
   },
   ImportModal: {
     downloadButtonText: {
       en: "Download CSV",
-      pl: "Ściągnij plik CSV",
+      pl: "Pobierz plik CSV",
       fr: "Télécharger le fichier CSV",
     },
     successHeader: {
@@ -1327,23 +1350,28 @@ const dictionary = {
     errorCsvMessage: {
       en: "Not all records have been imported. Check which records have not been imported! Correct the records in the downloaded file and import them again.",
       pl: "Nie wszystkie rekordy zostały zaimportowane. Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
-      fr: "*Tous les enregistrements n'ont pas été importés. Vérifiez quels enregistrements n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+      fr: "Certains enregistrements n'ont pas été importés. Veuillez vérifier quels enregistrements n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
     },
     noBudgetSaved: {
       en: "No budget was saved. Correct the file and import it again",
       pl: "Żaden budżet nie został zapisany. Popraw plik i zaimportuj go ponownie",
-      fr: "*Aucun budget n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
+      fr: "Aucun budget n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
+    },
+    noTransactionSaved: {
+      en: "No transaction was saved. Correct the file and import it again",
+      pl: "Żadna transakcja nie została zapisana. Popraw plik i zaimportuj go ponownie",
+      fr: "Aucune transaction n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
     },
     incorrectFileExtension: {
       en: "Incorrect file extension. Import the file with the correct extension:",
       pl: "Nieprawidłowe rozszerzenie pliku. Zaimportuj plik z prawidłowym rozszerzeniem:",
-      fr: "*Extension de fichier incorrecte. Importer le fichier avec l'extension correcte:",
+      fr: "Extension de fichier incorrecte. Importez le fichier avec l'extension correcte:",
     },
     responseErrors: {
       400: {
         en: "400: Incorrect data. Correct the file and try again.",
         pl: "400: Nieprawidłowe dane. Popraw plik i spróbuj jeszcze raz.",
-        fr: "*400: Données incorrectes. Corrigez le fichier et réessayez.",
+        fr: "400: Données incorrectes. Corrigez le fichier et réessayez.",
       },
       401: {
         en: "401: Unauthorized user",
@@ -1359,12 +1387,12 @@ const dictionary = {
     modalHeader: {
       en: "Import",
       pl: "Importuj",
-      fr: "*Importer un fichier",
+      fr: "Importer",
     },
     importButtonText: {
       en: "Click to import",
       pl: "Kliknij, aby zaimportować",
-      fr: "Cliquez pour importer",
+      fr: "Cliquer pour importer",
     },
     instruction: {
       wantToUpload: {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Icon } from "ui";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { device } from "web/lib/media-queries";
@@ -10,15 +10,20 @@ export type ButtonWithDropdownProps = {
   label: string;
   items: ButtonWithDropdownItem[];
   disabled?: boolean;
+  variant?: "primary" | "secondary";
 };
 
 export type ButtonWithDropdownItem = {
   id: string;
-  label: string;
-  callback: () => void;
+  callback?: () => void;
+  node?: React.ReactNode | string;
 };
 
-const StyledButton = styled.button`
+type ButtonVariant = {
+  variant: "primary" | "secondary";
+};
+
+const StyledButton = styled.button<ButtonVariant>`
   box-sizing: border-box;
   display: inline-flex;
   justify-content: center;
@@ -32,6 +37,7 @@ const StyledButton = styled.button`
   transition: all 0.2s;
   cursor: pointer;
   padding: 5px 3px 5px 12px;
+
   ${device.tablet} {
     padding: 9px 12px 9px 22px;
     font-size: 1em;
@@ -48,6 +54,24 @@ const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.button.primary.disabled};
     cursor: not-allowed;
   }
+
+  ${({ variant }) =>
+    variant === "secondary" &&
+    css`
+      background-color: ${({ theme }) => theme.button.secondary.background};
+      border: 2px solid ${({ theme }) => theme.button.secondary.main};
+      color: ${({ theme }) => theme.button.secondary.main};
+      &:hover {
+        background-color: ${({ theme }) => theme.button.secondary.background};
+        border: 2px solid ${({ theme }) => theme.button.secondary.hover};
+        color: ${({ theme }) => theme.button.secondary.hover};
+      }
+      &:disabled {
+        color: ${({ theme }) => theme.button.secondary.disabled};
+        background-color: ${({ theme }) => theme.button.secondary.background};
+        border: 2px solid ${({ theme }) => theme.button.secondary.disabled};
+      }
+    `}
 `;
 
 export const DropdownMenuContentStyled = styled(DropdownMenu.Content)`
@@ -97,16 +121,17 @@ export const ButtonWithDropdown = ({
   label,
   items,
   disabled,
+  variant = "primary",
 }: ButtonWithDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu.Root modal={false} open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenu.Trigger asChild>
-        <StyledButton disabled={disabled}>
+        <StyledButton disabled={disabled} variant={variant}>
           {label}
           <Icon
-            color="white"
+            color="inherit"
             icon={isOpen ? "arrow_drop_up" : "arrow_drop_down"}
             iconSize={30}
           />
@@ -114,9 +139,9 @@ export const ButtonWithDropdown = ({
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
         <DropdownMenuContentStyled align="start">
-          {items.map((item) => (
-            <DropdownMenuItemStyled key={item.id} onClick={item.callback}>
-              {item.label}
+          {items.map(({ id, callback, node }) => (
+            <DropdownMenuItemStyled key={id} onClick={callback}>
+              {node}
             </DropdownMenuItemStyled>
           ))}
         </DropdownMenuContentStyled>

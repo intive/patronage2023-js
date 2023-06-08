@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { useTranslate } from "lib/hooks";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { useGetBudgets } from "lib/hooks/useGetBudgets";
+import { ExportResponseProps } from "lib/types";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import validate from "lib/validations/iconValidation";
 
@@ -22,7 +23,6 @@ import { ImportModal } from "components/ImportModal";
 import { SideNavigationBar, Icon, NavList, useToast } from "ui";
 import { SpanStyled } from "ui/NavList";
 import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
-import { ExportResponseProps } from "lib/types";
 
 export const IconStyled = styled(Icon)`
   background: ${({ theme }) => theme.navList.navItem.iconBackgroundColor};
@@ -39,7 +39,6 @@ export default function SideNav() {
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
   const showToast = useToast();
-
   const superFetch = useSuperfetch();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
