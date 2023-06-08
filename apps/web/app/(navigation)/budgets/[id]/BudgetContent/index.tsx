@@ -18,12 +18,13 @@ import TransactionTableController from "../TransactionTableController";
 import { ImportModal } from "components/ImportModal";
 import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
 
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { device } from "lib/media-queries";
 import { useTranslate } from "lib/hooks";
+import { ExportResponseProps } from "lib/types";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
 import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
-import { ExportResponseProps } from "lib/types";
-import useSuperfetch from "lib/hooks/useSuperfetch";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -48,6 +49,14 @@ const CreateButtonWrapper = styled.div`
 
 const ImportButton = styled(Button)`
   font-size: 0.9em;
+  padding: 12px;
+  ${device.tablet} {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+  ${device.desktop} {
+    padding: 12px 34px;
+  }
 `;
 
 interface BudgetsContentProps {
@@ -90,7 +99,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
-  //temporary it will export budgets untill endpoint for transactions won't be ready
   const { data: exportData } = useQuery({
     queryKey: ["exportedTransactionsCsvUri"],
     queryFn: async (): Promise<ExportResponseProps> => {
@@ -154,10 +162,12 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
         />
         <ImportButton
           disabled={!budget}
-          onClick={() => setImportModalOpen(true)}>
+          onClick={() => setImportModalOpen(true)}
+          variant="secondary">
           {tButton(dictButton.import)}
         </ImportButton>
         <ButtonWithDropdown
+          variant="secondary"
           items={exportTransactionsItems}
           disabled={!budget}
           label={tButton(dictButton.export)}></ButtonWithDropdown>

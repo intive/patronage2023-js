@@ -1158,7 +1158,7 @@ const dictionary = {
     sendEmailText: {
       en: "Send by email",
       pl: "Wyślij za pomocą email",
-      fr: "",
+      fr: "Envoyer par email",
     },
   },
   ImportModal: {
