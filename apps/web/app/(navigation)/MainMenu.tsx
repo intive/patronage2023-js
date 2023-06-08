@@ -64,6 +64,7 @@ export const MainMenu = () => {
                 triggerComponent={
                   <AvatarStyled src={data.user.image} outlined />
                 }
+                side="bottom"
                 name={data.user.name}
                 email={data.user.email}
                 image={data.user.image}

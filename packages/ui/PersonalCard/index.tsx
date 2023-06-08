@@ -16,6 +16,7 @@ import {
 
 interface PersonalCardProps {
   triggerComponent: ReactNode;
+  side: "top" | "bottom" | "left" | "right";
   name: string;
   email?: string;
   image: string;
@@ -39,6 +40,7 @@ const getPersonalCardContent = (
 
 export const PersonalCard = ({
   triggerComponent,
+  side,
   name,
   email,
   image,
@@ -49,7 +51,7 @@ export const PersonalCard = ({
         <HoverCard.Root>
           <HoverCard.Trigger asChild>{triggerComponent}</HoverCard.Trigger>
           <HoverCard.Portal>
-            <HoverCardContent>
+            <HoverCardContent side={side}>
               {getPersonalCardContent(name, email, image)}
               <HoverCardArrow />
             </HoverCardContent>
@@ -61,7 +63,7 @@ export const PersonalCard = ({
         <Popover.Root>
           <Popover.Trigger asChild>{triggerComponent}</Popover.Trigger>
           <Popover.Portal>
-            <PopoverContent>
+            <PopoverContent side={side}>
               {getPersonalCardContent(name, email, image)}
               <PopoverArrow />
             </PopoverContent>

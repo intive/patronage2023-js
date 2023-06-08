@@ -14,6 +14,11 @@ const StyledWrapper = styled.div`
   display: flex;
   align-items: flex-start;
   line-height: 1em;
+  margin-left: 8px;
+
+  ${device.tablet} {
+    margin-left: 0px;
+  }
 
   > * + * {
     margin-left: -8px;
@@ -63,6 +68,7 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
           {user.firstName} {user.lastName}
         </StyledUser>
       }
+      side="right"
       email={user.userEmail}
       image={user.avatar}
       name={`${user.firstName} ${user.lastName}`}
@@ -85,6 +91,7 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
               outlined
             />
           }
+          side="bottom"
           name={`${user.firstName} ${user.lastName}`}
           email={user.userEmail}
           image={user.avatar}
