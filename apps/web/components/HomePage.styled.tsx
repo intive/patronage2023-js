@@ -23,10 +23,6 @@ export const CardStyled = styled(Card)`
   }
 `;
 
-export const CardStyledTop = styled(CardStyled)`
-  justify-content: flex-start;
-`;
-
 export const TypoStyled = styled.h1`
   font-family: "Signika", sans-serif;
   font-size: 2.8em;
