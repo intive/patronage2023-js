@@ -266,7 +266,6 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                     )}
                   </Field>
                 </InputWrapperHalfStyledCurrency>
-
                 <Field
                   name="description"
                   initialValue={""}
@@ -280,8 +279,15 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
                           name="description"
                           placeholder={""}
                           label={t(dict.inputNames.description)}
+                          value={value}
+                          hasError={errors.length > 0}
+                          onChange={(e) => {
+                            setValue(e.currentTarget.value);
+                          }}
                         />
-                        <TextareaErrorStyled>{errors[0]}</TextareaErrorStyled>
+                        <TextareaErrorStyled>
+                          {errors.at(0)}
+                        </TextareaErrorStyled>
                       </TextAreaWrapperStyled>
                     );
                   }}
