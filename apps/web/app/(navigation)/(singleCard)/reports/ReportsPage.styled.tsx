@@ -55,7 +55,7 @@ export const SelectWrapper = styled.div`
 
 export const ChartButtonsWrapper = styled.div`
   margin-top: 1px;
-  max-height: 45px;
+  max-height: 54px;
   width: 120px;
 `;
 
