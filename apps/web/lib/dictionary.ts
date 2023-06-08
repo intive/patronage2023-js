@@ -327,10 +327,62 @@ const dictionary = {
         pl: "Spersonalizuj swoje konto",
         fr: "Personnaliser votre compte",
       },
+      avatarSwitcherDefault: {
+        en: "Default",
+        pl: "Podstawowe",
+        fr: "Par défaut",
+      },
+      avatarSwitcherCustom: {
+        en: "Personalized",
+        pl: "Spersonalizowany",
+        fr: "Personnalisé",
+      },
+      dropZone: {
+        mainText: {
+          en: "Drop file here",
+          pl: "Upuść plik tutaj",
+          fr: "Déposez le fichier ici",
+        },
+        separator: {
+          en: "or",
+          pl: "lub",
+          fr: "ou",
+        },
+        buttonText: {
+          en: "Choose a file",
+          pl: "Wybierz plik",
+          fr: "Choisir un fichier",
+        },
+        onOver: {
+          en: "Drop here...",
+          pl: "Upuść tutaj...",
+          fr: "Déposez ici...",
+        },
+        goBack: {
+          en: "Crop again",
+          pl: "Przytnij jeszcze raz",
+          fr: "Recadrer à nouveau",
+        },
+        delete: {
+          en: "Delete",
+          pl: "Usuń",
+          fr: "Supprimer",
+        },
+        modalHeader: {
+          en: "Crop your image before submitting.",
+          pl: "Przytnij zdjęcie przed wysłaniem.",
+          fr: "Recadrez votre image avant de la soumettre.",
+        },
+        croppedTitle: {
+          en: "Your avatar",
+          pl: "Twój awatar",
+          fr: "Votre avatar",
+        },
+      },
       subtitle: {
-        en: "Select your avatar and tell us your name",
-        pl: "Wybierz avatar i powiedz jak się nazywasz",
-        fr: "Choisissez un avatar et dites votre nom",
+        en: "Select or upload your avatar and tell us your name",
+        pl: "Wybierz lub prześlij swój avatar i powiedz jak się nazywasz",
+        fr: "Choisissez ou téléchargez votre avatar et prononcez votre nom",
       },
       firstNameInputLabel: {
         en: "First name",
@@ -700,6 +752,42 @@ const dictionary = {
       },
     },
   },
+  ShareBudget: {
+    header: {
+      en: "Share budget",
+      pl: "Udostępnij budżet",
+      fr: "Partager le budget",
+    },
+    noUsersFound: {
+      en: "No members found.",
+      pl: "Nie znaleziono użytkowników.",
+      fr: "D'aucuns utilisateurs trouvés",
+    },
+    inviteMembers: {
+      en: "Invite existing members",
+      pl: "Zaproś użytkowników",
+      fr: "Inviter des utilisateurs existants",
+    },
+    search: { en: "Search", pl: "Wyszukaj", fr: "Rechercher" },
+    share: { en: "Share", pl: "Udostępnij", fr: "Partager" },
+    errors: {
+      error400: {
+        en: "400: Incorrect data. Please try again.",
+        pl: "400: Nieprawidłowe dane. Spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Veuillez réessayer.",
+      },
+      error401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: L'utilisateur non autorisé",
+      },
+      errorDefault: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+    },
+  },
   CreateNewTransactionModal: {
     header: {
       income: {
@@ -921,12 +1009,89 @@ const dictionary = {
     },
   },
   ReportsPage: {
-    title: { en: "Reports page", pl: "Raporty", fr: "Rapports" },
+    title: { en: "Reports", pl: "Raporty", fr: "Rapports" },
+    aside: {
+      title: {
+        en: "Additional information",
+        pl: "Dodatkowe informacje",
+        fr: "Informations supplémentaires",
+      },
+    },
+    currencyNames: {
+      USD: {
+        en: "United States Dollar",
+        pl: "Dolar Amerykański",
+        fr: "Dollar des États-Unis",
+      },
+      PLN: { en: "Polish Zloty", pl: "Polski Złoty", fr: "Zloty polonais" },
+      GBP: {
+        en: "British Pound",
+        pl: "Funt Brytyjski",
+        fr: "Livre britannique",
+      },
+      EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
+    },
+    currencyPlShorts: {
+      en: "PLN",
+      pl: "zł",
+      fr: "PLN",
+    },
+    thousandShorts: {
+      en: "K",
+      pl: "tys",
+      fr: "k",
+    },
+    balance: {
+      en: "Total balance",
+      pl: "Bilans",
+      fr: "Solde total",
+    },
     trendChip: {
       text: {
         en: "Your budget's percentage growth is ",
         pl: "Wzrost procentowy twojego budżetu wynosi ",
         fr: "Le pourcentage de croissance de votre budget est de ",
+      },
+    },
+    currency: {
+      en: "Currency",
+      pl: "Waluta",
+      fr: "Monnaie",
+    },
+    shortcuts: {
+      day: {
+        en: "d",
+        pl: "d",
+        fr: "j",
+      },
+      month: {
+        en: "m",
+        pl: "m",
+        fr: "m",
+      },
+    },
+    info: {
+      noData: {
+        en: "No data for ",
+        pl: "Brak danych dla ",
+        fr: "Aucune donnée pour ",
+      },
+      noTransaction: {
+        en: "There are no transactions for the selected period",
+        pl: "Brak transakcji dla wybranego okresu",
+        fr: "Il n'y a aucune transaction pour la période sélectionnée",
+      },
+    },
+    labelsTooltip: {
+      incomes: {
+        en: "Incomes",
+        pl: "Wpływy",
+        fr: "Recettes",
+      },
+      expenses: {
+        en: "Expenses",
+        pl: "Wydatki",
+        fr: "Dépenses",
       },
     },
   },

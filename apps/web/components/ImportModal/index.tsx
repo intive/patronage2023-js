@@ -20,16 +20,16 @@ import {
   SuccessScreen,
 } from "./ImportModal.screens";
 import {
-  ImportExportAction,
-  ImportExportState,
+  ImportExportActionType,
+  ImportExportStateType,
   ImportResponseProps,
 } from "./ImportModal.types";
 import { InstructionPopover } from "./InstructionPopover";
 
 const reducer = (
-  state: ImportExportState,
-  action: ImportExportAction
-): ImportExportState => {
+  state: ImportExportStateType,
+  action: ImportExportActionType
+): ImportExportStateType => {
   switch (action.type) {
     case "SET_SHOW_IMPORT_BUTTON":
       return { ...state, showImportButton: action.payload };
@@ -37,20 +37,30 @@ const reducer = (
       return { ...state, csvUri: action.payload };
     case "SET_SCREEN":
       return { ...state, screen: action.payload };
-    case "SET_PROPS":
-      return { ...state, props: action.payload };
-    case "SET_MULTIPLE":
-      return { ...state, ...action.payload };
+    case "SET_RESPONSE_VALID":
+      return {
+        ...state,
+        screen: action.payload.screen,
+        showImportButton: action.payload.showImportButton,
+      };
+    case "SET_RESPONSE_INVALID":
+      return {
+        ...state,
+        showImportButton: action.payload.showImportButton,
+        csvUri: action.payload.csvUri,
+        screen: action.payload.screen,
+        errorsScreenProps: action.payload.errorsScreenProps,
+      };
     default:
       return state;
   }
 };
 
-const initialState: ImportExportState = {
+const initialState: ImportExportStateType = {
   showImportButton: true,
   csvUri: "",
   screen: () => null,
-  props: {
+  errorsScreenProps: {
     errors: [],
     errorMessage: "",
   },
@@ -76,7 +86,7 @@ export const ImportModal = ({
   noDataSavedToastMsg,
 }: ImportModalProps) => {
   const [
-    { showImportButton, csvUri, screen: Screen, props: importExportProps },
+    { showImportButton, csvUri, screen: Screen, errorsScreenProps },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -112,16 +122,16 @@ export const ImportModal = ({
 
           if (isDataValid) {
             dispatch({
-              type: "SET_MULTIPLE",
+              type: "SET_RESPONSE_VALID",
               payload: { screen: SuccessScreen, showImportButton: true },
             });
           } else {
             dispatch({
-              type: "SET_MULTIPLE",
+              type: "SET_RESPONSE_INVALID",
               payload: {
                 showImportButton: false,
                 screen: ErrorsScreen,
-                props: {
+                errorsScreenProps: {
                   errors: data.errors,
                   errorMessage: t(dict.errorCsvMessage),
                 },
@@ -136,11 +146,11 @@ export const ImportModal = ({
             message: t(dict.responseErrors[400]),
           });
           dispatch({
-            type: "SET_MULTIPLE",
+            type: "SET_RESPONSE_INVALID",
             payload: {
               showImportButton: true, // show download button or show import button
               screen: ErrorsScreen,
-              props: {
+              errorsScreenProps: {
                 errors: data.errors,
                 errorMessage: noDataSavedToastMsg,
               },
@@ -213,7 +223,7 @@ export const ImportModal = ({
       onClose={() => onClose()}>
       <SeparatorTopStyled />
       <ModalContentStyled>
-        {isLoading ? <SpinnerScreen /> : <Screen {...importExportProps} />}
+        {isLoading ? <SpinnerScreen /> : <Screen {...errorsScreenProps} />}
         {showImportButton ? (
           <>
             <ImportButtonStyled
@@ -221,7 +231,7 @@ export const ImportModal = ({
               onClick={inputClickHandler}
               disabled={isLoading}>
               <LabelStyled htmlFor="import-file" aria-label="upload-file">
-                <IconStyled icon="file_upload" />
+                <IconStyled icon="file_download" />
                 <span>{importButtonLabel}</span>
               </LabelStyled>
             </ImportButtonStyled>
@@ -249,7 +259,7 @@ export const ImportModal = ({
             href={csvUri}
             download
             title="csv-file">
-            <IconStyled icon="file_download" size={12} />
+            <IconStyled icon="file_upload" size={12} />
             <span>{downloadButtonLabel}</span>
           </ButtonStyled>
         )}

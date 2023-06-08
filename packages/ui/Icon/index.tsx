@@ -59,6 +59,7 @@ export type IconType =
   | "navigate_next"
   | "trending_flat"
   | "favorite"
+  | "share"
   | "keyboard_arrow_down"
   | "keyboard_arrow_up"
   | "currency_exchange"

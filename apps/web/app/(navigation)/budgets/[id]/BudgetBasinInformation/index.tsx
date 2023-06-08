@@ -24,8 +24,9 @@ import {
 import { EditBudget } from "./EditBudget";
 import { RemoveBudget } from "./RemoveBudget";
 import PeopleInBudget from "./PeopleInBudget";
-import { InfoTile, NavBudgetIcon } from "ui";
+import { InfoTile } from "ui";
 import { StyledAddInfoSpan } from "ui/InfoTile";
+import { ShareBudget } from "./ShareBudget";
 //TYPES
 type BudgetBasicInfoProps = {
   budget: BudgetFixed;
@@ -37,7 +38,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
   const { data: session } = useSession();
 
   const loggedUserId = session?.user.id;
-  const peopleWithoutLoggedUser = budget.budgetUsers.filter(
+  const peopleWithoutLoggedUser = budget.budgetUsers?.filter(
     (user) => user.id !== loggedUserId
   );
 
@@ -82,12 +83,22 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
 
   const [isEditBudgetModalOpen, setIsEditBudgetModalOpen] = useState(false);
 
-  const openModal = () => {
+  const openEditModal = () => {
     setIsEditBudgetModalOpen(true);
   };
 
-  const closeModal = () => {
+  const closeEditModal = () => {
     setIsEditBudgetModalOpen(false);
+  };
+
+  const [isShareBudgetModalOpen, setIsShareBudgetModalOpen] = useState(false);
+
+  const openShareModal = () => {
+    setIsShareBudgetModalOpen(true);
+  };
+
+  const closeShareModal = () => {
+    setIsShareBudgetModalOpen(false);
   };
 
   const [deleteModalVisibility, setDeleteModalVisibility] = useState(false);
@@ -100,53 +111,70 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
           <BudgetNameWrapperStyled>
             <BudgetNameIconsWrapperStyled>
               <BudgetNameStyled>{name}</BudgetNameStyled>
-              <NavBudgetIconStyled onClick={openModal} icon="edit" />
               <FavouriteStyled
                 isFav={budget.isFavourite}
                 budgetId={budget.id}
+                isOwner={loggedUserId === budget.userId}
               />
-              <NavBudgetIconStyled
-                onClick={() => setDeleteModalVisibility(true)}
-                icon="delete"
-              />
-              <DropdownMenuStyled
-                items={[
-                  {
-                    ComponentToRender: (
-                      <NavBudgetIconDropdownStyled
-                        onClick={openModal}
-                        icon="edit"
-                      />
-                    ),
-                    id: "edit",
-                  },
-                  {
-                    ComponentToRender: (
-                      <FavouriteDropdownStyled
-                        isFav={budget.isFavourite}
-                        budgetId={budget.id}
-                      />
-                    ),
-                    id: "favourite",
-                  },
-                  {
-                    ComponentToRender: (
-                      <NavBudgetIconDropdownStyled
-                        onClick={() => setDeleteModalVisibility(true)}
-                        icon="delete"
-                      />
-                    ),
-                    id: "delete",
-                  },
-                ]}
-                side="bottom"
-                ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
-              />
+              {loggedUserId === budget.userId && (
+                <>
+                  <NavBudgetIconStyled onClick={openEditModal} icon="edit" />
+                  <NavBudgetIconStyled icon="share" onClick={openShareModal} />
+                  <NavBudgetIconStyled
+                    onClick={() => setDeleteModalVisibility(true)}
+                    icon="delete"
+                  />
+                </>
+              )}
+              {loggedUserId === budget.userId && (
+                <DropdownMenuStyled
+                  items={[
+                    {
+                      ComponentToRender: (
+                        <FavouriteDropdownStyled
+                          isFav={budget.isFavourite}
+                          budgetId={budget.id}
+                        />
+                      ),
+                      id: "favourite",
+                    },
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={openEditModal}
+                          icon="edit"
+                        />
+                      ),
+                      id: "edit",
+                    },
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={openShareModal}
+                          icon="share"
+                        />
+                      ),
+                      id: "share",
+                    },
+                    {
+                      ComponentToRender: (
+                        <NavBudgetIconDropdownStyled
+                          onClick={() => setDeleteModalVisibility(true)}
+                          icon="delete"
+                        />
+                      ),
+                      id: "delete",
+                    },
+                  ]}
+                  side="bottom"
+                  ariaLabel={t(basicInformation.labels.dropdownMenuAriaLabel)}
+                />
+              )}
             </BudgetNameIconsWrapperStyled>
             <BudgetDescriptionStyled>{description}</BudgetDescriptionStyled>
           </BudgetNameWrapperStyled>
         </BasicBudgetInfoWrapperStyled>
-        <PeopleInBudget users={peopleWithoutLoggedUser} />
+        <PeopleInBudget users={peopleWithoutLoggedUser || []} />
       </TopWrapperStyled>
       <InfoTileWrapperStyled>
         <InfoTile
@@ -164,7 +192,10 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
       </InfoTileWrapperStyled>
 
       {isEditBudgetModalOpen && (
-        <EditBudget budget={budget} onClose={() => closeModal()} />
+        <EditBudget budget={budget} onClose={() => closeEditModal()} />
+      )}
+      {isShareBudgetModalOpen && (
+        <ShareBudget budget={budget} onClose={() => closeShareModal()} /> // budget={budget} onClose={() => closeEditModal()} />
       )}
       {deleteModalVisibility && (
         <RemoveBudget

@@ -8,6 +8,7 @@ const CheckboxWrapperStyled = styled.div`
   gap: 18px;
   width: 100%;
   height: 100%;
+  position: relative;
 `;
 
 const LabelStyled = styled.label`
@@ -139,8 +140,7 @@ export const Checkbox = ({
         sizeBig={sizeBig}
       />
       <CheckmarkStyled sizeBig={sizeBig} />
-
-      <LabelStyled htmlFor={id}>{children}</LabelStyled>
+      {children && <LabelStyled htmlFor={id}>{children}</LabelStyled>}
     </CheckboxWrapperStyled>
   );
 };

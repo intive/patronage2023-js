@@ -1,4 +1,7 @@
-import { Content } from "@radix-ui/react-popover";
+import {
+  Content as PopoverContent,
+  Close as PopoverClose,
+} from "@radix-ui/react-popover";
 import { ScreenCircle } from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
 import { device } from "lib/media-queries";
 import styled, { css } from "styled-components";
@@ -128,7 +131,7 @@ export const SpanStyled = styled.span<ColorProps>`
   color: ${({ color }) => color};
 `;
 
-export const PopoverContentStyled = styled(Content)`
+export const PopoverContentStyled = styled(PopoverContent)`
   z-index: 101;
 `;
 
@@ -154,4 +157,8 @@ export const CardStyled = styled(Card)`
 
 export const PopoverIconStyled = styled(Icon)`
   font-size: 20px;
+`;
+
+export const PopoverCloseStyled = styled(PopoverClose)`
+  opacity: 0;
 `;

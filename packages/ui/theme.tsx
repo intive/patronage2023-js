@@ -23,7 +23,7 @@ const colors = {
   Neutral5: "#9E9E9E",
   Neutral4: "#B1B1B1",
   Neutral3: "#CFCFCF",
-  Neutral2: "#E1E1E1",
+  Neutral2: "#e1e1e1",
   Neutral1: "#F7F7F7",
   Supporting25: "#000000",
   Supporting24: "#FB8C00",
@@ -234,6 +234,7 @@ export const theme = {
     background: colors.Neutral8,
     header: colors.Teal10,
     closeButton: colors.Neutral6,
+    paragraph: colors.Neutral8,
   },
   signUp: {
     main: colors.Teal10,
@@ -378,6 +379,14 @@ export const theme = {
     borderInactive: colors.Neutral2,
     content: colors.Teal10,
     background: colors.BasicWhite,
+  },
+  reports: {
+    incomesBar: colors.Supporting7,
+    incomesLine: colors.Supporting14,
+    expensesBar: colors.Neutral2,
+    expensesLine: colors.Neutral6,
+    lineChartPointsFill: colors.Neutral1,
+    buttonGroupSimpleLabel: colors.Neutral6,
   },
 };
 

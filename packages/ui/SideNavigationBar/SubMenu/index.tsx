@@ -79,7 +79,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
       as={ImportExportButtonStyled}
       disabled={!!!exportButton?.csvUri}
       variant="secondary">
-      <Icon icon="file_download" size={12} />
+      <Icon icon="file_upload" size={12} />
     </ButtonStyled>
   );
 
@@ -89,7 +89,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
       download
       title="csv"
       onClick={exportButton?.clickHandler}>
-      <Icon icon="file_download" size={12} />
+      <Icon icon="file_upload" size={12} />
       <span>{exportButton?.label}</span>
     </LinkStyled>
   );
@@ -147,7 +147,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
                   as={ImportExportButtonStyled}
                   variant="secondary"
                   onClick={importButton.clickHandler}>
-                  <Icon icon="file_upload" size={12} />
+                  <Icon icon="file_download" size={12} />
                 </ButtonStyled>
               </Tooltip>
             </ButtonGroupStyled>
