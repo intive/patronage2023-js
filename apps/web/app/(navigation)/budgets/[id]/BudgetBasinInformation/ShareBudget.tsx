@@ -90,7 +90,9 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
   const pageSize = 15;
   const { t, dict } = useTranslate("ShareBudget");
 
-  const initBudgetUsers = budget.budgetUsers?.map((user) => user.id) || [];
+  const budgetUsersWithoutOwner =
+    budget.budgetUsers?.filter((user) => user.id !== budget.userId) || [];
+  const initBudgetUsers = budgetUsersWithoutOwner.map((user) => user.id);
   const [budgetUsers, setBudgetUsers] = useState(initBudgetUsers);
 
   const [searchValue, setSearchValue] = useState("");
@@ -157,11 +159,6 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
   const fetch = useSuperfetch();
   const queryClient = useQueryClient();
 
-  // temporary just for current version of query
-  const filteredUsers = budgetUsers.filter(
-    (user) => !initBudgetUsers.includes(user)
-  );
-
   const updateBudgetUsersMutation = useMutation({
     mutationFn: (budgetUsers: string[]) => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budget.id}/users`, {
@@ -221,9 +218,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
         <ButtonWrapperStyled>
           <Button
             onClick={() => {
-              filteredUsers.length > 0
-                ? updateBudgetUsersMutation.mutate(filteredUsers)
-                : onClose();
+              updateBudgetUsersMutation.mutate(budgetUsers);
             }}>
             {t(dict.share)}
           </Button>

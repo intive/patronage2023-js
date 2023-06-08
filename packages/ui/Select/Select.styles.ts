@@ -40,7 +40,8 @@ export const SelectTriggerStyled = styled(AtomicSelect.Trigger)<{
       color: ${({ theme }) => theme.select.error};
       border: solid 2px ${({ theme }) => theme.select.error};
 
-      &:focus {
+      &:focus,
+      &[data-state="open"] {
         border: solid 2px ${({ theme }) => theme.select.error};
       }
     `}
