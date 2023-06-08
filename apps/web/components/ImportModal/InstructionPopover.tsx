@@ -1,6 +1,7 @@
 "use client";
 
 import * as Popover from "@radix-ui/react-popover";
+import styled from "styled-components";
 import { ButtonStyled } from "ui";
 import {
   PopoverContentStyled,
@@ -13,6 +14,10 @@ import {
 type InstructionPopoverProps = {
   children: React.ReactNode;
 };
+
+const Arrow = styled(Popover.Arrow)`
+  margin-bottom: 12px;
+`;
 
 export const InstructionPopover = ({ children }: InstructionPopoverProps) => (
   <Popover.Root modal={false}>
@@ -28,7 +33,6 @@ export const InstructionPopover = ({ children }: InstructionPopoverProps) => (
       <PopoverContentStyled sideOffset={5}>
         <CardStyled>{children}</CardStyled>
         <PopoverCloseStyled aria-label="Close" />
-        <Popover.Arrow />
       </PopoverContentStyled>
     </Popover.Portal>
   </Popover.Root>
