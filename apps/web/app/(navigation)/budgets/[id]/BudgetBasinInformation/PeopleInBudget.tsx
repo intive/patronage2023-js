@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { BudgetUser } from "lib/types";
 import { device } from "lib/media-queries";
+import isAvatarValid from "lib/validations/avatarValidation";
 import { Avatar, Tooltip } from "ui";
 
 type PeopleInBudgetProps = {
@@ -63,7 +64,9 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
           text={`${user.firstName} ${user.lastName}`}
           position="bottom">
           <Avatar
-            src={user.avatar}
+            src={
+              isAvatarValid(user.avatar) ? user.avatar : "/avatars/default.svg"
+            }
             username={`${user.firstName} ${user.lastName}`}
             outlined
           />
