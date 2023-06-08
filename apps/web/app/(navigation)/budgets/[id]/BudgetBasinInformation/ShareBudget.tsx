@@ -155,7 +155,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
       </ContentWrapper>
     );
 
-  // sending users to BE
+  //sending users to BE
   const fetch = useSuperfetch();
   const queryClient = useQueryClient();
 
