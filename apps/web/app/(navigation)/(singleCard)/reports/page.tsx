@@ -12,7 +12,7 @@ import { env } from "env.mjs";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useTranslate } from "lib/hooks";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
-import MultiCardLayoutTop from "../MultiCardLayoutTop";
+import MultiCardLayoutTop from "../../MultiCardLayoutTop";
 import ReportsChart from "./ReportsChart";
 import {
   ButtonGroup,
@@ -39,7 +39,7 @@ import {
   ButtonGroupWrapper,
 } from "./ReportsPage.styled";
 
-import { CurrencyTagStyled } from "./../budgets/[id]/BudgetContent/CreateNewBudget.styled";
+import { CurrencyTagStyled } from "../../budgets/[id]/BudgetContent/CreateNewBudget.styled";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
 type CurrencyType = "PLN" | "USD" | "EUR";
@@ -164,7 +164,7 @@ export default function ReportsPage() {
     }, {});
   }
 
-  const mainCardContent = (
+  return (
     <>
       {isLoading && (
         <SpinnerWrapper>
@@ -296,15 +296,5 @@ export default function ReportsPage() {
         </PageWrapper>
       )}
     </>
-  );
-  const asideData = t(aside.title);
-  const shown = false;
-  //conditionally render aside if needed e.g. pass additional info to it etc.
-
-  return (
-    <MultiCardLayoutTop
-      main={mainCardContent}
-      aside={shown ? <>{asideData}</> : <></>}
-    />
   );
 }
