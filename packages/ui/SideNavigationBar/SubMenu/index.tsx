@@ -94,23 +94,10 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     </LinkStyled>
   );
 
-  const emailButton = (
-    <button
-      onClick={() => {
-        console.log("email");
-      }}>
-      email
-    </button>
-  );
-
   const exportBudgetsDropdownItems = [
     {
       id: "export-budgets-download",
       node: downloadLink,
-    },
-    {
-      id: "export-budgets-email",
-      node: emailButton,
     },
   ];
 

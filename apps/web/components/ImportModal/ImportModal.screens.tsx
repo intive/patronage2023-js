@@ -20,7 +20,7 @@ import {
 } from "app/(regflow)/sign-up/FlowController/SignUpFormStyled";
 import { IconStyled } from "app/(regflow)/sign-up/FlowController/SuccessErrorScreen";
 
-type ErrorsScreenProps = {
+export type ErrorsScreenProps = {
   errors: string[];
   errorMessage: string;
 };

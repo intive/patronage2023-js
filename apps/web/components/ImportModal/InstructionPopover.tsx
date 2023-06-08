@@ -7,6 +7,7 @@ import {
   PopoverIconStyled,
   CardStyled,
   StyledButton,
+  PopoverCloseStyled,
 } from "./ImportModal.styled";
 
 type InstructionPopoverProps = {
@@ -26,7 +27,7 @@ export const InstructionPopover = ({ children }: InstructionPopoverProps) => (
     <Popover.Portal>
       <PopoverContentStyled sideOffset={5}>
         <CardStyled>{children}</CardStyled>
-        <Popover.Close aria-label="Close" style={{ opacity: "0" }} />
+        <PopoverCloseStyled aria-label="Close" />
         <Popover.Arrow />
       </PopoverContentStyled>
     </Popover.Portal>

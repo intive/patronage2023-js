@@ -1,3 +1,5 @@
+import { ErrorsScreenProps } from "./ImportModal.screens";
+
 export type ColorProps = {
   color?: string;
 };
@@ -8,21 +10,21 @@ export type ImportResponseProps = {
   status: number;
 };
 
-type PropsType = {
-  errors?: string[];
-  errorMessage?: string;
-};
-
-export type ImportExportState = {
-  showImportButton?: boolean;
-  csvUri?: string;
+export type ImportExportStateType = {
+  showImportButton: boolean;
+  csvUri: string;
   screen: React.ComponentType<any>;
-  props?: PropsType;
+  errorsScreenProps: ErrorsScreenProps;
 };
 
-export type ImportExportAction =
+type ResponseValidType = {
+  showImportButton: boolean;
+  screen: React.ComponentType<any>;
+};
+
+export type ImportExportActionType =
   | { type: "SET_SHOW_IMPORT_BUTTON"; payload: boolean }
   | { type: "SET_CSV_URI"; payload: string }
   | { type: "SET_SCREEN"; payload: React.ComponentType<any> }
-  | { type: "SET_PROPS"; payload: PropsType }
-  | { type: "SET_MULTIPLE"; payload: ImportExportState };
+  | { type: "SET_RESPONSE_VALID"; payload: ResponseValidType }
+  | { type: "SET_RESPONSE_INVALID"; payload: ImportExportStateType };
