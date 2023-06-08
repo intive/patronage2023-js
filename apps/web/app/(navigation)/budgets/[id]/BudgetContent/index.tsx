@@ -103,13 +103,12 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     queryKey: ["exportedTransactionsCsvUri"],
     queryFn: async (): Promise<ExportResponseProps> => {
       return superFetch(
-        `${env.NEXT_PUBLIC_API_URL}budgets/${budget?.id}/transactions/export`
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export`
       ).catch((err) => console.error(err));
     },
     enabled: !!session,
   });
 
-  //href that will come from query export transactions
   const exportLink = (
     <LinkStyled href={exportData?.uri} download title="csv">
       <Icon icon="file_download" size={12} />
@@ -182,8 +181,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
       )}
     </BudgetContentWrapperStyled>
   );
-
-  //temporary it will import budgets untill endpoint for transactions won't be ready
   return (
     <>
       <MultiCardLayout main={mainCardContent} aside={<AsideCardContent />} />
@@ -197,7 +194,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
       {importModalOpen && (
         <ImportModal
           onClose={() => setImportModalOpen(false)}
-          importEndpoint={`budgets/${budget?.id}/transactions/import`}
+          importEndpoint={`budgets/${id}/transactions/import`}
           allowedFileExtensions={[".csv"]}
           downloadButtonLabel={tImport(dictImport.downloadButtonText)}
           importButtonLabel={tImport(dictImport.importButtonText)}

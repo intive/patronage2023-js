@@ -1305,7 +1305,7 @@ const dictionary = {
     },
     export: {
       en: "Export",
-      pl: "Exportuj",
+      pl: "Eksportuj",
       fr: "Exporter",
     },
   },
@@ -1317,7 +1317,7 @@ const dictionary = {
     },
     exportButtonText: {
       en: "Download CSV",
-      pl: "Ściągnij plik CSV",
+      pl: "Pobierz plik CSV",
       fr: "Télécharger le fichier CSV",
     },
     sendEmailText: {
@@ -1329,7 +1329,7 @@ const dictionary = {
   ImportModal: {
     downloadButtonText: {
       en: "Download CSV",
-      pl: "Ściągnij plik CSV",
+      pl: "Pobierz plik CSV",
       fr: "Télécharger le fichier CSV",
     },
     successHeader: {
