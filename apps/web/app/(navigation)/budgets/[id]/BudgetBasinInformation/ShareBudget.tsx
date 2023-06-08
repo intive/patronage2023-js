@@ -90,10 +90,14 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
   const pageSize = 15;
   const { t, dict } = useTranslate("ShareBudget");
 
-  const budgetUsersWithoutOwner =
-    budget.budgetUsers?.filter((user) => user.id !== budget.userId) || [];
-  const initBudgetUsers = budgetUsersWithoutOwner.map((user) => user.id);
-  const [budgetUsers, setBudgetUsers] = useState(initBudgetUsers);
+  const [budgetUsers, setBudgetUsers] = useState(
+    budget.budgetUsers?.reduce((acc: string[], curr) => {
+      if (budget.userId !== curr.id) {
+        return [...acc, curr.id];
+      }
+      return acc;
+    }, []) || []
+  );
 
   const [searchValue, setSearchValue] = useState("");
   const debouncedSearch = useDebounce(searchValue, 500);
@@ -220,7 +224,7 @@ export const ShareBudget = ({ budget, onClose }: ShareBudgetProps) => {
             onClick={() => {
               updateBudgetUsersMutation.mutate(budgetUsers);
             }}>
-            {t(dict.share)}
+            {t(dict.save)}
           </Button>
         </ButtonWrapperStyled>
       </SeparatorAndButtonWrapperStyled>

@@ -638,18 +638,6 @@ const dictionary = {
       pl: "Edytuj budżet",
       fr: "Éditer budget",
     },
-    tabs: {
-      settings: {
-        en: "Settings",
-        pl: "Ustawienia",
-        fr: "Paramètres",
-      },
-      share: {
-        en: "Share",
-        pl: "Udostępnij",
-        fr: "Partager",
-      },
-    },
     paragraphs: {
       details: {
         en: "Details",
@@ -769,7 +757,7 @@ const dictionary = {
       fr: "Inviter des utilisateurs existants",
     },
     search: { en: "Search", pl: "Wyszukaj", fr: "Rechercher" },
-    share: { en: "Share", pl: "Udostępnij", fr: "Partager" },
+    save: { en: "Save", pl: "Zapisz", fr: "Enregistrer" },
     errors: {
       error400: {
         en: "400: Incorrect data. Please try again.",
