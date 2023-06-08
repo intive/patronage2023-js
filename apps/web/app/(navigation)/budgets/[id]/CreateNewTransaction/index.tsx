@@ -29,7 +29,7 @@ import {
   ParagraphStyled,
   SeparatorStyled,
   TransactionSelectItemStyled,
-} from "./CreateNewTransactionStyled";
+} from "./CreateNewTransaction.styled";
 
 type CreateNewTransactionProps = {
   type: string;

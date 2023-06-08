@@ -10,10 +10,12 @@ import {
   CustomCard,
   FormWrapperStyled,
   H1Styled,
+  LanguageSelectorWrapper,
   ParagraphStyled,
   SectionStyled,
   TypoStyled,
 } from "./layout.styles";
+import { LanguageSelector } from "components/Navbar/LanguageSelector";
 
 export type LayoutProps = {
   children: React.ReactNode;
@@ -69,7 +71,12 @@ export default function RegFlowLayout({ children }: LayoutProps) {
           </TypoStyled>
         </SectionStyled>
         <FormWrapperStyled>
-          <CustomCard>{children}</CustomCard>
+          <CustomCard>
+            <LanguageSelectorWrapper>
+              <LanguageSelector variant="descriptive" />
+            </LanguageSelectorWrapper>
+            {children}
+          </CustomCard>
         </FormWrapperStyled>
       </ContentStyled>
     </BackgroundFlex>

@@ -95,6 +95,11 @@ const dictionary = {
             pl: "Język",
             fr: "Langue",
           },
+          currency: {
+            en: "Currency",
+            pl: "Waluta",
+            fr: "Monnaie",
+          },
         },
       },
       usersItem: {
@@ -322,10 +327,62 @@ const dictionary = {
         pl: "Spersonalizuj swoje konto",
         fr: "Personnaliser votre compte",
       },
+      avatarSwitcherDefault: {
+        en: "Default",
+        pl: "Podstawowe",
+        fr: "Par défaut",
+      },
+      avatarSwitcherCustom: {
+        en: "Personalized",
+        pl: "Spersonalizowany",
+        fr: "Personnalisé",
+      },
+      dropZone: {
+        mainText: {
+          en: "Drop file here",
+          pl: "Upuść plik tutaj",
+          fr: "Déposez le fichier ici",
+        },
+        separator: {
+          en: "or",
+          pl: "lub",
+          fr: "ou",
+        },
+        buttonText: {
+          en: "Choose a file",
+          pl: "Wybierz plik",
+          fr: "Choisir un fichier",
+        },
+        onOver: {
+          en: "Drop here...",
+          pl: "Upuść tutaj...",
+          fr: "Déposez ici...",
+        },
+        goBack: {
+          en: "Crop again",
+          pl: "Przytnij jeszcze raz",
+          fr: "Recadrer à nouveau",
+        },
+        delete: {
+          en: "Delete",
+          pl: "Usuń",
+          fr: "Supprimer",
+        },
+        modalHeader: {
+          en: "Crop your image before submitting.",
+          pl: "Przytnij zdjęcie przed wysłaniem.",
+          fr: "Recadrez votre image avant de la soumettre.",
+        },
+        croppedTitle: {
+          en: "Your avatar",
+          pl: "Twój awatar",
+          fr: "Votre avatar",
+        },
+      },
       subtitle: {
-        en: "Select your avatar and tell us your name",
-        pl: "Wybierz avatar i powiedz jak się nazywasz",
-        fr: "Choisissez un avatar et dites votre nom",
+        en: "Select or upload your avatar and tell us your name",
+        pl: "Wybierz lub prześlij swój avatar i powiedz jak się nazywasz",
+        fr: "Choisissez ou téléchargez votre avatar et prononcez votre nom",
       },
       firstNameInputLabel: {
         en: "First name",
@@ -695,6 +752,42 @@ const dictionary = {
       },
     },
   },
+  ShareBudget: {
+    header: {
+      en: "Share budget",
+      pl: "Udostępnij budżet",
+      fr: "Partager le budget",
+    },
+    noUsersFound: {
+      en: "No members found.",
+      pl: "Nie znaleziono użytkowników.",
+      fr: "D'aucuns utilisateurs trouvés",
+    },
+    inviteMembers: {
+      en: "Invite existing members",
+      pl: "Zaproś użytkowników",
+      fr: "Inviter des utilisateurs existants",
+    },
+    search: { en: "Search", pl: "Wyszukaj", fr: "Rechercher" },
+    share: { en: "Share", pl: "Udostępnij", fr: "Partager" },
+    errors: {
+      error400: {
+        en: "400: Incorrect data. Please try again.",
+        pl: "400: Nieprawidłowe dane. Spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Veuillez réessayer.",
+      },
+      error401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: L'utilisateur non autorisé",
+      },
+      errorDefault: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+    },
+  },
   CreateNewTransactionModal: {
     header: {
       income: {
@@ -945,6 +1038,18 @@ const dictionary = {
         en: "Language",
         pl: "Język",
         fr: "Langue",
+      },
+    },
+    currency: {
+      title: {
+        en: "Currency",
+        pl: "Waluta",
+        fr: "Monnaie",
+      },
+      button: {
+        en: "Save changes",
+        pl: "Zapisz zmianę",
+        fr: "Enregistrer",
       },
     },
   },
