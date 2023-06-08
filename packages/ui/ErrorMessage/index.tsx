@@ -4,11 +4,15 @@ import { Icon } from "../Icon";
 type ErrorMessageProps = {
   message: string;
   onClose: () => void;
-};
+} & React.HTMLProps<HTMLDivElement>;
 
-export const ErrorMessage = ({ message, onClose }: ErrorMessageProps) => {
+export const ErrorMessage = ({
+  message,
+  onClose,
+  className,
+}: ErrorMessageProps) => {
   return (
-    <ErrorMessageStyled>
+    <ErrorMessageStyled className={className}>
       <IconAndMessageWrapperStyled>
         <Icon icon="error" iconSize={20} />
         <MessageStyled>{message}</MessageStyled>

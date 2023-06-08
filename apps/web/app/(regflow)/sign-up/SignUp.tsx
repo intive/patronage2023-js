@@ -93,11 +93,13 @@ export const SignUp = () => {
           //we only accept one file so we know it's [0]
           newUser.profile.avatar = res[0].fileUrl;
       });
-      //set profile info to user
-      setUser(newUser);
-      //run mutation
-      signUpMutation.mutate(newUser);
     }
+    //set profile info to user
+
+    setUser(newUser);
+    //run mutation
+
+    signUpMutation.mutate(newUser);
   };
 
   return (

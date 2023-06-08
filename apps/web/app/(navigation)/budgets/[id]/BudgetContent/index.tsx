@@ -1,24 +1,30 @@
 "use client";
-
-import { AsideCardContent } from "app/AsideCardContent";
-import MultiCardLayout from "../../../MultiCardLayout";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { BudgetBasicInformation } from "../BudgetBasinInformation";
+import { AsideCardContent } from "app/AsideCardContent";
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
+
 import { env } from "env.mjs";
+import MultiCardLayout from "../../../MultiCardLayout";
+import { BudgetBasicInformation } from "../BudgetBasinInformation";
+import BudgetDetails from "../BudgetDetails/BudgetDetails";
 import {
   BudgetBasicInformationSuspense,
   BudgetDetailsSuspense,
 } from "../BudgetDetails/BudgetSuspense";
-import BudgetDetails from "../BudgetDetails/BudgetDetails";
-import { useSession } from "next-auth/react";
-import fixCurrencyObject from "lib/validations/fixCurrenyObject";
-import { ButtonWithDropdown, Separator } from "ui";
-import { useTranslate } from "lib/hooks";
-import { useState } from "react";
-
 import { CreateNewTransaction } from "../CreateNewTransaction";
 import TransactionTableController from "../TransactionTableController";
+import { ImportModal } from "components/ImportModal";
+import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
+
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { device } from "lib/media-queries";
+import { useTranslate } from "lib/hooks";
+import { ExportResponseProps } from "lib/types";
+import fixCurrencyObject from "lib/validations/fixCurrenyObject";
+import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
+import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -38,6 +44,19 @@ const CreateButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  gap: 6px;
+`;
+
+const ImportButton = styled(Button)`
+  font-size: 0.9em;
+  padding: 12px;
+  ${device.tablet} {
+    padding: 12px 25px;
+    font-size: 16px;
+  }
+  ${device.desktop} {
+    padding: 12px 34px;
+  }
 `;
 
 interface BudgetsContentProps {
@@ -46,11 +65,18 @@ interface BudgetsContentProps {
 
 export const BudgetContent = ({ id }: BudgetsContentProps) => {
   const { t, dict } = useTranslate("BudgetsPage");
+  const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
+  const { t: tImport, dict: dictImport } = useTranslate("ImportModal");
+  const { t: tButton, dict: dictButton } = useTranslate(
+    "ImportExportMainButton"
+  );
   const [
     createNewTransactionModalVisible,
     setCreateNewTransactionModalVisible,
   ] = useState(false);
   const [transactionType, setTransactionType] = useState("");
+  const [importModalOpen, setImportModalOpen] = useState(false);
+  const superFetch = useSuperfetch();
 
   const { data: session } = useSession();
 
@@ -73,6 +99,41 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
+  const { data: exportData } = useQuery({
+    queryKey: ["exportedTransactionsCsvUri"],
+    queryFn: async (): Promise<ExportResponseProps> => {
+      return superFetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export`
+      ).catch((err) => console.error(err));
+    },
+    enabled: !!session,
+  });
+
+  const exportLink = (
+    <LinkStyled href={exportData?.uri} download title="csv">
+      <Icon icon="file_download" size={12} />
+      <span>{tExport(dictExport.exportButtonText)}</span>
+    </LinkStyled>
+  );
+
+  const emailLink = (
+    <LinkStyled title="email">
+      <Icon icon="file_upload" size={12} />
+      <span>{tExport(dictExport.sendEmailText)}</span>
+    </LinkStyled>
+  );
+
+  const exportTransactionsItems = [
+    {
+      id: "export-transactions-download",
+      node: exportLink,
+    },
+    {
+      id: "export-transactions-email",
+      node: emailLink,
+    },
+  ];
+
   const mainCardContent = (
     <BudgetContentWrapperStyled>
       {budget ? (
@@ -88,15 +149,27 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
           items={[
             {
               id: "Income",
-              label: t(dict.createButton.newIncome),
+              node: t(dict.createButton.newIncome),
               callback: () => handleCreateNewTransaction("Income"),
             },
             {
               id: "Expense",
-              label: t(dict.createButton.newExpense),
+              node: t(dict.createButton.newExpense),
               callback: () => handleCreateNewTransaction("Expense"),
             },
           ]}
+        />
+        <ImportButton
+          disabled={!budget}
+          onClick={() => setImportModalOpen(true)}
+          variant="secondary">
+          {tButton(dictButton.import)}
+        </ImportButton>
+        <ButtonWithDropdown
+          variant="secondary"
+          items={exportTransactionsItems}
+          disabled={!budget}
+          label={tButton(dictButton.export)}
         />
       </CreateButtonWrapper>
       {budget ? (
@@ -109,7 +182,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
       )}
     </BudgetContentWrapperStyled>
   );
-
   return (
     <>
       <MultiCardLayout main={mainCardContent} aside={<AsideCardContent />} />
@@ -118,6 +190,24 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
           type={transactionType}
           onClose={() => setCreateNewTransactionModalVisible(false)}
           budget={budget}
+        />
+      )}
+      {importModalOpen && (
+        <ImportModal
+          onClose={() => setImportModalOpen(false)}
+          importEndpoint={`budgets/${id}/transactions/import`}
+          allowedFileExtensions={[".csv"]}
+          downloadButtonLabel={tImport(dictImport.downloadButtonText)}
+          importButtonLabel={tImport(dictImport.importButtonText)}
+          noDataSavedToastMsg={tImport(dictImport.noTransactionSaved)}
+          instructionScreen={() =>
+            ImportCSVInstructionScreen({
+              exampleHeader:
+                "Name,Value,TransactionType,CategoryType,Date,Status",
+              exampleFirstLine:
+                "Transaction name,-5.0000,Expense,Subscriptions,2023-06-12 19:28:26,Active",
+            })
+          }
         />
       )}
     </>

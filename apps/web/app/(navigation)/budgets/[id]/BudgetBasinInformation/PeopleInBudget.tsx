@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { BudgetUser } from "lib/types";
 import { device } from "lib/media-queries";
 import { Avatar, Tooltip, PersonalCard } from "ui";
+import isAvatarValid from "lib/validations/avatarValidation";
 
 type PeopleInBudgetProps = {
   users: BudgetUser[];
@@ -75,7 +76,11 @@ const PeopleInBudget = ({ users }: PeopleInBudgetProps) => {
           key={user.id}
           triggerComponent={
             <Avatar
-              src={user.avatar}
+              src={
+                isAvatarValid(user.avatar)
+                  ? user.avatar
+                  : "/avatars/default.svg"
+              }
               username={`${user.firstName} ${user.lastName}`}
               outlined
             />

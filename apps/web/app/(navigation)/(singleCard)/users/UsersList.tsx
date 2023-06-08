@@ -1,7 +1,6 @@
 "use client";
 
 import { useContext } from "react";
-import { z } from "zod";
 import { format } from "date-fns";
 import { useAtom } from "jotai";
 import { languageAtom } from "store";
@@ -13,6 +12,7 @@ import { Column } from "ka-table/models";
 import { Icon, Avatar } from "ui";
 import { UsersListStyled, EmailStyled } from "./UsersList.styled";
 import TableSuspense from "components/TableSuspense";
+import isAvatarValid from "lib/validations/avatarValidation";
 
 type User = {
   id: string;
@@ -107,23 +107,12 @@ export const UsersListTable = ({
             content: ({ column, rowData }) => {
               switch (column.key) {
                 case "avatar":
-                  //set default avatar if missing data
-                  if (!rowData.avatar)
-                    return <Avatar src="/avatars/default.svg" />;
-
-                  const text = rowData.avatar;
-                  //check if avatar string is a path coming from our avatars folder
-                  const schemaPath = z.string().startsWith("/avatars/");
-                  //check if avatar string is valid url
-                  const schemaUrl = z.string().url();
-                  const isPath = schemaPath.safeParse(text);
-                  const isUrl = schemaUrl.safeParse(text);
                   return (
                     <Avatar
                       src={
-                        isPath.success || isUrl.success
+                        isAvatarValid(rowData.avatar)
                           ? rowData.avatar
-                          : "avatars/default.svg"
+                          : "/avatars/default.svg"
                       }
                     />
                   );

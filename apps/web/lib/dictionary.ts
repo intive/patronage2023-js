@@ -37,9 +37,19 @@ const dictionary = {
           fr: "Rechercher un budget",
         },
         buttonLabel: {
-          en: "Add new budget",
-          pl: "Dodaj nowy budżet",
-          fr: "Créer un nouveau budget",
+          en: "New budget",
+          pl: "Nowy budżet",
+          fr: "Nouveau budget",
+        },
+        importButtonLabel: {
+          en: "Import",
+          pl: "Importuj",
+          fr: "Importer",
+        },
+        exportButtonLabel: {
+          en: "Export file",
+          pl: "Eksportuj plik",
+          fr: "Exporter le fichier",
         },
         infos: {
           loading: {
@@ -628,18 +638,6 @@ const dictionary = {
       pl: "Edytuj budżet",
       fr: "Éditer budget",
     },
-    tabs: {
-      settings: {
-        en: "Settings",
-        pl: "Ustawienia",
-        fr: "Paramètres",
-      },
-      share: {
-        en: "Share",
-        pl: "Udostępnij",
-        fr: "Partager",
-      },
-    },
     paragraphs: {
       details: {
         en: "Details",
@@ -759,7 +757,7 @@ const dictionary = {
       fr: "Inviter des utilisateurs existants",
     },
     search: { en: "Search", pl: "Wyszukaj", fr: "Rechercher" },
-    share: { en: "Share", pl: "Udostępnij", fr: "Partager" },
+    save: { en: "Save", pl: "Zapisz", fr: "Enregistrer" },
     errors: {
       error400: {
         en: "400: Incorrect data. Please try again.",
@@ -966,6 +964,7 @@ const dictionary = {
         fr: "Nouvelle dépense",
       },
     },
+
     charts: {
       titleLeft: {
         en: "Total balance",
@@ -998,12 +997,89 @@ const dictionary = {
     },
   },
   ReportsPage: {
-    title: { en: "Reports page", pl: "Raporty", fr: "Rapports" },
+    title: { en: "Reports", pl: "Raporty", fr: "Rapports" },
+    aside: {
+      title: {
+        en: "Additional information",
+        pl: "Dodatkowe informacje",
+        fr: "Informations supplémentaires",
+      },
+    },
+    currencyNames: {
+      USD: {
+        en: "United States Dollar",
+        pl: "Dolar Amerykański",
+        fr: "Dollar des États-Unis",
+      },
+      PLN: { en: "Polish Zloty", pl: "Polski Złoty", fr: "Zloty polonais" },
+      GBP: {
+        en: "British Pound",
+        pl: "Funt Brytyjski",
+        fr: "Livre britannique",
+      },
+      EUR: { en: "Euro", pl: "Euro", fr: "Euro" },
+    },
+    currencyPlShorts: {
+      en: "PLN",
+      pl: "zł",
+      fr: "PLN",
+    },
+    thousandShorts: {
+      en: "K",
+      pl: "tys",
+      fr: "k",
+    },
+    balance: {
+      en: "Total balance",
+      pl: "Bilans",
+      fr: "Solde total",
+    },
     trendChip: {
       text: {
         en: "Your budget's percentage growth is ",
         pl: "Wzrost procentowy twojego budżetu wynosi ",
         fr: "Le pourcentage de croissance de votre budget est de ",
+      },
+    },
+    currency: {
+      en: "Currency",
+      pl: "Waluta",
+      fr: "Monnaie",
+    },
+    shortcuts: {
+      day: {
+        en: "d",
+        pl: "d",
+        fr: "j",
+      },
+      month: {
+        en: "m",
+        pl: "m",
+        fr: "m",
+      },
+    },
+    info: {
+      noData: {
+        en: "No data for ",
+        pl: "Brak danych dla ",
+        fr: "Aucune donnée pour ",
+      },
+      noTransaction: {
+        en: "There are no transactions for the selected period",
+        pl: "Brak transakcji dla wybranego okresu",
+        fr: "Il n'y a aucune transaction pour la période sélectionnée",
+      },
+    },
+    labelsTooltip: {
+      incomes: {
+        en: "Incomes",
+        pl: "Wpływy",
+        fr: "Recettes",
+      },
+      expenses: {
+        en: "Expenses",
+        pl: "Wydatki",
+        fr: "Dépenses",
       },
     },
   },
@@ -1207,6 +1283,374 @@ const dictionary = {
       en: "Refund",
       pl: "Zwrot kosztów",
       fr: "Remboursement",
+    },
+  },
+  ImportExportMainButton: {
+    import: {
+      en: "Import",
+      pl: "Importuj",
+      fr: "Importer",
+    },
+    export: {
+      en: "Export",
+      pl: "Eksportuj",
+      fr: "Exporter",
+    },
+  },
+  ExportFile: {
+    exportToastMessage: {
+      en: "CSV exported successfully",
+      pl: "CSV wyeksportowany pomyślnie",
+      fr: "CSV exporté avec succès",
+    },
+    exportButtonText: {
+      en: "Download CSV",
+      pl: "Pobierz plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
+    sendEmailText: {
+      en: "Send by email",
+      pl: "Wyślij za pomocą email",
+      fr: "Envoyer par email",
+    },
+  },
+  ImportModal: {
+    downloadButtonText: {
+      en: "Download CSV",
+      pl: "Pobierz plik CSV",
+      fr: "Télécharger le fichier CSV",
+    },
+    successHeader: {
+      en: "Congratulations",
+      pl: "Gratulacje",
+      fr: "Félicitations",
+    },
+    successSubHeader: {
+      en: "Your file has been successfully imported!",
+      pl: "Plik został pomyślnie zaimportowany!",
+      fr: "Le fichier a été importé avec succès !",
+    },
+    corruptedFile: {
+      en: "Check the file, it may be corrupted!",
+      pl: "Sprawdź plik, może być uszkodzony!",
+      fr: "Vérifiez le fichier, il est peut-être corrompu !",
+    },
+    errorCsvMessage: {
+      en: "Not all records have been imported. Check which records have not been imported! Correct the records in the downloaded file and import them again.",
+      pl: "Nie wszystkie rekordy zostały zaimportowane. Sprawdź, które rekordy nie zostały zaimportowane! Popraw rekordy w pobranym pliku i zaimportuj je ponownie.",
+      fr: "Certains enregistrements n'ont pas été importés. Veuillez vérifier quels enregistrements n'ont pas été importés ! Corrigez les enregistrements dans le fichier téléchargé et importez-les à nouveau.",
+    },
+    noBudgetSaved: {
+      en: "No budget was saved. Correct the file and import it again",
+      pl: "Żaden budżet nie został zapisany. Popraw plik i zaimportuj go ponownie",
+      fr: "Aucun budget n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
+    },
+    noTransactionSaved: {
+      en: "No transaction was saved. Correct the file and import it again",
+      pl: "Żadna transakcja nie została zapisana. Popraw plik i zaimportuj go ponownie",
+      fr: "Aucune transaction n'a été enregistré. Corrigez le fichier et importez-le à nouveau",
+    },
+    incorrectFileExtension: {
+      en: "Incorrect file extension. Import the file with the correct extension:",
+      pl: "Nieprawidłowe rozszerzenie pliku. Zaimportuj plik z prawidłowym rozszerzeniem:",
+      fr: "Extension de fichier incorrecte. Importez le fichier avec l'extension correcte:",
+    },
+    responseErrors: {
+      400: {
+        en: "400: Incorrect data. Correct the file and try again.",
+        pl: "400: Nieprawidłowe dane. Popraw plik i spróbuj jeszcze raz.",
+        fr: "400: Données incorrectes. Corrigez le fichier et réessayez.",
+      },
+      401: {
+        en: "401: Unauthorized user",
+        pl: "401: Nieautoryzowany użytkownik",
+        fr: "401: Utilisateur non autorisé",
+      },
+      default: {
+        en: "Oops, something went wrong.",
+        pl: "Ups, coś poszło nie tak.",
+        fr: "Oups, quelque chose a mal tourné.",
+      },
+    },
+    modalHeader: {
+      en: "Import",
+      pl: "Importuj",
+      fr: "Importer",
+    },
+    importButtonText: {
+      en: "Click to import",
+      pl: "Kliknij, aby zaimportować",
+      fr: "Cliquer pour importer",
+    },
+    instruction: {
+      wantToUpload: {
+        en: "If you want to upload a file, please click the button below.",
+        pl: "Jeśli chcesz załadować plik, proszę kliknij przycisk poniżej.",
+        fr: "Si vous souhaitez charger un fichier, veuillez cliquer sur le bouton ci-dessous.",
+      },
+      correctFile: {
+        en: "The correct file should have a .csv extension. The CSV file should have headers on the ",
+        pl: "Prawidłowy plik powinien mieć rozszerzenie .csv. Plik CSV powinien zawierać nagłówki w ",
+        fr: "Le fichier correct doit avoir une extension .csv. Le fichier CSV doit avoir des en-têtes sur la ",
+      },
+      HLFirstLine: {
+        en: "first line",
+        pl: "pierwszej linii",
+        fr: "première ligne",
+      },
+      subsequentLines: {
+        en: ". Subsequent lines should contain the",
+        pl: ". Kolejne linie powinny zawierać",
+        fr: ". Les lignes suivantes doivent contenir les",
+      },
+      HLCorrectData: {
+        en: " correct data ",
+        pl: " poprawne dane ",
+        fr: " données correctes ",
+      },
+      eachLine: {
+        en: "on each line.",
+        pl: "w każdej linii.",
+        fr: "sur chaque ligne.",
+      },
+      example: {
+        en: "Example below:",
+        pl: "Przykład poniżej:",
+        fr: "Exemple ci-dessous :",
+      },
+      useComas: {
+        en: "Use commas to separate the individual data.",
+        pl: "Użyj przecinków do oddzielenia poszczególnych danych.",
+        fr: "Utilisez des virgules pour séparer les données individuelles.",
+      },
+    },
+  },
+  Errors: {
+    title: {
+      en: "Error ",
+      pl: "Błąd ",
+      fr: "Erreur ",
+    },
+    "1.1": {
+      //FE validation
+      en: "Budget name is too long.",
+      pl: "Nazwa budżetu jest zbyt długa.",
+      fr: "Le nom du budget est trop long.",
+    },
+    "1.2": {
+      //FE validation
+      en: "Name cannot be empty.",
+      pl: "Nazwa nie może być pusta.",
+      fr: "Le nom ne peut pas être vide.",
+    },
+    "1.3": {
+      //FE validation
+      en: "Name is too long.",
+      pl: "Nazwa jest zbyt długa.",
+      fr: "Le nom est trop long.",
+    },
+    "1.4": {
+      //TOAST
+      en: "Budget with given name already exists.",
+      pl: "Budżet o podanej nazwie już istnieje.",
+      fr: "Un budget portant le nom donné existe déjà.",
+    },
+    "1.5": {
+      //FE validation
+      en: "Start date cannot be empty.",
+      pl: "Data rozpoczęcia nie może być pusta.",
+      fr: "La date de début ne peut pas être vide.",
+    },
+    "1.6": {
+      //FE validation
+      en: "End date cannot be empty.",
+      pl: "Data zakończenia nie może być pusta.",
+      fr: "La date de fin ne peut pas être vide.",
+    },
+    "1.7": {
+      //FE validation
+      en: "Start date must be earlier than end date.",
+      pl: "Data rozpoczęcia musi być wcześniejsza niż data zakończenia.",
+      fr: "La date de début doit être antérieure à la date de fin.",
+    },
+    "1.8": {
+      //FE validation
+      en: "Limit cannot be empty.",
+      pl: "Limit nie może być pusty.",
+      fr: "La limite ne peut pas être vide.",
+    },
+    "1.9": {
+      //FE validation
+      en: "Limit must be greater than 0.",
+      pl: "Limit musi być większy niż 0.",
+      fr: "La limite doit être supérieure à 0.",
+    },
+    "1.10": {
+      //Not working with hardcoded currency
+      en: "Currency is not supported.",
+      pl: "Waluta nie jest obsługiwana.",
+      fr: "La monnaie n'est pas supporté.",
+    },
+    "1.11": {
+      //TOAST
+      en: "Budget not exists.",
+      pl: "Budżet nie istnieje.",
+      fr: "Le budget n'existe pas.",
+    },
+    "2.1": {
+      //FE validation
+      en: "Transaction type cannot be empty.",
+      pl: "Typ transakcji nie może być pusty.",
+      fr: "Le type de transaction ne peut pas être vide.",
+    },
+    "2.2": {
+      //TOAST
+      en: "Invalid budget transaction type.",
+      pl: "Nieprawidłowy typ transakcji budżetu.",
+      fr: "Type de transaction invalid",
+    },
+    "2.3": {
+      //FE validation
+      en: "Transaction name cannot be empty.",
+      pl: "Nazwa transakcji nie może być pusta.",
+      fr: "Le nom de la transaction ne peut pas être vide.",
+    },
+    "2.4": {
+      //FE validation
+      en: "Transaction name is too long.",
+      pl: "Nazwa transakcji jest zbyt długa.",
+      fr: "Le nom de la transaction est trop long.",
+    },
+    "2.5": {
+      //FE validation
+      en: "Value cannot be empty.",
+      pl: "Wartość nie może być pusta.",
+      fr: "La valeur ne peut pas être vide.",
+    },
+    "2.6": {
+      //FE validation - FE adds positive for income or negative for expense
+      en: "Value must be positive for income or negative for expense.",
+      pl: "Wartość musi być dodatnia dla wpływów lub ujemna dla wydatków.",
+      fr: "La valeur doit être positive pour une recette ou négative pour une dépense.",
+    },
+    "2.7": {
+      //FE validation
+      en: "Category cannot be empty.",
+      pl: "Kategoria nie może być pusta.",
+      fr: "La catégorie ne peut pas être vide.",
+    },
+    "2.8": {
+      //TOAST
+      en: "Category is invalid.",
+      pl: "Nieprawidłowa kategoria.",
+      fr: "La catégorie est invalide.",
+    },
+    "2.9": {
+      //FE validation
+      en: "Transaction date is outside the budget period.",
+      pl: "Data transakcji znajduje się poza okresem budżetowym.",
+      fr: "La date de la transaction est en dehors de la période du budget.",
+    },
+    "2.10": {
+      //TOAST
+      en: "Transaction does not belong to the specified budget.",
+      pl: "Transakcja nie należy do określonego budżetu.",
+      fr: "La transaction n'appartient pas au budget spécifié.",
+    },
+    "2.11": {
+      //TOAST
+      en: "Budget transaction not exists.",
+      pl: "Transakcja budżetu nie istnieje.",
+      fr: "La transaction du budget n'existe pas.",
+    },
+    "3.1": {
+      //FE validation
+      en: "Avatar cannot be empty.",
+      pl: "Awatar nie może być pusty.",
+      fr: "L'avatar ne peut pas être vide.",
+    },
+    "3.2": {
+      //FE validation
+      en: "First name cannot be empty.",
+      pl: "Imię nie może być puste.",
+      fr: "Le prénom ne peut pas être vide.",
+    },
+    "3.3": {
+      //FE validation
+      en: "Last name cannot be empty.",
+      pl: "Nazwisko nie może być puste.",
+      fr: "Le nom ne peut pas être vide.",
+    },
+    "3.4": {
+      //FE validation
+      en: "Email cannot be empty.",
+      pl: "Email nie może być pusty.",
+      fr: "L'e-mail ne peut pas être vide.",
+    },
+    "3.5": {
+      //FE validation
+      en: "Email is invalid.",
+      pl: "Nieprawidłowy email.",
+      fr: "L'e-mail est invalide.",
+    },
+    "3.6": {
+      //FE validation
+      en: "Password does not meet criteria...",
+      pl: "Hasło nie spełnia kryteriów...",
+      fr: "Le mot de passe ne correspond pas aux critères…",
+    },
+    "3.11": {
+      //TOAST
+      en: "User not exists.",
+      pl: "Użytkownik nie istnieje.",
+      fr: "L'utilisateur n'existe pas.",
+    },
+    "10.1": {
+      //CONSOLE
+      en: "Invalid page.",
+      pl: "Nieprawidłowa strona.",
+      fr: "Page invalide.",
+    },
+    "10.2": {
+      //CONSOLE
+      en: "Invalid sort descriptor.",
+      pl: "Nieprawidłowy deskryptor sortowania.",
+      fr: "Descripteur de tri invalide.",
+    },
+    noErrorCode: {
+      //no ErrorCode from BE
+      en: "An unexpected error occurred.",
+      pl: "Wystąpił nieoczekiwany błąd.",
+      fr: "Une erreur inattendue est apparue.",
+    },
+    status401: {
+      //TOAST
+      en: "Session expired. Redirect to Sign In...",
+      pl: "Sesja wygasła. Przekierowanie do strony logowania...",
+      fr: "Session expirée. Rediriger vers la connexion...",
+    },
+    status403: {
+      //CONSOLE
+      en: "Forbidden.",
+      pl: "Zabroniony.",
+      fr: "Interdit.",
+    },
+    status404: {
+      //CONSOLE
+      en: "Budget with given id does not exist.",
+      pl: "Budżet o podanym identyfikatorze nie istnieje.",
+      fr: "Le budget avec l'identifiant donné n'existe pas.",
+    },
+    status500: {
+      //CONSOLE
+      en: "Internal server error.",
+      pl: "Wewnętrzny błąd serwera.",
+      fr: "Erreur interne du serveur.",
+    },
+    defaultError: {
+      en: "Oops, something went wrong.",
+      pl: "Ups, coś poszło nie tak.",
+      fr: "Oups, quelque chose a mal tourné.",
     },
   },
 };

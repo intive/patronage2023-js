@@ -23,8 +23,12 @@ const colors = {
   Neutral5: "#9E9E9E",
   Neutral4: "#B1B1B1",
   Neutral3: "#CFCFCF",
-  Neutral2: "#E1E1E1",
+  Neutral2: "#e1e1e1",
   Neutral1: "#F7F7F7",
+  Supporting25: "#000000",
+  Supporting24: "#FB8C00",
+  Supporting23: "#8E24AA",
+  Supporting22: "#B3443D",
   Supporting21: "#D1A11F",
   Supporting20: "#FFF7E0",
   Supporting19: "#368B4F",
@@ -52,6 +56,7 @@ const colors = {
 
 export const theme = {
   main: colors.Teal10,
+  black: colors.Supporting25,
   avatar: {
     outline: colors.BasicWhite,
     aggregator: colors.Neutral6,
@@ -183,6 +188,7 @@ export const theme = {
       inactiveBackground: colors.BasicTransparent,
       hoverAndFocusBackground: colors.Teal1,
       focusOutline: colors.Teal10,
+      iconBackgroundColor: colors.BasicWhite,
     },
     infoText: colors.Neutral8,
     spinner: colors.Neutral5,
@@ -243,6 +249,7 @@ export const theme = {
     activeBackground: colors.Teal1,
     iconColor: colors.Neutral6,
     border: colors.Neutral2,
+    contentBackground: colors.BasicWhite,
   },
   infoTile: {
     border: colors.Neutral2,
@@ -362,6 +369,11 @@ export const theme = {
   favouriteBudget: {
     heartColor: "#ef4e4e",
   },
+  importModal: {
+    error: colors.Supporting22,
+    HLCorrectData: colors.Supporting23,
+    HLFirstLine: colors.Supporting24,
+  },
   accordion: {
     main: colors.Teal10,
     borderInactive: colors.Neutral2,
@@ -371,6 +383,14 @@ export const theme = {
   personalCard: {
     main: colors.Teal10,
     background: colors.BasicWhite,
+  },
+  reports: {
+    incomesBar: colors.Supporting7,
+    incomesLine: colors.Supporting14,
+    expensesBar: colors.Neutral2,
+    expensesLine: colors.Neutral6,
+    lineChartPointsFill: colors.Neutral1,
+    buttonGroupSimpleLabel: colors.Neutral6,
   },
 };
 
