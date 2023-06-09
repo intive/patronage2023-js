@@ -46,25 +46,27 @@ export const UserInfo = styled.div`
 `;
 
 export const UserName = styled.span`
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 1em;
+
   ${device.tablet} {
-    font-size: 24px;
+    font-size: 1.125em; //18px;
   }
 `;
 
 export const UserEmail = styled.span`
-  font-size: 8px;
+  font-size: 0.75em; //12px;
   ${device.tablet} {
-    font-size: 12px;
+    font-size: 0.875em; //14px;
   }
 `;
 
 export const AvatarStyled = styled(Avatar)`
-  height: 40px;
-  width: 40px;
+  height: 48px;
+  width: 48px;
   ${device.tablet} {
-    height: 80px;
-    width: 80px;
+    height: 60px;
+    width: 60px;
   }
 `;
 
