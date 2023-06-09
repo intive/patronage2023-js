@@ -24,8 +24,7 @@ import { useTranslate } from "lib/hooks";
 import { ExportResponseProps } from "lib/types";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
-import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
-import { ThemeType } from "ui/theme";
+import { ButtonWithDropdown, Icon, Separator, Button, useToast } from "ui";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -64,7 +63,6 @@ const ImportButton = styled(Button)`
 const ButtonStyled = styled(Button)`
   padding: 0;
   font-weight: normal;
-  text-decoration: none;
   color: ${({ theme }) => theme.button.primary.main};
   &:hover {
     text-decoration: none;
@@ -91,6 +89,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   const superFetch = useSuperfetch();
 
   const { data: session } = useSession();
+  const showToast = useToast();
 
   const handleCreateNewTransaction = (transactionType: string) => {
     setTransactionType(transactionType);
@@ -125,21 +124,13 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   const exportByMail = useQuery({
     queryKey: ["exporIncomesExpensesByEmail"],
     queryFn: async () =>
-      await fetch(
+      await superFetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
-        {
-          method: "POST",
-          headers: {
-            accept: "*/*",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + session?.user.accessToken,
-          },
-          body: JSON.stringify({ budgetId: id }),
-        }
-      )
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err)),
-    enabled: !!session,
+        { method: "POST", body: { budgetId: id } }
+      ),
+    // .then((res) => console.log(res))
+    // .catch((err) => console.error(err)),
+    enabled: false,
   });
 
   const exportLink = (
@@ -151,7 +142,10 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
 
   //trigger
   const emailButton = (
-    <ButtonStyled onClick={() => exportByMail} title="email" variant="simple">
+    <ButtonStyled
+      onClick={() => exportByMail.refetch()}
+      title="email"
+      variant="simple">
       <Icon icon="file_upload" size={12} />
       <span>{tExport(dictExport.sendEmailText)}</span>
     </ButtonStyled>
