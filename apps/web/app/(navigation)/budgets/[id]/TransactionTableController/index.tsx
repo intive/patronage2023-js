@@ -10,12 +10,13 @@ import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components/Pagination";
 import { useLocalStorage, useTranslate } from "lib/hooks";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
 import { MobileCategorySearch } from "components/CategoryFilter";
+import { budgetCategories } from "store/store";
 
 type APIResponse = {
   items: Item[];
@@ -63,6 +64,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseInt(getPageSizeValue);
+  const [userCategories] = useAtom(budgetCategories);
 
   const setSorting = (column: string) => {
     setSortDescriptors((previousSortDescriptors) => {
@@ -86,9 +88,20 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
-        category: categoryMap[item.categoryType.categoryName]
-          ? categoryMap[item.categoryType.categoryName]
-          : categoryMap.HomeSpendings,
+        //try finding custom category
+        category: userCategories.find(
+          (category) => category.name! === item.categoryType.categoryName
+        )
+          ? //if found set it
+            userCategories.find(
+              (category) => category.name! === item.categoryType.categoryName
+            )!
+          : //try default ones
+          categoryMap[item.categoryType.categoryName]
+          ? //set default
+            categoryMap[item.categoryType.categoryName]
+          : //fallback
+            categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
         creator: {

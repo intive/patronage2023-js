@@ -1,6 +1,6 @@
 "use client";
 import { useCategoryMap, useTranslate } from "lib/hooks";
-import { Checkbox } from "ui";
+import { Checkbox, Separator } from "ui";
 import { categoryFilterAtom } from "store";
 import { useAtom } from "jotai";
 import {
@@ -11,11 +11,14 @@ import {
   StyledAccordion,
   StyledButton,
 } from "./CategoryFilter.styled";
+import { budgetCategories, categoryModalAtom } from "store/store";
+import ManageCategories from "components/ManageCategories";
 
 export const CategoryFilter = () => {
   const categoryMap = useCategoryMap();
   const [categoryFilterAtomState, setCategoryFilterAtom] =
     useAtom(categoryFilterAtom);
+  const [userCategories] = useAtom(budgetCategories);
   const categoryEntries = Object.entries(categoryMap);
 
   const onCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,36 +32,59 @@ export const CategoryFilter = () => {
       );
     }
   };
-
   return (
-    <CheckboxListStyled>
-      {categoryEntries.map(([categoryKey, category]) => {
-        const { id, name } = category;
-        return (
-          <li key={`aside-checkbox-list-field-${id}`}>
-            <Checkbox
-              label={`category-filter-${name}`}
-              id={`category-filter-${id}`}
-              name={categoryKey}
-              checked={categoryFilterAtomState.includes(categoryKey)}
-              onChange={onCheckboxChange}>
-              <CheckboxLabelContentStyled>
-                <CategoryIconStyled small category={category} />
-                <CategoryTitleStyled>{name}</CategoryTitleStyled>
-              </CheckboxLabelContentStyled>
-            </Checkbox>
-          </li>
-        );
-      })}
-    </CheckboxListStyled>
+    <>
+      <CheckboxListStyled>
+        {categoryEntries.map(([categoryKey, category]) => {
+          const { categoryId, name } = category;
+          return (
+            <li key={`aside-checkbox-list-field-${categoryId}`}>
+              <Checkbox
+                label={`category-filter-${name}`}
+                id={`category-filter-${categoryId}`}
+                name={categoryKey}
+                checked={categoryFilterAtomState.includes(categoryKey)}
+                onChange={onCheckboxChange}>
+                <CheckboxLabelContentStyled>
+                  <CategoryIconStyled small category={category} />
+                  <CategoryTitleStyled>{name}</CategoryTitleStyled>
+                </CheckboxLabelContentStyled>
+              </Checkbox>
+            </li>
+          );
+        })}
+      </CheckboxListStyled>
+      <Separator />
+      <CheckboxListStyled>
+        {Object.values(userCategories).map((category) => {
+          const { categoryId, name } = category;
+          return (
+            <li key={`aside-checkbox-list-field-${categoryId}`}>
+              <Checkbox
+                label={`category-filter-${name}`}
+                id={`category-filter-${categoryId}`}
+                name={name}
+                checked={categoryFilterAtomState.includes(name!)}
+                onChange={onCheckboxChange}>
+                <CheckboxLabelContentStyled>
+                  <CategoryIconStyled small category={category} />
+                  <CategoryTitleStyled>{name}</CategoryTitleStyled>
+                </CheckboxLabelContentStyled>
+              </Checkbox>
+            </li>
+          );
+        })}
+      </CheckboxListStyled>
+    </>
   );
 };
 
 const MobileFilter = () => {
+  const [_, setModal] = useAtom(categoryModalAtom);
   const { t, dict } = useTranslate("AsideCard");
   return (
     <>
-      <StyledButton onClick={() => {}}>
+      <StyledButton onClick={() => setModal(true)}>
         {t(dict.categories.settings)}
       </StyledButton>
       <CategoryFilter />
@@ -72,7 +98,12 @@ export const MobileCategorySearch = () => {
   return (
     <StyledAccordion
       header={t(dict.categories.title)}
-      content={<MobileFilter />}
+      content={
+        <>
+          <MobileFilter />
+          <ManageCategories />
+        </>
+      }
     />
   );
 };
