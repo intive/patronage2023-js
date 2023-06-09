@@ -3,7 +3,7 @@ import { Icon, IconType } from "ui";
 
 export type CategoryType = {
   categoryId: string;
-  name?: string;
+  name: string;
   icon: {
     iconName: string;
     foreground: string;
