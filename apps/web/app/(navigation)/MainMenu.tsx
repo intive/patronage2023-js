@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
+import { Avatar, Icon, PersonalCard } from "ui";
 import { useTranslate } from "lib/hooks";
-import { Avatar, Icon } from "ui";
 import { SelectContentStyled, SelectItemStyled } from "ui/Select/Select.styles";
 
 export const AvatarStyled = styled(Avatar)`
@@ -59,8 +59,16 @@ export const MainMenu = () => {
           onValueChange={menuHandler}
           onOpenChange={() => setIsIconDown(!isIconDown)}>
           <SelectTriggerStyled>
-            <Select.Value>
-              <AvatarStyled src={data.user.image} outlined />
+            <Select.Value asChild>
+              <PersonalCard
+                triggerComponent={
+                  <AvatarStyled src={data.user.image} outlined />
+                }
+                side="bottom"
+                name={data.user.name}
+                email={data.user.email}
+                image={data.user.image}
+              />
             </Select.Value>
             <Select.Icon className="SelectIcon">
               {isIconDown ? <IconUp /> : <IconDown />}
