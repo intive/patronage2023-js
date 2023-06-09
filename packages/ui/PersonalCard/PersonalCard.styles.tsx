@@ -82,6 +82,7 @@ export const WrapperPopover = styled.div`
 export const PopoverContent = styled(Popover.Content)`
   ${CommonContentStyled}
   flex-direction: column;
+  max-width: 100vw;
 
   ${device.tablet} {
     display: none;
