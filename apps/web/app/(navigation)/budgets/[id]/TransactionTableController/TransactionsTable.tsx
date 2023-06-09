@@ -19,6 +19,7 @@ import {
 } from "./TransactionsTable.styled";
 
 import TableSuspense from "components/TableSuspense";
+import isAvatarValid from "lib/validations/avatarValidation";
 
 type SortDescriptor = {
   columnName: string;
@@ -172,7 +173,18 @@ export const TransactionsTable = ({
                     />
                   );
                 case "creator":
-                  return <Avatar className="avatar" src={props.value.avatar} />;
+                  return props.value ? (
+                    <Avatar
+                      className="avatar"
+                      src={
+                        isAvatarValid(props.value.avatar)
+                          ? props.value.avatar
+                          : "/default.svg"
+                      }
+                    />
+                  ) : (
+                    <></>
+                  );
                 case "editColumn":
                   return (
                     <DropdownMenu items={dropdownMenuItems} side="right" />
