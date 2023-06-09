@@ -7,7 +7,7 @@ import { languageAtom } from "store";
 import { Table } from "ka-table";
 import { DataType } from "ka-table/enums";
 import { Column } from "ka-table/models";
-import { Icon, Avatar, DropdownMenu, CategoryIcon } from "ui";
+import { Icon, Avatar, DropdownMenu, CategoryIcon, PersonalCard } from "ui";
 
 import { useTranslate } from "lib/hooks";
 import useLocaleDateString from "lib/hooks/useLocaleDateString";
@@ -19,6 +19,7 @@ import {
 } from "./TransactionsTable.styled";
 
 import TableSuspense from "components/TableSuspense";
+import isAvatarValid from "lib/validations/avatarValidation";
 
 type SortDescriptor = {
   columnName: string;
@@ -172,7 +173,29 @@ export const TransactionsTable = ({
                     />
                   );
                 case "creator":
-                  return <Avatar className="avatar" src={props.value.avatar} />;
+                  return props.value ? (
+                    <PersonalCard
+                      key={props.value.id}
+                      triggerComponent={
+                        <Avatar
+                          className="avatar"
+                          src={
+                            isAvatarValid(props.value.avatar)
+                              ? props.value.avatar
+                              : "/avatars/default.svg"
+                          }
+                          username={`${props.value.firstName} ${props.value.lastName}`}
+                          outlined
+                        />
+                      }
+                      side="left"
+                      name={`${props.value.firstName} ${props.value.lastName}`}
+                      email={props.value.userEmail}
+                      image={props.value.avatar}
+                    />
+                  ) : (
+                    <></>
+                  );
                 case "editColumn":
                   return (
                     <DropdownMenu items={dropdownMenuItems} side="right" />
