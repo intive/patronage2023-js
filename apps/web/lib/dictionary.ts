@@ -1313,6 +1313,13 @@ const dictionary = {
       pl: "Wyślij za pomocą email",
       fr: "Envoyer par email",
     },
+    toastMessages: {
+      emailSent: {
+        en: "Email sent.",
+        pl: "Email wysłany.",
+        fr: "Email envoyé.",
+      },
+    },
   },
   ImportModal: {
     downloadButtonText: {

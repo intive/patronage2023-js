@@ -126,8 +126,14 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     queryFn: async () =>
       await superFetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
-        { method: "POST", body: { budgetId: id } }
+        { method: "POST", body: { budgetId: { value: id } } }
       ),
+    onSuccess: () => {
+      showToast({
+        variant: "confirm",
+        message: tExport(dictExport.toastMessages.emailSent),
+      });
+    },
     enabled: false,
   });
 

@@ -59,6 +59,10 @@ export default function useSuperfetch() {
         showToast({ variant: "error", message: t(dict.status404) });
       } else if (res.status === 500) {
         console.log(t(dict.status500));
+        showToast({
+          variant: "error",
+          message: t(dict.status500),
+        });
       } else {
         showToast({
           variant: "error",
