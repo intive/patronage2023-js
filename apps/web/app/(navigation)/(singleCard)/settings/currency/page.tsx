@@ -4,7 +4,7 @@ import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { SettingsTitle } from "./SettingsTitle";
-import { Button, Select, Separator } from "ui";
+import { Button, Select, Separator, useToast } from "ui";
 import { currencyAtom } from "store/store";
 import { device } from "lib/media-queries";
 import { currency } from "lib/currency";
@@ -50,6 +50,7 @@ export default function SettingsPage() {
   const { t, dict } = useTranslate("SettingsPage");
   const value = useAtomValue(currencyAtom);
   const setValue = useSetAtom(currencyAtom);
+  const showToast = useToast();
 
   const [, setCurrency] = useLocalStorage("currency", "USD");
 
@@ -61,6 +62,7 @@ export default function SettingsPage() {
   const changeCurrency = (selectedCurrency: string) => {
     setValue(selectedCurrency);
     setCurrency(selectedCurrency);
+    showToast({ variant: "confirm", message: t(dict.currency.toast) });
   };
 
   const DivStyled = styled.div`
