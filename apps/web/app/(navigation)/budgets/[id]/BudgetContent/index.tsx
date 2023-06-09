@@ -24,7 +24,7 @@ import { useTranslate } from "lib/hooks";
 import { ExportResponseProps } from "lib/types";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
-import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
+import { ButtonWithDropdown, Icon, Separator, Button, useToast } from "ui";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -56,6 +56,16 @@ const ImportButton = styled(Button)`
   }
   ${device.desktop} {
     padding: 12px 34px;
+    text-decoration: none;
+  }
+`;
+
+const ButtonStyled = styled(Button)`
+  padding: 0;
+  font-weight: normal;
+  color: ${({ theme }) => theme.button.primary.main};
+  &:hover {
+    text-decoration: none;
   }
 `;
 
@@ -79,6 +89,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   const superFetch = useSuperfetch();
 
   const { data: session } = useSession();
+  const showToast = useToast();
 
   const handleCreateNewTransaction = (transactionType: string) => {
     setTransactionType(transactionType);
@@ -109,6 +120,22 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
+  const exportByMail = useQuery({
+    queryKey: ["exporIncomesExpensesByEmail"],
+    queryFn: async () =>
+      await superFetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
+        { method: "POST", body: { budgetId: { value: id } } }
+      ),
+    onSuccess: () => {
+      showToast({
+        variant: "confirm",
+        message: tExport(dictExport.toastMessages.emailSent),
+      });
+    },
+    enabled: false,
+  });
+
   const exportLink = (
     <LinkStyled href={exportData?.uri} download title="csv">
       <Icon icon="file_download" size={12} />
@@ -116,11 +143,14 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     </LinkStyled>
   );
 
-  const emailLink = (
-    <LinkStyled title="email">
+  const emailButton = (
+    <ButtonStyled
+      onClick={() => exportByMail.refetch()}
+      title="email"
+      variant="simple">
       <Icon icon="file_upload" size={12} />
       <span>{tExport(dictExport.sendEmailText)}</span>
-    </LinkStyled>
+    </ButtonStyled>
   );
 
   const exportTransactionsItems = [
@@ -130,7 +160,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     },
     {
       id: "export-transactions-email",
-      node: emailLink,
+      node: emailButton,
     },
   ];
 

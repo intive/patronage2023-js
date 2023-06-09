@@ -114,6 +114,14 @@ export const TransactionsTable = ({
     [locale]
   );
 
+  const columnMap = {
+    category: "CategoryType",
+    description: "Name",
+    amount: "Value",
+    date: "BudgetTransactionDate",
+    creator: "Email",
+  };
+
   const isSortedByColumn = (column: string | undefined) => {
     return sortDescriptors.find((element) => element.columnName === column);
   };
@@ -187,12 +195,19 @@ export const TransactionsTable = ({
           },
           headCellContent: {
             content: ({ column }) => {
-              const isSortedByThis = isSortedByColumn(column.key);
+              const isSortedByThis = isSortedByColumn(
+                columnMap[column.key as keyof typeof columnMap]
+              );
               return (
                 <>
                   <span>{column.title}</span>
                   {column.key !== "editColumn" && (
-                    <button onClick={() => setSorting(column.key)}>
+                    <button
+                      onClick={() =>
+                        setSorting(
+                          columnMap[column.key as keyof typeof columnMap]
+                        )
+                      }>
                       <Icon
                         icon="sort"
                         iconSize={20}

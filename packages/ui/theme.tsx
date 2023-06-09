@@ -380,6 +380,10 @@ export const theme = {
     content: colors.Teal10,
     background: colors.BasicWhite,
   },
+  personalCard: {
+    main: colors.Teal10,
+    background: colors.BasicWhite,
+  },
   reports: {
     incomesBar: colors.Supporting7,
     incomesLine: colors.Supporting14,
