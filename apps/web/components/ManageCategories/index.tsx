@@ -46,8 +46,7 @@ const ManageCategories = () => {
       background: "#e1e1e1",
       foreground: "#000000",
     },
-    //has to be undefined or null, because BE accepts empty string...
-    name: undefined,
+    name: "",
   });
   const [modal, setModal] = useAtom(categoryModalAtom);
   const queryClient = useQueryClient();
@@ -73,7 +72,17 @@ const ManageCategories = () => {
         body: customCategory,
       });
     },
-    onSuccess: () => queryClient.invalidateQueries(["customCategories"]),
+    onSuccess: () => {
+      setCustomCategory({
+        icon: {
+          iconName: "home",
+          background: "#e1e1e1",
+          foreground: "#000000",
+        },
+        name: "",
+      });
+      queryClient.invalidateQueries(["customCategories"]);
+    },
   });
 
   if (!modal) return null;
@@ -83,7 +92,7 @@ const ManageCategories = () => {
     setErrorMsg("");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     AddCategory.mutate();
