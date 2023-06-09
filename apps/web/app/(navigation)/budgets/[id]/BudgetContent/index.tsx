@@ -109,6 +109,16 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
+  const { data: ExportByMail } = useQuery({
+    queryKey: ["exporIncomesExpensesByEmail"],
+    queryFn: async () => {
+      return superFetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
+        { body: { budgetId: id } }
+      ).catch((err) => console.error(err));
+    },
+  });
+
   const exportLink = (
     <LinkStyled href={exportData?.uri} download title="csv">
       <Icon icon="file_download" size={12} />
@@ -117,7 +127,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   );
 
   const emailLink = (
-    <LinkStyled title="email">
+    <LinkStyled onClick={() => ExportByMail?.data} title="email">
       <Icon icon="file_upload" size={12} />
       <span>{tExport(dictExport.sendEmailText)}</span>
     </LinkStyled>
