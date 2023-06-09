@@ -109,6 +109,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
+  //query
   const { data: ExportByMail } = useQuery({
     queryKey: ["exporIncomesExpensesByEmail"],
     queryFn: async () => {
@@ -126,6 +127,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     </LinkStyled>
   );
 
+  //trigger
   const emailLink = (
     <LinkStyled onClick={() => ExportByMail?.data} title="email">
       <Icon icon="file_upload" size={12} />
