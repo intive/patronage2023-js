@@ -1436,7 +1436,7 @@ const dictionary = {
     empty: {
       pl: "Brak kategorii użytkownika",
       en: "No user categories",
-      fr: "",
+      fr: "Aucune catégorie d'utilisateur",
     },
   },
   Errors: {
