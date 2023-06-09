@@ -29,7 +29,15 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType: "HomeSpendings" | "Subscriptions" | "Car" | "Grocery";
+  categoryType: {
+    categoryName:
+      | "HomeSpendings"
+      | "Subscriptions"
+      | "Car"
+      | "Grocery"
+      | "Salary"
+      | "Refund";
+  };
 };
 
 type ID = {
@@ -78,8 +86,8 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
-        category: categoryMap[item.categoryType]
-          ? categoryMap[item.categoryType]
+        category: categoryMap[item.categoryType.categoryName]
+          ? categoryMap[item.categoryType.categoryName]
           : categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
