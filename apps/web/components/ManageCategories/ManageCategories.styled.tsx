@@ -16,6 +16,7 @@ export const ContentWrapper = styled.div`
 export const CategoryRow = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
   gap: 8px;
 `;
 

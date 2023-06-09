@@ -1,12 +1,15 @@
 "use client";
 import styled from "styled-components";
-import { LinkComponent, Modal } from "ui";
+import { CategoryType, LinkComponent } from "ui";
 import { CategoryFilter } from "components/CategoryFilter";
 import { useTranslate } from "lib/hooks";
 import { useState } from "react";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import ManageCategories from "components/ManageCategories";
-
+import { useParams } from "next/navigation";
+import { env } from "env.mjs";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 const CardHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
@@ -26,9 +29,33 @@ const CardSettingsButton = styled(LinkComponent)`
   text-decoration: none;
 `;
 
-export const AsideCardContent = () => {
-  // const fetch = useSuperfetch("")
+interface Response {
+  categories: CategoryType[];
+  httpStatus: number;
+}
 
+export const AsideCardContent = () => {
+  const { id: budgetId } = useParams() as { id: string };
+  const fetch = useSuperfetch();
+  const { data: session } = useSession();
+  const queryClient = useQueryClient();
+
+  const { data: categories } = useQuery({
+    queryKey: ["customCategories"],
+    queryFn: async () => {
+      return fetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/categories`
+      ).then((res: Response) => ({
+        ...res,
+        categories: res.categories.filter(
+          //filter out default categories, why are they even returned ?!
+          (cat) => cat.categoryId !== "00000000-0000-0000-0000-000000000000"
+        ),
+      }));
+    },
+    enabled: !!session,
+  });
+  console.log(categories);
   const { t, dict } = useTranslate("AsideCard");
   const [modal, setModal] = useState(false);
   return (
@@ -40,7 +67,11 @@ export const AsideCardContent = () => {
         </CardSettingsButton>
       </CardHeaderStyled>
       <CategoryFilter />
-      <ManageCategories open={modal} onClose={() => setModal(false)} />
+      <ManageCategories
+        open={modal}
+        onClose={() => setModal(false)}
+        budgetId={budgetId}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 import { useAtom } from "jotai";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { budgetCategories } from "store/store";
 import {
   CategoryIcon,
@@ -10,6 +10,7 @@ import {
   Separator,
   ErrorMessage,
   Input,
+  Spinner,
 } from "ui";
 import {
   CategoriesWrapper,
@@ -23,24 +24,44 @@ import { StyledButton } from "./ManageCategories.styled";
 import { icons } from "lib/icons";
 import { CategoryDropdown, ColorDropdown } from "./Dropdown";
 import { colors } from "ui/theme";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import { env } from "env.mjs";
 interface Props {
   open: boolean;
   onClose: () => void;
+  budgetId: string;
 }
 
-const ManageCategories = ({ open, onClose }: Props) => {
+const ManageCategories = ({ open, onClose, budgetId }: Props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [userCategories, setUserCategories] = useAtom(budgetCategories);
   const [customCategory, setCustomCategory] = useState<
-    Omit<CategoryType, "id">
+    Omit<CategoryType, "categoryId">
   >({
-    name: "",
     icon: {
       background: "",
       foreground: "",
       name: "home",
     },
+    name: "",
   });
+  const queryClient = useQueryClient();
+
+  const fetch = useSuperfetch();
+
+  const AddCategory = useMutation({
+    mutationFn: () => {
+      return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/categories`, {
+        method: "POST",
+        body: {
+          customCategory,
+        },
+      });
+    },
+    onSuccess: () => queryClient.invalidateQueries(["customCategories"]),
+  });
+
   if (!open) return null;
 
   const handleClose = () => {
@@ -50,21 +71,8 @@ const ManageCategories = ({ open, onClose }: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!customCategory.name) return setErrorMsg("Name cannot be empty.");
 
-    if (userCategories.find((el) => el.name === customCategory.name))
-      return setErrorMsg("Category already exist.");
-    setUserCategories([{ id: 69, ...customCategory }, ...userCategories]);
-
-    //clear
-    setCustomCategory({
-      icon: {
-        background: "",
-        foreground: "",
-        name: "home",
-      },
-      name: "",
-    });
+    AddCategory.mutate();
   };
 
   return (
@@ -83,6 +91,7 @@ const ManageCategories = ({ open, onClose }: Props) => {
             <Input
               label="Category name"
               name="category name"
+              value={customCategory.name}
               supportingLabel
               onChange={(e) =>
                 setCustomCategory({
@@ -114,7 +123,7 @@ const ManageCategories = ({ open, onClose }: Props) => {
               trigger={
                 <CategoryIcon
                   category={{
-                    id: 0,
+                    categoryId: "0",
                     ...customCategory,
                   }}
                 />
@@ -134,6 +143,7 @@ const ManageCategories = ({ open, onClose }: Props) => {
               }
               items={[
                 ...Object.values(colors)
+                  //remove last item (which is transparent)
                   .slice(0, -1)
                   .map((color) => ({
                     id: color,
@@ -188,13 +198,17 @@ const ManageCategories = ({ open, onClose }: Props) => {
               ]}
             />
           </StyledDiv>
-          <Submit disabled={!!errorMsg}>Add new category</Submit>
+          {queryClient.isMutating() ? (
+            <Spinner />
+          ) : (
+            <Submit disabled={!!errorMsg}>Add new category</Submit>
+          )}
         </form>
 
         <Separator />
         <CategoriesWrapper>
           {userCategories.map((category) => (
-            <CategoryRow key={category.id}>
+            <CategoryRow key={category.categoryId}>
               <CategoryIcon category={category} /> {category.name}
             </CategoryRow>
           ))}
