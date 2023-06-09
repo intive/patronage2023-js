@@ -120,7 +120,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     enabled: !!session,
   });
 
-  //query
   const exportByMail = useQuery({
     queryKey: ["exporIncomesExpensesByEmail"],
     queryFn: async () =>
@@ -144,7 +143,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     </LinkStyled>
   );
 
-  //trigger
   const emailButton = (
     <ButtonStyled
       onClick={() => exportByMail.refetch()}
