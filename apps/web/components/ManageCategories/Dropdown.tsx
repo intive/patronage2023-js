@@ -26,6 +26,7 @@ const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
 
 const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)`
   margin: 8px;
+  z-index: 100;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
   border: 1px solid ${({ theme }) => theme.dropdownMenu.border};
@@ -49,6 +50,7 @@ const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)`
 const DropdownColorMenuStyled = styled(DropdownMenuContentStyled)`
   display: grid;
   grid-template-columns: repeat(4, minmax(10px, 1fr));
+  z-index: 100;
 `;
 
 export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
