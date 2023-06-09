@@ -123,7 +123,7 @@ export default function ReportsPage() {
 
   let isData, transactions;
 
-  //prepare transactions object for the charts
+  //prepare transactions object for the charts //
   if (statistics && statistics.incomes != null && statistics.expenses != null) {
     isData = statistics.incomes || statistics.expenses;
 
