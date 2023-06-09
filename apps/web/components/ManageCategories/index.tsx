@@ -20,6 +20,7 @@ import {
   ContentWrapper,
   ErrorMessageWrapper,
   StyledDiv,
+  StyledSpan,
   Submit,
 } from "./ManageCategories.styled";
 import { StyledButton } from "./ManageCategories.styled";
@@ -33,6 +34,7 @@ import { useParams } from "next/navigation";
 interface Props {
   budgetId: string;
 }
+import { useTranslate } from "lib/hooks";
 
 const ManageCategories = () => {
   const { id: budgetId } = useParams() as { id: string };
@@ -50,6 +52,7 @@ const ManageCategories = () => {
   });
   const [modal, setModal] = useAtom(categoryModalAtom);
   const queryClient = useQueryClient();
+  const { t, dict } = useTranslate("ManageCategories");
 
   const fetch = useSuperfetch();
 
@@ -226,19 +229,21 @@ const ManageCategories = () => {
 
         <Separator />
         <CategoriesWrapper>
-          {userCategories.length
-            ? userCategories.map((category) => (
-                <CategoryRow key={category.categoryId}>
-                  <StyledDiv>
-                    <CategoryIcon category={category} /> {category.name}
-                  </StyledDiv>
-                  <NavBudgetIcon
-                    icon="delete"
-                    onClick={() => RemoveCategory.mutate(category.categoryId)}
-                  />
-                </CategoryRow>
-              ))
-            : "Brak kategorii użytkownika"}
+          {userCategories.length ? (
+            userCategories.map((category) => (
+              <CategoryRow key={category.categoryId}>
+                <StyledDiv>
+                  <CategoryIcon category={category} /> {category.name}
+                </StyledDiv>
+                <NavBudgetIcon
+                  icon="delete"
+                  onClick={() => RemoveCategory.mutate(category.categoryId)}
+                />
+              </CategoryRow>
+            ))
+          ) : (
+            <StyledSpan>{t(dict.empty)}</StyledSpan>
+          )}
         </CategoriesWrapper>
       </ContentWrapper>
     </Modal>

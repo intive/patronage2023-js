@@ -2,6 +2,7 @@
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
 import styled from "styled-components";
 import { ReactElement } from "react";
+import { device } from "lib/media-queries";
 
 interface Item {
   ComponentToRender?: ReactElement;
@@ -16,11 +17,15 @@ type DropdownMenuProps = {
 const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
   border: none;
   cursor: pointer;
-  width: 4em;
-  height: 4em;
+  width: 2.5em;
+  height: 2.5em;
   border-radius: 8px;
   &:focus {
     outline: 2px solid ${({ theme }) => theme.dropdownMenu.outlineFocus};
+  }
+  ${device.tablet} {
+    width: 4em;
+    height: 4em;
   }
 `;
 
