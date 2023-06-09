@@ -36,7 +36,7 @@ type Item = {
     | "Grocery"
     | "Salary"
     | "Refund";
-  user: {
+  budgetUser?: {
     id: string;
     avatar: string;
     firstName: string;
@@ -96,7 +96,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           : categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
-        creator: item.user,
+        creator: item.budgetUser,
       })
     );
   };

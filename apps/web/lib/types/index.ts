@@ -6,14 +6,6 @@ export interface Currency {
   locale: string;
 }
 
-// interface Creator {
-//   id: string;
-//   firstName: string;
-//   lastName: string;
-//   avatar: string;
-//   userEmail: string;
-// }
-
 export interface Transaction {
   id: string;
   date: number;
