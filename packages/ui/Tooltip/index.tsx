@@ -16,7 +16,7 @@ const StyledTooltipContent = styled(RadixTooltip.Content)`
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.tooltip.border};
   font-size: 12px;
-  z-index: 2;
+  z-index: 5;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
 `;
