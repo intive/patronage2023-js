@@ -110,14 +110,24 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   });
 
   //query
-  const { data: ExportByMail } = useQuery({
+  const exportByMail = useQuery({
     queryKey: ["exporIncomesExpensesByEmail"],
-    queryFn: async () => {
-      return superFetch(
+    queryFn: async () =>
+      await fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
-        { body: { budgetId: id } }
-      ).catch((err) => console.error(err));
-    },
+        {
+          method: "POST",
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + session?.user.accessToken,
+          },
+          // body: JSON.stringify({ budgetId: id }),
+        }
+      )
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err)),
+    enabled: !!session,
   });
 
   const exportLink = (
@@ -129,7 +139,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
 
   //trigger
   const emailLink = (
-    <LinkStyled onClick={() => ExportByMail?.data} title="email">
+    <LinkStyled onClick={() => exportByMail} title="email">
       <Icon icon="file_upload" size={12} />
       <span>{tExport(dictExport.sendEmailText)}</span>
     </LinkStyled>
