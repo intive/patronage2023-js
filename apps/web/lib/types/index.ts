@@ -27,6 +27,7 @@ export interface BudgetUser {
   avatar: string;
   firstName: string;
   lastName: string;
+  userEmail: string;
 }
 
 export interface Budget {

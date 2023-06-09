@@ -35,4 +35,5 @@ export { Tooltip } from "./Tooltip";
 export { ExportDropdown } from "./ExportDropdown";
 export { ButtonGroupSimple } from "./ButtonGroupSimple";
 export { Accordion } from "./Accordion";
+export { PersonalCard } from "./PersonalCard";
 export { Select } from "./Select";
