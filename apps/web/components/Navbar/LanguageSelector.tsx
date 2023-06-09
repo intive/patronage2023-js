@@ -1,30 +1,43 @@
+import { useAtom } from "jotai";
+import styled, { css } from "styled-components";
 import { Language, languageAtom } from "store";
-import { useSetAtom, useAtomValue } from "jotai";
 import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import { useLocalStorage, useTranslate } from "lib/hooks";
-import styled from "styled-components";
-
 import { Flag, Select } from "ui";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
 
-const SelectStyled = styled(Select)`
-  background-color: unset;
-  border: 0;
-  padding: 0;
-  line-height: 0;
-  margin-bottom: 0;
-  width: auto;
+type LanguageSelectorProps = {
+  variant: "flag" | "descriptive";
+};
 
-  &:focus,
-  &[data-state="open"] {
-    outline: revert;
-  }
+const SelectStyled = styled(Select)<LanguageSelectorProps>`
+  ${({ variant }) =>
+    variant === "flag" &&
+    css`
+      background-color: unset;
+      border: 0;
+      padding: 0;
+      line-height: 0;
+      margin-bottom: 0;
+      width: auto;
+
+      &:focus,
+      &[data-state="open"] {
+        outline: revert;
+      }
+    `}
+
+  ${({ variant }) =>
+    variant === "descriptive" &&
+    css`
+      padding: 8px;
+      line-height: 1em;
+    `}
 `;
 
-export const LanguageSelector = () => {
+export const LanguageSelector = ({ variant }: LanguageSelectorProps) => {
   const { hasScrollbar } = useHasScrollBar();
-  const setLanguage = useSetAtom(languageAtom);
-  const language = useAtomValue(languageAtom);
+  const [language, setLanguage] = useAtom(languageAtom);
   const { t, dict } = useTranslate("NavigationLayout");
   const [, setLang] = useLocalStorage("lang", "en");
 
@@ -56,14 +69,18 @@ export const LanguageSelector = () => {
 
   return (
     <SelectStyled
+      variant={variant}
       items={items.map(({ lang, flagSrc, languageName, alt }) => ({
         value: lang,
         label: (
           <>
             <Flag src={flagSrc} alt={alt} />
-            <SelectLabelHiddenInTrigger>
-              {languageName}
-            </SelectLabelHiddenInTrigger>
+            {variant === "descriptive" && <span>{languageName}</span>}
+            {variant === "flag" && (
+              <SelectLabelHiddenInTrigger>
+                {languageName}
+              </SelectLabelHiddenInTrigger>
+            )}
           </>
         ),
       }))}
@@ -72,7 +89,7 @@ export const LanguageSelector = () => {
         changeLanguage(language as Language);
       }}
       label=""
-      hasIcon={false}
+      hasIcon={variant === "descriptive"}
       hasScrollbar={hasScrollbar}
       sideOffset={5}
     />

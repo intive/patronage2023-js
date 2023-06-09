@@ -24,7 +24,7 @@ const ModalStyled = styled.div`
   height: 100%;
   padding: 8px;
   z-index: 100;
-  overflow: auto;
+  overflow: hidden;
 `;
 
 const BackgroundStyled = styled.div`

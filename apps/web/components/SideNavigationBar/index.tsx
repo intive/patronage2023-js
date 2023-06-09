@@ -1,25 +1,31 @@
 "use client";
-
 import { useCallback, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
-
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSetAtom } from "jotai";
-import { useQueryClient } from "@tanstack/react-query";
+import { env } from "env.mjs";
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
-import validate from "lib/validations/iconValidation";
-import { categoryFilterAtom } from "store";
-import { useTranslate } from "lib/hooks";
-import { useGetBudgets } from "lib/hooks/useGetBudgets";
-import { useDebounce } from "lib/hooks/useDebounce";
-import { BudgetType, ItemType } from "services/mutations";
 
-import { SideNavigationBar, Icon, NavList } from "ui";
-import { SpanStyled } from "ui/NavList";
+import { useTranslate } from "lib/hooks";
+import { useDebounce } from "lib/hooks/useDebounce";
+import { useGetBudgets } from "lib/hooks/useGetBudgets";
+import { ExportResponseProps } from "lib/types";
+import useSuperfetch from "lib/hooks/useSuperfetch";
+import validate from "lib/validations/iconValidation";
+
 import { CreateNewBudget } from "../../app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget";
+import { ItemType, BudgetType } from "services/mutations";
 import { Favourite } from "./Favourite";
 
+import { categoryFilterAtom } from "store";
+
+import { ImportModal } from "components/ImportModal";
+import { SideNavigationBar, Icon, NavList, useToast } from "ui";
+import { SpanStyled } from "ui/NavList";
+import { ImportCSVInstructionScreen } from "components/ImportModal/ImportModal.screens";
+
 export const IconStyled = styled(Icon)`
-  background: white;
+  background: ${({ theme }) => theme.navList.navItem.iconBackgroundColor};
   padding: 4px;
   border-radius: 8px;
 `;
@@ -27,13 +33,19 @@ export const IconStyled = styled(Icon)`
 export default function SideNav() {
   const { dict, t } = useTranslate("NavigationLayout");
   const { SideNav } = dict;
+  const { t: tExport, dict: dictExport } = useTranslate("ExportFile");
+  const { t: tImport, dict: dictImport } = useTranslate("ImportModal"); //
 
   const { data: session } = useSession();
   const setCategoryFilter = useSetAtom(categoryFilterAtom);
+  const showToast = useToast();
+  const superFetch = useSuperfetch();
 
   const [isNavListItemClicked, setIsNavItemClicked] = useState(false);
   const [isCreateNewBudgetModalVisible, setIsCreateNewBudgetModalVisible] =
     useState(false);
+
+  const [isImportModalVisible, setIsImportModalVisible] = useState(false);
 
   const [searchValue, setSearchValue] = useState("");
   const [sortAscending, setSortAscending] = useState(true);
@@ -139,11 +151,23 @@ export default function SideNav() {
     return distinct;
   };
 
-  const flatData = data?.pages?.flatMap(({ items }: ItemType) => items) ?? [];
+  const flatData = data?.pages[0]
+    ? data?.pages?.flatMap(({ items }: ItemType) => items)
+    : ([] as BudgetType[]);
 
   const uniqueValues = removeDuplicates(flatData, createKey);
 
   const successData = mapToBudgetsComponents(uniqueValues);
+
+  const { data: exportData } = useQuery({
+    queryKey: ["exportedCsvUri"],
+    queryFn: async (): Promise<ExportResponseProps> => {
+      return superFetch(`${env.NEXT_PUBLIC_API_URL}budgets/export`).catch(
+        (err) => console.error(err)
+      );
+    },
+    enabled: !!session,
+  });
 
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
@@ -176,6 +200,22 @@ export default function SideNav() {
         openModal();
       },
       label: t(SideNav.budgetsItem.buttonLabel),
+    },
+    exportButton: {
+      clickHandler: () => {
+        showToast({
+          variant: "confirm",
+          message: tExport(dictExport.exportToastMessage),
+        });
+      },
+      label: t(SideNav.budgetsItem.exportButtonLabel),
+      csvUri: exportData?.uri,
+    },
+    importButton: {
+      clickHandler: () => {
+        setIsImportModalVisible(true);
+      },
+      label: t(SideNav.budgetsItem.importButtonLabel),
     },
   };
 
@@ -270,11 +310,28 @@ export default function SideNav() {
         refetchBudgetsFunction={refetch}
         resetSearch={() => setSearchValue("")}
       />
-      <>
-        {isCreateNewBudgetModalVisible && (
-          <CreateNewBudget onClose={closeModal} />
-        )}
-      </>
+
+      {isCreateNewBudgetModalVisible && (
+        <CreateNewBudget onClose={closeModal} />
+      )}
+      {isImportModalVisible && (
+        <ImportModal
+          importEndpoint="budgets/import"
+          allowedFileExtensions={[".csv"]}
+          downloadButtonLabel={tExport(dictImport.downloadButtonText)}
+          importButtonLabel={tImport(dictImport.importButtonText)}
+          noDataSavedToastMsg={tImport(dictImport.noBudgetSaved)}
+          onClose={() => setIsImportModalVisible(false)}
+          instructionScreen={() =>
+            ImportCSVInstructionScreen({
+              exampleHeader:
+                "Name, IconName, Description, Currency, Value, StartDate, EndDate",
+              exampleFirstLine:
+                "budgetName,yellowIcon,some budget description,USD,15.00,04/20/2023 19:14:20,04/25/2023 20:14:20",
+            })
+          }
+        />
+      )}
     </>
   );
 }

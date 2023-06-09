@@ -57,13 +57,6 @@ export const ButtonStyled = styled.button<ButtonProps>`
     cursor: not-allowed;
   }
 
-  // temporary fix to button with arrow_dropdown_down
-  & :last-child {
-    margin-right: -10px;
-    margin-top: -8px;
-    margin-bottom: -8px;
-  }
-
   ${({ variant }) =>
     variant === "danger" &&
     css`

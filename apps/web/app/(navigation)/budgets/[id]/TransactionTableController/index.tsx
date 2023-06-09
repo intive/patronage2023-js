@@ -48,7 +48,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   >(null);
   const [searchTransactionByName, setSearchTransactionByName] = useState("");
   const [sortDescriptors, setSortDescriptors] = useState([
-    { columnName: "description", sortAscending: true },
+    { columnName: "Name", sortAscending: true },
   ]);
   const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
@@ -84,7 +84,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         description: item.name,
         status: "Done",
         creator: {
-          id: budget.userID,
+          id: budget.userId,
           name: session!.user.name,
           avatar: session!.user.image,
         },

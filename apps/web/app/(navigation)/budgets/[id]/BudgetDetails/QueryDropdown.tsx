@@ -74,7 +74,7 @@ const QueryDropdown = ({ label, items }: Props) => {
         <DropdownMenuContentStyled align="center">
           {items.map((item) => (
             <DropdownMenuItemStyled key={item.id} onClick={item.callback}>
-              {item.label}
+              {item.node}
             </DropdownMenuItemStyled>
           ))}
         </DropdownMenuContentStyled>
