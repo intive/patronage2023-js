@@ -25,6 +25,7 @@ import { ExportResponseProps } from "lib/types";
 import fixCurrencyObject from "lib/validations/fixCurrenyObject";
 import { LinkStyled } from "ui/SideNavigationBar/SubMenu/SubMenu.styled";
 import { ButtonWithDropdown, Icon, Separator, Button } from "ui";
+import { ThemeType } from "ui/theme";
 
 const BudgetContentWrapperStyled = styled.div`
   display: flex;
@@ -56,6 +57,17 @@ const ImportButton = styled(Button)`
   }
   ${device.desktop} {
     padding: 12px 34px;
+    text-decoration: none;
+  }
+`;
+
+const ButtonStyled = styled(Button)`
+  padding: 0;
+  font-weight: normal;
+  text-decoration: none;
+  color: ${({ theme }) => theme.button.primary.main};
+  &:hover {
+    text-decoration: none;
   }
 `;
 
@@ -122,7 +134,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
             "Content-Type": "application/json",
             Authorization: "Bearer " + session?.user.accessToken,
           },
-          // body: JSON.stringify({ budgetId: id }),
+          body: JSON.stringify({ budgetId: id }),
         }
       )
         .then((res) => console.log(res))
@@ -138,11 +150,11 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
   );
 
   //trigger
-  const emailLink = (
-    <LinkStyled onClick={() => exportByMail} title="email">
+  const emailButton = (
+    <ButtonStyled onClick={() => exportByMail} title="email" variant="simple">
       <Icon icon="file_upload" size={12} />
       <span>{tExport(dictExport.sendEmailText)}</span>
-    </LinkStyled>
+    </ButtonStyled>
   );
 
   const exportTransactionsItems = [
@@ -152,7 +164,7 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
     },
     {
       id: "export-transactions-email",
-      node: emailLink,
+      node: emailButton,
     },
   ];
 
