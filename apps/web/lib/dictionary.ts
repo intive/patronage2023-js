@@ -1644,9 +1644,9 @@ const dictionary = {
     },
     status404: {
       //CONSOLE
-      en: "Budget with given id does not exist.",
-      pl: "Budżet o podanym identyfikatorze nie istnieje.",
-      fr: "Le budget avec l'identifiant donné n'existe pas.",
+      en: "Not found.",
+      pl: "Nie znaleziono.",
+      fr: "Pas trouvé.",
     },
     status500: {
       //CONSOLE
