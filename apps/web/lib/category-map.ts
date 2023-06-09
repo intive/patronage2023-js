@@ -6,7 +6,7 @@ const { categoryIcons } = theme;
 //Since the name is set as a string to prevent errors I'll define that if string doesn't matches any part on this list it assigns HomeSpendings on default
 const categoryMap = {
   HomeSpendings: {
-    id: 1,
+    id: "1",
     name: "Home spendings",
     icon: {
       name: "home",
@@ -14,7 +14,7 @@ const categoryMap = {
     },
   },
   Subscriptions: {
-    id: 2,
+    id: "2",
     name: "Subscriptions",
     icon: {
       name: "subscriptions",
@@ -22,7 +22,7 @@ const categoryMap = {
     },
   },
   Car: {
-    id: 3,
+    id: "3",
     name: "Car",
     icon: {
       name: "directions_car",
@@ -30,7 +30,7 @@ const categoryMap = {
     },
   },
   Grocery: {
-    id: 4,
+    id: "4",
     name: "Grocery",
     icon: {
       name: "shopping_cart",
@@ -38,7 +38,7 @@ const categoryMap = {
     },
   },
   Salary: {
-    id: 5,
+    id: "5",
     name: "Salary",
     icon: {
       name: "payments",
@@ -46,7 +46,7 @@ const categoryMap = {
     },
   },
   Refund: {
-    id: 6,
+    id: "6",
     name: "Refund",
     icon: {
       name: "currency_exchange",

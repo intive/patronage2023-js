@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Icon, IconType } from "ui";
 
 export type CategoryType = {
-  id: number;
+  categoryId: string;
   name: string;
   icon: {
     name: string;
