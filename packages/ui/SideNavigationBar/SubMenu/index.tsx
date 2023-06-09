@@ -72,8 +72,6 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     <IconUpsideDown icon="filter_list" />
   );
 
-  // For some reason, radix doesn't work with our Button from UI (doesn't like onClick)
-  // So I use polymorphism to get the styles from our Button and pass them to <button>
   const triggerButton = (
     <ButtonStyled
       as={ImportExportButtonStyled}
