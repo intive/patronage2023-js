@@ -70,3 +70,8 @@ export const StyledDiv = styled.div`
 export const Submit = styled(Button)`
   margin-block: 16px;
 `;
+
+export const StyledSpan = styled.span`
+  width: full;
+  text-align: center;
+`;
