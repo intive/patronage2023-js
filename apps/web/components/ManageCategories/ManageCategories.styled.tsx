@@ -17,7 +17,9 @@ export const CategoryRow = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
+  padding-right: 10px;
 `;
 
 export const StyledButton = styled.button<ColorProps>`
@@ -62,6 +64,7 @@ export const ErrorMessageWrapper = styled.div`
 export const StyledDiv = styled.div`
   display: flex;
   gap: 10px;
+  align-items: center;
 `;
 
 export const Submit = styled(Button)`

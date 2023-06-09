@@ -10,6 +10,8 @@ import { useParams } from "next/navigation";
 import { env } from "env.mjs";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
+import { useAtom } from "jotai";
+import { budgetCategories, categoryModalAtom } from "store/store";
 const CardHeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
@@ -39,25 +41,29 @@ export const AsideCardContent = () => {
   const fetch = useSuperfetch();
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const [_, setUserCategories] = useAtom(budgetCategories);
 
-  const { data: categories } = useQuery({
+  useQuery({
     queryKey: ["customCategories"],
     queryFn: async () => {
       return fetch(
         `${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/categories`
-      ).then((res: Response) => ({
-        ...res,
-        categories: res.categories.filter(
+      ).then((res: Response) => {
+        const filteredCategories = res.categories.filter(
           //filter out default categories, why are they even returned ?!
           (cat) => cat.categoryId !== "00000000-0000-0000-0000-000000000000"
-        ),
-      }));
+        );
+        setUserCategories(filteredCategories);
+        return {
+          ...res,
+          categories: filteredCategories,
+        };
+      });
     },
     enabled: !!session,
   });
-  console.log(categories);
   const { t, dict } = useTranslate("AsideCard");
-  const [modal, setModal] = useState(false);
+  const [__, setModal] = useAtom(categoryModalAtom);
   return (
     <>
       <CardHeaderStyled>
@@ -67,11 +73,7 @@ export const AsideCardContent = () => {
         </CardSettingsButton>
       </CardHeaderStyled>
       <CategoryFilter />
-      <ManageCategories
-        open={modal}
-        onClose={() => setModal(false)}
-        budgetId={budgetId}
-      />
+      <ManageCategories />
     </>
   );
 };

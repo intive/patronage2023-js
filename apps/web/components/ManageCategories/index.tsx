@@ -1,7 +1,7 @@
 "use client";
 import { useAtom } from "jotai";
 import { useState } from "react";
-import { budgetCategories } from "store/store";
+import { budgetCategories, categoryModalAtom } from "store/store";
 import {
   CategoryIcon,
   CategoryType,
@@ -11,6 +11,8 @@ import {
   ErrorMessage,
   Input,
   Spinner,
+  Button,
+  NavBudgetIcon,
 } from "ui";
 import {
   CategoriesWrapper,
@@ -27,45 +29,57 @@ import { colors } from "ui/theme";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { env } from "env.mjs";
+import { useParams } from "next/navigation";
 interface Props {
-  open: boolean;
-  onClose: () => void;
   budgetId: string;
 }
 
-const ManageCategories = ({ open, onClose, budgetId }: Props) => {
+const ManageCategories = () => {
+  const { id: budgetId } = useParams() as { id: string };
   const [errorMsg, setErrorMsg] = useState("");
-  const [userCategories, setUserCategories] = useAtom(budgetCategories);
+  const [userCategories] = useAtom(budgetCategories);
   const [customCategory, setCustomCategory] = useState<
     Omit<CategoryType, "categoryId">
   >({
     icon: {
-      background: "",
-      foreground: "",
-      name: "home",
+      iconName: "home",
+      background: "#e1e1e1",
+      foreground: "#000000",
     },
-    name: "",
+    //has to be undefined or null, because BE accepts empty string...
+    name: undefined,
   });
+  const [modal, setModal] = useAtom(categoryModalAtom);
   const queryClient = useQueryClient();
 
   const fetch = useSuperfetch();
+
+  const RemoveCategory = useMutation({
+    mutationFn: (categoryId: string) => {
+      return fetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/categories/${categoryId}`,
+        {
+          method: "DELETE",
+        }
+      );
+    },
+    onSuccess: () => queryClient.invalidateQueries(["customCategories"]),
+  });
 
   const AddCategory = useMutation({
     mutationFn: () => {
       return fetch(`${env.NEXT_PUBLIC_API_URL}budgets/${budgetId}/categories`, {
         method: "POST",
-        body: {
-          customCategory,
-        },
+        body: customCategory,
       });
     },
     onSuccess: () => queryClient.invalidateQueries(["customCategories"]),
   });
 
-  if (!open) return null;
+  if (!modal) return null;
 
   const handleClose = () => {
-    onClose();
+    setModal(false);
     setErrorMsg("");
   };
 
@@ -111,7 +125,7 @@ const ManageCategories = ({ open, onClose, budgetId }: Props) => {
                           ...customCategory,
                           icon: {
                             ...customCategory.icon,
-                            name: icon,
+                            iconName: icon,
                           },
                         })
                       }>
@@ -199,7 +213,9 @@ const ManageCategories = ({ open, onClose, budgetId }: Props) => {
             />
           </StyledDiv>
           {queryClient.isMutating() ? (
-            <Spinner />
+            <Submit>
+              <Spinner />
+            </Submit>
           ) : (
             <Submit disabled={!!errorMsg}>Add new category</Submit>
           )}
@@ -207,11 +223,19 @@ const ManageCategories = ({ open, onClose, budgetId }: Props) => {
 
         <Separator />
         <CategoriesWrapper>
-          {userCategories.map((category) => (
-            <CategoryRow key={category.categoryId}>
-              <CategoryIcon category={category} /> {category.name}
-            </CategoryRow>
-          ))}
+          {userCategories.length
+            ? userCategories.map((category) => (
+                <CategoryRow key={category.categoryId}>
+                  <StyledDiv>
+                    <CategoryIcon category={category} /> {category.name}
+                  </StyledDiv>
+                  <NavBudgetIcon
+                    icon="delete"
+                    onClick={() => RemoveCategory.mutate(category.categoryId)}
+                  />
+                </CategoryRow>
+              ))
+            : "Brak kategorii użytkownika"}
         </CategoriesWrapper>
       </ContentWrapper>
     </Modal>
