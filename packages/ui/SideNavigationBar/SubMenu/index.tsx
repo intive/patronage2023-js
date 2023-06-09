@@ -15,6 +15,7 @@ import {
   ImportExportButtonStyled,
   NewBudgetButtonStyled,
   Title,
+  ExportBudgetsByMailStyled,
 } from "./SubMenu.styled";
 import { Tooltip } from "../../Tooltip";
 
@@ -41,6 +42,7 @@ export type SubMenuDataProps = {
   button?: SubMenuButtonType;
   exportButton?: SubMenuButtonType;
   importButton?: SubMenuButtonType;
+  exportBudgetsByMailButton?: SubMenuButtonType;
 };
 
 type SubMenuProps = {
@@ -56,6 +58,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     button,
     exportButton,
     importButton,
+    exportBudgetsByMailButton,
   } = subMenuData;
 
   const onInputChange = (value: string) => {
@@ -92,10 +95,24 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     </LinkStyled>
   );
 
+  const emailButton = (
+    <ExportBudgetsByMailStyled
+      onClick={exportBudgetsByMailButton?.clickHandler}
+      title="email"
+      variant="simple">
+      <Icon icon="file_upload" size={12} />
+      <span>{exportBudgetsByMailButton?.label}</span>
+    </ExportBudgetsByMailStyled>
+  );
+
   const exportBudgetsDropdownItems = [
     {
       id: "export-budgets-download",
       node: downloadLink,
+    },
+    {
+      id: "export-budgets-email",
+      node: emailButton,
     },
   ];
 
