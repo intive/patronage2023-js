@@ -29,13 +29,7 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType:
-    | "HomeSpendings"
-    | "Subscriptions"
-    | "Car"
-    | "Grocery"
-    | "Salary"
-    | "Refund";
+  categoryType: "HomeSpendings" | "Subscriptions" | "Car" | "Grocery";
 };
 
 type ID = {
@@ -54,7 +48,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   >(null);
   const [searchTransactionByName, setSearchTransactionByName] = useState("");
   const [sortDescriptors, setSortDescriptors] = useState([
-    { columnName: "BudgetTransactionDate", sortAscending: false },
+    { columnName: "Name", sortAscending: true },
   ]);
   const debouncedSearch = useDebounce(searchTransactionByName, 500);
   const { t, dict } = useTranslate("BudgetsPage");
