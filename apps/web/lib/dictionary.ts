@@ -1504,6 +1504,84 @@ const dictionary = {
       pl: "Budżet nie istnieje.",
       fr: "Le budget n'existe pas.",
     },
+    "1.12": {
+      //TOAST
+      en: "Budget ID cannot be empty.",
+      pl: "ID budżetu nie może być puste.",
+      fr: "L'identifiant du budget ne peut pas être vide.",
+    },
+    "1.13": {
+      //TOAST
+      en: "Icon cannot be empty.",
+      pl: "Ikona nie może być pusta.",
+      fr: "L'icône ne peut pas être vide.",
+    },
+    "1.14": {
+      //TOAST
+      en: "Limit is not in a valid format.",
+      pl: "Limit nie jest w prawidłowym formacie.",
+      fr: "La limite n'est pas dans un format valide.",
+    },
+    "1.15": {
+      //TOAST
+      en: "Start date is invalid.",
+      pl: "Nieprawidłowa data rozpoczęcia.",
+      fr: "La date de début n'est pas valide.",
+    },
+    "1.16": {
+      //TOAST
+      en: "End date is invalid.",
+      pl: "Nieprawidłowa data zakończenia.",
+      fr: "La date de fin n'est pas valide.",
+    },
+    "1.17": {
+      //TOAST
+      en: "Icon name is required.",
+      pl: "Nazwa ikony jest wymagana.",
+      fr: "Le nom de l'icône est obligatoire.",
+    },
+    "1.18": {
+      //TOAST
+      en: "Foreground should be a hexadecimal code.",
+      pl: "Kolor pierwszego planu powinien być kodem szesnastkowym.",
+      fr: "L'avant-plan doit être un code hexadécimal.",
+    },
+    "1.19": {
+      //TOAST
+      en: "Background should be a hexadecimal code.",
+      pl: "Kolor tła powinien być kodem szesnastkowym.",
+      fr: "L'arrière-plan doit être un code hexadécimal.",
+    },
+    "1.20": {
+      //TOAST
+      en: "Category name is required.",
+      pl: "Nazwa kategorii jest wymagana.",
+      fr: "Le nom de la catégorie est obligatoire.",
+    },
+    "1.21": {
+      //TOAST
+      en: "Category name must be unique.",
+      pl: "Nazwa kategorii musi być unikalna.",
+      fr: "Le nom de la catégorie doit être unique.",
+    },
+    "1.22": {
+      //TOAST
+      en: "Built-in category cannot be deleted.",
+      pl: "Nie można usunąć wbudowanej kategorii.",
+      fr: "La catégorie intégrée ne peut pas être supprimée.",
+    },
+    "1.23": {
+      //TOAST
+      en: "Category does not belong to the budget.",
+      pl: "Kategoria nie należy do tego budżetu.",
+      fr: "La catégorie n'appartient pas au budget.",
+    },
+    "1.24": {
+      //TOAST
+      en: "Cannot delete the category because it is used in one or more transactions.",
+      pl: "Nie można usunąć kategorii, ponieważ jest używana w jednej lub więcej transakcjach.",
+      fr: "Impossible de supprimer la catégorie car elle est utilisée dans une ou plusieurs transactions.",
+    },
     "2.1": {
       //FE validation
       en: "Transaction type cannot be empty.",
@@ -1570,6 +1648,48 @@ const dictionary = {
       pl: "Transakcja budżetu nie istnieje.",
       fr: "La transaction du budget n'existe pas.",
     },
+    "2.12": {
+      //TOAST
+      en: "Transaction ID cannot be empty.",
+      pl: "ID transakcji nie może być puste.",
+      fr: "L'ID de la transaction ne peut pas être vide.",
+    },
+    "2.13": {
+      //TOAST
+      en: "Transaction date cannot be empty.",
+      pl: "Data transakcji nie może być pusta.",
+      fr: "La date de transaction ne peut pas être vide.",
+    },
+    "2.14": {
+      //TOAST
+      en: "Transaction date is invalid.",
+      pl: "Nieprawidłowa data transakcji.",
+      fr: "La date de transaction n'est pas valide.",
+    },
+    "2.15": {
+      //TOAST
+      en: "Transaction status cannot be empty.",
+      pl: "Status transakcji nie może być pusty.",
+      fr: "Le statut de la transaction ne peut pas être vide.",
+    },
+    "2.16": {
+      //TOAST
+      en: "Transaction status must be active or cancelled.",
+      pl: "Status transakcji musi być aktywny lub anulowany.",
+      fr: "Le statut de la transaction doit être actif ou annulé.",
+    },
+    "2.17": {
+      //TOAST
+      en: "Transaction value is not in a valid format.",
+      pl: "Wartość transakcji nie jest w prawidłowym formacie.",
+      fr: "La valeur de la transaction n'est pas dans un format valide.",
+    },
+    "2.18": {
+      //TOAST
+      en: "Transaction cannot have more than one attachment.",
+      pl: "Transakcja może mieć maksymalnie jeden załącznik.",
+      fr: "La transaction ne peut avoir plus d'une pièce jointe.",
+    },
     "3.1": {
       //FE validation
       en: "Avatar cannot be empty.",
@@ -1623,6 +1743,24 @@ const dictionary = {
       en: "Invalid sort descriptor.",
       pl: "Nieprawidłowy deskryptor sortowania.",
       fr: "Descripteur de tri invalide.",
+    },
+    "11.1": {
+      //TOAST
+      en: "File is required.",
+      pl: "Plik jest wymagany.",
+      fr: "Le fichier est requis.",
+    },
+    "11.2": {
+      //TOAST
+      en: "File is too big.",
+      pl: "Plik jest za duży.",
+      fr: "Le fichier est trop volumineux.",
+    },
+    "11.3": {
+      //TOAST
+      en: "File type not allowed.",
+      pl: "Niedozwolony typ pliku.",
+      fr: "Type de fichier non autorisé.",
     },
     noErrorCode: {
       //no ErrorCode from BE
