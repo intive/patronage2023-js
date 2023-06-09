@@ -128,8 +128,6 @@ export const BudgetContent = ({ id }: BudgetsContentProps) => {
         `${env.NEXT_PUBLIC_API_URL}budgets/${id}/transactions/export/mail`,
         { method: "POST", body: { budgetId: id } }
       ),
-    // .then((res) => console.log(res))
-    // .catch((err) => console.error(err)),
     enabled: false,
   });
 
