@@ -212,13 +212,7 @@ const ManageCategories = () => {
               ]}
             />
           </StyledDiv>
-          {queryClient.isMutating() ? (
-            <Submit>
-              <Spinner />
-            </Submit>
-          ) : (
-            <Submit disabled={!!errorMsg}>Add new category</Submit>
-          )}
+          <Submit disabled={!!errorMsg}>Add new category</Submit>
         </form>
 
         <Separator />
