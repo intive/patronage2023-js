@@ -96,6 +96,15 @@ export const ImportExportButtonStyled = styled.button`
   ${ImportExportButtonsStyle};
 `;
 
+export const ExportBudgetsByMailStyled = styled(Button)`
+  padding: 0;
+  font-weight: normal;
+  color: ${({ theme }) => theme.button.primary.main};
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
 export const LinkStyled = styled.a`
   display: flex;
   text-decoration: none;

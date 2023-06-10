@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useRef, useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSetAtom } from "jotai";
 import { env } from "env.mjs";
 import { useSession } from "next-auth/react";
@@ -169,6 +169,30 @@ export default function SideNav() {
     enabled: !!session,
   });
 
+  const exportBudgetsByMailMutation = useMutation({
+    mutationFn: () => {
+      return superFetch(
+        `${env.NEXT_PUBLIC_API_URL}budgets/budgets/export/mail`,
+        {
+          method: "POST",
+        }
+      );
+    },
+    onSuccess: ({ httpStatus }) => {
+      if (httpStatus === 200) {
+        showToast({
+          variant: "confirm",
+          message: tExport(dictExport.toastMessages.emailSent),
+        });
+      } else {
+        showToast({
+          variant: "error",
+          message: tImport(dictImport.responseErrors.default),
+        });
+      }
+    },
+  });
+
   const budgetsSubMenuData = {
     title: t(SideNav.budgetsItem.title),
     sort: {
@@ -210,6 +234,10 @@ export default function SideNav() {
       },
       label: t(SideNav.budgetsItem.exportButtonLabel),
       csvUri: exportData?.uri,
+    },
+    exportBudgetsByMailButton: {
+      clickHandler: () => exportBudgetsByMailMutation.mutate(),
+      label: tExport(dictExport.sendEmailText),
     },
     importButton: {
       clickHandler: () => {
