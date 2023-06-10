@@ -39,6 +39,7 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   position: fixed;
   height: 100%;
   padding-top: 40px;
+  z-index: 5;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
     !isNavListItemClicked && !isSubMenuShown
