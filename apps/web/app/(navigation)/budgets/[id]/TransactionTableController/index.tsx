@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { env } from "env.mjs";
-import { BudgetFixed, Transaction } from "lib/types";
+import { BudgetFixed, CategoryMap, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
-import categoryMap from "lib/category-map";
+import categoryMap, { CategoryMapType } from "lib/category-map";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
@@ -30,20 +30,15 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType:
-    | "HomeSpendings"
-    | "Subscriptions"
-    | "Car"
-    | "Grocery"
-    | "Salary"
-    | "Refund";
+  categoryType: {
+    categoryName: string;
+  };
   budgetUser?: {
     id: string;
     avatar: string;
     firstName: string;
     lastName: string;
     userEmail: string;
-
   };
 };
 
@@ -98,7 +93,9 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           userCategories.find(
             (category) => category.name! === item.categoryType.categoryName
           ) ||
-          categoryMap[item.categoryType.categoryName] ||
+          categoryMap[
+            item.categoryType.categoryName as keyof CategoryMapType
+          ] ||
           categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
