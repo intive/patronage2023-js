@@ -1,8 +1,9 @@
-import { signOut, useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "ui";
 import { dictionaryType } from "lib/dictionary";
-import { useRouter } from "next/navigation";
 import { useTranslate } from "./useTranslate";
+import { useEffect } from "react";
 
 export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
   body?: object;
@@ -10,8 +11,8 @@ export interface SuperOptions extends Omit<RequestInit, "headers" | "body"> {
 
 export default function useSuperfetch() {
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
   const showToast = useToast();
-  const router = useRouter();
   const { t, dict } = useTranslate("Errors");
 
   const superfetch = (
@@ -47,12 +48,10 @@ export default function useSuperfetch() {
           message: t(dict.noErrorCode),
         });
       } else if (res.status === 401) {
-        showToast({
-          variant: "error",
-          message: t(dict.status401),
-        });
-        signOut();
-        router.push("/");
+        if (session) {
+          console.log("session");
+          queryClient.clear();
+        }
       } else if (res.status === 403) {
         console.log(t(dict.status403));
       } else if (res.status === 404) {
