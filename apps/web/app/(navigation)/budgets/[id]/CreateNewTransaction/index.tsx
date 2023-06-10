@@ -227,42 +227,28 @@ export const CreateNewTransaction = ({
                     .nonempty({ message: t(dict.errors.selectCategory) })}>
                   {({ setValue, errors, value }) => (
                     <Select
-                      items={
-                        userCategories.length
-                          ? [
-                              ...userCategories.map((category) => ({
-                                value: category.name!,
-                                label: (
-                                  <>
-                                    <CategoryIcon small category={category} />
-                                    <span>{category.name}</span>
-                                  </>
-                                ),
-                              })),
-                              ...Object.entries(categoryMap).map(
-                                ([categoryKey, category]) => ({
-                                  value: categoryKey,
-                                  label: (
-                                    <>
-                                      <CategoryIcon small category={category} />
-                                      <span>{category.name}</span>
-                                    </>
-                                  ),
-                                })
-                              ),
-                            ]
-                          : Object.entries(categoryMap).map(
-                              ([categoryKey, category]) => ({
-                                value: categoryKey,
-                                label: (
-                                  <>
-                                    <CategoryIcon small category={category} />
-                                    <span>{category.name}</span>
-                                  </>
-                                ),
-                              })
-                            )
-                      }
+                      items={[
+                        ...userCategories.map((category) => ({
+                          value: category.name!,
+                          label: (
+                            <>
+                              <CategoryIcon small category={category} />
+                              <span>{category.name}</span>
+                            </>
+                          ),
+                        })),
+                        ...Object.entries(categoryMap).map(
+                          ([categoryKey, category]) => ({
+                            value: categoryKey,
+                            label: (
+                              <>
+                                <CategoryIcon small category={category} />
+                                <span>{category.name}</span>
+                              </>
+                            ),
+                          })
+                        ),
+                      ]}
                       onValueChange={(newValue) => {
                         setValue(newValue);
                       }}

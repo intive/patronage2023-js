@@ -88,20 +88,12 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
-        //try finding custom category
-        category: userCategories.find(
-          (category) => category.name! === item.categoryType.categoryName
-        )
-          ? //if found set it
-            userCategories.find(
-              (category) => category.name! === item.categoryType.categoryName
-            )!
-          : //try default ones
-          categoryMap[item.categoryType.categoryName]
-          ? //set default
-            categoryMap[item.categoryType.categoryName]
-          : //fallback
-            categoryMap.HomeSpendings,
+        category:
+          userCategories.find(
+            (category) => category.name! === item.categoryType.categoryName
+          ) ||
+          categoryMap[item.categoryType.categoryName] ||
+          categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
         creator: {
