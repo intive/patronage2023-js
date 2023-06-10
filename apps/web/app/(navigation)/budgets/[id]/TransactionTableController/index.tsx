@@ -124,6 +124,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       transactionType,
       debouncedSearch,
       sortDescriptors,
+      userCategories,
     ],
 
     queryFn: async () => {
