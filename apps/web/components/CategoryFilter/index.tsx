@@ -1,6 +1,6 @@
 "use client";
 import { useCategoryMap, useTranslate } from "lib/hooks";
-import { Checkbox, Separator } from "ui";
+import { Checkbox } from "ui";
 import { categoryFilterAtom } from "store";
 import { useAtom } from "jotai";
 import {
@@ -56,7 +56,7 @@ export const CategoryFilter = () => {
         })}
       </CheckboxListStyled>
       <StyledSeparator />
-      <CheckboxListStyled>
+      <CheckboxListStyled limit>
         {Object.values(userCategories).map((category) => {
           const { categoryId, name } = category;
           return (
