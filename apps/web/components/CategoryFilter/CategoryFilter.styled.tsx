@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Accordion, CategoryIcon } from "ui";
+import { Accordion, CategoryIcon, Separator } from "ui";
 import { device } from "lib/media-queries";
 
 export const CheckboxListStyled = styled.ul`
@@ -60,4 +60,8 @@ export const StyledButton = styled.button`
   font-weight: 600;
   font-size: 0.8em;
   align-self: end;
+`;
+
+export const StyledSeparator = styled(Separator)`
+  width: 100%;
 `;

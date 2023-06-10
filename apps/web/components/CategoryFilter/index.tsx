@@ -10,6 +10,7 @@ import {
   CheckboxListStyled,
   StyledAccordion,
   StyledButton,
+  StyledSeparator,
 } from "./CategoryFilter.styled";
 import { budgetCategories, categoryModalAtom } from "store/store";
 import ManageCategories from "components/ManageCategories";
@@ -54,7 +55,7 @@ export const CategoryFilter = () => {
           );
         })}
       </CheckboxListStyled>
-      <Separator />
+      <StyledSeparator />
       <CheckboxListStyled>
         {Object.values(userCategories).map((category) => {
           const { categoryId, name } = category;
