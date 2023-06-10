@@ -6,12 +6,6 @@ export interface Currency {
   locale: string;
 }
 
-interface Creator {
-  id: string;
-  name: string;
-  avatar: string;
-}
-
 export interface Transaction {
   id: string;
   date: number;
@@ -19,7 +13,7 @@ export interface Transaction {
   category: CategoryType;
   description: string;
   status: string;
-  creator: Creator;
+  creator?: BudgetUser;
 }
 
 export interface BudgetUser {

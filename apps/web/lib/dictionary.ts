@@ -1117,6 +1117,11 @@ const dictionary = {
         pl: "Zapisz zmianę",
         fr: "Enregistrer",
       },
+      toast: {
+        en: "Saved",
+        pl: "Zapisano",
+        fr: "Enregistré",
+      },
     },
   },
   TeamPage: { title: { en: "Team page", pl: "Zespoły", fr: "Équipes" } },

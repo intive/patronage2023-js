@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import styled from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import {
   DropdownMenuItemStyled,
-  DropdownMenuContentStyled as MenuContentStyled,
+  DropdownMenuContentStyled,
 } from "../ButtonWithDropdown";
 import { Tooltip } from "ui";
 
@@ -20,10 +19,6 @@ export type ExportDropdownItem = {
   id: string;
   node: React.ReactNode;
 };
-
-const DropdownMenuContentStyled = styled(MenuContentStyled)`
-  width: 100%;
-`;
 
 export const ExportDropdown = ({
   items,

@@ -15,6 +15,7 @@ import {
   ImportExportButtonStyled,
   NewBudgetButtonStyled,
   Title,
+  ExportBudgetsByMailStyled,
 } from "./SubMenu.styled";
 import { Tooltip } from "../../Tooltip";
 
@@ -41,6 +42,7 @@ export type SubMenuDataProps = {
   button?: SubMenuButtonType;
   exportButton?: SubMenuButtonType;
   importButton?: SubMenuButtonType;
+  exportBudgetsByMailButton?: SubMenuButtonType;
 };
 
 type SubMenuProps = {
@@ -56,6 +58,7 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     button,
     exportButton,
     importButton,
+    exportBudgetsByMailButton,
   } = subMenuData;
 
   const onInputChange = (value: string) => {
@@ -72,8 +75,6 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
     <IconUpsideDown icon="filter_list" />
   );
 
-  // For some reason, radix doesn't work with our Button from UI (doesn't like onClick)
-  // So I use polymorphism to get the styles from our Button and pass them to <button>
   const triggerButton = (
     <ButtonStyled
       as={ImportExportButtonStyled}
@@ -95,12 +96,13 @@ export const SubMenu = ({ subMenuDataObject: subMenuData }: SubMenuProps) => {
   );
 
   const emailButton = (
-    <button
-      onClick={() => {
-        console.log("email");
-      }}>
-      email
-    </button>
+    <ExportBudgetsByMailStyled
+      onClick={exportBudgetsByMailButton?.clickHandler}
+      title="email"
+      variant="simple">
+      <Icon icon="file_upload" size={12} />
+      <span>{exportBudgetsByMailButton?.label}</span>
+    </ExportBudgetsByMailStyled>
   );
 
   const exportBudgetsDropdownItems = [

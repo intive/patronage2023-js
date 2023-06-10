@@ -30,14 +30,20 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType: {
-    categoryName:
-      | "HomeSpendings"
-      | "Subscriptions"
-      | "Car"
-      | "Grocery"
-      | "Salary"
-      | "Refund";
+  categoryType:
+    | "HomeSpendings"
+    | "Subscriptions"
+    | "Car"
+    | "Grocery"
+    | "Salary"
+    | "Refund";
+  budgetUser?: {
+    id: string;
+    avatar: string;
+    firstName: string;
+    lastName: string;
+    userEmail: string;
+
   };
 };
 
@@ -96,11 +102,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
           categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
-        creator: {
-          id: budget.userId,
-          name: session!.user.name,
-          avatar: session!.user.image,
-        },
+        creator: item.budgetUser,
       })
     );
   };
