@@ -50,6 +50,7 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
 
   ${device.tablet} {
     border-right: none;
+    z-index: 0;
   }
 `;
 
