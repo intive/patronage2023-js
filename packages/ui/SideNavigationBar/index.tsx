@@ -37,9 +37,9 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
   flex-direction: column;
   align-items: center;
   position: fixed;
-  z-index: 5;
   height: 100%;
   padding-top: 40px;
+  z-index: 5;
   list-style: none;
   background-color: ${({ isSubMenuShown, theme, isNavListItemClicked }) =>
     !isNavListItemClicked && !isSubMenuShown
@@ -50,6 +50,7 @@ const SideNavigationBarStyled = styled.ul<SubMenuBoolean>`
 
   ${device.tablet} {
     border-right: none;
+    z-index: 0;
   }
 `;
 

@@ -24,7 +24,7 @@ import {
 } from "../BudgetContent/CreateNewBudget.styled";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { env } from "env.mjs";
-import { icons } from "../BudgetContent/CreateNewBudget";
+import { icons } from "lib/icons";
 import { useState } from "react";
 import { ErrorMessage } from "ui";
 import useSuperfetch from "lib/hooks/useSuperfetch";

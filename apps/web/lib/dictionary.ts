@@ -1437,6 +1437,13 @@ const dictionary = {
       },
     },
   },
+  ManageCategories: {
+    empty: {
+      pl: "Brak kategorii użytkownika",
+      en: "No user categories",
+      fr: "Aucune catégorie d'utilisateur",
+    },
+  },
   Errors: {
     title: {
       en: "Error ",

@@ -198,7 +198,11 @@ export const TransactionsTable = ({
                   );
                 case "editColumn":
                   return (
-                    <DropdownMenu items={dropdownMenuItems} side="right" />
+                    <DropdownMenu
+                      items={dropdownMenuItems}
+                      side="right"
+                      icon="more_vert"
+                    />
                   );
               }
             },

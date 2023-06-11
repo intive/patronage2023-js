@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { env } from "env.mjs";
-import { BudgetFixed, Transaction } from "lib/types";
+import { BudgetFixed, CategoryMap, Transaction } from "lib/types";
 import { useQuery } from "@tanstack/react-query";
-import categoryMap from "lib/category-map";
+import categoryMap, { CategoryMapType } from "lib/category-map";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { useDebounce } from "lib/hooks/useDebounce";
 import { ErrorMessage } from "ui";
@@ -10,12 +10,13 @@ import { SearchInput } from "ui/Input/SearchInput";
 import { useSession } from "next-auth/react";
 import { Pagination } from "components/Pagination";
 import { useLocalStorage, useTranslate } from "lib/hooks";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { categoryFilterAtom } from "store";
 import { FilterSearchWrapper } from "./TransactionsFilterSearchStyled";
 import { TransactionTypeFilter } from "./TransactionTypeFilter";
 import { TransactionsTable } from "./TransactionsTable";
 import { MobileCategorySearch } from "components/CategoryFilter";
+import { budgetCategories } from "store/store";
 
 type APIResponse = {
   items: Item[];
@@ -29,13 +30,9 @@ type Item = {
   name: string;
   value: number;
   budgetTransactionDate: string;
-  categoryType:
-    | "HomeSpendings"
-    | "Subscriptions"
-    | "Car"
-    | "Grocery"
-    | "Salary"
-    | "Refund";
+  categoryType: {
+    categoryName: string;
+  };
   budgetUser?: {
     id: string;
     avatar: string;
@@ -68,6 +65,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
   const { data: session } = useSession();
   const categoryFilterState = useAtomValue(categoryFilterAtom);
   const pageSize = parseInt(getPageSizeValue);
+  const [userCategories] = useAtom(budgetCategories);
 
   const setSorting = (column: string) => {
     setSortDescriptors((previousSortDescriptors) => {
@@ -91,9 +89,14 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
         id: item.transactionId.value,
         date: Date.parse(item.budgetTransactionDate),
         amount: item.value,
-        category: categoryMap[item.categoryType]
-          ? categoryMap[item.categoryType]
-          : categoryMap.HomeSpendings,
+        category:
+          userCategories.find(
+            (category) => category.name! === item.categoryType.categoryName
+          ) ||
+          categoryMap[
+            item.categoryType.categoryName as keyof CategoryMapType
+          ] ||
+          categoryMap.HomeSpendings,
         description: item.name,
         status: "Done",
         creator: item.budgetUser,
@@ -120,6 +123,7 @@ const TransactionTableController = ({ budget }: { budget: BudgetFixed }) => {
       transactionType,
       debouncedSearch,
       sortDescriptors,
+      userCategories,
     ],
 
     queryFn: async () => {

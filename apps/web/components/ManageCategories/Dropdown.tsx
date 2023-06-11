@@ -1,65 +1,45 @@
 "use client";
 import * as RadixDropdownMenu from "@radix-ui/react-dropdown-menu";
-import { Icon, IconType } from "ui";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { ReactElement } from "react";
+import { device } from "lib/media-queries";
 
-//type for every item in DropdownMenu
-type DropdownMenuSingleItem = {
+interface Item {
   ComponentToRender?: ReactElement;
   id: string;
-};
-
-type DropdownMenuProps = {
-  items: Array<DropdownMenuSingleItem>;
-  side: "top" | "right" | "bottom" | "left";
-  ariaLabel?: string;
-  className?: string;
-  icon: IconType;
-  limit?: string;
-};
-
-interface MenuProps {
-  limit?: string;
 }
 
-const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
-  background-color: transparent;
-  border: 0;
-  border-radius: 50%;
-  padding: 8px;
-  height: 28px;
-  width: 28px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+type DropdownMenuProps = {
+  trigger: ReactElement;
+  items: Item[];
+};
 
+const DropdownMenuTriggerStyled = styled(RadixDropdownMenu.Trigger)`
+  border: none;
+  cursor: pointer;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 8px;
   &:focus {
     outline: 2px solid ${({ theme }) => theme.dropdownMenu.outlineFocus};
   }
+  ${device.tablet} {
+    width: 4em;
+    height: 4em;
+  }
 `;
 
-const IconStyled = styled(Icon)`
-  color: ${({ theme }) => theme.dropdownMenu.iconColor};
-`;
-
-const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)<MenuProps>`
+const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)`
   margin: 8px;
+  z-index: 100;
   box-shadow: 0px 2px 8px rgba(32, 37, 50, 0.08),
     0px 2px 4px rgba(32, 37, 50, 0.03);
   border: 1px solid ${({ theme }) => theme.dropdownMenu.border};
-  border-radius: 16px;
-  ${({ limit }) =>
-    limit
-      ? css`
-          height: ${limit};
-          overflow-y: auto;
-        `
-      : css`
-          overflow: hidden;
-        `}
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  max-height: 250px;
   background-color: white;
+  overflow-y: auto;
   &::-webkit-scrollbar {
     background-color: ${({ theme }) => theme.textarea.disabled};
     border-radius: 10px;
@@ -70,6 +50,12 @@ const DropdownMenuContentStyled = styled(RadixDropdownMenu.Content)<MenuProps>`
     background-color: ${({ theme }) => theme.modal.closeButton};
     border-radius: 10px;
   }
+`;
+
+const DropdownColorMenuStyled = styled(DropdownMenuContentStyled)`
+  display: grid;
+  grid-template-columns: repeat(4, minmax(10px, 1fr));
+  z-index: 100;
 `;
 
 export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
@@ -98,24 +84,12 @@ export const DropdownMenuItemStyled = styled(RadixDropdownMenu.Item)`
     border: 1px solid transparent;
   }
 `;
-
-export const DropdownMenu = ({
-  items,
-  side,
-  ariaLabel,
-  className,
-  icon,
-  limit,
-}: DropdownMenuProps) => {
+export const CategoryDropdown = ({ trigger, items }: DropdownMenuProps) => {
   return (
     <RadixDropdownMenu.Root modal={false}>
-      <DropdownMenuTriggerStyled asChild className={className}>
-        <button aria-label={ariaLabel}>
-          <IconStyled icon={icon} />
-        </button>
-      </DropdownMenuTriggerStyled>
+      <DropdownMenuTriggerStyled>{trigger}</DropdownMenuTriggerStyled>
       <RadixDropdownMenu.Portal>
-        <DropdownMenuContentStyled side={side} limit={limit}>
+        <DropdownMenuContentStyled side="bottom">
           {items.map((item) => {
             return (
               <DropdownMenuItemStyled key={item.id}>
@@ -124,6 +98,25 @@ export const DropdownMenu = ({
             );
           })}
         </DropdownMenuContentStyled>
+      </RadixDropdownMenu.Portal>
+    </RadixDropdownMenu.Root>
+  );
+};
+
+export const ColorDropdown = ({ trigger, items }: DropdownMenuProps) => {
+  return (
+    <RadixDropdownMenu.Root modal={false}>
+      <DropdownMenuTriggerStyled asChild>{trigger}</DropdownMenuTriggerStyled>
+      <RadixDropdownMenu.Portal>
+        <DropdownColorMenuStyled side="bottom">
+          {items.map((item) => {
+            return (
+              <DropdownMenuItemStyled key={item.id}>
+                {item.ComponentToRender}
+              </DropdownMenuItemStyled>
+            );
+          })}
+        </DropdownColorMenuStyled>
       </RadixDropdownMenu.Portal>
     </RadixDropdownMenu.Root>
   );

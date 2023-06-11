@@ -23,7 +23,6 @@ type Active = {
 const FavButton = styled.button<Active>`
   display: ${({ active }) => active && "none"};
   margin-left: 50px;
-  z-index: 1;
   border: none;
   background: none;
   cursor: pointer;

@@ -128,6 +128,7 @@ export function BudgetBasicInformation({ budget }: BudgetBasicInfoProps) {
               )}
               {loggedUserId === budget.userId && (
                 <DropdownMenuStyled
+                  icon="more_vert"
                   items={[
                     {
                       ComponentToRender: (

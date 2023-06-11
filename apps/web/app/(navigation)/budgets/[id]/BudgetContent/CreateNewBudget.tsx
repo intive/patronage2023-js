@@ -42,6 +42,7 @@ import { useHasScrollBar } from "lib/hooks/useHasScrollBar";
 import useSuperfetch from "lib/hooks/useSuperfetch";
 import { currency } from "lib/currency";
 import { currencyAtom } from "store";
+import { icons } from "lib/icons";
 
 type NewBudget = {
   onClose: Function;
@@ -60,18 +61,6 @@ type newBudgetType = {
   description: string;
   iconName: string;
 };
-
-export const icons: IconType[] = [
-  "savings",
-  "directions_car",
-  "payments",
-  "subscriptions",
-  "shopping_cart",
-  "home",
-  "wallet",
-  "error",
-  "help",
-];
 
 export const CreateNewBudget = ({ onClose }: NewBudget) => {
   const [selectedIcon, setSelectedIcon] = useState<IconType>("savings");

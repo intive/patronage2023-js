@@ -10,7 +10,6 @@
 
 .wrapper-content-div {
   width: 100%;
-  z-index: 0;
 }
 
 .wrapper-content-div span {
@@ -19,7 +18,7 @@
 
 .loading-tbody {
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .loading-cell {

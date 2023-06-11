@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { Icon, IconType } from "ui";
 
 export type CategoryType = {
-  id: number;
+  categoryId: string;
   name: string;
   icon: {
-    name: string;
+    iconName: string;
     foreground: string;
     background: string;
   };
@@ -38,7 +38,7 @@ export const CategoryIcon = ({
   className,
 }: CategoryIconProps) => {
   const { icon } = category;
-  const { name, foreground, background } = icon;
+  const { iconName: name, foreground, background } = icon;
 
   return (
     <IconBackground
