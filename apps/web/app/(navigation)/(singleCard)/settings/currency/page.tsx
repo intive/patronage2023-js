@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue, useSetAtom } from "jotai";
-
+//
 import { SettingsTitle } from "./SettingsTitle";
 import { Button, Select, Separator, useToast } from "ui";
 import { currencyAtom } from "store/store";
@@ -10,6 +10,7 @@ import { device } from "lib/media-queries";
 import { currency } from "lib/currency";
 import { CurrencyTagStyled } from "app/(navigation)/budgets/[id]/BudgetContent/CreateNewBudget.styled";
 import { SelectLabelHiddenInTrigger } from "ui/Select/Select.styles";
+import { useState } from "react";
 
 const H1Styled = styled.h1`
   font-family: "Signika";
@@ -48,21 +49,17 @@ const CurrencyItems = () => {
 
 export default function SettingsPage() {
   const { t, dict } = useTranslate("SettingsPage");
-  const value = useAtomValue(currencyAtom);
+  const valueAtom = useAtomValue(currencyAtom);
   const setValue = useSetAtom(currencyAtom);
   const showToast = useToast();
+
+  const [valueState, setValueState] = useState(valueAtom);
 
   const [, setCurrency] = useLocalStorage("currency", "USD");
 
   const translation = {
     label: t(dict.currency.title),
     button: t(dict.currency.button),
-  };
-
-  const changeCurrency = (selectedCurrency: string) => {
-    setValue(selectedCurrency);
-    setCurrency(selectedCurrency);
-    showToast({ variant: "confirm", message: t(dict.currency.toast) });
   };
 
   const DivStyled = styled.div`
@@ -80,14 +77,22 @@ export default function SettingsPage() {
       <InputWrapper>
         <Select
           items={CurrencyItems()}
-          onValueChange={changeCurrency}
-          value={value}
+          onValueChange={setValueState}
+          value={valueState}
           label={translation.label}
           id="currenc-selector"
           hasIcon
         />
       </InputWrapper>
-      <Button variant="primary">{translation.button}</Button>
+      <Button
+        variant="primary"
+        onClick={() => {
+          setValue(valueState);
+          setCurrency(valueState);
+          showToast({ variant: "confirm", message: t(dict.currency.toast) });
+        }}>
+        {translation.button}
+      </Button>
     </DivStyled>
   );
 }
