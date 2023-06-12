@@ -60,15 +60,17 @@ export const MainMenu = () => {
           onOpenChange={() => setIsIconDown(!isIconDown)}>
           <SelectTriggerStyled>
             <Select.Value asChild>
-              <PersonalCard
-                triggerComponent={
-                  <AvatarStyled src={data.user.image} outlined />
-                }
-                side="bottom"
-                name={data.user.name}
-                email={data.user.email}
-                image={data.user.image}
-              />
+              <>
+                <PersonalCard
+                  triggerComponent={
+                    <AvatarStyled src={data.user.image} outlined />
+                  }
+                  side="bottom"
+                  name={data.user.name}
+                  email={data.user.email}
+                  image={data.user.image}
+                />
+              </>
             </Select.Value>
             <Select.Icon className="SelectIcon">
               {isIconDown ? <IconUp /> : <IconDown />}
