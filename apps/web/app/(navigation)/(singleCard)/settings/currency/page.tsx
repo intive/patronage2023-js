@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { useLocalStorage, useTranslate } from "lib/hooks";
 import { useAtomValue, useSetAtom } from "jotai";
-
+//
 import { SettingsTitle } from "./SettingsTitle";
 import { Button, Select, Separator, useToast } from "ui";
 import { currencyAtom } from "store/store";
