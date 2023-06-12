@@ -9,10 +9,6 @@ type FormFooterProps = {
 };
 
 const FormFooterStyled = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
   font-size: 16px;
   line-height: 150%;
   margin-top: 42px;
@@ -25,7 +21,7 @@ const TextStyled = styled.span`
 export const FormFooter = ({ basicText, linkText, href }: FormFooterProps) => {
   return (
     <FormFooterStyled>
-      <TextStyled>{basicText}</TextStyled>
+      <TextStyled>{`${basicText} `}</TextStyled>
       <LinkComponent href={href}>{linkText}</LinkComponent>
     </FormFooterStyled>
   );

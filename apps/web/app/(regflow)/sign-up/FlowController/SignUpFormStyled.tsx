@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { device } from "lib/media-queries";
 import { ButtonGroup } from "ui";
 
@@ -11,16 +11,26 @@ export const ButtonGroupStyled = styled(ButtonGroup)`
   margin-block: 10px;
 `;
 
-export const FormWrapper = styled.div<WrapperProps>`
-  height: 542px;
+export const FormWrapperStyle = css`
+  height: 578px;
   width: 312px;
   display: flex;
   flex-direction: column;
-  justify-content: ${({ center }) => (center ? "center" : "space-between")};
+  margin-top: 20px;
+
+  ${device.tablet} {
+    margin-top: 10px;
+  }
 
   ${device.desktop} {
+    margin-top: 0;
     width: 416px;
   }
+`;
+
+export const FormWrapper = styled.div<WrapperProps>`
+  ${FormWrapperStyle}
+  justify-content: ${({ center }) => (center ? "center" : "space-between")};
 `;
 
 export const SwitcherWrapper = styled.div`

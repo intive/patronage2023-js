@@ -7,20 +7,14 @@ import { ErrorMessage, Button, Input, FormFooter } from "ui";
 import styled from "styled-components";
 import { z } from "zod";
 import { useTranslate } from "lib/hooks";
-import { device } from "lib/media-queries";
 import { signIn } from "next-auth/react";
+import { FormWrapperStyle } from "../sign-up/FlowController/SignUpFormStyled";
 
 const FormWrapper = styled.div`
+  ${FormWrapperStyle}
   position: relative;
-  height: 542px;
-  width: 312px;
-  display: flex;
   flex-direction: column;
   justify-content: center;
-
-  ${device.desktop} {
-    width: 416px;
-  }
 `;
 
 const FieldsWrapper = styled.div`

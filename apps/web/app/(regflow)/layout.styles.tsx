@@ -120,7 +120,7 @@ export const ParagraphStyled = styled.p`
 
 export const CustomCard = styled(Card)`
   position: relative;
-  padding: 3rem;
+  padding: 1.25rem;
 
   ${device.tablet} {
     padding: 3rem 1rem;
