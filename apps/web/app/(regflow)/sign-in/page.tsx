@@ -31,7 +31,7 @@ const ErrorWrapper = styled.div`
   top: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 5;
 `;
 
 const InputWrapper = styled.div`

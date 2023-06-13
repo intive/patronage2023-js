@@ -136,7 +136,7 @@ export const CreateNewBudget = ({ onClose }: NewBudget) => {
       description: values.description,
       iconName: selectedIcon,
     };
-    console.log(JSON.stringify(newBudget));
+
     sendBudget.mutate(newBudget);
   };
 

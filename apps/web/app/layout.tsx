@@ -36,7 +36,7 @@ export default function RootLayout({ children }: LayoutProps) {
   useEffect(() => {
     setLanguage(lang);
     setCurrency(defaultCurrency);
-  }, [setLanguage, setCurrency]);
+  }, [setLanguage, setCurrency, defaultCurrency, lang]);
 
   return (
     <html lang="en">

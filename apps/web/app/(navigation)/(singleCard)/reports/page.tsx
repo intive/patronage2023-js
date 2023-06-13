@@ -133,34 +133,30 @@ export default function ReportsPage() {
       timeRange === "3month";
     const dateFormat = groupByMonth ? "MMM | YY" : "DD-MM";
 
-    transactions = [...statistics.incomes, ...statistics.expenses];
-
-    if (!groupByMonth) {
-      transactions = transactions.sort(
+    transactions = [...statistics.incomes, ...statistics.expenses]
+      .sort(
         (a, b) => dayjs(a.datePoint).valueOf() - dayjs(b.datePoint).valueOf()
-      );
-    }
+      )
+      .reduce((acc, transaction) => {
+        const date = dayjs(transaction.datePoint);
+        const grouping = date.format(dateFormat);
+        const { value } = transaction;
 
-    transactions = transactions.reduce((acc, transaction) => {
-      const date = dayjs(transaction.datePoint);
-      const grouping = date.format(dateFormat);
-      const { value } = transaction;
+        if (!acc[grouping]) {
+          // If the month is not yet in the accumulator, initialize it with zero income and expense
+          acc[grouping] = { incomes: 0, expenses: 0 };
+        }
 
-      if (!acc[grouping]) {
-        // If the month is not yet in the accumulator, initialize it with zero income and expense
-        acc[grouping] = { incomes: 0, expenses: 0 };
-      }
+        if (statistics.incomes.includes(transaction)) {
+          // If it's an income transaction, add the value to the incomes total
+          acc[grouping].incomes += value;
+        } else {
+          // If it's an expense transaction, add the value to the expenses total
+          acc[grouping].expenses += value;
+        }
 
-      if (statistics.incomes.includes(transaction)) {
-        // If it's an income transaction, add the value to the incomes total
-        acc[grouping].incomes += value;
-      } else {
-        // If it's an expense transaction, add the value to the expenses total
-        acc[grouping].expenses += value;
-      }
-
-      return acc;
-    }, {});
+        return acc;
+      }, {});
   }
 
   return (
