@@ -79,6 +79,7 @@ export const TypoStyled = styled.div`
 
 export const FormWrapperStyled = styled.div`
   overflow-x: auto;
+  margin: 0 1rem;
 
   ${device.tablet} {
     width: 60%;

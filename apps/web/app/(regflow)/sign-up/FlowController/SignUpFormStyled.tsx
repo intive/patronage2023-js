@@ -13,10 +13,14 @@ export const ButtonGroupStyled = styled(ButtonGroup)`
 
 export const FormWrapperStyle = css`
   height: 578px;
-  width: 312px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+
+  @media only screen and (min-width: 375px) {
+    width: 312px;
+  }
 
   ${device.tablet} {
     margin-top: 10px;
